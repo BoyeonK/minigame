@@ -10,16 +10,8 @@ bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int
 #endif
 	return false;
 }
-/*
-bool Handle_C_MOVE(shared_ptr<PBSession> sessionRef, Protocol::C_Move& pkt) {
+bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& pkt) {
 	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
-
-	return true;
+	cout << "C_Welcome 패킷을 받았다." << endl;
+	return false;
 }
-
-bool Handle_C_SKILL(shared_ptr<PBSession> sessionRef, Protocol::C_Skill& pkt) {
-	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
-
-	return true;
-}
-*/

@@ -7,24 +7,22 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 //name convention : 서버에서 보내는(클라가 받는) S_
 //					클라에서 보내는(서버가 받는) C_
 enum : uint16_t {
-	PKT_S_WELCOME = 0,
+	PKT_S_ENCRYPTED = 0,
+	PKT_C_ENCRYPTED = 1,
+	PKT_S_WELCOME = 2,
+	PKT_C_WELCOME = 3,
 };
 
 bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
-/*
-bool Handle_C_MOVE(shared_ptr<PBSession> sessionRef, Protocol::C_Move& pkt);
-bool Handle_C_SKILL(shared_ptr<PBSession> sessionRef, Protocol::C_Skill& pkt);
-*/
+bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& pkt);
 
 class ServerPacketHandler {
 public:
 	static void Init() {
 		for (int32_t i = 0; i < UINT16_MAX; i++)
 			GPacketHandler[i] = Handle_INVALID;
-		/*
-		GPacketHandler[PKT_C_MOVE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<Protocol::C_Move>(Handle_C_MOVE, sessionRef, buffer, len); };
-		GPacketHandler[PKT_C_SKILL] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<Protocol::C_Skill>(Handle_C_SKILL, sessionRef, buffer, len); };
-		*/
+		
+		GPacketHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<Protocol::C_Welcome>(Handle_C_WELCOME, sessionRef, buffer, len); };
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
