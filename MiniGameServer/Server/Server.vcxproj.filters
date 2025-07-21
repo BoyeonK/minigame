@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="main">
+      <UniqueIdentifier>{dfd4e8a8-5f62-467b-8c25-f55971435014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PBfiles">
+      <UniqueIdentifier>{1de3d763-d253-476c-a0f8-ad1a1844ae88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameContent">
+      <UniqueIdentifier>{6e610321-ca55-4021-973d-f37454e70ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameContent\GameObjects">
+      <UniqueIdentifier>{d4f8db27-7c55-49c6-91bb-d7f60ceb3cbc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerPacketHandler.h">
+      <Filter>PBfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.pb.h">
+      <Filter>PBfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSession.h">
+      <Filter>GameContent</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerGlobal.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameContent\GameObjects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerPacketHandler.cpp">
+      <Filter>PBfiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol.pb.cc">
+      <Filter>PBfiles</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSession.cpp">
+      <Filter>GameContent</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerGlobal.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameContent\GameObjects</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

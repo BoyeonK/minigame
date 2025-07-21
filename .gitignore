@@ -1,0 +1,30 @@
+# Unity 기본 파일 무시
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+TinyRPGTown/
+Tiny RPG Forest/
+BuildFiles/
+Include/
+Protobuf/
+env/
+
+# Visual Studio 관련 파일 무시
+.vs/
+*.csproj
+3D practice.sln
+UnityClient.sln
+*.userprefs
+
+# OS별 불필요한 파일 무시
+.DS_Store
+Thumbs.db
+
+# 빌드된 실행 파일 무시
+*.apk
+*.exe
+*.dll

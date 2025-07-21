@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package Protocol;
+option csharp_namespace = "Google.Protobuf.Protocol";
+
+enum MsgId {
+    S_ENCRYPTED = 0;
+    C_ENCRYPTED = 1;
+    S_WELCOME = 2;
+    C_WELCOME = 3;
+    S_WELCOME_RESPONSE = 4;
+}
+
+message S_Welcome {
+    bytes publicKey = 1;
+    int32 gameversion = 2;
+}
+
+message C_Welcome {
+    bytes aesKey = 1;
+    string message = 2;
+}
+
+message S_WelcomeResponse {
+    string message = 1;
+    bool success = 2;
+}
+
