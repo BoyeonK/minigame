@@ -201,7 +201,7 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	return decrypted;
 }
 
-bool CryptoManager::Decrypt(
+bool CryptoManager::Encrypt(
 	const vector<unsigned char>& key,
 	const vector<unsigned char>& plaintext, 
 	vector<unsigned char>& iv, 

@@ -67,7 +67,7 @@ private:
 		string serializedStr = pkt.SerializeAsString();
 		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
 		vector<unsigned char> iv, ciphertext, tag;
-		CryptoManager::Decrypt(AESKey, plaintext, iv, ciphertext, tag);
+		CryptoManager::Encrypt(AESKey, plaintext, iv, ciphertext, tag);
 		Protocol::S_Encrypted sendPkt;
 		sendPkt.set_iv(iv.data(), iv.size());
 		sendPkt.set_ciphertext(ciphertext.data(), ciphertext.size());
