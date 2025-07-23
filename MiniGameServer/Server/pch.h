@@ -11,3 +11,7 @@
 #endif
 
 #include "CorePch.h"
+#include <openssl/rsa.h>
+#include <openssl/pem.h>
+#include <openssl/err.h>
+#include <openssl/rand.h>

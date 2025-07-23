@@ -23,8 +23,4 @@
 #include "CoreGlobal.h"
 #include "JobQueue.h"
 
-#include <openssl/rsa.h>
-#include <openssl/pem.h>
-#include <openssl/err.h>
-
 using namespace std;
