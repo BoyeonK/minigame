@@ -69,7 +69,10 @@ class PacketHandler {
 		Managers.Network.Send(cWelcomePacket);
 	}
 
-    public static void S_WelcomeResponseHandler(PacketSession session, IMessage recvPkt) {
+    public static void S_WelcomeResponseHandler(PacketSession session, IMessage packet) {
+		S_WelcomeResponse recvPkt = packet as S_WelcomeResponse;
+		string asdf = recvPkt.Message;
+		Debug.Log(asdf);
 		return;
     }
 
