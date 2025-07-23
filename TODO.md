@@ -5,7 +5,7 @@
   - ~~RSA key값들을 미리 생성해서 pool을 만들어 둔다.~~
   - ~~client와 socket연결 성공시 (on connected 단계) public key를 던져 준다.~~
     - ~~TODO : DER방식으로 인코딩해야 함.~~
-  - 클라이언트로부터 AES key를 받고, 해당 Key로서 특정 문자열을 암호화하여 클라이언트에게 전송한다.
+  - ~~클라이언트로부터 AES key를 받고, 해당 Key로서 특정 문자열을 암호화하여 클라이언트에게 전송한다.~~
 
 - Client
   
