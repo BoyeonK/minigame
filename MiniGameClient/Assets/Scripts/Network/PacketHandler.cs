@@ -66,7 +66,7 @@ class PacketHandler {
 		//지금은 고정 문자열을 사용하지만, 나중에는 특정한 생성 로직을 도입할 예정.
 		cWelcomePacket.Message = "트랄랄레로트랄랄라";
 
-		session.Send(cWelcomePacket.ToByteArray());
+		Managers.Network.Send(cWelcomePacket);
 	}
 }
 
