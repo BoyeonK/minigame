@@ -11,7 +11,7 @@
   
   - ~~특정 키 입력시, 서버에 연결 시도.~~
     
-    - 연결 성공시 RSA public key를 받고, AES key를 생성해서 RSA public key로 암호화해서 전송.
+    - ~~연결 성공시 RSA public key를 받고, AES key를 생성해서 RSA public key로 암호화해서 전송.~~
       
       - ~~생성한 AES key는, session에서 저장하여야 함.~~
     

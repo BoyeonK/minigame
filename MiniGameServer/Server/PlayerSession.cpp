@@ -21,11 +21,11 @@ void PlayerSession::OnConnected() {
 		return;
 	}
 
-	Protocol::S_Welcome pkt;
-	pkt.set_publickey(publicKey.data(), publicKey.size());
-	pkt.set_gameversion(_gameVersion);
+	Protocol::S_Welcome sendPkt;
+	sendPkt.set_publickey(publicKey.data(), publicKey.size());
+	sendPkt.set_gameversion(_gameVersion);
 
-	shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(pkt);
+	shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt);
 	Send(sendBuffer);
 }
 
