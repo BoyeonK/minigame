@@ -18,7 +18,13 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& pkt
 	string encryptedStr = pkt.aeskey();
 	vector<unsigned char> encryptedKey(encryptedStr.begin(), encryptedStr.end());
 	vector<unsigned char> AESKey = RSAKeyManager::Decrypt(playerSessionRef->GetRSAKey(), encryptedKey);
-	playerSessionRef->SetAESKey(AESKey);
 
+	if (AESKey.empty()) {
+		cout << "AES Key 복호화 실패!" << endl;
+		//추후, 정상적인 AESKey를 확보하지 못했을 경우 예외처리
+		return false;
+	}
+
+	playerSessionRef->SetAESKey(move(AESKey));
 	return true;
 }

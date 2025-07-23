@@ -41,8 +41,8 @@ EVP_PKEY* PlayerSession::GetRSAKey() {
 	return _RSAKey;
 }
 
-void PlayerSession::SetAESKey(vector<unsigned char>& AESKey) {
-	_AESKey = AESKey;
+void PlayerSession::SetAESKey(vector<unsigned char>&& AESKey) {
+	_AESKey = std::move(AESKey);
 
 	//디버그용. 추후 삭제 예정.
 	cout << "SetAESKey" << endl;

@@ -8,7 +8,7 @@ public:
 	void OnRecvPacket(unsigned char* buffer, int32_t len) override;
 
 	EVP_PKEY* GetRSAKey();
-	void SetAESKey(vector<unsigned char>& AESKey);
+	void SetAESKey(vector<unsigned char>&& AESKey);
 
 private:
 	EVP_PKEY* _RSAKey;
