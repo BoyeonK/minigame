@@ -45,7 +45,14 @@ void PlayerSession::SetAESKey(vector<unsigned char>&& AESKey) {
 	_AESKey = std::move(AESKey);
 
 	//디버그용. 추후 삭제 예정.
-	cout << "SetAESKey" << endl;
+	cout << "SetAESKey (Move)" << endl;
+}
+
+void PlayerSession::SetAESKey(vector<unsigned char>& AESKey) {
+	_AESKey = AESKey;
+
+	//디버그용. 추후 삭제 예정.
+	cout << "SetAESKey (Copy)" << endl;
 }
 
 vector<unsigned char> PlayerSession::GetAESKey() {
