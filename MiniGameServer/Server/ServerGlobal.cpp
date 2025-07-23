@@ -161,12 +161,23 @@ vector<unsigned char> RSAKeyManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	}
 
 	// RSA_PADDING - 클라이언트가 어떤 방식으로 암호화했는지와 일치해야 함
-	// RSA-OAEP-SHA256을 사용했다면 다음 줄을 추가
+
+	/*
+	var encryptEngine = new OaepEncoding(new RsaEngine(), new Sha256Digest());
+	encryptEngine.Init(true, rsaParams);
+	encryptedKey = encryptEngine.ProcessBlock(aesKey, 0, aesKey.Length);
+	*/
+
+	// 패딩 OAEP + MGF1 + SHA-256
+	// 암호화 방식 RSAES-OAEP (SHA-256 기반)
 	if (EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING) <= 0) {
 		cout << "Failed to set padding" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
+
+	// RSA-OAEP-SHA256방식을 사용했으므로, 아래 코드가 반드시 필요.
+	EVP_PKEY_CTX_set_rsa_oaep_md(ctx, EVP_sha256());
 
 	// 복호화 결과 길이 확인
 	size_t outLen = 0;
