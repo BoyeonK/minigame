@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Encodings;
+using Org.BouncyCastle.Crypto.Engines;
+using Org.BouncyCastle.Crypto.Modes;
+using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 
 //아래의 Handler함수들은, 모두 customHandler를 통해서 main thread에서 실행되는 구조이므로
@@ -90,11 +91,10 @@ class PacketHandler {
 		}
 
 		byte[] plaintext = new byte[ciphertext.Length];
-		try {
-			using (var aesGcm = new AesGcm(key))
-				aesGcm.Decrypt(iv, ciphertext, tag, plaintext);
+		try	{
+			plaintext = DecryptAesGcm(key, iv, ciphertext, tag);
 		}
-        catch (CryptographicException ex) {
+		catch (Exception ex) {
 			Debug.LogError($"복호화 실패: {ex.Message}");
 			return;
 		}
@@ -102,6 +102,22 @@ class PacketHandler {
 		if (!(PacketManager.Instance.ByteToIMessage(session, plaintext, msgId))) {
 			Debug.Log("역직렬화 혹은 Custom Handler에 등록 실패");
         }
+	}
+
+	private static byte[] DecryptAesGcm(byte[] key, byte[] iv, byte[] ciphertext, byte[] tag) {
+		var cipher = new GcmBlockCipher(new AesEngine());
+		var parameters = new AeadParameters(new KeyParameter(key), 128, iv, null); // 128 = tag bits
+		cipher.Init(false, parameters); // false = decrypt
+
+		byte[] encrypted = new byte[ciphertext.Length + tag.Length];
+		Buffer.BlockCopy(ciphertext, 0, encrypted, 0, ciphertext.Length);
+		Buffer.BlockCopy(tag, 0, encrypted, ciphertext.Length, tag.Length);
+
+		byte[] output = new byte[cipher.GetOutputSize(encrypted.Length)];
+		int len = cipher.ProcessBytes(encrypted, 0, encrypted.Length, output, 0);
+		cipher.DoFinal(output, len);
+
+		return output;
 	}
 }
 
