@@ -36,3 +36,14 @@ void PlayerSession::OnDisconnected() {
 void PlayerSession::OnRecvPacket(unsigned char* buffer, int32_t len) {
 	ServerPacketHandler::HandlePacket(static_pointer_cast<PBSession>(shared_from_this()), buffer, len);
 }
+
+EVP_PKEY* PlayerSession::GetRSAKey() {
+	return _RSAKey;
+}
+
+void PlayerSession::SetAESKey(vector<unsigned char>& AESKey) {
+	_AESKey = AESKey;
+
+	//디버그용. 추후 삭제 예정.
+	cout << "SetAESKey" << endl;
+}
