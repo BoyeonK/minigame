@@ -24,21 +24,22 @@ namespace Google.Protobuf.Protocol {
     static ProtocolReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5Qcm90b2NvbC5wcm90bxIIUHJvdG9jb2wiOgoLU19FbmNyeXB0ZWQSCgoC",
-            "aXYYASABKAwSEgoKY2lwaGVydGV4dBgCIAEoDBILCgN0YWcYAyABKAwiOgoL",
-            "Q19FbmNyeXB0ZWQSCgoCaXYYASABKAwSEgoKY2lwaGVydGV4dBgCIAEoDBIL",
-            "CgN0YWcYAyABKAwiMwoJU19XZWxjb21lEhEKCXB1YmxpY0tleRgBIAEoDBIT",
-            "CgtnYW1ldmVyc2lvbhgCIAEoBSIsCglDX1dlbGNvbWUSDgoGYWVzS2V5GAEg",
-            "ASgMEg8KB21lc3NhZ2UYAiABKAkiNQoRU19XZWxjb21lUmVzcG9uc2USDwoH",
-            "bWVzc2FnZRgBIAEoCRIPCgdzdWNjZXNzGAIgASgIKl8KBU1zZ0lkEg8KC1Nf",
-            "RU5DUllQVEVEEAASDwoLQ19FTkNSWVBURUQQARINCglTX1dFTENPTUUQAhIN",
-            "CglDX1dFTENPTUUQAxIWChJTX1dFTENPTUVfUkVTUE9OU0UQBEIbqgIYR29v",
-            "Z2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
+            "Cg5Qcm90b2NvbC5wcm90bxIIUHJvdG9jb2wiSQoLU19FbmNyeXB0ZWQSCgoC",
+            "aXYYASABKAwSEgoKY2lwaGVydGV4dBgCIAEoDBILCgN0YWcYAyABKAwSDQoF",
+            "bXNnSWQYBCABKAUiSQoLQ19FbmNyeXB0ZWQSCgoCaXYYASABKAwSEgoKY2lw",
+            "aGVydGV4dBgCIAEoDBILCgN0YWcYAyABKAwSDQoFbXNnSWQYBCABKAUiMwoJ",
+            "U19XZWxjb21lEhEKCXB1YmxpY0tleRgBIAEoDBITCgtnYW1ldmVyc2lvbhgC",
+            "IAEoBSIsCglDX1dlbGNvbWUSDgoGYWVzS2V5GAEgASgMEg8KB21lc3NhZ2UY",
+            "AiABKAkiNQoRU19XZWxjb21lUmVzcG9uc2USDwoHbWVzc2FnZRgBIAEoCRIP",
+            "CgdzdWNjZXNzGAIgASgIKl8KBU1zZ0lkEg8KC1NfRU5DUllQVEVEEAASDwoL",
+            "Q19FTkNSWVBURUQQARINCglTX1dFTENPTUUQAhINCglDX1dFTENPTUUQAxIW",
+            "ChJTX1dFTENPTUVfUkVTUE9OU0UQBEIbqgIYR29vZ2xlLlByb3RvYnVmLlBy",
+            "b3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Encrypted), global::Google.Protobuf.Protocol.S_Encrypted.Parser, new[]{ "Iv", "Ciphertext", "Tag" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Encrypted), global::Google.Protobuf.Protocol.C_Encrypted.Parser, new[]{ "Iv", "Ciphertext", "Tag" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Encrypted), global::Google.Protobuf.Protocol.S_Encrypted.Parser, new[]{ "Iv", "Ciphertext", "Tag", "MsgId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Encrypted), global::Google.Protobuf.Protocol.C_Encrypted.Parser, new[]{ "Iv", "Ciphertext", "Tag", "MsgId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Welcome), global::Google.Protobuf.Protocol.S_Welcome.Parser, new[]{ "PublicKey", "Gameversion" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Welcome), global::Google.Protobuf.Protocol.C_Welcome.Parser, new[]{ "AesKey", "Message" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_WelcomeResponse), global::Google.Protobuf.Protocol.S_WelcomeResponse.Parser, new[]{ "Message", "Success" }, null, null, null, null)
@@ -96,6 +97,7 @@ namespace Google.Protobuf.Protocol {
       iv_ = other.iv_;
       ciphertext_ = other.ciphertext_;
       tag_ = other.tag_;
+      msgId_ = other.msgId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -141,6 +143,18 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "msgId" field.</summary>
+    public const int MsgIdFieldNumber = 4;
+    private int msgId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MsgId {
+      get { return msgId_; }
+      set {
+        msgId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -159,6 +173,7 @@ namespace Google.Protobuf.Protocol {
       if (Iv != other.Iv) return false;
       if (Ciphertext != other.Ciphertext) return false;
       if (Tag != other.Tag) return false;
+      if (MsgId != other.MsgId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -169,6 +184,7 @@ namespace Google.Protobuf.Protocol {
       if (Iv.Length != 0) hash ^= Iv.GetHashCode();
       if (Ciphertext.Length != 0) hash ^= Ciphertext.GetHashCode();
       if (Tag.Length != 0) hash ^= Tag.GetHashCode();
+      if (MsgId != 0) hash ^= MsgId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -199,6 +215,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(26);
         output.WriteBytes(Tag);
       }
+      if (MsgId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(MsgId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -221,6 +241,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(26);
         output.WriteBytes(Tag);
       }
+      if (MsgId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(MsgId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -239,6 +263,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (Tag.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Tag);
+      }
+      if (MsgId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MsgId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -260,6 +287,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.Tag.Length != 0) {
         Tag = other.Tag;
+      }
+      if (other.MsgId != 0) {
+        MsgId = other.MsgId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -288,6 +318,10 @@ namespace Google.Protobuf.Protocol {
             Tag = input.ReadBytes();
             break;
           }
+          case 32: {
+            MsgId = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -313,6 +347,10 @@ namespace Google.Protobuf.Protocol {
           }
           case 26: {
             Tag = input.ReadBytes();
+            break;
+          }
+          case 32: {
+            MsgId = input.ReadInt32();
             break;
           }
         }
@@ -359,6 +397,7 @@ namespace Google.Protobuf.Protocol {
       iv_ = other.iv_;
       ciphertext_ = other.ciphertext_;
       tag_ = other.tag_;
+      msgId_ = other.msgId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -404,6 +443,18 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "msgId" field.</summary>
+    public const int MsgIdFieldNumber = 4;
+    private int msgId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MsgId {
+      get { return msgId_; }
+      set {
+        msgId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -422,6 +473,7 @@ namespace Google.Protobuf.Protocol {
       if (Iv != other.Iv) return false;
       if (Ciphertext != other.Ciphertext) return false;
       if (Tag != other.Tag) return false;
+      if (MsgId != other.MsgId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -432,6 +484,7 @@ namespace Google.Protobuf.Protocol {
       if (Iv.Length != 0) hash ^= Iv.GetHashCode();
       if (Ciphertext.Length != 0) hash ^= Ciphertext.GetHashCode();
       if (Tag.Length != 0) hash ^= Tag.GetHashCode();
+      if (MsgId != 0) hash ^= MsgId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -462,6 +515,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(26);
         output.WriteBytes(Tag);
       }
+      if (MsgId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(MsgId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -484,6 +541,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(26);
         output.WriteBytes(Tag);
       }
+      if (MsgId != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(MsgId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -502,6 +563,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (Tag.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Tag);
+      }
+      if (MsgId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MsgId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -523,6 +587,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.Tag.Length != 0) {
         Tag = other.Tag;
+      }
+      if (other.MsgId != 0) {
+        MsgId = other.MsgId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -551,6 +618,10 @@ namespace Google.Protobuf.Protocol {
             Tag = input.ReadBytes();
             break;
           }
+          case 32: {
+            MsgId = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -576,6 +647,10 @@ namespace Google.Protobuf.Protocol {
           }
           case 26: {
             Tag = input.ReadBytes();
+            break;
+          }
+          case 32: {
+            MsgId = input.ReadInt32();
             break;
           }
         }

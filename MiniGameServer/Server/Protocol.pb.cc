@@ -26,6 +26,7 @@ PROTOBUF_CONSTEXPR S_Encrypted::S_Encrypted(
     /*decltype(_impl_.iv_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.ciphertext_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.tag_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.msgid_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct S_EncryptedDefaultTypeInternal {
   PROTOBUF_CONSTEXPR S_EncryptedDefaultTypeInternal()
@@ -41,6 +42,7 @@ PROTOBUF_CONSTEXPR C_Encrypted::C_Encrypted(
     /*decltype(_impl_.iv_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.ciphertext_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.tag_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.msgid_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct C_EncryptedDefaultTypeInternal {
   PROTOBUF_CONSTEXPR C_EncryptedDefaultTypeInternal()
@@ -108,6 +110,7 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::Protocol::S_Encrypted, _impl_.iv_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_Encrypted, _impl_.ciphertext_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_Encrypted, _impl_.tag_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_Encrypted, _impl_.msgid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_Encrypted, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -117,6 +120,7 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::Protocol::C_Encrypted, _impl_.iv_),
   PROTOBUF_FIELD_OFFSET(::Protocol::C_Encrypted, _impl_.ciphertext_),
   PROTOBUF_FIELD_OFFSET(::Protocol::C_Encrypted, _impl_.tag_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_Encrypted, _impl_.msgid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_Welcome, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -144,10 +148,10 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::S_Encrypted)},
-  { 9, -1, -1, sizeof(::Protocol::C_Encrypted)},
-  { 18, -1, -1, sizeof(::Protocol::S_Welcome)},
-  { 26, -1, -1, sizeof(::Protocol::C_Welcome)},
-  { 34, -1, -1, sizeof(::Protocol::S_WelcomeResponse)},
+  { 10, -1, -1, sizeof(::Protocol::C_Encrypted)},
+  { 20, -1, -1, sizeof(::Protocol::S_Welcome)},
+  { 28, -1, -1, sizeof(::Protocol::C_Welcome)},
+  { 36, -1, -1, sizeof(::Protocol::S_WelcomeResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -159,21 +163,22 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_Protocol_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016Protocol.proto\022\010Protocol\":\n\013S_Encrypte"
+  "\n\016Protocol.proto\022\010Protocol\"I\n\013S_Encrypte"
   "d\022\n\n\002iv\030\001 \001(\014\022\022\n\nciphertext\030\002 \001(\014\022\013\n\003tag"
-  "\030\003 \001(\014\":\n\013C_Encrypted\022\n\n\002iv\030\001 \001(\014\022\022\n\ncip"
-  "hertext\030\002 \001(\014\022\013\n\003tag\030\003 \001(\014\"3\n\tS_Welcome\022"
-  "\021\n\tpublicKey\030\001 \001(\014\022\023\n\013gameversion\030\002 \001(\005\""
-  ",\n\tC_Welcome\022\016\n\006aesKey\030\001 \001(\014\022\017\n\007message\030"
-  "\002 \001(\t\"5\n\021S_WelcomeResponse\022\017\n\007message\030\001 "
-  "\001(\t\022\017\n\007success\030\002 \001(\010*_\n\005MsgId\022\017\n\013S_ENCRY"
-  "PTED\020\000\022\017\n\013C_ENCRYPTED\020\001\022\r\n\tS_WELCOME\020\002\022\r"
-  "\n\tC_WELCOME\020\003\022\026\n\022S_WELCOME_RESPONSE\020\004B\033\252"
-  "\002\030Google.Protobuf.Protocolb\006proto3"
+  "\030\003 \001(\014\022\r\n\005msgId\030\004 \001(\005\"I\n\013C_Encrypted\022\n\n\002"
+  "iv\030\001 \001(\014\022\022\n\nciphertext\030\002 \001(\014\022\013\n\003tag\030\003 \001("
+  "\014\022\r\n\005msgId\030\004 \001(\005\"3\n\tS_Welcome\022\021\n\tpublicK"
+  "ey\030\001 \001(\014\022\023\n\013gameversion\030\002 \001(\005\",\n\tC_Welco"
+  "me\022\016\n\006aesKey\030\001 \001(\014\022\017\n\007message\030\002 \001(\t\"5\n\021S"
+  "_WelcomeResponse\022\017\n\007message\030\001 \001(\t\022\017\n\007suc"
+  "cess\030\002 \001(\010*_\n\005MsgId\022\017\n\013S_ENCRYPTED\020\000\022\017\n\013"
+  "C_ENCRYPTED\020\001\022\r\n\tS_WELCOME\020\002\022\r\n\tC_WELCOM"
+  "E\020\003\022\026\n\022S_WELCOME_RESPONSE\020\004B\033\252\002\030Google.P"
+  "rotobuf.Protocolb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Protocol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
-    false, false, 434, descriptor_table_protodef_Protocol_2eproto,
+    false, false, 464, descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
     &descriptor_table_Protocol_2eproto_once, nullptr, 0, 5,
     schemas, file_default_instances, TableStruct_Protocol_2eproto::offsets,
@@ -224,6 +229,7 @@ S_Encrypted::S_Encrypted(const S_Encrypted& from)
       decltype(_impl_.iv_){}
     , decltype(_impl_.ciphertext_){}
     , decltype(_impl_.tag_){}
+    , decltype(_impl_.msgid_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -251,6 +257,7 @@ S_Encrypted::S_Encrypted(const S_Encrypted& from)
     _this->_impl_.tag_.Set(from._internal_tag(), 
       _this->GetArenaForAllocation());
   }
+  _this->_impl_.msgid_ = from._impl_.msgid_;
   // @@protoc_insertion_point(copy_constructor:Protocol.S_Encrypted)
 }
 
@@ -262,6 +269,7 @@ inline void S_Encrypted::SharedCtor(
       decltype(_impl_.iv_){}
     , decltype(_impl_.ciphertext_){}
     , decltype(_impl_.tag_){}
+    , decltype(_impl_.msgid_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.iv_.InitDefault();
@@ -307,6 +315,7 @@ void S_Encrypted::Clear() {
   _impl_.iv_.ClearToEmpty();
   _impl_.ciphertext_.ClearToEmpty();
   _impl_.tag_.ClearToEmpty();
+  _impl_.msgid_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -339,6 +348,14 @@ const char* S_Encrypted::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           auto str = _internal_mutable_tag();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 msgId = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          _impl_.msgid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -390,6 +407,12 @@ uint8_t* S_Encrypted::_InternalSerialize(
         3, this->_internal_tag(), target);
   }
 
+  // int32 msgId = 4;
+  if (this->_internal_msgid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(4, this->_internal_msgid(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -427,6 +450,11 @@ size_t S_Encrypted::ByteSizeLong() const {
         this->_internal_tag());
   }
 
+  // int32 msgId = 4;
+  if (this->_internal_msgid() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_msgid());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -453,6 +481,9 @@ void S_Encrypted::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PR
   }
   if (!from._internal_tag().empty()) {
     _this->_internal_set_tag(from._internal_tag());
+  }
+  if (from._internal_msgid() != 0) {
+    _this->_internal_set_msgid(from._internal_msgid());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -485,6 +516,7 @@ void S_Encrypted::InternalSwap(S_Encrypted* other) {
       &_impl_.tag_, lhs_arena,
       &other->_impl_.tag_, rhs_arena
   );
+  swap(_impl_.msgid_, other->_impl_.msgid_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata S_Encrypted::GetMetadata() const {
@@ -512,6 +544,7 @@ C_Encrypted::C_Encrypted(const C_Encrypted& from)
       decltype(_impl_.iv_){}
     , decltype(_impl_.ciphertext_){}
     , decltype(_impl_.tag_){}
+    , decltype(_impl_.msgid_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -539,6 +572,7 @@ C_Encrypted::C_Encrypted(const C_Encrypted& from)
     _this->_impl_.tag_.Set(from._internal_tag(), 
       _this->GetArenaForAllocation());
   }
+  _this->_impl_.msgid_ = from._impl_.msgid_;
   // @@protoc_insertion_point(copy_constructor:Protocol.C_Encrypted)
 }
 
@@ -550,6 +584,7 @@ inline void C_Encrypted::SharedCtor(
       decltype(_impl_.iv_){}
     , decltype(_impl_.ciphertext_){}
     , decltype(_impl_.tag_){}
+    , decltype(_impl_.msgid_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.iv_.InitDefault();
@@ -595,6 +630,7 @@ void C_Encrypted::Clear() {
   _impl_.iv_.ClearToEmpty();
   _impl_.ciphertext_.ClearToEmpty();
   _impl_.tag_.ClearToEmpty();
+  _impl_.msgid_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -627,6 +663,14 @@ const char* C_Encrypted::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           auto str = _internal_mutable_tag();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 msgId = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          _impl_.msgid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -678,6 +722,12 @@ uint8_t* C_Encrypted::_InternalSerialize(
         3, this->_internal_tag(), target);
   }
 
+  // int32 msgId = 4;
+  if (this->_internal_msgid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(4, this->_internal_msgid(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -715,6 +765,11 @@ size_t C_Encrypted::ByteSizeLong() const {
         this->_internal_tag());
   }
 
+  // int32 msgId = 4;
+  if (this->_internal_msgid() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_msgid());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -741,6 +796,9 @@ void C_Encrypted::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PR
   }
   if (!from._internal_tag().empty()) {
     _this->_internal_set_tag(from._internal_tag());
+  }
+  if (from._internal_msgid() != 0) {
+    _this->_internal_set_msgid(from._internal_msgid());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -773,6 +831,7 @@ void C_Encrypted::InternalSwap(C_Encrypted* other) {
       &_impl_.tag_, lhs_arena,
       &other->_impl_.tag_, rhs_arena
   );
+  swap(_impl_.msgid_, other->_impl_.msgid_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata C_Encrypted::GetMetadata() const {

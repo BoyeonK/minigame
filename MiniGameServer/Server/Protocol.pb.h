@@ -225,6 +225,7 @@ class S_Encrypted final :
     kIvFieldNumber = 1,
     kCiphertextFieldNumber = 2,
     kTagFieldNumber = 3,
+    kMsgIdFieldNumber = 4,
   };
   // bytes iv = 1;
   void clear_iv();
@@ -268,6 +269,15 @@ class S_Encrypted final :
   std::string* _internal_mutable_tag();
   public:
 
+  // int32 msgId = 4;
+  void clear_msgid();
+  int32_t msgid() const;
+  void set_msgid(int32_t value);
+  private:
+  int32_t _internal_msgid() const;
+  void _internal_set_msgid(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_Encrypted)
  private:
   class _Internal;
@@ -279,6 +289,7 @@ class S_Encrypted final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr iv_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ciphertext_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+    int32_t msgid_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -410,6 +421,7 @@ class C_Encrypted final :
     kIvFieldNumber = 1,
     kCiphertextFieldNumber = 2,
     kTagFieldNumber = 3,
+    kMsgIdFieldNumber = 4,
   };
   // bytes iv = 1;
   void clear_iv();
@@ -453,6 +465,15 @@ class C_Encrypted final :
   std::string* _internal_mutable_tag();
   public:
 
+  // int32 msgId = 4;
+  void clear_msgid();
+  int32_t msgid() const;
+  void set_msgid(int32_t value);
+  private:
+  int32_t _internal_msgid() const;
+  void _internal_set_msgid(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.C_Encrypted)
  private:
   class _Internal;
@@ -464,6 +485,7 @@ class C_Encrypted final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr iv_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ciphertext_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+    int32_t msgid_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1127,6 +1149,26 @@ inline void S_Encrypted::set_allocated_tag(std::string* tag) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_Encrypted.tag)
 }
 
+// int32 msgId = 4;
+inline void S_Encrypted::clear_msgid() {
+  _impl_.msgid_ = 0;
+}
+inline int32_t S_Encrypted::_internal_msgid() const {
+  return _impl_.msgid_;
+}
+inline int32_t S_Encrypted::msgid() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_Encrypted.msgId)
+  return _internal_msgid();
+}
+inline void S_Encrypted::_internal_set_msgid(int32_t value) {
+  
+  _impl_.msgid_ = value;
+}
+inline void S_Encrypted::set_msgid(int32_t value) {
+  _internal_set_msgid(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_Encrypted.msgId)
+}
+
 // -------------------------------------------------------------------
 
 // C_Encrypted
@@ -1279,6 +1321,26 @@ inline void C_Encrypted::set_allocated_tag(std::string* tag) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_Encrypted.tag)
+}
+
+// int32 msgId = 4;
+inline void C_Encrypted::clear_msgid() {
+  _impl_.msgid_ = 0;
+}
+inline int32_t C_Encrypted::_internal_msgid() const {
+  return _impl_.msgid_;
+}
+inline int32_t C_Encrypted::msgid() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_Encrypted.msgId)
+  return _internal_msgid();
+}
+inline void C_Encrypted::_internal_set_msgid(int32_t value) {
+  
+  _impl_.msgid_ = value;
+}
+inline void C_Encrypted::set_msgid(int32_t value) {
+  _internal_set_msgid(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_Encrypted.msgId)
 }
 
 // -------------------------------------------------------------------

@@ -15,12 +15,14 @@ message S_Encrypted {
     bytes iv = 1;
     bytes ciphertext = 2;
     bytes tag = 3;
+    int32 msgId = 4;
 }
 
 message C_Encrypted {
     bytes iv = 1;
     bytes ciphertext = 2;
     bytes tag = 3;
+    int32 msgId = 4;
 } 
 
 message S_Welcome {
