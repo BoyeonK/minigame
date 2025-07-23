@@ -99,6 +99,7 @@ class PacketHandler {
 			return;
 		}
 
+		Debug.Log($"Message Id = {msgId}");
 		if (!(PacketManager.Instance.ByteToIMessage(session, plaintext, msgId))) {
 			Debug.Log("역직렬화 혹은 Custom Handler에 등록 실패");
         }

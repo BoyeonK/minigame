@@ -76,6 +76,7 @@ private:
 		sendPkt.set_iv(iv.data(), iv.size());
 		sendPkt.set_ciphertext(ciphertext.data(), ciphertext.size());
 		sendPkt.set_tag(tag.data(), tag.size());
+		sendPkt.set_msgid(pktId);
 
 		uint16_t dataSize = static_cast<uint16_t>(sendPkt.ByteSizeLong());
 		uint16_t packetSize = dataSize + sizeof(PacketHeader);
