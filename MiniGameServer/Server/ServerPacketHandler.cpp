@@ -31,12 +31,7 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& rec
 	Protocol::S_WelcomeResponse sendPkt;
 	sendPkt.set_message(recvPkt.message());
 	sendPkt.set_success(true);
-
-	encryptedStr.clear();
-	sendPkt.SerializeToString(&encryptedStr);
-
-	std::vector<unsigned char> plaintext(encryptedStr.begin(), encryptedStr.end());
-	std::vector<unsigned char> iv, ciphertext, tag;
+	//shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef()
 
 	return true;
 }

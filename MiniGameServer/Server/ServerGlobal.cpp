@@ -220,7 +220,7 @@ bool CryptoManager::Decrypt(
 		return false;
 	}
 
-	if (EVP_EncryptInit_ex(ctx, nullptr, nullptr, key.data(), iv.data()) != 1) {
+	if (EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, nullptr, nullptr) != 1 || EVP_EncryptInit_ex(ctx, nullptr, nullptr, key.data(), iv.data()) != 1) {
 		EVP_CIPHER_CTX_free(ctx);
 		return false;
 	}

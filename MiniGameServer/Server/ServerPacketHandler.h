@@ -11,6 +11,7 @@ enum : uint16_t {
 	PKT_C_ENCRYPTED = 1,
 	PKT_S_WELCOME = 2,
 	PKT_C_WELCOME = 3,
+	PKT_S_WELCOMERESPONSE = 4,
 };
 
 bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
@@ -30,14 +31,9 @@ public:
 		return GPacketHandler[header->_id](sessionRef, buffer, len);
 	}
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_Welcome& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOME); }
-	/*
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_EnterGame& pkt) { return MakeSendBufferRef(pkt, PKT_S_ENTER_GAME); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_LeaveGame& pkt) { return MakeSendBufferRef(pkt, PKT_S_LEAVE_GAME); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_Despawn& pkt) { return MakeSendBufferRef(pkt, PKT_S_DESPAWN); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_Spawn& pkt) { return MakeSendBufferRef(pkt, PKT_S_SPAWN); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_Move& pkt) { return MakeSendBufferRef(pkt, PKT_S_MOVE); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_Skill& pkt) { return MakeSendBufferRef(pkt, PKT_S_SKILL); }
-	*/
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_Welcome& pkt, const vector<unsigned char> AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_WelcomeResponse& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOMERESPONSE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_WelcomeResponse& pkt, const vector<unsigned char> AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOMERESPONSE, AESKey); }
 
 private:
 	template<typename PBType, typename HandlerFunc>
@@ -65,18 +61,26 @@ private:
 		return sendBufferRef;
 	}
 
-	//PB로 직렬화된 패킷을 AES키를 이용하여 암호화, SendBufferChunk에 로드하고 해당 SendBuffer를 Return 할 예정
-	//서버에서 암호화 한 경우, PacketHeader의 packetID부분을 0으로 통일하여 packetID를 숨김.
+	//PB로 직렬화된 패킷을 AES키를 이용하여 암호화, SendBufferChunk에 로드하고 해당 SendBuffer를 Return
 	template<typename PBType>
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const PBType& pkt, uint16_t pktId, int AES) {
-		uint16_t dataSize = static_cast<uint16_t>(pkt.ByteSizeLong());
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const PBType& pkt, uint16_t pktId, const vector<unsigned char>& AESKey) {
+		string serializedStr = pkt.SerializeAsString();
+		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
+		vector<unsigned char> iv, ciphertext, tag;
+		CryptoManager::Decrypt(AESKey, plaintext, iv, ciphertext, tag);
+		Protocol::S_Encrypted sendPkt;
+		sendPkt.set_iv(iv.data(), iv.size());
+		sendPkt.set_ciphertext(ciphertext.data(), ciphertext.size());
+		sendPkt.set_tag(tag.data(), tag.size());
+
+		uint16_t dataSize = static_cast<uint16_t>(sendPkt.ByteSizeLong());
 		uint16_t packetSize = dataSize + sizeof(PacketHeader);
 
 		shared_ptr<SendBuffer> sendBufferRef = GSendBufferManager->Open(packetSize);
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(sendBufferRef->Buffer());
 		header->_size = packetSize;
-		header->_id = pktId;
-		pkt.SerializeToArray(&header[1]/*(++header)*/, dataSize);
+		header->_id = 0;
+		sendPkt.SerializeToArray(&header[1]/*(++header)*/, dataSize);
 		sendBufferRef->Close(packetSize);
 
 		return sendBufferRef;
