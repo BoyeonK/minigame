@@ -16,13 +16,20 @@ class PacketManager {
 
 	Dictionary<ushort, Action<PacketSession, ArraySegment<byte>, ushort>> _onRecv = new Dictionary<ushort, Action<PacketSession, ArraySegment<byte>, ushort>>();
 	Dictionary<ushort, Action<PacketSession, IMessage>> _handler = new Dictionary<ushort, Action<PacketSession, IMessage>>();
-		
+	Dictionary<ushort, Func<IMessage>> _msgFactories = new Dictionary<ushort, Func<IMessage>>();
+	
 	public Action<PacketSession, IMessage, ushort> CustomHandler { get; set; }
 
 	//PacketManager 초기화 시, 각 패킷을 다룰 델리게이트들을 초기화해준다.
 	public void Register() {
+		_onRecv.Add((ushort)MsgId.SEncrypted, UnpackPacket<S_Encrypted>);
+		_handler.Add((ushort)MsgId.SEncrypted, PacketHandler.S_Encrypted);
 		_onRecv.Add((ushort)MsgId.SWelcome, UnpackPacket<S_Welcome>);
 		_handler.Add((ushort)MsgId.SWelcome, PacketHandler.S_WelcomeHandler);
+		_msgFactories.Add((ushort)MsgId.SWelcome, () => new S_Welcome());
+		_onRecv.Add((ushort)MsgId.SWelcomeResponse, UnpackPacket<S_WelcomeResponse>);
+		_handler.Add((ushort)MsgId.SWelcomeResponse, PacketHandler.S_WelcomeResponseHandler);
+		_msgFactories.Add((ushort)MsgId.SWelcomeResponse, () => new S_WelcomeResponse());
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {
@@ -34,17 +41,8 @@ class PacketManager {
 		count += 2;
 
 		Action<PacketSession, ArraySegment<byte>, ushort> action = null;
-		//암호화가 적용되었는지 분기처리 (header에 적힌 packetId가 0이 아닌경우)
-		if (id != 0) {
-			//암호화가 적용되지 않았을 경우, _onRecv에서 해당 packetID에 해당하는 델리게이트를 찾아 실행.
-			if (_onRecv.TryGetValue(id, out action))
-				action.Invoke(session, buffer, id);
-		} 
-		else {
-			//TODO : Session의 AES Key가 null이 아닌 경우이면서, 동시에 packetID가 0인 경우,
-			//packetHeader 뒷부분의 바이너리에 대해서 복호화를 선행하여 올바른 packet을 만들고
-			//복원된 packet을 대상으로 _onRecv에서 델리게이트를 찾아 실행.
-        }
+		if (_onRecv.TryGetValue(id, out action))
+			action.Invoke(session, buffer, id);
 	}
 
 	void UnpackPacket<T>(PacketSession session, ArraySegment<byte> buffer, ushort id) where T : IMessage, new()	{
@@ -63,4 +61,14 @@ class PacketManager {
 			return action;
 		return null;
 	}
+
+	public bool ByteToIMessage(PacketSession session, byte[] plaintext, ushort msgId) {
+		if (_msgFactories.TryGetValue(msgId, out Func<IMessage> factory)) {
+			IMessage pkt = factory.Invoke();
+			pkt.MergeFrom(plaintext);
+			CustomHandler.Invoke(session, pkt, msgId);
+			return true;
+		}
+		return false;
+    }
 }

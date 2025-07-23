@@ -12,6 +12,7 @@ void PlayerSession::OnConnected() {
 		Disconnect();
 		return;
 	}
+
 	vector<unsigned char> publicKey = GCryptoManager->ExtractPublicKey(rawKey);
 	_RSAKey = EVP_PKEY_dup(rawKey);
 	GCryptoManager->ReturnKey(rawKey);

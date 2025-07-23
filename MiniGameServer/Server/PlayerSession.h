@@ -9,6 +9,7 @@ public:
 
 	EVP_PKEY* GetRSAKey();
 	void SetAESKey(vector<unsigned char>&& AESKey);
+	void SetAESKey(vector<unsigned char>& AESKey);
 	vector<unsigned char> GetAESKey();
 
 private:

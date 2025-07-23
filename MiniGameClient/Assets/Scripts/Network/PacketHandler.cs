@@ -21,13 +21,13 @@ class PacketHandler {
 	public static void S_WelcomeHandler(PacketSession session, IMessage packet) {
 		S_Welcome sWelcomePacket = packet as S_Welcome;
 
-		if (sWelcomePacket.Gameversion != Managers.GameVersion) {
+		if (sWelcomePacket.Gameversion != Managers.GameVersion)	{
 			//현재는 클라이언트를 즉시 종료하지만, 팝업으로 에러메세지를 띄우고
 			//이후 종료를 유도하는 쪽이 바람직해 보임.
 			Debug.LogError("서버와 클라이언트의 버전이 일치하지 않습니다.");
 			Application.Quit();
 			return;
-        }
+		}
 
 		byte[] publicKey = sWelcomePacket.PublicKey.ToByteArray();
 		RsaKeyParameters rsaParams = null;
@@ -50,7 +50,7 @@ class PacketHandler {
 
 		byte[] encryptedKey;
 
-		try {
+		try	{
 			var encryptEngine = new OaepEncoding(new RsaEngine(), new Sha256Digest());
 			encryptEngine.Init(true, rsaParams);
 			encryptedKey = encryptEngine.ProcessBlock(aesKey, 0, aesKey.Length);
@@ -68,6 +68,37 @@ class PacketHandler {
 
 		Managers.Network.Send(cWelcomePacket);
 	}
-}
 
+    public static void S_WelcomeResponseHandler(PacketSession session, IMessage recvPkt) {
+		return;
+    }
+
+    public static void S_Encrypted(PacketSession session, IMessage packet) {
+		S_Encrypted recvPkt = packet as S_Encrypted;
+		byte[] key = session.AESKey; // 32 bytes (AES-256)
+		byte[] iv = recvPkt.Iv.ToByteArray();
+		byte[] ciphertext = recvPkt.Ciphertext.ToByteArray();
+		byte[] tag = recvPkt.Tag.ToByteArray();
+        ushort msgId = (ushort)recvPkt.MsgId;
+
+		if (iv.Length != 12 || tag.Length != 16) {
+			Debug.LogError($"Invalid IV ({iv.Length}) or Tag ({tag.Length}) length.");
+			return;
+		}
+
+		byte[] plaintext = new byte[ciphertext.Length];
+		try {
+			using (var aesGcm = new AesGcm(key))
+				aesGcm.Decrypt(iv, ciphertext, tag, plaintext);
+		}
+        catch (CryptographicException ex) {
+			Debug.LogError($"복호화 실패: {ex.Message}");
+			return;
+		}
+
+		if (!(PacketManager.Instance.ByteToIMessage(session, plaintext, msgId))) {
+			Debug.Log("역직렬화 혹은 Custom Handler에 등록 실패");
+        }
+	}
+}
 
