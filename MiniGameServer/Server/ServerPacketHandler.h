@@ -1,5 +1,6 @@
 #pragma once
 #include "Protocol.pb.h"
+#include "ServerGlobal.h"
 
 using PacketHandlerFunc = function<bool(shared_ptr<PBSession>, unsigned char*, int32_t)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
@@ -67,7 +68,10 @@ private:
 		string serializedStr = pkt.SerializeAsString();
 		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
 		vector<unsigned char> iv, ciphertext, tag;
-		CryptoManager::Encrypt(AESKey, plaintext, iv, ciphertext, tag);
+		if (!(GCryptoManager->Encrypt(AESKey, plaintext, iv, ciphertext, tag))) {
+			cout << "복호화 실패" << endl;
+			return nullptr;
+		}
 		Protocol::S_Encrypted sendPkt;
 		sendPkt.set_iv(iv.data(), iv.size());
 		sendPkt.set_ciphertext(ciphertext.data(), ciphertext.size());
