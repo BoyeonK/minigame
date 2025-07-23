@@ -46,9 +46,15 @@ struct TableStruct_Protocol_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Protocol_2eproto;
 namespace Protocol {
+class C_Encrypted;
+struct C_EncryptedDefaultTypeInternal;
+extern C_EncryptedDefaultTypeInternal _C_Encrypted_default_instance_;
 class C_Welcome;
 struct C_WelcomeDefaultTypeInternal;
 extern C_WelcomeDefaultTypeInternal _C_Welcome_default_instance_;
+class S_Encrypted;
+struct S_EncryptedDefaultTypeInternal;
+extern S_EncryptedDefaultTypeInternal _S_Encrypted_default_instance_;
 class S_Welcome;
 struct S_WelcomeDefaultTypeInternal;
 extern S_WelcomeDefaultTypeInternal _S_Welcome_default_instance_;
@@ -57,7 +63,9 @@ struct S_WelcomeResponseDefaultTypeInternal;
 extern S_WelcomeResponseDefaultTypeInternal _S_WelcomeResponse_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
+template<> ::Protocol::C_Encrypted* Arena::CreateMaybeMessage<::Protocol::C_Encrypted>(Arena*);
 template<> ::Protocol::C_Welcome* Arena::CreateMaybeMessage<::Protocol::C_Welcome>(Arena*);
+template<> ::Protocol::S_Encrypted* Arena::CreateMaybeMessage<::Protocol::S_Encrypted>(Arena*);
 template<> ::Protocol::S_Welcome* Arena::CreateMaybeMessage<::Protocol::S_Welcome>(Arena*);
 template<> ::Protocol::S_WelcomeResponse* Arena::CreateMaybeMessage<::Protocol::S_WelcomeResponse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -92,6 +100,376 @@ inline bool MsgId_Parse(
     MsgId_descriptor(), name, value);
 }
 // ===================================================================
+
+class S_Encrypted final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_Encrypted) */ {
+ public:
+  inline S_Encrypted() : S_Encrypted(nullptr) {}
+  ~S_Encrypted() override;
+  explicit PROTOBUF_CONSTEXPR S_Encrypted(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_Encrypted(const S_Encrypted& from);
+  S_Encrypted(S_Encrypted&& from) noexcept
+    : S_Encrypted() {
+    *this = ::std::move(from);
+  }
+
+  inline S_Encrypted& operator=(const S_Encrypted& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_Encrypted& operator=(S_Encrypted&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_Encrypted& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_Encrypted* internal_default_instance() {
+    return reinterpret_cast<const S_Encrypted*>(
+               &_S_Encrypted_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  friend void swap(S_Encrypted& a, S_Encrypted& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_Encrypted* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_Encrypted* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_Encrypted* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_Encrypted>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_Encrypted& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_Encrypted& from) {
+    S_Encrypted::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_Encrypted* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_Encrypted";
+  }
+  protected:
+  explicit S_Encrypted(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIvFieldNumber = 1,
+    kCiphertextFieldNumber = 2,
+    kTagFieldNumber = 3,
+  };
+  // bytes iv = 1;
+  void clear_iv();
+  const std::string& iv() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_iv(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_iv();
+  PROTOBUF_NODISCARD std::string* release_iv();
+  void set_allocated_iv(std::string* iv);
+  private:
+  const std::string& _internal_iv() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_iv(const std::string& value);
+  std::string* _internal_mutable_iv();
+  public:
+
+  // bytes ciphertext = 2;
+  void clear_ciphertext();
+  const std::string& ciphertext() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_ciphertext(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_ciphertext();
+  PROTOBUF_NODISCARD std::string* release_ciphertext();
+  void set_allocated_ciphertext(std::string* ciphertext);
+  private:
+  const std::string& _internal_ciphertext() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_ciphertext(const std::string& value);
+  std::string* _internal_mutable_ciphertext();
+  public:
+
+  // bytes tag = 3;
+  void clear_tag();
+  const std::string& tag() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_tag(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_tag();
+  PROTOBUF_NODISCARD std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_Encrypted)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr iv_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ciphertext_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_Encrypted final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_Encrypted) */ {
+ public:
+  inline C_Encrypted() : C_Encrypted(nullptr) {}
+  ~C_Encrypted() override;
+  explicit PROTOBUF_CONSTEXPR C_Encrypted(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  C_Encrypted(const C_Encrypted& from);
+  C_Encrypted(C_Encrypted&& from) noexcept
+    : C_Encrypted() {
+    *this = ::std::move(from);
+  }
+
+  inline C_Encrypted& operator=(const C_Encrypted& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_Encrypted& operator=(C_Encrypted&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_Encrypted& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_Encrypted* internal_default_instance() {
+    return reinterpret_cast<const C_Encrypted*>(
+               &_C_Encrypted_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(C_Encrypted& a, C_Encrypted& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(C_Encrypted* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_Encrypted* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_Encrypted* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<C_Encrypted>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const C_Encrypted& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const C_Encrypted& from) {
+    C_Encrypted::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(C_Encrypted* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.C_Encrypted";
+  }
+  protected:
+  explicit C_Encrypted(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIvFieldNumber = 1,
+    kCiphertextFieldNumber = 2,
+    kTagFieldNumber = 3,
+  };
+  // bytes iv = 1;
+  void clear_iv();
+  const std::string& iv() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_iv(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_iv();
+  PROTOBUF_NODISCARD std::string* release_iv();
+  void set_allocated_iv(std::string* iv);
+  private:
+  const std::string& _internal_iv() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_iv(const std::string& value);
+  std::string* _internal_mutable_iv();
+  public:
+
+  // bytes ciphertext = 2;
+  void clear_ciphertext();
+  const std::string& ciphertext() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_ciphertext(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_ciphertext();
+  PROTOBUF_NODISCARD std::string* release_ciphertext();
+  void set_allocated_ciphertext(std::string* ciphertext);
+  private:
+  const std::string& _internal_ciphertext() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_ciphertext(const std::string& value);
+  std::string* _internal_mutable_ciphertext();
+  public:
+
+  // bytes tag = 3;
+  void clear_tag();
+  const std::string& tag() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_tag(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_tag();
+  PROTOBUF_NODISCARD std::string* release_tag();
+  void set_allocated_tag(std::string* tag);
+  private:
+  const std::string& _internal_tag() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_tag(const std::string& value);
+  std::string* _internal_mutable_tag();
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.C_Encrypted)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr iv_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ciphertext_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tag_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
+// -------------------------------------------------------------------
 
 class S_Welcome final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_Welcome) */ {
@@ -141,7 +519,7 @@ class S_Welcome final :
                &_S_Welcome_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    2;
 
   friend void swap(S_Welcome& a, S_Welcome& b) {
     a.Swap(&b);
@@ -305,7 +683,7 @@ class C_Welcome final :
                &_C_Welcome_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    3;
 
   friend void swap(C_Welcome& a, C_Welcome& b) {
     a.Swap(&b);
@@ -474,7 +852,7 @@ class S_WelcomeResponse final :
                &_S_WelcomeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    4;
 
   friend void swap(S_WelcomeResponse& a, S_WelcomeResponse& b) {
     a.Swap(&b);
@@ -597,6 +975,314 @@ class S_WelcomeResponse final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// S_Encrypted
+
+// bytes iv = 1;
+inline void S_Encrypted::clear_iv() {
+  _impl_.iv_.ClearToEmpty();
+}
+inline const std::string& S_Encrypted::iv() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_Encrypted.iv)
+  return _internal_iv();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_Encrypted::set_iv(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.iv_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_Encrypted.iv)
+}
+inline std::string* S_Encrypted::mutable_iv() {
+  std::string* _s = _internal_mutable_iv();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_Encrypted.iv)
+  return _s;
+}
+inline const std::string& S_Encrypted::_internal_iv() const {
+  return _impl_.iv_.Get();
+}
+inline void S_Encrypted::_internal_set_iv(const std::string& value) {
+  
+  _impl_.iv_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_Encrypted::_internal_mutable_iv() {
+  
+  return _impl_.iv_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_Encrypted::release_iv() {
+  // @@protoc_insertion_point(field_release:Protocol.S_Encrypted.iv)
+  return _impl_.iv_.Release();
+}
+inline void S_Encrypted::set_allocated_iv(std::string* iv) {
+  if (iv != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.iv_.SetAllocated(iv, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.iv_.IsDefault()) {
+    _impl_.iv_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_Encrypted.iv)
+}
+
+// bytes ciphertext = 2;
+inline void S_Encrypted::clear_ciphertext() {
+  _impl_.ciphertext_.ClearToEmpty();
+}
+inline const std::string& S_Encrypted::ciphertext() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_Encrypted.ciphertext)
+  return _internal_ciphertext();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_Encrypted::set_ciphertext(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.ciphertext_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_Encrypted.ciphertext)
+}
+inline std::string* S_Encrypted::mutable_ciphertext() {
+  std::string* _s = _internal_mutable_ciphertext();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_Encrypted.ciphertext)
+  return _s;
+}
+inline const std::string& S_Encrypted::_internal_ciphertext() const {
+  return _impl_.ciphertext_.Get();
+}
+inline void S_Encrypted::_internal_set_ciphertext(const std::string& value) {
+  
+  _impl_.ciphertext_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_Encrypted::_internal_mutable_ciphertext() {
+  
+  return _impl_.ciphertext_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_Encrypted::release_ciphertext() {
+  // @@protoc_insertion_point(field_release:Protocol.S_Encrypted.ciphertext)
+  return _impl_.ciphertext_.Release();
+}
+inline void S_Encrypted::set_allocated_ciphertext(std::string* ciphertext) {
+  if (ciphertext != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.ciphertext_.SetAllocated(ciphertext, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.ciphertext_.IsDefault()) {
+    _impl_.ciphertext_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_Encrypted.ciphertext)
+}
+
+// bytes tag = 3;
+inline void S_Encrypted::clear_tag() {
+  _impl_.tag_.ClearToEmpty();
+}
+inline const std::string& S_Encrypted::tag() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_Encrypted.tag)
+  return _internal_tag();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void S_Encrypted::set_tag(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.tag_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.S_Encrypted.tag)
+}
+inline std::string* S_Encrypted::mutable_tag() {
+  std::string* _s = _internal_mutable_tag();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_Encrypted.tag)
+  return _s;
+}
+inline const std::string& S_Encrypted::_internal_tag() const {
+  return _impl_.tag_.Get();
+}
+inline void S_Encrypted::_internal_set_tag(const std::string& value) {
+  
+  _impl_.tag_.Set(value, GetArenaForAllocation());
+}
+inline std::string* S_Encrypted::_internal_mutable_tag() {
+  
+  return _impl_.tag_.Mutable(GetArenaForAllocation());
+}
+inline std::string* S_Encrypted::release_tag() {
+  // @@protoc_insertion_point(field_release:Protocol.S_Encrypted.tag)
+  return _impl_.tag_.Release();
+}
+inline void S_Encrypted::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.tag_.SetAllocated(tag, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.tag_.IsDefault()) {
+    _impl_.tag_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_Encrypted.tag)
+}
+
+// -------------------------------------------------------------------
+
+// C_Encrypted
+
+// bytes iv = 1;
+inline void C_Encrypted::clear_iv() {
+  _impl_.iv_.ClearToEmpty();
+}
+inline const std::string& C_Encrypted::iv() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_Encrypted.iv)
+  return _internal_iv();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_Encrypted::set_iv(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.iv_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_Encrypted.iv)
+}
+inline std::string* C_Encrypted::mutable_iv() {
+  std::string* _s = _internal_mutable_iv();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_Encrypted.iv)
+  return _s;
+}
+inline const std::string& C_Encrypted::_internal_iv() const {
+  return _impl_.iv_.Get();
+}
+inline void C_Encrypted::_internal_set_iv(const std::string& value) {
+  
+  _impl_.iv_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C_Encrypted::_internal_mutable_iv() {
+  
+  return _impl_.iv_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C_Encrypted::release_iv() {
+  // @@protoc_insertion_point(field_release:Protocol.C_Encrypted.iv)
+  return _impl_.iv_.Release();
+}
+inline void C_Encrypted::set_allocated_iv(std::string* iv) {
+  if (iv != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.iv_.SetAllocated(iv, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.iv_.IsDefault()) {
+    _impl_.iv_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_Encrypted.iv)
+}
+
+// bytes ciphertext = 2;
+inline void C_Encrypted::clear_ciphertext() {
+  _impl_.ciphertext_.ClearToEmpty();
+}
+inline const std::string& C_Encrypted::ciphertext() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_Encrypted.ciphertext)
+  return _internal_ciphertext();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_Encrypted::set_ciphertext(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.ciphertext_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_Encrypted.ciphertext)
+}
+inline std::string* C_Encrypted::mutable_ciphertext() {
+  std::string* _s = _internal_mutable_ciphertext();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_Encrypted.ciphertext)
+  return _s;
+}
+inline const std::string& C_Encrypted::_internal_ciphertext() const {
+  return _impl_.ciphertext_.Get();
+}
+inline void C_Encrypted::_internal_set_ciphertext(const std::string& value) {
+  
+  _impl_.ciphertext_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C_Encrypted::_internal_mutable_ciphertext() {
+  
+  return _impl_.ciphertext_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C_Encrypted::release_ciphertext() {
+  // @@protoc_insertion_point(field_release:Protocol.C_Encrypted.ciphertext)
+  return _impl_.ciphertext_.Release();
+}
+inline void C_Encrypted::set_allocated_ciphertext(std::string* ciphertext) {
+  if (ciphertext != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.ciphertext_.SetAllocated(ciphertext, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.ciphertext_.IsDefault()) {
+    _impl_.ciphertext_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_Encrypted.ciphertext)
+}
+
+// bytes tag = 3;
+inline void C_Encrypted::clear_tag() {
+  _impl_.tag_.ClearToEmpty();
+}
+inline const std::string& C_Encrypted::tag() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_Encrypted.tag)
+  return _internal_tag();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_Encrypted::set_tag(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.tag_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_Encrypted.tag)
+}
+inline std::string* C_Encrypted::mutable_tag() {
+  std::string* _s = _internal_mutable_tag();
+  // @@protoc_insertion_point(field_mutable:Protocol.C_Encrypted.tag)
+  return _s;
+}
+inline const std::string& C_Encrypted::_internal_tag() const {
+  return _impl_.tag_.Get();
+}
+inline void C_Encrypted::_internal_set_tag(const std::string& value) {
+  
+  _impl_.tag_.Set(value, GetArenaForAllocation());
+}
+inline std::string* C_Encrypted::_internal_mutable_tag() {
+  
+  return _impl_.tag_.Mutable(GetArenaForAllocation());
+}
+inline std::string* C_Encrypted::release_tag() {
+  // @@protoc_insertion_point(field_release:Protocol.C_Encrypted.tag)
+  return _impl_.tag_.Release();
+}
+inline void C_Encrypted::set_allocated_tag(std::string* tag) {
+  if (tag != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.tag_.SetAllocated(tag, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.tag_.IsDefault()) {
+    _impl_.tag_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_Encrypted.tag)
+}
+
+// -------------------------------------------------------------------
+
 // S_Welcome
 
 // bytes publicKey = 1;
@@ -850,6 +1536,10 @@ inline void S_WelcomeResponse::set_success(bool value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

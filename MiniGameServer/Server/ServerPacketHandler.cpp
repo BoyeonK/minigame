@@ -28,6 +28,8 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& rec
 	playerSessionRef->SetAESKey(move(AESKey));
 
 	Protocol::S_WelcomeResponse sendPkt;
+	sendPkt.set_message(recvPkt.message());
+	sendPkt.set_success(true);
 
 	return true;
 }

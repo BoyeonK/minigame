@@ -24,16 +24,21 @@ namespace Google.Protobuf.Protocol {
     static ProtocolReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5Qcm90b2NvbC5wcm90bxIIUHJvdG9jb2wiMwoJU19XZWxjb21lEhEKCXB1",
-            "YmxpY0tleRgBIAEoDBITCgtnYW1ldmVyc2lvbhgCIAEoBSIsCglDX1dlbGNv",
-            "bWUSDgoGYWVzS2V5GAEgASgMEg8KB21lc3NhZ2UYAiABKAkiNQoRU19XZWxj",
-            "b21lUmVzcG9uc2USDwoHbWVzc2FnZRgBIAEoCRIPCgdzdWNjZXNzGAIgASgI",
-            "Kl8KBU1zZ0lkEg8KC1NfRU5DUllQVEVEEAASDwoLQ19FTkNSWVBURUQQARIN",
-            "CglTX1dFTENPTUUQAhINCglDX1dFTENPTUUQAxIWChJTX1dFTENPTUVfUkVT",
-            "UE9OU0UQBEIbqgIYR29vZ2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
+            "Cg5Qcm90b2NvbC5wcm90bxIIUHJvdG9jb2wiOgoLU19FbmNyeXB0ZWQSCgoC",
+            "aXYYASABKAwSEgoKY2lwaGVydGV4dBgCIAEoDBILCgN0YWcYAyABKAwiOgoL",
+            "Q19FbmNyeXB0ZWQSCgoCaXYYASABKAwSEgoKY2lwaGVydGV4dBgCIAEoDBIL",
+            "CgN0YWcYAyABKAwiMwoJU19XZWxjb21lEhEKCXB1YmxpY0tleRgBIAEoDBIT",
+            "CgtnYW1ldmVyc2lvbhgCIAEoBSIsCglDX1dlbGNvbWUSDgoGYWVzS2V5GAEg",
+            "ASgMEg8KB21lc3NhZ2UYAiABKAkiNQoRU19XZWxjb21lUmVzcG9uc2USDwoH",
+            "bWVzc2FnZRgBIAEoCRIPCgdzdWNjZXNzGAIgASgIKl8KBU1zZ0lkEg8KC1Nf",
+            "RU5DUllQVEVEEAASDwoLQ19FTkNSWVBURUQQARINCglTX1dFTENPTUUQAhIN",
+            "CglDX1dFTENPTUUQAxIWChJTX1dFTENPTUVfUkVTUE9OU0UQBEIbqgIYR29v",
+            "Z2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Encrypted), global::Google.Protobuf.Protocol.S_Encrypted.Parser, new[]{ "Iv", "Ciphertext", "Tag" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Encrypted), global::Google.Protobuf.Protocol.C_Encrypted.Parser, new[]{ "Iv", "Ciphertext", "Tag" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Welcome), global::Google.Protobuf.Protocol.S_Welcome.Parser, new[]{ "PublicKey", "Gameversion" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Welcome), global::Google.Protobuf.Protocol.C_Welcome.Parser, new[]{ "AesKey", "Message" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_WelcomeResponse), global::Google.Protobuf.Protocol.S_WelcomeResponse.Parser, new[]{ "Message", "Success" }, null, null, null, null)
@@ -54,6 +59,532 @@ namespace Google.Protobuf.Protocol {
   #endregion
 
   #region Messages
+  public sealed partial class S_Encrypted : pb::IMessage<S_Encrypted>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<S_Encrypted> _parser = new pb::MessageParser<S_Encrypted>(() => new S_Encrypted());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<S_Encrypted> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_Encrypted() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_Encrypted(S_Encrypted other) : this() {
+      iv_ = other.iv_;
+      ciphertext_ = other.ciphertext_;
+      tag_ = other.tag_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_Encrypted Clone() {
+      return new S_Encrypted(this);
+    }
+
+    /// <summary>Field number for the "iv" field.</summary>
+    public const int IvFieldNumber = 1;
+    private pb::ByteString iv_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Iv {
+      get { return iv_; }
+      set {
+        iv_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "ciphertext" field.</summary>
+    public const int CiphertextFieldNumber = 2;
+    private pb::ByteString ciphertext_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Ciphertext {
+      get { return ciphertext_; }
+      set {
+        ciphertext_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "tag" field.</summary>
+    public const int TagFieldNumber = 3;
+    private pb::ByteString tag_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Tag {
+      get { return tag_; }
+      set {
+        tag_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as S_Encrypted);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_Encrypted other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Iv != other.Iv) return false;
+      if (Ciphertext != other.Ciphertext) return false;
+      if (Tag != other.Tag) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Iv.Length != 0) hash ^= Iv.GetHashCode();
+      if (Ciphertext.Length != 0) hash ^= Ciphertext.GetHashCode();
+      if (Tag.Length != 0) hash ^= Tag.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Iv.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Iv);
+      }
+      if (Ciphertext.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Ciphertext);
+      }
+      if (Tag.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(Tag);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Iv.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Iv);
+      }
+      if (Ciphertext.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Ciphertext);
+      }
+      if (Tag.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(Tag);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Iv.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Iv);
+      }
+      if (Ciphertext.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Ciphertext);
+      }
+      if (Tag.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Tag);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(S_Encrypted other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Iv.Length != 0) {
+        Iv = other.Iv;
+      }
+      if (other.Ciphertext.Length != 0) {
+        Ciphertext = other.Ciphertext;
+      }
+      if (other.Tag.Length != 0) {
+        Tag = other.Tag;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Iv = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            Ciphertext = input.ReadBytes();
+            break;
+          }
+          case 26: {
+            Tag = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Iv = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            Ciphertext = input.ReadBytes();
+            break;
+          }
+          case 26: {
+            Tag = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class C_Encrypted : pb::IMessage<C_Encrypted>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<C_Encrypted> _parser = new pb::MessageParser<C_Encrypted>(() => new C_Encrypted());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<C_Encrypted> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_Encrypted() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_Encrypted(C_Encrypted other) : this() {
+      iv_ = other.iv_;
+      ciphertext_ = other.ciphertext_;
+      tag_ = other.tag_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public C_Encrypted Clone() {
+      return new C_Encrypted(this);
+    }
+
+    /// <summary>Field number for the "iv" field.</summary>
+    public const int IvFieldNumber = 1;
+    private pb::ByteString iv_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Iv {
+      get { return iv_; }
+      set {
+        iv_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "ciphertext" field.</summary>
+    public const int CiphertextFieldNumber = 2;
+    private pb::ByteString ciphertext_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Ciphertext {
+      get { return ciphertext_; }
+      set {
+        ciphertext_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "tag" field.</summary>
+    public const int TagFieldNumber = 3;
+    private pb::ByteString tag_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Tag {
+      get { return tag_; }
+      set {
+        tag_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as C_Encrypted);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(C_Encrypted other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Iv != other.Iv) return false;
+      if (Ciphertext != other.Ciphertext) return false;
+      if (Tag != other.Tag) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Iv.Length != 0) hash ^= Iv.GetHashCode();
+      if (Ciphertext.Length != 0) hash ^= Ciphertext.GetHashCode();
+      if (Tag.Length != 0) hash ^= Tag.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Iv.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Iv);
+      }
+      if (Ciphertext.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Ciphertext);
+      }
+      if (Tag.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(Tag);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Iv.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Iv);
+      }
+      if (Ciphertext.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteBytes(Ciphertext);
+      }
+      if (Tag.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(Tag);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Iv.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Iv);
+      }
+      if (Ciphertext.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Ciphertext);
+      }
+      if (Tag.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Tag);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(C_Encrypted other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Iv.Length != 0) {
+        Iv = other.Iv;
+      }
+      if (other.Ciphertext.Length != 0) {
+        Ciphertext = other.Ciphertext;
+      }
+      if (other.Tag.Length != 0) {
+        Tag = other.Tag;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Iv = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            Ciphertext = input.ReadBytes();
+            break;
+          }
+          case 26: {
+            Tag = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Iv = input.ReadBytes();
+            break;
+          }
+          case 18: {
+            Ciphertext = input.ReadBytes();
+            break;
+          }
+          case 26: {
+            Tag = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   public sealed partial class S_Welcome : pb::IMessage<S_Welcome>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -68,7 +599,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -294,7 +825,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -520,7 +1051,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

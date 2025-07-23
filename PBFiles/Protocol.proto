@@ -11,6 +11,18 @@ enum MsgId {
     S_WELCOME_RESPONSE = 4;
 }
 
+message S_Encrypted {
+    bytes iv = 1;
+    bytes ciphertext = 2;
+    bytes tag = 3;
+}
+
+message C_Encrypted {
+    bytes iv = 1;
+    bytes ciphertext = 2;
+    bytes tag = 3;
+} 
+
 message S_Welcome {
     bytes publicKey = 1;
     int32 gameversion = 2;
