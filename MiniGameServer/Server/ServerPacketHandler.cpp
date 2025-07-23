@@ -17,11 +17,12 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& rec
 
 	string encryptedStr = recvPkt.aeskey();
 	vector<unsigned char> encryptedKey(encryptedStr.begin(), encryptedStr.end());
-	vector<unsigned char> AESKey = RSAKeyManager::Decrypt(playerSessionRef->GetRSAKey(), encryptedKey);
+	vector<unsigned char> AESKey = CryptoManager::Decrypt(playerSessionRef->GetRSAKey(), encryptedKey);
 
 	if (AESKey.empty()) {
+		//TODO : 정상적인 AESKey를 확보하지 못했을 경우 예외처리
 		cout << "AES Key 복호화 실패!" << endl;
-		//추후, 정상적인 AESKey를 확보하지 못했을 경우 예외처리
+		playerSessionRef->Disconnect();
 		return false;
 	}
 
@@ -30,6 +31,12 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& rec
 	Protocol::S_WelcomeResponse sendPkt;
 	sendPkt.set_message(recvPkt.message());
 	sendPkt.set_success(true);
+
+	encryptedStr.clear();
+	sendPkt.SerializeToString(&encryptedStr);
+
+	std::vector<unsigned char> plaintext(encryptedStr.begin(), encryptedStr.end());
+	std::vector<unsigned char> iv, ciphertext, tag;
 
 	return true;
 }

@@ -2,13 +2,13 @@
 #include "ServerGlobal.h"
 
 ObjectManager* GObjectManager = nullptr;
-RSAKeyManager* RSAManager = nullptr;
+CryptoManager* RSAManager = nullptr;
 
 class ServerGlobal {
 public:
 	ServerGlobal() {
 		GObjectManager = new ObjectManager();
-		RSAManager = new RSAKeyManager();
+		RSAManager = new CryptoManager();
 	}
 	~ServerGlobal() {
 		delete GObjectManager;
@@ -16,7 +16,7 @@ public:
 	}
 } GServerGlobal;
 
-RSAKeyManager::RSAKeyManager() {
+CryptoManager::CryptoManager() {
 	//최초, 메인스레드에서 1번 실행 될 것이기 때문에
 	//생성자 안에서만큼은 multi thread환경을 고려하지 않고 작성됨.
 	for (int i = 0; i < 100; i++) {
@@ -53,7 +53,7 @@ RSAKeyManager::RSAKeyManager() {
 	cout << "RSAKeyManager Initiated" << endl;
 }
 
-RSAKeyManager::~RSAKeyManager() {
+CryptoManager::~CryptoManager() {
 	//TODO : 사용되고 있는 모든 RSA Key를 회수하고 나서 실행되어야 함.
 	//따라서 _outPool이 0인지 확인하는 로직을 추가할 예정.
 
@@ -67,7 +67,7 @@ RSAKeyManager::~RSAKeyManager() {
 	}
 }
 
-EVP_PKEY* RSAKeyManager::PopKey() {
+EVP_PKEY* CryptoManager::PopKey() {
 	
 	EVP_PKEY* key = nullptr;
 	{
@@ -111,7 +111,7 @@ EVP_PKEY* RSAKeyManager::PopKey() {
 }
 
 //이럴 줄 알았으면 처음부터 _keyQueue를 unique_ptr을 다루는 큐로서 만들 걸 그랬다.
-bool RSAKeyManager::ReturnKey(EVP_PKEY*& key) {
+bool CryptoManager::ReturnKey(EVP_PKEY*& key) {
 	if (!key) {
 		cout << "??도대체 뭘 리턴한거지??" << endl;
 		return false;
@@ -126,7 +126,7 @@ bool RSAKeyManager::ReturnKey(EVP_PKEY*& key) {
 	return true;
 }
 
-vector<unsigned char> RSAKeyManager::ExtractPublicKey(EVP_PKEY* key) {
+vector<unsigned char> CryptoManager::ExtractPublicKey(EVP_PKEY* key) {
 	std::vector<unsigned char> publicKey;
 
 	if (!key)
@@ -146,7 +146,7 @@ vector<unsigned char> RSAKeyManager::ExtractPublicKey(EVP_PKEY* key) {
 	return publicKey;
 }
 
-vector<unsigned char> RSAKeyManager::Decrypt(EVP_PKEY* privateKey, const vector<unsigned char>& encrypted) {
+vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<unsigned char>& encrypted) {
 	vector<unsigned char> decrypted;
 	EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(privateKey, nullptr);
 	if (!ctx) {
@@ -199,4 +199,56 @@ vector<unsigned char> RSAKeyManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	EVP_PKEY_CTX_free(ctx);
 
 	return decrypted;
+}
+
+bool CryptoManager::Decrypt(
+	const vector<unsigned char>& key,
+	const vector<unsigned char>& plaintext, 
+	vector<unsigned char>& iv, 
+	vector<unsigned char>& ciphertext, 
+	vector<unsigned char>& tag
+) {
+	EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
+	if (!ctx)
+		return false;
+
+	iv.resize(12); // GCM 권장 IV 크기
+	RAND_bytes(iv.data(), iv.size());
+
+	if (EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, nullptr, nullptr) != 1) {
+		EVP_CIPHER_CTX_free(ctx);
+		return false;
+	}
+
+	if (EVP_EncryptInit_ex(ctx, nullptr, nullptr, key.data(), iv.data()) != 1) {
+		EVP_CIPHER_CTX_free(ctx);
+		return false;
+	}
+
+	ciphertext.resize(plaintext.size());
+	int len;
+
+	if (EVP_EncryptUpdate(ctx, ciphertext.data(), &len, plaintext.data(), plaintext.size()) != 1) {
+		EVP_CIPHER_CTX_free(ctx);
+		return false;
+	}
+
+	int ciphertext_len = len;
+
+	if (EVP_EncryptFinal_ex(ctx, ciphertext.data() + len, &len) != 1) {
+		EVP_CIPHER_CTX_free(ctx);
+		return false;
+	}
+
+	ciphertext_len += len;
+	ciphertext.resize(ciphertext_len);
+
+	tag.resize(16);
+	if (EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_GET_TAG, 16, tag.data()) != 1) {
+		EVP_CIPHER_CTX_free(ctx);
+		return false;
+	}
+
+	EVP_CIPHER_CTX_free(ctx);
+	return true;
 }

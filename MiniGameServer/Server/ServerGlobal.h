@@ -5,7 +5,7 @@
 #include <cstring>
 
 extern class ObjectManager* GObjectManager;
-extern class RSAKeyManager* RSAManager;
+extern class CryptoManager* RSAManager;
 
 class ObjectManager {
 public:
@@ -15,16 +15,23 @@ private:
 	static atomic<uint32_t> _objectId;
 };
 
-class RSAKeyManager {
+class CryptoManager {
 public:
-	RSAKeyManager();
-	~RSAKeyManager();
+	CryptoManager();
+	~CryptoManager();
 
 	EVP_PKEY* PopKey();
 	bool ReturnKey(EVP_PKEY*& key);
 
 	static vector<unsigned char> ExtractPublicKey(EVP_PKEY* key);
 	static vector<unsigned char> Decrypt(EVP_PKEY* privateKey, const vector<unsigned char>& encrypted);
+	static bool Decrypt(
+		const vector<unsigned char>& key,
+		const vector<unsigned char>& plaintext,
+		vector<unsigned char>& iv,
+		vector<unsigned char>& ciphertext,
+		vector<unsigned char>& tag
+	);
 
 private:
 	USE_RWLOCK;
