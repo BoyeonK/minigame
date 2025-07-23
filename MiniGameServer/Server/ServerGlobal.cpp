@@ -2,17 +2,17 @@
 #include "ServerGlobal.h"
 
 ObjectManager* GObjectManager = nullptr;
-CryptoManager* RSAManager = nullptr;
+CryptoManager* GCryptoManager = nullptr;
 
 class ServerGlobal {
 public:
 	ServerGlobal() {
 		GObjectManager = new ObjectManager();
-		RSAManager = new CryptoManager();
+		GCryptoManager = new CryptoManager();
 	}
 	~ServerGlobal() {
 		delete GObjectManager;
-		delete RSAManager;
+		delete GCryptoManager;
 	}
 } GServerGlobal;
 
@@ -213,14 +213,13 @@ bool CryptoManager::Encrypt(
 		return false;
 
 	iv.resize(12); // GCM 권장 IV 크기
-	RAND_bytes(iv.data(), iv.size());
-
-	if (EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, nullptr, nullptr) != 1) {
+	if (RAND_bytes(iv.data(), iv.size()) != 1) {
 		EVP_CIPHER_CTX_free(ctx);
 		return false;
 	}
 
-	if (EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, nullptr, nullptr) != 1 || EVP_EncryptInit_ex(ctx, nullptr, nullptr, key.data(), iv.data()) != 1) {
+	if (EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, nullptr, nullptr) != 1 ||
+		EVP_EncryptInit_ex(ctx, nullptr, nullptr, key.data(), iv.data()) != 1) {
 		EVP_CIPHER_CTX_free(ctx);
 		return false;
 	}

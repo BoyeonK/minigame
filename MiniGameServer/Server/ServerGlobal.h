@@ -5,7 +5,7 @@
 #include <cstring>
 
 extern class ObjectManager* GObjectManager;
-extern class CryptoManager* RSAManager;
+extern class CryptoManager* GCryptoManager;
 
 class ObjectManager {
 public:

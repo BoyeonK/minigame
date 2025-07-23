@@ -6,15 +6,15 @@
 void PlayerSession::OnConnected() {
 	cout << "Player Session Onconnected!" << endl;
 
-	EVP_PKEY* rawKey = RSAManager->PopKey();
+	EVP_PKEY* rawKey = GCryptoManager->PopKey();
 	if (!rawKey) {
 		cout << "Failed to Pop RSAKey!" << endl;
 		Disconnect();
 		return;
 	}
-	vector<unsigned char> publicKey = RSAManager->ExtractPublicKey(rawKey);
+	vector<unsigned char> publicKey = GCryptoManager->ExtractPublicKey(rawKey);
 	_RSAKey = EVP_PKEY_dup(rawKey);
-	RSAManager->ReturnKey(rawKey);
+	GCryptoManager->ReturnKey(rawKey);
 	if (!_RSAKey) {
 		cout << "Failed to duplicate RSAKey!" << endl;
 		Disconnect();
@@ -46,4 +46,8 @@ void PlayerSession::SetAESKey(vector<unsigned char>&& AESKey) {
 
 	//디버그용. 추후 삭제 예정.
 	cout << "SetAESKey" << endl;
+}
+
+vector<unsigned char> PlayerSession::GetAESKey() {
+	return _AESKey;
 }
