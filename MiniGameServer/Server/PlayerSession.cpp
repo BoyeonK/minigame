@@ -35,4 +35,5 @@ void PlayerSession::OnDisconnected() {
 
 void PlayerSession::OnRecvPacket(unsigned char* buffer, int32_t len) {
 	ServerPacketHandler::HandlePacket(static_pointer_cast<PBSession>(shared_from_this()), buffer, len);
+	cout << "OnRecvPacket" << endl;
 }

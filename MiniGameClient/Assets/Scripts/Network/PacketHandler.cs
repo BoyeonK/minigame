@@ -10,6 +10,7 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Crypto.Encodings;
 using Org.BouncyCastle.Security;
 
 //아래의 Handler함수들은, 모두 customHandler를 통해서 main thread에서 실행되는 구조이므로
@@ -48,12 +49,10 @@ class PacketHandler {
 		session.AESKey = aesKey;
 
 		byte[] encryptedKey;
+
 		try {
-			var encryptEngine = new Org.BouncyCastle.Crypto.Engines.OaepEncoding(
-				new Org.BouncyCastle.Crypto.Engines.RsaEngine(),
-				new Org.BouncyCastle.Crypto.Digests.Sha256Digest() // OAEP SHA-256
-			);
-			encryptEngine.Init(true, rsaParams); // true = for encryption
+			var encryptEngine = new OaepEncoding(new RsaEngine(), new Sha256Digest());
+			encryptEngine.Init(true, rsaParams);
 			encryptedKey = encryptEngine.ProcessBlock(aesKey, 0, aesKey.Length);
 		}
 		catch (Exception ex) {
