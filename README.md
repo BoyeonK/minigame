@@ -1,4 +1,4 @@
-#### Third-Party Libraries
+### Third-Party Libraries
 
 This project uses the following third-party libraries and tools:
 
@@ -15,3 +15,13 @@ This project uses the following third-party libraries and tools:
   Copyright © The OpenSSL Project
   
   > Used for generating RSA key pairs (PKCS#8 / DER format), which are exchanged between client and server during secure handshake initialization.
+
+- **Microsoft SQL Server ODBC Driver**  
+  License: Proprietary License (Microsoft)
+  
+  > Used in C++ for establishing connections, querying, and interacting with Microsoft SQL Server.
+
+- **Microsoft SQL Server Express**  
+  License: Proprietary License (Microsoft)
+  
+  > Used for lightweight, free database management in this project, compatible with the full SQL Server system.
