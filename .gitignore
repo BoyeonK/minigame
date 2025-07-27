@@ -28,3 +28,6 @@ Thumbs.db
 *.apk
 *.exe
 *.dll
+
+# 환경변수 무시
+.env
