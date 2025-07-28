@@ -27,33 +27,7 @@ bool CheckReturn(SQLRETURN ret, SQLHDBC& hDbc) {
     return true;
 }
 
-// ODBC 환경 초기화 및 연결 함수
-void InitializeODBC(SQLHENV& hEnv, SQLHDBC& hDbc) {
-    SQLRETURN ret;
-
-    // 환경 핸들 할당
-    ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &hEnv);
-    CheckReturn(ret, hDbc);
-
-    // ODBC 버전 설정
-    ret = SQLSetEnvAttr(hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0);
-    CheckReturn(ret, hDbc);
-
-    // 연결 핸들 할당
-    ret = SQLAllocHandle(SQL_HANDLE_DBC, hEnv, &hDbc);
-    CheckReturn(ret, hDbc);
-}
-
-// 데이터베이스 연결 함수
-void ConnectToDatabase(SQLHDBC hDbc) {
-    SQLWCHAR connStr[] = L"Driver={ODBC Driver 17 for SQL Server};Server=localhost\\SQLEXPRESS;Database=MyGameDB;Trusted_Connection=Yes;";
-    SQLRETURN ret;
-
-    ret = SQLDriverConnectW(hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
-    CheckReturn(ret, hDbc);
-}
-
-void Cleanup(SQLHDBC hDbc, SQLHENV hEnv) {
+void Cleanup(SQLHDBC& hDbc, SQLHENV& hEnv) {
     SQLFreeHandle(SQL_HANDLE_DBC, hDbc);  // 연결 핸들 해제
     SQLFreeHandle(SQL_HANDLE_ENV, hEnv);  // 환경 핸들 해제
 }
@@ -94,8 +68,8 @@ wchar_t* GetEnvVar(const wchar_t* varName) {
 }
 
 int main() {
-    SQLHENV hEnv;
-    SQLHDBC hDbc;
+    SQLHENV hEnv = NULL;
+    SQLHDBC hDbc = NULL;
     SQLRETURN ret;
     string line;
 
@@ -103,32 +77,39 @@ int main() {
 
     if (envFile.is_open()) {
         cout << ".env Open Succeed!" << endl;
-        while (getline(envFile, line)) {
-            // 공백이나 주석을 무시하고, "=" 기준으로 KEY=VALUE 쌍을 추출
-            if (line.empty() || line[0] == '#') continue;
-
-            // KEY=VALUE에서 VALUE가 따옴표로 감싸져 있다면 이를 제거
-            size_t eqPos = line.find("=");
-            if (eqPos != string::npos) {
-                string key = line.substr(0, eqPos);
-                string value = line.substr(eqPos + 1);
-
-                // VALUE에서 따옴표 제거
-                if (value.front() == '"' && value.back() == '"')
-                    value = value.substr(1, value.length() - 2);
-
-                wstring wkey = s2ws(key);
-                wstring wvalue = s2ws(value);
-
-                // 환경 변수 설정 (Windows에서는 SetEnvironmentVariableW 사용)
-                if (SetEnvironmentVariableW(wkey.c_str(), wvalue.c_str()))
-                    cout << "설정된 환경 변수: " << key << "=" << value << std::endl;
-                else
-                    cout << "환경 변수 설정 실패: " << key << " (에러 코드: " << GetLastError() << ")" << std::endl;
-            }
-        }
-        envFile.close();
     }
+    else {
+        cout << ".env Open Faild" << endl;
+        return 0;
+    }
+
+    while (getline(envFile, line)) {
+        // 공백이나 주석을 무시하고, "=" 기준으로 KEY=VALUE 쌍을 추출
+        if (line.empty() || line[0] == '#') continue;
+
+        // KEY=VALUE에서 VALUE가 따옴표로 감싸져 있다면 이를 제거
+        size_t eqPos = line.find("=");
+        if (eqPos != string::npos) {
+            string key = line.substr(0, eqPos);
+            string value = line.substr(eqPos + 1);
+
+            // VALUE가 따옴표로 묶여있을 경우, 제거
+            if (value.front() == '"' && value.back() == '"')
+                value = value.substr(1, value.length() - 2);
+
+            //Unicode로 변환 (SetEnvironmentVariableW 사용을 위해서)
+            wstring wkey = s2ws(key);
+            wstring wvalue = s2ws(value);
+
+            // 환경 변수 설정
+            if (SetEnvironmentVariableW(wkey.c_str(), wvalue.c_str()))
+                cout << "설정된 환경 변수: " << key << "=" << value << std::endl;
+            else
+                cout << "환경 변수 설정 실패: " << key << " (에러 코드: " << GetLastError() << ")" << std::endl;
+        }
+    }
+
+    envFile.close();
 
     wchar_t* dbServer = GetEnvVar(L"DB_SERVER");
     wchar_t* dbName = GetEnvVar(L"DB_NAME");
@@ -136,30 +117,57 @@ int main() {
 
     // ODBC 환경 및 연결 초기화
     ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &hEnv);
-    CheckReturn(ret, hDbc);
+    if (!CheckReturn(ret, hDbc)) {
+        cout << "초기화 실패1" << endl;
+        Cleanup(hDbc, hEnv);
+        delete[] dbServer;
+        delete[] dbName;
+        delete[] connection;
+        return 0;
+    }
 
     // ODBC 버전 설정
     ret = SQLSetEnvAttr(hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0);
-    CheckReturn(ret, hDbc);
+    if (!CheckReturn(ret, hDbc)) {
+        cout << "초기화 실패2" << endl;
+        Cleanup(hDbc, hEnv);
+        delete[] dbServer;
+        delete[] dbName;
+        delete[] connection;
+        return 0;
+    }
 
     // 연결 핸들 할당
     ret = SQLAllocHandle(SQL_HANDLE_DBC, hEnv, &hDbc);
-    CheckReturn(ret, hDbc);
+    if (!CheckReturn(ret, hDbc)) {
+        cout << "초기화 실패3" << endl;
+        Cleanup(hDbc, hEnv);
+        delete[] dbServer;
+        delete[] dbName;
+        delete[] connection;
+        return 0;
+    }
 
     // 데이터베이스에 연결
     if (dbServer && dbName && connection) {
         SQLWCHAR connStr[1024];
         _snwprintf_s(connStr, sizeof(connStr) / sizeof(SQLWCHAR),
-            L"Driver={ODBC Driver 17 for SQL Server};Server=%s;Database=%s;%s;",
+            L"Driver={ODBC Driver 17 for SQL Server};Server=%ls;Database=%ls;%ls;",
             dbServer, dbName, connection);
-
-        wcout << L"연결 문자열: " << connStr << endl;
+        wcout << L"connStr : " << connStr << endl;
 
         ret = SQLDriverConnectW(hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
-        CheckReturn(ret, hDbc);
+        if (!CheckReturn(ret, hDbc)) {
+            cout << "초기화 실패4" << endl;
+            Cleanup(hDbc, hEnv);
+            delete[] dbServer;
+            delete[] dbName;
+            delete[] connection;
+            return 0;
+        }
     }
     else
-        wcout << L"환경 변수가 설정되지 않았습니다." << endl;
+        wcerr << L"환경 변수가 설정되지 않았습니다." << endl;
 
     // 리소스 해제
     delete[] dbServer;
