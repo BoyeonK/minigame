@@ -93,7 +93,9 @@ public:
             wcout << L"connStr : " << connStr << endl;
 
             ret = SQLDriverConnectW(_hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
-            CheckReturn(ret);
+            if (CheckReturn(ret)) {
+                cout << "DB 연결에 성공했습니다." << endl;
+            }
         }
         else
             cout << "환경 변수가 설정되지 않았습니다." << endl;
@@ -101,7 +103,6 @@ public:
         delete[] dbServer;
         delete[] dbName;
         delete[] connection;
-        cout << "DB 연결에 성공했습니다." << endl;
 	}
 
     ~DBManager() {
