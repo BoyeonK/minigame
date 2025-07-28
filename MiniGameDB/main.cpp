@@ -12,7 +12,7 @@
 using namespace std;
 
 // 오류 상태 확인 함수
-void CheckReturn(SQLRETURN ret, SQLHDBC hDbc) {
+bool CheckReturn(SQLRETURN ret, SQLHDBC& hDbc) {
     if (!SQL_SUCCEEDED(ret)) {
         SQLWCHAR SQLState[6];  // SQLSTATE는 5개의 문자를 사용 + null 종료 문자를 위해 6
         SQLWCHAR message[256]; // 메시지 버퍼 크기
@@ -22,7 +22,9 @@ void CheckReturn(SQLRETURN ret, SQLHDBC hDbc) {
         // SQLGetDiagRecW에서 유니코드 오류 메시지 받아오기
         SQLGetDiagRecW(SQL_HANDLE_DBC, hDbc, 1, SQLState, &NativeError, message, sizeof(message) / sizeof(SQLWCHAR), &msgLength);
         wcout << L"SQLState: " << SQLState << L", Message: " << message << endl;
+        return false;
     }
+    return true;
 }
 
 // ODBC 환경 초기화 및 연결 함수
@@ -133,7 +135,16 @@ int main() {
     wchar_t* connection = GetEnvVar(L"CONNECTION");
 
     // ODBC 환경 및 연결 초기화
-    InitializeODBC(hEnv, hDbc);
+    ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &hEnv);
+    CheckReturn(ret, hDbc);
+
+    // ODBC 버전 설정
+    ret = SQLSetEnvAttr(hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0);
+    CheckReturn(ret, hDbc);
+
+    // 연결 핸들 할당
+    ret = SQLAllocHandle(SQL_HANDLE_DBC, hEnv, &hDbc);
+    CheckReturn(ret, hDbc);
 
     // 데이터베이스에 연결
     if (dbServer && dbName && connection) {
@@ -150,10 +161,10 @@ int main() {
     else
         wcout << L"환경 변수가 설정되지 않았습니다." << endl;
 
-    // 연결 상태 체크
-    cout << "Connection Succeed!" << endl;
-
     // 리소스 해제
+    delete[] dbServer;
+    delete[] dbName;
+    delete[] connection;
     Cleanup(hDbc, hEnv);
 
     return 0;
