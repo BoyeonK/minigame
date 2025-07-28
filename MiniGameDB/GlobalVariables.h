@@ -16,7 +16,7 @@ extern class DBManager* GDBManager;
 
 class DBManager {
 public:
-	DBManager() : _hEnv(nullptr), _hDbc(nullptr), _ret(0) {
+	DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
 		ifstream envFile(".env");
 
 		if (envFile.is_open())
@@ -73,16 +73,16 @@ public:
             wcout << L"CONNECTION" << " = " << connection << endl;
 
         // ODBC 환경 및 연결 초기화
-        _ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &_hEnv);
-        CheckReturn();
+        SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &_hEnv);
+        CheckReturn(ret);
 
         // ODBC 버전 설정
-        _ret = SQLSetEnvAttr(_hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0);
-        CheckReturn();
+        ret = SQLSetEnvAttr(_hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0);
+        CheckReturn(ret);
 
         // 연결 핸들 할당
-        _ret = SQLAllocHandle(SQL_HANDLE_DBC, _hEnv, &_hDbc);
-        CheckReturn();
+        ret = SQLAllocHandle(SQL_HANDLE_DBC, _hEnv, &_hDbc);
+        CheckReturn(ret);
 
         if (dbServer && dbName && connection) {
             SQLWCHAR connStr[1024];
@@ -92,8 +92,8 @@ public:
             //기본 CMD에서 유니코드 한글이 출력되지 않음....
             wcout << L"connStr : " << connStr << endl;
 
-            _ret = SQLDriverConnectW(_hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
-            CheckReturn();
+            ret = SQLDriverConnectW(_hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+            CheckReturn(ret);
         }
         else
             cout << "환경 변수가 설정되지 않았습니다." << endl;
@@ -109,8 +109,8 @@ public:
         SQLFreeHandle(SQL_HANDLE_ENV, _hEnv);  // 환경 핸들 해제
     }
 
-    bool CheckReturn() {
-        if (!SQL_SUCCEEDED(_ret)) {
+    bool CheckReturn(SQLRETURN& ret) {
+        if (!SQL_SUCCEEDED(ret)) {
             SQLWCHAR SQLState[6];  // SQLSTATE는 5개의 문자를 사용 + null 종료 문자를 위해 6
             SQLWCHAR message[256]; // 메시지 버퍼 크기
             SQLINTEGER NativeError;
@@ -127,6 +127,5 @@ public:
 private:
 	SQLHENV _hEnv;
 	SQLHDBC _hDbc;
-	SQLRETURN _ret;
 };
 
