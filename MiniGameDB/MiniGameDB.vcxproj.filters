@@ -12,9 +12,15 @@
     <ClCompile Include="GlobalVariables.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="QueryExecuter.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalVariables.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryExecuter.h">
       <Filter>main</Filter>
     </ClInclude>
   </ItemGroup>

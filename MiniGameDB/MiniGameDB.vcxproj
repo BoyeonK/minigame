@@ -153,9 +153,11 @@
   <ItemGroup>
     <ClCompile Include="GlobalVariables.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="QueryExecuter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="QueryExecuter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
