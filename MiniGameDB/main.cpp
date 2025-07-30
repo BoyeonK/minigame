@@ -14,19 +14,13 @@ int main() {
     cout << a << endl;
     cout << b << endl;
 
-    string uu = "나는문어";
-    string aa = "Dreaming Octopus";
+    wstring tableName = L"HandShake";
+    wstring colName = L"value";
+    wstring value = L"10";
 
     try {
-        wstring uuRef = GDBManager->a2wsRef(uu);
-        wcout << uuRef << endl;
-    } catch (const runtime_error& e) {
-        cout << e.what() << endl;
-    }
-
-    try {
-        wstring aaRef = GDBManager->a2wsRef(aa);
-        wcout << aaRef << endl;
+        wstring q = GDBManager->CreateQuery(tableName, { L"value1", L"value2", L"'10'", L"'20'" });
+        wcout << q << endl;
     } catch (const runtime_error& e) {
         cout << e.what() << endl;
     }

@@ -28,27 +28,31 @@ public:
     wstring a2wsRef(const string& in_cp949);
     wstring s2wsRef(const string& in_u8s);
 
-    wstring combineWideStrings(initializer_list<unique_ptr<wchar_t[]>> wsRefs) {
-        if (wsRefs.size() < 3 or (wsRefs.size() / 2) == 0) {
-            throw runtime_error("CreateQueryA2W: 인자 갯수가 맞지 않습니다.");
+    //이대로 사용하면 코드인젝션에 굉장히 취약함!
+    wstring CreateQuery(const wstring& tableName, initializer_list<wstring> wstrs) {
+        if (wstrs.size() < 2 or wstrs.size() % 2 != 0)
+            throw runtime_error("CreateQuery: 인자 갯수가 맞지 않습니다.");
+
+        vector<wstring> args(wstrs);
+
+        wstringstream ss;
+        ss << L"INSERT INTO " << tableName << L" (";
+        size_t halfCol = wstrs.size() / 2;
+
+        for (int i = 0; i < halfCol; i++) {
+            ss << args[i];
+            if (i != (halfCol - 1))
+                ss << L", ";
         }
+        ss << L") VALUES (";
+        for (int i = 0; i < halfCol; i++) {
+            ss << args[i + halfCol];
+            if (i != (halfCol - 1))
+                ss << L", ";
+        }
+        ss << L")";
 
-        wstring insertQuery = L"INSERT INTO ";
-
-        // 1. 최종 wstring의 총 길이 계산 (널 종료 문자는 제외)
-        size_t total_len = 0;
-        for (const auto& uptr : wsRefs)
-            if (uptr)
-                total_len += wcslen(uptr.get()); // wcslen은 널 종료 문자를 포함하지 않는 길이 반환
-
-        // 2. 최종 wstring 생성 및 각 문자열 이어 붙이기
-        wstring result;
-        result.reserve(total_len);
-        for (const auto& uptr : wsRefs)
-            if (uptr)
-                result.append(uptr.get()); // unique_ptr이 관리하는 wchar_t*를 append
-
-        return result;
+        return ss.str();
     }
 
     /*
