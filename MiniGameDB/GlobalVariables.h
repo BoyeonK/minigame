@@ -25,50 +25,38 @@ public:
 
     bool CheckReturn(SQLRETURN& ret);
 
-    unique_ptr<wchar_t[]> a2ws(const string& in_cp949) {
-        if (in_cp949.empty())
-            return nullptr;
+    wstring a2wsRef(const string& in_cp949);
+    wstring s2wsRef(const string& in_u8s);
 
-        // 1. 필요한 wchar_t 버퍼 크기 계산 (NULL 종료 문자 포함)
-        int w_len = MultiByteToWideChar(CP_ACP, 0, in_cp949.c_str(), -1, NULL, 0);
-        if (w_len == 0)
-            throw runtime_error("a2ws: Failed to get required length. LastError: " + to_string(GetLastError()));
+    wstring combineWideStrings(initializer_list<unique_ptr<wchar_t[]>> wsRefs) {
+        if (wsRefs.size() < 3 or (wsRefs.size() / 2) == 0) {
+            throw runtime_error("CreateQueryA2W: 인자 갯수가 맞지 않습니다.");
+        }
 
-        // 2. 할당
-        unique_ptr<wchar_t[]> wsRef = make_unique<wchar_t[]>(w_len);
+        wstring insertQuery = L"INSERT INTO ";
 
-        //값 채우기
-        if (!MultiByteToWideChar(CP_ACP, 0, in_cp949.c_str(), -1, wsRef.get(), w_len))
-            throw runtime_error("a2ws: Failed to convert string to wchar. LastError: " + std::to_string(GetLastError()));
+        // 1. 최종 wstring의 총 길이 계산 (널 종료 문자는 제외)
+        size_t total_len = 0;
+        for (const auto& uptr : wsRefs)
+            if (uptr)
+                total_len += wcslen(uptr.get()); // wcslen은 널 종료 문자를 포함하지 않는 길이 반환
 
-        return wsRef;
-    }
+        // 2. 최종 wstring 생성 및 각 문자열 이어 붙이기
+        wstring result;
+        result.reserve(total_len);
+        for (const auto& uptr : wsRefs)
+            if (uptr)
+                result.append(uptr.get()); // unique_ptr이 관리하는 wchar_t*를 append
 
-    unique_ptr<wchar_t[]> s2ws(const string& in_u8s) {
-        if (in_u8s.empty())
-            return nullptr;
-
-        // 1. 필요한 wchar_t 버퍼 크기 계산 (NULL 종료 문자 포함)
-        int w_len = MultiByteToWideChar(CP_UTF8, 0, in_u8s.c_str(), -1, NULL, 0);
-        if (w_len == 0)
-            throw runtime_error("s2ws: Failed to get required length. LastError: " + to_string(GetLastError()));
-
-        // 2. 할당
-        unique_ptr<wchar_t[]> wsRef = make_unique<wchar_t[]>(w_len);
-
-        //값 채우기
-        if (!MultiByteToWideChar(CP_UTF8, 0, in_u8s.c_str(), -1, wsRef.get(), w_len))
-            throw runtime_error("s2ws: Failed to convert string to wchar. LastError: " + std::to_string(GetLastError()));
-
-        return wsRef;
+        return result;
     }
 
     /*
-    wchar_t* CreateQueryA2W(const Args&... args)
     wchar_t* ReadQueryA2W();
     wchar_t* UpdateQueryA2W();
     wchar_t* DeleteQueryA2W();
     */
+
 private:
 	SQLHENV _hEnv;
 	SQLHDBC _hDbc;

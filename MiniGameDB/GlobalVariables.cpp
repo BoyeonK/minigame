@@ -122,3 +122,43 @@ bool DBManager::CheckReturn(SQLRETURN& ret) {
     }
     return true;
 }
+
+wstring DBManager::a2wsRef(const string& in_cp949) {
+    if (in_cp949.empty())
+        return L"";
+
+    // 1. 필요한 wchar_t 버퍼 크기 계산 (NULL 종료 문자 포함)
+    int w_len = MultiByteToWideChar(CP_ACP, 0, in_cp949.c_str(), -1, NULL, 0);
+    if (w_len == 0)
+        throw runtime_error("a2ws: Failed to get required length. LastError: " + to_string(GetLastError()));
+
+    // 2. 할당
+    wstring ws;
+    ws.resize(w_len - 1);
+
+    //값 채우기
+    if (!MultiByteToWideChar(CP_ACP, 0, in_cp949.c_str(), -1, &ws[0], w_len))
+        throw runtime_error("a2ws: Failed to convert string to wchar. LastError: " + std::to_string(GetLastError()));
+
+    return ws;
+}
+
+wstring DBManager::s2wsRef(const string& in_u8s) {
+    if (in_u8s.empty())
+        return L"";
+
+    // 1. 필요한 wchar_t 버퍼 크기 계산 (NULL 종료 문자 포함)
+    int w_len = MultiByteToWideChar(CP_UTF8, 0, in_u8s.c_str(), -1, NULL, 0);
+    if (w_len == 0)
+        throw runtime_error("s2ws: Failed to get required length. LastError: " + to_string(GetLastError()));
+
+    // 2. 할당
+    wstring ws;
+    ws.resize(w_len - 1);
+
+    //값 채우기
+    if (!MultiByteToWideChar(CP_UTF8, 0, in_u8s.c_str(), -1, &ws[0], w_len))
+        throw runtime_error("s2ws: Failed to convert string to wchar. LastError: " + std::to_string(GetLastError()));
+
+    return ws;
+}
