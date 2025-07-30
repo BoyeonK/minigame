@@ -127,7 +127,7 @@ void DBManager::InitialC() {
         throw runtime_error("InitialC Failed.");
     }
 
-    wstring query = L"INSERT INTO HandShake (id, value) VALUES (?, ?)";
+    wstring query = L"INSERT INTO CRUD (id, value) VALUES (?, ?)";
     ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
     if (!CheckReturn(ret)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
@@ -152,7 +152,7 @@ void DBManager::InitialC() {
 void DBManager::InitialR() {
     SQLHSTMT hStmt;
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, _hDbc, &hStmt);
-    wstring query = L"SELECT id, value FROM HandShake";
+    wstring query = L"SELECT id, value FROM CRUD";
     ret = SQLExecDirectW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
     if (!CheckReturn(ret)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
@@ -173,7 +173,7 @@ void DBManager::InitialR() {
 void DBManager::InitialU() {
     SQLHSTMT hStmt;
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, _hDbc, &hStmt);
-    wstring query = L"UPDATE HandShake SET value = ? WHERE id = ?";
+    wstring query = L"UPDATE CRUD SET value = ? WHERE id = ?";
     ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
     if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
@@ -209,7 +209,7 @@ void DBManager::InitialU() {
 void DBManager::InitialD() {
     SQLHSTMT hStmt;
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, _hDbc, &hStmt);
-    wstring query = L"DELETE FROM HandShake WHERE id = ?";
+    wstring query = L"DELETE FROM CRUD WHERE id = ?";
     ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
     if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
