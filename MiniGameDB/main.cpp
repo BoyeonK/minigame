@@ -14,32 +14,40 @@ void might_fail_function(int value) {
 }
 
 int main() {
+    wcout.imbue(locale("korean"));
+
     string a = "alpha";
     string b = "베타";
 
     cout << a << endl;
     cout << b << endl;
 
-    std::cout << std::endl;
+    string uu = "나는문어";
+    string aa = "Dreaming Octopus";
 
-    std::cout << "--- Attempt 1: Successful call ---" << std::endl;
     try {
-        might_fail_function(10);
+        unique_ptr<wchar_t[]> uuRef = GDBManager->a2ws(uu);
+        if (uuRef.get() != nullptr) {
+            wcout << uuRef.get() << endl;
+        }
+        else {
+            wcout << L"Converted string is empty (nullptr)." << std::endl;
+        }
+    } catch (const runtime_error& e) {
+        cout << e.what() << endl;
     }
-    catch (const std::runtime_error& e) {
-        std::cerr << "Caught an exception: " << e.what() << std::endl;
-    }
-    std::cout << "Main function continues after successful call." << std::endl;
 
-    std::cout << "\n--- Attempt 2: Failing call ---" << std::endl;
     try {
-        might_fail_function(-5); // 여기서 예외가 던져짐
-        std::cout << "This line will NOT be printed if exception is thrown." << std::endl;
+        unique_ptr<wchar_t[]> aaRef = GDBManager->a2ws(aa);
+        if (aaRef.get() != nullptr) {
+            wcout << aaRef.get() << endl;
+        }
+        else {
+            wcout << L"Converted string is empty (nullptr)." << std::endl;
+        }
+    } catch (const runtime_error& e) {
+        cout << e.what() << endl;
     }
-    catch (const std::runtime_error& e) { // 여기에서 예외를 잡음
-        std::cerr << "Caught an exception: " << e.what() << std::endl;
-    }
-    std::cout << "Main function continues after catching exception." << std::endl;
-
+       
     return 0;
 }
