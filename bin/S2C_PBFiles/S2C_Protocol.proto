@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package Protocol;
+package S2C_Protocol;
 option csharp_namespace = "Google.Protobuf.Protocol";
 
 enum MsgId {

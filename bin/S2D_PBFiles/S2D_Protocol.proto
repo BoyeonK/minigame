@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package Protocol;
+package S2D_Protocol;
 
 service Greeter {
   // SayHello RPC 정의
