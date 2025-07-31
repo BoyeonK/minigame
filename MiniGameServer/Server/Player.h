@@ -1,4 +1,4 @@
 #pragma once
-#include "Protocol.pb.h"
+#include "S2C_Protocol.pb.h"
 
 

@@ -21,9 +21,6 @@
     <ClInclude Include="ServerPacketHandler.h">
       <Filter>PBfiles</Filter>
     </ClInclude>
-    <ClInclude Include="Protocol.pb.h">
-      <Filter>PBfiles</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerSession.h">
       <Filter>GameContent</Filter>
     </ClInclude>
@@ -32,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameContent\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="S2C_Protocol.pb.h">
+      <Filter>PBfiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -44,9 +44,6 @@
     <ClCompile Include="ServerPacketHandler.cpp">
       <Filter>PBfiles</Filter>
     </ClCompile>
-    <ClCompile Include="Protocol.pb.cc">
-      <Filter>PBfiles</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerSession.cpp">
       <Filter>GameContent</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameContent\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol.pb.cc">
+      <Filter>PBfiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

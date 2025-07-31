@@ -1,5 +1,5 @@
 #pragma once
-#include "Protocol.pb.h"
+#include "S2C_Protocol.pb.h"
 #include "ServerGlobal.h"
 
 using PacketHandlerFunc = function<bool(shared_ptr<PBSession>, unsigned char*, int32_t)>;

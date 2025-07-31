@@ -1,7 +1,7 @@
 #pragma once
 #include <mutex>
 #include <unordered_map>
-#include "Protocol.pb.h"
+#include "S2C_Protocol.pb.h"
 #include <cstring>
 
 extern class ObjectManager* GObjectManager;
