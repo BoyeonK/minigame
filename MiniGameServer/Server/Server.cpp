@@ -42,6 +42,7 @@ int main() {
 
 	string target_address("localhost:50051");
 	shared_ptr<grpc::Channel> channel = grpc::CreateChannel(target_address, grpc::InsecureChannelCredentials());
+
 	GreeterClient greeter(channel);
 	string user_name = "World";
 	string reply = greeter.SayHello(user_name);
