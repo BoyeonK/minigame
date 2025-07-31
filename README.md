@@ -2,26 +2,46 @@
 
 This project uses the following third-party libraries and tools:
 
-- [Google Protocol Buffers](https://github.com/protocolbuffers/protobuf)  
-  License: BSD 3-Clause License  
+- **Google Protocol Buffers**
+  License: BSD 3-Clause License
   Copyright © Google
+  
+  > Used for efficient, language-neutral, platform-neutral, extensible **serialization and deserialization** of structured data.
+  
+  
 
-- [BouncyCastle C#](https://www.bouncycastle.org/csharp/)  
-  License: MIT-style License  
-  Copyright © BouncyCastle
+- **gRPC**
+  License: Apache License 2.0
+  Copyright © Google
+  
+  > A high-performance, open-source **universal RPC framework** used for inter-service communication between the game logic server and the database server.
+  
+  
 
-- [OpenSSL](https://www.openssl.org/)  
-  License: Apache License 2.0  
+- **OpenSSL**
+  License: Apache License 2.0
   Copyright © The OpenSSL Project
   
-  > Used for generating RSA key pairs (PKCS#8 / DER format), which are exchanged between client and server during secure handshake initialization.
+  > Utilized for generating **RSA key pairs (PKCS#8 / DER format)**, which are exchanged between client and server during secure handshake initialization.
+  
+  
 
-- **Microsoft SQL Server ODBC Driver**  
+- **BouncyCastle C#**
+  License: MIT-style License
+  Copyright © BouncyCastle
+  
+  > Provides **cryptographic APIs** for various security operations within the C# components of the project.
+  
+  
+
+- **Microsoft SQL Server ODBC Driver**
   License: Proprietary License (Microsoft)
   
-  > Used in C++ for establishing connections, querying, and interacting with Microsoft SQL Server.
+  > Employed in the **C++ backend** for establishing connections, executing queries, and interacting with Microsoft SQL Server databases.
+  
+  
 
-- **Microsoft SQL Server Express**  
+- **Microsoft SQL Server Express**
   License: Proprietary License (Microsoft)
   
-  > Used for lightweight, free database management in this project, compatible with the full SQL Server system.
+  > Serves as a **lightweight, free database solution** for development and small-scale deployments, maintaining full compatibility with the complete SQL Server system.
