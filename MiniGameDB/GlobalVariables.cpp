@@ -16,7 +16,6 @@ public:
 
 DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
     ifstream envFile(".env");
-    wcout.imbue(locale("korean"));
 
     if (envFile.is_open())
         cout << ".env Open Succeed!" << endl;
