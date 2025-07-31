@@ -3,6 +3,8 @@
 #include "PlayerSession.h"
 #include "ServerGlobal.h"
 
+#include "gRPC_test.h"
+
 shared_ptr<PlayerSession> PSfactory() {
 	return make_shared<PlayerSession>();
 }
@@ -37,6 +39,17 @@ int main() {
 			}
 		});
 	}
+
+	string target_address("localhost:50051");
+	shared_ptr<grpc::Channel> channel = grpc::CreateChannel(target_address, grpc::InsecureChannelCredentials());
+	GreeterClient greeter(channel);
+	string user_name = "World";
+	string reply = greeter.SayHello(user_name);
+	cout << "Client: Received final reply from SayHello: " << string(reply.begin(), reply.end()) << endl;
+
+	user_name = "gRPC User";
+	reply = greeter.SayHello(user_name);
+	cout << "Client: Received final reply from SayHello: " << string(reply.begin(), reply.end()) << endl;
 
 	GThreadManager->Join();
 }
