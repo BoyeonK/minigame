@@ -12,7 +12,7 @@ bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int
 	return false;
 }
 
-bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& recvPkt) {
+bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome& recvPkt) {
 	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
 	cout << "C_Welcome 패킷을 받았다." << endl;
 
@@ -29,7 +29,7 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& rec
 
 	playerSessionRef->SetAESKey(move(AESKey));
 
-	Protocol::S_WelcomeResponse sendPkt;
+	S2C_Protocol::S_WelcomeResponse sendPkt;
 	sendPkt.set_message(recvPkt.message());
 	sendPkt.set_success(true);
 	shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt, playerSessionRef->GetAESKey());

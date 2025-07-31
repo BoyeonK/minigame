@@ -16,7 +16,7 @@ enum : uint16_t {
 };
 
 bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
-bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, Protocol::C_Welcome& pkt);
+bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome& pkt);
 
 class ServerPacketHandler {
 public:
@@ -24,17 +24,17 @@ public:
 		for (int32_t i = 0; i < UINT16_MAX; i++)
 			GPacketHandler[i] = Handle_INVALID;
 		
-		GPacketHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<Protocol::C_Welcome>(Handle_C_WELCOME, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Welcome>(Handle_C_WELCOME, sessionRef, buffer, len); };
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
 		return GPacketHandler[header->_id](sessionRef, buffer, len);
 	}
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_Welcome& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOME); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_Welcome& pkt, const vector<unsigned char> AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_WelcomeResponse& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOMERESPONSE); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const Protocol::S_WelcomeResponse& pkt, const vector<unsigned char> AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOMERESPONSE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOME); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt, const vector<unsigned char> AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOMERESPONSE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt, const vector<unsigned char> AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOMERESPONSE, AESKey); }
 
 private:
 	template<typename PBType, typename HandlerFunc>
@@ -72,7 +72,7 @@ private:
 			cout << "복호화 실패" << endl;
 			return nullptr;
 		}
-		Protocol::S_Encrypted sendPkt;
+		S2C_Protocol::S_Encrypted sendPkt;
 		sendPkt.set_iv(iv.data(), iv.size());
 		sendPkt.set_ciphertext(ciphertext.data(), ciphertext.size());
 		sendPkt.set_tag(tag.data(), tag.size());

@@ -22,7 +22,7 @@ void PlayerSession::OnConnected() {
 		return;
 	}
 
-	Protocol::S_Welcome sendPkt;
+	S2C_Protocol::S_Welcome sendPkt;
 	sendPkt.set_publickey(publicKey.data(), publicKey.size());
 	sendPkt.set_gameversion(_gameVersion);
 

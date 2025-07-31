@@ -4,6 +4,9 @@
     <Filter Include="main">
       <UniqueIdentifier>{c009c85c-2aba-4646-8f7d-ef85c6bd8865}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{83e47248-ef7d-4f87-9c19-9e575ab65852}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -12,16 +15,22 @@
     <ClCompile Include="GlobalVariables.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="QueryExecuter.cpp">
-      <Filter>main</Filter>
+    <ClCompile Include="S2D_Protocol.grpc.pb.cc">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="S2D_Protocol.pb.cc">
+      <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalVariables.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="QueryExecuter.h">
-      <Filter>main</Filter>
+    <ClInclude Include="S2D_Protocol.grpc.pb.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="S2D_Protocol.pb.h">
+      <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

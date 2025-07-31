@@ -4,14 +4,14 @@
     <Filter Include="main">
       <UniqueIdentifier>{dfd4e8a8-5f62-467b-8c25-f55971435014}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PBfiles">
-      <UniqueIdentifier>{1de3d763-d253-476c-a0f8-ad1a1844ae88}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameContent">
       <UniqueIdentifier>{6e610321-ca55-4021-973d-f37454e70ccd}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameContent\GameObjects">
       <UniqueIdentifier>{d4f8db27-7c55-49c6-91bb-d7f60ceb3cbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{1de3d763-d253-476c-a0f8-ad1a1844ae88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -19,7 +19,7 @@
       <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="ServerPacketHandler.h">
-      <Filter>PBfiles</Filter>
+      <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSession.h">
       <Filter>GameContent</Filter>
@@ -31,7 +31,16 @@
       <Filter>GameContent\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="S2C_Protocol.pb.h">
-      <Filter>PBfiles</Filter>
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="gRPC_test.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="S2D_Protocol.grpc.pb.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="S2D_Protocol.pb.h">
+      <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -42,7 +51,7 @@
       <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="ServerPacketHandler.cpp">
-      <Filter>PBfiles</Filter>
+      <Filter>Network</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSession.cpp">
       <Filter>GameContent</Filter>
@@ -54,7 +63,16 @@
       <Filter>GameContent\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="S2C_Protocol.pb.cc">
-      <Filter>PBfiles</Filter>
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="gRPC_test.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="S2D_Protocol.grpc.pb.cc">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="S2D_Protocol.pb.cc">
+      <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
