@@ -71,9 +71,6 @@ private:
 	ConnectTask _CT;
 	DisconnectTask _DCT;
 	RecvTask _RT;
-	//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함
-	//_ST를 사용할 게 아니라, SendTask를 새로 만들어야 함.
-	//SendTask _ST;
 };
 
 struct PacketHeader {

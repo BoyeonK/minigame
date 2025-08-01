@@ -6,13 +6,14 @@
 
 #ifdef _DEBUG
 #pragma comment(lib, "Libraries.lib")
-#pragma comment(lib, "libprotobufd.lib")
+//#pragma comment(lib, "libprotobufd.lib")
 #else
 #pragma comment(lib, "Libraries.lib")
-#pragma comment(lib, "libprotobuf.lib")
+//#pragma comment(lib, "libprotobuf.lib")
 #endif
 
 #include "CorePch.h"
+#include <grpcpp/grpcpp.h>
 #include <openssl/rsa.h>
 #include <openssl/pem.h>
 #include <openssl/err.h>

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "GlobalVariables.h"
 
 DBManager* GDBManager = nullptr;

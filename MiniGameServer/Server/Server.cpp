@@ -2,6 +2,8 @@
 #include "ServerPacketHandler.h"
 #include "PlayerSession.h"
 #include "ServerGlobal.h"
+#include "S2D_Protocol.grpc.pb.h"
+#include "gRPC_test.h"
 
 shared_ptr<PlayerSession> PSfactory() {
 	return make_shared<PlayerSession>();
@@ -20,6 +22,16 @@ int main() {
 	);
 
 	serverService->StartAccept();
+
+	GreeterServiceImpl service;
+	grpc::ServerBuilder builder;
+
+	string server_address("0.0.0.0:50051");
+	builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+	builder.RegisterService(&service);
+
+	unique_ptr<grpc::ServerCompletionQueue> completionQueue(builder.AddCompletionQueue());
+	unique_ptr<grpc::Server> DBserver(builder.BuildAndStart());
 
 	GThreadManager->Launch([=]() {
 		while (true) {

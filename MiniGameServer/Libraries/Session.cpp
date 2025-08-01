@@ -125,8 +125,6 @@ void Session::RegisterRecv() {
 	}
 }
 
-//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함
-//_ST를 사용할 게 아니라, SendTask를 새로 만들어야 함.
 void Session::RegisterSend() {
 	if (isConnected() == false)
 		return;
@@ -204,8 +202,6 @@ void Session::ProcessRecv(int32_t numOfBytes) {
 	RegisterRecv();
 }
 
-//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함
-//_ST를 사용할 게 아니라, SendTask를 새로 만들어야 함.
 void Session::ProcessSend(CPTask* pCPTask, int32_t numOfBytes) {
 	SendTask* pST = static_cast<SendTask*>(pCPTask);
 	pST->_OwnerRef = nullptr;
