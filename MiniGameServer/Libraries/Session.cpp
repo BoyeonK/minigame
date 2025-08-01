@@ -125,6 +125,7 @@ void Session::RegisterRecv() {
 	}
 }
 
+//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함;
 void Session::RegisterSend() {
 	if (isConnected() == false)
 		return;
@@ -201,6 +202,7 @@ void Session::ProcessRecv(int32_t numOfBytes) {
 	RegisterRecv();
 }
 
+//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함;
 void Session::ProcessSend(int32_t numOfBytes) {
 	_ST._OwnerRef = nullptr;
 	_ST._sendBufferRefs.clear();

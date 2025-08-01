@@ -71,6 +71,7 @@ private:
 	ConnectTask _CT;
 	DisconnectTask _DCT;
 	RecvTask _RT;
+	//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함;
 	SendTask _ST;
 };
 

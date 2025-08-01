@@ -19,6 +19,10 @@
     - Player Session에 의해 일어난 작업(클라이언트의 요청)인 경우 , Functor가 해당 session에 대한 정보(weak_ptr)를 가지고 있게 만들어서, 작업 완료시 해당 세션으로 하여금 (필요한 경우) 추가적인 작업을 하도록 로직도 만들 수 있을듯 하다.
   
   - 비동기 gRPC에 사용할 객체, CallData를 Pooling해서 사용
+  
+  - !현재 PlayerSession에 Send부분은, 멀티쓰레드 환경을 충분히 고려하지 못한 상황!
+    
+    - Send과정에서 사용할 overlapped객체를 pooling해서 사용해야 함.
 
 - Client
   
