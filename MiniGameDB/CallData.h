@@ -6,6 +6,7 @@ public:
         : _service(service), _completionQueueRef(cq), _status(CREATE), _ctx() {}
     virtual ~CallData() {}
     virtual void Proceed() = 0;
+    virtual void ReturnToPool() = 0;
 
 protected:
     // 모든 CallData 객체가 공통적으로 사용하는 멤버 변수
@@ -48,6 +49,9 @@ public:
         // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
         else
             objectPool<HelloCallData>::dealloc(this);
+    }
+    void ReturnToPool() override {
+        objectPool<HelloCallData>::dealloc(this);
     }
 
 private:

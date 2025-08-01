@@ -3,28 +3,33 @@
 #include "DBServiceImpl.h"
 
 int main() {
-    GreeterServiceImpl DBService;
-
+    shared_ptr<GreeterServiceImpl> DBService = make_shared<GreeterServiceImpl>();
     string server_address("0.0.0.0:50051");
     grpc::ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
-    builder.RegisterService(&DBService); // 비동기 서비스 등록
+    builder.RegisterService(DBService.get()); // 비동기 서비스 등록
 
     unique_ptr<grpc::ServerCompletionQueue> completionQueue(builder.AddCompletionQueue());
-    DBService.setCompletionQueue(move(completionQueue));
+    DBService->setCompletionQueue(move(completionQueue));
     unique_ptr<grpc::Server> server(builder.BuildAndStart());
     cout << "Async Server listening on " << string(server_address.begin(), server_address.end()) << endl;
 
-    ReadyForCall(&DBService, DBService.getPCompletionQueue());
+    ReadyForCall(DBService.get(), DBService->getPCompletionQueue());
+
+    for (int i = 0; i < 4; i++) {
+        GThreadManager->Launch([=]() {
+            while (true) {
+                DBService->HandleRpcs();
+                this_thread::sleep_for(20ms);
+            }
+        });
+    }
 
     server->Wait();
 
-    //DBService.getPCompletionQueue()->Shutdown();
-    /*
-    for (auto& t : threads) {
-        t.join();
-    }
-    */
+    DBService->getPCompletionQueue()->Shutdown();
+    
+    GThreadManager->Join();
 
     return 0;
 }

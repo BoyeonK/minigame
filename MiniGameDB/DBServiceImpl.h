@@ -17,23 +17,22 @@ public:
         return _completionQueueRef.get();
     }
 
-private:
-    // 워커 스레드가 실행할 함수
     void HandleRpcs() {
         void* tag;
         bool ok;
 
         while (_completionQueueRef->Next(&tag, &ok)) { // CompletionQueue에서 이벤트가 올 때까지 대기
             if (ok) {
-                // 이벤트가 성공적으로 발생하면 CallData 객체의 Proceed() 호출
+                // 성공 시 CallData 객체의 Proceed() 호출 (다음 단계로 진행)
                 static_cast<CallData*>(tag)->Proceed();
             }
             else {
-                // 비동기 작업 실패 시 (예: 클라이언트 연결 끊김)
-                delete static_cast<CallData*>(tag);
+                // 실패 시 (예: 클라이언트 연결 끊김) pool로 반환.
+                static_cast<CallData*>(tag)->ReturnToPool();
             }
         }
     }
 
+private:
     unique_ptr<grpc::ServerCompletionQueue> _completionQueueRef;
 };
