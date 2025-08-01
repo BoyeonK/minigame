@@ -1,5 +1,3 @@
-using namespace std;
-
 extern class DBManager* GDBManager;
 
 class DBManager {

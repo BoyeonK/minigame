@@ -5,6 +5,7 @@
 
 #include <WinSock2.h>
 #include <windows.h>
+#include <grpcpp/grpcpp.h>
 
 #include <vector>
 #include <memory>
@@ -20,3 +21,5 @@
 #include <sqltypes.h> 
 #include <sql.h> 
 #include <cstdlib> 
+
+using namespace std;

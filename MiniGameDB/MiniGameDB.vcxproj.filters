@@ -7,6 +7,9 @@
     <Filter Include="Network">
       <UniqueIdentifier>{83e47248-ef7d-4f87-9c19-9e575ab65852}</UniqueIdentifier>
     </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{6c96c160-2f58-428d-92f0-a40463328406}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,6 +30,12 @@
     <ClCompile Include="pch.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="objectPool.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="objectPoool.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalVariables.h">
@@ -43,6 +52,12 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="objectPool.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="objectPoool.h">
+      <Filter>memory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

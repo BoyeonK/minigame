@@ -157,6 +157,8 @@
     <ClCompile Include="DBServiceImpl.cpp" />
     <ClCompile Include="GlobalVariables.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="objectPool.cpp" />
+    <ClCompile Include="objectPoool.cpp" />
     <ClCompile Include="S2D_Protocol.grpc.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -170,6 +172,8 @@
   <ItemGroup>
     <ClInclude Include="DBServiceImpl.h" />
     <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="objectPool.h" />
+    <ClInclude Include="objectPoool.h" />
     <ClInclude Include="S2D_Protocol.grpc.pb.h" />
     <ClInclude Include="S2D_Protocol.pb.h" />
     <ClInclude Include="pch.h" />
