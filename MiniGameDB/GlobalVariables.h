@@ -30,4 +30,3 @@ private:
     void InitialU();
     void InitialD();
 };
-

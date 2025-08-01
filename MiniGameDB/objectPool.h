@@ -85,4 +85,3 @@ poolHeader<_Ty> objectPool<_Ty>::_poolHeader{};
 template<typename _Ty>
 counter objectPool<_Ty>::_counter{};
 #endif
-

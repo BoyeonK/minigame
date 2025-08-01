@@ -15,25 +15,11 @@ int main() {
     unique_ptr<grpc::Server> server(builder.BuildAndStart());
     cout << "Async Server listening on " << string(server_address.begin(), server_address.end()) << endl;
 
-    // 초기 요청 대기를 위해 워커 스레드 수만큼 CallData 객체 등록
-    /*
-    const int num_threads = std::thread::hardware_concurrency();
-    for (int i = 0; i < num_threads; ++i) {
-        new CallData(this, cq_.get());
-    }
-    */
-
-    // CPU 코어 수만큼 워커 스레드 생성 및 실행
-    /*
-    std::vector<std::thread> threads;
-    for (int i = 0; i < num_threads; ++i) {
-        threads.emplace_back(&GreeterServiceImpl::HandleRpcs, this);
-    }
-    */
+    ReadyForCall(&DBService, DBService.getPCompletionQueue());
 
     server->Wait();
 
-    //completionQueue->Shutdown();
+    //DBService.getPCompletionQueue()->Shutdown();
     /*
     for (auto& t : threads) {
         t.join();

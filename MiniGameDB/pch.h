@@ -23,3 +23,6 @@
 #include <cstdlib> 
 
 using namespace std;
+
+#include "S2D_Protocol.grpc.pb.h"
+#include "objectPool.h"

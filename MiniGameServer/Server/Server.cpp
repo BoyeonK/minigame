@@ -23,16 +23,6 @@ int main() {
 
 	serverService->StartAccept();
 
-	GreeterServiceImpl service;
-	grpc::ServerBuilder builder;
-
-	string server_address("0.0.0.0:50051");
-	builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
-	builder.RegisterService(&service);
-
-	unique_ptr<grpc::ServerCompletionQueue> completionQueue(builder.AddCompletionQueue());
-	unique_ptr<grpc::Server> DBserver(builder.BuildAndStart());
-
 	GThreadManager->Launch([=]() {
 		while (true) {
 			ThreadManager::DoTimerQueueDistribution();
