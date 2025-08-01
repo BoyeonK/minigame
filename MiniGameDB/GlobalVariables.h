@@ -1,4 +1,5 @@
 extern class DBManager* GDBManager;
+extern class ThreadManager* GThreadManager;
 
 class DBManager {
 public:
@@ -29,4 +30,23 @@ private:
     void InitialR();
     void InitialU();
     void InitialD();
+};
+
+class ThreadManager {
+public:
+    ThreadManager();
+    ~ThreadManager();
+
+    static void InitTLS();
+    static void DestroyTLS() { };
+    //이후에 JobQueue가 필요한 시점이 오면 그때 추가하는 걸로.
+    //static void DoGlobalQueueWork();
+    //static void DoTimerQueueDistribution();
+
+    void Launch(function<void()> callback);
+    void Join();
+
+private:
+    mutex	_mutex;
+    vector<thread> _threads;
 };
