@@ -108,7 +108,13 @@ public:
 
         while (true) {
             // 큐에서 다음 이벤트를 가져옵니다. 블로킹 호출입니다.
+            if (!cq_->Next(&tag, &ok)) {
+                // cq_가 Shutdown되면 false를 반환하고, 반복문을 탈출합니다.
+                break;
+            }
 
+            // tag를 CallData 객체 포인터로 변환합니다.
+            GreeterServiceImpl::CallData* call_data = static_cast<GreeterServiceImpl::CallData*>(tag);
             // tag는 CallData 객체 포인터입니다.
             // ok는 이벤트가 성공적으로 완료되었는지 여부를 나타냅니다.
             static_cast<CallData*>(tag)->Proceed();

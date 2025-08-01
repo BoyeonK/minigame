@@ -54,7 +54,7 @@ void Session::Dispatch(CPTask* pCPTask, int32_t numOfBytes) {
 		ProcessRecv(numOfBytes);
 		break;
 	case (TaskType::Send):
-		ProcessSend(numOfBytes);
+		ProcessSend(pCPTask, numOfBytes);
 		break;
 	default:
 		break;
@@ -125,12 +125,14 @@ void Session::RegisterRecv() {
 	}
 }
 
-//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함;
+//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함
+//_ST를 사용할 게 아니라, SendTask를 새로 만들어야 함.
 void Session::RegisterSend() {
 	if (isConnected() == false)
 		return;
-	_ST.Init();
-	_ST._OwnerRef = shared_from_this();
+	SendTask* pST = objectPool<SendTask>::alloc();
+	pST->Init();
+	pST->_OwnerRef = shared_from_this();
 	{
 		WRITE_RWLOCK;
 		int32_t writeSize = 0;
@@ -139,14 +141,14 @@ void Session::RegisterSend() {
 			writeSize += sendBufferRef->WriteSize();
 
 			_sendBufferRefQueue.pop();
-			_ST._sendBufferRefs.push_back(sendBufferRef);
+			pST->_sendBufferRefs.push_back(sendBufferRef);
 		}
 	}
 
 	vector<WSABUF> wsaBufs;
-	wsaBufs.reserve(_ST._sendBufferRefs.size());
+	wsaBufs.reserve(pST->_sendBufferRefs.size());
 	WSABUF wsaBuf;
-	for (shared_ptr<SendBuffer>& sendBufferRef : _ST._sendBufferRefs) {
+	for (shared_ptr<SendBuffer>& sendBufferRef : pST->_sendBufferRefs) {
 		WSABUF wsaBuf;
 		wsaBuf.buf = reinterpret_cast<char*>(sendBufferRef->Buffer());
 		wsaBuf.len = static_cast<LONG>(sendBufferRef->WriteSize());
@@ -154,11 +156,11 @@ void Session::RegisterSend() {
 	}
 
 	DWORD numOfBytes = 0;
-	if (SOCKET_ERROR == ::WSASend(_socketHandle, wsaBufs.data(), static_cast<DWORD>(wsaBufs.size()), OUT &numOfBytes, 0, &_ST, nullptr)) {
+	if (SOCKET_ERROR == ::WSASend(_socketHandle, wsaBufs.data(), static_cast<DWORD>(wsaBufs.size()), OUT &numOfBytes, 0, pST, nullptr)) {
 		int32_t errorCode = WSAGetLastError();
 		if (errorCode != WSA_IO_PENDING) {
-			_ST._OwnerRef = nullptr;
-			_ST._sendBufferRefs.clear();
+			pST->_OwnerRef = nullptr;
+			pST->_sendBufferRefs.clear();
 			_sendRegistered.store(false);
 		}
 	}
@@ -202,10 +204,13 @@ void Session::ProcessRecv(int32_t numOfBytes) {
 	RegisterRecv();
 }
 
-//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함;
-void Session::ProcessSend(int32_t numOfBytes) {
-	_ST._OwnerRef = nullptr;
-	_ST._sendBufferRefs.clear();
+//Send는 여러 번 일어날 수 있음. 현재 구조가 좀 이상함
+//_ST를 사용할 게 아니라, SendTask를 새로 만들어야 함.
+void Session::ProcessSend(CPTask* pCPTask, int32_t numOfBytes) {
+	SendTask* pST = static_cast<SendTask*>(pCPTask);
+	pST->_OwnerRef = nullptr;
+	pST->_sendBufferRefs.clear();
+	objectPool<SendTask>::dealloc(pST);
 	if (numOfBytes == 0) {
 		cout << "0bytes sent?" << endl;
 	}
