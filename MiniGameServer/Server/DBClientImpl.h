@@ -19,7 +19,7 @@ public:
     void AsyncCompleteRpc() {
         void* tag;
         bool ok;
-        while (_cqRef->Next(&tag, &ok)) {
+        if (_cqRef->Next(&tag, &ok)) {
             S2D_CallData* pCallData = reinterpret_cast<S2D_CallData*>(tag);
 
             if (ok && pCallData->status.ok())
