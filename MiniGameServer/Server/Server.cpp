@@ -8,6 +8,10 @@ int main() {
 
 	//DB서버와의 연결 진행
 	DBManager = new DBClientImpl(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
+#ifdef _DEBUG
+	DBManager->HelloAsync();
+#endif
+
 
 	//Client와의 연결을 담당할 서비스 객체 생성 및 Listen시작.
 	GServerService = make_shared<ServerServiceImpl>(make_shared<CPCore>(), NetAddress(L"0.0.0.0", 7777), 100);
@@ -21,21 +25,20 @@ int main() {
 		}
 	});
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		GThreadManager->Launch([=]() {
 			while (true) {
 				LEndTickCount = ::GetTickCount64() + 64;
 				ThreadManager::DoGlobalQueueWork();
-				DBManager->AsyncCompleteRpc();
+				try {
+					DBManager->AsyncCompleteRpc();
+				} catch (const runtime_error& e) {
+					cerr << e.what() << endl;
+				}
 				GServerService->GetCPCoreRef()->Dispatch(10);
 			}
 		});
 	}
-
-	cout << "Sending async calls..." << endl;
-	DBManager->SayHelloAsync("World");
-	DBManager->SayHelloAsync("gRPC");
-	DBManager->SayHelloAsync("User");
 
 	GThreadManager->Join();
 }
