@@ -1,7 +1,6 @@
 ﻿#include "pch.h"
 #include "ServerPacketHandler.h"
 #include "ServerGlobal.h"
-#include "gRPC_test.h"
 
 int main() {
 	//Game Client와의 프로토콜을 정의한 PacketHandler 초기화.
@@ -11,7 +10,7 @@ int main() {
 	DBManager = new DBClientImpl(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
 
 	//Client와의 연결을 담당할 서비스 객체 생성 및 Listen시작.
-	shared_ptr<ServerServiceImpl> GServerService = make_shared<ServerServiceImpl>(make_shared<CPCore>(), NetAddress(L"0.0.0.0", 7777), 100);
+	GServerService = make_shared<ServerServiceImpl>(make_shared<CPCore>(), NetAddress(L"0.0.0.0", 7777), 100);
 	GServerService->StartAccept();
 	
 	//Worker Thread 생성
@@ -33,12 +32,10 @@ int main() {
 		});
 	}
 
-	/*
 	cout << "Sending async calls..." << endl;
 	DBManager->SayHelloAsync("World");
 	DBManager->SayHelloAsync("gRPC");
 	DBManager->SayHelloAsync("User");
-	*/
 
 	GThreadManager->Join();
 }

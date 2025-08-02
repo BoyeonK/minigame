@@ -17,7 +17,7 @@ protected:
     CallStatus _status;
 };
 
-class HelloCallData : public CallData {
+class HelloCallData final : public CallData {
 public:
     HelloCallData(S2D_Protocol::Greeter::AsyncService* service, grpc::ServerCompletionQueue* cq) 
         : CallData(service, cq), _responder(&_ctx) {
