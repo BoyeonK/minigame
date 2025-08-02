@@ -47,9 +47,13 @@ public:
             _responder.Finish(_reply, grpc::Status::OK, this);
         }
         // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
-        else
+        else {
+            cout << "Server: Response sqeunce complete!" << endl;
             objectPool<HelloCallData>::dealloc(this);
+        }
+            
     }
+
     void ReturnToPool() override {
         objectPool<HelloCallData>::dealloc(this);
     }
