@@ -25,8 +25,8 @@ public:
             if (ok && pCallData->status.ok())
                 pCallData->OnSucceed();
             else {
-                pCallData->ReturnToPool();
                 pCallData->OnFailed();
+                throw runtime_error("HandShake Failed");
             }
             pCallData->ReturnToPool(); // RPC가 완료되면 객체 해제
         }
