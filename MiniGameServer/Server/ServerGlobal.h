@@ -1,12 +1,17 @@
 #pragma once
 #include <mutex>
 #include <unordered_map>
-#include "S2C_Protocol.pb.h"
 #include <cstring>
+#include "DBClientImpl.h"
+#include "ServerServiceImpl.h"
 
-extern class ObjectManager* GObjectManager;
+//extern class ObjectManager* GObjectManager;
 extern class CryptoManager* GCryptoManager;
+extern class DBClientImpl* DBManager;
+extern class shared_ptr<ServerServiceImpl> GServerService;
 
+//높은 확률로 S2C 컨텐츠로 옮겨질 예정.
+/*
 class ObjectManager {
 public:
 	
@@ -14,6 +19,7 @@ private:
 	USE_RWLOCK;
 	static atomic<uint32_t> _objectId;
 };
+*/
 
 class CryptoManager {
 public:

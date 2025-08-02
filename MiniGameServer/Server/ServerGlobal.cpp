@@ -1,46 +1,59 @@
 #include "pch.h"
 #include "ServerGlobal.h"
 
-ObjectManager* GObjectManager = nullptr;
+//ObjectManager* GObjectManager = nullptr;
 CryptoManager* GCryptoManager = nullptr;
+DBClientImpl* DBManager = nullptr;
+shared_ptr<ServerServiceImpl> GServerService = nullptr;
 
+//지금은 전역 객체로 선언된 raw pointer를 들고 소멸자에서 사라지게 하고있지만,
+//별도의 소멸자 로직 없이, 멤버 변수로 스마트 포인터를 들고 있어도 될듯?
 class ServerGlobal {
 public:
 	ServerGlobal() {
-		GObjectManager = new ObjectManager();
+		//GObjectManager = new ObjectManager();
 		GCryptoManager = new CryptoManager();
 	}
 	~ServerGlobal() {
-		delete GObjectManager;
+		//delete GObjectManager;
 		delete GCryptoManager;
+		if (DBManager)
+			delete DBManager;
+		if (GServerService)
+			GServerService = nullptr;
 	}
 } GServerGlobal;
 
 CryptoManager::CryptoManager() {
 	//최초, 메인스레드에서 1번 실행 될 것이기 때문에
 	//생성자 안에서만큼은 multi thread환경을 고려하지 않고 작성됨.
+
+	//아니 대체 cout이 왜 모호하다는거야
+#ifdef _DEBUG
+	std::cout << "Initiating CryptoManager...." << endl;
+#endif
 	for (int i = 0; i < 100; i++) {
 		EVP_PKEY* pkey = nullptr;
 		EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
 		if (!ctx) {
-			cout << i << "번째 ctx 생성 오류" << endl;
+			std::cout << i << "번째 ctx 생성 오류" << endl;
 			continue;
 		}
 
 		if (EVP_PKEY_keygen_init(ctx) <= 0) {
-			cout << i << "번째 keygen init 오류" << endl;
+			std::cout << i << "번째 keygen init 오류" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
 
 		if (EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, 2048) <= 0) {
-			cout << i << "번째 key size set 오류" << endl;
+			std::cout << i << "번째 key size set 오류" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
 
 		if (EVP_PKEY_keygen(ctx, &pkey) <= 0) {
-			cout << i << "번째 pkey 생성 오류" << endl;
+			std::cout << i << "번째 pkey 생성 오류" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
@@ -50,7 +63,9 @@ CryptoManager::CryptoManager() {
 	}
 	_inPool = 100;
 	_outPool = 0;
-	cout << "RSAKeyManager Initiated" << endl;
+#ifdef _DEBUG
+	std::cout << "CryptoManager Initiated" << endl;
+#endif
 }
 
 CryptoManager::~CryptoManager() {
@@ -83,24 +98,24 @@ EVP_PKEY* CryptoManager::PopKey() {
 	
 	EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
 	if (!ctx) {
-		cout << "ctx 생성 오류" << endl;
+		std::cout << "ctx 생성 오류" << endl;
 		return nullptr;
 	}
 
 	if (EVP_PKEY_keygen_init(ctx) <= 0) {
-		cout << "Keygen init 오류" << endl;
+		std::cout << "Keygen init 오류" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
 
 	if (EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, 2048) <= 0) {
-		cout << "Key size set 오류" << endl;
+		std::cout << "Key size set 오류" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
 
 	if (EVP_PKEY_keygen(ctx, &key) <= 0) {
-		cout << "Key 생성 오류" << endl;
+		std::cout << "Key 생성 오류" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
@@ -113,7 +128,7 @@ EVP_PKEY* CryptoManager::PopKey() {
 //이럴 줄 알았으면 처음부터 _keyQueue를 unique_ptr을 다루는 큐로서 만들 걸 그랬다.
 bool CryptoManager::ReturnKey(EVP_PKEY*& key) {
 	if (!key) {
-		cout << "??도대체 뭘 리턴한거지??" << endl;
+		std::cout << "??도대체 뭘 리턴한거지??" << endl;
 		return false;
 	}
 	{
@@ -150,12 +165,12 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	vector<unsigned char> decrypted;
 	EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(privateKey, nullptr);
 	if (!ctx) {
-		cout << "EVP_PKEY_CTX_new failed" << endl;
+		std::cout << "EVP_PKEY_CTX_new failed" << endl;
 		return {};
 	}
 
 	if (EVP_PKEY_decrypt_init(ctx) <= 0) {
-		cout << "EVP_PKEY_decrypt_init failed" << endl;
+		std::cout << "EVP_PKEY_decrypt_init failed" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
@@ -171,7 +186,7 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	// 패딩 OAEP + MGF1 + SHA-256
 	// 암호화 방식 RSAES-OAEP (SHA-256 기반)
 	if (EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING) <= 0) {
-		cout << "Failed to set padding" << endl;
+		std::cout << "Failed to set padding" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
@@ -182,7 +197,7 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	// 복호화 결과 길이 확인
 	size_t outLen = 0;
 	if (EVP_PKEY_decrypt(ctx, nullptr, &outLen, encrypted.data(), encrypted.size()) <= 0) {
-		cout << "EVP_PKEY_decrypt (length) failed" << endl;
+		std::cout << "EVP_PKEY_decrypt (length) failed" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
@@ -190,7 +205,7 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	decrypted.resize(outLen);
 
 	if (EVP_PKEY_decrypt(ctx, decrypted.data(), &outLen, encrypted.data(), encrypted.size()) <= 0) {
-		cout << "EVP_PKEY_decrypt failed" << endl;
+		std::cout << "EVP_PKEY_decrypt failed" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}

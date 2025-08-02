@@ -1,28 +1,20 @@
 ﻿#include "pch.h"
 #include "ServerPacketHandler.h"
-#include "PlayerSession.h"
 #include "ServerGlobal.h"
-#include "S2D_Protocol.grpc.pb.h"
 #include "gRPC_test.h"
 
-shared_ptr<PlayerSession> PSfactory() {
-	return make_shared<PlayerSession>();
-}
-
 int main() {
-	cout << "I'm Server" << endl;
-
+	//Game Client와의 프로토콜을 정의한 PacketHandler 초기화.
 	ServerPacketHandler::Init();
 
-	shared_ptr<ServerService> serverService = make_shared<ServerService>(
-		make_shared<CPCore>(),
-		NetAddress(L"0.0.0.0", 7777),
-		PSfactory,
-		100
-	);
+	//DB서버와의 연결 진행
+	DBManager = new DBClientImpl(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
 
-	serverService->StartAccept();
-
+	//Client와의 연결을 담당할 서비스 객체 생성 및 Listen시작.
+	shared_ptr<ServerServiceImpl> GServerService = make_shared<ServerServiceImpl>(make_shared<CPCore>(), NetAddress(L"0.0.0.0", 7777), 100);
+	GServerService->StartAccept();
+	
+	//Worker Thread 생성
 	GThreadManager->Launch([=]() {
 		while (true) {
 			ThreadManager::DoTimerQueueDistribution();
@@ -35,24 +27,18 @@ int main() {
 			while (true) {
 				LEndTickCount = ::GetTickCount64() + 64;
 				ThreadManager::DoGlobalQueueWork();
-				serverService->GetCPCoreRef()->Dispatch(10);
+				DBManager->AsyncCompleteRpc();
+				GServerService->GetCPCoreRef()->Dispatch(10);
 			}
 		});
 	}
 
-	string target_address("localhost:50051");
-	GreeterClient client(grpc::CreateChannel(target_address, grpc::InsecureChannelCredentials()));
-
+	/*
 	cout << "Sending async calls..." << endl;
-
-	client.SayHelloAsync("World");
-	client.SayHelloAsync("gRPC");
-	client.SayHelloAsync("User");
-
-	// 비동기 호출이 완료될 시간을 주기 위해 main 스레드를 잠시 대기
-	this_thread::sleep_for(chrono::seconds(2));
-
-	cout << "Client finished." << endl;
+	DBManager->SayHelloAsync("World");
+	DBManager->SayHelloAsync("gRPC");
+	DBManager->SayHelloAsync("User");
+	*/
 
 	GThreadManager->Join();
 }

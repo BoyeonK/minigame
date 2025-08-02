@@ -2,8 +2,7 @@
 #include "pch.h"
 #include <atomic>
 
-using namespace std;
-
+//std::shared_mutex와 사실상 동일한 기능을 한다.
 class RWLock {
 	enum : uint32_t {
 		ACQUIRE_TIMEOUT_TICK = 10000,

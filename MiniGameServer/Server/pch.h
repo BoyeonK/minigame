@@ -18,3 +18,5 @@
 #include <openssl/pem.h>
 #include <openssl/err.h>
 #include <openssl/rand.h>
+
+using namespace std;

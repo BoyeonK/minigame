@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DBClientImpl.h" />
     <ClInclude Include="gRPC_test.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="S2C_Protocol.pb.h" />
@@ -170,8 +171,10 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="ServerPacketHandler.h" />
     <ClInclude Include="PlayerSession.h" />
+    <ClInclude Include="ServerServiceImpl.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DBClientImpl.cpp" />
     <ClCompile Include="gRPC_test.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="S2C_Protocol.pb.cc">
@@ -192,6 +195,7 @@
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="ServerPacketHandler.cpp" />
     <ClCompile Include="PlayerSession.cpp" />
+    <ClCompile Include="ServerServiceImpl.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
