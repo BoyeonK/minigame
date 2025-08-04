@@ -17,4 +17,3 @@ private:
 	vector<unsigned char> _AESKey;
 	int32_t _gameVersion = 0;
 };
-

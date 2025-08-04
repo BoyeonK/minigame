@@ -13,6 +13,3 @@ void HelloCall::OnFailed() {
 	objectPool<HelloCall>::dealloc(this);
 }
 #endif
-
-
-
