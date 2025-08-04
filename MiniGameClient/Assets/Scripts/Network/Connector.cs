@@ -28,15 +28,21 @@ namespace ServerCore {
 			if (socket == null)
 				return;
 
+			//비 동기적 연결.
 			bool pending = socket.ConnectAsync(args);
+			//즉시 완료되었을 경우 (false인 경우) 직접 Completed에 들어갔을 함수를 호출해야함.
+			//즉시 완료되지 않았을 경우(true인 경우) Completed가 실행되도록 내부적으로 작성되있음.
 			if (pending == false)
 				OnConnectCompleted(null, args);
 		}
 
 		void OnConnectCompleted(object sender, SocketAsyncEventArgs args) {
 			if (args.SocketError == SocketError.Success) {
+				//최초 Connect함수에 인자로 들어온 Factory함수로 Session을 만들고
 				Session session = _sessionFactory.Invoke();
+				//해당 Session으로서 socket handle을 관리 및 Recv시작.
 				session.Start(args.ConnectSocket);
+				//해당 Session의 OnConnected함수 실행 (아마, HandShake과정이 포함되있음)
 				session.OnConnected(args.RemoteEndPoint);
 			}
 			else {

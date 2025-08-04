@@ -2,20 +2,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoginScene : BaseScene {
-    bool cnt = false;
-    bool lgn = false;
-
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            if (!cnt) {
+        if (Input.GetKeyDown(KeyCode.Q))
+            if (!(Managers.Network.IsConnected()))
                 Managers.Network.TryConnectToServer();
-                cnt = true;
-                lgn = true;
+        if (Input.GetKeyDown(KeyCode.W)) {
+            if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
+                Debug.Log("로그인 시도 로직이 들어가야 하는 자리");
             }
         }
     }

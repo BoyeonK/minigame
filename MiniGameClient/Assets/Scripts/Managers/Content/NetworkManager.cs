@@ -9,6 +9,17 @@ using UnityEngine;
 public class NetworkManager {
 	ServerSession _session = new ServerSession();
 
+	public bool IsConnected() {
+		return _session.IsConnected;
+    }
+
+	public bool IsLogined() {
+		if (_session.ID != 0)
+			return true;
+
+		return false;
+    }
+
 	public void Send(IMessage packet) {
 		_session.Send(packet);
 	}
@@ -20,10 +31,8 @@ public class NetworkManager {
 		string host = Dns.GetHostName();
 		IPHostEntry ipHost = Dns.GetHostEntry(host);
 
-
 		//IPAddress ipAddr = IPAddress.Parse("192.168.0.8");
 		IPAddress ipAddr = IPAddress.Loopback;
-
 
 		//IPAddress ipAddr = Array.Find(ipHost.AddressList, a => a.AddressFamily == AddressFamily.InterNetwork);
 		//IPAddress ipAddr = ipHost.AddressList[0];
