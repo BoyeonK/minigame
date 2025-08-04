@@ -5,7 +5,7 @@
 
 class GreeterClient {
 private:
-    unique_ptr<S2D_Protocol::Greeter::Stub> stub_;
+    unique_ptr<S2D_Protocol::S2D_Service::Stub> stub_;
     unique_ptr<grpc::CompletionQueue> cq_;
 
     // AsyncClientCall: 각 RPC 호출의 상태를 관리하는 객체
@@ -18,7 +18,7 @@ private:
    
 public:
     GreeterClient(shared_ptr<grpc::Channel> channel)
-        : stub_(S2D_Protocol::Greeter::NewStub(channel)), cq_(make_unique<grpc::CompletionQueue>()) {
+        : stub_(S2D_Protocol::S2D_Service::NewStub(channel)), cq_(make_unique<grpc::CompletionQueue>()) {
         
     }
 

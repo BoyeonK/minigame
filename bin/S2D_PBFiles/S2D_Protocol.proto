@@ -2,15 +2,37 @@ syntax = "proto3";
 
 package S2D_Protocol;
 
-service Greeter {
-  // SayHello RPC 정의
-  rpc SayHello (HelloRequest) returns (HelloReply);
+service S2D_Service {
+    rpc SayHello (HelloRequest) returns (HelloReply);
+    rpc LoginRequest (S2D_Login) returns (D2S_Login);
+    rpc CreateAccountRequest (S2D_CreateAccount) returns (D2S_CreateAccount);
 }
 
 message HelloRequest {
-  string name = 1;
+    string name = 1;
 }
 
 message HelloReply {
-  string message = 1;
+    string message = 1;
+}
+
+message S2D_Login {
+    string id = 1;
+    string password = 2;
+}
+
+message D2S_Login {
+    oneof value_case {
+        int32 dbid = 1;
+        string err = 2;
+    }
+}
+
+message S2D_CreateAccount {
+    string id = 1;
+    string password = 2;
+}
+
+message D2S_CreateAccount {
+    bool success = 1;
 }

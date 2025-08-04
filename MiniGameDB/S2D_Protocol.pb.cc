@@ -26,6 +26,66 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace S2D_Protocol {
 
+inline constexpr S2D_Login::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        password_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S2D_Login::S2D_Login(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S2D_LoginDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_LoginDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_LoginDefaultTypeInternal() {}
+  union {
+    S2D_Login _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_LoginDefaultTypeInternal _S2D_Login_default_instance_;
+
+inline constexpr S2D_CreateAccount::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        password_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S2D_CreateAccount::S2D_CreateAccount(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S2D_CreateAccountDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_CreateAccountDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_CreateAccountDefaultTypeInternal() {}
+  union {
+    S2D_CreateAccount _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_CreateAccountDefaultTypeInternal _S2D_CreateAccount_default_instance_;
+
 inline constexpr HelloRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : name_(
@@ -79,6 +139,57 @@ struct HelloReplyDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 HelloReplyDefaultTypeInternal _HelloReply_default_instance_;
+
+inline constexpr D2S_Login::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : value_case_{},
+        _cached_size_{0},
+        _oneof_case_{} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR D2S_Login::D2S_Login(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct D2S_LoginDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2S_LoginDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2S_LoginDefaultTypeInternal() {}
+  union {
+    D2S_Login _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_LoginDefaultTypeInternal _D2S_Login_default_instance_;
+
+inline constexpr D2S_CreateAccount::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : success_{false},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR D2S_CreateAccount::D2S_CreateAccount(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct D2S_CreateAccountDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2S_CreateAccountDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2S_CreateAccountDefaultTypeInternal() {}
+  union {
+    D2S_CreateAccount _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_CreateAccountDefaultTypeInternal _D2S_CreateAccount_default_instance_;
 }  // namespace S2D_Protocol
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_S2D_5fProtocol_2eproto = nullptr;
@@ -105,36 +216,93 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::HelloReply, _impl_.message_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_Login, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_Login, _impl_.id_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_Login, _impl_.password_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_Login, _internal_metadata_),
+        ~0u,  // no _extensions_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_Login, _impl_._oneof_case_[0]),
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_Login, _impl_.value_case_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_CreateAccount, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_CreateAccount, _impl_.id_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_CreateAccount, _impl_.password_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_CreateAccount, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_CreateAccount, _impl_.success_),
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::S2D_Protocol::HelloRequest)},
         {9, -1, -1, sizeof(::S2D_Protocol::HelloReply)},
+        {18, -1, -1, sizeof(::S2D_Protocol::S2D_Login)},
+        {28, -1, -1, sizeof(::S2D_Protocol::D2S_Login)},
+        {39, -1, -1, sizeof(::S2D_Protocol::S2D_CreateAccount)},
+        {49, -1, -1, sizeof(::S2D_Protocol::D2S_CreateAccount)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2D_Protocol::_HelloRequest_default_instance_._instance,
     &::S2D_Protocol::_HelloReply_default_instance_._instance,
+    &::S2D_Protocol::_S2D_Login_default_instance_._instance,
+    &::S2D_Protocol::_D2S_Login_default_instance_._instance,
+    &::S2D_Protocol::_S2D_CreateAccount_default_instance_._instance,
+    &::S2D_Protocol::_D2S_CreateAccount_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2D_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\022S2D_Protocol.proto\022\014S2D_Protocol\"\034\n\014He"
     "lloRequest\022\014\n\004name\030\001 \001(\t\"\035\n\nHelloReply\022\017"
-    "\n\007message\030\001 \001(\t2K\n\007Greeter\022@\n\010SayHello\022\032"
-    ".S2D_Protocol.HelloRequest\032\030.S2D_Protoco"
-    "l.HelloReplyb\006proto3"
+    "\n\007message\030\001 \001(\t\")\n\tS2D_Login\022\n\n\002id\030\001 \001(\t"
+    "\022\020\n\010password\030\002 \001(\t\"8\n\tD2S_Login\022\016\n\004dbid\030"
+    "\001 \001(\005H\000\022\r\n\003err\030\002 \001(\tH\000B\014\n\nvalue_case\"1\n\021"
+    "S2D_CreateAccount\022\n\n\002id\030\001 \001(\t\022\020\n\010passwor"
+    "d\030\002 \001(\t\"$\n\021D2S_CreateAccount\022\017\n\007success\030"
+    "\001 \001(\0102\353\001\n\013S2D_Service\022@\n\010SayHello\022\032.S2D_"
+    "Protocol.HelloRequest\032\030.S2D_Protocol.Hel"
+    "loReply\022@\n\014LoginRequest\022\027.S2D_Protocol.S"
+    "2D_Login\032\027.S2D_Protocol.D2S_Login\022X\n\024Cre"
+    "ateAccountRequest\022\037.S2D_Protocol.S2D_Cre"
+    "ateAccount\032\037.S2D_Protocol.D2S_CreateAcco"
+    "untb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2D_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2D_5fProtocol_2eproto = {
     false,
     false,
-    180,
+    531,
     descriptor_table_protodef_S2D_5fProtocol_2eproto,
     "S2D_Protocol.proto",
     &descriptor_table_S2D_5fProtocol_2eproto_once,
     nullptr,
     0,
-    2,
+    6,
     schemas,
     file_default_instances,
     TableStruct_S2D_5fProtocol_2eproto::offsets,
@@ -602,6 +770,1042 @@ void HelloReply::InternalSwap(HelloReply* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata HelloReply::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S2D_Login::_Internal {
+ public:
+};
+
+S2D_Login::S2D_Login(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_Login)
+}
+inline PROTOBUF_NDEBUG_INLINE S2D_Login::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2D_Protocol::S2D_Login& from_msg)
+      : id_(arena, from.id_),
+        password_(arena, from.password_),
+        _cached_size_{0} {}
+
+S2D_Login::S2D_Login(
+    ::google::protobuf::Arena* arena,
+    const S2D_Login& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S2D_Login* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:S2D_Protocol.S2D_Login)
+}
+inline PROTOBUF_NDEBUG_INLINE S2D_Login::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : id_(arena),
+        password_(arena),
+        _cached_size_{0} {}
+
+inline void S2D_Login::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+S2D_Login::~S2D_Login() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_Login)
+  SharedDtor(*this);
+}
+inline void S2D_Login::SharedDtor(MessageLite& self) {
+  S2D_Login& this_ = static_cast<S2D_Login&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.id_.Destroy();
+  this_._impl_.password_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* S2D_Login::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S2D_Login(arena);
+}
+constexpr auto S2D_Login::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(S2D_Login),
+                                            alignof(S2D_Login));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S2D_Login::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S2D_Login_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S2D_Login::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_Login>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S2D_Login::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_Login>(), &S2D_Login::ByteSizeLong,
+            &S2D_Login::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S2D_Login, _impl_._cached_size_),
+        false,
+    },
+    &S2D_Login::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S2D_Login::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 41, 2> S2D_Login::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_Login>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string password = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_Login, _impl_.password_)}},
+    // string id = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_Login, _impl_.id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string id = 1;
+    {PROTOBUF_FIELD_OFFSET(S2D_Login, _impl_.id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string password = 2;
+    {PROTOBUF_FIELD_OFFSET(S2D_Login, _impl_.password_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\26\2\10\0\0\0\0\0"
+    "S2D_Protocol.S2D_Login"
+    "id"
+    "password"
+  }},
+};
+
+PROTOBUF_NOINLINE void S2D_Login::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_Login)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.id_.ClearToEmpty();
+  _impl_.password_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S2D_Login::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S2D_Login& this_ = static_cast<const S2D_Login&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S2D_Login::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S2D_Login& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_Login)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string id = 1;
+          if (!this_._internal_id().empty()) {
+            const std::string& _s = this_._internal_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2D_Protocol.S2D_Login.id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // string password = 2;
+          if (!this_._internal_password().empty()) {
+            const std::string& _s = this_._internal_password();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2D_Protocol.S2D_Login.password");
+            target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_Login)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S2D_Login::ByteSizeLong(const MessageLite& base) {
+          const S2D_Login& this_ = static_cast<const S2D_Login&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S2D_Login::ByteSizeLong() const {
+          const S2D_Login& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_Login)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string id = 1;
+            if (!this_._internal_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_id());
+            }
+            // string password = 2;
+            if (!this_._internal_password().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_password());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S2D_Login::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_Login*>(&to_msg);
+  auto& from = static_cast<const S2D_Login&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_Login)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_id().empty()) {
+    _this->_internal_set_id(from._internal_id());
+  }
+  if (!from._internal_password().empty()) {
+    _this->_internal_set_password(from._internal_password());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S2D_Login::CopyFrom(const S2D_Login& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_Login)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S2D_Login::InternalSwap(S2D_Login* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.id_, &other->_impl_.id_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.password_, &other->_impl_.password_, arena);
+}
+
+::google::protobuf::Metadata S2D_Login::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class D2S_Login::_Internal {
+ public:
+  static constexpr ::int32_t kOneofCaseOffset =
+      PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_Login, _impl_._oneof_case_);
+};
+
+D2S_Login::D2S_Login(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2S_Login)
+}
+inline PROTOBUF_NDEBUG_INLINE D2S_Login::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2D_Protocol::D2S_Login& from_msg)
+      : value_case_{},
+        _cached_size_{0},
+        _oneof_case_{from._oneof_case_[0]} {}
+
+D2S_Login::D2S_Login(
+    ::google::protobuf::Arena* arena,
+    const D2S_Login& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  D2S_Login* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  switch (value_case_case()) {
+    case VALUE_CASE_NOT_SET:
+      break;
+      case kDbid:
+        _impl_.value_case_.dbid_ = from._impl_.value_case_.dbid_;
+        break;
+      case kErr:
+        new (&_impl_.value_case_.err_) decltype(_impl_.value_case_.err_){arena, from._impl_.value_case_.err_};
+        break;
+  }
+
+  // @@protoc_insertion_point(copy_constructor:S2D_Protocol.D2S_Login)
+}
+inline PROTOBUF_NDEBUG_INLINE D2S_Login::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : value_case_{},
+        _cached_size_{0},
+        _oneof_case_{} {}
+
+inline void D2S_Login::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+D2S_Login::~D2S_Login() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2S_Login)
+  SharedDtor(*this);
+}
+inline void D2S_Login::SharedDtor(MessageLite& self) {
+  D2S_Login& this_ = static_cast<D2S_Login&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  if (this_.has_value_case()) {
+    this_.clear_value_case();
+  }
+  this_._impl_.~Impl_();
+}
+
+void D2S_Login::clear_value_case() {
+// @@protoc_insertion_point(one_of_clear_start:S2D_Protocol.D2S_Login)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  switch (value_case_case()) {
+    case kDbid: {
+      // No need to clear
+      break;
+    }
+    case kErr: {
+      _impl_.value_case_.err_.Destroy();
+      break;
+    }
+    case VALUE_CASE_NOT_SET: {
+      break;
+    }
+  }
+  _impl_._oneof_case_[0] = VALUE_CASE_NOT_SET;
+}
+
+
+inline void* D2S_Login::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) D2S_Login(arena);
+}
+constexpr auto D2S_Login::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2S_Login),
+                                            alignof(D2S_Login));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull D2S_Login::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_D2S_Login_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &D2S_Login::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2S_Login>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &D2S_Login::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2S_Login>(), &D2S_Login::ByteSizeLong,
+            &D2S_Login::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(D2S_Login, _impl_._cached_size_),
+        false,
+    },
+    &D2S_Login::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* D2S_Login::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 2, 0, 34, 2> D2S_Login::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2S_Login>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 dbid = 1;
+    {PROTOBUF_FIELD_OFFSET(D2S_Login, _impl_.value_case_.dbid_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kInt32)},
+    // string err = 2;
+    {PROTOBUF_FIELD_OFFSET(D2S_Login, _impl_.value_case_.err_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\26\0\3\0\0\0\0\0"
+    "S2D_Protocol.D2S_Login"
+    "err"
+  }},
+};
+
+PROTOBUF_NOINLINE void D2S_Login::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2S_Login)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  clear_value_case();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* D2S_Login::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const D2S_Login& this_ = static_cast<const D2S_Login&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* D2S_Login::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const D2S_Login& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2S_Login)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          switch (this_.value_case_case()) {
+            case kDbid: {
+              target = ::google::protobuf::internal::WireFormatLite::
+                  WriteInt32ToArrayWithField<1>(
+                      stream, this_._internal_dbid(), target);
+              break;
+            }
+            case kErr: {
+              const std::string& _s = this_._internal_err();
+              ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                  _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2D_Protocol.D2S_Login.err");
+              target = stream->WriteStringMaybeAliased(2, _s, target);
+              break;
+            }
+            default:
+              break;
+          }
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2S_Login)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t D2S_Login::ByteSizeLong(const MessageLite& base) {
+          const D2S_Login& this_ = static_cast<const D2S_Login&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t D2S_Login::ByteSizeLong() const {
+          const D2S_Login& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2S_Login)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          switch (this_.value_case_case()) {
+            // int32 dbid = 1;
+            case kDbid: {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_dbid());
+              break;
+            }
+            // string err = 2;
+            case kErr: {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_err());
+              break;
+            }
+            case VALUE_CASE_NOT_SET: {
+              break;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void D2S_Login::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2S_Login*>(&to_msg);
+  auto& from = static_cast<const D2S_Login&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_Login)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
+    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
+    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
+    if (oneof_needs_init) {
+      if (oneof_to_case != 0) {
+        _this->clear_value_case();
+      }
+      _this->_impl_._oneof_case_[0] = oneof_from_case;
+    }
+
+    switch (oneof_from_case) {
+      case kDbid: {
+        _this->_impl_.value_case_.dbid_ = from._impl_.value_case_.dbid_;
+        break;
+      }
+      case kErr: {
+        if (oneof_needs_init) {
+          _this->_impl_.value_case_.err_.InitDefault();
+        }
+        _this->_impl_.value_case_.err_.Set(from._internal_err(), arena);
+        break;
+      }
+      case VALUE_CASE_NOT_SET:
+        break;
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void D2S_Login::CopyFrom(const D2S_Login& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2S_Login)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void D2S_Login::InternalSwap(D2S_Login* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.value_case_, other->_impl_.value_case_);
+  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
+}
+
+::google::protobuf::Metadata D2S_Login::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S2D_CreateAccount::_Internal {
+ public:
+};
+
+S2D_CreateAccount::S2D_CreateAccount(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_CreateAccount)
+}
+inline PROTOBUF_NDEBUG_INLINE S2D_CreateAccount::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2D_Protocol::S2D_CreateAccount& from_msg)
+      : id_(arena, from.id_),
+        password_(arena, from.password_),
+        _cached_size_{0} {}
+
+S2D_CreateAccount::S2D_CreateAccount(
+    ::google::protobuf::Arena* arena,
+    const S2D_CreateAccount& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S2D_CreateAccount* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:S2D_Protocol.S2D_CreateAccount)
+}
+inline PROTOBUF_NDEBUG_INLINE S2D_CreateAccount::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : id_(arena),
+        password_(arena),
+        _cached_size_{0} {}
+
+inline void S2D_CreateAccount::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+S2D_CreateAccount::~S2D_CreateAccount() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_CreateAccount)
+  SharedDtor(*this);
+}
+inline void S2D_CreateAccount::SharedDtor(MessageLite& self) {
+  S2D_CreateAccount& this_ = static_cast<S2D_CreateAccount&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.id_.Destroy();
+  this_._impl_.password_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* S2D_CreateAccount::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S2D_CreateAccount(arena);
+}
+constexpr auto S2D_CreateAccount::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(S2D_CreateAccount),
+                                            alignof(S2D_CreateAccount));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S2D_CreateAccount::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S2D_CreateAccount_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S2D_CreateAccount::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_CreateAccount>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S2D_CreateAccount::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_CreateAccount>(), &S2D_CreateAccount::ByteSizeLong,
+            &S2D_CreateAccount::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S2D_CreateAccount, _impl_._cached_size_),
+        false,
+    },
+    &S2D_CreateAccount::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S2D_CreateAccount::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 49, 2> S2D_CreateAccount::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_CreateAccount>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string password = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_CreateAccount, _impl_.password_)}},
+    // string id = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_CreateAccount, _impl_.id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string id = 1;
+    {PROTOBUF_FIELD_OFFSET(S2D_CreateAccount, _impl_.id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string password = 2;
+    {PROTOBUF_FIELD_OFFSET(S2D_CreateAccount, _impl_.password_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\36\2\10\0\0\0\0\0"
+    "S2D_Protocol.S2D_CreateAccount"
+    "id"
+    "password"
+  }},
+};
+
+PROTOBUF_NOINLINE void S2D_CreateAccount::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_CreateAccount)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.id_.ClearToEmpty();
+  _impl_.password_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S2D_CreateAccount::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S2D_CreateAccount& this_ = static_cast<const S2D_CreateAccount&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S2D_CreateAccount::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S2D_CreateAccount& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_CreateAccount)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string id = 1;
+          if (!this_._internal_id().empty()) {
+            const std::string& _s = this_._internal_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2D_Protocol.S2D_CreateAccount.id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // string password = 2;
+          if (!this_._internal_password().empty()) {
+            const std::string& _s = this_._internal_password();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2D_Protocol.S2D_CreateAccount.password");
+            target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_CreateAccount)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S2D_CreateAccount::ByteSizeLong(const MessageLite& base) {
+          const S2D_CreateAccount& this_ = static_cast<const S2D_CreateAccount&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S2D_CreateAccount::ByteSizeLong() const {
+          const S2D_CreateAccount& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_CreateAccount)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string id = 1;
+            if (!this_._internal_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_id());
+            }
+            // string password = 2;
+            if (!this_._internal_password().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_password());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S2D_CreateAccount::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_CreateAccount*>(&to_msg);
+  auto& from = static_cast<const S2D_CreateAccount&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_CreateAccount)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_id().empty()) {
+    _this->_internal_set_id(from._internal_id());
+  }
+  if (!from._internal_password().empty()) {
+    _this->_internal_set_password(from._internal_password());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S2D_CreateAccount::CopyFrom(const S2D_CreateAccount& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_CreateAccount)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S2D_CreateAccount::InternalSwap(S2D_CreateAccount* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.id_, &other->_impl_.id_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.password_, &other->_impl_.password_, arena);
+}
+
+::google::protobuf::Metadata S2D_CreateAccount::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class D2S_CreateAccount::_Internal {
+ public:
+};
+
+D2S_CreateAccount::D2S_CreateAccount(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2S_CreateAccount)
+}
+D2S_CreateAccount::D2S_CreateAccount(
+    ::google::protobuf::Arena* arena, const D2S_CreateAccount& from)
+    : D2S_CreateAccount(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE D2S_CreateAccount::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void D2S_CreateAccount::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.success_ = {};
+}
+D2S_CreateAccount::~D2S_CreateAccount() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2S_CreateAccount)
+  SharedDtor(*this);
+}
+inline void D2S_CreateAccount::SharedDtor(MessageLite& self) {
+  D2S_CreateAccount& this_ = static_cast<D2S_CreateAccount&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* D2S_CreateAccount::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) D2S_CreateAccount(arena);
+}
+constexpr auto D2S_CreateAccount::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2S_CreateAccount),
+                                            alignof(D2S_CreateAccount));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull D2S_CreateAccount::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_D2S_CreateAccount_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &D2S_CreateAccount::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2S_CreateAccount>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &D2S_CreateAccount::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2S_CreateAccount>(), &D2S_CreateAccount::ByteSizeLong,
+            &D2S_CreateAccount::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(D2S_CreateAccount, _impl_._cached_size_),
+        false,
+    },
+    &D2S_CreateAccount::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* D2S_CreateAccount::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_CreateAccount::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2S_CreateAccount>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // bool success = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2S_CreateAccount, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2S_CreateAccount, _impl_.success_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool success = 1;
+    {PROTOBUF_FIELD_OFFSET(D2S_CreateAccount, _impl_.success_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void D2S_CreateAccount::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2S_CreateAccount)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* D2S_CreateAccount::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const D2S_CreateAccount& this_ = static_cast<const D2S_CreateAccount&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* D2S_CreateAccount::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const D2S_CreateAccount& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2S_CreateAccount)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool success = 1;
+          if (this_._internal_success() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_success(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2S_CreateAccount)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t D2S_CreateAccount::ByteSizeLong(const MessageLite& base) {
+          const D2S_CreateAccount& this_ = static_cast<const D2S_CreateAccount&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t D2S_CreateAccount::ByteSizeLong() const {
+          const D2S_CreateAccount& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2S_CreateAccount)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // bool success = 1;
+            if (this_._internal_success() != 0) {
+              total_size += 2;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void D2S_CreateAccount::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2S_CreateAccount*>(&to_msg);
+  auto& from = static_cast<const D2S_CreateAccount&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_CreateAccount)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_success() != 0) {
+    _this->_impl_.success_ = from._impl_.success_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void D2S_CreateAccount::CopyFrom(const D2S_CreateAccount& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2S_CreateAccount)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void D2S_CreateAccount::InternalSwap(D2S_CreateAccount* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.success_, other->_impl_.success_);
+}
+
+::google::protobuf::Metadata D2S_CreateAccount::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

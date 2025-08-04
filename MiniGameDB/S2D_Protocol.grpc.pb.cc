@@ -21,60 +21,144 @@
 #include <grpcpp/support/sync_stream.h>
 namespace S2D_Protocol {
 
-static const char* Greeter_method_names[] = {
-  "/S2D_Protocol.Greeter/SayHello",
+static const char* S2D_Service_method_names[] = {
+  "/S2D_Protocol.S2D_Service/SayHello",
+  "/S2D_Protocol.S2D_Service/LoginRequest",
+  "/S2D_Protocol.S2D_Service/CreateAccountRequest",
 };
 
-std::unique_ptr< Greeter::Stub> Greeter::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+std::unique_ptr< S2D_Service::Stub> S2D_Service::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
-  std::unique_ptr< Greeter::Stub> stub(new Greeter::Stub(channel, options));
+  std::unique_ptr< S2D_Service::Stub> stub(new S2D_Service::Stub(channel, options));
   return stub;
 }
 
-Greeter::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_SayHello_(Greeter_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+S2D_Service::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_SayHello_(S2D_Service_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_LoginRequest_(S2D_Service_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CreateAccountRequest_(S2D_Service_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status Greeter::Stub::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::S2D_Protocol::HelloReply* response) {
+::grpc::Status S2D_Service::Stub::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::S2D_Protocol::HelloReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::S2D_Protocol::HelloRequest, ::S2D_Protocol::HelloReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_SayHello_, context, request, response);
 }
 
-void Greeter::Stub::async::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest* request, ::S2D_Protocol::HelloReply* response, std::function<void(::grpc::Status)> f) {
+void S2D_Service::Stub::async::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest* request, ::S2D_Protocol::HelloReply* response, std::function<void(::grpc::Status)> f) {
   ::grpc::internal::CallbackUnaryCall< ::S2D_Protocol::HelloRequest, ::S2D_Protocol::HelloReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SayHello_, context, request, response, std::move(f));
 }
 
-void Greeter::Stub::async::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest* request, ::S2D_Protocol::HelloReply* response, ::grpc::ClientUnaryReactor* reactor) {
+void S2D_Service::Stub::async::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest* request, ::S2D_Protocol::HelloReply* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_SayHello_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::S2D_Protocol::HelloReply>* Greeter::Stub::PrepareAsyncSayHelloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::HelloReply>* S2D_Service::Stub::PrepareAsyncSayHelloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::S2D_Protocol::HelloReply, ::S2D_Protocol::HelloRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_SayHello_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::S2D_Protocol::HelloReply>* Greeter::Stub::AsyncSayHelloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::HelloReply>* S2D_Service::Stub::AsyncSayHelloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncSayHelloRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-Greeter::Service::Service() {
+::grpc::Status S2D_Service::Stub::LoginRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_Login& request, ::S2D_Protocol::D2S_Login* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::S2D_Protocol::S2D_Login, ::S2D_Protocol::D2S_Login, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_LoginRequest_, context, request, response);
+}
+
+void S2D_Service::Stub::async::LoginRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_Login* request, ::S2D_Protocol::D2S_Login* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::S2D_Protocol::S2D_Login, ::S2D_Protocol::D2S_Login, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_LoginRequest_, context, request, response, std::move(f));
+}
+
+void S2D_Service::Stub::async::LoginRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_Login* request, ::S2D_Protocol::D2S_Login* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_LoginRequest_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_Login>* S2D_Service::Stub::PrepareAsyncLoginRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_Login& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::S2D_Protocol::D2S_Login, ::S2D_Protocol::S2D_Login, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_LoginRequest_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_Login>* S2D_Service::Stub::AsyncLoginRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_Login& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncLoginRequestRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status S2D_Service::Stub::CreateAccountRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount& request, ::S2D_Protocol::D2S_CreateAccount* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::S2D_Protocol::S2D_CreateAccount, ::S2D_Protocol::D2S_CreateAccount, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_CreateAccountRequest_, context, request, response);
+}
+
+void S2D_Service::Stub::async::CreateAccountRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount* request, ::S2D_Protocol::D2S_CreateAccount* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::S2D_Protocol::S2D_CreateAccount, ::S2D_Protocol::D2S_CreateAccount, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CreateAccountRequest_, context, request, response, std::move(f));
+}
+
+void S2D_Service::Stub::async::CreateAccountRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount* request, ::S2D_Protocol::D2S_CreateAccount* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CreateAccountRequest_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_CreateAccount>* S2D_Service::Stub::PrepareAsyncCreateAccountRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::S2D_Protocol::D2S_CreateAccount, ::S2D_Protocol::S2D_CreateAccount, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_CreateAccountRequest_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_CreateAccount>* S2D_Service::Stub::AsyncCreateAccountRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncCreateAccountRequestRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+S2D_Service::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Greeter_method_names[0],
+      S2D_Service_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Greeter::Service, ::S2D_Protocol::HelloRequest, ::S2D_Protocol::HelloReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](Greeter::Service* service,
+      new ::grpc::internal::RpcMethodHandler< S2D_Service::Service, ::S2D_Protocol::HelloRequest, ::S2D_Protocol::HelloReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](S2D_Service::Service* service,
              ::grpc::ServerContext* ctx,
              const ::S2D_Protocol::HelloRequest* req,
              ::S2D_Protocol::HelloReply* resp) {
                return service->SayHello(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      S2D_Service_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< S2D_Service::Service, ::S2D_Protocol::S2D_Login, ::S2D_Protocol::D2S_Login, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](S2D_Service::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::S2D_Protocol::S2D_Login* req,
+             ::S2D_Protocol::D2S_Login* resp) {
+               return service->LoginRequest(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      S2D_Service_method_names[2],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< S2D_Service::Service, ::S2D_Protocol::S2D_CreateAccount, ::S2D_Protocol::D2S_CreateAccount, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](S2D_Service::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::S2D_Protocol::S2D_CreateAccount* req,
+             ::S2D_Protocol::D2S_CreateAccount* resp) {
+               return service->CreateAccountRequest(ctx, req, resp);
+             }, this)));
 }
 
-Greeter::Service::~Service() {
+S2D_Service::Service::~Service() {
 }
 
-::grpc::Status Greeter::Service::SayHello(::grpc::ServerContext* context, const ::S2D_Protocol::HelloRequest* request, ::S2D_Protocol::HelloReply* response) {
+::grpc::Status S2D_Service::Service::SayHello(::grpc::ServerContext* context, const ::S2D_Protocol::HelloRequest* request, ::S2D_Protocol::HelloReply* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status S2D_Service::Service::LoginRequest(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_Login* request, ::S2D_Protocol::D2S_Login* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status S2D_Service::Service::CreateAccountRequest(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_CreateAccount* request, ::S2D_Protocol::D2S_CreateAccount* response) {
   (void) context;
   (void) request;
   (void) response;

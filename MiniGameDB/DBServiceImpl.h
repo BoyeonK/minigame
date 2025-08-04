@@ -1,7 +1,7 @@
 #pragma once
 #include "CallData.h"
 
-class GreeterServiceImpl final : public S2D_Protocol::Greeter::AsyncService {
+class GreeterServiceImpl final : public S2D_Protocol::S2D_Service::AsyncService {
 public:
     GreeterServiceImpl() {}
 

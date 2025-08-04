@@ -12,7 +12,7 @@
     
     - DB를 조회한다. (`C2S_Login`을 받은 경우 `S2D_Login`전송)
       
-      1. 있는 경우 (`D2S_LoginDbid`을 받은 경우 처리)
+      1. 있는 경우 (`D2S_Login`을 받은 경우 처리)
          
          1. 비밀번호가 맞은 경우 (0 이외의 값을 받았다.) : session에 해당 dbid를 session에 저장. 로그인 성공. `S2C_Login`에 True를 담아 전송.
          
@@ -61,7 +61,7 @@
          
          - password에 해당 ID의 salt를 섞어서 해싱한 후, 해당 ID의 password가 맞는지 검사한다.
            
-           1. 맞는경우, dbid를 서버에 건네준다. `D2S_LoginDbid`전송
+           1. 맞는경우, dbid를 서버에 건네준다. `D2S_Login`전송
            
            2. 틀린경우, 0을 건네준다. `D2S_Login`전송
   

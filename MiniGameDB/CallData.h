@@ -2,7 +2,7 @@
 
 class CallData {
 public:
-    CallData(S2D_Protocol::Greeter::AsyncService* service, grpc::ServerCompletionQueue* cq)
+    CallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
         : _service(service), _completionQueueRef(cq), _status(CREATE), _ctx() {}
     virtual ~CallData() {}
     virtual void Proceed() = 0;
@@ -10,7 +10,7 @@ public:
 
 protected:
     // 모든 CallData 객체가 공통적으로 사용하는 멤버 변수
-    S2D_Protocol::Greeter::AsyncService* _service;
+    S2D_Protocol::S2D_Service::AsyncService* _service;
     grpc::ServerCompletionQueue* _completionQueueRef;
     grpc::ServerContext _ctx;
     enum CallStatus { CREATE, PROCESS, FINISH };
@@ -19,7 +19,7 @@ protected:
 
 class HelloCallData final : public CallData {
 public:
-    HelloCallData(S2D_Protocol::Greeter::AsyncService* service, grpc::ServerCompletionQueue* cq) 
+    HelloCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq) 
         : CallData(service, cq), _responder(&_ctx) {
 
         Proceed();
@@ -64,4 +64,4 @@ private:
     grpc::ServerAsyncResponseWriter<S2D_Protocol::HelloReply> _responder;
 };
 
-void ReadyForCall(S2D_Protocol::Greeter::AsyncService* service, grpc::ServerCompletionQueue* cq);
+void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq);

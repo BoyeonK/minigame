@@ -4,7 +4,7 @@
 class DBClientImpl {
 public:
     DBClientImpl(shared_ptr<grpc::Channel> channel) : 
-        _stub(S2D_Protocol::Greeter::NewStub(channel)),
+        _stub(S2D_Protocol::S2D_Service::NewStub(channel)),
         _cqRef(make_unique<grpc::CompletionQueue>()) 
     {
         if (_cqRef) {
@@ -46,7 +46,7 @@ public:
     }
 
 private:
-    unique_ptr<S2D_Protocol::Greeter::Stub> _stub;
+    unique_ptr<S2D_Protocol::S2D_Service::Stub> _stub;
     unique_ptr<grpc::CompletionQueue> _cqRef;
     atomic<bool> _isConnected = false;
 };
