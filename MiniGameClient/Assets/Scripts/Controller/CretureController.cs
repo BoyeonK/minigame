@@ -2,8 +2,7 @@ using Google.Protobuf.Protocol;
 using UnityEngine;
 using static Define;
 
-public class CreatureController : MonoBehaviour
-{
+public class CreatureController : MonoBehaviour {
 	public int Id { get; set; }
 
 	[SerializeField]
@@ -14,8 +13,7 @@ public class CreatureController : MonoBehaviour
 	protected Animator _animator;
 	protected SpriteRenderer _sprite;
 
-	protected virtual void UpdateAnimation() {
-	}
+	protected virtual void UpdateAnimation() { }
 
 	void Start() {
 		Init();
@@ -31,14 +29,10 @@ public class CreatureController : MonoBehaviour
 		UpdateAnimation();
 	}
 
-	protected virtual void UpdateController() {
-	}
+	protected virtual void UpdateController() {	}
 
-	protected virtual void UpdateIdle() {
-	}
+	protected virtual void UpdateIdle() { }
 
 	// 스르륵 이동하는 것을 처리
-	protected virtual void UpdateMoving() {
-
-	}
+	protected virtual void UpdateMoving() {	}
 }

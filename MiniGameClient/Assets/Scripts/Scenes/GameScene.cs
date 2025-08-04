@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class GameScene : BaseScene
-{
-    protected override void Init()
-    {
+public class GameScene : BaseScene {
+    protected override void Init() {
         base.Init();
         /*
         SceneType = Define.Scene.Game;
@@ -13,8 +11,7 @@ public class GameScene : BaseScene
         */
     }
 
-    public override void Clear()
-    {
+    public override void Clear() {
         Debug.Log("GameScene Cleared!");
     }
 }

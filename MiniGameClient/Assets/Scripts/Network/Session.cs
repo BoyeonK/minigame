@@ -202,8 +202,7 @@ namespace ServerCore {
 				catch (Exception e) {
 					Debug.Log($"OnRecvCompleted Failed {e}");
 				}
-			} 
-			else {
+			} else {
 				Disconnect();
 			}
 		}

@@ -1,34 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager
-{
+public class UIManager {
     int _order = 10;
 
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
     UI_Scene _sceneUI = null;
 
-
-    public void SetCanvas(GameObject go, bool sort = true)
-    {
+    public void SetCanvas(GameObject go, bool sort = true) {
         Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
-        if (sort)
-        {
+        if (sort) {
             canvas.sortingOrder = _order;
             _order++;
-        }
-        else
-        {
+        } else {
             canvas.sortingOrder = 0;
         }
     }
 
     //name -> prefab의 이름
-    public T ShowPopupUI<T>(string name = null) where T : UI_Popup
-    {
+    public T ShowPopupUI<T>(string name = null) where T : UI_Popup {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
@@ -46,8 +39,7 @@ public class UIManager
         return popup;
     }
 
-    public T ShowSceneUI<T>(string name = null) where T : UI_Scene
-    {
+    public T ShowSceneUI<T>(string name = null) where T : UI_Scene {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
@@ -64,8 +56,7 @@ public class UIManager
         return sceneUI;
     }
 
-    public void ClosePopupUI()
-    {
+    public void ClosePopupUI() {
         if (_popupStack.Count == 0)
             return;
 
@@ -75,13 +66,11 @@ public class UIManager
         //_order--;
     }
 
-    public void ClosePopupUI(UI_Popup popup)
-    {
+    public void ClosePopupUI(UI_Popup popup) {
         if (_popupStack.Count == 0)
             return;
 
-        if (_popupStack.Peek() != popup)
-        {
+        if (_popupStack.Peek() != popup) {
             Debug.Log("Close Popup Failed");
             return;
         }
@@ -89,15 +78,13 @@ public class UIManager
         ClosePopupUI();
     }
 
-    public void CloseAllPopupUI()
-    {
+    public void CloseAllPopupUI() {
         //이거 Thread 안전함??
         while (_popupStack.Count > 0)
             ClosePopupUI();
     }
 
-    public void Clear()
-    {
+    public void Clear() {
         CloseAllPopupUI();
         _sceneUI = null;
     }

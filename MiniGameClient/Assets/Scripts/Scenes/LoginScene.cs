@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoginScene : BaseScene {
-    bool t = false;
+    bool cnt = false;
+    bool lgn = false;
 
     protected override void Init() {
         base.Init();
@@ -11,9 +12,10 @@ public class LoginScene : BaseScene {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
-            if (!t) {
+            if (!cnt) {
                 Managers.Network.TryConnectToServer();
-                t = true;
+                cnt = true;
+                lgn = true;
             }
         }
     }

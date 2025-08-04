@@ -3,37 +3,30 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
 
-public class UI_Button : UI_Popup
-{
-    enum Texts
-    {
+public class UI_Button : UI_Popup {
+    enum Texts {
         AddButtonText,
         ScoreText
     }
 
-    enum Buttons
-    {
+    enum Buttons {
         AddButton
     }
 
-    enum GameObjects
-    {
+    enum GameObjects {
         TestObj
     }
 
-    enum Images
-    {
+    enum Images {
         ItemIcon,
     }
 
     int _score = 0;
-    private void Start()
-    {
+    private void Start() {
         Init();
     }
 
-    public override void Init()
-    {
+    public override void Init() {
         base.Init();
         Bind<Button>(typeof(Buttons));
         Bind<Text>(typeof(Texts));
@@ -47,8 +40,7 @@ public class UI_Button : UI_Popup
         AddUIEvent(go, (PointerEventData data) => { go.transform.position = data.position; }, Define.UIEvent.Drag);
     }
 
-    public void OnButtonClicked(PointerEventData data)
-    {
+    public void OnButtonClicked(PointerEventData data) {
         _score++;
         Get<Text>((int)Texts.ScoreText).text = $"{_score}";
     }

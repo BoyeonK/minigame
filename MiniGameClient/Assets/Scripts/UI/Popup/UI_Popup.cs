@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class UI_Popup : UI_Base
-{
+public class UI_Popup : UI_Base {
     //이거 왜 안되는지 알아 둘 것
     /*
     void Start()
@@ -9,13 +8,11 @@ public class UI_Popup : UI_Base
         Managers.UI.SetCanvas(gameObject, true);
     }
     */
-    public virtual void Init()
-    {
+    public virtual void Init() {
         Managers.UI.SetCanvas(gameObject, true);
     }
 
-    public virtual void ClosePopupUI()
-    {
+    public virtual void ClosePopupUI() {
         Managers.UI.ClosePopupUI(this);
     }
 }

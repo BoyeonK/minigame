@@ -5,8 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 
-namespace ServerCore
-{
+namespace ServerCore {
 	public class Connector {
 		Func<Session> _sessionFactory;
 

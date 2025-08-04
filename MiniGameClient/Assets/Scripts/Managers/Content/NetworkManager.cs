@@ -13,9 +13,7 @@ public class NetworkManager {
 		_session.Send(packet);
 	}
 
-	public void Init() {
-
-	}
+	public void Init() { }
 
 	public void TryConnectToServer() {
 		// DNS (Domain Name System)
@@ -34,9 +32,7 @@ public class NetworkManager {
 
 		Connector connector = new Connector();
 
-		connector.Connect(endPoint,
-			() => { return _session; },
-			1);
+		connector.Connect(endPoint, () => { return _session; }, 1);
 	}
 
 	public void Update() {
