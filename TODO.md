@@ -50,11 +50,14 @@
 
 ### Until Today
 
-- Player정보를, DB에 어떻게 저장할 것인가? (어떻게 정규화 할 것인가)
+- ~~Player정보를, DB에 어떻게 저장할 것인가? (어떻게 정규화 할 것인가)~~
   
-  1. PlayerID (문자)자체를 primary key로
+  1. ~~PlayerID (문자)자체를 primary key로~~
   
-  2. PlayerID (int)를 primary key로, name column 추가.
+  2. ~~PlayerID (int)를 primary key로, name column 추가.~~
+  
+  챗 선생님 + 제 선생님과의 면담 끝에 테이블 하나를 사용하되.
+  dbid(int) - primary key와 player_id(nvarchar(16)) - unique key(비클러스트형 인덱스)를 사용하기로 결정됨.
 
 - PlayerID를 토대로 elo를 가져오기 (인게임 서버에서 최종적으로 활용할 수 있는 방식으로)
   
