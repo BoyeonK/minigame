@@ -20,7 +20,6 @@ int main() {
         GThreadManager->Launch([=]() {
             while (true) {
                 DBService->HandleRpcs();
-                this_thread::sleep_for(20ms);
             }
         });
     }
