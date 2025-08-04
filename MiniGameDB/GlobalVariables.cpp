@@ -107,6 +107,7 @@ DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
     delete[] dbServer;
     delete[] dbName;
     delete[] connection;
+
     try {
         InitialC();
         InitialR();
@@ -115,8 +116,7 @@ DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
     }
     catch (const runtime_error& e) {
         cerr << e.what() << endl;
-    }
-    
+    } 
 }
 
 DBManager::~DBManager() {

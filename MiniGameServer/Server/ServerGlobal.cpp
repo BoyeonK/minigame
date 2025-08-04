@@ -28,32 +28,31 @@ CryptoManager::CryptoManager() {
 	//최초, 메인스레드에서 1번 실행 될 것이기 때문에
 	//생성자 안에서만큼은 multi thread환경을 고려하지 않고 작성됨.
 
-	//아니 대체 cout이 왜 모호하다는거야
 #ifdef _DEBUG
-	std::cout << "Initiating CryptoManager...." << endl;
+	cout << "Initiating CryptoManager...." << endl;
 #endif
 	for (int i = 0; i < 100; i++) {
 		EVP_PKEY* pkey = nullptr;
 		EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
 		if (!ctx) {
-			std::cout << i << "번째 ctx 생성 오류" << endl;
+			cout << i << "번째 ctx 생성 오류" << endl;
 			continue;
 		}
 
 		if (EVP_PKEY_keygen_init(ctx) <= 0) {
-			std::cout << i << "번째 keygen init 오류" << endl;
+			cout << i << "번째 keygen init 오류" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
 
 		if (EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, 2048) <= 0) {
-			std::cout << i << "번째 key size set 오류" << endl;
+			cout << i << "번째 key size set 오류" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
 
 		if (EVP_PKEY_keygen(ctx, &pkey) <= 0) {
-			std::cout << i << "번째 pkey 생성 오류" << endl;
+			cout << i << "번째 pkey 생성 오류" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
@@ -64,7 +63,7 @@ CryptoManager::CryptoManager() {
 	_inPool = 100;
 	_outPool = 0;
 #ifdef _DEBUG
-	std::cout << "CryptoManager Initiated" << endl;
+	cout << "CryptoManager Initiated" << endl;
 #endif
 }
 
@@ -98,24 +97,24 @@ EVP_PKEY* CryptoManager::PopKey() {
 	
 	EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
 	if (!ctx) {
-		std::cout << "ctx 생성 오류" << endl;
+		cout << "ctx 생성 오류" << endl;
 		return nullptr;
 	}
 
 	if (EVP_PKEY_keygen_init(ctx) <= 0) {
-		std::cout << "Keygen init 오류" << endl;
+		cout << "Keygen init 오류" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
 
 	if (EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, 2048) <= 0) {
-		std::cout << "Key size set 오류" << endl;
+		cout << "Key size set 오류" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
 
 	if (EVP_PKEY_keygen(ctx, &key) <= 0) {
-		std::cout << "Key 생성 오류" << endl;
+		cout << "Key 생성 오류" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
@@ -128,7 +127,7 @@ EVP_PKEY* CryptoManager::PopKey() {
 //이럴 줄 알았으면 처음부터 _keyQueue를 unique_ptr을 다루는 큐로서 만들 걸 그랬다.
 bool CryptoManager::ReturnKey(EVP_PKEY*& key) {
 	if (!key) {
-		std::cout << "??도대체 뭘 리턴한거지??" << endl;
+		cout << "??도대체 뭘 리턴한거지??" << endl;
 		return false;
 	}
 	{
@@ -142,7 +141,7 @@ bool CryptoManager::ReturnKey(EVP_PKEY*& key) {
 }
 
 vector<unsigned char> CryptoManager::ExtractPublicKey(EVP_PKEY* key) {
-	std::vector<unsigned char> publicKey;
+	vector<unsigned char> publicKey;
 
 	if (!key)
 		return publicKey;
@@ -165,17 +164,19 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	vector<unsigned char> decrypted;
 	EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(privateKey, nullptr);
 	if (!ctx) {
-		std::cout << "EVP_PKEY_CTX_new failed" << endl;
+		cout << "EVP_PKEY_CTX_new failed" << endl;
 		return {};
 	}
 
 	if (EVP_PKEY_decrypt_init(ctx) <= 0) {
-		std::cout << "EVP_PKEY_decrypt_init failed" << endl;
+		cout << "EVP_PKEY_decrypt_init failed" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
 
-	// RSA_PADDING - 클라이언트가 어떤 방식으로 암호화했는지와 일치해야 함
+	// 아래 주석 코드는 클라이언트에서 BouncyCastle 라이브러리를 사용하여 암호화 하는데 사용한 코드 (Unity C#)
+	// 패딩 OAEP + MGF1 + SHA-256
+	// 암호화 방식 RSAES-OAEP (SHA-256 기반)
 
 	/*
 	var encryptEngine = new OaepEncoding(new RsaEngine(), new Sha256Digest());
@@ -183,10 +184,9 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	encryptedKey = encryptEngine.ProcessBlock(aesKey, 0, aesKey.Length);
 	*/
 
-	// 패딩 OAEP + MGF1 + SHA-256
-	// 암호화 방식 RSAES-OAEP (SHA-256 기반)
+	// RSA_PADDING - 클라이언트가 어떤 방식으로 암호화했는지와 일치해야 함
 	if (EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING) <= 0) {
-		std::cout << "Failed to set padding" << endl;
+		cout << "Failed to set padding" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
@@ -197,7 +197,7 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	// 복호화 결과 길이 확인
 	size_t outLen = 0;
 	if (EVP_PKEY_decrypt(ctx, nullptr, &outLen, encrypted.data(), encrypted.size()) <= 0) {
-		std::cout << "EVP_PKEY_decrypt (length) failed" << endl;
+		cout << "EVP_PKEY_decrypt (length) failed" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
@@ -205,7 +205,7 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	decrypted.resize(outLen);
 
 	if (EVP_PKEY_decrypt(ctx, decrypted.data(), &outLen, encrypted.data(), encrypted.size()) <= 0) {
-		std::cout << "EVP_PKEY_decrypt failed" << endl;
+		cout << "EVP_PKEY_decrypt failed" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
