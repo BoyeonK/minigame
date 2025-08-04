@@ -40,7 +40,6 @@ public:
                 break;
 
             case grpc::CompletionQueue::SHUTDOWN:
-                // 연결 종료와 같은 이유로 실패 시, pool로 반환.
                 _isConnected.store(false);
                 break;
             }

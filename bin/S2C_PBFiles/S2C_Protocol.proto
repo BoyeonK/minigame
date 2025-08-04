@@ -9,6 +9,8 @@ enum MsgId {
     S_WELCOME = 2;
     C_WELCOME = 3;
     S_WELCOME_RESPONSE = 4;
+    C_LOGIN = 5;
+    S_LOGIN = 6;
 }
 
 message S_Encrypted {
@@ -40,3 +42,14 @@ message S_WelcomeResponse {
     bool success = 2;
 }
 
+message C_Login {
+    string id = 1;
+    string password = 2;
+}
+
+message S_Login {
+    oneof value_case {
+        int32 dbid = 1;
+        string err = 2;
+    }
+}

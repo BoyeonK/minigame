@@ -82,6 +82,32 @@ struct S_WelcomeDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_WelcomeDefaultTypeInternal _S_Welcome_default_instance_;
 
+inline constexpr S_Login::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : value_case_{},
+        _cached_size_{0},
+        _oneof_case_{} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_Login::S_Login(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_LoginDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_LoginDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_LoginDefaultTypeInternal() {}
+  union {
+    S_Login _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_LoginDefaultTypeInternal _S_Login_default_instance_;
+
 inline constexpr S_Encrypted::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : iv_(
@@ -145,6 +171,36 @@ struct C_WelcomeDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_WelcomeDefaultTypeInternal _C_Welcome_default_instance_;
+
+inline constexpr C_Login::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        password_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR C_Login::C_Login(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct C_LoginDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_LoginDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_LoginDefaultTypeInternal() {}
+  union {
+    C_Login _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_LoginDefaultTypeInternal _C_Login_default_instance_;
 
 inline constexpr C_Encrypted::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -240,6 +296,27 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_WelcomeResponse, _impl_.message_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_WelcomeResponse, _impl_.success_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_Login, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_Login, _impl_.id_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_Login, _impl_.password_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_Login, _internal_metadata_),
+        ~0u,  // no _extensions_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_Login, _impl_._oneof_case_[0]),
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        ::_pbi::kInvalidFieldOffsetTag,
+        ::_pbi::kInvalidFieldOffsetTag,
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_Login, _impl_.value_case_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -249,6 +326,8 @@ static const ::_pbi::MigrationSchema
         {24, -1, -1, sizeof(::S2C_Protocol::S_Welcome)},
         {34, -1, -1, sizeof(::S2C_Protocol::C_Welcome)},
         {44, -1, -1, sizeof(::S2C_Protocol::S_WelcomeResponse)},
+        {54, -1, -1, sizeof(::S2C_Protocol::C_Login)},
+        {64, -1, -1, sizeof(::S2C_Protocol::S_Login)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_Encrypted_default_instance_._instance,
@@ -256,6 +335,8 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_Welcome_default_instance_._instance,
     &::S2C_Protocol::_C_Welcome_default_instance_._instance,
     &::S2C_Protocol::_S_WelcomeResponse_default_instance_._instance,
+    &::S2C_Protocol::_C_Login_default_instance_._instance,
+    &::S2C_Protocol::_S_Login_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2C_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -267,22 +348,25 @@ const char descriptor_table_protodef_S2C_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SEC
     "\tpublicKey\030\001 \001(\014\022\023\n\013gameversion\030\002 \001(\005\",\n"
     "\tC_Welcome\022\016\n\006aesKey\030\001 \001(\014\022\017\n\007message\030\002 "
     "\001(\t\"5\n\021S_WelcomeResponse\022\017\n\007message\030\001 \001("
-    "\t\022\017\n\007success\030\002 \001(\010*_\n\005MsgId\022\017\n\013S_ENCRYPT"
-    "ED\020\000\022\017\n\013C_ENCRYPTED\020\001\022\r\n\tS_WELCOME\020\002\022\r\n\t"
-    "C_WELCOME\020\003\022\026\n\022S_WELCOME_RESPONSE\020\004B\033\252\002\030"
-    "Google.Protobuf.Protocolb\006proto3"
+    "\t\022\017\n\007success\030\002 \001(\010\"\'\n\007C_Login\022\n\n\002id\030\001 \001("
+    "\t\022\020\n\010password\030\002 \001(\t\"6\n\007S_Login\022\016\n\004dbid\030\001"
+    " \001(\005H\000\022\r\n\003err\030\002 \001(\tH\000B\014\n\nvalue_case*y\n\005M"
+    "sgId\022\017\n\013S_ENCRYPTED\020\000\022\017\n\013C_ENCRYPTED\020\001\022\r"
+    "\n\tS_WELCOME\020\002\022\r\n\tC_WELCOME\020\003\022\026\n\022S_WELCOM"
+    "E_RESPONSE\020\004\022\013\n\007C_LOGIN\020\005\022\013\n\007S_LOGIN\020\006B\033"
+    "\252\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_2eproto = {
     false,
     false,
-    472,
+    595,
     descriptor_table_protodef_S2C_5fProtocol_2eproto,
     "S2C_Protocol.proto",
     &descriptor_table_S2C_5fProtocol_2eproto_once,
     nullptr,
     0,
-    5,
+    7,
     schemas,
     file_default_instances,
     TableStruct_S2C_5fProtocol_2eproto::offsets,
@@ -295,9 +379,9 @@ const ::google::protobuf::EnumDescriptor* MsgId_descriptor() {
   return file_level_enum_descriptors_S2C_5fProtocol_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t MsgId_internal_data_[] = {
-    327680u, 0u, };
+    458752u, 0u, };
 bool MsgId_IsValid(int value) {
-  return 0 <= value && value <= 4;
+  return 0 <= value && value <= 6;
 }
 // ===================================================================
 
@@ -1666,6 +1750,576 @@ void S_WelcomeResponse::InternalSwap(S_WelcomeResponse* PROTOBUF_RESTRICT other)
 }
 
 ::google::protobuf::Metadata S_WelcomeResponse::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class C_Login::_Internal {
+ public:
+};
+
+C_Login::C_Login(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.C_Login)
+}
+inline PROTOBUF_NDEBUG_INLINE C_Login::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::C_Login& from_msg)
+      : id_(arena, from.id_),
+        password_(arena, from.password_),
+        _cached_size_{0} {}
+
+C_Login::C_Login(
+    ::google::protobuf::Arena* arena,
+    const C_Login& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  C_Login* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.C_Login)
+}
+inline PROTOBUF_NDEBUG_INLINE C_Login::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : id_(arena),
+        password_(arena),
+        _cached_size_{0} {}
+
+inline void C_Login::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+C_Login::~C_Login() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.C_Login)
+  SharedDtor(*this);
+}
+inline void C_Login::SharedDtor(MessageLite& self) {
+  C_Login& this_ = static_cast<C_Login&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.id_.Destroy();
+  this_._impl_.password_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* C_Login::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) C_Login(arena);
+}
+constexpr auto C_Login::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(C_Login),
+                                            alignof(C_Login));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull C_Login::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_C_Login_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &C_Login::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<C_Login>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &C_Login::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<C_Login>(), &C_Login::ByteSizeLong,
+            &C_Login::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(C_Login, _impl_._cached_size_),
+        false,
+    },
+    &C_Login::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* C_Login::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 39, 2> C_Login::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::C_Login>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string password = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(C_Login, _impl_.password_)}},
+    // string id = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(C_Login, _impl_.id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string id = 1;
+    {PROTOBUF_FIELD_OFFSET(C_Login, _impl_.id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string password = 2;
+    {PROTOBUF_FIELD_OFFSET(C_Login, _impl_.password_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\24\2\10\0\0\0\0\0"
+    "S2C_Protocol.C_Login"
+    "id"
+    "password"
+  }},
+};
+
+PROTOBUF_NOINLINE void C_Login::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.C_Login)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.id_.ClearToEmpty();
+  _impl_.password_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* C_Login::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const C_Login& this_ = static_cast<const C_Login&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* C_Login::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const C_Login& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.C_Login)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string id = 1;
+          if (!this_._internal_id().empty()) {
+            const std::string& _s = this_._internal_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.C_Login.id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // string password = 2;
+          if (!this_._internal_password().empty()) {
+            const std::string& _s = this_._internal_password();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.C_Login.password");
+            target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.C_Login)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t C_Login::ByteSizeLong(const MessageLite& base) {
+          const C_Login& this_ = static_cast<const C_Login&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t C_Login::ByteSizeLong() const {
+          const C_Login& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.C_Login)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string id = 1;
+            if (!this_._internal_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_id());
+            }
+            // string password = 2;
+            if (!this_._internal_password().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_password());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void C_Login::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<C_Login*>(&to_msg);
+  auto& from = static_cast<const C_Login&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.C_Login)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_id().empty()) {
+    _this->_internal_set_id(from._internal_id());
+  }
+  if (!from._internal_password().empty()) {
+    _this->_internal_set_password(from._internal_password());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void C_Login::CopyFrom(const C_Login& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.C_Login)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void C_Login::InternalSwap(C_Login* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.id_, &other->_impl_.id_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.password_, &other->_impl_.password_, arena);
+}
+
+::google::protobuf::Metadata C_Login::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_Login::_Internal {
+ public:
+  static constexpr ::int32_t kOneofCaseOffset =
+      PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_Login, _impl_._oneof_case_);
+};
+
+S_Login::S_Login(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_Login)
+}
+inline PROTOBUF_NDEBUG_INLINE S_Login::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_Login& from_msg)
+      : value_case_{},
+        _cached_size_{0},
+        _oneof_case_{from._oneof_case_[0]} {}
+
+S_Login::S_Login(
+    ::google::protobuf::Arena* arena,
+    const S_Login& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_Login* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  switch (value_case_case()) {
+    case VALUE_CASE_NOT_SET:
+      break;
+      case kDbid:
+        _impl_.value_case_.dbid_ = from._impl_.value_case_.dbid_;
+        break;
+      case kErr:
+        new (&_impl_.value_case_.err_) decltype(_impl_.value_case_.err_){arena, from._impl_.value_case_.err_};
+        break;
+  }
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_Login)
+}
+inline PROTOBUF_NDEBUG_INLINE S_Login::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : value_case_{},
+        _cached_size_{0},
+        _oneof_case_{} {}
+
+inline void S_Login::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+S_Login::~S_Login() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_Login)
+  SharedDtor(*this);
+}
+inline void S_Login::SharedDtor(MessageLite& self) {
+  S_Login& this_ = static_cast<S_Login&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  if (this_.has_value_case()) {
+    this_.clear_value_case();
+  }
+  this_._impl_.~Impl_();
+}
+
+void S_Login::clear_value_case() {
+// @@protoc_insertion_point(one_of_clear_start:S2C_Protocol.S_Login)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  switch (value_case_case()) {
+    case kDbid: {
+      // No need to clear
+      break;
+    }
+    case kErr: {
+      _impl_.value_case_.err_.Destroy();
+      break;
+    }
+    case VALUE_CASE_NOT_SET: {
+      break;
+    }
+  }
+  _impl_._oneof_case_[0] = VALUE_CASE_NOT_SET;
+}
+
+
+inline void* S_Login::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_Login(arena);
+}
+constexpr auto S_Login::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_Login),
+                                            alignof(S_Login));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_Login::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_Login_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_Login::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_Login>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_Login::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_Login>(), &S_Login::ByteSizeLong,
+            &S_Login::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_Login, _impl_._cached_size_),
+        false,
+    },
+    &S_Login::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_Login::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 2, 0, 32, 2> S_Login::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_Login>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 dbid = 1;
+    {PROTOBUF_FIELD_OFFSET(S_Login, _impl_.value_case_.dbid_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kInt32)},
+    // string err = 2;
+    {PROTOBUF_FIELD_OFFSET(S_Login, _impl_.value_case_.err_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\24\0\3\0\0\0\0\0"
+    "S2C_Protocol.S_Login"
+    "err"
+  }},
+};
+
+PROTOBUF_NOINLINE void S_Login::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_Login)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  clear_value_case();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_Login::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_Login& this_ = static_cast<const S_Login&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_Login::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_Login& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_Login)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          switch (this_.value_case_case()) {
+            case kDbid: {
+              target = ::google::protobuf::internal::WireFormatLite::
+                  WriteInt32ToArrayWithField<1>(
+                      stream, this_._internal_dbid(), target);
+              break;
+            }
+            case kErr: {
+              const std::string& _s = this_._internal_err();
+              ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                  _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.S_Login.err");
+              target = stream->WriteStringMaybeAliased(2, _s, target);
+              break;
+            }
+            default:
+              break;
+          }
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_Login)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_Login::ByteSizeLong(const MessageLite& base) {
+          const S_Login& this_ = static_cast<const S_Login&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_Login::ByteSizeLong() const {
+          const S_Login& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_Login)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          switch (this_.value_case_case()) {
+            // int32 dbid = 1;
+            case kDbid: {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_dbid());
+              break;
+            }
+            // string err = 2;
+            case kErr: {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_err());
+              break;
+            }
+            case VALUE_CASE_NOT_SET: {
+              break;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_Login::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_Login*>(&to_msg);
+  auto& from = static_cast<const S_Login&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_Login)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
+    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
+    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
+    if (oneof_needs_init) {
+      if (oneof_to_case != 0) {
+        _this->clear_value_case();
+      }
+      _this->_impl_._oneof_case_[0] = oneof_from_case;
+    }
+
+    switch (oneof_from_case) {
+      case kDbid: {
+        _this->_impl_.value_case_.dbid_ = from._impl_.value_case_.dbid_;
+        break;
+      }
+      case kErr: {
+        if (oneof_needs_init) {
+          _this->_impl_.value_case_.err_.InitDefault();
+        }
+        _this->_impl_.value_case_.err_.Set(from._internal_err(), arena);
+        break;
+      }
+      case VALUE_CASE_NOT_SET:
+        break;
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_Login::CopyFrom(const S_Login& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_Login)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_Login::InternalSwap(S_Login* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.value_case_, other->_impl_.value_case_);
+  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
+}
+
+::google::protobuf::Metadata S_Login::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
