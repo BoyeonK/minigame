@@ -29,3 +29,31 @@ public:
 	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::HelloReply>> response_reader;
 };
 #endif
+
+class SLoginCall final : public S2D_CallData {
+public:
+	~SLoginCall() { }
+
+	void OnSucceed() override;
+	void OnFailed() override;
+	void ReturnToPool() {
+		objectPool<SLoginCall>::dealloc(this);
+	}
+
+	S2D_Protocol::HelloReply reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::HelloReply>> response_reader;
+};
+
+class SCreateAccountCall final : public S2D_CallData {
+public:
+	~SCreateAccountCall() { }
+
+	void OnSucceed() override;
+	void OnFailed() override;
+	void ReturnToPool() {
+		objectPool<SCreateAccountCall>::dealloc(this);
+	}
+
+	S2D_Protocol::HelloReply reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::HelloReply>> response_reader;
+};

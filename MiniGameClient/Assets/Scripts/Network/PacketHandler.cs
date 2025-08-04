@@ -77,7 +77,7 @@ class PacketHandler {
 		return;
     }
 
-    public static void S_Encrypted(PacketSession session, IMessage packet) {
+    public static void S_EncryptedHandler(PacketSession session, IMessage packet) {
 		S_Encrypted recvPkt = packet as S_Encrypted;
 		byte[] key = session.AESKey; // 32 bytes (AES-256)
 		byte[] iv = recvPkt.Iv.ToByteArray();
@@ -119,6 +119,27 @@ class PacketHandler {
 		cipher.DoFinal(output, len);
 
 		return output;
+	}
+
+	public static void S_LoginHandler(PacketSession session, IMessage packet) {
+		S_Login recvPkt = packet as S_Login;
+		switch (recvPkt.ValueCaseCase) {
+			case (S_Login.ValueCaseOneofCase.Dbid):
+				if (recvPkt.Dbid == 0) {
+					// 실패
+                } else {
+					// 정상적인 로그인 성공
+                }
+				break;
+			case (S_Login.ValueCaseOneofCase.Err):
+				// 로그인 실패 (비밀번호 오류, 나중에는 없는 아이디일수도 있음.)
+				string errMsg = recvPkt.Err;
+				break;
+			case (S_Login.ValueCaseOneofCase.None):
+				// 값이 할당되지 않았을 때 (ㄹㅇ 버그)
+				Console.WriteLine("서버에서 온 로그인 응답이 매우 찐빠인 상황입니다.");
+				break;
+		}
 	}
 }
 

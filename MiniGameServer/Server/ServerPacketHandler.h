@@ -13,10 +13,14 @@ enum : uint16_t {
 	PKT_S_WELCOME = 2,
 	PKT_C_WELCOME = 3,
 	PKT_S_WELCOMERESPONSE = 4,
+	PKT_C_LOGIN = 5,
+	PKT_S_LOGIN = 6,
 };
 
 bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
+bool Handle_C_ENCRYPTED(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encrypted& pkt);
 bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome& pkt);
+bool Handle_C_LOGIN(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt);
 
 class ServerPacketHandler {
 public:

@@ -38,7 +38,7 @@ public class ServerSession : PacketSession {
 
 		//CustomHandler.Invoke(Session, IMessage, pktId);
 		//인즉, PacketQueue.Instace.Push(pktId, IMessage)가 된다.
-		PacketManager.Instance.CustomHandler = (session, imessage, pktId) =>	{
+		PacketManager.Instance.CustomHandler = (session, imessage, pktId) => {
 			PacketQueue.Instance.Push(pktId, imessage);
 		};
 

@@ -23,13 +23,19 @@ class PacketManager {
 	//PacketManager 초기화 시, 각 패킷을 다룰 델리게이트들을 초기화해준다.
 	public void Register() {
 		_onRecv.Add((ushort)MsgId.SEncrypted, UnpackPacket<S_Encrypted>);
-		_handler.Add((ushort)MsgId.SEncrypted, PacketHandler.S_Encrypted);
+		_handler.Add((ushort)MsgId.SEncrypted, PacketHandler.S_EncryptedHandler);
+
 		_onRecv.Add((ushort)MsgId.SWelcome, UnpackPacket<S_Welcome>);
 		_handler.Add((ushort)MsgId.SWelcome, PacketHandler.S_WelcomeHandler);
 		_msgFactories.Add((ushort)MsgId.SWelcome, () => new S_Welcome());
+
 		_onRecv.Add((ushort)MsgId.SWelcomeResponse, UnpackPacket<S_WelcomeResponse>);
 		_handler.Add((ushort)MsgId.SWelcomeResponse, PacketHandler.S_WelcomeResponseHandler);
 		_msgFactories.Add((ushort)MsgId.SWelcomeResponse, () => new S_WelcomeResponse());
+
+		_onRecv.Add((ushort)MsgId.SLogin, UnpackPacket<S_Login>);
+		_handler.Add((ushort)MsgId.SLogin, PacketHandler.S_LoginHandler);
+		_msgFactories.Add((ushort)MsgId.SLogin, () => new S_Login());
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {
@@ -48,7 +54,6 @@ class PacketManager {
 	void UnpackPacket<T>(PacketSession session, ArraySegment<byte> buffer, ushort id) where T : IMessage, new()	{
 		T pkt = new T();
 		pkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
-		//TODO :
 		//main thread가 아니면, unity에서 제공하는 메서드를 실행할 때 에러가 발생할 수 있다.
 		//Unity에서 제공하는 메서드를 사용하는 작업에 대해서는 메인 thread에서 실행할 수 있도록 
 		//메인 스레드가 작업할 작업 queue에 밀어주어야 한다.

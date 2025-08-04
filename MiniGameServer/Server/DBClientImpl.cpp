@@ -17,4 +17,37 @@ void DBClientImpl::HelloAsync() {
     // 3. 응답을 기다리며 CompletionQueue에 태그를 등록
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
 }
-#endif // _DEBUG
+#endif
+
+void DBClientImpl::S2D_Login() {
+
+}
+void DBClientImpl::S2D_CreateAccount() {
+
+}
+
+
+void DBClientImpl::AsyncCompleteRpc() {
+    if (_isConnected.load()) {
+        void* tag;
+        bool ok;
+
+        grpc::CompletionQueue::NextStatus status = _cqRef->AsyncNext(&tag, &ok, chrono::system_clock::now() + chrono::milliseconds(2));
+
+        switch (status) {
+        case (grpc::CompletionQueue::GOT_EVENT): {
+            S2D_CallData* pCallData = reinterpret_cast<S2D_CallData*>(tag);
+            if (ok && pCallData->status.ok())
+                pCallData->OnSucceed();
+            else
+                pCallData->OnFailed();
+            pCallData->ReturnToPool();
+            break;
+        }
+        case (grpc::CompletionQueue::TIMEOUT):
+            break;
+        case (grpc::CompletionQueue::SHUTDOWN):
+            break;
+        }
+    }
+}
