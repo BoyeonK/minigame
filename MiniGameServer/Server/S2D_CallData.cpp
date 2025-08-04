@@ -10,6 +10,5 @@ void HelloCall::OnSucceed() {
 void HelloCall::OnFailed() {
 	cerr << "Client: RPC failed with code " << this->status.error_code() << " and message "
 		<< string(this->status.error_message().begin(), this->status.error_message().end()) << endl;
-	objectPool<HelloCall>::dealloc(this);
 }
 #endif

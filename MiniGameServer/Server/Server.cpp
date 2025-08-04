@@ -12,7 +12,6 @@ int main() {
 	DBManager->HelloAsync();
 #endif
 
-
 	//Client와의 연결을 담당할 서비스 객체 생성 및 Listen시작.
 	GServerService = make_shared<ServerServiceImpl>(make_shared<CPCore>(), NetAddress(L"0.0.0.0", 7777), 100);
 	GServerService->StartAccept();
@@ -30,11 +29,7 @@ int main() {
 			while (true) {
 				LEndTickCount = ::GetTickCount64() + 64;
 				ThreadManager::DoGlobalQueueWork();
-				try {
-					DBManager->AsyncCompleteRpc();
-				} catch (const runtime_error& e) {
-					cerr << e.what() << endl;
-				}
+				DBManager->AsyncCompleteRpc();
 				GServerService->GetCPCoreRef()->Dispatch(10);
 			}
 		});
