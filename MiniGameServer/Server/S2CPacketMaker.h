@@ -1,8 +1,7 @@
 #pragma once
 #include "ServerGlobal.h"
-#include "S2C_Protocol.pb.h"
 
-class ServerPacketMaker {
+class S2CPacketMaker {
 public:
 	template<typename PBType>
 	static S2C_Protocol::S_Encrypted MakeSEncrypted(const PBType& pkt, uint16_t pktId, const vector<unsigned char>& AESKey) {
