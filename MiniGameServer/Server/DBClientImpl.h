@@ -19,31 +19,10 @@ public:
 #ifdef _DEBUG
     void HelloAsync();
 #endif
+    void S2D_Login();
+    void S2D_CreateAccount();
 
-    void AsyncCompleteRpc() {
-        if (_isConnected.load()) {
-            void* tag;
-            bool ok;
-
-            grpc::CompletionQueue::NextStatus status = _cqRef->AsyncNext(&tag, &ok, chrono::system_clock::now() + chrono::milliseconds(2));
-
-            switch (status) {
-            case (grpc::CompletionQueue::GOT_EVENT): {
-                S2D_CallData* pCallData = reinterpret_cast<S2D_CallData*>(tag);
-                if (ok && pCallData->status.ok())
-                    pCallData->OnSucceed();
-                else
-                    pCallData->OnFailed();
-                pCallData->ReturnToPool();
-                break;
-            }
-            case (grpc::CompletionQueue::TIMEOUT):
-                break;
-            case (grpc::CompletionQueue::SHUTDOWN): 
-                break;
-            }
-        }
-    }
+    void AsyncCompleteRpc();
 
 private:
     unique_ptr<S2D_Protocol::S2D_Service::Stub> _stub;

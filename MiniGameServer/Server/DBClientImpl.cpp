@@ -26,7 +26,6 @@ void DBClientImpl::S2D_CreateAccount() {
 
 }
 
-
 void DBClientImpl::AsyncCompleteRpc() {
     if (_isConnected.load()) {
         void* tag;

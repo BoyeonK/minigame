@@ -67,7 +67,15 @@
   
   - 계정 생성 시도 (`S2D_CreateAccount`를 받은 경우 처리)
     
-    - 한 계정에 대한 중앙테이블, 관계 설정중.....
+    - 받은 id, password로 계정 생성 시도.
+      
+      - Players테이블에 row추가. (player_id가 Unique Key이므로 중복X)
+      
+      - row추가에 성공했을 경우, OpenSSL을 사용해 난수의 salt (NVARCHAR(32))생성.
+      
+      - password에 salt를 더해서 해싱한 이후 Accounts테이블에 해당 dbid로서 row추가.
+      
+      - Elos테이블에 해당 dbid로서 row추가.
   
   - Server에게 player의 mmr을 조회할 수 있도록 한다.
   
@@ -90,14 +98,5 @@
 ---
 
 ### Until Today
-
-- ~~Player정보를, DB에 어떻게 저장할 것인가? (어떻게 정규화 할 것인가)~~
-  
-  1. ~~PlayerID (문자)자체를 primary key로~~
-  
-  2. ~~PlayerID (int)를 primary key로, name column 추가.~~
-  
-  ~~챗 선생님 + 제 선생님과의 면담 끝에 테이블 하나를 사용하되.
-  dbid(int) - primary key와 player_id(nvarchar(16)) - unique key(비클러스트형 인덱스)를 사용하기로 결정됨.~~
 
 - 로그인 및 계정 생성
