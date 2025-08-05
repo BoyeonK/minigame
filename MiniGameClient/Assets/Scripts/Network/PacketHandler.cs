@@ -80,6 +80,9 @@ class PacketHandler {
 		byte[] ciphertext = recvPkt.Ciphertext.ToByteArray();
 		byte[] tag = recvPkt.Tag.ToByteArray();
 		int msgId = recvPkt.MsgId;
+
+		Debug.Log($"{msgId} 복호화 시도");
+
 		byte[] aad = BitConverter.GetBytes(msgId);
 		if (!BitConverter.IsLittleEndian) {
 			Array.Reverse(aad);
@@ -110,9 +113,13 @@ class PacketHandler {
 		var parameters = new AeadParameters(new KeyParameter(key), 128, iv, aad); // 128 = tag bits
 		cipher.Init(false, parameters); // false = decrypt
 
+		Debug.Log("1");
+
 		byte[] encrypted = new byte[ciphertext.Length + tag.Length];
 		Buffer.BlockCopy(ciphertext, 0, encrypted, 0, ciphertext.Length);
 		Buffer.BlockCopy(tag, 0, encrypted, ciphertext.Length, tag.Length);
+
+		Debug.Log("2");
 
 		byte[] output = new byte[cipher.GetOutputSize(encrypted.Length)];
 		int len = cipher.ProcessBytes(encrypted, 0, encrypted.Length, output, 0);

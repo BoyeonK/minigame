@@ -32,9 +32,11 @@ class PacketMaker {
 
         //무결성 검사를 위해 pktId를 추가 인증 데이터로 사용.
         byte[] aad = BitConverter.GetBytes(pktId);
+        /*
         if (!BitConverter.IsLittleEndian) {
             Array.Reverse(aad);
         }
+        */
 
         //BouncyCastle 라이브러리 사용을 위한 객체 초기화
         GcmBlockCipher gcmCipher = new GcmBlockCipher(new AesEngine());

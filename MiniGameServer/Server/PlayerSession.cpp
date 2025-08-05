@@ -2,6 +2,7 @@
 #include "PlayerSession.h"
 #include "ServerGlobal.h"
 #include "ServerPacketHandler.h"
+#include "ServerPacketMaker.h"
 
 void PlayerSession::OnConnected() {
 	cout << "Player Session Onconnected!" << endl;
@@ -22,10 +23,7 @@ void PlayerSession::OnConnected() {
 		return;
 	}
 
-	S2C_Protocol::S_Welcome sendPkt;
-	sendPkt.set_publickey(publicKey.data(), publicKey.size());
-	sendPkt.set_gameversion(_gameVersion);
-
+	S2C_Protocol::S_Welcome sendPkt = ServerPacketMaker::MakeSWelcome(publicKey, _gameVersion);
 	shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt);
 	Send(sendBuffer);
 }

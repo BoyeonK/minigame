@@ -238,9 +238,10 @@ bool CryptoManager::Encrypt(
 		return false;
 	}
 
-	uint32_t network_byte_order_pktId = htonl(pktId);
+	//uint32_t network_byte_order_pktId = htonl(pktId);
+	uint32_t msgId = pktId;
 	std::vector<unsigned char> aad(4);
-	std::memcpy(aad.data(), &network_byte_order_pktId, 4);
+	std::memcpy(aad.data(), &msgId, 4);
 
 	int len = 0;
 	if (EVP_EncryptUpdate(ctx, nullptr, &len, aad.data(), aad.size()) != 1) {
