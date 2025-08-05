@@ -219,13 +219,13 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 bool CryptoManager::Encrypt(
 	const vector<unsigned char>& key,
 	const vector<unsigned char>& plaintext, 
+	const int32_t pktId,
 	vector<unsigned char>& iv, 
 	vector<unsigned char>& ciphertext, 
 	vector<unsigned char>& tag
 ) {
 	EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
-	if (!ctx)
-		return false;
+	if (!ctx) return false;
 
 	iv.resize(12); // GCM 권장 IV 크기
 	if (RAND_bytes(iv.data(), iv.size()) != 1) {
@@ -233,20 +233,26 @@ bool CryptoManager::Encrypt(
 		return false;
 	}
 
-	if (EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, nullptr, nullptr) != 1 ||
-		EVP_EncryptInit_ex(ctx, nullptr, nullptr, key.data(), iv.data()) != 1) {
+	if (EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, key.data(), iv.data()) != 1) {
+		EVP_CIPHER_CTX_free(ctx);
+		return false;
+	}
+
+	uint32_t network_byte_order_pktId = htonl(pktId);
+	std::vector<unsigned char> aad(4);
+	std::memcpy(aad.data(), &network_byte_order_pktId, 4);
+
+	int len = 0;
+	if (EVP_EncryptUpdate(ctx, nullptr, &len, aad.data(), aad.size()) != 1) {
 		EVP_CIPHER_CTX_free(ctx);
 		return false;
 	}
 
 	ciphertext.resize(plaintext.size());
-	int len;
-
 	if (EVP_EncryptUpdate(ctx, ciphertext.data(), &len, plaintext.data(), plaintext.size()) != 1) {
 		EVP_CIPHER_CTX_free(ctx);
 		return false;
 	}
-
 	int ciphertext_len = len;
 
 	if (EVP_EncryptFinal_ex(ctx, ciphertext.data() + len, &len) != 1) {

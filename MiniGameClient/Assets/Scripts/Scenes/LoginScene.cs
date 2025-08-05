@@ -1,3 +1,4 @@
+using Google.Protobuf.Protocol;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +15,8 @@ public class LoginScene : BaseScene {
         if (Input.GetKeyDown(KeyCode.W)) {
             if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
                 Debug.Log("로그인 시도 로직이 들어가야 하는 자리");
-                //PacketMaker.MakeCLogin("tetepiti149", "q1w2e3r4!@");
+                C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), "tetepiti149", "q1w2e3r4!@");
+                Managers.Network.Send(pkt);
             }
         }
     }

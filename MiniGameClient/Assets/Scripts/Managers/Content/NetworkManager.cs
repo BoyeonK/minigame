@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class NetworkManager {
 	ServerSession _session = new ServerSession();
+	public ServerSession GetSession() {
+		return _session;
+    }
 
 	public bool IsConnected() {
 		return _session.IsConnected;

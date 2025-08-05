@@ -32,12 +32,13 @@ public:
 	static vector<unsigned char> ExtractPublicKey(EVP_PKEY* key);
 	static vector<unsigned char> Decrypt(EVP_PKEY* privateKey, const vector<unsigned char>& encrypted);
 	static bool Encrypt(
-		const vector<unsigned char>& key,
-		const vector<unsigned char>& plaintext,
-		vector<unsigned char>& iv,
-		vector<unsigned char>& ciphertext,
-		vector<unsigned char>& tag
-	);
+		const vector<unsigned char>& key, 
+		const vector<unsigned char>& plaintext, 
+		const int32_t pktId, 
+		vector<unsigned char>& iv, 
+		vector<unsigned char>& ciphertext, 
+		vector<unsigned char>& tag);
+
 
 private:
 	USE_RWLOCK;

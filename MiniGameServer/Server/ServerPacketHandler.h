@@ -72,7 +72,7 @@ private:
 		string serializedStr = pkt.SerializeAsString();
 		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
 		vector<unsigned char> iv, ciphertext, tag;
-		if (!(GCryptoManager->Encrypt(AESKey, plaintext, iv, ciphertext, tag))) {
+		if (!(GCryptoManager->Encrypt(AESKey, plaintext, (int32_t)pktId, iv, ciphertext, tag))) {
 			cout << "복호화 실패" << endl;
 			return nullptr;
 		}
