@@ -79,7 +79,11 @@ class PacketHandler {
 		byte[] iv = recvPkt.Iv.ToByteArray();
 		byte[] ciphertext = recvPkt.Ciphertext.ToByteArray();
 		byte[] tag = recvPkt.Tag.ToByteArray();
-        ushort msgId = (ushort)recvPkt.MsgId;
+		int msgId = recvPkt.MsgId;
+		byte[] aad = BitConverter.GetBytes(msgId);
+		if (!BitConverter.IsLittleEndian) {
+			Array.Reverse(aad);
+		}
 
 		if (iv.Length != 12 || tag.Length != 16) {
 			Debug.LogError($"Invalid IV ({iv.Length}) or Tag ({tag.Length}) length.");
@@ -88,7 +92,7 @@ class PacketHandler {
 
 		byte[] plaintext = new byte[ciphertext.Length];
 		try	{
-			plaintext = DecryptAesGcmInternal(key, iv, ciphertext, tag);
+			plaintext = DecryptAesGcmInternal(key, iv, ciphertext, tag, aad);
 		}
 		catch (Exception ex) {
 			Debug.LogError($"복호화 실패: {ex.Message}");
@@ -96,14 +100,14 @@ class PacketHandler {
 		}
 
 		Debug.Log($"Message Id = {msgId}");
-		if (!(PacketManager.Instance.ByteToIMessage(session, plaintext, msgId))) {
+		if (!(PacketManager.Instance.ByteToIMessage(session, plaintext, (ushort)msgId))) {
 			Debug.Log("역직렬화 혹은 Custom Handler에 등록 실패");
         }
 	}
 
-	private static byte[] DecryptAesGcmInternal(byte[] key, byte[] iv, byte[] ciphertext, byte[] tag) {
+	private static byte[] DecryptAesGcmInternal(byte[] key, byte[] iv, byte[] ciphertext, byte[] tag, byte[] aad) {
 		var cipher = new GcmBlockCipher(new AesEngine());
-		var parameters = new AeadParameters(new KeyParameter(key), 128, iv, null); // 128 = tag bits
+		var parameters = new AeadParameters(new KeyParameter(key), 128, iv, aad); // 128 = tag bits
 		cipher.Init(false, parameters); // false = decrypt
 
 		byte[] encrypted = new byte[ciphertext.Length + tag.Length];

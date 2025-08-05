@@ -8,17 +8,61 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
 
 class PacketMaker {
-    public static C_Encrypted MakeCEncrypted(PacketSession session, IMessage rawPkt, ushort pktId) {
+    private static readonly SecureRandom _secureRandom = new SecureRandom();
+    private const int GCM_IV_LENGTH_BYTES = 12;
+    private const int GCM_TAG_LENGTH_BITS = 128;
+    private const int GCM_TAG_LENGTH_BYTES = 16;
+
+    private static C_Encrypted MakeCEncryptedInternal<T>(PacketSession session, T rawPkt, int pktId) where T : IMessage {
         byte[] aesKey = session.AESKey;
         if (aesKey == null || aesKey.Length == 0) {
-            Debug.LogError("dd");
+            Debug.LogError("Session에 AES Key가 유효하지 않습니다.");
             return new C_Encrypted();
         }
-        // iv, ciphertext, tag를 만들어서 protobuf로 직렬화해서
 
-        C_Encrypted pkt = new C_Encrypted();
+        //Protobuf를 바이너리로
+        byte[] plaintext = rawPkt.ToByteArray();
+
+        //초기화 벡터
+        byte[] iv = new byte[GCM_IV_LENGTH_BYTES];
+        _secureRandom.NextBytes(iv);
+
+        //무결성 검사를 위해 pktId를 추가 인증 데이터로 사용.
+        byte[] aad = BitConverter.GetBytes(pktId);
+        if (!BitConverter.IsLittleEndian) {
+            Array.Reverse(aad);
+        }
+
+        //BouncyCastle 라이브러리 사용을 위한 객체 초기화
+        GcmBlockCipher gcmCipher = new GcmBlockCipher(new AesEngine());
+        ICipherParameters parameters = new AeadParameters(new KeyParameter(aesKey), GCM_TAG_LENGTH_BITS, iv, aad);
+        gcmCipher.Init(true, parameters);
+
+        //AES방식으로 암호화 수행
+        byte[] fullOutput = new byte[gcmCipher.GetOutputSize(plaintext.Length)];
+        int len = gcmCipher.ProcessBytes(plaintext, 0, plaintext.Length, fullOutput, 0);
+        gcmCipher.DoFinal(fullOutput, len);
+
+        //암호화된 바이너리에서 ciphertext와 tag를 분리
+        int tagLen = GCM_TAG_LENGTH_BYTES;
+        int cipherLen = fullOutput.Length - tagLen;
+
+        byte[] ciphertext = new byte[cipherLen];
+        byte[] tag = new byte[tagLen];
+
+        Array.Copy(fullOutput, 0, ciphertext, 0, cipherLen);
+        Array.Copy(fullOutput, cipherLen, tag, 0, tagLen);
+
+        //Protobuf로 직렬화
+        C_Encrypted pkt = new C_Encrypted {
+            Iv = Google.Protobuf.ByteString.CopyFrom(iv),
+            Ciphertext = Google.Protobuf.ByteString.CopyFrom(ciphertext),
+            Tag = Google.Protobuf.ByteString.CopyFrom(tag),
+            MsgId = pktId,
+        };
         return pkt;
     }
 
@@ -38,7 +82,7 @@ class PacketMaker {
 
     public static C_Encrypted MakeCLogin(PacketSession session, string id, string password) {
         C_Login rawPkt = MakeCLoginInternal(id, password);
-        C_Encrypted pkt = new C_Encrypted();
+        C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CLogin);
         return pkt;
     }
 }
