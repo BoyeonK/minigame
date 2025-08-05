@@ -332,6 +332,14 @@ wstring DBManager::s2wsRef(const string& in_u8s) {
     return ws;
 }
 
+wstring DBManager::v2wsRef(const vector<unsigned char>& in_binary) {
+    wstringstream ws;
+    for (const auto& byte : in_binary) {
+        ws << hex << setw(2) << setfill(L'0') << static_cast<int>(byte);
+    }
+    return ws.str();
+}
+
 wstring DBManager::CreateQuery(const wstring& tableName, initializer_list<wstring> wstrs) {
     if (wstrs.size() < 2 or wstrs.size() % 2 != 0)
         throw runtime_error("CreateQuery: 인자 갯수가 맞지 않습니다.");

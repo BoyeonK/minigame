@@ -83,79 +83,101 @@ void DCreateAccountCallData::Proceed() {
         string id = _request.id();
         string password = _request.password();
 
-        //Players 계정 추가
-        {
-            SQLHSTMT hStmt;
-            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, GDBManager->getHDbc(), &hStmt);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
-            }
-
-            wstring query = L"INSERT INTO Players (player_id) VALUES (?)";
-            ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
-            }
-
-            wstring wId = GDBManager->a2wsRef(id);
-            ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, (SQLULEN)DBManager::pid_size, 0, (SQLPOINTER)wId.c_str(), 0, (SQLLEN*)SQL_NTS);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
-            }
-
-            ret = SQLExecute(hStmt);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
-            }
-
-            SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        SQLRETURN ret = SQLSetConnectAttr(GDBManager->getHDbc(), SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, SQL_IS_UINTEGER);
+        if (!GDBManager->CheckReturn(ret)) {
+            cout << "??????" << endl;
+            return;
         }
 
-        //방금 추가한 계정의 dbid를 얻어옴.
-        SQLINTEGER dbid = -1;
-        {
-            SQLHSTMT hStmt;
-            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, GDBManager->getHDbc(), &hStmt);
-            wstring query = L"SELECT dbid FROM Players WHERE player_id = ?";
-            ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
+        SQLHSTMT hStmt1 = nullptr; // Players 테이블 INSERT
+        SQLHSTMT hStmt2 = nullptr; // Players 테이블 SELECT
+        SQLHSTMT hStmt3 = nullptr; // Accounts 테이블 INSERT
+        SQLHSTMT hStmt4 = nullptr; // Elos 테이블 INSERT
+        bool transaction_succeeded = false;
+
+        try {
+            //Player Table INSERT 작업
+            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, GDBManager->getHDbc(), &hStmt1);
             if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
+                throw runtime_error("1");
+            }
+
+            wstring query1 = L"INSERT INTO Players (player_id) VALUES (?)";
+            ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query1.c_str(), SQL_NTS);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("2");
             }
 
             wstring wId = GDBManager->a2wsRef(id);
-            ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, (SQLULEN)DBManager::pid_size, 0, (SQLPOINTER)wId.c_str(), 0, (SQLLEN*)SQL_NTS);
+            ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, (SQLULEN)DBManager::pid_size, 0, (SQLPOINTER)wId.c_str(), 0, (SQLLEN*)SQL_NTS);
             if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
+                throw runtime_error("3");
             }
 
-            ret = SQLExecute(hStmt);
+            ret = SQLExecute(hStmt1);
             if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
+                throw runtime_error("4");
+            }
+
+            //Player Table SELECT 작업
+            //방금 추가한 계정의 dbid를 얻어옴.
+            SQLINTEGER dbid = -1;
+
+            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, GDBManager->getHDbc(), &hStmt2);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("5");
+            }
+
+            wstring query2 = L"SELECT dbid FROM Players WHERE player_id = ?";
+            ret = SQLPrepareW(hStmt2, (SQLWCHAR*)query2.c_str(), SQL_NTS);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("7");
+            }
+
+            wstring wId = GDBManager->a2wsRef(id);
+            ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, (SQLULEN)DBManager::pid_size, 0, (SQLPOINTER)wId.c_str(), 0, (SQLLEN*)SQL_NTS);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("8");
+            }
+
+            ret = SQLExecute(hStmt2);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("9");
             }
 
             SQLLEN dbid_ind = 0;
 
-            ret = SQLFetch(hStmt);
+            ret = SQLFetch(hStmt2);
             if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
-                ret = SQLGetData(hStmt, 1, SQL_C_SLONG, &dbid, 0, &dbid_ind);
+                ret = SQLGetData(hStmt2, 1, SQL_C_SLONG, &dbid, 0, &dbid_ind);
                 if (!GDBManager->CheckReturn(ret)) {
-                    // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
+                    throw runtime_error("9");
                 }
                 // 정상 동작
             }
             else if (ret == SQL_NO_DATA) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제
+                throw runtime_error("10");
             }
             else {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
+                throw runtime_error("11");
             }
-        }
 
-        {
+            //Accounts Table INSERT 작업
+            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, GDBManager->getHDbc(), &hStmt3);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("12");
+            }
+
+            wstring query3 = L"INSERT INTO Accounts (dbid, password_hash, salt) VALUES (?, ?, ?)";
+            ret = SQLPrepareW(hStmt3, (SQLWCHAR*)query3.c_str(), SQL_NTS);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("13");
+            }
+
             vector<unsigned char> salt(DBManager::salt_size);
             vector<unsigned char> hash(DBManager::hash_size);
             if (RAND_bytes(salt.data(), DBManager::salt_size) != 1) {
-                // TODO: 트랜잭션 롤백 + throw 에러
+                throw runtime_error("14");
             }
             if (PKCS5_PBKDF2_HMAC(
                 password.c_str(),
@@ -167,76 +189,77 @@ void DCreateAccountCallData::Proceed() {
                 DBManager::hash_size,
                 hash.data()
             ) != 1) {
-                // TODO: 트랜잭션 롤백 + throw 에러
+                throw runtime_error("15");
             }
 
             // 해시 값을 16진수 문자열로 변환 (저장 및 관리를 위해)
-            wstringstream hashwordStream;
-            for (const auto& byte : hash) {
-                hashwordStream << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
+            wstring wHashword = GDBManager->v2wsRef(hash);
+            wstring wSalt = GDBManager->v2wsRef(salt);
+
+            ret = SQLBindParameter(hStmt3, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("16");
+            }
+            ret = SQLBindParameter(hStmt3, 2, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, DBManager::hash_size * 2, 0, (SQLPOINTER)wHashword.c_str(), 0, (SQLLEN*)SQL_NTS);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("17");
+            }
+            ret = SQLBindParameter(hStmt3, 3, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, DBManager::salt_size * 2, 0, (SQLPOINTER)wSalt.c_str(), 0, (SQLLEN*)SQL_NTS);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("18");
             }
 
-            wstring wHashword = hashwordStream.str();
-            wstring wSalt(salt.begin(), salt.end());
-            
-            SQLHSTMT hStmt;
-            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, GDBManager->getHDbc(), &hStmt);
+            ret = SQLExecute(hStmt3);
             if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
+                throw runtime_error("19");
             }
 
-            wstring query = L"INSERT INTO Accounts (dbid, password_hash, salt) VALUES (?, ?, ?)";
-            ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
+            //Elos Table INSERT작업
+            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, GDBManager->getHDbc(), &hStmt4);
             if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
+                throw runtime_error("20");
             }
 
-            ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
+            wstring query = L"INSERT INTO (Elos) dbid VALUES (?)";
+
+            ret = SQLPrepareW(hStmt4, (SQLWCHAR*)query.c_str(), SQL_NTS);
             if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
-            }
-            ret = SQLBindParameter(hStmt, 2, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, (SQLULEN)DBManager::hash_size, 0, (SQLPOINTER)wHashword.c_str(), 0, (SQLLEN*)SQL_NTS);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
-            }
-            ret = SQLBindParameter(hStmt, 3, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, (SQLULEN)DBManager::salt_size, 0, (SQLPOINTER)wSalt.c_str(), 0, (SQLLEN*)SQL_NTS);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
+                throw runtime_error("21");
             }
 
-            ret = SQLExecute(hStmt);
+            ret = SQLBindParameter(hStmt4, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
             if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
+                throw runtime_error("22");
             }
 
-            SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+            ret = SQLExecute(hStmt4);
+            if (!GDBManager->CheckReturn(ret)) {
+                throw runtime_error("23");
+            }
+
+            transaction_succeeded = true;
+        }
+        catch (const runtime_error& e) {
+            cout << e.what() << endl;
+            SQLEndTran(SQL_HANDLE_DBC, GDBManager->getHDbc(), SQL_ROLLBACK);
         }
 
-        {
-            //디폴트 값으로 Elos Table생성
-            SQLHSTMT hStmt;
-            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, GDBManager->getHDbc(), &hStmt);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
-            }
-
-            wstring query = L"INSERT INTO Elos dbid VALUES (?)";
-
-            ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
-            }
-
-            ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러 
-            }
-
-            ret = SQLExecute(hStmt);
-            if (!GDBManager->CheckReturn(ret)) {
-                // TODO: 트랜잭션 롤백 + 핸들 해제 + throw 에러
-            }
+        if (transaction_succeeded) {
+            // 모든 작업이 성공했으므로 COMMIT
+            SQLEndTran(SQL_HANDLE_DBC, GDBManager->getHDbc(), SQL_COMMIT);
+            std::cout << "Transaction committed successfully." << std::endl;
         }
+        else {
+            // 중간에 오류가 발생했으므로 ROLLBACK
+            SQLEndTran(SQL_HANDLE_DBC, GDBManager->getHDbc(), SQL_ROLLBACK);
+            std::cout << "Transaction rolled back due to an error." << std::endl;
+        }
+
+        if (hStmt1) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+        if (hStmt2) SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);
+        if (hStmt3) SQLFreeHandle(SQL_HANDLE_STMT, hStmt3);
+        if (hStmt4) SQLFreeHandle(SQL_HANDLE_STMT, hStmt4);
+        SQLSetConnectAttr(GDBManager->getHDbc(), SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_ON, SQL_IS_UINTEGER);
 
         _status = FINISH;
         _responder.Finish(_reply, grpc::Status::OK, this);

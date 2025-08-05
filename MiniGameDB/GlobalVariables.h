@@ -8,7 +8,7 @@ public:
 
     static const int pid_size = 16;
     static const int salt_size = 16;
-    static const int hash_size = 16;
+    static const int hash_size = 32;
     static const int pbkdf2_iter = 10000;
     
     bool CheckReturn(SQLRETURN& ret);
