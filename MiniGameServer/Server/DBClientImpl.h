@@ -1,5 +1,6 @@
 #pragma once
 #include "S2D_CallData.h"
+#include "S2DPacketMaker.h"
 
 class DBClientImpl {
 public:
@@ -19,7 +20,7 @@ public:
 #ifdef _DEBUG
     void HelloAsync();
 #endif
-    void S2D_Login();
+    void S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password);
     void S2D_CreateAccount();
 
     void AsyncCompleteRpc();

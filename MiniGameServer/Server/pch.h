@@ -19,5 +19,6 @@
 #include <openssl/err.h>
 #include <openssl/rand.h>
 #include "S2D_Protocol.grpc.pb.h"
+#include "S2C_Protocol.pb.h"
 
 using namespace std;

@@ -3,7 +3,9 @@
 #include "ServerGlobal.h"
 
 using PacketHandlerFunc = function<bool(shared_ptr<PBSession>, unsigned char*, int32_t)>;
+using PlaintextHandlerFunc = function<bool(shared_ptr<PBSession>, vector<unsigned char>&)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
+extern PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
 
 //name convention : 서버에서 보내는(클라가 받는) S_
 //					클라에서 보내는(서버가 받는) C_
@@ -31,6 +33,9 @@ public:
 		GPacketHandler[PKT_C_ENCRYPTED] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Encrypted>(Handle_C_ENCRYPTED, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Welcome>(Handle_C_WELCOME, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_LOGIN] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Login>(Handle_C_LOGIN, sessionRef, buffer, len); };
+
+		PlaintextHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Welcome>(Handle_C_WELCOME, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_LOGIN] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Login>(Handle_C_LOGIN, sessionRef, plaintext); };
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
@@ -49,6 +54,14 @@ private:
 	static bool HandlePacket(HandlerFunc func, shared_ptr<PBSession>& sessionRef, unsigned char* buffer, int32_t len) {
 		PBType pkt;
 		if (pkt.ParseFromArray(buffer + sizeof(PacketHeader), len - sizeof(PacketHeader)) == false)
+			return false;
+		return func(sessionRef, pkt);
+	}
+
+	template<typename PBType, typename HandlerFunc>
+	static bool HandlePlaintext(HandlerFunc func, shared_ptr<PBSession>& sessionRef, vector<unsigned char> plaintext) {
+		PBType pkt;
+		if (pkt.ParseFromArray(plaintext.data(), plaintext.size()) == false)
 			return false;
 		return func(sessionRef, pkt);
 	}

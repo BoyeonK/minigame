@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "ServerPacketHandler.h"
 #include "PlayerSession.h"
-#include "ServerGlobal.h"
-#include "ServerPacketMaker.h"
+#include "S2CPacketMaker.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
+PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
 
 bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
 #ifdef _DEBUG
@@ -73,8 +73,10 @@ bool Handle_C_ENCRYPTED(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 	}
 	plaintext_len += len;
 	plaintext.resize(plaintext_len);
+	
+	cout << "plaintext 추출" << endl;
 
-	return true;
+	return PlaintextHandler[msgId](sessionRef, plaintext);
 }
 
 bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome& recvPkt) {
@@ -94,7 +96,7 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 
 	playerSessionRef->SetAESKey(move(AESKey));
 
-	S2C_Protocol::S_WelcomeResponse sendPkt = ServerPacketMaker::MakeSWelcomeResponse(recvPkt.message(), true);
+	S2C_Protocol::S_WelcomeResponse sendPkt = S2CPacketMaker::MakeSWelcomeResponse(recvPkt.message(), true);
 	//shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt);
 	shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt, playerSessionRef->GetAESKey());
 	if (sendBuffer == nullptr) {
@@ -106,9 +108,11 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 }
 
 bool Handle_C_LOGIN(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt) {
-	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
+	//PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
 	//TODO : ID와 password를 받아서 로그인을 수행한다.
 	cout << "ㅇ" << endl;
+
+	DBManager->S2D_Login(sessionRef, pkt.id(), pkt.password());
 
 	return false;
 }

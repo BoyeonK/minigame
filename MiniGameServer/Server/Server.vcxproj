@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="S2DPacketMaker.h" />
     <ClInclude Include="S2D_CallData.h" />
     <ClInclude Include="DBClientImpl.h" />
     <ClInclude Include="gRPC_test.h" />
@@ -172,10 +173,11 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="ServerPacketHandler.h" />
     <ClInclude Include="PlayerSession.h" />
-    <ClInclude Include="ServerPacketMaker.h" />
+    <ClInclude Include="S2CPacketMaker.h" />
     <ClInclude Include="ServerServiceImpl.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="S2DPacketMaker.cpp" />
     <ClCompile Include="S2D_CallData.cpp" />
     <ClCompile Include="DBClientImpl.cpp" />
     <ClCompile Include="gRPC_test.cpp" />
@@ -200,7 +202,7 @@
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="ServerPacketHandler.cpp" />
     <ClCompile Include="PlayerSession.cpp" />
-    <ClCompile Include="ServerPacketMaker.cpp" />
+    <ClCompile Include="S2CPacketMaker.cpp" />
     <ClCompile Include="ServerServiceImpl.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

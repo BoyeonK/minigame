@@ -40,8 +40,8 @@ public:
 		objectPool<SLoginCall>::dealloc(this);
 	}
 
-	S2D_Protocol::HelloReply reply;
-	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::HelloReply>> response_reader;
+	S2D_Protocol::D2S_Login reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_Login>> response_reader;
 };
 
 class SCreateAccountCall final : public S2D_CallData {
@@ -54,6 +54,6 @@ public:
 		objectPool<SCreateAccountCall>::dealloc(this);
 	}
 
-	S2D_Protocol::HelloReply reply;
-	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::HelloReply>> response_reader;
+	S2D_Protocol::D2S_CreateAccount reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_CreateAccount>> response_reader;
 };

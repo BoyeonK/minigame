@@ -54,9 +54,10 @@
     <ClInclude Include="S2D_CallData.h">
       <Filter>S2D</Filter>
     </ClInclude>
-    <ClInclude Include="ServerPacketMaker.h">
+    <ClInclude Include="S2CPacketMaker.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
+    <ClInclude Include="S2DPacketMaker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -98,8 +99,9 @@
     <ClCompile Include="S2D_CallData.cpp">
       <Filter>S2D</Filter>
     </ClCompile>
-    <ClCompile Include="ServerPacketMaker.cpp">
+    <ClCompile Include="S2CPacketMaker.cpp">
       <Filter>S2C\Network</Filter>
     </ClCompile>
+    <ClCompile Include="S2DPacketMaker.cpp" />
   </ItemGroup>
 </Project>

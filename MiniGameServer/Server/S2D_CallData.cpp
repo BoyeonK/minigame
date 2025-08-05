@@ -14,6 +14,7 @@ void HelloCall::OnFailed() {
 #endif
 
 void SLoginCall::OnSucceed() {
+	cout << "DB서버에 로그인을 위한 조회 요청 보내기 성공" << endl;
 	//TODO: 0을받은경우, S_Login 패킷에 err를 담아서 클라에 전송.
 	//0 이외를 받은 경우, 해당 dbid를 클라이언트에게 '암호화해서' 전송
 }
