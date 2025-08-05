@@ -67,7 +67,7 @@
   
   - 계정 생성 시도 (`S2D_CreateAccount`를 받은 경우 처리)
     
-    - 받은 id, password로 계정 생성 시도.
+    - 받은 id, password로 계정 생성 시도. (아래의 과정은 트랜잭션 처리해야함)
       
       - Players테이블에 row추가. (player_id가 Unique Key이므로 중복X)
       

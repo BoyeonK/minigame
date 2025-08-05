@@ -5,6 +5,11 @@ class DBManager {
 public:
     DBManager();
     ~DBManager();
+
+    static const int pid_size = 16;
+    static const int salt_size = 16;
+    static const int hash_size = 16;
+    static const int pbkdf2_iter = 10000;
     
     bool CheckReturn(SQLRETURN& ret);
     bool CheckReturn(SQLRETURN& ret, SQLHANDLE hHandle, SQLSMALLINT HandleType);
@@ -20,6 +25,9 @@ public:
     wchar_t* UpdateQueryA2W();
     wchar_t* DeleteQueryA2W();
     */
+
+    SQLHENV getHEnv() { return _hEnv; }
+    SQLHDBC getHDbc() { return _hDbc; }
 
 private:
 	SQLHENV _hEnv;
