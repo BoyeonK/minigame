@@ -14,10 +14,10 @@ using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 
-//아래의 Handler함수들은, 모두 customHandler를 통해서 main thread에서 실행되는 구조이므로
+//아래의 Handler함수들은 customHandler를 통해서 main thread에서 '모두' 실행되는 구조이므로
 //UnityEngine의 메서드들을 사용하여 작성해도 무방하다.
 //다만, 게임이 요구하는 스펙이 커질 경우, 즉 일부 로직을 멀티스레드로 실행할 필요성이 생긴다면
-//전체적인 구조를 조금 바꿀 필요가 생긴다.
+//구조를 조금 바꿀 필요가 있다.
 class PacketHandler {
 	public static void S_WelcomeHandler(PacketSession session, IMessage packet) {
 		S_Welcome sWelcomePacket = packet as S_Welcome;
@@ -62,11 +62,7 @@ class PacketHandler {
 			return;
 		}
 
-		C_Welcome cWelcomePacket = new C_Welcome();
-		cWelcomePacket.AesKey = Google.Protobuf.ByteString.CopyFrom(encryptedKey);
-		//지금은 고정 문자열을 사용하지만, 나중에는 특정한 생성 로직을 도입할 예정.
-		cWelcomePacket.Message = "트랄랄레로트랄랄라";
-
+		C_Welcome cWelcomePacket = PacketMaker.MakeCWelcome(encryptedKey, "트랄랄레로트랄랄라");
 		Managers.Network.Send(cWelcomePacket);
 	}
 
@@ -92,7 +88,7 @@ class PacketHandler {
 
 		byte[] plaintext = new byte[ciphertext.Length];
 		try	{
-			plaintext = DecryptAesGcm(key, iv, ciphertext, tag);
+			plaintext = DecryptAesGcmInternal(key, iv, ciphertext, tag);
 		}
 		catch (Exception ex) {
 			Debug.LogError($"복호화 실패: {ex.Message}");
@@ -105,7 +101,7 @@ class PacketHandler {
         }
 	}
 
-	private static byte[] DecryptAesGcm(byte[] key, byte[] iv, byte[] ciphertext, byte[] tag) {
+	private static byte[] DecryptAesGcmInternal(byte[] key, byte[] iv, byte[] ciphertext, byte[] tag) {
 		var cipher = new GcmBlockCipher(new AesEngine());
 		var parameters = new AeadParameters(new KeyParameter(key), 128, iv, null); // 128 = tag bits
 		cipher.Init(false, parameters); // false = decrypt

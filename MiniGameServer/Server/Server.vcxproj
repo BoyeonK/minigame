@@ -172,6 +172,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="ServerPacketHandler.h" />
     <ClInclude Include="PlayerSession.h" />
+    <ClInclude Include="ServerPacketMaker.h" />
     <ClInclude Include="ServerServiceImpl.h" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +200,7 @@
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="ServerPacketHandler.cpp" />
     <ClCompile Include="PlayerSession.cpp" />
+    <ClCompile Include="ServerPacketMaker.cpp" />
     <ClCompile Include="ServerServiceImpl.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

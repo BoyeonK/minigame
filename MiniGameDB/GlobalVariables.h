@@ -16,6 +16,7 @@ public:
 
     wstring a2wsRef(const string& in_cp949);
     wstring s2wsRef(const string& in_u8s);
+    wstring v2wsRef(const vector<unsigned char>& in_binary);
 
     //이대로 사용하면 코드인젝션에 굉장히 취약함!
     wstring CreateQuery(const wstring& tableName, initializer_list<wstring> wstrs);

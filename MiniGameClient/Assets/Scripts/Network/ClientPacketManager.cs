@@ -68,6 +68,7 @@ class PacketManager {
 	}
 
 	public bool ByteToIMessage(PacketSession session, byte[] plaintext, ushort msgId) {
+		//유효성검사 X. 나중에 유효성 검사 로직 필요.
 		if (_msgFactories.TryGetValue(msgId, out Func<IMessage> factory)) {
 			IMessage pkt = factory.Invoke();
 			pkt.MergeFrom(plaintext);
