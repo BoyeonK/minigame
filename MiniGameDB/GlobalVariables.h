@@ -1,3 +1,5 @@
+#include <queue>
+
 extern class DBManager* GDBManager;
 extern class ThreadManager* GThreadManager;
 
@@ -21,18 +23,16 @@ public:
     //이대로 사용하면 코드인젝션에 굉장히 취약함!
     wstring CreateQuery(const wstring& tableName, initializer_list<wstring> wstrs);
 
-    /*
-    wchar_t* ReadQueryA2W();
-    wchar_t* UpdateQueryA2W();
-    wchar_t* DeleteQueryA2W();
-    */
 
     SQLHENV getHEnv() { return _hEnv; }
-    SQLHDBC getHDbc() { return _hDbc; }
+    SQLHDBC connectNewHDbc();
+    SQLHDBC popHDbc();
+    void returnHDbc(SQLHDBC hDbc);
 
 private:
+    mutex _mtx;
 	SQLHENV _hEnv;
-	SQLHDBC _hDbc;
+    queue<SQLHDBC> _hDbcQ;
 
     //생성자에서 CRUD 테스트를 위해 사용할 함수들
     void InitialC();
@@ -58,4 +58,15 @@ public:
 private:
     mutex	_mutex;
     vector<thread> _threads;
+};
+
+struct SQLHandleDeleter {
+    SQLSMALLINT handleType;
+    SQLHANDLE handle;
+    void operator()(SQLHANDLE* pHandle) {
+        if (pHandle && *pHandle != SQL_NULL_HANDLE) {
+            SQLFreeHandle(handleType, *pHandle);
+            delete pHandle;
+        }
+    }
 };

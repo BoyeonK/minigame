@@ -20,9 +20,17 @@ public:
 
 } GDBGlobal;
 
-DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
-    ifstream envFile(".env");
+DBManager::DBManager() : _hEnv(nullptr) {
+    //ODBC 환경 및 연결 초기화
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &_hEnv);
+    CheckReturn(ret);
 
+    // ODBC 버전 설정
+    ret = SQLSetEnvAttr(_hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, SQL_IS_INTEGER);
+    CheckReturn(ret);
+
+    //DB연결을 위한 쿼리 작성을 위해서, 설정을 환경 변수에서 읽어냄 (다른사람이 보면 곤란)
+    ifstream envFile(".env");
     if (envFile.is_open())
         cout << ".env Open Succeed!" << endl;
     else
@@ -44,7 +52,7 @@ DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
                 value = value.substr(1, value.length() - 2);
 
             //Unicode로 변환 (SetEnvironmentVariableW 사용을 위해서)
-            //한글이 포함되지 않으면서, 동시에 Windows환경이라서 제대로 동작한다.
+            //한글이 포함되지 않으면서(ascii 코드 내로 읽히는 문자들), 동시에 Windows환경이라서 제대로 동작한다.
             wstring wkey(key.begin(), key.end());
             wstring wvalue(value.begin(), value.end());
 
@@ -57,13 +65,13 @@ DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
     }
     envFile.close();
 
+    //2. 환경 변수로 등록된 문자열(유니코드)들을 매핑
     wchar_t* dbServer = nullptr;
     wchar_t* dbName = nullptr;
     wchar_t* connection = nullptr;
     size_t wSize;
     errno_t err;
 
-    //환경 변수로 등록된 문자열(유니코드)들을 매핑
     err = _wdupenv_s(&dbServer, &wSize, L"DB_SERVER");
     if (err == 0 && dbServer != nullptr)
         wcout << L"DB_SERVER" << " = " << dbServer << endl;
@@ -76,18 +84,6 @@ DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
     if (err == 0 && connection != nullptr)
         wcout << L"CONNECTION" << " = " << connection << endl;
 
-    // ODBC 환경 및 연결 초기화
-    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &_hEnv);
-    CheckReturn(ret);
-
-    // ODBC 버전 설정
-    ret = SQLSetEnvAttr(_hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0);
-    CheckReturn(ret);
-
-    // 연결 핸들 할당
-    ret = SQLAllocHandle(SQL_HANDLE_DBC, _hEnv, &_hDbc);
-    CheckReturn(ret);
-
     if (dbServer && dbName && connection) {
         SQLWCHAR connStr[1024];
         _snwprintf_s(connStr, sizeof(connStr) / sizeof(SQLWCHAR),
@@ -96,13 +92,30 @@ DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
         //기본 CMD에서 유니코드 한글이 출력되지 않음....
         wcout << L"connStr : " << connStr << endl;
 
-        ret = SQLDriverConnectW(_hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
-        if (CheckReturn(ret)) {
-            cout << "DB 연결에 성공했습니다." << endl;
+        //연결 핸들 pool에 연결핸들 3개 추가. 초기화단계에서는 1개의 스레드에서
+        //실행되는 것이 자명하므로 굳이 mutex걸지 않음.
+        for (int i = 0; i < 3; i++) {
+            SQLHDBC hDbc = nullptr;
+
+            ret = SQLAllocHandle(SQL_HANDLE_DBC, _hEnv, &hDbc);
+            if (!CheckReturn(ret)) {
+                cout << "핸들 할당 실패" << endl;
+                continue;
+            }
+
+            ret = SQLDriverConnectW(hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+            if (CheckReturn(ret)) {
+                _hDbcQ.push(hDbc);
+                cout << "DB 연결 성공" << endl;
+            }
+            else {
+                SQLFreeHandle(SQL_HANDLE_DBC, hDbc);
+            }
         }
+
     }
     else
-        cout << "환경 변수가 설정되지 않았습니다." << endl;
+        cout << "환경 변수가 설정되지 않아, DB연결을 수행하지 못함" << endl;
 
     delete[] dbServer;
     delete[] dbName;
@@ -120,123 +133,15 @@ DBManager::DBManager() : _hEnv(nullptr), _hDbc(nullptr) {
 }
 
 DBManager::~DBManager() {
-    SQLFreeHandle(SQL_HANDLE_DBC, _hDbc);  // 연결 핸들 해제
+    {
+        lock_guard<mutex> lock(_mtx);
+        while (!_hDbcQ.empty()) {
+            SQLHDBC hDbc = _hDbcQ.front();
+            SQLFreeHandle(SQL_HANDLE_DBC, &hDbc);
+            _hDbcQ.pop();
+        }  // 연결 핸들 해제
+    }
     SQLFreeHandle(SQL_HANDLE_ENV, _hEnv);  // 환경 핸들 해제
-}
-
-void DBManager::InitialC() {
-    SQLHSTMT hStmt;
-    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, _hDbc, &hStmt);
-    if (!CheckReturn(ret)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialC Failed.");
-    }
-
-    wstring query = L"INSERT INTO CRUD (id, value) VALUES (?, ?)";
-    ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-    if (!CheckReturn(ret)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialC Failed.");
-    }
-
-    int id = 0, value = 10;
-    SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &id, 0, NULL);
-    SQLBindParameter(hStmt, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &value, 0, NULL);
-
-    ret = SQLExecute(hStmt);
-    if (!CheckReturn(ret)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialC Failed.");
-    }
-    else {
-        cout << "C sequence is done." << endl;
-    }
-    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-}
-
-void DBManager::InitialR() {
-    SQLHSTMT hStmt;
-    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, _hDbc, &hStmt);
-    wstring query = L"SELECT id, value FROM CRUD";
-    ret = SQLExecDirectW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-    if (!CheckReturn(ret)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialC Failed.");
-    }
-
-    SQLINTEGER sid;
-    SQLINTEGER svalue;
-
-    while (SQLFetch(hStmt) == SQL_SUCCESS) {
-        SQLGetData(hStmt, 1, SQL_C_SLONG, &sid, 0, NULL);
-        SQLGetData(hStmt, 2, SQL_C_SLONG, &svalue, 0, NULL);
-        cout << "R sequence is done. id : " << sid << " value: " << svalue << endl;
-    }
-    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-}
-
-void DBManager::InitialU() {
-    SQLHSTMT hStmt;
-    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, _hDbc, &hStmt);
-    wstring query = L"UPDATE CRUD SET value = ? WHERE id = ?";
-    ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialU Failed.");
-    }
-
-    int id = 0;
-    int uvalue = 20;
-    ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &uvalue, 0, NULL);
-    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialU Failed.");
-    }
-
-    ret = SQLBindParameter(hStmt, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &id, 0, NULL);
-    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialU Failed.");
-    }
-
-    ret = SQLExecute(hStmt);
-    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialU Failed.");
-    }
-    else {
-        cout << "U sequence is done. value: " << uvalue << endl;
-    }
-
-    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-}
-
-void DBManager::InitialD() {
-    SQLHSTMT hStmt;
-    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, _hDbc, &hStmt);
-    wstring query = L"DELETE FROM CRUD WHERE id = ?";
-    ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialD Failed.");
-    }
-
-    int id = 0;
-    ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &id, 0, NULL);
-    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialD Failed.");
-    }
-
-    ret = SQLExecute(hStmt);
-    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
-        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
-        throw runtime_error("InitialD Failed.");
-    }
-    else {
-        cout << "D sequence is done." << endl;
-    }
-    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
 }
 
 bool DBManager::CheckReturn(SQLRETURN& ret) {
@@ -246,8 +151,9 @@ bool DBManager::CheckReturn(SQLRETURN& ret) {
         SQLINTEGER NativeError;
         SQLSMALLINT msgLength;
 
+        SQLHDBC hDbc = popHDbc();
         // SQLGetDiagRecW에서 유니코드 오류 메시지 받아오기
-        SQLRETURN rreett = SQLGetDiagRecW(SQL_HANDLE_DBC, _hDbc, 1, SQLState, &NativeError, message, sizeof(message) / sizeof(SQLWCHAR), &msgLength);
+        SQLRETURN rreett = SQLGetDiagRecW(SQL_HANDLE_DBC, hDbc, 1, SQLState, &NativeError, message, sizeof(message) / sizeof(SQLWCHAR), &msgLength);
 
         if (rreett == SQL_SUCCESS || rreett == SQL_SUCCESS_WITH_INFO) {
             wcout << L"SQLState: " << SQLState << L", Message: " << message << endl;
@@ -255,6 +161,7 @@ bool DBManager::CheckReturn(SQLRETURN& ret) {
         else {
             wcout << L"Error retrieving diagnostic information" << endl;
         }
+        returnHDbc(hDbc);
         return false;
     }
     return true;
@@ -364,6 +271,199 @@ wstring DBManager::CreateQuery(const wstring& tableName, initializer_list<wstrin
     ss << L")";
 
     return ss.str();
+}
+
+SQLHDBC DBManager::connectNewHDbc() {
+    SQLHDBC hDbc = nullptr;
+
+    wchar_t* dbServer = nullptr;
+    wchar_t* dbName = nullptr;
+    wchar_t* connection = nullptr;
+    size_t wSize;
+    errno_t err;
+    try {
+        err = _wdupenv_s(&dbServer, &wSize, L"DB_SERVER");
+        err = _wdupenv_s(&dbName, &wSize, L"DB_NAME");
+        err = _wdupenv_s(&connection, &wSize, L"CONNECTION");
+
+        if (dbServer && dbName && connection) {
+            SQLWCHAR connStr[1024];
+            _snwprintf_s(connStr, sizeof(connStr) / sizeof(SQLWCHAR),
+                L"Driver={ODBC Driver 17 for SQL Server};Server=%ls;Database=%ls;%ls;",
+                dbServer, dbName, connection);
+
+            SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_DBC, _hEnv, &hDbc);
+            if (!CheckReturn(ret)) {
+                throw runtime_error("핸들 할당 실패");
+            }
+
+            ret = SQLDriverConnectW(hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
+            if (CheckReturn(ret)) {
+                cout << "DB 연결 성공" << endl;
+            }
+            else {
+                SQLFreeHandle(SQL_HANDLE_DBC, hDbc);
+                throw runtime_error("DB 연결 실패");
+            }
+        }
+        else
+            throw runtime_error("환경 변수에 값이 올바르지 않음");
+    }
+    catch (runtime_error& e) {
+        cout << e.what() << endl;
+        hDbc = nullptr;
+    }
+    
+    if (dbServer) delete[] dbServer;
+    if (dbName) delete[] dbName;
+    if (connection) delete[] connection;
+
+
+
+    return hDbc;
+}
+
+SQLHDBC DBManager::popHDbc() {
+    SQLHDBC hDbc = nullptr;
+    {
+        lock_guard<mutex> lock(_mtx);
+        if (!_hDbcQ.empty()) {
+            hDbc = _hDbcQ.front();
+            _hDbcQ.pop();
+            return hDbc;
+        }
+    }
+    hDbc = connectNewHDbc();
+    return hDbc;
+}
+
+void DBManager::returnHDbc(SQLHDBC hDbc) {
+    lock_guard<mutex> lock(_mtx);
+    _hDbcQ.push(hDbc);
+}
+
+void DBManager::InitialC() {
+    SQLHSTMT hStmt;
+    SQLHDBC hDbc = popHDbc();
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
+
+    wstring query = L"INSERT INTO CRUD (id, value) VALUES (?, ?)";
+    ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        throw runtime_error("InitialC Failed.");
+    }
+
+    int id = 0, value = 10;
+    SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &id, 0, NULL);
+    SQLBindParameter(hStmt, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &value, 0, NULL);
+
+    ret = SQLExecute(hStmt);
+    if (!CheckReturn(ret)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        throw runtime_error("InitialC Failed.");
+    }
+    else {
+        cout << "C sequence is done." << endl;
+    }
+    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+}
+
+void DBManager::InitialR() {
+    SQLHSTMT hStmt;
+    SQLHDBC hDbc = popHDbc();
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
+    wstring query = L"SELECT id, value FROM CRUD";
+    ret = SQLExecDirectW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        returnHDbc(hDbc);
+        throw runtime_error("InitialC Failed.");
+    }
+
+    SQLINTEGER sid;
+    SQLINTEGER svalue;
+
+    while (SQLFetch(hStmt) == SQL_SUCCESS) {
+        SQLGetData(hStmt, 1, SQL_C_SLONG, &sid, 0, NULL);
+        SQLGetData(hStmt, 2, SQL_C_SLONG, &svalue, 0, NULL);
+        cout << "R sequence is done. id : " << sid << " value: " << svalue << endl;
+    }
+    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+    returnHDbc(hDbc);
+}
+
+void DBManager::InitialU() {
+    SQLHSTMT hStmt;
+    SQLHDBC hDbc = popHDbc();
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
+    wstring query = L"UPDATE CRUD SET value = ? WHERE id = ?";
+    ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        returnHDbc(hDbc);
+        throw runtime_error("InitialU Failed.");
+    }
+
+    int id = 0;
+    int uvalue = 20;
+    ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &uvalue, 0, NULL);
+    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        returnHDbc(hDbc);
+        throw runtime_error("InitialU Failed.");
+    }
+
+    ret = SQLBindParameter(hStmt, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &id, 0, NULL);
+    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        returnHDbc(hDbc);
+        throw runtime_error("InitialU Failed.");
+    }
+
+    ret = SQLExecute(hStmt);
+    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        returnHDbc(hDbc);
+        throw runtime_error("InitialU Failed.");
+    }
+    else {
+        cout << "U sequence is done. value: " << uvalue << endl;
+    }
+    returnHDbc(hDbc);
+    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+}
+
+void DBManager::InitialD() {
+    SQLHSTMT hStmt;
+    SQLHDBC hDbc = popHDbc();
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
+    wstring query = L"DELETE FROM CRUD WHERE id = ?";
+    ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        throw runtime_error("InitialD Failed.");
+    }
+
+    int id = 0;
+    ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &id, 0, NULL);
+    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        returnHDbc(hDbc);
+        throw runtime_error("InitialD Failed.");
+    }
+
+    ret = SQLExecute(hStmt);
+    if (!CheckReturn(ret, hStmt, SQL_HANDLE_STMT)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        returnHDbc(hDbc);
+        throw runtime_error("InitialD Failed.");
+    }
+    else {
+        cout << "D sequence is done." << endl;
+    }
+    returnHDbc(hDbc);
+    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
 }
 
 ThreadManager::ThreadManager() {
