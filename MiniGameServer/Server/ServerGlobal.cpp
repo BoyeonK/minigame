@@ -31,7 +31,7 @@ CryptoManager::CryptoManager() {
 #ifdef _DEBUG
 	cout << "Initiating CryptoManager...." << endl;
 #endif
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 10; i++) {
 		EVP_PKEY* pkey = nullptr;
 		EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
 		if (!ctx) {
