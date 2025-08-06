@@ -1,7 +1,9 @@
+#pragma once
 #include <queue>
 
 extern class DBManager* GDBManager;
 extern class ThreadManager* GThreadManager;
+extern thread_local SQLHDBC LhDbc;
 
 class DBManager {
 public:
@@ -12,9 +14,11 @@ public:
     static const int salt_size = 16;
     static const int hash_size = 32;
     static const int pbkdf2_iter = 10000;
+
+    void SetEnv();
     
     bool CheckReturn(SQLRETURN& ret);
-    bool CheckReturn(SQLRETURN& ret, SQLHANDLE hHandle, SQLSMALLINT HandleType);
+    bool CheckReturn(SQLRETURN ret, SQLHSTMT hStmt);
 
     wstring a2wsRef(const string& in_cp949);
     wstring s2wsRef(const string& in_u8s);
@@ -23,11 +27,10 @@ public:
     //이대로 사용하면 코드인젝션에 굉장히 취약함!
     wstring CreateQuery(const wstring& tableName, initializer_list<wstring> wstrs);
 
-
-    SQLHENV getHEnv() { return _hEnv; }
-    SQLHDBC connectNewHDbc();
-    SQLHDBC popHDbc();
-    void returnHDbc(SQLHDBC hDbc);
+    SQLHENV GetHEnv() { return _hEnv; }
+    SQLHDBC ConnectNewHDbc();
+    SQLHDBC PopHDbc();
+    void ReturnHDbc(SQLHDBC hDbc);
 
 private:
     mutex _mtx;
