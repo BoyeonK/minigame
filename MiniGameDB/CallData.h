@@ -46,7 +46,6 @@ public:
     }
 
     void Proceed() override;
-
     void ReturnToPool() override { objectPool<DLoginCallData>::dealloc(this); }
 
 private:
@@ -64,7 +63,6 @@ public:
     }
 
     void Proceed() override;
-
     void ReturnToPool() override { objectPool<DCreateAccountCallData>::dealloc(this); }
 
 private:

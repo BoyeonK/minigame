@@ -17,8 +17,7 @@ public:
 
     void SetEnv();
     
-    bool CheckReturn(SQLRETURN& ret);
-    bool CheckReturn(SQLRETURN ret, SQLHSTMT hStmt);
+    bool CheckReturn(SQLRETURN ret, SQLSMALLINT handleType, SQLHANDLE handle);
 
     wstring a2wsRef(const string& in_cp949);
     wstring s2wsRef(const string& in_u8s);
@@ -63,13 +62,28 @@ private:
     vector<thread> _threads;
 };
 
-struct SQLHandleDeleter {
-    SQLSMALLINT handleType;
-    SQLHANDLE handle;
-    void operator()(SQLHANDLE* pHandle) {
-        if (pHandle && *pHandle != SQL_NULL_HANDLE) {
-            SQLFreeHandle(handleType, *pHandle);
-            delete pHandle;
+class Cleaner {
+public:
+    //암시적 형 변환을 때려막는다. 가끔 ㄹㅇ 병신크리가 뜰수있다.
+    explicit Cleaner(std::function<void()> cleanup_func)
+        : m_cleanup_function(cleanup_func) {
+    }
+
+    ~Cleaner() {
+        if (!m_dismissed) {
+            m_cleanup_function();
         }
     }
+
+    void dismiss() {
+        m_dismissed = true;
+    }
+
+    // 복사 생성자 및 대입 연산자 금지
+    Cleaner(const Cleaner&) = delete;
+    Cleaner& operator=(const Cleaner&) = delete;
+
+private:
+    std::function<void()> m_cleanup_function;
+    bool m_dismissed = false;
 };
