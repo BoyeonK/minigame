@@ -24,6 +24,10 @@ public:
 DBManager::DBManager() : _hEnv(nullptr) {
     //ODBC 환경 및 연결 초기화
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &_hEnv);
+    if (!SQL_SUCCEEDED(ret)) {
+        cout << "환경 핸들 할당 실패." << endl;
+        return;
+    }
 
     // ODBC 버전 설정
     ret = SQLSetEnvAttr(_hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, SQL_IS_INTEGER);
@@ -98,45 +102,25 @@ void DBManager::SetEnv() {
     envFile.close();
 }
 
-bool DBManager::CheckReturn(SQLRETURN& ret) {
+bool DBManager::CheckReturn(SQLRETURN ret, SQLSMALLINT handleType, SQLHANDLE handle) {
     if (!SQL_SUCCEEDED(ret)) {
-        SQLWCHAR SQLState[6];  // SQLSTATE는 5개의 문자를 사용 + null 종료 문자를 위해 6
-        SQLWCHAR message[256]; // 메시지 버퍼 크기
-        SQLINTEGER NativeError;
-        SQLSMALLINT msgLength;
+        SQLWCHAR sqlState[6];
+        SQLINTEGER nativeError;
+        SQLWCHAR messageText[1024];
+        SQLSMALLINT textLength;
+        SQLSMALLINT recNumber = 1;
 
-        SQLHDBC hDbc = PopHDbc();
-        // SQLGetDiagRecW에서 유니코드 오류 메시지 받아오기
-        SQLRETURN rreett = SQLGetDiagRecW(SQL_HANDLE_DBC, hDbc, 1, SQLState, &NativeError, message, sizeof(message) / sizeof(SQLWCHAR), &msgLength);
+        // 더 이상 가져올 데이터가 없을 때(SQL_NO_DATA)까지 반복
+        while (SQLGetDiagRecW(handleType, handle, recNumber, sqlState, &nativeError,
+            messageText, sizeof(messageText) / sizeof(SQLWCHAR), &textLength) != SQL_NO_DATA)
+        {
+            wcout << L"ODBC Error:" << std::endl;
+            wcout << L"  SQLSTATE: " << sqlState << std::endl;
+            wcout << L"  Native Error: " << nativeError << std::endl;
+            wcout << L"  Message: " << messageText << std::endl;
 
-        if (rreett == SQL_SUCCESS || rreett == SQL_SUCCESS_WITH_INFO) {
-            wcout << L"SQLState: " << SQLState << L", Message: " << message << endl;
+            recNumber++;
         }
-        else {
-            wcout << L"Error retrieving diagnostic information" << endl;
-        }
-        ReturnHDbc(hDbc);
-        return false;
-    }
-    return true;
-}
-
-bool DBManager::CheckReturn(SQLRETURN ret, SQLHSTMT hStmt) {
-    if (!SQL_SUCCEEDED(ret)) {
-        SQLCHAR SQLState[6];
-        SQLCHAR message[256];
-        SQLINTEGER NativeError;
-        SQLSMALLINT msgLength;
-
-        SQLRETURN diagRet = SQLGetDiagRecA(SQL_HANDLE_STMT, hStmt, 1, SQLState, &NativeError, message, sizeof(message), &msgLength);
-        if (diagRet == SQL_SUCCESS || diagRet == SQL_SUCCESS_WITH_INFO) {
-            cout << "SQLState: " << SQLState << std::endl;
-            cout << "Message: " << message << std::endl;
-        }
-        else {
-            cout << "Failed to retrieve diagnostic information" << std::endl;
-        }
-
         return false;
     }
     return true;
@@ -286,7 +270,7 @@ void DBManager::InitialC() {
 
     wstring query = L"INSERT INTO CRUD (id, value) VALUES (?, ?)";
     ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         throw runtime_error("InitialC Failed.");
     }
@@ -296,7 +280,7 @@ void DBManager::InitialC() {
     SQLBindParameter(hStmt, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &value, 0, NULL);
 
     ret = SQLExecute(hStmt);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         throw runtime_error("InitialC Failed.");
     }
@@ -312,7 +296,7 @@ void DBManager::InitialR() {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
     wstring query = L"SELECT id, value FROM CRUD";
     ret = SQLExecDirectW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         ReturnHDbc(hDbc);
         throw runtime_error("InitialC Failed.");
@@ -336,7 +320,7 @@ void DBManager::InitialU() {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
     wstring query = L"UPDATE CRUD SET value = ? WHERE id = ?";
     ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         ReturnHDbc(hDbc);
         throw runtime_error("InitialU Failed.");
@@ -345,21 +329,21 @@ void DBManager::InitialU() {
     int id = 0;
     int uvalue = 20;
     ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &uvalue, 0, NULL);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         ReturnHDbc(hDbc);
         throw runtime_error("InitialU Failed.");
     }
 
     ret = SQLBindParameter(hStmt, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &id, 0, NULL);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         ReturnHDbc(hDbc);
         throw runtime_error("InitialU Failed.");
     }
 
     ret = SQLExecute(hStmt);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         ReturnHDbc(hDbc);
         throw runtime_error("InitialU Failed.");
@@ -377,21 +361,21 @@ void DBManager::InitialD() {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
     wstring query = L"DELETE FROM CRUD WHERE id = ?";
     ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         throw runtime_error("InitialD Failed.");
     }
 
     int id = 0;
     ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &id, 0, NULL);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         ReturnHDbc(hDbc);
         throw runtime_error("InitialD Failed.");
     }
 
     ret = SQLExecute(hStmt);
-    if (!CheckReturn(ret, hStmt)) {
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         ReturnHDbc(hDbc);
         throw runtime_error("InitialD Failed.");
