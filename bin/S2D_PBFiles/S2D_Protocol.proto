@@ -24,7 +24,7 @@ message S2D_Login {
 message D2S_Login {
     oneof value_case {
         int32 dbid = 1;
-        string err = 2;
+        bool incorrect_id = 2;
     }
 }
 

@@ -280,23 +280,23 @@ const char descriptor_table_protodef_S2D_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SEC
     "\n\022S2D_Protocol.proto\022\014S2D_Protocol\"\034\n\014He"
     "lloRequest\022\014\n\004name\030\001 \001(\t\"\035\n\nHelloReply\022\017"
     "\n\007message\030\001 \001(\t\")\n\tS2D_Login\022\n\n\002id\030\001 \001(\t"
-    "\022\020\n\010password\030\002 \001(\t\"8\n\tD2S_Login\022\016\n\004dbid\030"
-    "\001 \001(\005H\000\022\r\n\003err\030\002 \001(\tH\000B\014\n\nvalue_case\"1\n\021"
-    "S2D_CreateAccount\022\n\n\002id\030\001 \001(\t\022\020\n\010passwor"
-    "d\030\002 \001(\t\"$\n\021D2S_CreateAccount\022\017\n\007success\030"
-    "\001 \001(\0102\353\001\n\013S2D_Service\022@\n\010SayHello\022\032.S2D_"
-    "Protocol.HelloRequest\032\030.S2D_Protocol.Hel"
-    "loReply\022@\n\014LoginRequest\022\027.S2D_Protocol.S"
-    "2D_Login\032\027.S2D_Protocol.D2S_Login\022X\n\024Cre"
-    "ateAccountRequest\022\037.S2D_Protocol.S2D_Cre"
-    "ateAccount\032\037.S2D_Protocol.D2S_CreateAcco"
-    "untb\006proto3"
+    "\022\020\n\010password\030\002 \001(\t\"A\n\tD2S_Login\022\016\n\004dbid\030"
+    "\001 \001(\005H\000\022\026\n\014incorrect_id\030\002 \001(\010H\000B\014\n\nvalue"
+    "_case\"1\n\021S2D_CreateAccount\022\n\n\002id\030\001 \001(\t\022\020"
+    "\n\010password\030\002 \001(\t\"$\n\021D2S_CreateAccount\022\017\n"
+    "\007success\030\001 \001(\0102\353\001\n\013S2D_Service\022@\n\010SayHel"
+    "lo\022\032.S2D_Protocol.HelloRequest\032\030.S2D_Pro"
+    "tocol.HelloReply\022@\n\014LoginRequest\022\027.S2D_P"
+    "rotocol.S2D_Login\032\027.S2D_Protocol.D2S_Log"
+    "in\022X\n\024CreateAccountRequest\022\037.S2D_Protoco"
+    "l.S2D_CreateAccount\032\037.S2D_Protocol.D2S_C"
+    "reateAccountb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2D_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2D_5fProtocol_2eproto = {
     false,
     false,
-    531,
+    540,
     descriptor_table_protodef_S2D_5fProtocol_2eproto,
     "S2D_Protocol.proto",
     &descriptor_table_S2D_5fProtocol_2eproto_once,
@@ -1075,8 +1075,8 @@ D2S_Login::D2S_Login(
       case kDbid:
         _impl_.value_case_.dbid_ = from._impl_.value_case_.dbid_;
         break;
-      case kErr:
-        new (&_impl_.value_case_.err_) decltype(_impl_.value_case_.err_){arena, from._impl_.value_case_.err_};
+      case kIncorrectId:
+        _impl_.value_case_.incorrect_id_ = from._impl_.value_case_.incorrect_id_;
         break;
   }
 
@@ -1114,8 +1114,8 @@ void D2S_Login::clear_value_case() {
       // No need to clear
       break;
     }
-    case kErr: {
-      _impl_.value_case_.err_.Destroy();
+    case kIncorrectId: {
+      // No need to clear
       break;
     }
     case VALUE_CASE_NOT_SET: {
@@ -1162,7 +1162,7 @@ const ::google::protobuf::internal::ClassData* D2S_Login::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 2, 0, 34, 2> D2S_Login::_table_ = {
+const ::_pbi::TcParseTable<0, 2, 0, 0, 2> D2S_Login::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -1187,15 +1187,12 @@ const ::_pbi::TcParseTable<0, 2, 0, 34, 2> D2S_Login::_table_ = {
     // int32 dbid = 1;
     {PROTOBUF_FIELD_OFFSET(D2S_Login, _impl_.value_case_.dbid_), _Internal::kOneofCaseOffset + 0, 0,
     (0 | ::_fl::kFcOneof | ::_fl::kInt32)},
-    // string err = 2;
-    {PROTOBUF_FIELD_OFFSET(D2S_Login, _impl_.value_case_.err_), _Internal::kOneofCaseOffset + 0, 0,
-    (0 | ::_fl::kFcOneof | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // bool incorrect_id = 2;
+    {PROTOBUF_FIELD_OFFSET(D2S_Login, _impl_.value_case_.incorrect_id_), _Internal::kOneofCaseOffset + 0, 0,
+    (0 | ::_fl::kFcOneof | ::_fl::kBool)},
   }},
   // no aux_entries
   {{
-    "\26\0\3\0\0\0\0\0"
-    "S2D_Protocol.D2S_Login"
-    "err"
   }},
 };
 
@@ -1232,11 +1229,10 @@ PROTOBUF_NOINLINE void D2S_Login::Clear() {
                       stream, this_._internal_dbid(), target);
               break;
             }
-            case kErr: {
-              const std::string& _s = this_._internal_err();
-              ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                  _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2D_Protocol.D2S_Login.err");
-              target = stream->WriteStringMaybeAliased(2, _s, target);
+            case kIncorrectId: {
+              target = stream->EnsureSpace(target);
+              target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                  2, this_._internal_incorrect_id(), target);
               break;
             }
             default:
@@ -1272,10 +1268,9 @@ PROTOBUF_NOINLINE void D2S_Login::Clear() {
                   this_._internal_dbid());
               break;
             }
-            // string err = 2;
-            case kErr: {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_err());
+            // bool incorrect_id = 2;
+            case kIncorrectId: {
+              total_size += 2;
               break;
             }
             case VALUE_CASE_NOT_SET: {
@@ -1289,7 +1284,6 @@ PROTOBUF_NOINLINE void D2S_Login::Clear() {
 void D2S_Login::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<D2S_Login*>(&to_msg);
   auto& from = static_cast<const D2S_Login&>(from_msg);
-  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_Login)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
@@ -1310,11 +1304,8 @@ void D2S_Login::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::googl
         _this->_impl_.value_case_.dbid_ = from._impl_.value_case_.dbid_;
         break;
       }
-      case kErr: {
-        if (oneof_needs_init) {
-          _this->_impl_.value_case_.err_.InitDefault();
-        }
-        _this->_impl_.value_case_.err_.Set(from._internal_err(), arena);
+      case kIncorrectId: {
+        _this->_impl_.value_case_.incorrect_id_ = from._impl_.value_case_.incorrect_id_;
         break;
       }
       case VALUE_CASE_NOT_SET:

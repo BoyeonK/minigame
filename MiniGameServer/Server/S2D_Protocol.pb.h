@@ -960,7 +960,7 @@ class D2S_Login final : public ::google::protobuf::Message
   }
   enum ValueCaseCase {
     kDbid = 1,
-    kErr = 2,
+    kIncorrectId = 2,
     VALUE_CASE_NOT_SET = 0,
   };
   static inline const D2S_Login* internal_default_instance() {
@@ -1055,7 +1055,7 @@ class D2S_Login final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kDbidFieldNumber = 1,
-    kErrFieldNumber = 2,
+    kIncorrectIdFieldNumber = 2,
   };
   // int32 dbid = 1;
   bool has_dbid() const;
@@ -1068,21 +1068,15 @@ class D2S_Login final : public ::google::protobuf::Message
   void _internal_set_dbid(::int32_t value);
 
   public:
-  // string err = 2;
-  bool has_err() const;
-  void clear_err() ;
-  const std::string& err() const;
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void set_err(Arg_&& arg, Args_... args);
-  std::string* mutable_err();
-  PROTOBUF_NODISCARD std::string* release_err();
-  void set_allocated_err(std::string* value);
+  // bool incorrect_id = 2;
+  bool has_incorrect_id() const;
+  void clear_incorrect_id() ;
+  bool incorrect_id() const;
+  void set_incorrect_id(bool value);
 
   private:
-  const std::string& _internal_err() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_err(
-      const std::string& value);
-  std::string* _internal_mutable_err();
+  bool _internal_incorrect_id() const;
+  void _internal_set_incorrect_id(bool value);
 
   public:
   void clear_value_case();
@@ -1091,13 +1085,13 @@ class D2S_Login final : public ::google::protobuf::Message
  private:
   class _Internal;
   void set_has_dbid();
-  void set_has_err();
+  void set_has_incorrect_id();
   inline bool has_value_case() const;
   inline void clear_has_value_case();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       0, 2, 0,
-      34, 2>
+      0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -1118,7 +1112,7 @@ class D2S_Login final : public ::google::protobuf::Message
       constexpr ValueCaseUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
       ::int32_t dbid_;
-      ::google::protobuf::internal::ArenaStringPtr err_;
+      bool incorrect_id_;
     } value_case_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::uint32_t _oneof_case_[1];
@@ -1571,89 +1565,37 @@ inline ::int32_t D2S_Login::_internal_dbid() const {
   return 0;
 }
 
-// string err = 2;
-inline bool D2S_Login::has_err() const {
-  return value_case_case() == kErr;
+// bool incorrect_id = 2;
+inline bool D2S_Login::has_incorrect_id() const {
+  return value_case_case() == kIncorrectId;
 }
-inline void D2S_Login::set_has_err() {
-  _impl_._oneof_case_[0] = kErr;
+inline void D2S_Login::set_has_incorrect_id() {
+  _impl_._oneof_case_[0] = kIncorrectId;
 }
-inline void D2S_Login::clear_err() {
+inline void D2S_Login::clear_incorrect_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case_case() == kErr) {
-    _impl_.value_case_.err_.Destroy();
+  if (value_case_case() == kIncorrectId) {
+    _impl_.value_case_.incorrect_id_ = false;
     clear_has_value_case();
   }
 }
-inline const std::string& D2S_Login::err() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.D2S_Login.err)
-  return _internal_err();
+inline bool D2S_Login::incorrect_id() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.D2S_Login.incorrect_id)
+  return _internal_incorrect_id();
 }
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void D2S_Login::set_err(Arg_&& arg,
-                                                     Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case_case() != kErr) {
+inline void D2S_Login::set_incorrect_id(bool value) {
+  if (value_case_case() != kIncorrectId) {
     clear_value_case();
-
-    set_has_err();
-    _impl_.value_case_.err_.InitDefault();
+    set_has_incorrect_id();
   }
-  _impl_.value_case_.err_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:S2D_Protocol.D2S_Login.err)
+  _impl_.value_case_.incorrect_id_ = value;
+  // @@protoc_insertion_point(field_set:S2D_Protocol.D2S_Login.incorrect_id)
 }
-inline std::string* D2S_Login::mutable_err() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_err();
-  // @@protoc_insertion_point(field_mutable:S2D_Protocol.D2S_Login.err)
-  return _s;
-}
-inline const std::string& D2S_Login::_internal_err() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  if (value_case_case() != kErr) {
-    return ::google::protobuf::internal::GetEmptyStringAlreadyInited();
+inline bool D2S_Login::_internal_incorrect_id() const {
+  if (value_case_case() == kIncorrectId) {
+    return _impl_.value_case_.incorrect_id_;
   }
-  return _impl_.value_case_.err_.Get();
-}
-inline void D2S_Login::_internal_set_err(const std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case_case() != kErr) {
-    clear_value_case();
-
-    set_has_err();
-    _impl_.value_case_.err_.InitDefault();
-  }
-  _impl_.value_case_.err_.Set(value, GetArena());
-}
-inline std::string* D2S_Login::_internal_mutable_err() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case_case() != kErr) {
-    clear_value_case();
-
-    set_has_err();
-    _impl_.value_case_.err_.InitDefault();
-  }
-  return _impl_.value_case_.err_.Mutable( GetArena());
-}
-inline std::string* D2S_Login::release_err() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:S2D_Protocol.D2S_Login.err)
-  if (value_case_case() != kErr) {
-    return nullptr;
-  }
-  clear_has_value_case();
-  return _impl_.value_case_.err_.Release();
-}
-inline void D2S_Login::set_allocated_err(std::string* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (has_value_case()) {
-    clear_value_case();
-  }
-  if (value != nullptr) {
-    set_has_err();
-    _impl_.value_case_.err_.InitAllocated(value, GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:S2D_Protocol.D2S_Login.err)
+  return false;
 }
 
 inline bool D2S_Login::has_value_case() const {
