@@ -21,7 +21,7 @@ public:
     void HelloAsync();
 #endif
     void S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password);
-    void S2D_CreateAccount();
+    void S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id, string password);
 
     void AsyncCompleteRpc();
 

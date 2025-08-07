@@ -7,5 +7,12 @@ public:
 		pkt.set_password(password);
 		return pkt;
 	}
+
+	static S2D_Protocol::S2D_CreateAccount Make_S2D_CreateAccount(string id, string password) {
+		S2D_Protocol::S2D_CreateAccount pkt;
+		pkt.set_id(id);
+		pkt.set_password(password);
+		return pkt;
+	}
 };
 

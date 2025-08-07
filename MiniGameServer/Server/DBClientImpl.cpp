@@ -29,8 +29,14 @@ void DBClientImpl::S2D_Login(shared_ptr<PBSession> sessionRef, string id, string
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
 }
 
-void DBClientImpl::S2D_CreateAccount() {
+void DBClientImpl::S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id, string password) {
+    SCreateAccountCall* call = objectPool<SCreateAccountCall>::alloc();
+    S2D_Protocol::S2D_CreateAccount request = S2DPacketMaker::Make_S2D_CreateAccount(id, password);
 
+    call->response_reader = _stub->PrepareAsyncCreateAccountRequest(&call->context, request, _cqRef.get());
+    call->response_reader->StartCall();
+
+    call->response_reader->Finish(&call->reply, &call->status, (void*)call);
 }
 
 void DBClientImpl::AsyncCompleteRpc() {

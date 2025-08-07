@@ -24,6 +24,7 @@ void SLoginCall::OnFailed() {
 }
 
 void SCreateAccountCall::OnSucceed() {
+	cout << "DB서버에 계정 생성을 위한 조회 요청 보내기 성공" << endl;
 	//TODO: 계정 생성 성공, 실패여부를 bool값으로 확인한다.
 	//추후에는 이 성공, 실패여부를 클라이언트에 통보할 일이 있을것.
 }
