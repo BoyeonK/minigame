@@ -11,6 +11,8 @@ enum MsgId {
     S_WELCOME_RESPONSE = 4;
     C_LOGIN = 5;
     S_LOGIN = 6;
+    C_CREATE_ACCOUNT = 7;
+    S_CREATE_ACCOUNT = 8;
 }
 
 message S_Encrypted {
@@ -52,4 +54,14 @@ message S_Login {
         int32 dbid = 1;
         string err = 2;
     }
+}
+
+message C_CreateAccount {
+    string id = 1;
+    string password = 2;
+}
+
+message S_CreateAccount {
+    bool success = 1;
+    string err = 2;
 }
