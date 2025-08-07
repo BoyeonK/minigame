@@ -76,6 +76,10 @@ bool Handle_C_ENCRYPTED(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 	
 	cout << "plaintext ÃßÃâ" << endl;
 
+	if (msgId > 6 or msgId < 2) {
+		return false;
+	}
+
 	return PlaintextHandler[msgId](sessionRef, plaintext);
 }
 

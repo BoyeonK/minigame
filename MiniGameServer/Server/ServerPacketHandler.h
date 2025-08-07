@@ -39,6 +39,7 @@ public:
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
+		//TODO: Session에 허락된 범주의 pktId의 핸들러만 실행하기.
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
 		return GPacketHandler[header->_id](sessionRef, buffer, len);
 	}
