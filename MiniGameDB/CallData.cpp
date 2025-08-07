@@ -214,12 +214,10 @@ void DCreateAccountCallData::Proceed() {
         SQLHDBC hDbc = GDBManager->PopHDbc();
 
         bool attrErr = false;
-        /*
+        
         try {
-            auto hStmt1 = unique_ptr<SQLHANDLE, SQLHandleDeleter>(new SQLHANDLE(SQL_NULL_HANDLE), { SQL_HANDLE_STMT, hDbc });
-            auto hStmt2 = unique_ptr<SQLHANDLE, SQLHandleDeleter>(new SQLHANDLE(SQL_NULL_HANDLE), { SQL_HANDLE_STMT, hDbc });
-            auto hStmt3 = unique_ptr<SQLHANDLE, SQLHandleDeleter>(new SQLHANDLE(SQL_NULL_HANDLE), { SQL_HANDLE_STMT, hDbc });
-            auto hStmt4 = unique_ptr<SQLHANDLE, SQLHandleDeleter>(new SQLHANDLE(SQL_NULL_HANDLE), { SQL_HANDLE_STMT, hDbc });
+            SQLHSTMT hStmt1, hStmt2, hStmt3, hStmt4;
+
 
             SQLRETURN ret = SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, SQL_IS_UINTEGER);
 
@@ -229,61 +227,43 @@ void DCreateAccountCallData::Proceed() {
             }
 
             //Player Table INSERT 작업
-            ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, hStmt1.get());
-            if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-                throw runtime_error("1");
-            }
+            ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
+
 
             wstring query1 = L"INSERT INTO Players (player_id) VALUES (?)";
-            ret = SQLPrepareW(hStmt1.get(), (SQLWCHAR*)query1.c_str(), SQL_NTS);
-            if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC ,hDbc)) {
-                throw runtime_error("2");
-            }
+            ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query1.c_str(), SQL_NTS);
+
 
             wstring wId = GDBManager->a2wsRef(id);
-            ret = SQLBindParameter(hStmt1.get(), 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, 0, 0, (SQLPOINTER)wId.c_str(), 0, (SQLLEN*)SQL_NTS);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("3");
-            }
+            ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, 0, 0, (SQLPOINTER)wId.c_str(), 0, (SQLLEN*)SQL_NTS);
 
-            ret = SQLExecute(hStmt1.get());
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("4");
-            }
+
+            ret = SQLExecute(hStmt1);
+
 
             //Player Table SELECT 작업
             //방금 추가한 계정의 dbid를 얻어옴.
             SQLINTEGER dbid = -1;
 
-            ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, hStmt2.get());
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("5");
-            }
+            ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
+
 
             wstring query2 = L"SELECT dbid FROM Players WHERE player_id = ?";
-            ret = SQLPrepareW(hStmt2.get(), (SQLWCHAR*)query2.c_str(), SQL_NTS);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("7");
-            }
+            ret = SQLPrepareW(hStmt2, (SQLWCHAR*)query2.c_str(), SQL_NTS);
 
-            ret = SQLBindParameter(hStmt2.get(), 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, 0, 0, (SQLPOINTER)wId.c_str(), 0, (SQLLEN*)SQL_NTS);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("8");
-            }
 
-            ret = SQLExecute(hStmt2.get());
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("9");
-            }
+            ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, 0, 0, (SQLPOINTER)wId.c_str(), 0, (SQLLEN*)SQL_NTS);
+
+
+            ret = SQLExecute(hStmt2);
+
 
             SQLLEN dbid_ind = 0;
 
-            ret = SQLFetch(hStmt2.get());
+            ret = SQLFetch(hStmt2);
             if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
-                ret = SQLGetData(hStmt2.get(), 1, SQL_C_SLONG, &dbid, sizeof(dbid), &dbid_ind);
-                if (!GDBManager->CheckReturn(ret, hDbc)) {
-                    throw runtime_error("9");
-                }
+                ret = SQLGetData(hStmt2, 1, SQL_C_SLONG, &dbid, sizeof(dbid), &dbid_ind);
+
                 // 정상 동작
             }
             else if (ret == SQL_NO_DATA) {
@@ -294,22 +274,18 @@ void DCreateAccountCallData::Proceed() {
             }
 
             //Accounts Table INSERT 작업
-            ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, hStmt3.get());
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("12");
-            }
+            ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt3);
+
 
             wstring query3 = L"INSERT INTO Accounts (dbid, password_hash, salt) VALUES (?, ?, ?)";
-            ret = SQLPrepareW(hStmt3.get(), (SQLWCHAR*)query3.c_str(), SQL_NTS);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("13");
-            }
+            ret = SQLPrepareW(hStmt3, (SQLWCHAR*)query3.c_str(), SQL_NTS);
 
             vector<unsigned char> salt(DBManager::salt_size);
             vector<unsigned char> hash(DBManager::hash_size);
             if (RAND_bytes(salt.data(), DBManager::salt_size) != 1) {
                 throw runtime_error("14");
             }
+
             if (PKCS5_PBKDF2_HMAC(
                 password.c_str(),
                 password.length(),
@@ -327,46 +303,26 @@ void DCreateAccountCallData::Proceed() {
             wstring wHashword = GDBManager->v2wsRef(hash);
             wstring wSalt = GDBManager->v2wsRef(salt);
 
-            ret = SQLBindParameter(hStmt3.get(), 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("16");
-            }
-            ret = SQLBindParameter(hStmt3.get(), 2, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, 0, 0, (SQLPOINTER)wHashword.c_str(), 0, (SQLLEN*)SQL_NTS);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("17");
-            }
-            ret = SQLBindParameter(hStmt3.get(), 3, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, 0, 0, (SQLPOINTER)wSalt.c_str(), 0, (SQLLEN*)SQL_NTS);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("18");
-            }
+            ret = SQLBindParameter(hStmt3, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
 
-            ret = SQLExecute(hStmt3.get());
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("19");
-            }
+            ret = SQLBindParameter(hStmt3, 2, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, 0, 0, (SQLPOINTER)wHashword.c_str(), 0, (SQLLEN*)SQL_NTS);
+
+            ret = SQLBindParameter(hStmt3, 3, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, 0, 0, (SQLPOINTER)wSalt.c_str(), 0, (SQLLEN*)SQL_NTS);
+
+            ret = SQLExecute(hStmt3);
+
 
             //Elos Table INSERT작업
-            ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, hStmt4.get());
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("20");
-            }
+            ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt4);
+
 
             wstring query = L"INSERT INTO Elos (dbid) VALUES (?)";
 
-            ret = SQLPrepareW(hStmt4.get(), (SQLWCHAR*)query.c_str(), SQL_NTS);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("21");
-            }
+            ret = SQLPrepareW(hStmt4, (SQLWCHAR*)query.c_str(), SQL_NTS);
 
-            ret = SQLBindParameter(hStmt4.get(), 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("22");
-            }
+            ret = SQLBindParameter(hStmt4, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
 
-            ret = SQLExecute(hStmt4.get());
-            if (!GDBManager->CheckReturn(ret, hDbc)) {
-                throw runtime_error("23");
-            }
+            ret = SQLExecute(hStmt4);
 
             SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
             cout << "Transaction committed successfully." << std::endl;
@@ -378,7 +334,7 @@ void DCreateAccountCallData::Proceed() {
         }
 
         SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_ON, SQL_IS_UINTEGER);
-        */
+        
 
         _status = FINISH;
         _responder.Finish(_reply, grpc::Status::OK, this);

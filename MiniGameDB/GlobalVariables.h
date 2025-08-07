@@ -41,6 +41,7 @@ private:
     void InitialR();
     void InitialU();
     void InitialD();
+    void ScandinavianFlick();
 };
 
 class ThreadManager {

@@ -46,6 +46,7 @@ DBManager::DBManager() : _hEnv(nullptr) {
         InitialR();
         InitialU();
         InitialD();
+        ScandinavianFlick();
     }
     catch (const runtime_error& e) {
         cerr << e.what() << endl;
@@ -114,10 +115,10 @@ bool DBManager::CheckReturn(SQLRETURN ret, SQLSMALLINT handleType, SQLHANDLE han
         while (SQLGetDiagRecW(handleType, handle, recNumber, sqlState, &nativeError,
             messageText, sizeof(messageText) / sizeof(SQLWCHAR), &textLength) != SQL_NO_DATA)
         {
-            wcout << L"ODBC Error:" << std::endl;
-            wcout << L"  SQLSTATE: " << sqlState << std::endl;
-            wcout << L"  Native Error: " << nativeError << std::endl;
-            wcout << L"  Message: " << messageText << std::endl;
+            wcout << L"ODBC Error:" << endl;
+            wcout << L"  SQLSTATE: " << sqlState << endl;
+            wcout << L"  Native Error: " << nativeError << endl;
+            //wcout << L"  Message: " << messageText << endl;
 
             recNumber++;
         }
@@ -385,6 +386,145 @@ void DBManager::InitialD() {
     }
     ReturnHDbc(hDbc);
     SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+}
+
+void DBManager::ScandinavianFlick() {
+    string myId = "tetepiti149";
+    wstring wId = GDBManager->a2wsRef(myId);
+    string password = "qwe123";
+    bool exists;
+
+    SQLHSTMT hStmt = nullptr;
+    SQLHDBC hDbc = PopHDbc();
+    if (hDbc == nullptr) {
+        cout << "불량 hDbc 이슈" << endl;
+        return;
+    }
+
+    Cleaner hDbcCleaner([=]() {
+        ReturnHDbc(hDbc);
+    });
+
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        cout << "hStmt 할당 실패;" << endl;
+        return;
+    }
+
+    Cleaner hStmtCleaner([=]() {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+    });
+
+    wstring query = L"SELECT 1 FROM Players WHERE player_id = ?";
+    ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
+        return;
+    }
+
+    SQLLEN idLen = SQL_NTS;
+    ret = SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wId.size(), 0, (SQLPOINTER)wId.c_str(), 0, &idLen);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
+        return;
+    }
+
+    ret = SQLExecute(hStmt);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
+        return;
+    }
+
+    ret = SQLFetch(hStmt);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        exists = true;
+        cout << "있는 아이디 데스우" << endl;
+        return;
+    }
+    else if (ret == SQL_NO_DATA) {
+        exists = false;
+    }
+    else {
+        return;
+    }
+
+    ret = SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, SQL_IS_UINTEGER);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        cout << "레드 리부트 맞음. 망했음." << endl;
+        return;
+    }
+    Cleaner Lovely_Labrynth_Of_The_Silver_Castle([=]() {
+        SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_ROLLBACK);
+    });
+
+    SQLHSTMT hStmt2 = nullptr;
+    ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        cout << "hStmt2 할당 실패;" << endl;
+        return;
+    }
+    Cleaner hStmt2Cleaner([=]() {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);
+    });
+
+    query = L"INSERT INTO Players (player_id) VALUES (?)";
+    ret = SQLPrepareW(hStmt2, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        return;
+    }
+
+    ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wId.size(), 0, (SQLPOINTER)wId.c_str(), 0, &idLen);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        return;
+    }
+
+    ret = SQLExecute(hStmt2);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        return;
+    }
+
+    //Player Table SELECT 작업
+    //방금 추가한 계정의 dbid를 얻어옴.
+    SQLINTEGER dbid = -1;
+
+    SQLHSTMT hStmt3 = nullptr;
+    ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt3);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        cout << "hStmt3 할당 실패;" << endl;
+        return;
+    }
+    Cleaner hStmt3Cleaner([=]() {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt3);
+    });
+
+    query = L"SELECT dbid FROM Players WHERE player_id = ?";
+    ret = SQLPrepareW(hStmt3, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt3)) {
+        return;
+    }
+
+    ret = SQLBindParameter(hStmt3, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wId.size(), 0, (SQLPOINTER)wId.c_str(), 0, &idLen);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt3)) {
+        return;
+    }
+
+    ret = SQLExecute(hStmt3);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt3)) {
+        return;
+    }
+
+    SQLLEN dbid_ind = 0;
+
+    ret = SQLFetch(hStmt3);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        ret = SQLGetData(hStmt3, 1, SQL_C_SLONG, &dbid, sizeof(dbid), &dbid_ind);
+        cout << dbid << endl;
+        // 정상 동작
+    }
+    else if (ret == SQL_NO_DATA) {
+        return;
+    }
+    else {
+        return;
+    }
+
 }
 
 ThreadManager::ThreadManager() {
