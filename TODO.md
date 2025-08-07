@@ -8,11 +8,11 @@
     
     - 로그인처리되지 않은 세션에서는, HandShake과정에서 필요한 패킷들과 로그인시도 패킷 이외의 모든 요청을 reject. (packetID > 6 인 패킷에 대한 처리를 하지 않는다.)
     
-    - 암호화된 패킷으로서 Client에서 ID와 password를 받는다.
+    - ~~암호화된 패킷으로서 Client에서 ID와 password를 받는다.~~
     
-    - DB를 조회한다. (`C2S_Login`을 받은 경우 `S2D_Login`전송)
+    - ~~DB를 조회한다. (`C2S_Login`을 받은 경우 `S2D_Login`전송)~~
       
-      1. 있는 경우 (`D2S_Login`을 받은 경우 처리)
+      1. ~~있는 경우 (`D2S_Login`을 받은 경우 처리)~~
          
          1. 비밀번호가 맞은 경우 (0 이외의 값을 받았다.) : session에 해당 dbid를 session에 저장. 로그인 성공. `S2C_Login`에 True를 담아 전송.
          
@@ -49,33 +49,33 @@
 
 - DB
   
-  - 로그인 시도 (`S2D_Login`을 받은 경우 처리)
+  - ~~로그인 시도 (`S2D_Login`을 받은 경우 처리)~~
     
-    - DB를 조회해서 해당 ID를 조회한다.
+    - ~~DB를 조회해서 해당 ID를 조회한다.~~
       
-      1. 해당 ID가 없는경우.
+      1. ~~해당 ID가 없는경우.~~
          
-         - 해당 ID가 없다는 내용의 패킷을 전송한다. `D2S_Login`
+         - ~~해당 ID가 없다는 내용의 패킷을 전송한다. `D2S_Login`~~
       
-      2. 해당 ID가 있는경우.
+      2. ~~해당 ID가 있는경우.~~
          
-         - password에 해당 ID의 salt를 섞어서 해싱한 후, 해당 ID의 password가 맞는지 검사한다.
+         - ~~password에 해당 ID의 salt를 섞어서 해싱한 후, 해당 ID의 password가 맞는지 검사한다.~~
            
-           1. 맞는경우, dbid를 서버에 건네준다. `D2S_Login`전송
+           1. ~~맞는경우, dbid를 서버에 건네준다. `D2S_Login`전송~~
            
-           2. 틀린경우, 0을 건네준다. `D2S_Login`전송
+           2. ~~틀린경우, 0을 건네준다. `D2S_Login`전송~~
   
   - 계정 생성 시도 (`S2D_CreateAccount`를 받은 경우 처리)
     
-    - 받은 id, password로 계정 생성 시도. (아래의 과정은 트랜잭션 처리해야함)
+    - ~~받은 id, password로 계정 생성 시도. (아래의 과정은 트랜잭션 처리해야함)~~
       
-      - Players테이블에 row추가. (player_id가 Unique Key이므로 중복X)
+      - ~~Players테이블에 row추가. (player_id가 Unique Key이므로 중복X)~~
       
-      - row추가에 성공했을 경우, OpenSSL을 사용해 난수의 salt (NVARCHAR(32))생성.
+      - ~~row추가에 성공했을 경우, OpenSSL을 사용해 난수의 salt (NVARCHAR(32))생성.~~
       
-      - password에 salt를 더해서 해싱한 이후 Accounts테이블에 해당 dbid로서 row추가.
+      - ~~password에 salt를 더해서 해싱한 이후 Accounts테이블에 해당 dbid로서 row추가.~~
       
-      - Elos테이블에 해당 dbid로서 row추가.
+      - ~~Elos테이블에 해당 dbid로서 row추가.~~
   
   - Server에게 player의 mmr을 조회할 수 있도록 한다.
   

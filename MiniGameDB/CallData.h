@@ -71,7 +71,7 @@ public:
 
 private:
     void fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const string& id, bool& S1);
-    void fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id);
+    void fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id, bool& flag);
     void fSQL3(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const string& id, SQLINTEGER& dbid);
     void fSQL4(SQLHDBC& hDbc, SQLHSTMT& hStmt4, const string& password, SQLINTEGER& dbid);
     void fSQL5(SQLHDBC& hDbc, SQLHSTMT& hStmt5, SQLINTEGER& dbid);

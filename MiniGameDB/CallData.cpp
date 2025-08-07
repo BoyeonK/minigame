@@ -263,13 +263,8 @@ void DCreateAccountCallData::Proceed() {
                 if (hStmt5 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt5);
             });
 
-            //bool isDupl = false;
+            bool isSuccess = false;
             
-            //중복 ID가 있는지 검색.
-            //fSQL1(hDbc, hStmt1, id, isDupl);
-
-            //없는경우 아래 쿼리 실행
-
             //트랜잭션 설정
             SQLRETURN ret = SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, SQL_IS_UINTEGER);
             if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
@@ -278,20 +273,36 @@ void DCreateAccountCallData::Proceed() {
             attr = true;
 
             //중앙 테이블인 Players row INSERT
-            fSQL2(hDbc, hStmt2, id);
+            fSQL2(hDbc, hStmt2, id, isSuccess);
 
-            //해당 테이블의 dbid를 가져옴.
-            SQLINTEGER dbid = -1;
-            fSQL3(hDbc, hStmt3, id, dbid);
+            //INSERT에 성공한 경우.
+            if (isSuccess) {
+                //해당 테이블의 dbid를 가져옴.
+                SQLINTEGER dbid = -1;
+                fSQL3(hDbc, hStmt3, id, dbid);
 
-            //dbid로서 Accounts row INSERT
-            fSQL4(hDbc, hStmt4, password, dbid);
+                //dbid로서 Accounts row INSERT
+                fSQL4(hDbc, hStmt4, password, dbid);
 
-            //dbid로서 Elos row INSERT
-            fSQL5(hDbc, hStmt5, dbid);
+                //dbid로서 Elos row INSERT
+                fSQL5(hDbc, hStmt5, dbid);
 
-            SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
-            attr = false;
+                ret = SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
+                if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+                    throw runtime_error("Transaction Commit Failed");
+                }
+                attr = false;
+            }
+            else {
+                _reply.set_success(false);
+            }
+
+            SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_ON, SQL_IS_UINTEGER);
+            if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+                //hDbc가 null인 경우, pool에 반환되지 않게 동작하므로
+                hDbc = nullptr;
+                throw runtime_error("Failed to hDbc Auto Commit Setting");
+            }
         }
         catch (const runtime_error& e) {
             cout << e.what() << endl;
@@ -345,7 +356,7 @@ void DCreateAccountCallData::fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const string
     }
 }
 
-void DCreateAccountCallData::fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id) {
+void DCreateAccountCallData::fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id, bool& flag) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         cout << "hStmt2 할당 실패;" << endl;
@@ -359,15 +370,31 @@ void DCreateAccountCallData::fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string
     }
 
     wstring wId = GDBManager->a2wsRef(id);
+    SQLLEN idLen = SQL_NTS;
     ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wId.size(), 0, (SQLPOINTER)wId.c_str(), 0, &idLen);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
         throw runtime_error("D2S_CreateAccount : S2 Bind Parameter Failed");
     }
 
     ret = SQLExecute(hStmt2);
-    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
-        throw runtime_error("D2S_CreateAccount : S2 Execute Failed");
+    if (!SQL_SUCCEEDED(ret)) {
+        SQLWCHAR sqlState[6] = { 0 };
+        SQLINTEGER nativeError;
+        SQLWCHAR messageText[1024] = { 0 };
+        SQLSMALLINT textLength;
+        SQLSMALLINT recNumber = 1;
+
+        SQLGetDiagRecW(SQL_HANDLE_STMT, hStmt2, recNumber, sqlState, &nativeError, messageText, sizeof(messageText) / sizeof(SQLWCHAR), &textLength);
+        if (wstring(sqlState) == L"23000") {
+            flag = false;
+            cout << 23000 << endl;
+            return;
+        }
+        else {
+            throw runtime_error("D2S_CreateAccount : S2 Execute Failed");
+        }
     }
+    flag = true;
 }
 
 void DCreateAccountCallData::fSQL3(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const string& id, SQLINTEGER& dbid) {

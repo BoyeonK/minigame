@@ -311,7 +311,9 @@ SQLHDBC DBManager::PopHDbc() {
 
 void DBManager::ReturnHDbc(SQLHDBC hDbc) {
     lock_guard<mutex> lock(_mtx);
-    _hDbcQ.push(hDbc);
+    if (hDbc != nullptr) {
+        _hDbcQ.push(hDbc);
+    }
 }
 
 void DBManager::InitialC() {
