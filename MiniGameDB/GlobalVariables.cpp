@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GlobalVariables.h"
+#include <openssl/rand.h>
 
 DBManager* GDBManager = nullptr;
 ThreadManager* GThreadManager = nullptr;
@@ -525,6 +526,82 @@ void DBManager::ScandinavianFlick() {
         return;
     }
 
+    SQLHSTMT hStmt4 = nullptr;
+    ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt4);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        return;
+    }
+    Cleaner hStmt4Cleaner([=]() {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt4);
+    });
+
+    query = L"INSERT INTO Accounts (dbid, password_hash, salt) VALUES (?, ?, ?)";
+    ret = SQLPrepareW(hStmt4, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt4)) {
+        return;
+    }
+    vector<unsigned char> salt(DBManager::salt_size);
+    vector<unsigned char> hash(DBManager::hash_size);
+    if (RAND_bytes(salt.data(), DBManager::salt_size) != 1) {
+        cout << "이거실패" << endl;
+        return;
+    }
+
+    if (PKCS5_PBKDF2_HMAC(
+        password.c_str(),
+        password.length(),
+        salt.data(),
+        salt.size(),
+        DBManager::pbkdf2_iter,
+        EVP_sha256(),
+        DBManager::hash_size,
+        hash.data()
+    ) != 1) {
+        cout << "그거실패" << endl;
+        return;
+    }
+
+    wstring wHashword = GDBManager->v2wsRef(hash);
+    wstring wSalt = GDBManager->v2wsRef(salt);
+    ret = SQLBindParameter(hStmt4, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt4)) {
+        return;
+    }
+    SQLLEN wHashLen = SQL_NTS;
+    ret = SQLBindParameter(hStmt4, 2, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wHashword.size(), 0, (SQLPOINTER)wHashword.c_str(), 0, &wHashLen);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt4)) {
+        return;
+    }
+    SQLLEN wSaltLen = SQL_NTS;
+    ret = SQLBindParameter(hStmt4, 3, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wSalt.size(), 0, (SQLPOINTER)wSalt.c_str(), 0, &wSaltLen);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt4)) {
+        return;
+    }
+
+    ret = SQLExecute(hStmt4);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt4)) {
+        return;
+    }
+
+    SQLHSTMT hStmt5 = nullptr;
+    ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt5);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        return;
+    }
+    Cleaner hStmt5Cleaner([=]() {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt5);
+    });
+
+    query = L"INSERT INTO Elos (dbid) VALUES (?)";
+    ret = SQLPrepareW(hStmt5, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt5)) {
+        return;
+    }
+    ret = SQLBindParameter(hStmt5, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
+    ret = SQLExecute(hStmt5);
+
+    SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
+    Lovely_Labrynth_Of_The_Silver_Castle.dismiss();
 }
 
 ThreadManager::ThreadManager() {
