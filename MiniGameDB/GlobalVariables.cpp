@@ -357,8 +357,8 @@ void DBManager::InitialR() {
     SQLINTEGER svalue;
 
     while (SQLFetch(hStmt) == SQL_SUCCESS) {
-        SQLGetData(hStmt, 1, SQL_C_SLONG, &sid, 0, NULL);
-        SQLGetData(hStmt, 2, SQL_C_SLONG, &svalue, 0, NULL);
+        SQLGetData(hStmt, 1, SQL_C_SLONG, &sid, sizeof(sid), NULL);
+        SQLGetData(hStmt, 2, SQL_C_SLONG, &svalue, sizeof(svalue), NULL);
         cout << "R sequence is done. id : " << sid << " value: " << svalue << endl;
     }
     SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
@@ -702,7 +702,7 @@ void DBManager::ScandinavianFlick() {
     ret = SQLFetch(hStmt1);
     // SQL문 성공은 했다 (데이터 없음) or SQL문 성공해서 결과를 들고왔다
     if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
-        ret = SQLGetData(hStmt1, 1, SQL_C_SLONG, &dbid, 0, NULL);
+        ret = SQLGetData(hStmt1, 1, SQL_C_SLONG, &dbid, sizeof(dbid), NULL);
         // 정상 동작 1, 가져오는데 성공
         if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
             flag = true;
