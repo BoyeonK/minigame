@@ -42,16 +42,19 @@ DBManager::DBManager() : _hEnv(nullptr) {
     }
 
     //CRUD 테스트
+#ifdef _DEBUG
     try {
         InitialC();
         InitialR();
         InitialU();
         InitialD();
+        AkagiRedSunsNo2();
         ScandinavianFlick();
     }
     catch (const runtime_error& e) {
         cerr << e.what() << endl;
-    } 
+    }
+#endif 
 }
 
 DBManager::~DBManager() {
@@ -174,6 +177,52 @@ wstring DBManager::v2wsRef(const vector<unsigned char>& in_binary) {
         ws << hex << setw(2) << setfill(L'0') << static_cast<int>(byte);
     }
     return ws.str();
+}
+
+vector<unsigned char> DBManager::s2vRef(const string& hex_str) {
+    vector<unsigned char> in_binary;
+    // 입력 문자열의 길이가 홀수이면 변환 불가
+    if (hex_str.length() % 2 != 0) {
+        throw invalid_argument("16진수 문자열의 길이가 홀수입니다.");
+    }
+
+    for (size_t i = 0; i < hex_str.length(); i += 2) {
+        // 16진수 문자 2개(예: "ab")를 unsigned int로 변환
+        string byte_string = hex_str.substr(i, 2);
+        unsigned int byte_val = 0;
+        stringstream ss;
+        ss << hex << byte_string;
+        ss >> byte_val;
+
+        in_binary.push_back(static_cast<unsigned char>(byte_val));
+    }
+    return in_binary;
+}
+
+string DBManager::ws2sRef(const wstring& in_u16ws) {
+    if (in_u16ws.empty()) {
+        return "";
+    }
+
+    // 1. 필요한 버퍼 크기 계산
+    int s_len = WideCharToMultiByte(CP_UTF8, 0, in_u16ws.c_str(), -1, nullptr, 0, nullptr, nullptr);
+    if (s_len == 0) {
+        throw runtime_error("Failed to determine buffer size for string conversion.");
+    }
+
+    // 2. 할당
+    string s;
+    s.resize(s_len - 1); // 널 종료 문자 제외하고 크기 할당
+
+    // 3. 값 채우기
+    if (!WideCharToMultiByte(CP_UTF8, 0, in_u16ws.c_str(), -1, &s[0], s_len, nullptr, nullptr))
+        throw runtime_error("ws2s: Failed to convert ws to string. LastError: " + to_string(GetLastError()));
+    return s;
+}
+
+vector<unsigned char> DBManager::ws2vRef(const wstring& ws) {
+    string hex_str = ws2sRef(ws);
+    return s2vRef(hex_str);
 }
 
 wstring DBManager::CreateQuery(const wstring& tableName, initializer_list<wstring> wstrs) {
@@ -389,7 +438,7 @@ void DBManager::InitialD() {
     SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
 }
 
-void DBManager::ScandinavianFlick() {
+void DBManager::AkagiRedSunsNo2() {
     string myId = "tetepiti149";
     wstring wId = GDBManager->a2wsRef(myId);
     string password = "qwe123";
@@ -401,7 +450,10 @@ void DBManager::ScandinavianFlick() {
         cout << "불량 hDbc 이슈" << endl;
         return;
     }
-
+    
+    //당장 이 함수 내에서는 그럴 일이 없겠지만,
+    //멀티스레드환경을 고려했을 때, Cleaner는 1개로 통일하는 것이 좋다. (초기화 순서 보장)
+    //롤백 되기전에 hDbc 핸들이 초기화 될 가능성이 있다.
     Cleaner hDbcCleaner([=]() {
         ReturnHDbc(hDbc);
     });
@@ -448,7 +500,7 @@ void DBManager::ScandinavianFlick() {
 
     ret = SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, SQL_IS_UINTEGER);
     if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-        cout << "레드 리부트 맞음. 망했음." << endl;
+        cout << "레드 리부트 맞음." << endl;
         return;
     }
     Cleaner Lovely_Labrynth_Of_The_Silver_Castle([=]() {
@@ -602,6 +654,160 @@ void DBManager::ScandinavianFlick() {
 
     SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
     Lovely_Labrynth_Of_The_Silver_Castle.dismiss();
+}
+
+void DBManager::ScandinavianFlick() {
+    string id = "tetepiti149";
+    string password = "qwe123";
+    SQLHSTMT hStmt1 = nullptr;
+    SQLHSTMT hStmt2 = nullptr;
+    SQLHDBC hDbc = PopHDbc();
+
+    //스코프를 벗어날때 자원을 해제해 줄 친구들
+    Cleaner hDbcCleaner([=]() { ReturnHDbc(hDbc); });
+    Cleaner hStmtCleaner([=]() {
+        if (hStmt1 != nullptr)
+            SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+        if (hStmt2 != nullptr)
+            SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);
+    });
+
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        return;
+    }
+
+    wstring query = L"SELECT dbid FROM Players WHERE player_id = ?";
+    ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        return;
+    }
+
+    wstring wId = a2wsRef(id);
+
+    SQLLEN idLen = SQL_NTS;
+    ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wId.size(), 0, (SQLPOINTER)wId.c_str(), 0, &idLen);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        return;
+    }
+
+    ret = SQLExecute(hStmt1);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        return;
+    }
+
+    SQLINTEGER dbid;
+    bool flag = false;
+
+    ret = SQLFetch(hStmt1);
+    // SQL문 성공은 했다 (데이터 없음) or SQL문 성공해서 결과를 들고왔다
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        ret = SQLGetData(hStmt1, 1, SQL_C_SLONG, &dbid, 0, NULL);
+        // 정상 동작 1, 가져오는데 성공
+        if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+            flag = true;
+        }
+        //? 있는데 보여주긴 싫음? 이건 무슨상황
+        else {
+            cout << "Failed to get data" << endl;
+            return;
+        }
+    }
+    // 정상 동작 2, 일치하는 데이터가 없음. DB잘못이 아님. 사람 잘못.
+    else if (ret == SQL_NO_DATA) {
+        cout << "No Data" << endl;
+        return;
+    }
+    // SQL문 Fetch에 실패함.
+    else {
+        return;
+    }
+
+    ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        return;
+    }
+
+    query = L"SELECT password_hash, salt FROM Accounts WHERE dbid = ?";
+    ret = SQLPrepareW(hStmt2, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        return;
+    }
+
+    int targetDbid = dbid;
+    ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &targetDbid, 0, NULL);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        return;
+    }
+
+    ret = SQLExecute(hStmt2);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        return;
+    }
+
+    flag = false;
+
+    ret = SQLFetch(hStmt2);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        flag = true;
+    }
+    else if (ret == SQL_NO_DATA) {
+        cout << "일치하는 데이터가 없습니다." << endl;
+        return;
+    }
+    else {
+        return;
+    }
+
+    // 결과 데이터 버퍼 준비
+    const size_t HASH_SIZE = 64;
+    const size_t SALT_SIZE = 32;
+    wstring password_hash(HASH_SIZE, L' ');
+    wstring salt(SALT_SIZE, L' ');
+    SQLLEN hash_ind, salt_ind;
+
+    // password_hash와 salt 데이터를 가져옴
+    ret = SQLGetData(hStmt2, 1, SQL_C_WCHAR, password_hash.data(), (HASH_SIZE + 1) * sizeof(wchar_t), &hash_ind);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        return;
+    }
+    password_hash.resize(hash_ind / sizeof(wchar_t));
+
+    ret = SQLGetData(hStmt2, 2, SQL_C_WCHAR, salt.data(), (SALT_SIZE + 1) * sizeof(wchar_t), &salt_ind);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        return;
+    }
+    salt.resize(salt_ind / sizeof(wchar_t));
+
+    wcout << L"Hash: " << password_hash << endl;
+    wcout << L"Salt: " << salt << endl;
+
+    vector<unsigned char> requestedVHash(DBManager::hash_size);
+    vector<unsigned char> vSalt = ws2vRef(salt);
+    
+    if (vSalt.size() != DBManager::salt_size) {
+        cout << "이게 다르면 안대징" << endl;
+        return;
+    }
+
+    if (PKCS5_PBKDF2_HMAC(
+        password.c_str(),
+        password.length(),
+        vSalt.data(),
+        vSalt.size(),
+        DBManager::pbkdf2_iter,
+        EVP_sha256(),
+        DBManager::hash_size,
+        requestedVHash.data()
+    ) != 1) {
+        cout << "그거실패" << endl;
+        return;
+    }
+
+    wstring requestedWHash = GDBManager->v2wsRef(requestedVHash);
+    if (requestedWHash == password_hash) {
+        cout << "성공" << endl;
+    }
 }
 
 ThreadManager::ThreadManager() {
