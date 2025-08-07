@@ -87,4 +87,17 @@ class PacketMaker {
         C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CLogin);
         return pkt;
     }
+
+    private static C_CreateAccount MakeCCreateAccountInternal(string id, string password) {
+        return new C_CreateAccount {
+            Id = id,
+            Password = password,
+        };
+    }
+
+    public static C_Encrypted MakeCCreateAccount(PacketSession session, string id, string password) {
+        C_CreateAccount rawPkt = MakeCCreateAccountInternal(id, password);
+        C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CCreateAccount);
+        return pkt;
+    }
 }
