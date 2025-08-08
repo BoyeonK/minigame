@@ -42,13 +42,13 @@
     <ClInclude Include="S2C_Protocol.pb.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
-    <ClInclude Include="ServerPacketHandler.h">
+    <ClInclude Include="S2CPacketHandler.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
     <ClInclude Include="DBClientImpl.h">
       <Filter>S2D</Filter>
     </ClInclude>
-    <ClInclude Include="ServerServiceImpl.h">
+    <ClInclude Include="S2CServerServiceImpl.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
     <ClInclude Include="S2D_CallData.h">
@@ -87,13 +87,13 @@
     <ClCompile Include="S2C_Protocol.pb.cc">
       <Filter>S2C\Network</Filter>
     </ClCompile>
-    <ClCompile Include="ServerPacketHandler.cpp">
+    <ClCompile Include="S2CPacketHandler.cpp">
       <Filter>S2C\Network</Filter>
     </ClCompile>
     <ClCompile Include="DBClientImpl.cpp">
       <Filter>S2D</Filter>
     </ClCompile>
-    <ClCompile Include="ServerServiceImpl.cpp">
+    <ClCompile Include="S2CServerServiceImpl.cpp">
       <Filter>S2C\Network</Filter>
     </ClCompile>
     <ClCompile Include="S2D_CallData.cpp">

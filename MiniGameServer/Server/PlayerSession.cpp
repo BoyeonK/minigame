@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "PlayerSession.h"
 #include "ServerGlobal.h"
-#include "ServerPacketHandler.h"
 #include "S2CPacketMaker.h"
+#include "S2CPacketHandler.h"
 
 void PlayerSession::OnConnected() {
 	cout << "Player Session Onconnected!" << endl;
@@ -24,7 +24,7 @@ void PlayerSession::OnConnected() {
 	}
 
 	S2C_Protocol::S_Welcome sendPkt = S2CPacketMaker::MakeSWelcome(publicKey, _gameVersion);
-	shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(sendPkt);
 	Send(sendBuffer);
 }
 
@@ -33,7 +33,7 @@ void PlayerSession::OnDisconnected() {
 }
 
 void PlayerSession::OnRecvPacket(unsigned char* buffer, int32_t len) {
-	ServerPacketHandler::HandlePacket(static_pointer_cast<PBSession>(shared_from_this()), buffer, len);
+	S2CPacketHandler::HandlePacket(static_pointer_cast<PBSession>(shared_from_this()), buffer, len);
 }
 
 EVP_PKEY* PlayerSession::GetRSAKey() {

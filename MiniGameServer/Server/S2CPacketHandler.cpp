@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "ServerPacketHandler.h"
+#include "S2CPacketHandler.h"
 #include "PlayerSession.h"
 #include "S2CPacketMaker.h"
 
@@ -102,7 +102,7 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 
 	S2C_Protocol::S_WelcomeResponse sendPkt = S2CPacketMaker::MakeSWelcomeResponse(recvPkt.message(), true);
 	//shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt);
-	shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt, playerSessionRef->GetAESKey());
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(sendPkt, playerSessionRef->GetAESKey());
 	if (sendBuffer == nullptr) {
 		return false;
 	}

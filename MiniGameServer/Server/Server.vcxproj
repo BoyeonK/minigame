@@ -171,10 +171,10 @@
     <ClInclude Include="S2D_Protocol.pb.h" />
     <ClInclude Include="ServerGlobal.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="ServerPacketHandler.h" />
+    <ClInclude Include="S2CPacketHandler.h" />
     <ClInclude Include="PlayerSession.h" />
     <ClInclude Include="S2CPacketMaker.h" />
-    <ClInclude Include="ServerServiceImpl.h" />
+    <ClInclude Include="S2CServerServiceImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="S2DPacketMaker.cpp" />
@@ -200,10 +200,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Server.cpp" />
-    <ClCompile Include="ServerPacketHandler.cpp" />
+    <ClCompile Include="S2CPacketHandler.cpp" />
     <ClCompile Include="PlayerSession.cpp" />
     <ClCompile Include="S2CPacketMaker.cpp" />
-    <ClCompile Include="ServerServiceImpl.cpp" />
+    <ClCompile Include="S2CServerServiceImpl.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

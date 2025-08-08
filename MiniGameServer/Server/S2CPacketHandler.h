@@ -24,7 +24,7 @@ bool Handle_C_ENCRYPTED(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome& pkt);
 bool Handle_C_LOGIN(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt);
 
-class ServerPacketHandler {
+class S2CPacketHandler {
 public:
 	static void Init() {
 		for (int32_t i = 0; i < UINT16_MAX; i++)

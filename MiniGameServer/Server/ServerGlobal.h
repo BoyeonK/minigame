@@ -3,12 +3,12 @@
 #include <unordered_map>
 #include <cstring>
 #include "DBClientImpl.h"
-#include "ServerServiceImpl.h"
+#include "S2CServerServiceImpl.h"
 
 //extern class ObjectManager* GObjectManager;
 extern class CryptoManager* GCryptoManager;
 extern class DBClientImpl* DBManager;
-extern class shared_ptr<ServerServiceImpl> GServerService;
+extern class shared_ptr<S2CServerServiceImpl> GServerService;
 
 //높은 확률로 S2C 컨텐츠로 옮겨질 예정.
 /*

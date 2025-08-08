@@ -3,9 +3,9 @@
 
 shared_ptr<PlayerSession> PSfactory(); 
 
-class ServerServiceImpl : public ServerService {
+class S2CServerServiceImpl : public ServerService {
 public:
-	ServerServiceImpl(
+	S2CServerServiceImpl(
 		shared_ptr<CPCore>CPCoreRef,
 		NetAddress address,
 		uint32_t maxSessionCount
