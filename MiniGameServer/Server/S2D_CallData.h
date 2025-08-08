@@ -36,6 +36,11 @@ public:
 
 	void OnSucceed() override;
 	void OnFailed() override;
+
+	void CorrectIP(int32_t dbid);
+	void CorrectI();
+	void IncorrectI();
+
 	void ReturnToPool() {
 		objectPool<SLoginCall>::dealloc(this);
 	}
