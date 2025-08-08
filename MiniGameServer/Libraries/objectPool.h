@@ -58,13 +58,13 @@ public:
 	}
 
 	static void dealloc(_Ty* ptr) {
-		ptr->~_Ty();
-		PSLIST_ENTRY pSE = reinterpret_cast<PSLIST_ENTRY>(ptr) - 1;
-		_poolHeader.pushEntry(pSE);
 #ifdef _DEBUG
 		_counter._uses.fetch_sub(1);
 		_counter._reserves.fetch_add(1);
 #endif
+		PSLIST_ENTRY pSE = reinterpret_cast<PSLIST_ENTRY>(ptr) - 1;
+		_poolHeader.pushEntry(pSE);
+		ptr->~_Ty();
 	}
 
 public:
