@@ -12,6 +12,8 @@ public:
 	void SetAESKey(vector<unsigned char>& AESKey);
 	vector<unsigned char> GetAESKey();
 
+	void SetSecureLevel(int32_t lv);
+
 private:
 	EVP_PKEY* _RSAKey;
 	vector<unsigned char> _AESKey;

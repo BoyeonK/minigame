@@ -83,7 +83,10 @@ public:
 	PBSession() { }
 	~PBSession() { }
 
+	int32_t GetSecureLevel();
+
 protected:
 	virtual int32_t OnRecv(unsigned char* buffer, int32_t len) sealed;
 	virtual void OnRecvPacket(unsigned char* buffer, int32_t len) abstract;
+	int32_t _secureLevel = 2;
 };

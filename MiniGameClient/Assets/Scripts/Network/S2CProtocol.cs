@@ -36,8 +36,8 @@ namespace Google.Protobuf.Protocol {
             "ABINCgNlcnIYAiABKAlIAEIMCgp2YWx1ZV9jYXNlIi8KD0NfQ3JlYXRlQWNj",
             "b3VudBIKCgJpZBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSIvCg9TX0NyZWF0",
             "ZUFjY291bnQSDwoHc3VjY2VzcxgBIAEoCBILCgNlcnIYAiABKAkqpQEKBU1z",
-            "Z0lkEg8KC1NfRU5DUllQVEVEEAASDwoLQ19FTkNSWVBURUQQARINCglTX1dF",
-            "TENPTUUQAhINCglDX1dFTENPTUUQAxIWChJTX1dFTENPTUVfUkVTUE9OU0UQ",
+            "Z0lkEg0KCVNfV0VMQ09NRRAAEg0KCUNfV0VMQ09NRRABEhYKElNfV0VMQ09N",
+            "RV9SRVNQT05TRRACEg8KC1NfRU5DUllQVEVEEAMSDwoLQ19FTkNSWVBURUQQ",
             "BBILCgdDX0xPR0lOEAUSCwoHU19MT0dJThAGEhQKEENfQ1JFQVRFX0FDQ09V",
             "TlQQBxIUChBTX0NSRUFURV9BQ0NPVU5UEAhCG6oCGEdvb2dsZS5Qcm90b2J1",
             "Zi5Qcm90b2NvbGIGcHJvdG8z"));
@@ -60,11 +60,11 @@ namespace Google.Protobuf.Protocol {
   }
   #region Enums
   public enum MsgId {
-    [pbr::OriginalName("S_ENCRYPTED")] SEncrypted = 0,
-    [pbr::OriginalName("C_ENCRYPTED")] CEncrypted = 1,
-    [pbr::OriginalName("S_WELCOME")] SWelcome = 2,
-    [pbr::OriginalName("C_WELCOME")] CWelcome = 3,
-    [pbr::OriginalName("S_WELCOME_RESPONSE")] SWelcomeResponse = 4,
+    [pbr::OriginalName("S_WELCOME")] SWelcome = 0,
+    [pbr::OriginalName("C_WELCOME")] CWelcome = 1,
+    [pbr::OriginalName("S_WELCOME_RESPONSE")] SWelcomeResponse = 2,
+    [pbr::OriginalName("S_ENCRYPTED")] SEncrypted = 3,
+    [pbr::OriginalName("C_ENCRYPTED")] CEncrypted = 4,
     [pbr::OriginalName("C_LOGIN")] CLogin = 5,
     [pbr::OriginalName("S_LOGIN")] SLogin = 6,
     [pbr::OriginalName("C_CREATE_ACCOUNT")] CCreateAccount = 7,

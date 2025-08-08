@@ -76,7 +76,8 @@ bool Handle_C_ENCRYPTED(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 	
 	cout << "plaintext 추출" << endl;
 
-	if (msgId > 6 or msgId < 2) {
+	if (msgId > sessionRef->GetSecureLevel()) {
+		cout << "보안 레벨에 맞지 않는 패킷. " << endl;
 		return false;
 	}
 
@@ -101,21 +102,28 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 	playerSessionRef->SetAESKey(move(AESKey));
 
 	S2C_Protocol::S_WelcomeResponse sendPkt = S2CPacketMaker::MakeSWelcomeResponse(recvPkt.message(), true);
-	//shared_ptr<SendBuffer> sendBuffer = ServerPacketHandler::MakeSendBufferRef(sendPkt);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(sendPkt, playerSessionRef->GetAESKey());
+
+	/*
+	S2C_Protocol::S_WelcomeResponse baseSendPkt = S2CPacketMaker::MakeSWelcomeResponse(recvPkt.message(), true);
+	S2C_Protocol::S_Encrypted sendPkt = S2CPacketMaker::MakeSEncrypted(baseSendPkt, PKT_S_WELCOMERESPONSE, playerSessionRef->GetAESKey());
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(sendPkt);
+	*/
+
 	if (sendBuffer == nullptr) {
 		return false;
 	}
 	playerSessionRef->Send(sendBuffer);
+	playerSessionRef->SetSecureLevel(8);
+
 	cout << "S_WelcomeResponse 전송" << endl;
+
 	return true;
 }
 
 bool Handle_C_LOGIN(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt) {
 	//PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
 	//TODO : ID와 password를 받아서 로그인을 수행한다.
-	cout << "ㅇ" << endl;
-
 	DBManager->S2D_Login(sessionRef, pkt.id(), pkt.password());
 
 	return false;

@@ -22,7 +22,9 @@ class PacketHandler {
 	public static void S_WelcomeHandler(PacketSession session, IMessage packet) {
 		S_Welcome sWelcomePacket = packet as S_Welcome;
 
-		if (sWelcomePacket.Gameversion != Managers.GameVersion)	{
+		if (sWelcomePacket.Gameversion != Managers.GameVersion) {
+            Debug.Log($"서버의 게임 버전 : {sWelcomePacket.Gameversion}");
+            Debug.Log($"클라이언트의 게임 버전 : {Managers.GameVersion}");
 			//현재는 클라이언트를 즉시 종료하지만, 팝업으로 에러메세지를 띄우고
 			//이후 종료를 유도하는 쪽이 바람직해 보임.
 			Debug.LogError("서버와 클라이언트의 버전이 일치하지 않습니다.");

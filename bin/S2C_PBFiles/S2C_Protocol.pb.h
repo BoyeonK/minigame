@@ -88,11 +88,11 @@ namespace protobuf {
 
 namespace S2C_Protocol {
 enum MsgId : int {
-  S_ENCRYPTED = 0,
-  C_ENCRYPTED = 1,
-  S_WELCOME = 2,
-  C_WELCOME = 3,
-  S_WELCOME_RESPONSE = 4,
+  S_WELCOME = 0,
+  C_WELCOME = 1,
+  S_WELCOME_RESPONSE = 2,
+  S_ENCRYPTED = 3,
+  C_ENCRYPTED = 4,
   C_LOGIN = 5,
   S_LOGIN = 6,
   C_CREATE_ACCOUNT = 7,

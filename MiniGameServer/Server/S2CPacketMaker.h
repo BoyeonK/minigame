@@ -4,10 +4,10 @@
 class S2CPacketMaker {
 public:
 	template<typename PBType>
-	static S2C_Protocol::S_Encrypted MakeSEncrypted(const PBType& pkt, uint16_t pktId, const vector<unsigned char>& AESKey) {
+	static S2C_Protocol::S_Encrypted MakeSEncrypted(const PBType& basePkt, uint16_t pktId, const vector<unsigned char>& AESKey) {
 		S2C_Protocol::S_Encrypted pkt;
 
-		string serializedStr = pkt.SerializeAsString();
+		string serializedStr = basePkt.SerializeAsString();
 		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
 		vector<unsigned char> iv, ciphertext, tag;
 		if (!(GCryptoManager->Encrypt(AESKey, plaintext, (int32_t)pktId, iv, ciphertext, tag))) {

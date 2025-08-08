@@ -10,13 +10,15 @@ extern PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
 //name convention : 서버에서 보내는(클라가 받는) S_
 //					클라에서 보내는(서버가 받는) C_
 enum : uint16_t {
-	PKT_S_ENCRYPTED = 0,
-	PKT_C_ENCRYPTED = 1,
-	PKT_S_WELCOME = 2,
-	PKT_C_WELCOME = 3,
-	PKT_S_WELCOMERESPONSE = 4,
+	PKT_S_WELCOME = 0,
+	PKT_C_WELCOME = 1,
+	PKT_S_WELCOMERESPONSE = 2,
+	PKT_S_ENCRYPTED = 3,
+	PKT_C_ENCRYPTED = 4,
 	PKT_C_LOGIN = 5,
 	PKT_S_LOGIN = 6,
+	PKT_C_CREATE_ACCOUNT = 7,
+	PKT_S_CREATE_ACCOUNT = 8,
 };
 
 bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
@@ -41,6 +43,11 @@ public:
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
 		//TODO: Session에 허락된 범주의 pktId의 핸들러만 실행하기.
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
+		if (header->_id > sessionRef->GetSecureLevel()) {
+			cout << "보안 레벨에 맞지 않는 패킷. " << endl;
+			return false;
+		}
+
 		return GPacketHandler[header->_id](sessionRef, buffer, len);
 	}
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Encrypted& pkt) { return MakeSendBufferRef(pkt, PKT_S_ENCRYPTED); }
@@ -106,7 +113,7 @@ private:
 		shared_ptr<SendBuffer> sendBufferRef = GSendBufferManager->Open(packetSize);
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(sendBufferRef->Buffer());
 		header->_size = packetSize;
-		header->_id = 0;
+		header->_id = PKT_S_ENCRYPTED;
 		sendPkt.SerializeToArray(&header[1]/*(++header)*/, dataSize);
 		sendBufferRef->Close(packetSize);
 

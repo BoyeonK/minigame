@@ -250,3 +250,7 @@ int32_t PBSession::OnRecv(unsigned char* buffer, int32_t len) {
 	
 	return processLen;
 }
+
+int32_t PBSession::GetSecureLevel() {
+	return _secureLevel;
+}
