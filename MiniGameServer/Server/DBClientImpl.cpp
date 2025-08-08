@@ -20,7 +20,7 @@ void DBClientImpl::HelloAsync() {
 #endif
 
 void DBClientImpl::S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password) {
-    SLoginCall* call = objectPool<SLoginCall>::alloc();
+    SLoginCall* call = objectPool<SLoginCall>::alloc(sessionRef);
     S2D_Protocol::S2D_Login request = S2DPacketMaker::Make_S2D_Login(id, password);
 
     call->response_reader = _stub->PrepareAsyncLoginRequest(&call->context, request, _cqRef.get());

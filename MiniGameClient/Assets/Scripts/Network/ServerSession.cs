@@ -8,18 +8,12 @@ using System.Net;
 using UnityEngine;
 
 public class ServerSession : PacketSession {
-	//public bool IsConnected { get; private set; } = false;와 동일.
-	private bool _isConnected = false;
-	public bool IsConnected {
-		get => _isConnected;
-		private set { _isConnected = value; }
-	}
+	
 	private int _id = 0;
 	public int ID {
 		get => _id;
 		set { _id = value; }
 	}
-
 	public void Send(IMessage packet) {
 		string msgName = packet.Descriptor.Name.Replace("_", string.Empty);
 		MsgId msgId = (MsgId)Enum.Parse(typeof(MsgId), msgName);
@@ -42,7 +36,7 @@ public class ServerSession : PacketSession {
 			PacketQueue.Instance.Push(pktId, imessage);
 		};
 
-		_isConnected = true;
+		IsConnected = true;
 	}
 
 	public override void OnDisconnected(EndPoint endPoint) {

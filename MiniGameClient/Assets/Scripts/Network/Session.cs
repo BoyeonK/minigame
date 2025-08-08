@@ -10,13 +10,20 @@ namespace ServerCore {
 	public abstract class PacketSession : Session {
 		public static readonly int HeaderSize = 2;
 
+		//public bool IsConnected { get; private set; } = false;와 동일.
+		private bool _isConnected = false;
+		public bool IsConnected	{
+			get => _isConnected;
+			set { _isConnected = value; }
+		}
+
 		private byte[] _aesKey;
 		//_aesKey는, 사실상 public으로 열어 놓은 것과 같아 보이지만,
 		//이렇게 작성함으로서 _aesKey의 변화는 반드시 setter함수를 통해 이루어지며,
 		//나중에 생길 요구사항 변화에 좀 더 유연하게 대응할 수 있다. (유효성 검사 등의 로직 추가 등)
 		public byte[] AESKey {
 			get => _aesKey;
-			set {
+			set	{
 				if (value == null || value.Length != 32)
 					throw new ArgumentException("AES 키는 반드시 32바이트여야 합니다.");
 				_aesKey = value;

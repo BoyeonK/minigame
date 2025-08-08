@@ -135,18 +135,22 @@ class PacketHandler {
 		switch (recvPkt.ValueCaseCase) {
 			case (S_Login.ValueCaseOneofCase.Dbid):
 				if (recvPkt.Dbid == 0) {
+					Debug.Log("없는 아이디.");
 					// 실패
                 } else {
 					// 정상적인 로그인 성공
+					ServerSession ss = session as ServerSession;
+					ss.ID = recvPkt.Dbid;
+					Debug.Log($"{ss.ID} 내 아이디");
                 }
 				break;
 			case (S_Login.ValueCaseOneofCase.Err):
-				// 로그인 실패 (비밀번호 오류, 나중에는 없는 아이디일수도 있음.)
 				string errMsg = recvPkt.Err;
+                Debug.Log($"{errMsg}");
 				break;
 			case (S_Login.ValueCaseOneofCase.None):
 				// 값이 할당되지 않았을 때 (ㄹㅇ 버그)
-				Console.WriteLine("서버에서 온 로그인 응답이 매우 찐빠인 상황입니다.");
+				Debug.Log("매우찐빠");
 				break;
 		}
 	}

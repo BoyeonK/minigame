@@ -32,14 +32,14 @@ public:
 
 class SLoginCall final : public S2D_CallData {
 public:
+	SLoginCall(weak_ptr<PBSession> sessionRef) : _clientSessionRef(sessionRef) { }
 	~SLoginCall() { }
 
 	void OnSucceed() override;
 	void OnFailed() override;
 
-	void CorrectIP(int32_t dbid);
-	void CorrectI();
-	void IncorrectI();
+	void CorrectI(int32_t dbid);
+	void IncorrectI(bool incorrect_id);
 
 	void ReturnToPool() {
 		objectPool<SLoginCall>::dealloc(this);
@@ -47,6 +47,9 @@ public:
 
 	S2D_Protocol::D2S_Login reply;
 	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_Login>> response_reader;
+
+private:
+	weak_ptr<PBSession> _clientSessionRef;
 };
 
 class SCreateAccountCall final : public S2D_CallData {

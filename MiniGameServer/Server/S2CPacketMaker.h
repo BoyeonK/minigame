@@ -36,8 +36,22 @@ public:
 		return pkt;
 	}
 
-	static S2C_Protocol::S_Login MakeSLogin() {
+	static S2C_Protocol::S_Login MakeSLogin(int32_t dbid) {
 		S2C_Protocol::S_Login pkt;
+		pkt.set_dbid(dbid);
+		return pkt;
+	}
+
+	static S2C_Protocol::S_Login MakeSLogin(bool incorrect_id) {
+		S2C_Protocol::S_Login pkt;
+		if (incorrect_id) {
+			string err = "asdf";
+			pkt.set_err(err);
+		}
+		else {
+			string err = "qwer";
+			pkt.set_err(err);
+		}
 		return pkt;
 	}
 };

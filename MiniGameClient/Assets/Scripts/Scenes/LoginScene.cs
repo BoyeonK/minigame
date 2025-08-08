@@ -19,19 +19,15 @@ public class LoginScene : BaseScene {
                 Managers.Network.Send(pkt);
             }
         }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined()))
-            {
+        if (Input.GetKeyDown(KeyCode.S)) {
+            if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
                 Debug.Log("로그인 시도");
                 C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), "tetepiti149", "qwe1234");
                 Managers.Network.Send(pkt);
             }
         }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined()))
-            {
+        if (Input.GetKeyDown(KeyCode.X)) {
+            if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
                 Debug.Log("로그인 시도");
                 C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), "tetepiti14", "qwe123");
                 Managers.Network.Send(pkt);
