@@ -6,14 +6,14 @@
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
 
-bool Handle_INVALID(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
+bool Handle_Invalid(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
 #ifdef _DEBUG
 	cout << "Something goes wrong, Client sent invalid packet" << endl;
 #endif
 	return false;
 }
 
-bool Handle_C_ENCRYPTED(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encrypted& pkt) {
+bool Handle_C_Encrypted(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encrypted& pkt) {
 	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
 	//TODO : Session에 저장된 AESKey를 통해서 원본 Protobuf로 복구한 후, Handler함수를 동작시킨다.
 	const string& iv_str = pkt.iv();
@@ -84,7 +84,7 @@ bool Handle_C_ENCRYPTED(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 	return PlaintextHandler[msgId](sessionRef, plaintext);
 }
 
-bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome& recvPkt) {
+bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome& recvPkt) {
 	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
 	cout << "C_Welcome 패킷을 받았다." << endl;
 
@@ -121,10 +121,14 @@ bool Handle_C_WELCOME(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 	return true;
 }
 
-bool Handle_C_LOGIN(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt) {
+bool Handle_C_Login(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt) {
 	//PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
 	//TODO : ID와 password를 받아서 로그인을 수행한다.
 	DBManager->S2D_Login(sessionRef, pkt.id(), pkt.password());
 
 	return false;
+}
+
+bool Handle_C_CreateAccount(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_CreateAccount& pkt) {
+	return true;
 }

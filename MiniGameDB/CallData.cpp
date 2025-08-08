@@ -83,6 +83,7 @@ void DLoginCallData::Proceed() {
         catch (runtime_error& e) {
             cout << e.what() << endl;
         }
+
         _status = FINISH;
         _responder.Finish(_reply, stat, this);
     }
