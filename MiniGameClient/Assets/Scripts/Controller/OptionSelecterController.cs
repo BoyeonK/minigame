@@ -17,7 +17,7 @@ public class OptionSelecterController : MonoBehaviour {
     }
 
     private void PrOpt() {
-        _counter = (_counter - 1 + 4) % 4;
+        _counter = (_counter + 3) % 4;
         Debug.Log("Pre");
         ChangeLookDir();
     }
