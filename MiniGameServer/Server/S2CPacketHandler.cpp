@@ -123,12 +123,9 @@ bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 
 bool Handle_C_Login(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt) {
 	//PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
-	//TODO : ID와 password를 받아서 로그인을 수행한다.
-	DBManager->S2D_Login(sessionRef, pkt.id(), pkt.password());
-
-	return false;
+	return DBManager->S2D_Login(sessionRef, pkt.id(), pkt.password());
 }
 
 bool Handle_C_CreateAccount(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_CreateAccount& pkt) {
-	return true;
+	return DBManager->S2D_CreateAccount(sessionRef, pkt.id(), pkt.password());
 }

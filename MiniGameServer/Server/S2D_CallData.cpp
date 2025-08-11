@@ -54,6 +54,9 @@ void SLoginCall::CorrectI(int32_t dbid) {
 void SLoginCall::IncorrectI(bool incorrect_id) {
 	S2C_Protocol::S_Login pkt = S2CPacketMaker::MakeSLogin(incorrect_id);
 	shared_ptr<PlayerSession> sessionRef = static_pointer_cast<PlayerSession>(_clientSessionRef.lock());
+	if (sessionRef == nullptr) {
+		return;
+	}
 
 	//로그인 실패 (없는 아이디)
 	shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
@@ -62,10 +65,44 @@ void SLoginCall::IncorrectI(bool incorrect_id) {
 
 void SCreateAccountCall::OnSucceed() {
 	cout << "DB서버에 계정 생성 요청의 응답을 받음" << endl;
+	if (reply.success()) {
+		CreateComplete();
+		cout << "계정 생성 요청 성공." << endl;
+	}
+	else {
+		CreateFailed();
+		cout << "계정 생성 요청 실패." << endl;
+	}
+
 	//TODO: 계정 생성 성공, 실패여부를 bool값으로 확인한다.
 	//추후에는 이 성공, 실패여부를 클라이언트에 통보할 일이 있을것.
 }
 
 void SCreateAccountCall::OnFailed() {
 	//TODO: 뭔가 해야될거 같은데 당장 생각이 안나네
+}
+
+void SCreateAccountCall::CreateComplete() {
+	S2C_Protocol::S_CreateAccount pkt;
+	pkt.set_success(true);
+
+	shared_ptr<PlayerSession> sessionRef = static_pointer_cast<PlayerSession>(_clientSessionRef.lock());
+	if (sessionRef == nullptr) {
+		return;
+	}
+	shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
+	sessionRef->Send(sendBufferRef);
+}
+
+void SCreateAccountCall::CreateFailed() {
+	S2C_Protocol::S_CreateAccount pkt;
+	pkt.set_success(false);
+	pkt.set_err("Failed To create Account");
+
+	shared_ptr<PlayerSession> sessionRef = static_pointer_cast<PlayerSession>(_clientSessionRef.lock());
+	if (sessionRef == nullptr) {
+		return;
+	}
+	shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
+	sessionRef->Send(sendBufferRef);
 }

@@ -19,7 +19,7 @@ void DBClientImpl::HelloAsync() {
 }
 #endif
 
-void DBClientImpl::S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password) {
+bool DBClientImpl::S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password) {
     SLoginCall* call = objectPool<SLoginCall>::alloc(sessionRef);
     S2D_Protocol::S2D_Login request = S2DPacketMaker::Make_S2D_Login(id, password);
 
@@ -27,16 +27,18 @@ void DBClientImpl::S2D_Login(shared_ptr<PBSession> sessionRef, string id, string
     call->response_reader->StartCall();
 
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
+    return true;
 }
 
-void DBClientImpl::S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id, string password) {
-    SCreateAccountCall* call = objectPool<SCreateAccountCall>::alloc();
+bool DBClientImpl::S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id, string password) {
+    SCreateAccountCall* call = objectPool<SCreateAccountCall>::alloc(sessionRef);
     S2D_Protocol::S2D_CreateAccount request = S2DPacketMaker::Make_S2D_CreateAccount(id, password);
 
     call->response_reader = _stub->PrepareAsyncCreateAccountRequest(&call->context, request, _cqRef.get());
     call->response_reader->StartCall();
 
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
+    return true;
 }
 
 void DBClientImpl::AsyncCompleteRpc() {

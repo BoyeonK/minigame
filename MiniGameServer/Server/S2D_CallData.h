@@ -54,14 +54,22 @@ private:
 
 class SCreateAccountCall final : public S2D_CallData {
 public:
+	SCreateAccountCall(weak_ptr<PBSession> sessionRef) : _clientSessionRef(sessionRef) { }
 	~SCreateAccountCall() { }
 
 	void OnSucceed() override;
 	void OnFailed() override;
+	
+	void CreateComplete();
+	void CreateFailed();
+
 	void ReturnToPool() {
 		objectPool<SCreateAccountCall>::dealloc(this);
 	}
 
 	S2D_Protocol::D2S_CreateAccount reply;
 	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_CreateAccount>> response_reader;
+
+private:
+	weak_ptr<PBSession> _clientSessionRef;
 };

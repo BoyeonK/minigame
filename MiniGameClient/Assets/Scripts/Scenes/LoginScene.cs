@@ -40,6 +40,13 @@ public class LoginScene : BaseScene {
                 Managers.Network.Send(pkt);
             }
         }
+        if (Input.GetKeyDown(KeyCode.D)) {
+            if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
+                Debug.Log("계정생성 시도 로직이 들어가야 하는 자리");
+                C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), "erdfttgg", "qwe123");
+                Managers.Network.Send(pkt);
+            }
+        }
     }
 
     public override void Clear() {
