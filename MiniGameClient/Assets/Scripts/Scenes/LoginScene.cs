@@ -1,7 +1,6 @@
 using Google.Protobuf.Protocol;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static InputManager;
 
 public class LoginScene : BaseScene {
     protected override void Init() {
@@ -9,12 +8,12 @@ public class LoginScene : BaseScene {
         SceneType = Define.Scene.Login;
         Managers.Resource.Instantiate("UI/Popup/LoginPopup");
 
-        Managers.Input.AddKeyListener(KeyCode.Q, TryConnectToServer, KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.W, TryLoginCorrect, KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.S, TryLoginWrongPassword, KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.X, TryLoginWrongID, KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.E, TryCreateAccountCorrect, KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.D, TryCreateAccountExisting, KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.Q, TryConnectToServer, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.W, TryLoginCorrect, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.S, TryLoginWrongPassword, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.X, TryLoginWrongID, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.E, TryCreateAccountCorrect, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.D, TryCreateAccountExisting, InputManager.KeyState.Up);
     }
 
     private void TryConnectToServer() {
