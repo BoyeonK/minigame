@@ -4,32 +4,11 @@
 
 - Server
   
-  - 로그인
-    
-    - 로그인처리되지 않은 세션에서는, HandShake과정에서 필요한 패킷들과 로그인시도 패킷 이외의 모든 요청을 reject. (packetID > 6 인 패킷에 대한 처리를 하지 않는다.)
-    
-    - ~~암호화된 패킷으로서 Client에서 ID와 password를 받는다.~~
-    
-    - ~~DB를 조회한다. (`C2S_Login`을 받은 경우 `S2D_Login`전송)~~
-      
-      1. ~~있는 경우 (`D2S_Login`을 받은 경우 처리)~~
-         
-         1. 비밀번호가 맞은 경우 (0 이외의 값을 받았다.) : session에 해당 dbid를 session에 저장. 로그인 성공. `S2C_Login`에 True를 담아 전송.
-         
-         2. 비밀번호가 틀린 경우 (0을 받았다.) : 로그인 실패. 클라이언트에 통보. `S2C_Login`에 False를 담아 전송
-      
-      2. 없는 경우 (`D2S_Login`를 받은 경우 처리)
-         
-         - 계정을 만들고, 다시 로그인 시도한다. 
-           해당 ID와 password로 계정 생성을 시도. (`S2D_CreateAccount`전송. 지금은 새로 만들지만, 나중에 계정 생성 기능이 따로 생긴다면, 1-2와 동일하게 처리할 예정)
-           이후, OnSucceed함수로서 같은 ID, password로 DB조회 과정을 반복한다. (`S2D_Login` 전송과정부터 다시 시작.)
-           정상적인 경우, 1-1상황과 같아진다.
-  
   - 대기열 진입 로직 추가.
     
     - player의 elo를 토대로 매칭
       
-      - gRPC를 활용하여 DB에서 해당 player의 elo? mmr? 을 조회.
+      - gRPC를 활용하여 DB에서 해당 player의 elo를 조회
       
       - 2개의 vector를 사용.
         
@@ -43,39 +22,11 @@
   
   - 로그인UI `C2D_Login`에 ID와 password를 담을 수 있는 UI생성
   
-  - 대기열 진입 로직 추가. `C2D_MatchMaking`
+  - 계정 생성 성공시, 해당 아이디로 즉시 로그인.
   
-  - 일단은 dummy를 사용해서 test
+  - 대기열 진입 로직 추가. `C2D_MatchMaking`
 
 - DB
-  
-  - ~~로그인 시도 (`S2D_Login`을 받은 경우 처리)~~
-    
-    - ~~DB를 조회해서 해당 ID를 조회한다.~~
-      
-      1. ~~해당 ID가 없는경우.~~
-         
-         - ~~해당 ID가 없다는 내용의 패킷을 전송한다. `D2S_Login`~~
-      
-      2. ~~해당 ID가 있는경우.~~
-         
-         - ~~password에 해당 ID의 salt를 섞어서 해싱한 후, 해당 ID의 password가 맞는지 검사한다.~~
-           
-           1. ~~맞는경우, dbid를 서버에 건네준다. `D2S_Login`전송~~
-           
-           2. ~~틀린경우, 0을 건네준다. `D2S_Login`전송~~
-  
-  - 계정 생성 시도 (`S2D_CreateAccount`를 받은 경우 처리)
-    
-    - ~~받은 id, password로 계정 생성 시도. (아래의 과정은 트랜잭션 처리해야함)~~
-      
-      - ~~Players테이블에 row추가. (player_id가 Unique Key이므로 중복X)~~
-      
-      - ~~row추가에 성공했을 경우, OpenSSL을 사용해 난수의 salt (NVARCHAR(32))생성.~~
-      
-      - ~~password에 salt를 더해서 해싱한 이후 Accounts테이블에 해당 dbid로서 row추가.~~
-      
-      - ~~Elos테이블에 해당 dbid로서 row추가.~~
   
   - Server에게 player의 mmr을 조회할 수 있도록 한다.
   
@@ -99,4 +50,4 @@
 
 ### Until Today
 
-- 로그인 및 계정 생성
+- 
