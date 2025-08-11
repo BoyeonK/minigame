@@ -6,6 +6,7 @@ public class LoginScene : BaseScene {
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
+        Managers.Resource.Instantiate("UI/Popup/LoginPopup");
     }
 
     private void Update() {
