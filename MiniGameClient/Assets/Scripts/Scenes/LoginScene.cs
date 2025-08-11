@@ -6,7 +6,7 @@ public class LoginScene : BaseScene {
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
-        Managers.Resource.Instantiate("UI/Popup/LoginPopup");
+        Managers.UI.ShowPopupUI<UI_TestLoginPopup>();
 
         Managers.Input.AddKeyListener(KeyCode.Q, TryConnectToServer, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.W, TryLoginCorrect, InputManager.KeyState.Up);
