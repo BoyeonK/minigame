@@ -109,9 +109,9 @@ void DBManager::SetEnv() {
 
 bool DBManager::CheckReturn(SQLRETURN ret, SQLSMALLINT handleType, SQLHANDLE handle) {
     if (!SQL_SUCCEEDED(ret)) {
-        SQLWCHAR sqlState[6];
+        SQLWCHAR sqlState[6] = { 0 };
         SQLINTEGER nativeError;
-        SQLWCHAR messageText[1024];
+        SQLWCHAR messageText[1024] = { 0 };
         SQLSMALLINT textLength;
         SQLSMALLINT recNumber = 1;
 
@@ -225,32 +225,6 @@ vector<unsigned char> DBManager::ws2vRef(const wstring& ws) {
     return s2vRef(hex_str);
 }
 
-wstring DBManager::CreateQuery(const wstring& tableName, initializer_list<wstring> wstrs) {
-    if (wstrs.size() < 2 or wstrs.size() % 2 != 0)
-        throw runtime_error("CreateQuery: 인자 갯수가 맞지 않습니다.");
-
-    vector<wstring> args(wstrs);
-
-    wstringstream ss;
-    ss << L"INSERT INTO " << tableName << L" (";
-    size_t halfCol = wstrs.size() / 2;
-
-    for (int i = 0; i < halfCol; i++) {
-        ss << args[i];
-        if (i != (halfCol - 1))
-            ss << L", ";
-    }
-    ss << L") VALUES (";
-    for (int i = 0; i < halfCol; i++) {
-        ss << args[i + halfCol];
-        if (i != (halfCol - 1))
-            ss << L", ";
-    }
-    ss << L")";
-
-    return ss.str();
-}
-
 SQLHDBC DBManager::ConnectNewHDbc() {
     SQLHDBC hDbc = nullptr;
 
@@ -313,6 +287,29 @@ void DBManager::ReturnHDbc(SQLHDBC hDbc) {
     lock_guard<mutex> lock(_mtx);
     if (hDbc != nullptr) {
         _hDbcQ.push(hDbc);
+    }
+}
+
+void DBManager::PrepareQ(SQLHSTMT& hStmt, const wstring& query) {
+    SQLRETURN ret = SQLPrepareW(hStmt, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        throw runtime_error("Prepare Query Failed");
+    }
+}
+
+void DBManager::BindPInt(SQLHSTMT& hStmt, const int param, int val) {
+    SQLRETURN ret = SQLBindParameter(hStmt, param, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &val, 0, NULL);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
+        throw runtime_error("Bind Int Parameter Failed");
+    }
+}
+
+void DBManager::BindPWchar(SQLHSTMT& hStmt, const int param, const wstring& ws) {
+    SQLLEN idLen = SQL_NTS;
+    SQLRETURN ret = SQLBindParameter(hStmt, param, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, ws.size(), 0, (SQLPOINTER)ws.c_str(), 0, &idLen);  
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
+        throw runtime_error("Bind WCAHR Parameter Failed");
     }
 }
 
