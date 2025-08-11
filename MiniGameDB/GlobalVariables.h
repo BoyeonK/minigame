@@ -15,26 +15,31 @@ public:
     static const int hash_size = 32;
     static const int pbkdf2_iter = 10000;
 
+    //초기화 시, 환경변수 세팅 함수.
     void SetEnv();
     
+    //에러 핸들링 함수.
     bool CheckReturn(SQLRETURN ret, SQLSMALLINT handleType, SQLHANDLE handle);
 
+    //문자열 인코딩 함수들
     wstring a2wsRef(const string& in_cp949);
     wstring s2wsRef(const string& in_u8s);
-
     wstring v2wsRef(const vector<unsigned char>& in_binary);
     vector<unsigned char> s2vRef(const string& hex_str);
-
-    string ws2sRef(const wstring& in_u16ws);
     vector<unsigned char> ws2vRef(const wstring& ws);
+    string ws2sRef(const wstring& in_u16ws);
+    //string ws2aRef
 
-    //이대로 사용하면 코드인젝션에 굉장히 취약함!
-    wstring CreateQuery(const wstring& tableName, initializer_list<wstring> wstrs);
-
+    //환경변수 pooling함수.
     SQLHENV GetHEnv() { return _hEnv; }
     SQLHDBC ConnectNewHDbc();
     SQLHDBC PopHDbc();
     void ReturnHDbc(SQLHDBC hDbc);
+
+    //자주 쓰는 친구들 함수로 묶음.
+    void PrepareQ(SQLHSTMT& hStmt, const wstring& query);
+    void BindPInt(SQLHSTMT& hStmt, const int param, const int val);
+    void BindPWchar(SQLHSTMT& hStmt, const int param, const wstring& ws);
 
 private:
     mutex _mtx;
