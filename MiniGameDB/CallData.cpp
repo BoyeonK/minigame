@@ -255,7 +255,7 @@ void DCreateAccountCallData::Proceed() {
                 GDBManager->ReturnHDbc(hDbc);
             });
 
-            SQLHSTMT hStmt1, hStmt2, hStmt3, hStmt4, hStmt5;
+            SQLHSTMT hStmt1 = nullptr , hStmt2 = nullptr, hStmt3 = nullptr, hStmt4 = nullptr, hStmt5 = nullptr;
             Cleaner hStmtCleaner([&]() {
                 if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
                 if (hStmt2 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);

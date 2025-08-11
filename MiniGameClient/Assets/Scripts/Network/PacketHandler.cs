@@ -154,5 +154,9 @@ class PacketHandler {
 				break;
 		}
 	}
+
+	public static void S_CreateAccountHandler(PacketSession session, IMessage packet) {
+		S_CreateAccount recvPkt = packet as S_CreateAccount;
+	}
 }
 

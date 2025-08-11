@@ -36,6 +36,10 @@ class PacketManager {
 		_onRecv.Add((ushort)MsgId.SLogin, UnpackPacket<S_Login>);
 		_handler.Add((ushort)MsgId.SLogin, PacketHandler.S_LoginHandler);
 		_msgFactories.Add((ushort)MsgId.SLogin, () => new S_Login());
+
+		_onRecv.Add((ushort)MsgId.SCreateAccount, UnpackPacket<S_CreateAccount>);
+		_handler.Add((ushort)MsgId.SCreateAccount, PacketHandler.S_CreateAccountHandler);
+		_msgFactories.Add((ushort)MsgId.SCreateAccount, () => new S_CreateAccount());
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {
