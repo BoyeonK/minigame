@@ -39,6 +39,7 @@ public class Managers : MonoBehaviour {
         Instance._network.Init();
         Instance._pool.Init();
         Instance._sound.Init();
+        Instance._ui.Init();
         Debug.Log("Manager Initiate");
     }
 

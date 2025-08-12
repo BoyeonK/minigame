@@ -23,6 +23,7 @@ bool DBClientImpl::S2D_Login(shared_ptr<PBSession> sessionRef, string id, string
     SLoginCall* call = objectPool<SLoginCall>::alloc(sessionRef);
     S2D_Protocol::S2D_Login request = S2DPacketMaker::Make_S2D_Login(id, password);
 
+    //Call을 처리하는 이 세 줄은, FM대로하면 CallData의 멤버 함수로서 캡슐화해야함.
     call->response_reader = _stub->PrepareAsyncLoginRequest(&call->context, request, _cqRef.get());
     call->response_reader->StartCall();
 

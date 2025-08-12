@@ -15,7 +15,7 @@ public class UI_Base : MonoBehaviour {
         _objects.Add(typeof(T), objects);
 
         for (int i = 0; i < names.Length; i++) {
-            if(typeof(T) == typeof(GameObject))
+            if (typeof(T) == typeof(GameObject))
                 objects[i] = Util.FindChild(gameObject, names[i], true);
             else
                 objects[i] = Util.FindChild<T>(gameObject, names[i], true);

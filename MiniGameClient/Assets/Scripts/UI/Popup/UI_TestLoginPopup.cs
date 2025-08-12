@@ -1,51 +1,39 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UI_TestLoginPopup : UI_Popup {
-    /*
-    enum Texts {
-        AddButtonText,
-        ScoreText
+
+    enum InputFields {
+        IdInputField,
+        PasswordInputField
     }
 
     enum Buttons {
-        AddButton
+        LoginButton
     }
 
-    enum GameObjects {
-        TestObj
-    }
-
-    enum Images {
-        ItemIcon,
-    }
-
-    int _score = 0;
     private void Start() {
         Init();
     }
-    */
 
     public override void Init() {
         base.Init();
-        /*
         Bind<Button>(typeof(Buttons));
-        Bind<Text>(typeof(Texts));
-        Bind<GameObject>(typeof(GameObjects));
-        Bind<Image>(typeof(Images));
+        Bind<TMP_InputField>(typeof(InputFields));
 
-        GameObject Btn = GetButton((int)Buttons.AddButton).gameObject;
-        AddUIEvent(Btn, OnButtonClicked, Define.UIEvent.Click);
-
-        GameObject go = GetImage((int)Images.ItemIcon).gameObject;
-        AddUIEvent(go, (PointerEventData data) => { go.transform.position = data.position; }, Define.UIEvent.Drag);
-        */
+        Button Btn = GetButton((int)Buttons.LoginButton);
+        if (Btn != null) {
+            Btn.onClick.AddListener(OnButtonClicked);
+        }
     }
 
-    /*
-    public void OnButtonClicked(PointerEventData data)
-    {
-        _score++;
-        Get<Text>((int)Texts.ScoreText).text = $"{_score}";
+    private void OnButtonClicked() {
+        TMP_InputField idf = Get<TMP_InputField>(0);
+        TMP_InputField pwf = Get<TMP_InputField>(1);
+        Debug.Log(idf.text);
+        Debug.Log(pwf.text);
     }
-    */
 }
