@@ -8,6 +8,7 @@ public class LoginScene : BaseScene {
     private int _opt = 0;
     private OptionSelecterController _optionSelecter;
 
+    //Scene이 바뀔 때, 이 친구가 대표로 나서서 모든 초기화 작업을 해 줄거임.
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
@@ -21,26 +22,12 @@ public class LoginScene : BaseScene {
         }
 
         Managers.Input.AddKeyListener(KeyCode.Q, TryConnectToServer, InputManager.KeyState.Up);
-        /*
         Managers.Input.AddKeyListener(KeyCode.UpArrow, PrOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.DownArrow, NxtOpt, InputManager.KeyState.Up);
-        */
-        Managers.Input.AddKeyListener(KeyCode.UpArrow, PrOptTest, InputManager.KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.DownArrow, NxtOptTest, InputManager.KeyState.Up);
         Managers.Network.OnConnectedAct += ConnectToServerSucceed;
-    }
-    private void PrOptTest() {
-        _opt = (_opt + 1) % 6;
-        _optionSelecter.SetOpt(_opt);
-        Debug.Log("Pre");
+        Managers.Network.OnLoginAct += LoginSucceed;
     }
 
-    private void NxtOptTest() {
-        _opt = (_opt + 5) % 6;
-        _optionSelecter.SetOpt(_opt);
-        Debug.Log("Next");
-    }
-    /*
     private void PrOpt() {
         if (_isLogined) {
             _opt = (_opt + 1) % 4;
@@ -56,31 +43,34 @@ public class LoginScene : BaseScene {
             Debug.Log("Next");
         }
     }
-    */
+
     private void TryConnectToServer() {
         if (!(Managers.Network.IsConnected()))
             Managers.Network.TryConnectToServer();
     }
 
-    private void ConnectToServerSucceed()  {
-        _isConnected = true;
-        
+    private void ConnectToServerSucceed() {
+        if (_isConnected == false) {
+            _opt = 5;
+            _optionSelecter.SetOpt(_opt);
+            _isConnected = true;
+        }
     }
 
     public void LoginSucceed() {
-        if (_isConnected)
+        if (_isConnected && !_isLogined) {
+            _opt = 0;
+            _optionSelecter.SetOpt(_opt);
             _isLogined = true;
+        }   
     }
 
     public override void Clear() {
         Managers.Input.RemoveKeyListener(KeyCode.Q, TryConnectToServer, InputManager.KeyState.Up);
-        /*
         Managers.Input.RemoveKeyListener(KeyCode.UpArrow, PrOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, NxtOpt, InputManager.KeyState.Up);
-        */
-        Managers.Input.RemoveKeyListener(KeyCode.UpArrow, PrOptTest, InputManager.KeyState.Up);
-        Managers.Input.RemoveKeyListener(KeyCode.DownArrow, NxtOptTest, InputManager.KeyState.Up);
         Managers.Network.OnConnectedAct -= ConnectToServerSucceed;
+        Managers.Network.OnLoginAct -= LoginSucceed;
         Debug.Log("Login Scene Cleared");
     }
 }
