@@ -3,65 +3,84 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoginScene : BaseScene {
+    private bool _isConnected = false;
+    private bool _isLogined = false;
+    private int _opt = 0;
+    private OptionSelecterController _optionSelecter;
+
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
         Managers.UI.ShowPopupUI<UI_TestLoginPopup>();
+        GameObject go = GameObject.Find("OptionSelecter");
+        if (go != null) {
+            _optionSelecter = go.GetComponent<OptionSelecterController>();
+        }
+        else {
+            Debug.LogError("OptionSelecter가 Scene에 없습니다링");
+        }
 
         Managers.Input.AddKeyListener(KeyCode.Q, TryConnectToServer, InputManager.KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.W, TryLoginCorrect, InputManager.KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.S, TryLoginWrongPassword, InputManager.KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.X, TryLoginWrongID, InputManager.KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.E, TryCreateAccountCorrect, InputManager.KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.D, TryCreateAccountExisting, InputManager.KeyState.Up);
+        /*
+        Managers.Input.AddKeyListener(KeyCode.UpArrow, PrOpt, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.DownArrow, NxtOpt, InputManager.KeyState.Up);
+        */
+        Managers.Input.AddKeyListener(KeyCode.UpArrow, PrOptTest, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.DownArrow, NxtOptTest, InputManager.KeyState.Up);
+        Managers.Network.OnConnectedAct += ConnectToServerSucceed;
+    }
+    private void PrOptTest() {
+        _opt = (_opt + 1) % 6;
+        _optionSelecter.SetOpt(_opt);
+        Debug.Log("Pre");
     }
 
+    private void NxtOptTest() {
+        _opt = (_opt + 5) % 6;
+        _optionSelecter.SetOpt(_opt);
+        Debug.Log("Next");
+    }
+    /*
+    private void PrOpt() {
+        if (_isLogined) {
+            _opt = (_opt + 1) % 4;
+            _optionSelecter.SetOpt(_opt);
+            Debug.Log("Pre");
+        }
+    }
+
+    private void NxtOpt() {
+        if (_isLogined) {
+            _opt = (_opt + 3) % 4;
+            _optionSelecter.SetOpt(_opt);
+            Debug.Log("Next");
+        }
+    }
+    */
     private void TryConnectToServer() {
         if (!(Managers.Network.IsConnected()))
             Managers.Network.TryConnectToServer();
     }
 
-    private void TryLoginCorrect() {
-        if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
-            Debug.Log("로그인 시도 (정상)");
-            C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), "tetepiti149", "qwe123");
-            Managers.Network.Send(pkt);
-        }
+    private void ConnectToServerSucceed()  {
+        _isConnected = true;
+        
     }
 
-    private void TryLoginWrongPassword() {
-        if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
-            Debug.Log("로그인 시도 (비번틀림)");
-            C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), "tetepiti149", "qwe1234");
-            Managers.Network.Send(pkt);
-        }
-    }
-
-    private void TryLoginWrongID() {
-        if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
-            Debug.Log("로그인 시도 (아이디틀림)");
-            C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), "tetepiti14", "qwe123");
-            Managers.Network.Send(pkt);
-        }
-    }
-
-    private void TryCreateAccountCorrect() {
-        if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
-            Debug.Log("계정생성 시도 (정상)");
-            C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), "tetepiti149", "qwe123");
-            Managers.Network.Send(pkt);
-        }
-    }
-
-    private void TryCreateAccountExisting() {
-        if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
-            Debug.Log("계정생성 시도 (이미존재)");
-            C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), "erdfttgg", "qwe123");
-            Managers.Network.Send(pkt);
-        }
+    public void LoginSucceed() {
+        if (_isConnected)
+            _isLogined = true;
     }
 
     public override void Clear() {
+        Managers.Input.RemoveKeyListener(KeyCode.Q, TryConnectToServer, InputManager.KeyState.Up);
+        /*
+        Managers.Input.RemoveKeyListener(KeyCode.UpArrow, PrOpt, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.DownArrow, NxtOpt, InputManager.KeyState.Up);
+        */
+        Managers.Input.RemoveKeyListener(KeyCode.UpArrow, PrOptTest, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.DownArrow, NxtOptTest, InputManager.KeyState.Up);
+        Managers.Network.OnConnectedAct -= ConnectToServerSucceed;
         Debug.Log("Login Scene Cleared");
     }
 }

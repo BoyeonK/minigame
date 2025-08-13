@@ -42,11 +42,15 @@ namespace ServerCore {
 				Session session = _sessionFactory.Invoke();
 				//해당 Session으로서 socket handle을 관리 및 Recv시작.
 				session.Start(args.ConnectSocket);
-				//해당 Session의 OnConnected함수 실행 (아마, HandShake과정이 포함되있음)
+				//해당 Session의 OnConnected함수 실행 (HandShake과정 수행 시작)
 				session.OnConnected(args.RemoteEndPoint);
+
+				Managers.Network.ConnectCompleted(true);
 			}
 			else {
 				Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
+
+				Managers.Network.ConnectCompleted(false);
 			}
 		}
 	}
