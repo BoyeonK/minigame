@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Managers : MonoBehaviour {
@@ -29,6 +31,14 @@ public class Managers : MonoBehaviour {
     SoundManager _sound = new SoundManager();
     public static SoundManager Sound { get { return Instance._sound; } }
 
+    private static Queue<Action> _jobQueue = new Queue<Action>();
+    private static readonly object _lock = new object();
+    public static void ExecuteAtMainThread(Action job) {
+        lock (_lock) {
+            _jobQueue.Enqueue(job);
+        }
+    }
+
     private void Awake() {
         if (Instance != null) {
             Destroy(gameObject);
@@ -47,6 +57,12 @@ public class Managers : MonoBehaviour {
     void Update() {
         _input.OnUpdate();
         _network.Update();
+        lock (_lock) {
+            while (_jobQueue.Count > 0) {
+                Action job = _jobQueue.Dequeue();
+                job?.Invoke();
+            }
+        }
     }
 
     static void Init() {
