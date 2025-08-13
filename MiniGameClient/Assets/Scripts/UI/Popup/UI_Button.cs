@@ -4,6 +4,7 @@ using System;
 using UnityEngine.EventSystems;
 
 public class UI_Button : UI_Popup {
+    /*
     enum Texts {
         AddButtonText,
         ScoreText
@@ -44,4 +45,5 @@ public class UI_Button : UI_Popup {
         _score++;
         Get<Text>((int)Texts.ScoreText).text = $"{_score}";
     }
+    */
 }
