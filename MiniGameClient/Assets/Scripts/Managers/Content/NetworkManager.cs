@@ -71,7 +71,9 @@ public class NetworkManager {
 	public Action OnConnectedAct;
 	public Action OnConnectedFailedAct;
 	public Action OnLoginAct;
-	public Action OnLoginFailedAct;
+	public Action OnWrongIdAct;
+	public Action OnWrongPasswordAct;
+
 	public void ConnectCompleted(bool result) {
 		_isConnected = result;
 		if (_isTryingConnect == 1)
@@ -84,12 +86,17 @@ public class NetworkManager {
 		}
 	}
 
-	public void LoginCompleted(bool result) {
-		if (result)	{
-			OnLoginAct.Invoke();
-		}
-		else {
-			OnLoginFailedAct.Invoke();
+	public void LoginCompleted(int result) {
+		switch (result) {
+			case 0:
+				OnLoginAct.Invoke();
+				break;
+			case 1:
+				OnWrongIdAct.Invoke();
+				break;
+			case 2:
+				OnWrongPasswordAct.Invoke();
+				break;
 		}
 	}
 	#endregion

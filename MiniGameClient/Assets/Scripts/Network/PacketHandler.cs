@@ -115,13 +115,9 @@ class PacketHandler {
 		var parameters = new AeadParameters(new KeyParameter(key), 128, iv, aad); // 128 = tag bits
 		cipher.Init(false, parameters); // false = decrypt
 
-		Debug.Log("1");
-
 		byte[] encrypted = new byte[ciphertext.Length + tag.Length];
 		Buffer.BlockCopy(ciphertext, 0, encrypted, 0, ciphertext.Length);
 		Buffer.BlockCopy(tag, 0, encrypted, ciphertext.Length, tag.Length);
-
-		Debug.Log("2");
 
 		byte[] output = new byte[cipher.GetOutputSize(encrypted.Length)];
 		int len = cipher.ProcessBytes(encrypted, 0, encrypted.Length, output, 0);
@@ -134,22 +130,28 @@ class PacketHandler {
 		S_Login recvPkt = packet as S_Login;
 		switch (recvPkt.ValueCaseCase) {
 			case (S_Login.ValueCaseOneofCase.Dbid):
+				//없는 아이디
 				if (recvPkt.Dbid == 0) {
 					Debug.Log("없는 아이디.");
+					Managers.Network.LoginCompleted(1);
 					// 실패
-                } else {
-					// 정상적인 로그인 성공
+				}
+				// 정상적인 로그인 성공
+				else {	
 					ServerSession ss = session as ServerSession;
 					ss.ID = recvPkt.Dbid;
 					Debug.Log($"{ss.ID} 내 아이디");
+					Managers.Network.LoginCompleted(0);
                 }
 				break;
+			//틀린 비밀번호
 			case (S_Login.ValueCaseOneofCase.Err):
 				string errMsg = recvPkt.Err;
                 Debug.Log($"{errMsg}");
+				Managers.Network.LoginCompleted(2);
 				break;
+			// 값이 할당되지 않았을 때 (ㄹㅇ 버그, 서버 문제임)
 			case (S_Login.ValueCaseOneofCase.None):
-				// 값이 할당되지 않았을 때 (ㄹㅇ 버그)
 				Debug.Log("매우찐빠");
 				break;
 		}

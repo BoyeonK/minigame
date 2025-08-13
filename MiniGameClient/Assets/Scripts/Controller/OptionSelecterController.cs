@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class OptionSelecterController : MonoBehaviour {
-    private int _opt = 0;
+    private int _opt = 4;
     
     private Vector3 _lookDirection;
     private Vector3 _eyePosition;
