@@ -6,13 +6,17 @@
 [Bb]uilds/
 [Ll]ogs/
 UserSettings/
-TinyRPGTown/
-Tiny RPG Forest/
-TextMesh Pro/
 BuildFiles/
 Include/
 Protobuf/
 env/
+
+# Unity 에셋 스토어 관련 파일 무시
+TinyRPGTown/
+Tiny RPG Forest/
+TextMesh Pro/
+Unity UI Samples/
+UI Toolkit/
 
 # Visual Studio 관련 파일 무시
 .vs/
