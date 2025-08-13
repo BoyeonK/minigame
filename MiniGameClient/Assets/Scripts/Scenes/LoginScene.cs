@@ -12,7 +12,7 @@ public class LoginScene : BaseScene {
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
-        Managers.UI.ShowPopupUI<UI_TestLoginPopup>();
+        Managers.UI.ShowPopupUI<UI_TestStartInfo>();
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {
             _optionSelecter = go.GetComponent<OptionSelecterController>();
@@ -21,10 +21,12 @@ public class LoginScene : BaseScene {
             Debug.LogError("OptionSelecter가 Scene에 없습니다링");
         }
 
-        Managers.Input.AddKeyListener(KeyCode.Q, TryConnectToServer, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.UpArrow, PrOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.DownArrow, NxtOpt, InputManager.KeyState.Up);
         Managers.Network.OnConnectedAct += ConnectToServerSucceed;
+        Managers.Network.OnConnectedFailedAct += ConnectToServerFailed;
+        Managers.Network.OnWrongIdAct += WrongId;
+        Managers.Network.OnWrongPasswordAct += WrongPassword;
         Managers.Network.OnLoginAct += LoginSucceed;
     }
 
@@ -44,17 +46,20 @@ public class LoginScene : BaseScene {
         }
     }
 
-    private void TryConnectToServer() {
-        if (!(Managers.Network.IsConnected()))
-            Managers.Network.TryConnectToServer();
-    }
-
     private void ConnectToServerSucceed() {
         if (_isConnected == false) {
             _opt = 5;
             _optionSelecter.SetOpt(_opt);
             _isConnected = true;
+            Managers.ExecuteAtMainThread(() => {
+                Managers.UI.DisableUI("UI_TestStartInfo");
+                Managers.UI.ShowPopupUI<UI_TestLoginPopup>();
+            });
         }
+    }
+
+    private void ConnectToServerFailed() {
+
     }
 
     public void LoginSucceed() {
@@ -65,11 +70,21 @@ public class LoginScene : BaseScene {
         }   
     }
 
+    public void WrongId() {
+
+    }
+
+    public void WrongPassword() {
+
+    }
+
     public override void Clear() {
-        Managers.Input.RemoveKeyListener(KeyCode.Q, TryConnectToServer, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.UpArrow, PrOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, NxtOpt, InputManager.KeyState.Up);
         Managers.Network.OnConnectedAct -= ConnectToServerSucceed;
+        Managers.Network.OnConnectedFailedAct -= ConnectToServerFailed;
+        Managers.Network.OnWrongIdAct -= WrongId;
+        Managers.Network.OnWrongPasswordAct -= WrongPassword;
         Managers.Network.OnLoginAct -= LoginSucceed;
         Debug.Log("Login Scene Cleared");
     }

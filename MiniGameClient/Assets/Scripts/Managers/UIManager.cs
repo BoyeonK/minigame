@@ -34,12 +34,10 @@ public class UIManager {
 
         GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
         T popup = Util.GetOrAddComponent<T>(go);
-        //go의 참조값을(포인터라고 생각하면 편함) 들고 있기 때문에, 
-        //위의 딕셔너리 컨테이너에서 해당 object를 꺼내 컨트롤 할 수 있다.
-        _uiCache.Add(name, go);
 
         Init();
         go.transform.SetParent(_root.transform);
+        Debug.Log($"{name}에 저장");
 
         Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -47,6 +45,10 @@ public class UIManager {
 
         int newOrder = Interlocked.Increment(ref _popupOrder);
         canvas.sortingOrder = newOrder;
+
+        //go의 참조값을(포인터라고 생각하면 편함) 들고 있기 때문에, 
+        //위의 딕셔너리 컨테이너에서 해당 object를 꺼내 컨트롤 할 수 있다.
+        _uiCache.Add(name, go);
 
         return popup;
     }
@@ -83,8 +85,15 @@ public class UIManager {
     public void DisableUI(string uiName) {
         //딕셔너리 컨테이너에서, uiName에 해당하는 object의 포인터를 꺼낸다.
         //그리고 Active값을 변경
+        Debug.Log($"{uiName}에 해당하는 친구를 삭제하겠다.");
         if (_uiCache.TryGetValue(uiName, out GameObject uiObj)) {
-            uiObj.SetActive(false);
+            if (uiObj != null) {
+                uiObj.SetActive(false);
+                Debug.Log($"{uiName} UI를 비활성화했습니다.");
+            } else  {
+                _uiCache.Remove(uiName);
+                Debug.LogWarning($"{uiName} 참조가 캐시에 남아있었지만, 오브젝트는 이미 파괴되었습니다. 캐시에서 제거합니다.");
+            }
         }
         else {
             Debug.LogWarning($"{uiName}에 해당하는 UI가 캐시에 없음");
