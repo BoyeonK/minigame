@@ -23,12 +23,14 @@ class PacketHandler {
 		S_Welcome sWelcomePacket = packet as S_Welcome;
 
 		if (sWelcomePacket.Gameversion != Managers.GameVersion) {
-            Debug.Log($"서버의 게임 버전 : {sWelcomePacket.Gameversion}");
-            Debug.Log($"클라이언트의 게임 버전 : {Managers.GameVersion}");
-			//현재는 클라이언트를 즉시 종료하지만, 팝업으로 에러메세지를 띄우고
-			//이후 종료를 유도하는 쪽이 바람직해 보임.
-			Debug.LogError("서버와 클라이언트의 버전이 일치하지 않습니다.");
-			Managers.ExecuteAtMainThread(() => { Application.Quit(); });
+			Managers.ExecuteAtMainThread(() => {
+				Debug.Log($"서버의 게임 버전 : {sWelcomePacket.Gameversion}");
+				Debug.Log($"클라이언트의 게임 버전 : {Managers.GameVersion}");
+				//현재는 클라이언트를 즉시 종료하지만, 팝업으로 에러메세지를 띄우고
+				//이후 종료를 유도하는 쪽이 바람직해 보임.
+				Debug.LogError("서버와 클라이언트의 버전이 일치하지 않습니다.");
+				Application.Quit(); 
+			});
 			return;
 		}
 
@@ -41,8 +43,10 @@ class PacketHandler {
 				throw new Exception("RSA Key가 아님");
 		}
 		catch (Exception ex) {
-			Debug.LogError($"RSA Key Import 실패: {ex.Message}");
-			Managers.ExecuteAtMainThread(() => { Application.Quit(); });
+			Managers.ExecuteAtMainThread(() => { 
+				Debug.LogError($"RSA Key Import 실패: {ex.Message}");
+				Application.Quit(); 
+			});
 			return;
 		}
 
@@ -59,8 +63,10 @@ class PacketHandler {
 			encryptedKey = encryptEngine.ProcessBlock(aesKey, 0, aesKey.Length);
 		}
 		catch (Exception ex) {
-			Debug.LogError($"RSA 암호화 실패: {ex.Message}");
-			Managers.ExecuteAtMainThread(() => { Application.Quit(); });
+			Managers.ExecuteAtMainThread(() => { 
+				Debug.LogError($"RSA 암호화 실패: {ex.Message}");
+				Application.Quit(); 
+			});
 			return;
 		}
 
@@ -71,7 +77,9 @@ class PacketHandler {
     public static void S_WelcomeResponseHandler(PacketSession session, IMessage packet) {
 		S_WelcomeResponse recvPkt = packet as S_WelcomeResponse;
 		string asdf = recvPkt.Message;
-		Debug.Log(asdf);
+		Managers.ExecuteAtMainThread(() => {
+			Debug.Log(asdf);
+		});
 		return;
     }
 
@@ -83,7 +91,7 @@ class PacketHandler {
 		byte[] tag = recvPkt.Tag.ToByteArray();
 		int msgId = recvPkt.MsgId;
 
-		Debug.Log($"{msgId} 복호화 시도");
+		Managers.ExecuteAtMainThread(() => { Debug.Log($"{msgId} 복호화 시도"); });
 
 		byte[] aad = BitConverter.GetBytes(msgId);
 		if (!BitConverter.IsLittleEndian) {
@@ -91,7 +99,7 @@ class PacketHandler {
 		}
 
 		if (iv.Length != 12 || tag.Length != 16) {
-			Debug.LogError($"Invalid IV ({iv.Length}) or Tag ({tag.Length}) length.");
+			Managers.ExecuteAtMainThread(() => { Debug.LogError($"Invalid IV ({iv.Length}) or Tag ({tag.Length}) length."); });
 			return;
 		}
 
@@ -100,13 +108,13 @@ class PacketHandler {
 			plaintext = DecryptAesGcmInternal(key, iv, ciphertext, tag, aad);
 		}
 		catch (Exception ex) {
-			Debug.LogError($"복호화 실패: {ex.Message}");
+			Managers.ExecuteAtMainThread(() => { Debug.LogError($"복호화 실패: {ex.Message}"); });
 			return;
 		}
 
-		Debug.Log($"Message Id = {msgId}");
+		Managers.ExecuteAtMainThread(() => { Debug.Log($"Message Id = {msgId}"); });
 		if (!(PacketManager.Instance.ByteToIMessage(session, plaintext, (ushort)msgId))) {
-			Debug.Log("역직렬화 혹은 Custom Handler에 등록 실패");
+			Managers.ExecuteAtMainThread(() => { Debug.Log("역직렬화 혹은 Custom Handler에 등록 실패"); });
         }
 	}
 
@@ -132,7 +140,7 @@ class PacketHandler {
 			case (S_Login.ValueCaseOneofCase.Dbid):
 				//없는 아이디
 				if (recvPkt.Dbid == 0) {
-					Debug.Log("없는 아이디.");
+					Managers.ExecuteAtMainThread(() => { Debug.Log("없는 아이디."); });
 					Managers.Network.LoginCompleted(1);
 					// 실패
 				}
@@ -140,19 +148,19 @@ class PacketHandler {
 				else {	
 					ServerSession ss = session as ServerSession;
 					ss.ID = recvPkt.Dbid;
-					Debug.Log($"{ss.ID} 내 아이디");
+					Managers.ExecuteAtMainThread(() => { Debug.Log($"{ss.ID} 내 아이디"); });
 					Managers.Network.LoginCompleted(0);
                 }
 				break;
 			//틀린 비밀번호
 			case (S_Login.ValueCaseOneofCase.Err):
 				string errMsg = recvPkt.Err;
-                Debug.Log($"{errMsg}");
+				Managers.ExecuteAtMainThread(() => { Debug.Log($"{errMsg}"); });
 				Managers.Network.LoginCompleted(2);
 				break;
 			// 값이 할당되지 않았을 때 (ㄹㅇ 버그, 서버 문제임)
 			case (S_Login.ValueCaseOneofCase.None):
-				Debug.Log("매우찐빠");
+				Managers.ExecuteAtMainThread(() => { Debug.Log("매우찐빠"); });
 				break;
 		}
 	}

@@ -58,11 +58,7 @@ public class NetworkManager {
 	}
 
 	public void Update() {
-		List<PacketMessage> list = PacketQueue.Instance.PopAll();
-		foreach (PacketMessage packet in list) {
-			Action<PacketSession, IMessage> handler = PacketManager.Instance.GetPacketHandler(packet.Id);
-			handler?.Invoke(_session, packet.Message);
-		}
+
 	}
 
 	#region Session의 통신 결과를 Client에게 널리 알릴 델리게이터

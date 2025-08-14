@@ -29,13 +29,6 @@ public class ServerSession : PacketSession {
 
 	public override void OnConnected(EndPoint endPoint)	{
 		Debug.Log($"OnConnected : {endPoint}");
-
-		//CustomHandler.Invoke(Session, IMessage, pktId);
-		//인즉, PacketQueue.Instace.Push(pktId, IMessage)가 된다.
-		PacketManager.Instance.CustomHandler = (session, imessage, pktId) => {
-			PacketQueue.Instance.Push(pktId, imessage);
-		};
-
 		IsConnected = true;
 	}
 
