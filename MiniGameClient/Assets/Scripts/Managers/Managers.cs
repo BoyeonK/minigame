@@ -32,6 +32,7 @@ public class Managers : MonoBehaviour {
     public static SoundManager Sound { get { return Instance._sound; } }
 
     private static Queue<Action> _jobQueue = new Queue<Action>();
+    private static List<Action> _actions = new List<Action>();
     private static readonly object _lock = new object();
     public static void ExecuteAtMainThread(Action job) {
         lock (_lock) {
@@ -57,12 +58,17 @@ public class Managers : MonoBehaviour {
     void Update() {
         _input.OnUpdate();
         _network.Update();
+
         lock (_lock) {
             while (_jobQueue.Count > 0) {
-                Action job = _jobQueue.Dequeue();
-                job?.Invoke();
+                _actions.Add(_jobQueue.Dequeue());
             }
         }
+
+        foreach(Action act in _actions) {
+            act?.Invoke();
+        }
+        _actions.Clear();
     }
 
     static void Init() {

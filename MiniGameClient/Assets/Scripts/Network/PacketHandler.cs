@@ -28,7 +28,7 @@ class PacketHandler {
 			//현재는 클라이언트를 즉시 종료하지만, 팝업으로 에러메세지를 띄우고
 			//이후 종료를 유도하는 쪽이 바람직해 보임.
 			Debug.LogError("서버와 클라이언트의 버전이 일치하지 않습니다.");
-			Application.Quit();
+			Managers.ExecuteAtMainThread(() => { Application.Quit(); });
 			return;
 		}
 
@@ -42,7 +42,7 @@ class PacketHandler {
 		}
 		catch (Exception ex) {
 			Debug.LogError($"RSA Key Import 실패: {ex.Message}");
-			Application.Quit();
+			Managers.ExecuteAtMainThread(() => { Application.Quit(); });
 			return;
 		}
 
@@ -60,7 +60,7 @@ class PacketHandler {
 		}
 		catch (Exception ex) {
 			Debug.LogError($"RSA 암호화 실패: {ex.Message}");
-			Application.Quit();
+			Managers.ExecuteAtMainThread(() => { Application.Quit(); });
 			return;
 		}
 

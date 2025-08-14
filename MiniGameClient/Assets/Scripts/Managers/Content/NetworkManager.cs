@@ -61,8 +61,7 @@ public class NetworkManager {
 		List<PacketMessage> list = PacketQueue.Instance.PopAll();
 		foreach (PacketMessage packet in list) {
 			Action<PacketSession, IMessage> handler = PacketManager.Instance.GetPacketHandler(packet.Id);
-			if (handler != null)
-				handler.Invoke(_session, packet.Message);
+			handler?.Invoke(_session, packet.Message);
 		}
 	}
 

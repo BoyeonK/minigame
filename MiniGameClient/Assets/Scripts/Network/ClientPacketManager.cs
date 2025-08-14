@@ -52,16 +52,22 @@ class PacketManager {
 
 		Action<PacketSession, ArraySegment<byte>, ushort> action = null;
 		if (_onRecv.TryGetValue(id, out action))
-			action.Invoke(session, buffer, id);
+			action?.Invoke(session, buffer, id);
 	}
 
 	void UnpackPacket<T>(PacketSession session, ArraySegment<byte> buffer, ushort id) where T : IMessage, new()	{
 		T pkt = new T();
 		pkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
-		//main thread가 아니면, unity에서 제공하는 메서드를 실행할 때 에러가 발생할 수 있다.
-		//Unity에서 제공하는 메서드를 사용하는 작업에 대해서는 메인 thread에서 실행할 수 있도록 
-		//메인 스레드가 작업할 작업 queue에 밀어주어야 한다.
-		CustomHandler.Invoke(session, pkt, id);
+
+		// 방법1. 모든 핸들러 함수고 메인스레드에서 실행되도록 유도.
+		//CustomHandler.Invoke(session, pkt, id);
+
+		// 방법2. 받은 즉시 그 스레드에서 핸들러 함수 실행 (고행)
+		// 이 핸들러에 영향을 받는 모든 object는 이제 멀티스레드를 고려해서 설계되어야함.
+		// 메인스레드에서만 정상 동작을 보장하는 메서드는 따로 메인스레드에서 동작하도록
+		// 설계 해 주어야함.
+		Action<PacketSession, IMessage> act = GetPacketHandler(id);
+		act?.Invoke(session, pkt);
 	}
 
 	public Action<PacketSession, IMessage> GetPacketHandler(ushort id) {
