@@ -59,7 +59,13 @@ public class LoginScene : BaseScene {
     }
 
     private void ConnectToServerFailed() {
-
+        Managers.ExecuteAtMainThread(() => {
+            Debug.Log("어플을 정지");
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+            Application.Quit(); 
+        });
     }
 
     public void LoginSucceed() {
