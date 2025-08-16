@@ -36,7 +36,6 @@
     <ClCompile Include="CallData.cpp">
       <Filter>memory</Filter>
     </ClCompile>
-    <ClCompile Include="SQLExecuter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalVariables.h">
@@ -60,6 +59,5 @@
     <ClInclude Include="CallData.h">
       <Filter>memory</Filter>
     </ClInclude>
-    <ClInclude Include="SQLExecuter.h" />
   </ItemGroup>
 </Project>
