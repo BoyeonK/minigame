@@ -27,7 +27,7 @@ public:
 
 	void Clear() {
 		WRITE_RWLOCK;
-		_items = queue<T>;
+		_items = queue<T>();
 	}
 
 private:
