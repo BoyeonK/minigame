@@ -12,7 +12,8 @@ public class LoginScene : BaseScene {
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
-        Managers.UI.ShowPopupUI<UI_TestStartInfo>();
+        //Managers.UI.ShowPopupUI<UI_TestStartInfo>();
+        Managers.UI.ShowSceneUI<UI_StartGame>();
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {
             _optionSelecter = go.GetComponent<OptionSelecterController>();
@@ -52,7 +53,7 @@ public class LoginScene : BaseScene {
             _optionSelecter.SetOpt(_opt);
             _isConnected = true;
             Managers.ExecuteAtMainThread(() => {
-                Managers.UI.DisableUI("UI_TestStartInfo");
+                Managers.UI.DisableUI("UI_StartGame");
                 Managers.UI.ShowPopupUI<UI_TestLoginPopup>();
             });
         }
