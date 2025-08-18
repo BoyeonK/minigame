@@ -119,4 +119,8 @@ public class UIManager {
         _sceneOrder = 0;
         _popupOrder = 10;
     }
+
+    public void ShowErrorUI(string errorDetail, bool isQuit = false) {
+
+    }
 }
