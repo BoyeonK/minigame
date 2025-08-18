@@ -61,11 +61,7 @@ public class LoginScene : BaseScene {
 
     private void ConnectToServerFailed() {
         Managers.ExecuteAtMainThread(() => {
-            Debug.Log("어플을 정지");
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-            Application.Quit(); 
+            Managers.UI.ShowErrorUI("서버와의 연결에 실패했습니다.", false);
         });
     }
 

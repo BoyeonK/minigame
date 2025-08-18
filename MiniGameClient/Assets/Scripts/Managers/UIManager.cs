@@ -139,7 +139,9 @@ public class UIManager {
         canvas.sortingOrder = order;
 
         //에러 내용 + 종료 여부를 담아 초기화 함수 실행.
-        uiError.Init(errorDetail, isQuit);
+        if (uiError != null) {
+            uiError.Init(errorDetail, isQuit);
+        }
 
         return uiError;
     }
