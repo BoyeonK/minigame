@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class UIManager {
@@ -120,7 +121,26 @@ public class UIManager {
         _popupOrder = 10;
     }
 
-    public void ShowErrorUI(string errorDetail, bool isQuit = false) {
+    public UI_Error ShowErrorUI(string errorDetail, bool isQuit = true) {
+        //에러 발생 UI는 캐싱하지 않음.
+        //정상적인 상황은 아니기 때문에 보수적으로 접근한다.
+        GameObject go = Managers.Resource.Instantiate("UI/Popup/UI_Error");
+        UI_Error uiError = Util.GetOrAddComponent<UI_Error>(go);
 
+        Init();
+        go.transform.SetParent(_root.transform);
+
+        Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.overrideSorting = true;
+
+        //최상단에 위치하도록
+        int order = _popupOrder + 1000;
+        canvas.sortingOrder = order;
+
+        //에러 내용 + 종료 여부를 담아 초기화 함수 실행.
+        uiError.Init(errorDetail, isQuit);
+
+        return uiError;
     }
 }
