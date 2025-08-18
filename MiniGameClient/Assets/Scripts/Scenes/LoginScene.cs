@@ -32,7 +32,7 @@ public class LoginScene : BaseScene {
 
     private void PrOpt() {
         if (_isLogined) {
-            _opt = (_opt + 1) % 4;
+            _opt = (_opt + 1) % 5;
             _optionSelecter.SetOpt(_opt);
             Debug.Log("Pre");
         }
@@ -40,7 +40,7 @@ public class LoginScene : BaseScene {
 
     private void NxtOpt() {
         if (_isLogined) {
-            _opt = (_opt + 3) % 4;
+            _opt = (_opt + 4) % 5;
             _optionSelecter.SetOpt(_opt);
             Debug.Log("Next");
         }
@@ -48,7 +48,7 @@ public class LoginScene : BaseScene {
 
     private void ConnectToServerSucceed() {
         if (_isConnected == false) {
-            _opt = 5;
+            _opt = 6;
             _optionSelecter.SetOpt(_opt);
             _isConnected = true;
             Managers.ExecuteAtMainThread(() => {
