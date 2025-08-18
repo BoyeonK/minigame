@@ -20,6 +20,9 @@ UI Toolkit/
 LowPolyAssetBundle/
 LowPolyInterior2/
 
+# Baked된 광원 효과 무시
+MiniGameClient/Assets/Scenes/Login/
+
 # Visual Studio 관련 파일 무시
 .vs/
 *.csproj
