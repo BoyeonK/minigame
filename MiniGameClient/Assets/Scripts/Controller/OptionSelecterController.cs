@@ -43,7 +43,7 @@ public class OptionSelecterController : MonoBehaviour {
                 break;
             case 5:
                 _lookDirection = new Vector3(0.0f, 0.0f, 1.0f).normalized;
-                _eyePosition = new Vector3(0.0f, 0.7f, 1.0f);
+                _eyePosition = new Vector3(0.0f, 0.7f, 0.0f);
                 break;
             case 6:
                 _lookDirection = new Vector3(0.0f, 0.2f, 1.0f).normalized;
