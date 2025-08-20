@@ -1,19 +1,38 @@
-using Google.Protobuf.Protocol;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoginScene : BaseScene {
-    private bool _isConnected = false;
-    private bool _isLogined = false;
-    private int _opt = 0;
-    private OptionSelecterController _optionSelecter;
+    public enum Stage {
+        Connect,
+        Login,
+        Lobby,
+        MatchMake,
+    }
 
+    private Stage _stage = Stage.Connect;
+
+    UI_StartGame _uiStartGame;
+
+    UI_LoginOrCreateAccount _uiLoginOrCreateAccount;
+    UI_LoginPopup _uiLoginPopup;
+    UI_CreateAccountPopup _uiCreateAccountPopup;
+    private int _loginOpt = 0;
+
+    private int _lobbyOpt = 0;
+    private OptionSelecterController _optionSelecter;
+    
     //Scene이 바뀔 때, 이 친구가 대표로 나서서 모든 초기화 작업을 해 줄거임.
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
-        //Managers.UI.ShowPopupUI<UI_TestStartInfo>();
-        Managers.UI.ShowSceneUI<UI_StartGame>();
+        _uiStartGame = Managers.UI.ShowSceneUI<UI_StartGame>();
+        //사용할 UI를 미리 메모리에 올려둔다.
+        _uiLoginOrCreateAccount = Managers.UI.ShowSceneUI<UI_LoginOrCreateAccount>();
+        _uiLoginPopup = Managers.UI.ShowPopupUI<UI_LoginPopup>();
+        _uiCreateAccountPopup = Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
+        Managers.UI.DisableUI("UI_LoginOrCreateAccount");
+        Managers.UI.DisableUI("UI_LoginPopup");
+        Managers.UI.DisableUI("UI_CreateAccountPopup");
+
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {
             _optionSelecter = go.GetComponent<OptionSelecterController>();
@@ -22,8 +41,10 @@ public class LoginScene : BaseScene {
             Debug.LogError("OptionSelecter가 Scene에 없습니다링");
         }
 
-        Managers.Input.AddKeyListener(KeyCode.UpArrow, PrOpt, InputManager.KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.DownArrow, NxtOpt, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.UpArrow, UpLobbyOpt, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.UpArrow, ChangeLoginOpt, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.DownArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Network.OnConnectedAct += ConnectToServerSucceed;
         Managers.Network.OnConnectedFailedAct += ConnectToServerFailed;
         Managers.Network.OnWrongIdAct += WrongId;
@@ -31,30 +52,45 @@ public class LoginScene : BaseScene {
         Managers.Network.OnLoginAct += LoginSucceed;
     }
 
-    private void PrOpt() {
-        if (_isLogined) {
-            _opt = (_opt + 1) % 5;
-            _optionSelecter.SetOpt(_opt);
-            Debug.Log("Pre");
+    private void ChangeLoginOpt() {
+        if (_stage == Stage.Login) {
+            _loginOpt = (_loginOpt + 1) % 2;
+            _uiLoginOrCreateAccount.SetSelectedOpt(_loginOpt);
+            if (_loginOpt == 0) {
+                Managers.UI.ShowPopupUI<UI_LoginPopup>();
+                Managers.UI.DisableUI("UI_CreateAccountPopup");
+            } else {
+                Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
+                Managers.UI.DisableUI("UI_LoginPopup");
+            }
         }
     }
 
-    private void NxtOpt() {
-        if (_isLogined) {
-            _opt = (_opt + 4) % 5;
-            _optionSelecter.SetOpt(_opt);
-            Debug.Log("Next");
+    private void UpLobbyOpt() {
+        if (_stage == Stage.Lobby) {
+            _lobbyOpt = (_lobbyOpt + 1) % 5;
+            _optionSelecter.SetOpt(_lobbyOpt);
+        }
+    }
+
+    private void DownLobbyOpt() {
+        if (_stage == Stage.Lobby) {
+            _lobbyOpt = (_lobbyOpt + 4) % 5;
+            _optionSelecter.SetOpt(_lobbyOpt);
         }
     }
 
     private void ConnectToServerSucceed() {
-        if (_isConnected == false) {
-            _opt = 6;
-            _optionSelecter.SetOpt(_opt);
-            _isConnected = true;
+        if (_stage == Stage.Connect) {
+            _lobbyOpt = 6;
+            _optionSelecter.SetOpt(_lobbyOpt);
+            _stage = Stage.Login;
             Managers.ExecuteAtMainThread(() => {
                 Managers.UI.DisableUI("UI_StartGame");
-                Managers.UI.ShowPopupUI<UI_TestLoginPopup>();
+
+                _loginOpt = 0;
+                Managers.UI.ShowPopupUI<UI_LoginPopup>();
+                Managers.UI.ShowSceneUI<UI_LoginOrCreateAccount>();
             });
         }
     }
@@ -66,24 +102,30 @@ public class LoginScene : BaseScene {
     }
 
     public void LoginSucceed() {
-        if (_isConnected && !_isLogined) {
-            _opt = 0;
-            _optionSelecter.SetOpt(_opt);
-            _isLogined = true;
+        if (_stage == Stage.Login) {
+            _lobbyOpt = 0;
+            _optionSelecter.SetOpt(_lobbyOpt);
+            _stage = Stage.Lobby;
+
+            Managers.UI.DisableUI("UI_CreateAccountPopup");
+            Managers.UI.DisableUI("UI_LoginPopup");
+            Managers.UI.DisableUI("UI_LoginOrCreateAccount");
         }   
     }
 
     public void WrongId() {
-
+        Managers.UI.ShowErrorUI("없는 아이디입니다.", false);
     }
 
     public void WrongPassword() {
-
+        Managers.UI.ShowErrorUI("비밀번호가 맞지 않습니다.", false);
     }
 
     public override void Clear() {
-        Managers.Input.RemoveKeyListener(KeyCode.UpArrow, PrOpt, InputManager.KeyState.Up);
-        Managers.Input.RemoveKeyListener(KeyCode.DownArrow, NxtOpt, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.UpArrow, UpLobbyOpt, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.UpArrow, ChangeLoginOpt, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.DownArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Network.OnConnectedAct -= ConnectToServerSucceed;
         Managers.Network.OnConnectedFailedAct -= ConnectToServerFailed;
         Managers.Network.OnWrongIdAct -= WrongId;

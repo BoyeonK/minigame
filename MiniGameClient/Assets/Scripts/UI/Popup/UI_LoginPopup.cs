@@ -27,7 +27,10 @@ public class UI_LoginPopup : UI_Popup {
         Clear();
     }
 
-    private void Clear() { }
+    private void Clear() {
+        _loginButton.onClick.RemoveAllListeners();
+        Managers.Input.RemoveKeyListener(KeyCode.Return, TryLogin, InputManager.KeyState.Down);
+    }
 
     public override void Init() {
         base.Init();
@@ -41,7 +44,9 @@ public class UI_LoginPopup : UI_Popup {
         if (_loginButton != null) {
             _loginButton.onClick.AddListener(TryLogin);
         }
+        Managers.Input.AddKeyListener(KeyCode.Return, TryLogin, InputManager.KeyState.Down);
     }
+
     private void TryLogin() {
         string id = "", password = "";
         if (_idField != null && _pwField != null) {
@@ -51,6 +56,12 @@ public class UI_LoginPopup : UI_Popup {
             password = _pwField.text;
         }
         else { return; }
+
+        if (id == "" || password == "") {
+            Managers.UI.ShowErrorUI("입력값이 잘못되었습니다.", false);
+            return;
+        }
+
         if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
             Debug.Log("로그인 시도");
             C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), id, password);

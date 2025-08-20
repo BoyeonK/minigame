@@ -1,17 +1,10 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Analytics;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class UI_LoginOrCreateAccount : UI_Scene {
     enum Texts {
         LoginMenu,
         CreateAccountMenu,
-    }
-
-    public enum SelectedOpt {
-        Login,
-        CreateAccount,
     }
 
     private TextMeshProUGUI _loginMenu;
@@ -20,17 +13,17 @@ public class UI_LoginOrCreateAccount : UI_Scene {
     private RectTransform _rectLogin;
     private RectTransform _rectCreateAccount;
 
-    private float _rectSpeed = 2.5f;
-    private float _range = 2f;
+    private float _rectSpeed = 5f;
+    private float _range = 3f;
 
     private Color _unSelectedColor = Color.white;
     private Color _selectedColor = new Color(128f / 255f, 0f, 0f, 1.0f);
 
-    private SelectedOpt _selectedOpt;
+    private int _selectedOpt;
 
-    public void SetSelectedOpt(SelectedOpt value) {
+    public void SetSelectedOpt(int value) {
         _selectedOpt = value;
-        if (_selectedOpt == SelectedOpt.Login) {
+        if (_selectedOpt == 0) {
             if (_rectCreateAccount != null) {
                 _rectCreateAccount.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 _loginMenu.color = _selectedColor;
@@ -54,12 +47,12 @@ public class UI_LoginOrCreateAccount : UI_Scene {
     }
 
     void Update() {
-        if (_selectedOpt== SelectedOpt.Login && _loginMenu != null && _rectLogin != null) {
+        if (_selectedOpt == 0 && _loginMenu != null && _rectLogin != null) {
             float pingPongValue = Mathf.PingPong(Time.time * _rectSpeed, _range);
             float rot = pingPongValue;
             _rectLogin.localRotation = Quaternion.Euler(0f, 0f, rot);
         }
-        if (_selectedOpt == SelectedOpt.CreateAccount && _createAccountMenu != null && _rectCreateAccount != null) {
+        if (_selectedOpt == 1 && _createAccountMenu != null && _rectCreateAccount != null) {
             float pingPongValue = Mathf.PingPong(Time.time * _rectSpeed, _range);
             float rot = pingPongValue;
             _rectCreateAccount.localRotation = Quaternion.Euler(0f, 0f, rot);
@@ -77,7 +70,7 @@ public class UI_LoginOrCreateAccount : UI_Scene {
         if (_createAccountMenu != null) {
             _rectCreateAccount = _createAccountMenu.GetComponent<RectTransform>();
         }
-        //SetSelectedOpt(SelectedOpt.Login);
+        SetSelectedOpt(0);
     }
 
     private void Clear() {

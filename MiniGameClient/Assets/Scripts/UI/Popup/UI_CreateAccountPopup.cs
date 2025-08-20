@@ -19,6 +19,7 @@ public class UI_CreateAccountPopup : UI_Popup {
     private Button _createAccountButton;
     private TMP_InputField _idField;
     private TMP_InputField _pwField;
+    private TMP_InputField _pwConfirmField;
 
     private void OnEnable() {
         Init();
@@ -29,6 +30,7 @@ public class UI_CreateAccountPopup : UI_Popup {
     }
 
     private void Clear() {
+        _createAccountButton.onClick.RemoveAllListeners();
         Managers.Input.RemoveKeyListener(KeyCode.Return, TryCreateAccount, InputManager.KeyState.Down);
     }
 
@@ -40,6 +42,7 @@ public class UI_CreateAccountPopup : UI_Popup {
         _createAccountButton = Get<Button>((int)Buttons.CreateAccountButton);
         _idField = Get<TMP_InputField>((int)InputFields.IdInputField);
         _pwField = Get<TMP_InputField>((int)InputFields.PasswordInputField);
+        _pwConfirmField = Get<TMP_InputField>((int)InputFields.PasswordConfirmInputField);
 
         if (_createAccountButton != null) {
             _createAccountButton.onClick.AddListener(TryCreateAccount);
@@ -49,17 +52,22 @@ public class UI_CreateAccountPopup : UI_Popup {
     private void TryCreateAccount() {
         //TODO : 패스워드확인이랑 패스워드랑 일치하는지 선제적으로 확인
         //다르면 에러 메세지 출력
-        string id = "", password = "";
-        if (_idField != null && _pwField != null) {
-            Debug.Log($"ID: {_idField.text}");
-            Debug.Log($"Password: {_pwField.text}");
+        string id = "", pw = "", pwc = "";
+        if (_idField != null && _pwField != null && _pwConfirmField != null) {
             id = _idField.text;
-            password = _pwField.text;
+            pw = _pwField.text;
+            pwc = _pwConfirmField.text;
         }
         else { return; }
+
+        if (id == "" || pw == "" || pwc == "" || pw != pwc) {
+            Managers.UI.ShowErrorUI("입력값이 잘못되었습니다.", false);
+            return;
+        }
+
         if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
             Debug.Log("계정생성 시도");
-            C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), id, password);
+            C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), id, pw);
             Managers.Network.Send(pkt);
         }
     }
