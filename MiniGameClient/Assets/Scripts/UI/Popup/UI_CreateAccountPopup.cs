@@ -61,7 +61,7 @@ public class UI_CreateAccountPopup : UI_Popup {
         else { return; }
 
         if (id == "" || pw == "" || pwc == "" || pw != pwc) {
-            Managers.UI.ShowErrorUI("입력값이 잘못되었습니다.", false);
+            Managers.UI.ShowErrorUIOnlyConfirm("입력값이 잘못되었습니다.", () => { });
             return;
         }
 

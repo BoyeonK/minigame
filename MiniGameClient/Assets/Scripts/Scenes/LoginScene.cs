@@ -24,8 +24,9 @@ public class LoginScene : BaseScene {
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
-        _uiStartGame = Managers.UI.ShowSceneUI<UI_StartGame>();
+
         //사용할 UI를 미리 메모리에 올려둔다.
+        _uiStartGame = Managers.UI.ShowSceneUI<UI_StartGame>();
         _uiLoginOrCreateAccount = Managers.UI.ShowSceneUI<UI_LoginOrCreateAccount>();
         _uiLoginPopup = Managers.UI.ShowPopupUI<UI_LoginPopup>();
         _uiCreateAccountPopup = Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
@@ -45,6 +46,7 @@ public class LoginScene : BaseScene {
         Managers.Input.AddKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.UpArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.DownArrow, ChangeLoginOpt, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Up);
         Managers.Network.OnConnectedAct += ConnectToServerSucceed;
         Managers.Network.OnConnectedFailedAct += ConnectToServerFailed;
         Managers.Network.OnWrongIdAct += WrongId;
@@ -97,7 +99,8 @@ public class LoginScene : BaseScene {
 
     private void ConnectToServerFailed() {
         Managers.ExecuteAtMainThread(() => {
-            Managers.UI.ShowErrorUI("서버와의 연결에 실패했습니다.", false);
+            //Managers.UI.ShowErrorUI("서버와의 연결에 실패했습니다.", false);
+            Managers.UI.ShowErrorUIOnlyConfirm("서버와의 연결에 실패했습니다.", () => { });
         });
     }
 
@@ -114,11 +117,31 @@ public class LoginScene : BaseScene {
     }
 
     public void WrongId() {
-        Managers.UI.ShowErrorUI("없는 아이디입니다.", false);
+        Managers.UI.ShowErrorUIOnlyConfirm("없는 아이디입니다.", () => { });
     }
 
     public void WrongPassword() {
-        Managers.UI.ShowErrorUI("비밀번호가 맞지 않습니다.", false);
+        Managers.UI.ShowErrorUIOnlyConfirm("비밀번호가 맞지 않습니다.", () => { });
+    }
+
+    public void BackToPreviousMenu() {
+        switch (_stage) {
+            case Stage.Connect:
+
+                break;
+            case Stage.Login:
+                break;
+            case Stage.Lobby:
+                break;
+            case Stage.MatchMake:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void LogOut() {
+
     }
 
     public override void Clear() {
@@ -126,6 +149,7 @@ public class LoginScene : BaseScene {
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.UpArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, ChangeLoginOpt, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Up);
         Managers.Network.OnConnectedAct -= ConnectToServerSucceed;
         Managers.Network.OnConnectedFailedAct -= ConnectToServerFailed;
         Managers.Network.OnWrongIdAct -= WrongId;

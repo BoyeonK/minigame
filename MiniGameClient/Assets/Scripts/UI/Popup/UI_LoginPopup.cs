@@ -58,7 +58,7 @@ public class UI_LoginPopup : UI_Popup {
         else { return; }
 
         if (id == "" || password == "") {
-            Managers.UI.ShowErrorUI("입력값이 잘못되었습니다.", false);
+            Managers.UI.ShowErrorUIOnlyConfirm("입력값이 잘못되었습니다.", () => { });
             return;
         }
 
