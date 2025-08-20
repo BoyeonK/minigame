@@ -45,12 +45,15 @@ namespace ServerCore {
 				//해당 Session의 OnConnected함수 실행 (HandShake과정 수행 시작)
 				session.OnConnected(args.RemoteEndPoint);
 
-				Managers.Network.ConnectCompleted(true);
+				Managers.ExecuteAtMainThread(() => {
+                    Managers.Network.ConnectCompleted(true);
+                }); 
 			}
 			else {
 				Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
-
-				Managers.Network.ConnectCompleted(false);
+                Managers.ExecuteAtMainThread(() => {
+                    Managers.Network.ConnectCompleted(false);
+                }); 
 			}
 		}
 	}

@@ -79,16 +79,18 @@ class PacketHandler {
 			return;
 		}
 
-		C_Welcome cWelcomePacket = PacketMaker.MakeCWelcome(encryptedKey, "트랄랄레로트랄랄라");
+		C_Welcome cWelcomePacket = PacketMaker.MakeCWelcome(encryptedKey, "직선조명을 없애보았더니 씬의 분위기가 마치 후즈앳더도어처럼 되어버렸다.");
 		Managers.Network.Send(cWelcomePacket);
 	}
 
     public static void S_WelcomeResponseHandler(PacketSession session, IMessage packet) {
 		S_WelcomeResponse recvPkt = packet as S_WelcomeResponse;
-		string asdf = recvPkt.Message;
-		Managers.ExecuteAtMainThread(() => {
-			Debug.Log(asdf);
+		string recvMessage = recvPkt.Message;
+#if UNITY_EDITOR
+        Managers.ExecuteAtMainThread(() => {
+			Debug.Log(recvMessage);
 		});
+#endif
 		return;
     }
 
@@ -100,15 +102,18 @@ class PacketHandler {
 		byte[] tag = recvPkt.Tag.ToByteArray();
 		int msgId = recvPkt.MsgId;
 
+#if UNITY_EDITOR
 		Managers.ExecuteAtMainThread(() => { Debug.Log($"{msgId} 복호화 시도"); });
-
+#endif
 		byte[] aad = BitConverter.GetBytes(msgId);
 		if (!BitConverter.IsLittleEndian) {
 			Array.Reverse(aad);
 		}
 
 		if (iv.Length != 12 || tag.Length != 16) {
+#if UNITY_EDITOR
 			Managers.ExecuteAtMainThread(() => { Debug.LogError($"Invalid IV ({iv.Length}) or Tag ({tag.Length}) length."); });
+#endif
 			return;
 		}
 
@@ -117,13 +122,17 @@ class PacketHandler {
 			plaintext = DecryptAesGcmInternal(key, iv, ciphertext, tag, aad);
 		}
 		catch (Exception ex) {
+#if UNITY_EDITOR
 			Managers.ExecuteAtMainThread(() => { Debug.LogError($"복호화 실패: {ex.Message}"); });
+#endif
 			return;
 		}
 
 		Managers.ExecuteAtMainThread(() => { Debug.Log($"Message Id = {msgId}"); });
 		if (!(PacketManager.Instance.ByteToIMessage(session, plaintext, (ushort)msgId))) {
+#if UNITY_EDITOR
 			Managers.ExecuteAtMainThread(() => { Debug.Log("역직렬화 혹은 Custom Handler에 등록 실패"); });
+#endif
         }
 	}
 
@@ -149,23 +158,29 @@ class PacketHandler {
 			case (S_Login.ValueCaseOneofCase.Dbid):
 				//없는 아이디
 				if (recvPkt.Dbid == 0) {
-					Managers.ExecuteAtMainThread(() => { Debug.Log("없는 아이디."); });
-					Managers.Network.LoginCompleted(1);
+					Managers.ExecuteAtMainThread(() => { 
+						Debug.Log("없는 아이디.");
+                        Managers.Network.LoginCompleted(2);
+                    });
 					// 실패
 				}
 				// 정상적인 로그인 성공
 				else {	
 					ServerSession ss = session as ServerSession;
 					ss.ID = recvPkt.Dbid;
-					Managers.ExecuteAtMainThread(() => { Debug.Log($"{ss.ID} 내 아이디"); });
-					Managers.Network.LoginCompleted(0);
+					Managers.ExecuteAtMainThread(() => { 
+						Debug.Log($"{ss.ID} 내 아이디");
+                        Managers.Network.LoginCompleted(0);
+                    });
                 }
 				break;
 			//틀린 비밀번호
 			case (S_Login.ValueCaseOneofCase.Err):
 				string errMsg = recvPkt.Err;
-				Managers.ExecuteAtMainThread(() => { Debug.Log($"{errMsg}"); });
-				Managers.Network.LoginCompleted(2);
+				Managers.ExecuteAtMainThread(() => { 
+					Debug.Log($"{errMsg}");
+                    Managers.Network.LoginCompleted(1);
+                });
 				break;
 			// 값이 할당되지 않았을 때 (ㄹㅇ 버그, 서버 문제임)
 			case (S_Login.ValueCaseOneofCase.None):
