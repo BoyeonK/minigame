@@ -1395,7 +1395,7 @@ GameObject:
   - component: {fileID: 4149860733841818652}
   - component: {fileID: 7323764830898059553}
   m_Layer: 5
-  m_Name: UI_CreateAccount
+  m_Name: UI_CreateAccountPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

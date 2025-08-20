@@ -10,6 +10,8 @@ public class UI_Base : MonoBehaviour {
     public Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
 
     protected void Bind<T>(Type type) where T : UnityEngine.Object {
+        if (_objects.ContainsKey(typeof(T)))
+            return;
         string[] names = Enum.GetNames(type);
         UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
         _objects.Add(typeof(T), objects);
