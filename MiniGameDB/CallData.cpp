@@ -293,6 +293,7 @@ void DCreateAccountCallData::Proceed() {
                     throw runtime_error("Transaction Commit Failed");
                 }
                 attr = false;
+                _reply.set_success(true);
             }
             else {
                 _reply.set_success(false);
