@@ -57,6 +57,22 @@ public class NetworkManager {
 		connector.Connect(endPoint, () => { return _session; }, 1);
 	}
 
+	//이 함수는, 일단 내 설계상 메인스레드에서만 호출할 예정.
+	//경쟁상태를 고려하지 않고 만듬.
+	public void TryDisconnect() {
+		if (_isConnected == true) {
+			_session.Disconnect();
+
+			//매우 큰 깨달음. 회고할때 반드시 짚고 넘어갈 것
+			//
+			_session = new ServerSession();
+			//
+			//
+
+			_isConnected = false;
+		}
+	}
+
 	public void Update() {
 
 	}
