@@ -69,6 +69,14 @@ public class UI_StartGame : UI_Scene {
         }
         if (_gameName != null) { 
             _rectGameName = _gameName.GetComponent<RectTransform>();
+            if (_enter != null && _toStart != null) {
+                Color ec = _enter.color;
+                Color tc = _toStart.color;
+                ec.a = 1f;
+                tc.a = 1f;
+                _enter.color = ec;
+                _toStart.color = tc;
+            }
         }
         if (_enterToStart != null) {
             _rectEnterToStart = _enterToStart.GetComponent<RectTransform>();

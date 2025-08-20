@@ -34,7 +34,8 @@ public class UI_ErrorConfirmOrCancel : UI_Popup {
         _cancelButton = Get<Button>((int)Buttons.CancelButton);
 
         _errorText.text = errorDetail;
-        Clear();
+        _confirmButton.onClick.RemoveAllListeners();
+        _cancelButton.onClick.RemoveAllListeners();
         _confirmButton.onClick.AddListener(() => {
             confirmOnClickEvent?.Invoke();
             DestroyThis();

@@ -191,6 +191,18 @@ class PacketHandler {
 
 	public static void S_CreateAccountHandler(PacketSession session, IMessage packet) {
 		S_CreateAccount recvPkt = packet as S_CreateAccount;
+		bool isSucceed = recvPkt.Success;
+		if (isSucceed) {
+			Managers.ExecuteAtMainThread(() => {
+				Managers.UI.ShowErrorUIOnlyConfirm("계정 생성에 성공하였습니다.");
+			});
+		}
+		else {
+			Managers.ExecuteAtMainThread(() => {
+				string err = recvPkt.Err;
+                Managers.UI.ShowErrorUIOnlyConfirm(err);
+            });
+		}
 	}
 }
 

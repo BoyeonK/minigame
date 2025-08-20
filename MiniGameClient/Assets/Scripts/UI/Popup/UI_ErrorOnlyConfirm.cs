@@ -31,7 +31,7 @@ public class UI_ErrorOnlyConfirm : UI_Popup {
         _confirmButton = Get<Button>((int)Buttons.ConfirmButton);
 
         _errorText.text = errorDetail;
-        Clear();
+        _confirmButton.onClick.RemoveAllListeners();
         _confirmButton.onClick.AddListener(() => {
             confirmOnClickEvent?.Invoke();
             DestroyThis();
