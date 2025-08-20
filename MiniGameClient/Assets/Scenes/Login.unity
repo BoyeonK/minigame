@@ -2396,7 +2396,7 @@ GameObject:
   - component: {fileID: 472684047}
   - component: {fileID: 472684046}
   m_Layer: 0
-  m_Name: Point Light Passage
+  m_Name: PointLightPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6568,7 +6568,7 @@ GameObject:
   - component: {fileID: 1186484389}
   - component: {fileID: 1186484388}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: DirectionalLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7686,7 +7686,7 @@ GameObject:
   - component: {fileID: 1409300658}
   - component: {fileID: 1409300657}
   m_Layer: 0
-  m_Name: Point Light Main Hall
+  m_Name: PointLightMainHall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

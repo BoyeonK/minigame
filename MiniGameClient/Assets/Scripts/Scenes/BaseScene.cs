@@ -15,7 +15,7 @@ public class BaseScene : MonoBehaviour {
             Managers.Resource.Instantiate("UI/EventSystem").name = "@EventSyetem";
         }
         else {
-            Debug.Log("asdf");
+            
         }
     }
 

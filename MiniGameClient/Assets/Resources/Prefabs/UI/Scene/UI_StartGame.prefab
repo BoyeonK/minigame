@@ -594,6 +594,7 @@ GameObject:
   - component: {fileID: 1040618550156569122}
   - component: {fileID: 5435572373243172354}
   - component: {fileID: 5496981150911042090}
+  - component: {fileID: 3564230875776934895}
   m_Layer: 5
   m_Name: UI_StartGame
   m_TagString: Untagged
@@ -685,3 +686,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3564230875776934895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8024928615007123124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fe9bbd0d152014686f13b0d8dd5303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

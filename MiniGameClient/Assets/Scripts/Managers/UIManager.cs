@@ -86,11 +86,9 @@ public class UIManager {
     public void DisableUI(string uiName) {
         //딕셔너리 컨테이너에서, uiName에 해당하는 object의 포인터를 꺼낸다.
         //그리고 Active값을 변경
-        Debug.Log($"{uiName}에 해당하는 친구를 삭제하겠다.");
         if (_uiCache.TryGetValue(uiName, out GameObject uiObj)) {
             if (uiObj != null) {
                 uiObj.SetActive(false);
-                Debug.Log($"{uiName} UI를 비활성화했습니다.");
             } else  {
                 _uiCache.Remove(uiName);
                 Debug.LogWarning($"{uiName} 참조가 캐시에 남아있었지만, 오브젝트는 이미 파괴되었습니다. 캐시에서 제거합니다.");
