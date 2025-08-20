@@ -1409,6 +1409,7 @@ GameObject:
   - component: {fileID: 7312659953109081546}
   - component: {fileID: 6399592281304115386}
   - component: {fileID: 4719093590460590006}
+  - component: {fileID: -2145892563703973077}
   m_Layer: 5
   m_Name: UI_LoginPopup
   m_TagString: Untagged
@@ -1499,3 +1500,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-2145892563703973077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8125643453437679670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f6f8e80ae957f49a28c230bc7808a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
