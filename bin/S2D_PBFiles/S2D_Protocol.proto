@@ -2,12 +2,14 @@ syntax = "proto3";
 
 package S2D_Protocol;
 
+//초기에 DB와 Server를 연결할 때, HandShake과정에서 연결 상태를 확인할 사용할 SayHello.
 service S2D_Service {
     rpc SayHello (HelloRequest) returns (HelloReply);
     rpc LoginRequest (S2D_Login) returns (D2S_Login);
     rpc CreateAccountRequest (S2D_CreateAccount) returns (D2S_CreateAccount);
 }
 
+//SayHello -> 단순한 에코를 실행.
 message HelloRequest {
     string name = 1;
 }
@@ -16,6 +18,16 @@ message HelloReply {
     string message = 1;
 }
 
+//로그인시 DB서버와 게임서버 사이의 protocol.
+    //1. id와 비밀번호 문자열을 전송.
+    //2. DB서버에서 해당 id에 해당하는 dbid를 조회
+        //2-1. 조회가 실패한 경우, 없는 아이디이다. D2S_Login패킷에 incorrect_id = true를 담아 전송.
+    //3. 조회가 성공한 경우, dbid를 통해 Accounts테이블을 조회한다.
+    //4. 비밀번호에 Accounts테이블의 salt를 넣고 pbkdf2(SHA-256)방식으로 해싱. 이후 Accounts테이블의 password_hash와 비교한다.    
+    //5. 맞는경우, 해당 dbid를 전송. 틀린경우 dbid = 0을 전송.
+        //TODO.
+        //pbkdf2알고리즘으로 해싱 ■■■■회 반복 현재 매직넘버 사용중... (git에 올라가지 않는 환경 변수값으로 지정하는 것이 안전하긴 함.)
+        //password값이 alphanumeric인지 재차 확인 필요. (ReDos 공격에 안전한 방식으로)
 message S2D_Login {
     string id = 1;
     string password = 2;
@@ -28,6 +40,15 @@ message D2S_Login {
     }
 }
 
+//계정 생성요청 시 DB서버와 게임서버 사이의 protocol.
+    //1. id와 비밀번호 문자열을 전송.
+    //2. 트랜잭션 ON. 해당 id로 계정 생성 시도.
+        //2-1. SQLError 23000인 경우, 아이디 중복으로 인한 실패. D2S_CreateAccount에 false를 담아 전송. 트랜잭션 종료. 핸들의 설정을 복원하고 pool에 반납. (핸들을 pooling해서 사용 중)
+    //3. 성공한 경우, 관계테이블인 Accounts테이블과 Elos테이블 생성.
+        //3-1. Accounts테이블. OpenSSL을 이용하여 암호학적으로 안전한 salt를 생성하고 비밀번호를 pbkdf2방식으로 해싱하여 salt와 함께 저장.
+        //3-2. Elos테이블. 최초 생성시 기본값 1200이 적용된다.
+        //3-3. 위의 과정 중 실패가 있는경우, 트랜잭션 롤백. 핸들의 설정을 복원하고 pool에 반납. D2S_CreateAccount에 false를 담아 전송.
+    //4. 트랜잭션 커밋. 핸들의 설정을 복원하고 pool에 반납. D2S_CreateAccount에 true를 담아 전송.
 message S2D_CreateAccount {
     string id = 1;
     string password = 2;
