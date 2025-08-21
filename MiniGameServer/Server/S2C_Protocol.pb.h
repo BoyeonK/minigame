@@ -62,6 +62,9 @@ extern C_EncryptedDefaultTypeInternal _C_Encrypted_default_instance_;
 class C_Login;
 struct C_LoginDefaultTypeInternal;
 extern C_LoginDefaultTypeInternal _C_Login_default_instance_;
+class C_Logout;
+struct C_LogoutDefaultTypeInternal;
+extern C_LogoutDefaultTypeInternal _C_Logout_default_instance_;
 class C_Welcome;
 struct C_WelcomeDefaultTypeInternal;
 extern C_WelcomeDefaultTypeInternal _C_Welcome_default_instance_;
@@ -74,6 +77,9 @@ extern S_EncryptedDefaultTypeInternal _S_Encrypted_default_instance_;
 class S_Login;
 struct S_LoginDefaultTypeInternal;
 extern S_LoginDefaultTypeInternal _S_Login_default_instance_;
+class S_Logout;
+struct S_LogoutDefaultTypeInternal;
+extern S_LogoutDefaultTypeInternal _S_Logout_default_instance_;
 class S_Welcome;
 struct S_WelcomeDefaultTypeInternal;
 extern S_WelcomeDefaultTypeInternal _S_Welcome_default_instance_;
@@ -97,6 +103,8 @@ enum MsgId : int {
   S_LOGIN = 6,
   C_CREATE_ACCOUNT = 7,
   S_CREATE_ACCOUNT = 8,
+  C_LOGOUT = 9,
+  S_LOGOUT = 10,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ =
@@ -106,8 +114,8 @@ enum MsgId : int {
 bool MsgId_IsValid(int value);
 extern const uint32_t MsgId_internal_data_[];
 constexpr MsgId MsgId_MIN = static_cast<MsgId>(0);
-constexpr MsgId MsgId_MAX = static_cast<MsgId>(8);
-constexpr int MsgId_ARRAYSIZE = 8 + 1;
+constexpr MsgId MsgId_MAX = static_cast<MsgId>(10);
+constexpr int MsgId_ARRAYSIZE = 10 + 1;
 const ::google::protobuf::EnumDescriptor*
 MsgId_descriptor();
 template <typename T>
@@ -120,7 +128,7 @@ const std::string& MsgId_Name(T value) {
 template <>
 inline const std::string& MsgId_Name(MsgId value) {
   return ::google::protobuf::internal::NameOfDenseEnum<MsgId_descriptor,
-                                                 0, 8>(
+                                                 0, 10>(
       static_cast<int>(value));
 }
 inline bool MsgId_Parse(absl::string_view name, MsgId* value) {
@@ -192,7 +200,7 @@ class S_WelcomeResponse final : public ::google::protobuf::Message
     return reinterpret_cast<const S_WelcomeResponse*>(
         &_S_WelcomeResponse_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 4;
+  static constexpr int kIndexInFileMessages = 2;
   friend void swap(S_WelcomeResponse& a, S_WelcomeResponse& b) { a.Swap(&b); }
   inline void Swap(S_WelcomeResponse* other) {
     if (other == this) return;
@@ -400,7 +408,7 @@ class S_Welcome final : public ::google::protobuf::Message
     return reinterpret_cast<const S_Welcome*>(
         &_S_Welcome_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static constexpr int kIndexInFileMessages = 0;
   friend void swap(S_Welcome& a, S_Welcome& b) { a.Swap(&b); }
   inline void Swap(S_Welcome* other) {
     if (other == this) return;
@@ -541,6 +549,196 @@ class S_Welcome final : public ::google::protobuf::Message
                           const S_Welcome& from_msg);
     ::google::protobuf::internal::ArenaStringPtr publickey_;
     ::int32_t gameversion_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_S2C_5fProtocol_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_Logout final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_Logout) */ {
+ public:
+  inline S_Logout() : S_Logout(nullptr) {}
+  ~S_Logout() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(S_Logout* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_Logout));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR S_Logout(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline S_Logout(const S_Logout& from) : S_Logout(nullptr, from) {}
+  inline S_Logout(S_Logout&& from) noexcept
+      : S_Logout(nullptr, std::move(from)) {}
+  inline S_Logout& operator=(const S_Logout& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_Logout& operator=(S_Logout&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_Logout& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_Logout* internal_default_instance() {
+    return reinterpret_cast<const S_Logout*>(
+        &_S_Logout_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 10;
+  friend void swap(S_Logout& a, S_Logout& b) { a.Swap(&b); }
+  inline void Swap(S_Logout* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_Logout* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_Logout* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S_Logout>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const S_Logout& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const S_Logout& from) { S_Logout::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(S_Logout* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_Logout"; }
+
+ protected:
+  explicit S_Logout(::google::protobuf::Arena* arena);
+  S_Logout(::google::protobuf::Arena* arena, const S_Logout& from);
+  S_Logout(::google::protobuf::Arena* arena, S_Logout&& from) noexcept
+      : S_Logout(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kSuccessFieldNumber = 1,
+  };
+  // bool success = 1;
+  void clear_success() ;
+  bool success() const;
+  void set_success(bool value);
+
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_Logout)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const S_Logout& from_msg);
+    bool success_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -834,7 +1032,7 @@ class S_Encrypted final : public ::google::protobuf::Message
     return reinterpret_cast<const S_Encrypted*>(
         &_S_Encrypted_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 0;
+  static constexpr int kIndexInFileMessages = 3;
   friend void swap(S_Encrypted& a, S_Encrypted& b) { a.Swap(&b); }
   inline void Swap(S_Encrypted* other) {
     if (other == this) return;
@@ -1286,7 +1484,7 @@ class C_Welcome final : public ::google::protobuf::Message
     return reinterpret_cast<const C_Welcome*>(
         &_C_Welcome_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 3;
+  static constexpr int kIndexInFileMessages = 1;
   friend void swap(C_Welcome& a, C_Welcome& b) { a.Swap(&b); }
   inline void Swap(C_Welcome* other) {
     if (other == this) return;
@@ -1433,6 +1631,196 @@ class C_Welcome final : public ::google::protobuf::Message
                           const C_Welcome& from_msg);
     ::google::protobuf::internal::ArenaStringPtr aeskey_;
     ::google::protobuf::internal::ArenaStringPtr message_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_S2C_5fProtocol_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_Logout final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.C_Logout) */ {
+ public:
+  inline C_Logout() : C_Logout(nullptr) {}
+  ~C_Logout() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(C_Logout* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(C_Logout));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR C_Logout(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline C_Logout(const C_Logout& from) : C_Logout(nullptr, from) {}
+  inline C_Logout(C_Logout&& from) noexcept
+      : C_Logout(nullptr, std::move(from)) {}
+  inline C_Logout& operator=(const C_Logout& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_Logout& operator=(C_Logout&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_Logout& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_Logout* internal_default_instance() {
+    return reinterpret_cast<const C_Logout*>(
+        &_C_Logout_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 9;
+  friend void swap(C_Logout& a, C_Logout& b) { a.Swap(&b); }
+  inline void Swap(C_Logout* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_Logout* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_Logout* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<C_Logout>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const C_Logout& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const C_Logout& from) { C_Logout::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(C_Logout* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.C_Logout"; }
+
+ protected:
+  explicit C_Logout(::google::protobuf::Arena* arena);
+  C_Logout(::google::protobuf::Arena* arena, const C_Logout& from);
+  C_Logout(::google::protobuf::Arena* arena, C_Logout&& from) noexcept
+      : C_Logout(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kDbidFieldNumber = 1,
+  };
+  // int32 dbid = 1;
+  void clear_dbid() ;
+  ::int32_t dbid() const;
+  void set_dbid(::int32_t value);
+
+  private:
+  ::int32_t _internal_dbid() const;
+  void _internal_set_dbid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.C_Logout)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const C_Logout& from_msg);
+    ::int32_t dbid_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1714,7 +2102,7 @@ class C_Encrypted final : public ::google::protobuf::Message
     return reinterpret_cast<const C_Encrypted*>(
         &_C_Encrypted_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 1;
+  static constexpr int kIndexInFileMessages = 4;
   friend void swap(C_Encrypted& a, C_Encrypted& b) { a.Swap(&b); }
   inline void Swap(C_Encrypted* other) {
     if (other == this) return;
@@ -2126,6 +2514,254 @@ class C_CreateAccount final : public ::google::protobuf::Message
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
+// S_Welcome
+
+// bytes publicKey = 1;
+inline void S_Welcome::clear_publickey() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.publickey_.ClearToEmpty();
+}
+inline const std::string& S_Welcome::publickey() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_Welcome.publicKey)
+  return _internal_publickey();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void S_Welcome::set_publickey(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.publickey_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_Welcome.publicKey)
+}
+inline std::string* S_Welcome::mutable_publickey() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_publickey();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_Welcome.publicKey)
+  return _s;
+}
+inline const std::string& S_Welcome::_internal_publickey() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.publickey_.Get();
+}
+inline void S_Welcome::_internal_set_publickey(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.publickey_.Set(value, GetArena());
+}
+inline std::string* S_Welcome::_internal_mutable_publickey() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.publickey_.Mutable( GetArena());
+}
+inline std::string* S_Welcome::release_publickey() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.S_Welcome.publicKey)
+  return _impl_.publickey_.Release();
+}
+inline void S_Welcome::set_allocated_publickey(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.publickey_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.publickey_.IsDefault()) {
+    _impl_.publickey_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_Welcome.publicKey)
+}
+
+// int32 gameversion = 2;
+inline void S_Welcome::clear_gameversion() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.gameversion_ = 0;
+}
+inline ::int32_t S_Welcome::gameversion() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_Welcome.gameversion)
+  return _internal_gameversion();
+}
+inline void S_Welcome::set_gameversion(::int32_t value) {
+  _internal_set_gameversion(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_Welcome.gameversion)
+}
+inline ::int32_t S_Welcome::_internal_gameversion() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.gameversion_;
+}
+inline void S_Welcome::_internal_set_gameversion(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.gameversion_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// C_Welcome
+
+// bytes aesKey = 1;
+inline void C_Welcome::clear_aeskey() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.aeskey_.ClearToEmpty();
+}
+inline const std::string& C_Welcome::aeskey() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.C_Welcome.aesKey)
+  return _internal_aeskey();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void C_Welcome::set_aeskey(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.aeskey_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:S2C_Protocol.C_Welcome.aesKey)
+}
+inline std::string* C_Welcome::mutable_aeskey() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_aeskey();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.C_Welcome.aesKey)
+  return _s;
+}
+inline const std::string& C_Welcome::_internal_aeskey() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.aeskey_.Get();
+}
+inline void C_Welcome::_internal_set_aeskey(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.aeskey_.Set(value, GetArena());
+}
+inline std::string* C_Welcome::_internal_mutable_aeskey() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.aeskey_.Mutable( GetArena());
+}
+inline std::string* C_Welcome::release_aeskey() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.C_Welcome.aesKey)
+  return _impl_.aeskey_.Release();
+}
+inline void C_Welcome::set_allocated_aeskey(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.aeskey_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.aeskey_.IsDefault()) {
+    _impl_.aeskey_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.C_Welcome.aesKey)
+}
+
+// string message = 2;
+inline void C_Welcome::clear_message() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_.ClearToEmpty();
+}
+inline const std::string& C_Welcome::message() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.C_Welcome.message)
+  return _internal_message();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void C_Welcome::set_message(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:S2C_Protocol.C_Welcome.message)
+}
+inline std::string* C_Welcome::mutable_message() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_message();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.C_Welcome.message)
+  return _s;
+}
+inline const std::string& C_Welcome::_internal_message() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.message_.Get();
+}
+inline void C_Welcome::_internal_set_message(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_.Set(value, GetArena());
+}
+inline std::string* C_Welcome::_internal_mutable_message() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.message_.Mutable( GetArena());
+}
+inline std::string* C_Welcome::release_message() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.C_Welcome.message)
+  return _impl_.message_.Release();
+}
+inline void C_Welcome::set_allocated_message(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.message_.IsDefault()) {
+    _impl_.message_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.C_Welcome.message)
+}
+
+// -------------------------------------------------------------------
+
+// S_WelcomeResponse
+
+// string message = 1;
+inline void S_WelcomeResponse::clear_message() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_.ClearToEmpty();
+}
+inline const std::string& S_WelcomeResponse::message() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_WelcomeResponse.message)
+  return _internal_message();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void S_WelcomeResponse::set_message(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_WelcomeResponse.message)
+}
+inline std::string* S_WelcomeResponse::mutable_message() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_message();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_WelcomeResponse.message)
+  return _s;
+}
+inline const std::string& S_WelcomeResponse::_internal_message() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.message_.Get();
+}
+inline void S_WelcomeResponse::_internal_set_message(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_.Set(value, GetArena());
+}
+inline std::string* S_WelcomeResponse::_internal_mutable_message() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.message_.Mutable( GetArena());
+}
+inline std::string* S_WelcomeResponse::release_message() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.S_WelcomeResponse.message)
+  return _impl_.message_.Release();
+}
+inline void S_WelcomeResponse::set_allocated_message(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.message_.IsDefault()) {
+    _impl_.message_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_WelcomeResponse.message)
+}
+
+// bool success = 2;
+inline void S_WelcomeResponse::clear_success() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.success_ = false;
+}
+inline bool S_WelcomeResponse::success() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_WelcomeResponse.success)
+  return _internal_success();
+}
+inline void S_WelcomeResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_WelcomeResponse.success)
+}
+inline bool S_WelcomeResponse::_internal_success() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.success_;
+}
+inline void S_WelcomeResponse::_internal_set_success(bool value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.success_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // S_Encrypted
 
 // bytes iv = 1;
@@ -2462,254 +3098,6 @@ inline ::int32_t C_Encrypted::_internal_msgid() const {
 inline void C_Encrypted::_internal_set_msgid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.msgid_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// S_Welcome
-
-// bytes publicKey = 1;
-inline void S_Welcome::clear_publickey() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.publickey_.ClearToEmpty();
-}
-inline const std::string& S_Welcome::publickey() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_Welcome.publicKey)
-  return _internal_publickey();
-}
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void S_Welcome::set_publickey(Arg_&& arg,
-                                                     Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.publickey_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_Welcome.publicKey)
-}
-inline std::string* S_Welcome::mutable_publickey() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_publickey();
-  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_Welcome.publicKey)
-  return _s;
-}
-inline const std::string& S_Welcome::_internal_publickey() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.publickey_.Get();
-}
-inline void S_Welcome::_internal_set_publickey(const std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.publickey_.Set(value, GetArena());
-}
-inline std::string* S_Welcome::_internal_mutable_publickey() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.publickey_.Mutable( GetArena());
-}
-inline std::string* S_Welcome::release_publickey() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:S2C_Protocol.S_Welcome.publicKey)
-  return _impl_.publickey_.Release();
-}
-inline void S_Welcome::set_allocated_publickey(std::string* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.publickey_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.publickey_.IsDefault()) {
-    _impl_.publickey_.Set("", GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_Welcome.publicKey)
-}
-
-// int32 gameversion = 2;
-inline void S_Welcome::clear_gameversion() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.gameversion_ = 0;
-}
-inline ::int32_t S_Welcome::gameversion() const {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_Welcome.gameversion)
-  return _internal_gameversion();
-}
-inline void S_Welcome::set_gameversion(::int32_t value) {
-  _internal_set_gameversion(value);
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_Welcome.gameversion)
-}
-inline ::int32_t S_Welcome::_internal_gameversion() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.gameversion_;
-}
-inline void S_Welcome::_internal_set_gameversion(::int32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.gameversion_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// C_Welcome
-
-// bytes aesKey = 1;
-inline void C_Welcome::clear_aeskey() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.aeskey_.ClearToEmpty();
-}
-inline const std::string& C_Welcome::aeskey() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.C_Welcome.aesKey)
-  return _internal_aeskey();
-}
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void C_Welcome::set_aeskey(Arg_&& arg,
-                                                     Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.aeskey_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:S2C_Protocol.C_Welcome.aesKey)
-}
-inline std::string* C_Welcome::mutable_aeskey() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_aeskey();
-  // @@protoc_insertion_point(field_mutable:S2C_Protocol.C_Welcome.aesKey)
-  return _s;
-}
-inline const std::string& C_Welcome::_internal_aeskey() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.aeskey_.Get();
-}
-inline void C_Welcome::_internal_set_aeskey(const std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.aeskey_.Set(value, GetArena());
-}
-inline std::string* C_Welcome::_internal_mutable_aeskey() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.aeskey_.Mutable( GetArena());
-}
-inline std::string* C_Welcome::release_aeskey() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:S2C_Protocol.C_Welcome.aesKey)
-  return _impl_.aeskey_.Release();
-}
-inline void C_Welcome::set_allocated_aeskey(std::string* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.aeskey_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.aeskey_.IsDefault()) {
-    _impl_.aeskey_.Set("", GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.C_Welcome.aesKey)
-}
-
-// string message = 2;
-inline void C_Welcome::clear_message() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.ClearToEmpty();
-}
-inline const std::string& C_Welcome::message() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.C_Welcome.message)
-  return _internal_message();
-}
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void C_Welcome::set_message(Arg_&& arg,
-                                                     Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:S2C_Protocol.C_Welcome.message)
-}
-inline std::string* C_Welcome::mutable_message() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_message();
-  // @@protoc_insertion_point(field_mutable:S2C_Protocol.C_Welcome.message)
-  return _s;
-}
-inline const std::string& C_Welcome::_internal_message() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.message_.Get();
-}
-inline void C_Welcome::_internal_set_message(const std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.Set(value, GetArena());
-}
-inline std::string* C_Welcome::_internal_mutable_message() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.message_.Mutable( GetArena());
-}
-inline std::string* C_Welcome::release_message() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:S2C_Protocol.C_Welcome.message)
-  return _impl_.message_.Release();
-}
-inline void C_Welcome::set_allocated_message(std::string* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.message_.IsDefault()) {
-    _impl_.message_.Set("", GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.C_Welcome.message)
-}
-
-// -------------------------------------------------------------------
-
-// S_WelcomeResponse
-
-// string message = 1;
-inline void S_WelcomeResponse::clear_message() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.ClearToEmpty();
-}
-inline const std::string& S_WelcomeResponse::message() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_WelcomeResponse.message)
-  return _internal_message();
-}
-template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void S_WelcomeResponse::set_message(Arg_&& arg,
-                                                     Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_WelcomeResponse.message)
-}
-inline std::string* S_WelcomeResponse::mutable_message() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_message();
-  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_WelcomeResponse.message)
-  return _s;
-}
-inline const std::string& S_WelcomeResponse::_internal_message() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.message_.Get();
-}
-inline void S_WelcomeResponse::_internal_set_message(const std::string& value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.Set(value, GetArena());
-}
-inline std::string* S_WelcomeResponse::_internal_mutable_message() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.message_.Mutable( GetArena());
-}
-inline std::string* S_WelcomeResponse::release_message() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:S2C_Protocol.S_WelcomeResponse.message)
-  return _impl_.message_.Release();
-}
-inline void S_WelcomeResponse::set_allocated_message(std::string* value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.message_.IsDefault()) {
-    _impl_.message_.Set("", GetArena());
-  }
-  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_WelcomeResponse.message)
-}
-
-// bool success = 2;
-inline void S_WelcomeResponse::clear_success() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.success_ = false;
-}
-inline bool S_WelcomeResponse::success() const {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_WelcomeResponse.success)
-  return _internal_success();
-}
-inline void S_WelcomeResponse::set_success(bool value) {
-  _internal_set_success(value);
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_WelcomeResponse.success)
-}
-inline bool S_WelcomeResponse::_internal_success() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.success_;
-}
-inline void S_WelcomeResponse::_internal_set_success(bool value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.success_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -3115,6 +3503,58 @@ inline void S_CreateAccount::set_allocated_err(std::string* value) {
     _impl_.err_.Set("", GetArena());
   }
   // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_CreateAccount.err)
+}
+
+// -------------------------------------------------------------------
+
+// C_Logout
+
+// int32 dbid = 1;
+inline void C_Logout::clear_dbid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.dbid_ = 0;
+}
+inline ::int32_t C_Logout::dbid() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.C_Logout.dbid)
+  return _internal_dbid();
+}
+inline void C_Logout::set_dbid(::int32_t value) {
+  _internal_set_dbid(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.C_Logout.dbid)
+}
+inline ::int32_t C_Logout::_internal_dbid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.dbid_;
+}
+inline void C_Logout::_internal_set_dbid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.dbid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// S_Logout
+
+// bool success = 1;
+inline void S_Logout::clear_success() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.success_ = false;
+}
+inline bool S_Logout::success() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_Logout.success)
+  return _internal_success();
+}
+inline void S_Logout::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_Logout.success)
+}
+inline bool S_Logout::_internal_success() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.success_;
+}
+inline void S_Logout::_internal_set_success(bool value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.success_ = value;
 }
 
 #ifdef __GNUC__

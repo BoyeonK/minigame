@@ -13,6 +13,50 @@ enum MsgId {
     S_LOGIN = 6;
     C_CREATE_ACCOUNT = 7;
     S_CREATE_ACCOUNT = 8;
+    C_LOGOUT = 9;
+    S_LOGOUT = 10;
+}
+
+//최초에 TCP방식의 Connect가 성공하면 해당 session의 보안레벨은 '보안레벨 0'이다.
+//MsgId 0~4영역(HandShake과정) 보안레벨 0에서 통신 가능.
+//1. (S_Welcome) 
+    //서버의 RSA key pool에서 공개키를 하나 꺼내서 gameversion과 함께 클라이언트에 전송.
+//2. (C_Welcome)
+    //받은 gameversion이 맞지 않으면, 메세지를 출력하고 클라이언트 종료.
+    //아닌 경우, AES key를 하나 만들고 세션에 저장.
+    //해당 AES key를 서버로부터 받은 RSA public key로 암호화하여 서버에 전송.
+    //해당 AES key로의 암호화 및 복호화가 양쪽에서 올바르게 진행되는지 확인할 목적으로 임의의 문자열도 같이 전송.
+//3. (S_WelcomeResponse -> S_Encrypted)
+    //클라이언트로부터 받은 문자열을 받아 S_WelcomeResponse으로 직렬화한다.
+    //'protobuf로 직렬화된 바이너리'를 암호화한다. '전송할 내용'을 암호화해서 해당 바이너리 영역을 protobuf로 직렬화할까도 고려해보았으나, 2가지 이유로 지금 순서를 사용하게 되었다.
+        //1. Handler함수를 재사용 할 수 있다.
+        //2. 직렬화된 바이너리를 암호화하는 경우, 암호화 할지 말지 여부가 자유롭다.
+            //전송할 내용을 암호화해서 직렬화하기로 프로토콜이 정해지면, 해당 내용은 반드시 암호화해서 전송해야한다.
+    //AES-GCM방식을 사용하고, 복호화된 바이너리를 어떤 패킷으로서 캐스팅해야 할지(서버 C++, 클라 C#) 단서를 주기 위해 msgId를 같이 전송한다.
+        //같이 전송된 msgId는, tag와 함께 해당 암호화의 무결성을 검증할 추가 인증수단으로서도 활용된다.
+//4. 클라이언트에서 S_Encrypted를 받아 핸들러 함수를 실행한다.
+    //정상적으로 동작한 경우 iv, cyphertext, tag, msgId를 통해 S_WelcomeResponse패킷이 복호화되고 해당 패킷에 대한 핸들러 함수가 실행된다.
+    //S_WelcomeResponse의 핸들러 함수의 동작으로서 HandShake과정이 끝난다.
+//이후 보안레벨 1로 설정한다.
+//보안레벨 1의 경우 통신가능한 MsgId영역은 0~8이다.(로그인, 계정생성까지 가능) FM대로 가자면 3~8로 하는 것이 명확하고 좋기는 하다.
+
+//클라이언트가 전송한, AES방식의 암호화된 패킷(C_Encrypted)에 대한 접근은 보안 레벨은 0에서도 동작하도록 설계되어있다.
+    //이 사실을 안 누군가가, 로그인하지 않고 msgId 4인 패킷을 무차별 난사한다면, 의미없는 패킷을 복호화하는데 서버의 자원이 소진 될 수 있다.
+    //복호화 불가능한 가짜 패킷이나 허용되지 않은 msgId영역에서의 전송이 반복될 경우, 해당 IP혹은 Session을 차단하는 것을 고려해 보았으나..
+    //누가 내 토이 프로젝트에 설마 그렇게 까지 하겠는가..
+message S_Welcome {
+    bytes publicKey = 1;
+    int32 gameversion = 2;
+}
+
+message C_Welcome {
+    bytes aesKey = 1;
+    string message = 2;
+}
+
+message S_WelcomeResponse {
+    string message = 1;
+    bool success = 2;
 }
 
 message S_Encrypted {
@@ -29,26 +73,20 @@ message C_Encrypted {
     int32 msgId = 4;
 } 
 
-message S_Welcome {
-    bytes publicKey = 1;
-    int32 gameversion = 2;
-}
-
-message C_Welcome {
-    bytes aesKey = 1;
-    string message = 2;
-}
-
-message S_WelcomeResponse {
-    string message = 1;
-    bool success = 2;
-}
+//여기서부터 보안레벨 1 영역
 
 message C_Login {
     string id = 1;
     string password = 2;
 }
 
+//1. 로그인 성공 => 0이 아닌 dbid
+//2. 로그인 실패. 비밀번호 틀림 => dbid = 0
+//3. 로그인 실패. 없는 아이디 => err 문자열 전송. (UTF-16으로 인코딩)
+    //유효한 dbid가 전송된 순간부터는 `보안레벨 2`이다.
+    //이제부터는 LobbyScene에서 전송 가능한 모든 MsgId의 수신에 대해 서버에서 처리한다.
+        //현재 로그인한 세션에서의, 재 로그인 요청을 처리할 수 있으며...(정상적인 상황 아님) 그렇게 될 경우 dbid를 덮어쓴다.
+        //따라서 FM대로 하자면, 모든 수신이 아니라 msgId 3~4, 그리고 9~ 에 대한 수신에 대한 처리를 해야 한다.
 message S_Login {
     oneof value_case {
         int32 dbid = 1;
@@ -64,4 +102,17 @@ message C_CreateAccount {
 message S_CreateAccount {
     bool success = 1;
     string err = 2;
+}
+
+//여기서부터 보안레벨 2 영역
+
+//연결을 종료하고 Session을 소거하는 것이 아닌, 해당 Session을 유지하면서
+//다른 dbid로의 연결을 가능하게 할 목적.
+//Session에서 dbid에 관한 정보를 지우고 다시 보안레벨 1로 낮춘다.
+message C_Logout {
+    int32 dbid = 1;
+}
+
+message S_Logout {
+    bool success = 1;
 }
