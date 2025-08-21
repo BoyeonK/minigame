@@ -36,18 +36,21 @@ void SLoginCall::OnFailed() {
 
 void SLoginCall::CorrectI(int32_t dbid) {
 	S2C_Protocol::S_Login pkt = S2CPacketMaker::MakeSLogin(dbid);
-	shared_ptr<PlayerSession> sessionRef = static_pointer_cast<PlayerSession>(_clientSessionRef.lock());
+	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(_clientSessionRef.lock());
 	//dbid = 0인경우 (로그인 실패)
 	//S_Login패킷을 그냥 전송.
 	if (dbid == 0) {
 		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
-		sessionRef->Send(sendBufferRef);
+		playerSessionRef->Send(sendBufferRef);
 	}
 	//dbid = 0이 아닌 경우 (로그인 성공)
 	//S_Login패킷을 session의 암호화 키로 암호화하여 전송.
 	else {
-		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt, sessionRef->GetAESKey());
-		sessionRef->Send(sendBufferRef);
+		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt, playerSessionRef->GetAESKey());
+		playerSessionRef->SetDbid(dbid);
+		//해당 session에서 처리할 최대 msgId를 10000으로 설정 (사실상, 이제 모든 패킷에 대한 요청을 거절하지 않겠다는 뜻)
+		playerSessionRef->SetSecureLevel(10000);
+		playerSessionRef->Send(sendBufferRef);
 	}
 }
 

@@ -54,4 +54,10 @@ public:
 		}
 		return pkt;
 	}
+
+	static S2C_Protocol::S_Logout MakeSLogout(bool isSucceed) {
+		S2C_Protocol::S_Logout pkt;
+		pkt.set_success(isSucceed);
+		return pkt;
+	}
 };

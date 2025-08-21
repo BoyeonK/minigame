@@ -13,9 +13,12 @@ public:
 	vector<unsigned char> GetAESKey();
 
 	void SetSecureLevel(int32_t lv);
+	void SetDbid(int32_t dbid);
+	int32_t GetDbid() const { return _dbid; }
 
 private:
 	EVP_PKEY* _RSAKey;
 	vector<unsigned char> _AESKey;
 	int32_t _gameVersion = 0;
+	int32_t _dbid = 0;
 };

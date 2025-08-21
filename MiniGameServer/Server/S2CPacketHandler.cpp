@@ -129,3 +129,29 @@ bool Handle_C_Login(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt
 bool Handle_C_CreateAccount(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_CreateAccount& pkt) {
 	return DBManager->S2D_CreateAccount(sessionRef, pkt.id(), pkt.password());
 }
+
+bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& pkt) {
+	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
+	bool isSucceed = false;
+	if (pkt.dbid() == playerSessionRef->GetDbid()) {
+		playerSessionRef->SetDbid(0);
+		playerSessionRef->SetSecureLevel(8);
+		S2C_Protocol::S_Logout pkt = S2CPacketMaker::MakeSLogout(true);
+		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
+		playerSessionRef->Send(sendBufferRef);
+	}
+	else {
+		//이 조건문이 else로 빠진 이 상황은 매우 이상하다. 
+		//특히, 받은 dbid가 0이 아닌 경우라면 변조가 심히 의심되는 상황.
+		if (pkt.dbid() != 0) {
+			//로그인한 유저가 '다른 유저'의 dbid를 사용하려고 하고 있다.
+		}
+		playerSessionRef->SetDbid(0);
+		playerSessionRef->SetSecureLevel(8);
+
+		S2C_Protocol::S_Logout pkt = S2CPacketMaker::MakeSLogout(false);
+		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
+		playerSessionRef->Send(sendBufferRef);
+	}
+	return isSucceed;
+}
