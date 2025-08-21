@@ -5,15 +5,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 using UnityEngine;
 
 public class ServerSession : PacketSession {
 	
 	private int _id = 0;
 	public int ID {
-		get => _id;
-		set { _id = value; }
-	}
+        get => Volatile.Read(ref _id);
+        set => Interlocked.Exchange(ref _id, value);
+    }
+
 	public void Send(IMessage packet) {
 		string msgName = packet.Descriptor.Name.Replace("_", string.Empty);
 		MsgId msgId = (MsgId)Enum.Parse(typeof(MsgId), msgName);
