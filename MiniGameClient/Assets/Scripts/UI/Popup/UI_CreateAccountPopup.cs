@@ -47,6 +47,14 @@ public class UI_CreateAccountPopup : UI_Popup {
         if (_createAccountButton != null) {
             _createAccountButton.onClick.AddListener(TryCreateAccount);
         }
+        if (_pwField != null) {
+            _pwField.contentType = TMP_InputField.ContentType.Alphanumeric;
+            _pwField.inputType = TMP_InputField.InputType.Password;
+        }
+        if (_pwConfirmField != null) {
+            _pwConfirmField.contentType = TMP_InputField.ContentType.Alphanumeric;
+            _pwConfirmField.inputType = TMP_InputField.InputType.Password;
+        }
         Managers.Input.AddKeyListener(KeyCode.Return, TryCreateAccount, InputManager.KeyState.Down);
     }
     private void TryCreateAccount() {

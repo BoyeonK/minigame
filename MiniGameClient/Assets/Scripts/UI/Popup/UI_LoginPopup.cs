@@ -44,6 +44,10 @@ public class UI_LoginPopup : UI_Popup {
         if (_loginButton != null) {
             _loginButton.onClick.AddListener(TryLogin);
         }
+        if (_pwField != null) {
+            _pwField.contentType = TMP_InputField.ContentType.Alphanumeric;
+            _pwField.inputType = TMP_InputField.InputType.Password;
+        }
         Managers.Input.AddKeyListener(KeyCode.Return, TryLogin, InputManager.KeyState.Down);
     }
 
