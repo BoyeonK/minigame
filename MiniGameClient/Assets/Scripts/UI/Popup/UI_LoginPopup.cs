@@ -14,7 +14,7 @@ public class UI_LoginPopup : UI_Popup {
     }
 
     //이 친구들은 포인터이다. 가지고 있어도 메모리적으로 손해 조금 보는 정도.
-    //C++처럼 생각해서, 해당 객체를 하나 더 들고있는 개념이 아니다.
+    //C++처럼 생각해서, 해당 객체가 하나 더 메모리에 로드되는 개념이 아니다.
     private Button _loginButton;
     private TMP_InputField _idField;
     private TMP_InputField _pwField;
