@@ -23,7 +23,7 @@ public class UI_LobbyMenu : UI_Scene {
     private RectTransform _rectQuit;
 
     private float _rectSpeed = 5f;
-    private float _range = 3f;
+    private float _range = 6f;
 
     private Color _unSelectedColor = Color.white;
     private Color _selectedColor = new Color(128f / 255f, 0f, 0f, 1.0f);
@@ -81,7 +81,7 @@ public class UI_LobbyMenu : UI_Scene {
 
     void Update() {
         float pingPongValue = Mathf.PingPong(Time.time * _rectSpeed, _range);
-        float rot = pingPongValue;
+        float rot = -3f + pingPongValue;
         switch (_selectedOpt) {
             case 0:
                 _rectStartGame.localRotation = Quaternion.Euler(0f, 0f, rot);

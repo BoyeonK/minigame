@@ -14,7 +14,7 @@ public class UI_LoginOrCreateAccount : UI_Scene {
     private RectTransform _rectCreateAccount;
 
     private float _rectSpeed = 5f;
-    private float _range = 3f;
+    private float _range = 6f;
 
     private Color _unSelectedColor = Color.white;
     private Color _selectedColor = new Color(128f / 255f, 0f, 0f, 1.0f);
@@ -47,14 +47,12 @@ public class UI_LoginOrCreateAccount : UI_Scene {
     }
 
     void Update() {
+        float pingPongValue = Mathf.PingPong(Time.time * _rectSpeed, _range);
+        float rot = -3f + pingPongValue;
         if (_selectedOpt == 0 && _loginMenu != null && _rectLogin != null) {
-            float pingPongValue = Mathf.PingPong(Time.time * _rectSpeed, _range);
-            float rot = pingPongValue;
             _rectLogin.localRotation = Quaternion.Euler(0f, 0f, rot);
         }
         if (_selectedOpt == 1 && _createAccountMenu != null && _rectCreateAccount != null) {
-            float pingPongValue = Mathf.PingPong(Time.time * _rectSpeed, _range);
-            float rot = pingPongValue;
             _rectCreateAccount.localRotation = Quaternion.Euler(0f, 0f, rot);
         }
     }
