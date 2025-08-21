@@ -1,3 +1,4 @@
+using Google.Protobuf.Protocol;
 using UnityEngine;
 
 public class LoginScene : BaseScene {
@@ -52,6 +53,7 @@ public class LoginScene : BaseScene {
         Managers.Network.OnWrongIdAct += WrongId;
         Managers.Network.OnWrongPasswordAct += WrongPassword;
         Managers.Network.OnLoginAct += LoginSucceed;
+        Managers.Network.OnLogoutAct += LogoutSucceed;
     }
 
     private void ChangeLoginOpt() {
@@ -138,6 +140,14 @@ public class LoginScene : BaseScene {
         }   
     }
 
+    public void LogoutSucceed() {
+        //GoToLoginStage();
+    }
+
+    public void LogoutFailed() {
+
+    }
+
     public void WrongId() {
         Managers.UI.ShowErrorUIOnlyConfirm("없는 아이디입니다.");
     }
@@ -163,6 +173,7 @@ public class LoginScene : BaseScene {
                 Managers.Network.TryDisconnect();
                 break;
             case Stage.Lobby:
+                Managers.UI.ShowErrorUIConfirmOrCancel("로그아웃 하시겠습니까?", LogOut);
                 break;
             case Stage.MatchMake:
                 break;
@@ -172,7 +183,11 @@ public class LoginScene : BaseScene {
     }
 
     public void LogOut() {
-
+        Debug.Log("로그아웃 시도");
+        C_Encrypted pkt = PacketMaker.MakeCLogout(Managers.Network.GetSession());
+        Managers.Network.Send(pkt);
+        GoToLoginStage();
+        Managers.Network.GetSession().ID = 0;
     }
 
     public override void Clear() {
@@ -186,6 +201,7 @@ public class LoginScene : BaseScene {
         Managers.Network.OnWrongIdAct -= WrongId;
         Managers.Network.OnWrongPasswordAct -= WrongPassword;
         Managers.Network.OnLoginAct -= LoginSucceed;
+        Managers.Network.OnLogoutAct -= LogoutSucceed;
         Debug.Log("Login Scene Cleared");
     }
 }

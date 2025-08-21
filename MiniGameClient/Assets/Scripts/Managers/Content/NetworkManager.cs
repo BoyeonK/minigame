@@ -82,7 +82,8 @@ public class NetworkManager {
 	public Action OnConnectedAct;
 	public Action OnConnectedFailedAct;
 	public Action OnLoginAct;
-	public Action OnWrongIdAct;
+    public Action OnLogoutAct;
+    public Action OnWrongIdAct;
 	public Action OnWrongPasswordAct;
 
 	public void ConnectCompleted(bool result) {

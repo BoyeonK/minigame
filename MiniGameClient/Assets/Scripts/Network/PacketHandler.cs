@@ -204,5 +204,26 @@ class PacketHandler {
             });
 		}
 	}
+
+	public static void S_LogoutHandler(PacketSession session, IMessage packet) {
+		S_Logout recvPkt = packet as S_Logout;
+		bool isSucceed = recvPkt.Success;
+		if (isSucceed) {
+			Managers.ExecuteAtMainThread(() => {
+				Managers.UI.ShowErrorUIOnlyConfirm("성공적으로 로그아웃 되었습니다.");
+			});
+		}
+		else {
+			//false를 반환한 경우는, 상당히 거시기한 상황. 게임 종료 유도.
+            Managers.ExecuteAtMainThread(() => {
+                Managers.UI.ShowErrorUIOnlyConfirm("계정 오류!", () => {
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                    Application.Quit();
+                });
+            });
+        }
+	}
 }
 

@@ -19,6 +19,11 @@ class PacketManager {
 	Dictionary<ushort, Func<IMessage>> _msgFactories = new Dictionary<ushort, Func<IMessage>>();
 	
 	//PacketManager 초기화 시, 각 패킷을 다룰 델리게이트들을 초기화해준다.
+	//_onRecv는 서버로부터 받은 바이너리에서 추출한 패킷 헤더의 msgId를 토대로
+	// 바이너리를 헤더와 protobuf부분으로 나누고, protobuf부분을 알맞게 캐스팅한다.
+	//_handler는 캐스팅된 protobuf내용에 따라 호출할 handler함수의 집합이다.
+	//_msgFactories는 SEncrypted를 통해 복호화된 바이너리를 알맞은 protobuf로 parse하기 위한
+	//factory함수이다.
 	public void Register() {
 		_onRecv.Add((ushort)MsgId.SEncrypted, UnpackPacket<S_Encrypted>);
 		_handler.Add((ushort)MsgId.SEncrypted, PacketHandler.S_EncryptedHandler);
@@ -38,7 +43,11 @@ class PacketManager {
 		_onRecv.Add((ushort)MsgId.SCreateAccount, UnpackPacket<S_CreateAccount>);
 		_handler.Add((ushort)MsgId.SCreateAccount, PacketHandler.S_CreateAccountHandler);
 		_msgFactories.Add((ushort)MsgId.SCreateAccount, () => new S_CreateAccount());
-	}
+
+        _onRecv.Add((ushort)MsgId.SLogout, UnpackPacket<S_Logout>);
+        _handler.Add((ushort)MsgId.SLogout, PacketHandler.S_LogoutHandler);
+        _msgFactories.Add((ushort)MsgId.SLogout, () => new S_Logout());
+    }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {
 		ushort count = 0;

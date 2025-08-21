@@ -100,4 +100,16 @@ class PacketMaker {
         C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CCreateAccount);
         return pkt;
     }
+
+    private static C_Logout MakeCLogoutInternal(ServerSession session) {
+        return new C_Logout {
+            Dbid = session.ID
+        };
+    }
+
+    public static C_Encrypted MakeCLogout(ServerSession session) {
+        C_Logout rawPkt = MakeCLogoutInternal(session);
+        C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CLogout);
+        return pkt;
+    }
 }
