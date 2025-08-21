@@ -16,6 +16,7 @@ public class LoginScene : BaseScene {
     UI_LoginOrCreateAccount _uiLoginOrCreateAccount;
     UI_LoginPopup _uiLoginPopup;
     UI_CreateAccountPopup _uiCreateAccountPopup;
+    UI_LobbyMenu _uiLobbyMenu;
     private int _loginOpt = 0;
 
     private int _lobbyOpt = 0;
@@ -31,9 +32,11 @@ public class LoginScene : BaseScene {
         _uiLoginOrCreateAccount = Managers.UI.ShowSceneUI<UI_LoginOrCreateAccount>();
         _uiLoginPopup = Managers.UI.ShowPopupUI<UI_LoginPopup>();
         _uiCreateAccountPopup = Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
+        _uiLobbyMenu = Managers.UI.ShowSceneUI<UI_LobbyMenu>();
         Managers.UI.DisableUI("UI_LoginOrCreateAccount");
         Managers.UI.DisableUI("UI_LoginPopup");
         Managers.UI.DisableUI("UI_CreateAccountPopup");
+        Managers.UI.DisableUI("UI_LobbyMenu");
 
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {
@@ -72,15 +75,17 @@ public class LoginScene : BaseScene {
 
     private void UpLobbyOpt() {
         if (_stage == Stage.Lobby) {
-            _lobbyOpt = (_lobbyOpt + 1) % 5;
+            _lobbyOpt = (_lobbyOpt + 4) % 5;
             _optionSelecter.SetOpt(_lobbyOpt);
+            _uiLobbyMenu.SetSelectedOpt(_lobbyOpt);
         }
     }
 
     private void DownLobbyOpt() {
         if (_stage == Stage.Lobby) {
-            _lobbyOpt = (_lobbyOpt + 4) % 5;
+            _lobbyOpt = (_lobbyOpt + 1) % 5;
             _optionSelecter.SetOpt(_lobbyOpt);
+            _uiLobbyMenu.SetSelectedOpt(_lobbyOpt);
         }
     }
 
@@ -106,7 +111,7 @@ public class LoginScene : BaseScene {
         _optionSelecter.SetOpt(_lobbyOpt);
         _stage = Stage.Login;
         Managers.UI.DisableUI("UI_StartGame");
-        //Managers.UI.DisableUI("UI_");
+        Managers.UI.DisableUI("UI_LobbyMenu");
 
         _loginOpt = 0;
         Managers.UI.ShowPopupUI<UI_LoginPopup>();
@@ -114,7 +119,15 @@ public class LoginScene : BaseScene {
     }
 
     private void GoToLobbyStage() {
+        _lobbyOpt = 0;
+        _optionSelecter.SetOpt(_lobbyOpt);
+        _stage = Stage.Lobby;
 
+        Managers.UI.DisableUI("UI_CreateAccountPopup");
+        Managers.UI.DisableUI("UI_LoginPopup");
+        Managers.UI.DisableUI("UI_LoginOrCreateAccount");
+        
+        Managers.UI.ShowSceneUI<UI_LobbyMenu>();
     }
 
     private void GoToMatchMakeStage() {
@@ -130,13 +143,7 @@ public class LoginScene : BaseScene {
 
     public void LoginSucceed() {
         if (_stage == Stage.Login) {
-            _lobbyOpt = 0;
-            _optionSelecter.SetOpt(_lobbyOpt);
-            _stage = Stage.Lobby;
-
-            Managers.UI.DisableUI("UI_CreateAccountPopup");
-            Managers.UI.DisableUI("UI_LoginPopup");
-            Managers.UI.DisableUI("UI_LoginOrCreateAccount");
+            GoToLobbyStage();
         }   
     }
 
