@@ -90,7 +90,7 @@ public class UI_StartGame : UI_Scene {
             
         }
 
-        Managers.Input.AddKeyListener(KeyCode.Return, TryConnectToServer, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.Return, TryConnectToServer, InputManager.KeyState.Down);
     }
 
     private void TryConnectToServer() {
@@ -117,6 +117,6 @@ public class UI_StartGame : UI_Scene {
     }
 
     private void Clear() {
-        Managers.Input.RemoveKeyListener(KeyCode.Return, TryConnectToServer, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.Return, TryConnectToServer, InputManager.KeyState.Down);
     }
 }

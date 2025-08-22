@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,6 +11,16 @@ public class InputManager {
         Down = 0,
         Up = 1,
         Press = 2,
+    }
+
+    //에러 발생시, 쌓일 스택. 1이라도 있으면 Input을 Invoke하지않는다.
+    int errStack = 0;
+    public void IncrementCounter() {
+        Interlocked.Increment(ref errStack);
+    }
+
+    public void DecrementCounter() {
+        Interlocked.Decrement(ref errStack);
     }
 
     private class ActionState {
@@ -43,6 +54,10 @@ public class InputManager {
     }
 
     public void OnUpdate() {
+        //처리되지 않은 에러팝업이 존재할 경우 Input차단.
+        if (errStack != 0)
+            return;
+
         // 해당 키에 등록된 모든 액션을 순회
         foreach (var pair in _keyActions) {
             KeyCode key = pair.Key;

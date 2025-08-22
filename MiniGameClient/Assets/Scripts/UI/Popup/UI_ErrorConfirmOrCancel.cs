@@ -17,8 +17,12 @@ public class UI_ErrorConfirmOrCancel : UI_Popup {
     private Button _confirmButton;
     private Button _cancelButton;
 
+    Action _confirmAct;
+    Action _cancelAct;
+
     private void OnDestroy() {
         Clear();
+        Managers.Input.DecrementCounter();
     }
 
     public override void Init() {
@@ -27,6 +31,7 @@ public class UI_ErrorConfirmOrCancel : UI_Popup {
 
     public void Init(string errorDetail, Action confirmOnClickEvent, Action cancelOnClickEvent) {
         Init();
+        Managers.Input.IncrementCounter();
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Button>(typeof(Buttons));
         _errorText = Get<TextMeshProUGUI>((int)Texts.ErrorText);
@@ -36,14 +41,25 @@ public class UI_ErrorConfirmOrCancel : UI_Popup {
         _errorText.text = errorDetail;
         _confirmButton.onClick.RemoveAllListeners();
         _cancelButton.onClick.RemoveAllListeners();
+        _confirmAct += confirmOnClickEvent;
+        _confirmAct += DestroyThis;
+        _cancelAct += cancelOnClickEvent;
+        _cancelAct += DestroyThis;
         _confirmButton.onClick.AddListener(() => {
-            confirmOnClickEvent?.Invoke();
-            DestroyThis();
+            _confirmAct?.Invoke();
         });
         _cancelButton.onClick.AddListener(() => {
-            cancelOnClickEvent?.Invoke();
-            DestroyThis();
+            _cancelAct?.Invoke();
         });
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            _confirmAct?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            _cancelAct?.Invoke();
+        }
     }
 
     private void Clear() {
@@ -52,6 +68,7 @@ public class UI_ErrorConfirmOrCancel : UI_Popup {
     }
 
     private void DestroyThis() {
+        Clear();
         GameObject go = this.gameObject;
         Managers.Resource.Destroy(go);
     }
