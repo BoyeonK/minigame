@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UI_StartGame : UI_Scene {
     enum Texts {
@@ -23,6 +24,7 @@ public class UI_StartGame : UI_Scene {
     private float _minRectGameNamez = 7.5f;
     private float _rectSpeed = 2.5f;
 
+    private UI_EventHandler _enterToStartEventHandler;
     private RectTransform _rectEnterToStart;
     private float _minEnterPosY = 87.5f;
     private float _enterPosYSpeed = 2.0f;
@@ -80,6 +82,12 @@ public class UI_StartGame : UI_Scene {
         }
         if (_enterToStart != null) {
             _rectEnterToStart = _enterToStart.GetComponent<RectTransform>();
+            _enterToStartEventHandler = _enterToStart.GetComponent<UI_EventHandler>();
+            if (_enterToStartEventHandler != null) {
+                _enterToStartEventHandler.Clear();
+                _enterToStartEventHandler.OnClickHandler += (PointerEventData data) => { TryConnectToServer(); };
+            }
+            
         }
 
         Managers.Input.AddKeyListener(KeyCode.Return, TryConnectToServer, InputManager.KeyState.Up);

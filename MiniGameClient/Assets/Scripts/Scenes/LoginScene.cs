@@ -62,28 +62,61 @@ public class LoginScene : BaseScene {
     private void ChangeLoginOpt() {
         if (_stage == Stage.Login) {
             _loginOpt = (_loginOpt + 1) % 2;
+            ApplyLoginOpt();
+        }
+    }
+
+    public void SetLoginOpt(int opt) {
+        if (_loginOpt == opt)
+            return;
+        _loginOpt = opt;
+        if (_stage == Stage.Login) {
+            _loginOpt = opt;
+            ApplyLoginOpt();
+        }
+    }
+
+    private void ApplyLoginOpt() {
+        Debug.Log(_loginOpt);
+        if (_stage == Stage.Login) {
             _uiLoginOrCreateAccount.SetSelectedOpt(_loginOpt);
             if (_loginOpt == 0) {
                 Managers.UI.ShowPopupUI<UI_LoginPopup>();
                 Managers.UI.DisableUI("UI_CreateAccountPopup");
-            } else {
+            }
+            else {
                 Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
                 Managers.UI.DisableUI("UI_LoginPopup");
             }
         }
     }
 
+    public void SetLobbyOpt(int opt) {
+        if (_lobbyOpt == opt)
+            return;
+        _lobbyOpt = opt;
+        if (_stage == Stage.Lobby) {
+            _lobbyOpt = opt;
+            ApplyLobbyOpt();
+        }
+    }
+
     private void UpLobbyOpt() {
         if (_stage == Stage.Lobby) {
             _lobbyOpt = (_lobbyOpt + 4) % 5;
-            _optionSelecter.SetOpt(_lobbyOpt);
-            _uiLobbyMenu.SetSelectedOpt(_lobbyOpt);
+            ApplyLobbyOpt();
         }
     }
 
     private void DownLobbyOpt() {
         if (_stage == Stage.Lobby) {
             _lobbyOpt = (_lobbyOpt + 1) % 5;
+            ApplyLobbyOpt();
+        }
+    }
+
+    private void ApplyLobbyOpt() {
+        if (_stage == Stage.Lobby) {
             _optionSelecter.SetOpt(_lobbyOpt);
             _uiLobbyMenu.SetSelectedOpt(_lobbyOpt);
         }

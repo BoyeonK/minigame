@@ -1,5 +1,7 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UI_LoginOrCreateAccount : UI_Scene {
     enum Texts {
@@ -7,11 +9,15 @@ public class UI_LoginOrCreateAccount : UI_Scene {
         CreateAccountMenu,
     }
 
+    LoginScene _loginScene;
+
     private TextMeshProUGUI _loginMenu;
     private TextMeshProUGUI _createAccountMenu;
 
     private RectTransform _rectLogin;
     private RectTransform _rectCreateAccount;
+    private UI_EventHandler _loginEventHandler;
+    private UI_EventHandler _createAccountEventHandler;
 
     private float _rectSpeed = 5f;
     private float _range = 6f;
@@ -59,14 +65,26 @@ public class UI_LoginOrCreateAccount : UI_Scene {
 
     public override void Init() {
         base.Init();
+        GameObject go = GameObject.Find("LoginScene");
+        _loginScene = go.GetComponent<LoginScene>();
         Bind<TextMeshProUGUI>(typeof(Texts));
         _loginMenu = Get<TextMeshProUGUI>((int)Texts.LoginMenu);
         _createAccountMenu = Get<TextMeshProUGUI>((int)Texts.CreateAccountMenu);
         if (_loginMenu != null) {
             _rectLogin = _loginMenu.GetComponent<RectTransform>();
+            _loginEventHandler = _loginMenu.GetComponent<UI_EventHandler>();
         }
         if (_createAccountMenu != null) {
             _rectCreateAccount = _createAccountMenu.GetComponent<RectTransform>();
+            _createAccountEventHandler = _createAccountMenu.GetComponent<UI_EventHandler>();
+        }
+        if (_loginEventHandler != null || _createAccountEventHandler != null) {
+            _loginEventHandler.Clear();
+            _createAccountEventHandler.Clear();
+            _loginEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLoginOpt(0); };
+            _loginEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLoginOpt(0); };
+            _createAccountEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLoginOpt(1); };
+            _createAccountEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLoginOpt(1); };
         }
         SetSelectedOpt(0);
     }

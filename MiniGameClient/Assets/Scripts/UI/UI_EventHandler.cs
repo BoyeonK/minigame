@@ -23,4 +23,15 @@ public class UI_EventHandler : MonoBehaviour, IDragHandler, IPointerClickHandler
     public void OnPointerExit(PointerEventData eventData) {
         OnPointerExitHandler?.Invoke(eventData);
     }
+
+    private void OnDestroy() {
+        Clear();
+    }
+
+    public void Clear() {
+        OnDragHandler = null;
+        OnClickHandler = null;
+        OnPointerEnterHandler = null;
+        OnPointerExitHandler = null;
+    }
 }
