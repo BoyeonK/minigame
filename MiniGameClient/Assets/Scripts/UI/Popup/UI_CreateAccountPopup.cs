@@ -1,6 +1,7 @@
 using Google.Protobuf.Protocol;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_CreateAccountPopup : UI_Popup {
@@ -32,6 +33,7 @@ public class UI_CreateAccountPopup : UI_Popup {
     private void Clear() {
         _createAccountButton.onClick.RemoveAllListeners();
         Managers.Input.RemoveKeyListener(KeyCode.Return, TryCreateAccount, InputManager.KeyState.Down);
+        Managers.Input.RemoveKeyListener(KeyCode.Tab, FocusToNxt, InputManager.KeyState.Down);
     }
 
     public override void Init() {
@@ -56,7 +58,9 @@ public class UI_CreateAccountPopup : UI_Popup {
             _pwConfirmField.inputType = TMP_InputField.InputType.Password;
         }
         Managers.Input.AddKeyListener(KeyCode.Return, TryCreateAccount, InputManager.KeyState.Down);
+        Managers.Input.AddKeyListener(KeyCode.Tab, FocusToNxt, InputManager.KeyState.Down);
     }
+
     private void TryCreateAccount() {
         //TODO : 패스워드확인이랑 패스워드랑 일치하는지 선제적으로 확인
         //다르면 에러 메세지 출력
@@ -78,5 +82,15 @@ public class UI_CreateAccountPopup : UI_Popup {
             C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), id, pw);
             Managers.Network.Send(pkt);
         }
+    }
+
+    private void FocusToNxt() {
+        GameObject current = EventSystem.current.currentSelectedGameObject;
+        if (current == null) return;
+
+        if (current == _idField.gameObject)
+            _pwField.Select();
+        else if (current == _pwField.gameObject)
+            _pwConfirmField.Select();
     }
 }

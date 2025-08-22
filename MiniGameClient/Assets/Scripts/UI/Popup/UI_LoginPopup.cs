@@ -1,6 +1,7 @@
 using Google.Protobuf.Protocol;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_LoginPopup : UI_Popup {
@@ -30,6 +31,7 @@ public class UI_LoginPopup : UI_Popup {
     private void Clear() {
         _loginButton.onClick.RemoveAllListeners();
         Managers.Input.RemoveKeyListener(KeyCode.Return, TryLogin, InputManager.KeyState.Down);
+        Managers.Input.RemoveKeyListener(KeyCode.Tab, FocusToNxt, InputManager.KeyState.Down);
     }
 
     public override void Init() {
@@ -49,6 +51,7 @@ public class UI_LoginPopup : UI_Popup {
             _pwField.inputType = TMP_InputField.InputType.Password;
         }
         Managers.Input.AddKeyListener(KeyCode.Return, TryLogin, InputManager.KeyState.Down);
+        Managers.Input.AddKeyListener(KeyCode.Tab, FocusToNxt, InputManager.KeyState.Down);
     }
 
     private void TryLogin() {
@@ -71,5 +74,13 @@ public class UI_LoginPopup : UI_Popup {
             C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), id, password);
             Managers.Network.Send(pkt);
         }
+    }
+
+    private void FocusToNxt() {
+        GameObject current = EventSystem.current.currentSelectedGameObject;
+        if (current == null) return;
+
+        if (current == _idField.gameObject)
+            _pwField.Select();
     }
 }
