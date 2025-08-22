@@ -50,7 +50,7 @@ public class LoginScene : BaseScene {
         Managers.Input.AddKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.UpArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.DownArrow, ChangeLoginOpt, InputManager.KeyState.Up);
-        Managers.Input.AddKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Down);
         Managers.Network.OnConnectedAct += ConnectToServerSucceed;
         Managers.Network.OnConnectedFailedAct += ConnectToServerFailed;
         Managers.Network.OnWrongIdAct += WrongId;
@@ -195,17 +195,38 @@ public class LoginScene : BaseScene {
         Managers.UI.ShowErrorUIOnlyConfirm("비밀번호가 맞지 않습니다.");
     }
 
+    public void SelectStartGame() {
+
+    }
+
+    public void SelectLeaderboard() {
+        Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다. ㅠㅠ");
+    }
+    public void SelectMyRecord() {
+        Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다. ㅠㅠ");
+    }
+    public void SelectOption() {
+        Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다. ㅠㅠ");
+    }
+    public void SelectQuit() {
+        QuitApplicationUI();
+    }
+
+    private void QuitApplicationUI() {
+        Managers.UI.ShowErrorUIConfirmOrCancel("게임을 종료하시겠습니까?", () => {
+            Managers.ExecuteAtMainThread(() => {
+                Application.Quit();
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
+            });
+        });
+    }
+
     public void BackToPreviousMenu() {
         switch (_stage) {
             case Stage.Connect:
-                Managers.UI.ShowErrorUIConfirmOrCancel("게임을 종료하시겠습니까?", () => {
-                    Managers.ExecuteAtMainThread(() => {
-                        Application.Quit();
-#if UNITY_EDITOR
-                        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-                    });
-                });
+                QuitApplicationUI();
                 break;
             case Stage.Login:
                 GoToConnectStage();
@@ -234,7 +255,7 @@ public class LoginScene : BaseScene {
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.UpArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, ChangeLoginOpt, InputManager.KeyState.Up);
-        Managers.Input.RemoveKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Down);
         Managers.Network.OnConnectedAct -= ConnectToServerSucceed;
         Managers.Network.OnConnectedFailedAct -= ConnectToServerFailed;
         Managers.Network.OnWrongIdAct -= WrongId;

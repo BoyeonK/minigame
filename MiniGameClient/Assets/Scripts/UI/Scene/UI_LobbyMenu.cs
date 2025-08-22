@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class UI_LobbyMenu : UI_Scene { 
     enum Texts {
@@ -110,6 +111,26 @@ public class UI_LobbyMenu : UI_Scene {
         }
     }
 
+    private void SelectPresentOption() {
+        switch (_selectedOpt) {
+            case 0:
+                _loginScene.SelectStartGame();
+                break;
+            case 1:
+                _loginScene.SelectLeaderboard();
+                break;
+            case 2:
+                _loginScene.SelectMyRecord();
+                break;
+            case 3:
+                _loginScene.SelectOption();
+                break;
+            case 4:
+                _loginScene.SelectQuit();
+                break;
+        }
+    }
+
     public override void Init() {
         base.Init();
         GameObject go = GameObject.Find("LoginScene");
@@ -125,7 +146,10 @@ public class UI_LobbyMenu : UI_Scene {
             _startGameEventHandler = _startGame.GetComponent<UI_EventHandler>();
             if (_startGameEventHandler != null) {
                 _startGameEventHandler.Clear();
-                _startGameEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(0); };
+                _startGameEventHandler.OnClickHandler += (PointerEventData data) => { 
+                    _loginScene.SetLobbyOpt(0);
+                    _loginScene.SelectStartGame();
+                };
                 _startGameEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(0); };
             }
         }
@@ -134,7 +158,10 @@ public class UI_LobbyMenu : UI_Scene {
             _leaderboardEventHandler = _leaderboard.GetComponent<UI_EventHandler>();
             if (_leaderboardEventHandler != null) {
                 _leaderboardEventHandler.Clear();
-                _leaderboardEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(1); };
+                _leaderboardEventHandler.OnClickHandler += (PointerEventData data) => { 
+                    _loginScene.SetLobbyOpt(1);
+                    _loginScene.SelectLeaderboard();
+                };
                 _leaderboardEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(1); };
             }
         }
@@ -143,7 +170,10 @@ public class UI_LobbyMenu : UI_Scene {
             _myRecordEventHandler = _myRecord.GetComponent<UI_EventHandler>();
             if (_myRecordEventHandler != null) {
                 _myRecordEventHandler.Clear();
-                _myRecordEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(2); };
+                _myRecordEventHandler.OnClickHandler += (PointerEventData data) => { 
+                    _loginScene.SetLobbyOpt(2);
+                    _loginScene.SelectMyRecord();
+                };
                 _myRecordEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(2); };
             }
         }
@@ -152,7 +182,10 @@ public class UI_LobbyMenu : UI_Scene {
             _optionEventHandler = _option.GetComponent<UI_EventHandler>();
             if (_optionEventHandler != null) {
                 _optionEventHandler.Clear();
-                _optionEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(3); };
+                _optionEventHandler.OnClickHandler += (PointerEventData data) => {
+                    _loginScene.SetLobbyOpt(3);
+                    _loginScene.SelectOption();
+                };
                 _optionEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(3); };
             }
         }
@@ -161,15 +194,18 @@ public class UI_LobbyMenu : UI_Scene {
             _quitEventHandler = _quit.GetComponent<UI_EventHandler>();
             if (_quitEventHandler != null) {
                 _quitEventHandler.Clear();
-                _quitEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(4); };
+                _quitEventHandler.OnClickHandler += (PointerEventData data) => { 
+                    _loginScene.SetLobbyOpt(4);
+                    _loginScene.SelectQuit();
+                };
                 _quitEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(4); };
             }
         }
+        Managers.Input.AddKeyListener(KeyCode.Return, SelectPresentOption, InputManager.KeyState.Down);
         SetSelectedOpt(0);
     }
 
-    private void Clear()
-    {
-
+    private void Clear() {
+        Managers.Input.RemoveKeyListener(KeyCode.Return, SelectPresentOption, InputManager.KeyState.Down);
     }
 }
