@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UI_LobbyMenu : UI_Scene { 
     enum Texts {
@@ -9,6 +10,8 @@ public class UI_LobbyMenu : UI_Scene {
         Option,
         Quit,
     }
+
+    LoginScene _loginScene;
 
     private TextMeshProUGUI _startGame;
     private TextMeshProUGUI _leaderboard;
@@ -21,6 +24,12 @@ public class UI_LobbyMenu : UI_Scene {
     private RectTransform _rectMyRecord;
     private RectTransform _rectOption;
     private RectTransform _rectQuit;
+
+    private UI_EventHandler _startGameEventHandler;
+    private UI_EventHandler _leaderboardEventHandler;
+    private UI_EventHandler _myRecordEventHandler;
+    private UI_EventHandler _optionEventHandler;
+    private UI_EventHandler _quitEventHandler;
 
     private float _rectSpeed = 5f;
     private float _range = 6f;
@@ -103,6 +112,8 @@ public class UI_LobbyMenu : UI_Scene {
 
     public override void Init() {
         base.Init();
+        GameObject go = GameObject.Find("LoginScene");
+        _loginScene = go.GetComponent<LoginScene>();
         Bind<TextMeshProUGUI>(typeof(Texts));
         _startGame = Get<TextMeshProUGUI>((int)Texts.StartGame);
         _leaderboard = Get<TextMeshProUGUI>((int)Texts.Leaderboard);
@@ -111,18 +122,48 @@ public class UI_LobbyMenu : UI_Scene {
         _quit = Get<TextMeshProUGUI>((int)Texts.Quit);
         if (_startGame != null) {
             _rectStartGame = _startGame.GetComponent<RectTransform>();
+            _startGameEventHandler = _startGame.GetComponent<UI_EventHandler>();
+            if (_startGameEventHandler != null) {
+                _startGameEventHandler.Clear();
+                _startGameEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(0); };
+                _startGameEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(0); };
+            }
         }
         if (_leaderboard != null) {
             _rectLeaderboard = _leaderboard.GetComponent<RectTransform>();
+            _leaderboardEventHandler = _leaderboard.GetComponent<UI_EventHandler>();
+            if (_leaderboardEventHandler != null) {
+                _leaderboardEventHandler.Clear();
+                _leaderboardEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(1); };
+                _leaderboardEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(1); };
+            }
         }
         if (_myRecord != null) {
             _rectMyRecord = _myRecord.GetComponent<RectTransform>();
+            _myRecordEventHandler = _myRecord.GetComponent<UI_EventHandler>();
+            if (_myRecordEventHandler != null) {
+                _myRecordEventHandler.Clear();
+                _myRecordEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(2); };
+                _myRecordEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(2); };
+            }
         }
         if (_option != null) {
             _rectOption = _option.GetComponent<RectTransform>();
+            _optionEventHandler = _option.GetComponent<UI_EventHandler>();
+            if (_optionEventHandler != null) {
+                _optionEventHandler.Clear();
+                _optionEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(3); };
+                _optionEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(3); };
+            }
         }
         if (_quit != null) {
             _rectQuit = _quit.GetComponent<RectTransform>();
+            _quitEventHandler = _quit.GetComponent<UI_EventHandler>();
+            if (_quitEventHandler != null) {
+                _quitEventHandler.Clear();
+                _quitEventHandler.OnClickHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(4); };
+                _quitEventHandler.OnPointerEnterHandler += (PointerEventData data) => { _loginScene.SetLobbyOpt(4); };
+            }
         }
         SetSelectedOpt(0);
     }

@@ -77,7 +77,6 @@ public class LoginScene : BaseScene {
     }
 
     private void ApplyLoginOpt() {
-        Debug.Log(_loginOpt);
         if (_stage == Stage.Login) {
             _uiLoginOrCreateAccount.SetSelectedOpt(_loginOpt);
             if (_loginOpt == 0) {
