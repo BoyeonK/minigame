@@ -57,7 +57,12 @@
     <ClInclude Include="S2CPacketMaker.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
-    <ClInclude Include="S2DPacketMaker.h" />
+    <ClInclude Include="S2DPacketMaker.h">
+      <Filter>S2D</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchQueue.h">
+      <Filter>S2C\Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -102,6 +107,11 @@
     <ClCompile Include="S2CPacketMaker.cpp">
       <Filter>S2C\Network</Filter>
     </ClCompile>
-    <ClCompile Include="S2DPacketMaker.cpp" />
+    <ClCompile Include="S2DPacketMaker.cpp">
+      <Filter>S2D</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchQueue.cpp">
+      <Filter>S2C\Network</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

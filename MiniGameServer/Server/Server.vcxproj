@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MatchQueue.h" />
     <ClInclude Include="S2DPacketMaker.h" />
     <ClInclude Include="S2D_CallData.h" />
     <ClInclude Include="DBClientImpl.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="S2CServerServiceImpl.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MatchQueue.cpp" />
     <ClCompile Include="S2DPacketMaker.cpp" />
     <ClCompile Include="S2D_CallData.cpp" />
     <ClCompile Include="DBClientImpl.cpp" />
