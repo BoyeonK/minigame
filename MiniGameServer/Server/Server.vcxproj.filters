@@ -60,7 +60,13 @@
     <ClInclude Include="S2DPacketMaker.h">
       <Filter>S2D</Filter>
     </ClInclude>
+    <ClInclude Include="GameRoom.h">
+      <Filter>S2C\GameObjects</Filter>
+    </ClInclude>
     <ClInclude Include="MatchQueue.h">
+      <Filter>S2C\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
   </ItemGroup>
@@ -110,7 +116,13 @@
     <ClCompile Include="S2DPacketMaker.cpp">
       <Filter>S2D</Filter>
     </ClCompile>
+    <ClCompile Include="GameRoom.cpp">
+      <Filter>S2C\GameObjects</Filter>
+    </ClCompile>
     <ClCompile Include="MatchQueue.cpp">
+      <Filter>S2C\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
       <Filter>S2C\Network</Filter>
     </ClCompile>
   </ItemGroup>

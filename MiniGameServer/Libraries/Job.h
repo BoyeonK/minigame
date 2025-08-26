@@ -8,8 +8,12 @@ public:
 	Job(CallbackType&& callback) : _callback(move(callback)) { }
 
 	template<typename T, typename Ret, typename... Args>
-	Job(shared_ptr<T> owner, Ret(T::* memFunc)(Args...), Args&&... args)  {
-		_callback = [owner, memFunc, args...]() { (owner.get()->*memFunc)(args...); };
+	Job(weak_ptr<T> ownerWRef, Ret(T::* memFunc)(Args...), Args&&... args)  {
+		_callback = [ownerWRef, memFunc, args...]() { 
+			shared_ptr<T> owner = ownerWRef.lock();
+			if (owner != nullptr)
+				(owner.get()->*memFunc)(args...);
+		};
 	}
 
 	//lambda capture를 통해, shared_ptr을 복사한 경우

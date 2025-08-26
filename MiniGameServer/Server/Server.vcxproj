@@ -161,6 +161,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameRoom.h" />
     <ClInclude Include="MatchQueue.h" />
     <ClInclude Include="S2DPacketMaker.h" />
     <ClInclude Include="S2D_CallData.h" />
@@ -178,6 +180,8 @@
     <ClInclude Include="S2CServerServiceImpl.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameRoom.cpp" />
     <ClCompile Include="MatchQueue.cpp" />
     <ClCompile Include="S2DPacketMaker.cpp" />
     <ClCompile Include="S2D_CallData.cpp" />
