@@ -4,6 +4,7 @@
 CryptoManager* GCryptoManager = nullptr;
 DBClientImpl* DBManager = nullptr;
 shared_ptr<S2CServerServiceImpl> GServerService = nullptr;
+vector<shared_ptr<GameManager>> GGameManagers;
 
 //지금은 전역 객체로 선언된 raw pointer를 들고 소멸자에서 사라지게 하고있지만,
 //별도의 소멸자 로직 없이, 멤버 변수로 스마트 포인터를 들고 있어도 될듯?
@@ -11,6 +12,9 @@ class ServerGlobal {
 public:
 	ServerGlobal() {
 		GCryptoManager = new CryptoManager();
+		
+		shared_ptr<PingPongManager> PPManager = make_shared<PingPongManager>();
+		GGameManagers.push_back(PPManager);
 	}
 	~ServerGlobal() {
 		delete GCryptoManager;
@@ -18,6 +22,7 @@ public:
 			delete DBManager;
 		if (GServerService)
 			GServerService = nullptr;
+		GGameManagers.clear();
 	}
 } GServerGlobal;
 

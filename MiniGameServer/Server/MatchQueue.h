@@ -8,7 +8,6 @@ struct WatingPlayerData {
 
 	bool IsValidPlayer() const {
 		shared_ptr<PlayerSession> playerSessionRef = _playerSessionRef.lock();
-		//GetMatchingState가 bool값이 아니라 int여야 할듯
 		if (playerSessionRef == nullptr || playerSessionRef->GetMatchingState() != GameType::None)
 			return false;
 		return true;
@@ -27,21 +26,22 @@ struct Deviset {
 };
 
 class MatchQueue {
+public:
 	void Push(WatingPlayerData newPlayer);
 	void FlushTempQueueAndSort();
 	void RemoveInvalidPlayer();
-	void SearchMatchGroup();
+	//void SearchMatchGroup();
 
+	vector<WatingPlayerData> searchQueue;
+	vector<bool> selectedChecks;
+	vector<int32_t> selectedPlayerIdxs;
+	priority_queue<Deviset> pq;
+	int32_t allowDevi = 50;
+	
 private:
 	mutex _TQlock;
 	vector<WatingPlayerData> _tempQueue;
 	mutex _SQlock;
-	vector<WatingPlayerData> _searchQueue;
-	vector<bool> _selectedChecks;
-	vector<int32_t> _selectedPlayerIdxs;
-	priority_queue<Deviset> _pq;
-	int32_t _allowDevi = 50;
-	int32_t _quota = 4;
 	int32_t _gameNum = 0;
 };
 

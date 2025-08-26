@@ -19,13 +19,13 @@ void MatchQueue::FlushTempQueueAndSort() {
 
     {
         lock_guard<mutex> lock(_SQlock);
-        _searchQueue.insert(
-            _searchQueue.end(),
+        searchQueue.insert(
+            searchQueue.end(),
             make_move_iterator(playersToMove.begin()),
             make_move_iterator(playersToMove.end())
         );
 
-        sort(_searchQueue.begin(), _searchQueue.end(),
+        sort(searchQueue.begin(), searchQueue.end(),
             [](WatingPlayerData& a, WatingPlayerData& b) {
                 return a._elo < b._elo;
             }
@@ -34,14 +34,15 @@ void MatchQueue::FlushTempQueueAndSort() {
 }
 
 void MatchQueue::RemoveInvalidPlayer() {
-    auto new_end = remove_if(_searchQueue.begin(), _searchQueue.end(),
+    auto new_end = remove_if(searchQueue.begin(), searchQueue.end(),
         [](WatingPlayerData& player) {
             return !player.IsValidPlayer();
         });
 
-    _searchQueue.erase(new_end, _searchQueue.end());
+    searchQueue.erase(new_end, searchQueue.end());
 }
 
+/*
 void MatchQueue::SearchMatchGroup() {
     //1. 유효하지 않은 그룹 제거
     RemoveInvalidPlayer();
@@ -104,7 +105,14 @@ void MatchQueue::SearchMatchGroup() {
     }
 
     //_selectedPlayerIdxs 를 바탕으로 매치 진행
+    for (auto& idx : _selectedPlayerIdxs) {
+        vector<WatingPlayerData> selectedSet;
+        for (int i = 0; i < _quota; i++)
+            selectedSet.push_back(_searchQueue[idx + i]);
+        
+    }
 }
+*/
 
 
 

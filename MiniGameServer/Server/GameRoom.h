@@ -1,12 +1,11 @@
 #pragma once
-#include "GameType.h"
-#include "GameManager.h"
+#include "MatchQueue.h"
 
 class PlayerSession;
 
 class GameRoom : public JobQueue {
 public:
-	virtual void Start(vector<weak_ptr<PlayerSession>> psv) = 0;
+	virtual void Start(vector<WatingPlayerData> pdv) = 0;
 	virtual void Update() = 0;
 
 	vector<weak_ptr<PlayerSession>> _playerWRefs;
@@ -25,8 +24,12 @@ class PingPongGameRoom : public GameRoom {
 	};
 
 public:
-	void Start(vector<weak_ptr<PlayerSession>> psv) override {
-
+	void Start(vector<WatingPlayerData> pdv) override {
+		//각 Session에 KeepAlive패킷을 BroadCast.
+		//1초 후, (Ping이 1초가 넘는것은, 이상하다.) 모든 패킷으로부터 응답을 받았다면 시작
+		//모든 Session으로부터 응답을 받지 못했다면 
+			//응답한 Session은 다시 대기열로...
+			//응답하지 않은 Session의 매치를 취소 or 연결을 종료.
 	}
 
 	void Update() override {
