@@ -42,7 +42,7 @@ void MatchQueue::RemoveInvalidPlayer() {
     _searchQueue.erase(new_end, _searchQueue.end());
 }
 
-void MatchQueue::SearchMin() {
+void MatchQueue::SearchMatchGroup() {
     //1. 유효하지 않은 그룹 제거
     RemoveInvalidPlayer();
     int32_t mxmidx = _searchQueue.size() - _quota;
