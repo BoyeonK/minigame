@@ -1,5 +1,5 @@
 #pragma once
-class GameRoom {
+class GameRoom : public JobQueue {
 	virtual void Update() = 0;
 };
 

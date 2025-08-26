@@ -1,4 +1,5 @@
 #pragma once
+#include "GameManager.h"
 
 class PlayerSession : public PBSession {
 public:
@@ -15,12 +16,12 @@ public:
 	void SetSecureLevel(int32_t lv);
 	void SetDbid(int32_t dbid);
 	int32_t GetDbid() const { return _dbid; }
-	bool GetMatchingState() const { return _matchingState; }
+	GameType GetMatchingState() const { return _matchingState; }
 
 private:
 	EVP_PKEY* _RSAKey;
 	vector<unsigned char> _AESKey;
 	int32_t _gameVersion = 0;
 	int32_t _dbid = 0;
-	atomic<bool> _matchingState = false;
+	atomic<GameType> _matchingState = GameType::None;
 };

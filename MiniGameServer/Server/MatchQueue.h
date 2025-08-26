@@ -9,7 +9,7 @@ struct WatingPlayerData {
 	bool IsValidPlayer() const {
 		shared_ptr<PlayerSession> playerSessionRef = _playerSessionRef.lock();
 		//GetMatchingState가 bool값이 아니라 int여야 할듯
-		if (playerSessionRef == nullptr || !playerSessionRef->GetMatchingState())
+		if (playerSessionRef == nullptr || playerSessionRef->GetMatchingState() != GameType::None)
 			return false;
 		return true;
 	}
