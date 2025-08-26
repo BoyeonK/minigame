@@ -1,5 +1,5 @@
 #pragma once
-#include "GameManager.h"
+#include "GameType.h"
 
 class PlayerSession : public PBSession {
 public:

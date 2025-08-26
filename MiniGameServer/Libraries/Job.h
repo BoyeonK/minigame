@@ -16,7 +16,7 @@ public:
 		};
 	}
 
-	//lambda capture를 통해, shared_ptr을 복사한 경우
+	//lambda capture를 통해, shared_ptr을 복사한 경우 문제가 될 수 있다. (되도록 weak_ptr을 쓰려고는 하지만)
 	//생명 주기를 보장하기 위해 _callback을 nullptr로 초기화.
 	void Execute() {
 		if (_callback) {

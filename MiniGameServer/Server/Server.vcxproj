@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameRoom.h" />
+    <ClInclude Include="GameType.h" />
     <ClInclude Include="MatchQueue.h" />
     <ClInclude Include="S2DPacketMaker.h" />
     <ClInclude Include="S2D_CallData.h" />
@@ -182,6 +183,7 @@
   <ItemGroup>
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameRoom.cpp" />
+    <ClCompile Include="GameType.cpp" />
     <ClCompile Include="MatchQueue.cpp" />
     <ClCompile Include="S2DPacketMaker.cpp" />
     <ClCompile Include="S2D_CallData.cpp" />

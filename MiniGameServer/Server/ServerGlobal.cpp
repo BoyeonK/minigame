@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "ServerGlobal.h"
 
-//ObjectManager* GObjectManager = nullptr;
 CryptoManager* GCryptoManager = nullptr;
 DBClientImpl* DBManager = nullptr;
 shared_ptr<S2CServerServiceImpl> GServerService = nullptr;
@@ -11,11 +10,9 @@ shared_ptr<S2CServerServiceImpl> GServerService = nullptr;
 class ServerGlobal {
 public:
 	ServerGlobal() {
-		//GObjectManager = new ObjectManager();
 		GCryptoManager = new CryptoManager();
 	}
 	~ServerGlobal() {
-		//delete GObjectManager;
 		delete GCryptoManager;
 		if (DBManager)
 			delete DBManager;

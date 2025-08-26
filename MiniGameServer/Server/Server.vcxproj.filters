@@ -69,6 +69,7 @@
     <ClInclude Include="GameManager.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
+    <ClInclude Include="GameType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -125,5 +126,6 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>S2C\Network</Filter>
     </ClCompile>
+    <ClCompile Include="GameType.cpp" />
   </ItemGroup>
 </Project>
