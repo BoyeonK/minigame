@@ -19,13 +19,13 @@ void MatchQueue::FlushTempQueueAndSort() {
 
     {
         lock_guard<mutex> lock(_SQlock);
-        searchQueue.insert(
-            searchQueue.end(),
+        _searchQueue.insert(
+            _searchQueue.end(),
             make_move_iterator(playersToMove.begin()),
             make_move_iterator(playersToMove.end())
         );
 
-        sort(searchQueue.begin(), searchQueue.end(),
+        sort(_searchQueue.begin(), _searchQueue.end(),
             [](WatingPlayerData& a, WatingPlayerData& b) {
                 return a._elo < b._elo;
             }
@@ -34,21 +34,22 @@ void MatchQueue::FlushTempQueueAndSort() {
 }
 
 void MatchQueue::RemoveInvalidPlayer() {
-    auto new_end = remove_if(searchQueue.begin(), searchQueue.end(),
+    auto new_end = remove_if(_searchQueue.begin(), _searchQueue.end(),
         [](WatingPlayerData& player) {
             return !player.IsValidPlayer();
         });
 
-    searchQueue.erase(new_end, searchQueue.end());
+    _searchQueue.erase(new_end, _searchQueue.end());
 }
 
-/*
-void MatchQueue::SearchMatchGroup() {
+vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
+    vector<vector<WatingPlayerData>> matchGruops;
+
     //1. 유효하지 않은 그룹 제거
     RemoveInvalidPlayer();
     int32_t mxmidx = _searchQueue.size() - _quota;
     if (mxmidx < 0)
-        return;
+        return matchGruops;
 
     //2. 변수 초기화
     long long sum = 0, sqsum = 0, newElo = 0, oldElo = 0;
@@ -83,6 +84,7 @@ void MatchQueue::SearchMatchGroup() {
         }
     }
 
+    //5. 분산이 _allowDevi 이하인 조합 중에, 겹치는 인원이 없도록 idx를 선택.
     while (!_pq.empty()) {
         Deviset Ds = _pq.top();
         _pq.pop();
@@ -104,15 +106,24 @@ void MatchQueue::SearchMatchGroup() {
         }
     }
 
-    //_selectedPlayerIdxs 를 바탕으로 매치 진행
+    //6. _selectedPlayerIdxs 를 바탕으로 매치 그룹들을 나열.
     for (auto& idx : _selectedPlayerIdxs) {
-        vector<WatingPlayerData> selectedSet;
+        vector<WatingPlayerData> matchGroup;
+        matchGroup.reserve(_quota);
         for (int i = 0; i < _quota; i++)
-            selectedSet.push_back(_searchQueue[idx + i]);
-        
+            matchGroup.push_back(_searchQueue[idx + i]);
+
+        matchGruops.push_back(matchGroup);
     }
+
+    //7. group으로 묶여서 매칭이 시작된 플레이어들을 Queue에서 제외
+    int it_idx = 0;
+    auto new_end = std::remove_if(_searchQueue.begin(), _searchQueue.end(),
+        [this, &it_idx](const WatingPlayerData& player) mutable {
+            return _selectedChecks[it_idx++];
+        });
+    _searchQueue.erase(new_end, _searchQueue.end());
+
+    return matchGruops;
 }
-*/
-
-
 

@@ -30,18 +30,18 @@ public:
 	void Push(WatingPlayerData newPlayer);
 	void FlushTempQueueAndSort();
 	void RemoveInvalidPlayer();
-	//void SearchMatchGroup();
+	vector<vector<WatingPlayerData>> SearchMatchGroups();
 
-	vector<WatingPlayerData> searchQueue;
-	vector<bool> selectedChecks;
-	vector<int32_t> selectedPlayerIdxs;
-	priority_queue<Deviset> pq;
-	int32_t allowDevi = 50;
-	
 private:
 	mutex _TQlock;
+	vector<WatingPlayerData> _searchQueue;
+	vector<bool> _selectedChecks;
+	vector<int32_t> _selectedPlayerIdxs;
+	priority_queue<Deviset> _pq;
+	int32_t _allowDevi = 50;
 	vector<WatingPlayerData> _tempQueue;
 	mutex _SQlock;
 	int32_t _gameNum = 0;
+	int32_t _quota = 4;
 };
 
