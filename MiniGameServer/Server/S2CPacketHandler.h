@@ -21,6 +21,14 @@ enum : uint16_t {
 	PKT_S_CREATE_ACCOUNT = 8,
 	PKT_C_LOGOUT = 9,
 	PKT_S_LOGOUT = 10,
+	PKT_C_MATCHMAKEREQUEST = 11,
+	PKT_C_MATCHMAKECANCEL = 12,
+	PKT_S_MATCHMAKEKEEPALIVE = 13,
+	PKT_C_MATCHMAKEKEEPALIVE = 14,
+	PKT_S_REDOMATCHMAKE = 15,
+	PKT_S_EXCLUDEDFROMMATCH = 16,
+	PKT_S_MATCHCOMPLETED = 17,
+	PKT_C_GAMESCENELOADINGPROGRESS = 18,
 };
 
 bool Handle_Invalid(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
@@ -29,6 +37,10 @@ bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 bool Handle_C_Login(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt);
 bool Handle_C_CreateAccount(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_CreateAccount& pkt);
 bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& pkt);
+bool Handle_C_MatchMakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeRequest& pkt);
+bool Handle_C_MatchMakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeCancel& pkt);
+bool Handle_C_MatchMakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeKeepAlive& pkt);
+bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_GameSceneLoadingProgress& pkt);
 
 class S2CPacketHandler {
 public:
@@ -42,12 +54,21 @@ public:
 		GPacketHandler[PKT_C_LOGIN] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Login>(Handle_C_Login, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_CREATE_ACCOUNT] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_CreateAccount>(Handle_C_CreateAccount, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_LOGOUT] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Logout>(Handle_C_Logout, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_MATCHMAKEREQUEST] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchMakeRequest>(Handle_C_MatchMakeRequest, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_MATCHMAKECANCEL] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchMakeCancel>(Handle_C_MatchMakeCancel, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchMakeKeepAlive>(Handle_C_MatchMakeKeepAlive, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_GAMESCENELOADINGPROGRESS] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_GameSceneLoadingProgress>(Handle_C_GameSceneLoadingProgress, sessionRef, buffer, len); };
 
 		//C_Encrypted를 복호화하여 얻은 바이너리를 알맞은 protobuf타입으로 캐스팅하고, 알맞은 핸들러 함수를 호출.
+		//암호화 하지 않을 패킷에 대해서 PlaintextHandler의 내용을 채울 필요는 없지만, 해서 나쁠건 없으니까.
 		PlaintextHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Welcome>(Handle_C_Welcome, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_LOGIN] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Login>(Handle_C_Login, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_CREATE_ACCOUNT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_CreateAccount>(Handle_C_CreateAccount, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_LOGOUT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Logout>(Handle_C_Logout, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_MATCHMAKEREQUEST] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchMakeRequest>(Handle_C_MatchMakeRequest, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_MATCHMAKECANCEL] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchMakeCancel>(Handle_C_MatchMakeCancel, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchMakeKeepAlive>(Handle_C_MatchMakeKeepAlive, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_GAMESCENELOADINGPROGRESS] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_GameSceneLoadingProgress>(Handle_C_GameSceneLoadingProgress, sessionRef, plaintext); };
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
@@ -60,18 +81,27 @@ public:
 
 		return GPacketHandler[header->_id](sessionRef, buffer, len);
 	}
-	//SendBufferChunk에서 SendBuffer를 할당받을 함수들.
+	//만들어진 Protobuf를 SendBufferChunk에 로드하고 SendBuffer를 할당받을 함수들.
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Encrypted& pkt) { return MakeSendBufferRef(pkt, PKT_S_ENCRYPTED); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOME); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOME_RESPONSE); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME_RESPONSE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Login& pkt) { return MakeSendBufferRef(pkt, PKT_S_LOGIN); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Login& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_LOGIN, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_CreateAccount& pkt) { return MakeSendBufferRef(pkt, PKT_S_CREATE_ACCOUNT); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_CreateAccount& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_CREATE_ACCOUNT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Logout& pkt) { return MakeSendBufferRef(pkt, PKT_S_LOGOUT); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchMakeKeepAlive& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKEKEEPALIVE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_RedoMatchMake& pkt) { return MakeSendBufferRef(pkt, PKT_S_REDOMATCHMAKE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchCompleted& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHCOMPLETED); }
+
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME_RESPONSE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Login& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_LOGIN, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_CreateAccount& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_CREATE_ACCOUNT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Logout& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_LOGOUT, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchMakeKeepAlive& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKEKEEPALIVE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_RedoMatchMake& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_REDOMATCHMAKE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchCompleted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHCOMPLETED, AESKey); }
 
 private:
 	template<typename PBType, typename HandlerFunc>
@@ -110,6 +140,8 @@ private:
 	//PB로 직렬화된 패킷을 AES키를 이용하여 암호화, SendBufferChunk에 로드하고 해당 SendBuffer를 Return
 	template<typename PBType>
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const PBType& pkt, uint16_t pktId, const vector<unsigned char>& AESKey) {
+		//C#이었다면 pkt가 where IMessage인지 확인해서 SerializeAsString() 메서드를 가지고 있는지 
+		//확인하고 안전하게 작동시켰을 텐데..
 		string serializedStr = pkt.SerializeAsString();
 		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
 		vector<unsigned char> iv, ciphertext, tag;

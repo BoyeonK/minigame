@@ -155,3 +155,19 @@ bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& p
 	}
 	return isSucceed;
 }
+
+bool Handle_C_MatchMakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeRequest& pkt) {
+	return false;
+}
+
+bool Handle_C_MatchMakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeCancel& pkt) {
+	return false;
+}
+
+bool Handle_C_MatchMakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeKeepAlive& pkt) {
+	return false;
+}
+
+bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_GameSceneLoadingProgress& pkt) {
+	return false;
+}
