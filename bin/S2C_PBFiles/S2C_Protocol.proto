@@ -15,6 +15,14 @@ enum MsgId {
     S_CREATE_ACCOUNT = 8;
     C_LOGOUT = 9;
     S_LOGOUT = 10;
+    C_MATCHMAKEREQUEST = 11;
+    C_MATCHMAKECANCEL = 12;
+    S_MATCHMAKEKEEPALIVE = 13;
+    C_MATCHMAKEKEEPALIVE = 14;
+    S_REDOMATCHMAKE = 15;
+    S_EXCLUDEDFROMMATCH = 16;
+    S_MATCHCOMPLETED = 17;
+    C_GAMESCENELOADINGPROGRESS = 18;
 }
 
 //최초에 TCP방식의 Connect가 성공하면 해당 session의 보안레벨은 '보안레벨 0'이다.
@@ -145,18 +153,18 @@ message C_MatchMakeCancel {
 }
 
 //올바른 조합을 찾았을 때, Session의 유효성 검사용
-message S_KeepAlive {
-
+message S_MatchMakeKeepAlive {
+    int32 gameId = 1;
 }
 
 //유효성 검사에 대한 응답.
-message C_KeepAlive {
-
+message C_MatchMakeKeepAlive {
+    int32 gameId = 1;
 }
 
 //매칭 실패로 인한 매칭 재개 통보.
 message S_RedoMatchMake {
-
+    int32 gameId = 1;
 }
 
 //매칭 취소요청, 혹은 안좋은 연결상태로 인해 서버의 매칭 대기열에서 벗어남을 통보.
@@ -167,4 +175,8 @@ message S_ExcludedFromMatch {
 //매칭성공. 해당 게임을 준비하기위해 Scene변경을 유도.
 message S_MatchCompleted {
     int32 gameId = 1;
+}
+
+message C_GameSceneLoadingProgress {
+    int32 persentage = 1;
 }
