@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "MatchQueue.h"
 
-void MatchQueue::Push(WatingPlayerData newPlayer){
+void MatchQueue::Push(WatingPlayerData&& newPlayer){
 	lock_guard<mutex> lock(_TQlock);
-	_tempQueue.push_back(newPlayer);
+	_tempQueue.push_back(move(newPlayer));
 }
 
 void MatchQueue::FlushTempQueueAndSort() {

@@ -22,16 +22,24 @@ protected:
 
 class PingPongManager : public GameManager {
 public:
+	PingPongManager() {
+		_excluded = vector<bool>(_quota);
+	}
+
 	void MatchMake() override {
 		vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
 		for (auto& pdv : pdvv) {
 			bool isReady = true;
-			for (auto& pd : pdv) {
-				shared_ptr<PlayerSession> playerSessionRef = pd._playerSessionRef.lock();
+			fill(_excluded.begin(), _excluded.end(), false);
+			for (int i = 0; i < _quota; i++) {
+				shared_ptr<PlayerSession> playerSessionRef = pdv[i]._playerSessionRef.lock();
 				if (playerSessionRef == nullptr || playerSessionRef->GetMatchingState() != GameType::PingPong) {
 					isReady = false;
+					_excluded[i] = true;
+
+					//S2DPacketMaker
+					//playerSessionRef->Send()
 					//TODO : 해당 playerSession에 대해 대기열에서 제외
-						//pdv에서 해당 player data를 삭제
 						//필요하다면, 제외된 사실을 Client에 통보.
 				}
 			}
@@ -40,8 +48,9 @@ public:
 				MakeRoom(move(pdv));
 			}
 			else {
-				for (auto& playerData : pdv) {
-					_matchQueue.Push(playerData);
+				for (int i = 0; i < _quota; i++) {
+					if (!_excluded[i])
+						_matchQueue.Push(move(pdv[i]));
 				}
 			}
 		}
@@ -62,4 +71,5 @@ private:
 	GameType _ty = GameType::PingPong;
 	MatchQueue _matchQueue;
     int32_t _quota = 4;
+	vector<bool> _excluded;
 };
