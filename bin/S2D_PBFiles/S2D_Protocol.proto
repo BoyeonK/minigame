@@ -7,6 +7,7 @@ service S2D_Service {
     rpc SayHello (HelloRequest) returns (HelloReply);
     rpc LoginRequest (S2D_Login) returns (D2S_Login);
     rpc CreateAccountRequest (S2D_CreateAccount) returns (D2S_CreateAccount);
+    rpc RenewElosRequest (S2D_RenewElos) returns (D2S_RenewElos);
 }
 
 //SayHello -> 단순한 에코를 실행.
@@ -56,4 +57,14 @@ message S2D_CreateAccount {
 
 message D2S_CreateAccount {
     bool success = 1;
+}
+
+message S2D_RenewElos {
+    int32 dbid = 1;
+}
+
+message D2S_RenewElos {
+    int32 elo1 = 1;
+    int32 elo2 = 2;
+    int32 elo3 = 3;
 }

@@ -25,6 +25,7 @@ static const char* S2D_Service_method_names[] = {
   "/S2D_Protocol.S2D_Service/SayHello",
   "/S2D_Protocol.S2D_Service/LoginRequest",
   "/S2D_Protocol.S2D_Service/CreateAccountRequest",
+  "/S2D_Protocol.S2D_Service/RenewElosRequest",
 };
 
 std::unique_ptr< S2D_Service::Stub> S2D_Service::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -37,6 +38,7 @@ S2D_Service::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   : channel_(channel), rpcmethod_SayHello_(S2D_Service_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_LoginRequest_(S2D_Service_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_CreateAccountRequest_(S2D_Service_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RenewElosRequest_(S2D_Service_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status S2D_Service::Stub::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::S2D_Protocol::HelloReply* response) {
@@ -108,6 +110,29 @@ void S2D_Service::Stub::async::CreateAccountRequest(::grpc::ClientContext* conte
   return result;
 }
 
+::grpc::Status S2D_Service::Stub::RenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::S2D_Protocol::D2S_RenewElos* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::S2D_Protocol::S2D_RenewElos, ::S2D_Protocol::D2S_RenewElos, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RenewElosRequest_, context, request, response);
+}
+
+void S2D_Service::Stub::async::RenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::S2D_Protocol::S2D_RenewElos, ::S2D_Protocol::D2S_RenewElos, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RenewElosRequest_, context, request, response, std::move(f));
+}
+
+void S2D_Service::Stub::async::RenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RenewElosRequest_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_RenewElos>* S2D_Service::Stub::PrepareAsyncRenewElosRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::S2D_Protocol::D2S_RenewElos, ::S2D_Protocol::S2D_RenewElos, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_RenewElosRequest_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_RenewElos>* S2D_Service::Stub::AsyncRenewElosRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncRenewElosRequestRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 S2D_Service::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       S2D_Service_method_names[0],
@@ -139,6 +164,16 @@ S2D_Service::Service::Service() {
              ::S2D_Protocol::D2S_CreateAccount* resp) {
                return service->CreateAccountRequest(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      S2D_Service_method_names[3],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< S2D_Service::Service, ::S2D_Protocol::S2D_RenewElos, ::S2D_Protocol::D2S_RenewElos, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](S2D_Service::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::S2D_Protocol::S2D_RenewElos* req,
+             ::S2D_Protocol::D2S_RenewElos* resp) {
+               return service->RenewElosRequest(ctx, req, resp);
+             }, this)));
 }
 
 S2D_Service::Service::~Service() {
@@ -159,6 +194,13 @@ S2D_Service::Service::~Service() {
 }
 
 ::grpc::Status S2D_Service::Service::CreateAccountRequest(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_CreateAccount* request, ::S2D_Protocol::D2S_CreateAccount* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status S2D_Service::Service::RenewElosRequest(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response) {
   (void) context;
   (void) request;
   (void) response;
