@@ -65,3 +65,9 @@ void PlayerSession::SetSecureLevel(int32_t lv) {
 void PlayerSession::SetDbid(int32_t dbid) {
 	_dbid = dbid;
 }
+
+void PlayerSession::SetElos(int32_t elo1, int32_t elo2, int32_t elo3) {
+	_elo1 = elo1;
+	_elo2 = elo2;
+	_elo3 = elo3;
+}

@@ -1,6 +1,7 @@
 #pragma once
 #include "S2D_CallData.h"
 #include "S2DPacketMaker.h"
+#include "PlayerSession.h"
 
 class DBClientImpl {
 public:
@@ -22,6 +23,7 @@ public:
 #endif
     bool S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password);
     bool S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id, string password);
+    bool S2D_RenewElos(shared_ptr<PlayerSession> sessionRef, int dbid);
 
     void AsyncCompleteRpc();
 

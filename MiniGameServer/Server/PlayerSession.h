@@ -17,6 +17,7 @@ public:
 	void SetDbid(int32_t dbid);
 	int32_t GetDbid() const { return _dbid; }
 	GameType GetMatchingState() const { return _matchingState; }
+	void SetElos(int32_t elo1, int32_t elo2, int32_t elo3);
 
 private:
 	EVP_PKEY* _RSAKey;
@@ -24,4 +25,7 @@ private:
 	int32_t _gameVersion = 0;
 	int32_t _dbid = 0;
 	atomic<GameType> _matchingState = GameType::None;
+	int32_t _elo1 = 0;
+	int32_t _elo2 = 0;
+	int32_t _elo3 = 0;
 };

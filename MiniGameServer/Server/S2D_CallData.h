@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerSession.h"
 
 class S2D_CallData {
 public:
@@ -72,4 +73,24 @@ public:
 
 private:
 	weak_ptr<PBSession> _clientSessionRef;
+};
+
+class SRenewElosCall final : public S2D_CallData {
+public:
+	SRenewElosCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
+	~SRenewElosCall() {}
+	
+	void StartCall();
+	void OnSucceed() override;
+	void OnFailed() override;
+
+	void ReturnToPool() {
+		objectPool<SRenewElosCall>::dealloc(this);
+	}
+
+	S2D_Protocol::D2S_RenewElos reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_RenewElos>> response_reader;
+
+private:
+	weak_ptr<PlayerSession> _clientSessionRef;
 };

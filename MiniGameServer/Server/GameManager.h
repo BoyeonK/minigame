@@ -26,6 +26,7 @@ public:
 		_excluded = vector<bool>(_quota);
 	}
 
+	void Push(shared_ptr<PlayerSession> playerSessionRef);
 	void MatchMake() override {
 		vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
 		for (auto& pdv : pdvv) {

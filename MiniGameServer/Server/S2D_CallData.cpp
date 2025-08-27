@@ -51,6 +51,9 @@ void SLoginCall::CorrectI(int32_t dbid) {
 		//해당 session에서 처리할 최대 msgId를 10000으로 설정 (사실상, 이제 모든 패킷에 대한 요청을 거절하지 않겠다는 뜻)
 		playerSessionRef->SetSecureLevel(10000);
 		playerSessionRef->Send(sendBufferRef);
+
+		//방금 로그인한 세션에 Elo를 최신화
+		DBManager->S2D_RenewElos(playerSessionRef, dbid);
 	}
 }
 
@@ -76,9 +79,6 @@ void SCreateAccountCall::OnSucceed() {
 		CreateFailed();
 		cout << "계정 생성 요청 실패." << endl;
 	}
-
-	//TODO: 계정 생성 성공, 실패여부를 bool값으로 확인한다.
-	//추후에는 이 성공, 실패여부를 클라이언트에 통보할 일이 있을것.
 }
 
 void SCreateAccountCall::OnFailed() {
@@ -108,4 +108,17 @@ void SCreateAccountCall::CreateFailed() {
 	}
 	shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
 	sessionRef->Send(sendBufferRef);
+}
+
+void SRenewElosCall::OnSucceed() {
+	shared_ptr<PlayerSession> sessionRef = _clientSessionRef.lock();
+	if (sessionRef == nullptr) {
+		return;
+	}
+	sessionRef->SetElos(reply.elo1(), reply.elo2(), reply.elo3());
+	cout << "Elo 설정 완료" << endl;
+}
+
+void SRenewElosCall::OnFailed() {
+	//TODO: 뭔가 해야될거 같은데 당장 생각이 안나네
 }

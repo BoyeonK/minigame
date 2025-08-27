@@ -14,5 +14,11 @@ public:
 		pkt.set_password(password);
 		return pkt;
 	}
+
+	static S2D_Protocol::S2D_RenewElos Make_S2D_RenewElos(int dbid) {
+		S2D_Protocol::S2D_RenewElos pkt;
+		pkt.set_dbid(dbid);
+		return pkt;
+	}
 };
 
