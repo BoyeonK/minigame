@@ -72,10 +72,10 @@ void DLoginCallData::Proceed() {
             bool flag2 = false;
 
             //해당 player_id로 dbid 조회. 해당 player_id를 가진 column이 없을경우, incorrect_id를 직렬화.
-            fSQL1(hDbc, hStmt1, flag, dbid, id);
+            ReadDbidFromPlayersTable(hDbc, hStmt1, flag, dbid, id);
 
             //fSQL1의 결과가 존재할 경우, 해당 dbid column의 Accounts Table을 Fetch.
-            if (flag == true) fSQL2(hDbc, hStmt2, flag2, dbid);
+            if (flag == true) ReadHashAndSaltFromAccountsTable(hDbc, hStmt2, flag2, dbid);
 
             //Account Table이 존재하는 경우(Fetch 성공), Table의 password_hash와 salt를 가져옴.
             //입력값 password와 해싱하여 비교 및 결과에 따라 _reply에 알맞는 dbid 직렬화
@@ -97,7 +97,7 @@ void DLoginCallData::Proceed() {
     }
 }
 
-void DLoginCallData::fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, bool& flag, SQLINTEGER& dbid, const string& id) {
+void DLoginCallData::ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, bool& flag, SQLINTEGER& dbid, const string& id) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         throw runtime_error("S2D_Login : hStmt1 Alloc Failed");
@@ -145,7 +145,7 @@ void DLoginCallData::fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, bool& flag, SQLINTEG
     }
 }
 
-void DLoginCallData::fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, bool& flag2, SQLINTEGER& dbid) {
+void DLoginCallData::ReadHashAndSaltFromAccountsTable(SQLHDBC& hDbc, SQLHSTMT& hStmt2, bool& flag2, SQLINTEGER& dbid) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         throw runtime_error("S2D_Login : hStmt2 Alloc Failed");
@@ -275,19 +275,19 @@ void DCreateAccountCallData::Proceed() {
             attr = true;
 
             //중앙 테이블인 Players row INSERT
-            fSQL2(hDbc, hStmt2, id, isSuccess);
+            CreatePlayersTable(hDbc, hStmt2, id, isSuccess);
 
             //INSERT에 성공한 경우.
             if (isSuccess) {
                 //해당 테이블의 dbid를 가져옴.
                 SQLINTEGER dbid = -1;
-                fSQL3(hDbc, hStmt3, id, dbid);
+                ReadDbidFromPlayersTable(hDbc, hStmt3, id, dbid);
 
                 //dbid로서 Accounts row INSERT
-                fSQL4(hDbc, hStmt4, password, dbid);
+                CreateAccountsTable(hDbc, hStmt4, password, dbid);
 
                 //dbid로서 Elos row INSERT
-                fSQL5(hDbc, hStmt5, dbid);
+                CreateElosTable(hDbc, hStmt5, dbid);
 
                 ret = SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
                 if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
@@ -322,7 +322,7 @@ void DCreateAccountCallData::Proceed() {
         objectPool<DCreateAccountCallData>::dealloc(this);
     }
 }
-
+/*
 void DCreateAccountCallData::fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const string& id, bool& S1) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
@@ -358,8 +358,8 @@ void DCreateAccountCallData::fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const string
         throw runtime_error("D2S_CreateAccount : S1 Fetch Failed");
     }
 }
-
-void DCreateAccountCallData::fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id, bool& flag) {
+*/
+void DCreateAccountCallData::CreatePlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id, bool& flag) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         cout << "hStmt2 할당 실패;" << endl;
@@ -400,7 +400,7 @@ void DCreateAccountCallData::fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string
     flag = true;
 }
 
-void DCreateAccountCallData::fSQL3(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const string& id, SQLINTEGER& dbid) {
+void DCreateAccountCallData::ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const string& id, SQLINTEGER& dbid) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt3);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         throw runtime_error("D2S_CreateAccount : S3 hStmt Alloc Failed");
@@ -440,7 +440,7 @@ void DCreateAccountCallData::fSQL3(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const string
     }
 }
 
-void DCreateAccountCallData::fSQL4(SQLHDBC& hDbc, SQLHSTMT& hStmt4, const string& password, SQLINTEGER& dbid) {
+void DCreateAccountCallData::CreateAccountsTable(SQLHDBC& hDbc, SQLHSTMT& hStmt4, const string& password, SQLINTEGER& dbid) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt4);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         throw runtime_error("D2S_CreateAccount : hStmt4 Alloc Failed");
@@ -493,7 +493,7 @@ void DCreateAccountCallData::fSQL4(SQLHDBC& hDbc, SQLHSTMT& hStmt4, const string
     }
 }
 
-void DCreateAccountCallData::fSQL5(SQLHDBC& hDbc, SQLHSTMT& hStmt5, SQLINTEGER& dbid) {
+void DCreateAccountCallData::CreateElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt5, SQLINTEGER& dbid) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt5);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         throw runtime_error("D2S_CreateAccount : S5 hStmt5 Alloc Failed");

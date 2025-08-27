@@ -1,4 +1,5 @@
 #pragma once
+#include "DBServiceImpl.h"
 
 void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq);
 
@@ -49,8 +50,8 @@ public:
     void ReturnToPool() override { objectPool<DLoginCallData>::dealloc(this); }
 
 private:
-    void fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, bool& flag, SQLINTEGER& dbid, const string& id);
-    void fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, bool& flag2, SQLINTEGER& dbid);
+    void ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, bool& flag, SQLINTEGER& dbid, const string& id);
+    void ReadHashAndSaltFromAccountsTable(SQLHDBC& hDbc, SQLHSTMT& hStmt2, bool& flag2, SQLINTEGER& dbid);
     void Compare_PBKDF2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, SQLINTEGER& dbid, const string& password);
 
     S2D_Protocol::S2D_Login _request;
@@ -70,11 +71,11 @@ public:
     void ReturnToPool() override { objectPool<DCreateAccountCallData>::dealloc(this); }
 
 private:
-    void fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const string& id, bool& S1);
-    void fSQL2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id, bool& flag);
-    void fSQL3(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const string& id, SQLINTEGER& dbid);
-    void fSQL4(SQLHDBC& hDbc, SQLHSTMT& hStmt4, const string& password, SQLINTEGER& dbid);
-    void fSQL5(SQLHDBC& hDbc, SQLHSTMT& hStmt5, SQLINTEGER& dbid);
+    //void fSQL1(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const string& id, bool& S1);
+    void CreatePlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id, bool& flag);
+    void ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const string& id, SQLINTEGER& dbid);
+    void CreateAccountsTable(SQLHDBC& hDbc, SQLHSTMT& hStmt4, const string& password, SQLINTEGER& dbid);
+    void CreateElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt5, SQLINTEGER& dbid);
 
     S2D_Protocol::S2D_CreateAccount _request;
     S2D_Protocol::D2S_CreateAccount _reply;
