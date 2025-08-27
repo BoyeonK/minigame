@@ -298,14 +298,14 @@ void DBManager::PrepareQ(SQLHSTMT& hStmt, const wstring& query) {
     }
 }
 
-void DBManager::BindPInt(SQLHSTMT& hStmt, const int param, int val) {
+void DBManager::BindPInt(SQLHSTMT& hStmt, const int& param, int val) {
     SQLRETURN ret = SQLBindParameter(hStmt, param, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &val, 0, NULL);
     if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {
         throw runtime_error("Bind Int Parameter Failed");
     }
 }
 
-void DBManager::BindPWchar(SQLHSTMT& hStmt, const int param, const wstring& ws) {
+void DBManager::BindPWchar(SQLHSTMT& hStmt, const int& param, const wstring& ws) {
     SQLLEN idLen = SQL_NTS;
     SQLRETURN ret = SQLBindParameter(hStmt, param, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, ws.size(), 0, (SQLPOINTER)ws.c_str(), 0, &idLen);  
     if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt)) {

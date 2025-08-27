@@ -9,6 +9,7 @@ void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::Server
         objectPool<HelloCallData>::alloc(service, cq);
         objectPool<DLoginCallData>::alloc(service, cq);
         objectPool<DCreateAccountCallData>::alloc(service, cq);
+        objectPool<DRenewElosCallData>::alloc(service, cq);
     }
 }
 
@@ -512,5 +513,95 @@ void DCreateAccountCallData::fSQL5(SQLHDBC& hDbc, SQLHSTMT& hStmt5, SQLINTEGER& 
     ret = SQLExecute(hStmt5);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt5)) {
         throw runtime_error("D2S_CreateAccount : S5 Execute Failed");
+    }
+}
+
+void DRenewElosCallData::Proceed() {
+    if (_status == CREATE) {
+        _status = PROCESS;
+        _service->RequestRenewElosRequest(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
+    }
+    else if (_status == PROCESS) {
+        // 새로운 CallData를 CompletionQueue에 등록.
+        DRenewElosCallData* newCallData = objectPool<DRenewElosCallData>::alloc(_service, _completionQueueRef);
+        int dbid = _request.dbid();
+
+        try {
+            SQLHDBC hDbc = GDBManager->PopHDbc();
+            if (hDbc == nullptr) {
+                throw runtime_error("Invalid hDbc");
+            }
+
+            Cleaner hDbcCleaner([&]() {
+                GDBManager->ReturnHDbc(hDbc);
+            });
+
+            SQLHSTMT hStmt1 = nullptr;
+            Cleaner hStmtCleaner([&]() {
+                if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+            });
+
+            SQLINTEGER elo1 = 0, elo2 = 0, elo3 = 0;
+            ReadElos(hDbc, hStmt1, dbid, elo1, elo2, elo3);
+
+            if (elo1 != 0 || elo2 != 0 || elo3 != 0) {
+                _reply.set_elo1(elo1);
+                _reply.set_elo2(elo2);
+                _reply.set_elo3(elo3);
+            }
+            else {
+                throw runtime_error("wrong Elos");
+            }
+        }
+        catch (runtime_error& e) {
+            cerr << e.what() << endl;
+        }
+        
+        _status = FINISH;
+        _responder.Finish(_reply, grpc::Status::OK, this);
+    }
+    // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
+    else {
+#ifdef _DEBUG
+        cout << "Server: CreateAccount Request sequence complete!" << endl;
+#endif 
+        ReturnToPool();
+    }
+}
+
+void DRenewElosCallData::ReadElos(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, SQLINTEGER& elo1, SQLINTEGER& elo2, SQLINTEGER& elo3) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("S2D_RenewElos : hStmt1 Alloc Failed");
+    }
+
+    wstring query = L"SELECT elo1, elo2, elo3 FROM Elos WHERE dbid = ?";
+    ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_RenewElos : S1 Query Setting Failed");
+    }
+
+    int objectId = dbid;
+    ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &objectId, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_RenewElos : S1 Bind Parameter Failed");
+    }
+
+    ret = SQLExecute(hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_RenewElos : S1 Execute Failed");
+    }
+
+    ret = SQLFetch(hStmt1);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        SQLGetData(hStmt1, 1, SQL_C_SLONG, &elo1, sizeof(elo1), NULL);
+        SQLGetData(hStmt1, 2, SQL_C_SLONG, &elo2, sizeof(elo2), NULL);
+        SQLGetData(hStmt1, 3, SQL_C_SLONG, &elo3, sizeof(elo3), NULL);
+    }
+    else if (ret == SQL_NO_DATA) {
+        throw runtime_error("S2D_RenewElos : Player not found with the given dbid.");
+    }
+    else {
+        throw runtime_error("S2D_RenewElos : SQLFetch Failed");
     }
 }

@@ -38,8 +38,8 @@ public:
 
     //자주 쓰는 친구들 함수로 묶음.
     void PrepareQ(SQLHSTMT& hStmt, const wstring& query);
-    void BindPInt(SQLHSTMT& hStmt, const int param, const int val);
-    void BindPWchar(SQLHSTMT& hStmt, const int param, const wstring& ws);
+    void BindPInt(SQLHSTMT& hStmt, const int& param, const int val);
+    void BindPWchar(SQLHSTMT& hStmt, const int& param, const wstring& ws);
 
 private:
     mutex _mtx;
