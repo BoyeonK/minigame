@@ -113,7 +113,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
         for (int i = 0; i < _quota; i++)
             matchGroup.push_back(_searchQueue[idx + i]);
 
-        matchGruops.push_back(matchGroup);
+        matchGruops.push_back(move(matchGroup));
     }
 
     //7. group으로 묶여서 매칭이 시작된 플레이어들을 Queue에서 제외

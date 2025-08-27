@@ -49,7 +49,6 @@ public:
 
 	void MakeRoom(vector<WatingPlayerData>&& pdv) override {
 		shared_ptr<PingPongGameRoom> newRoom = { objectPool<PingPongGameRoom>::alloc(), objectPool<PingPongGameRoom>::dealloc };
-		//Flag를 true로 둠으로서, 다른 thread에서 비 동기적으로 실행.
 		newRoom->DoAsyncAfter(&PingPongGameRoom::Start, pdv);
 	}
 
