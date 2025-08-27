@@ -5,15 +5,25 @@
 
 class JobQueue : public enable_shared_from_this<JobQueue> {
 public:
-	void DoAsync(CallbackType&& callback, bool isPushOnly = false) {
-		Push({ objectPool<Job>::alloc(std::move(callback)), objectPool<Job>::dealloc }, isPushOnly);
+	void DoAsync(CallbackType&& callback) {
+		Push({ objectPool<Job>::alloc(std::move(callback)), objectPool<Job>::dealloc });
+	}
+
+	void DoAsyncAfter(CallbackType&& callback) {
+		Push({ objectPool<Job>::alloc(std::move(callback)), objectPool<Job>::dealloc }, true);
 	}
 
 	//Ret는 void로 작성해도 될 것 같다.
 	template<typename T, typename Ret, typename... Args>
-	void DoAsync(bool isPushOnly, Ret(T::*memFunc)(Args...), Args... args) {
+	void DoAsync(Ret(T::*memFunc)(Args...), Args... args) {
 		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
-		Push({ objectPool<Job>::alloc(ownerWRef, memFunc, std::forward<Args>(args)...), objectPool<Job>::dealloc }, isPushOnly);
+		Push({ objectPool<Job>::alloc(ownerWRef, memFunc, std::forward<Args>(args)...), objectPool<Job>::dealloc });
+	}
+
+	template<typename T, typename Ret, typename... Args>
+	void DoAsyncAfter(Ret(T::* memFunc)(Args...), Args... args) {
+		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
+		Push({ objectPool<Job>::alloc(ownerWRef, memFunc, std::forward<Args>(args)...), objectPool<Job>::dealloc }, true);
 	}
 
 	//나 이거 왠지 JS에서 써본거같아
