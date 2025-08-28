@@ -30,4 +30,5 @@ private:
 	int32_t _elo1 = 0;
 	int32_t _elo2 = 0;
 	int32_t _elo3 = 0;
+	int64_t _lastKeepAliveTick = 0;
 };

@@ -36,6 +36,7 @@ public:
 		if (::GetTickCount64() - _lastRenewTick > 3000) {
 			_lastRenewTick = ::GetTickCount64();
 			_matchQueue.FlushTempQueueAndSort();
+			cout << "matchQueueRenewed" << endl;
 		}
 	}
 
