@@ -38,22 +38,23 @@ namespace Google.Protobuf.Protocol {
             "ZUFjY291bnQSDwoHc3VjY2VzcxgBIAEoCBILCgNlcnIYAiABKAkiGAoIQ19M",
             "b2dvdXQSDAoEZGJpZBgBIAEoBSIbCghTX0xvZ291dBIPCgdzdWNjZXNzGAEg",
             "ASgIIiQKEkNfTWF0Y2hNYWtlUmVxdWVzdBIOCgZnYW1lSWQYASABKAUiIwoR",
-            "Q19NYXRjaE1ha2VDYW5jZWwSDgoGZ2FtZUlkGAEgASgFIiYKFFNfTWF0Y2hN",
-            "YWtlS2VlcEFsaXZlEg4KBmdhbWVJZBgBIAEoBSImChRDX01hdGNoTWFrZUtl",
-            "ZXBBbGl2ZRIOCgZnYW1lSWQYASABKAUiIQoPU19SZWRvTWF0Y2hNYWtlEg4K",
-            "BmdhbWVJZBgBIAEoBSIVChNTX0V4Y2x1ZGVkRnJvbU1hdGNoIiIKEFNfTWF0",
-            "Y2hDb21wbGV0ZWQSDgoGZ2FtZUlkGAEgASgFIjAKGkNfR2FtZVNjZW5lTG9h",
-            "ZGluZ1Byb2dyZXNzEhIKCnBlcnNlbnRhZ2UYASABKAUqiAMKBU1zZ0lkEg0K",
-            "CVNfV0VMQ09NRRAAEg0KCUNfV0VMQ09NRRABEhYKElNfV0VMQ09NRV9SRVNQ",
-            "T05TRRACEg8KC1NfRU5DUllQVEVEEAMSDwoLQ19FTkNSWVBURUQQBBILCgdD",
-            "X0xPR0lOEAUSCwoHU19MT0dJThAGEhQKEENfQ1JFQVRFX0FDQ09VTlQQBxIU",
-            "ChBTX0NSRUFURV9BQ0NPVU5UEAgSDAoIQ19MT0dPVVQQCRIMCghTX0xPR09V",
-            "VBAKEhYKEkNfTUFUQ0hNQUtFUkVRVUVTVBALEhUKEUNfTUFUQ0hNQUtFQ0FO",
-            "Q0VMEAwSGAoUU19NQVRDSE1BS0VLRUVQQUxJVkUQDRIYChRDX01BVENITUFL",
-            "RUtFRVBBTElWRRAOEhMKD1NfUkVET01BVENITUFLRRAPEhcKE1NfRVhDTFVE",
-            "RURGUk9NTUFUQ0gQEBIUChBTX01BVENIQ09NUExFVEVEEBESHgoaQ19HQU1F",
-            "U0NFTkVMT0FESU5HUFJPR1JFU1MQEkIbqgIYR29vZ2xlLlByb3RvYnVmLlBy",
-            "b3RvY29sYgZwcm90bzM="));
+            "Q19NYXRjaE1ha2VDYW5jZWwSDgoGZ2FtZUlkGAEgASgFIjwKFFNfTWF0Y2hN",
+            "YWtlS2VlcEFsaXZlEg4KBmdhbWVJZBgBIAEoBRIUCgxzZW50VGltZVRpY2sY",
+            "AiABKAMiPAoUQ19NYXRjaE1ha2VLZWVwQWxpdmUSDgoGZ2FtZUlkGAEgASgF",
+            "EhQKDHNlbnRUaW1lVGljaxgCIAEoAyIhCg9TX1JlZG9NYXRjaE1ha2USDgoG",
+            "Z2FtZUlkGAEgASgFIhUKE1NfRXhjbHVkZWRGcm9tTWF0Y2giIgoQU19NYXRj",
+            "aENvbXBsZXRlZBIOCgZnYW1lSWQYASABKAUiMAoaQ19HYW1lU2NlbmVMb2Fk",
+            "aW5nUHJvZ3Jlc3MSEgoKcGVyc2VudGFnZRgBIAEoBSqIAwoFTXNnSWQSDQoJ",
+            "U19XRUxDT01FEAASDQoJQ19XRUxDT01FEAESFgoSU19XRUxDT01FX1JFU1BP",
+            "TlNFEAISDwoLU19FTkNSWVBURUQQAxIPCgtDX0VOQ1JZUFRFRBAEEgsKB0Nf",
+            "TE9HSU4QBRILCgdTX0xPR0lOEAYSFAoQQ19DUkVBVEVfQUNDT1VOVBAHEhQK",
+            "EFNfQ1JFQVRFX0FDQ09VTlQQCBIMCghDX0xPR09VVBAJEgwKCFNfTE9HT1VU",
+            "EAoSFgoSQ19NQVRDSE1BS0VSRVFVRVNUEAsSFQoRQ19NQVRDSE1BS0VDQU5D",
+            "RUwQDBIYChRTX01BVENITUFLRUtFRVBBTElWRRANEhgKFENfTUFUQ0hNQUtF",
+            "S0VFUEFMSVZFEA4SEwoPU19SRURPTUFUQ0hNQUtFEA8SFwoTU19FWENMVURF",
+            "REZST01NQVRDSBAQEhQKEFNfTUFUQ0hDT01QTEVURUQQERIeChpDX0dBTUVT",
+            "Q0VORUxPQURJTkdQUk9HUkVTUxASQhuqAhhHb29nbGUuUHJvdG9idWYuUHJv",
+            "dG9jb2xiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -70,8 +71,8 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Logout), global::Google.Protobuf.Protocol.S_Logout.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_MatchMakeRequest), global::Google.Protobuf.Protocol.C_MatchMakeRequest.Parser, new[]{ "GameId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_MatchMakeCancel), global::Google.Protobuf.Protocol.C_MatchMakeCancel.Parser, new[]{ "GameId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_MatchMakeKeepAlive), global::Google.Protobuf.Protocol.S_MatchMakeKeepAlive.Parser, new[]{ "GameId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_MatchMakeKeepAlive), global::Google.Protobuf.Protocol.C_MatchMakeKeepAlive.Parser, new[]{ "GameId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_MatchMakeKeepAlive), global::Google.Protobuf.Protocol.S_MatchMakeKeepAlive.Parser, new[]{ "GameId", "SentTimeTick" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_MatchMakeKeepAlive), global::Google.Protobuf.Protocol.C_MatchMakeKeepAlive.Parser, new[]{ "GameId", "SentTimeTick" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_RedoMatchMake), global::Google.Protobuf.Protocol.S_RedoMatchMake.Parser, new[]{ "GameId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_ExcludedFromMatch), global::Google.Protobuf.Protocol.S_ExcludedFromMatch.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_MatchCompleted), global::Google.Protobuf.Protocol.S_MatchCompleted.Parser, new[]{ "GameId" }, null, null, null, null),
@@ -3285,6 +3286,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_MatchMakeKeepAlive(S_MatchMakeKeepAlive other) : this() {
       gameId_ = other.gameId_;
+      sentTimeTick_ = other.sentTimeTick_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3306,6 +3308,18 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "sentTimeTick" field.</summary>
+    public const int SentTimeTickFieldNumber = 2;
+    private long sentTimeTick_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long SentTimeTick {
+      get { return sentTimeTick_; }
+      set {
+        sentTimeTick_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3322,6 +3336,7 @@ namespace Google.Protobuf.Protocol {
         return true;
       }
       if (GameId != other.GameId) return false;
+      if (SentTimeTick != other.SentTimeTick) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3330,6 +3345,7 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (GameId != 0) hash ^= GameId.GetHashCode();
+      if (SentTimeTick != 0L) hash ^= SentTimeTick.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3352,6 +3368,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(GameId);
       }
+      if (SentTimeTick != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(SentTimeTick);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3366,6 +3386,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(GameId);
       }
+      if (SentTimeTick != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(SentTimeTick);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3378,6 +3402,9 @@ namespace Google.Protobuf.Protocol {
       int size = 0;
       if (GameId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(GameId);
+      }
+      if (SentTimeTick != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SentTimeTick);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3393,6 +3420,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.GameId != 0) {
         GameId = other.GameId;
+      }
+      if (other.SentTimeTick != 0L) {
+        SentTimeTick = other.SentTimeTick;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3417,6 +3447,10 @@ namespace Google.Protobuf.Protocol {
             GameId = input.ReadInt32();
             break;
           }
+          case 16: {
+            SentTimeTick = input.ReadInt64();
+            break;
+          }
         }
       }
     #endif
@@ -3438,6 +3472,10 @@ namespace Google.Protobuf.Protocol {
             break;
           case 8: {
             GameId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            SentTimeTick = input.ReadInt64();
             break;
           }
         }
@@ -3486,6 +3524,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_MatchMakeKeepAlive(C_MatchMakeKeepAlive other) : this() {
       gameId_ = other.gameId_;
+      sentTimeTick_ = other.sentTimeTick_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3507,6 +3546,18 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "sentTimeTick" field.</summary>
+    public const int SentTimeTickFieldNumber = 2;
+    private long sentTimeTick_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long SentTimeTick {
+      get { return sentTimeTick_; }
+      set {
+        sentTimeTick_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3523,6 +3574,7 @@ namespace Google.Protobuf.Protocol {
         return true;
       }
       if (GameId != other.GameId) return false;
+      if (SentTimeTick != other.SentTimeTick) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3531,6 +3583,7 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (GameId != 0) hash ^= GameId.GetHashCode();
+      if (SentTimeTick != 0L) hash ^= SentTimeTick.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3553,6 +3606,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(GameId);
       }
+      if (SentTimeTick != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(SentTimeTick);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3567,6 +3624,10 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(GameId);
       }
+      if (SentTimeTick != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(SentTimeTick);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3579,6 +3640,9 @@ namespace Google.Protobuf.Protocol {
       int size = 0;
       if (GameId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(GameId);
+      }
+      if (SentTimeTick != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SentTimeTick);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3594,6 +3658,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.GameId != 0) {
         GameId = other.GameId;
+      }
+      if (other.SentTimeTick != 0L) {
+        SentTimeTick = other.SentTimeTick;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3618,6 +3685,10 @@ namespace Google.Protobuf.Protocol {
             GameId = input.ReadInt32();
             break;
           }
+          case 16: {
+            SentTimeTick = input.ReadInt64();
+            break;
+          }
         }
       }
     #endif
@@ -3639,6 +3710,10 @@ namespace Google.Protobuf.Protocol {
             break;
           case 8: {
             GameId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            SentTimeTick = input.ReadInt64();
             break;
           }
         }

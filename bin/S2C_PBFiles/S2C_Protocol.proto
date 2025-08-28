@@ -155,11 +155,13 @@ message C_MatchMakeCancel {
 //올바른 조합을 찾았을 때, Session의 유효성 검사용
 message S_MatchMakeKeepAlive {
     int32 gameId = 1;
+    int64 sentTimeTick = 2;
 }
 
 //유효성 검사에 대한 응답.
 message C_MatchMakeKeepAlive {
     int32 gameId = 1;
+    int64 sentTimeTick = 2;
 }
 
 //매칭 실패로 인한 매칭 재개 통보.

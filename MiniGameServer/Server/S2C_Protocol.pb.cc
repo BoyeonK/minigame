@@ -109,7 +109,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr S_MatchMakeKeepAlive::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : gameid_{0},
+      : senttimetick_{::int64_t{0}},
+        gameid_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -345,7 +346,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr C_MatchMakeKeepAlive::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : gameid_{0},
+      : senttimetick_{::int64_t{0}},
+        gameid_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -683,6 +685,7 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchMakeKeepAlive, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchMakeKeepAlive, _impl_.senttimetick_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_MatchMakeKeepAlive, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -692,6 +695,7 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_MatchMakeKeepAlive, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_MatchMakeKeepAlive, _impl_.senttimetick_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_RedoMatchMake, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -745,11 +749,11 @@ static const ::_pbi::MigrationSchema
         {113, -1, -1, sizeof(::S2C_Protocol::C_MatchMakeRequest)},
         {122, -1, -1, sizeof(::S2C_Protocol::C_MatchMakeCancel)},
         {131, -1, -1, sizeof(::S2C_Protocol::S_MatchMakeKeepAlive)},
-        {140, -1, -1, sizeof(::S2C_Protocol::C_MatchMakeKeepAlive)},
-        {149, -1, -1, sizeof(::S2C_Protocol::S_RedoMatchMake)},
-        {158, -1, -1, sizeof(::S2C_Protocol::S_ExcludedFromMatch)},
-        {166, -1, -1, sizeof(::S2C_Protocol::S_MatchCompleted)},
-        {175, -1, -1, sizeof(::S2C_Protocol::C_GameSceneLoadingProgress)},
+        {141, -1, -1, sizeof(::S2C_Protocol::C_MatchMakeKeepAlive)},
+        {151, -1, -1, sizeof(::S2C_Protocol::S_RedoMatchMake)},
+        {160, -1, -1, sizeof(::S2C_Protocol::S_ExcludedFromMatch)},
+        {168, -1, -1, sizeof(::S2C_Protocol::S_MatchCompleted)},
+        {177, -1, -1, sizeof(::S2C_Protocol::C_GameSceneLoadingProgress)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_Welcome_default_instance_._instance,
@@ -790,29 +794,31 @@ const char descriptor_table_protodef_S2C_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SEC
     "\022\013\n\003err\030\002 \001(\t\"\030\n\010C_Logout\022\014\n\004dbid\030\001 \001(\005\""
     "\033\n\010S_Logout\022\017\n\007success\030\001 \001(\010\"$\n\022C_MatchM"
     "akeRequest\022\016\n\006gameId\030\001 \001(\005\"#\n\021C_MatchMak"
-    "eCancel\022\016\n\006gameId\030\001 \001(\005\"&\n\024S_MatchMakeKe"
-    "epAlive\022\016\n\006gameId\030\001 \001(\005\"&\n\024C_MatchMakeKe"
-    "epAlive\022\016\n\006gameId\030\001 \001(\005\"!\n\017S_RedoMatchMa"
-    "ke\022\016\n\006gameId\030\001 \001(\005\"\025\n\023S_ExcludedFromMatc"
-    "h\"\"\n\020S_MatchCompleted\022\016\n\006gameId\030\001 \001(\005\"0\n"
-    "\032C_GameSceneLoadingProgress\022\022\n\npersentag"
-    "e\030\001 \001(\005*\210\003\n\005MsgId\022\r\n\tS_WELCOME\020\000\022\r\n\tC_WE"
-    "LCOME\020\001\022\026\n\022S_WELCOME_RESPONSE\020\002\022\017\n\013S_ENC"
-    "RYPTED\020\003\022\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_LOGIN\020\005\022\013"
-    "\n\007S_LOGIN\020\006\022\024\n\020C_CREATE_ACCOUNT\020\007\022\024\n\020S_C"
-    "REATE_ACCOUNT\020\010\022\014\n\010C_LOGOUT\020\t\022\014\n\010S_LOGOU"
-    "T\020\n\022\026\n\022C_MATCHMAKEREQUEST\020\013\022\025\n\021C_MATCHMA"
-    "KECANCEL\020\014\022\030\n\024S_MATCHMAKEKEEPALIVE\020\r\022\030\n\024"
-    "C_MATCHMAKEKEEPALIVE\020\016\022\023\n\017S_REDOMATCHMAK"
-    "E\020\017\022\027\n\023S_EXCLUDEDFROMMATCH\020\020\022\024\n\020S_MATCHC"
-    "OMPLETED\020\021\022\036\n\032C_GAMESCENELOADINGPROGRESS"
-    "\020\022B\033\252\002\030Google.Protobuf.Protocolb\006proto3"
+    "eCancel\022\016\n\006gameId\030\001 \001(\005\"<\n\024S_MatchMakeKe"
+    "epAlive\022\016\n\006gameId\030\001 \001(\005\022\024\n\014sentTimeTick\030"
+    "\002 \001(\003\"<\n\024C_MatchMakeKeepAlive\022\016\n\006gameId\030"
+    "\001 \001(\005\022\024\n\014sentTimeTick\030\002 \001(\003\"!\n\017S_RedoMat"
+    "chMake\022\016\n\006gameId\030\001 \001(\005\"\025\n\023S_ExcludedFrom"
+    "Match\"\"\n\020S_MatchCompleted\022\016\n\006gameId\030\001 \001("
+    "\005\"0\n\032C_GameSceneLoadingProgress\022\022\n\nperse"
+    "ntage\030\001 \001(\005*\210\003\n\005MsgId\022\r\n\tS_WELCOME\020\000\022\r\n\t"
+    "C_WELCOME\020\001\022\026\n\022S_WELCOME_RESPONSE\020\002\022\017\n\013S"
+    "_ENCRYPTED\020\003\022\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_LOGIN"
+    "\020\005\022\013\n\007S_LOGIN\020\006\022\024\n\020C_CREATE_ACCOUNT\020\007\022\024\n"
+    "\020S_CREATE_ACCOUNT\020\010\022\014\n\010C_LOGOUT\020\t\022\014\n\010S_L"
+    "OGOUT\020\n\022\026\n\022C_MATCHMAKEREQUEST\020\013\022\025\n\021C_MAT"
+    "CHMAKECANCEL\020\014\022\030\n\024S_MATCHMAKEKEEPALIVE\020\r"
+    "\022\030\n\024C_MATCHMAKEKEEPALIVE\020\016\022\023\n\017S_REDOMATC"
+    "HMAKE\020\017\022\027\n\023S_EXCLUDEDFROMMATCH\020\020\022\024\n\020S_MA"
+    "TCHCOMPLETED\020\021\022\036\n\032C_GAMESCENELOADINGPROG"
+    "RESS\020\022B\033\252\002\030Google.Protobuf.Protocolb\006pro"
+    "to3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_2eproto = {
     false,
     false,
-    1319,
+    1363,
     descriptor_table_protodef_S2C_5fProtocol_2eproto,
     "S2C_Protocol.proto",
     &descriptor_table_S2C_5fProtocol_2eproto_once,
@@ -4144,7 +4150,12 @@ inline PROTOBUF_NDEBUG_INLINE S_MatchMakeKeepAlive::Impl_::Impl_(
 
 inline void S_MatchMakeKeepAlive::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.gameid_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, senttimetick_),
+           0,
+           offsetof(Impl_, gameid_) -
+               offsetof(Impl_, senttimetick_) +
+               sizeof(Impl_::gameid_));
 }
 S_MatchMakeKeepAlive::~S_MatchMakeKeepAlive() {
   // @@protoc_insertion_point(destructor:S2C_Protocol.S_MatchMakeKeepAlive)
@@ -4193,15 +4204,15 @@ const ::google::protobuf::internal::ClassData* S_MatchMakeKeepAlive::GetClassDat
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_MatchMakeKeepAlive::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> S_MatchMakeKeepAlive::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -4211,6 +4222,9 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_MatchMakeKeepAlive::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_MatchMakeKeepAlive>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
+    // int64 sentTimeTick = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(S_MatchMakeKeepAlive, _impl_.senttimetick_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S_MatchMakeKeepAlive, _impl_.senttimetick_)}},
     // int32 gameId = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_MatchMakeKeepAlive, _impl_.gameid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_MatchMakeKeepAlive, _impl_.gameid_)}},
@@ -4220,6 +4234,9 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_MatchMakeKeepAlive::_table_ = {
     // int32 gameId = 1;
     {PROTOBUF_FIELD_OFFSET(S_MatchMakeKeepAlive, _impl_.gameid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int64 sentTimeTick = 2;
+    {PROTOBUF_FIELD_OFFSET(S_MatchMakeKeepAlive, _impl_.senttimetick_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
   }},
   // no aux_entries
   {{
@@ -4233,7 +4250,9 @@ PROTOBUF_NOINLINE void S_MatchMakeKeepAlive::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.gameid_ = 0;
+  ::memset(&_impl_.senttimetick_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.gameid_) -
+      reinterpret_cast<char*>(&_impl_.senttimetick_)) + sizeof(_impl_.gameid_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -4259,6 +4278,13 @@ PROTOBUF_NOINLINE void S_MatchMakeKeepAlive::Clear() {
                     stream, this_._internal_gameid(), target);
           }
 
+          // int64 sentTimeTick = 2;
+          if (this_._internal_senttimetick() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt64ToArrayWithField<2>(
+                    stream, this_._internal_senttimetick(), target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -4282,7 +4308,13 @@ PROTOBUF_NOINLINE void S_MatchMakeKeepAlive::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
+            // int64 sentTimeTick = 2;
+            if (this_._internal_senttimetick() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+                  this_._internal_senttimetick());
+            }
             // int32 gameId = 1;
             if (this_._internal_gameid() != 0) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
@@ -4301,6 +4333,9 @@ void S_MatchMakeKeepAlive::MergeImpl(::google::protobuf::MessageLite& to_msg, co
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_senttimetick() != 0) {
+    _this->_impl_.senttimetick_ = from._impl_.senttimetick_;
+  }
   if (from._internal_gameid() != 0) {
     _this->_impl_.gameid_ = from._impl_.gameid_;
   }
@@ -4318,7 +4353,12 @@ void S_MatchMakeKeepAlive::CopyFrom(const S_MatchMakeKeepAlive& from) {
 void S_MatchMakeKeepAlive::InternalSwap(S_MatchMakeKeepAlive* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.gameid_, other->_impl_.gameid_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_MatchMakeKeepAlive, _impl_.gameid_)
+      + sizeof(S_MatchMakeKeepAlive::_impl_.gameid_)
+      - PROTOBUF_FIELD_OFFSET(S_MatchMakeKeepAlive, _impl_.senttimetick_)>(
+          reinterpret_cast<char*>(&_impl_.senttimetick_),
+          reinterpret_cast<char*>(&other->_impl_.senttimetick_));
 }
 
 ::google::protobuf::Metadata S_MatchMakeKeepAlive::GetMetadata() const {
@@ -4351,7 +4391,12 @@ inline PROTOBUF_NDEBUG_INLINE C_MatchMakeKeepAlive::Impl_::Impl_(
 
 inline void C_MatchMakeKeepAlive::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.gameid_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, senttimetick_),
+           0,
+           offsetof(Impl_, gameid_) -
+               offsetof(Impl_, senttimetick_) +
+               sizeof(Impl_::gameid_));
 }
 C_MatchMakeKeepAlive::~C_MatchMakeKeepAlive() {
   // @@protoc_insertion_point(destructor:S2C_Protocol.C_MatchMakeKeepAlive)
@@ -4400,15 +4445,15 @@ const ::google::protobuf::internal::ClassData* C_MatchMakeKeepAlive::GetClassDat
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> C_MatchMakeKeepAlive::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> C_MatchMakeKeepAlive::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -4418,6 +4463,9 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> C_MatchMakeKeepAlive::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::C_MatchMakeKeepAlive>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
+    // int64 sentTimeTick = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(C_MatchMakeKeepAlive, _impl_.senttimetick_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(C_MatchMakeKeepAlive, _impl_.senttimetick_)}},
     // int32 gameId = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(C_MatchMakeKeepAlive, _impl_.gameid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(C_MatchMakeKeepAlive, _impl_.gameid_)}},
@@ -4427,6 +4475,9 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> C_MatchMakeKeepAlive::_table_ = {
     // int32 gameId = 1;
     {PROTOBUF_FIELD_OFFSET(C_MatchMakeKeepAlive, _impl_.gameid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int64 sentTimeTick = 2;
+    {PROTOBUF_FIELD_OFFSET(C_MatchMakeKeepAlive, _impl_.senttimetick_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
   }},
   // no aux_entries
   {{
@@ -4440,7 +4491,9 @@ PROTOBUF_NOINLINE void C_MatchMakeKeepAlive::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.gameid_ = 0;
+  ::memset(&_impl_.senttimetick_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.gameid_) -
+      reinterpret_cast<char*>(&_impl_.senttimetick_)) + sizeof(_impl_.gameid_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -4466,6 +4519,13 @@ PROTOBUF_NOINLINE void C_MatchMakeKeepAlive::Clear() {
                     stream, this_._internal_gameid(), target);
           }
 
+          // int64 sentTimeTick = 2;
+          if (this_._internal_senttimetick() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt64ToArrayWithField<2>(
+                    stream, this_._internal_senttimetick(), target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -4489,7 +4549,13 @@ PROTOBUF_NOINLINE void C_MatchMakeKeepAlive::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
+            // int64 sentTimeTick = 2;
+            if (this_._internal_senttimetick() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+                  this_._internal_senttimetick());
+            }
             // int32 gameId = 1;
             if (this_._internal_gameid() != 0) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
@@ -4508,6 +4574,9 @@ void C_MatchMakeKeepAlive::MergeImpl(::google::protobuf::MessageLite& to_msg, co
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_senttimetick() != 0) {
+    _this->_impl_.senttimetick_ = from._impl_.senttimetick_;
+  }
   if (from._internal_gameid() != 0) {
     _this->_impl_.gameid_ = from._impl_.gameid_;
   }
@@ -4525,7 +4594,12 @@ void C_MatchMakeKeepAlive::CopyFrom(const C_MatchMakeKeepAlive& from) {
 void C_MatchMakeKeepAlive::InternalSwap(C_MatchMakeKeepAlive* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.gameid_, other->_impl_.gameid_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(C_MatchMakeKeepAlive, _impl_.gameid_)
+      + sizeof(C_MatchMakeKeepAlive::_impl_.gameid_)
+      - PROTOBUF_FIELD_OFFSET(C_MatchMakeKeepAlive, _impl_.senttimetick_)>(
+          reinterpret_cast<char*>(&_impl_.senttimetick_),
+          reinterpret_cast<char*>(&other->_impl_.senttimetick_));
 }
 
 ::google::protobuf::Metadata C_MatchMakeKeepAlive::GetMetadata() const {

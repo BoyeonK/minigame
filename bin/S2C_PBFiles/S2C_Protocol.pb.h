@@ -926,8 +926,19 @@ class S_MatchMakeKeepAlive final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kSentTimeTickFieldNumber = 2,
     kGameIdFieldNumber = 1,
   };
+  // int64 sentTimeTick = 2;
+  void clear_senttimetick() ;
+  ::int64_t senttimetick() const;
+  void set_senttimetick(::int64_t value);
+
+  private:
+  ::int64_t _internal_senttimetick() const;
+  void _internal_set_senttimetick(::int64_t value);
+
+  public:
   // int32 gameId = 1;
   void clear_gameid() ;
   ::int32_t gameid() const;
@@ -943,7 +954,7 @@ class S_MatchMakeKeepAlive final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      1, 2, 0,
       0, 2>
       _table_;
 
@@ -961,6 +972,7 @@ class S_MatchMakeKeepAlive final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_MatchMakeKeepAlive& from_msg);
+    ::int64_t senttimetick_;
     ::int32_t gameid_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -2723,8 +2735,19 @@ class C_MatchMakeKeepAlive final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kSentTimeTickFieldNumber = 2,
     kGameIdFieldNumber = 1,
   };
+  // int64 sentTimeTick = 2;
+  void clear_senttimetick() ;
+  ::int64_t senttimetick() const;
+  void set_senttimetick(::int64_t value);
+
+  private:
+  ::int64_t _internal_senttimetick() const;
+  void _internal_set_senttimetick(::int64_t value);
+
+  public:
   // int32 gameId = 1;
   void clear_gameid() ;
   ::int32_t gameid() const;
@@ -2740,7 +2763,7 @@ class C_MatchMakeKeepAlive final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
+      1, 2, 0,
       0, 2>
       _table_;
 
@@ -2758,6 +2781,7 @@ class C_MatchMakeKeepAlive final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const C_MatchMakeKeepAlive& from_msg);
+    ::int64_t senttimetick_;
     ::int32_t gameid_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -5143,6 +5167,28 @@ inline void S_MatchMakeKeepAlive::_internal_set_gameid(::int32_t value) {
   _impl_.gameid_ = value;
 }
 
+// int64 sentTimeTick = 2;
+inline void S_MatchMakeKeepAlive::clear_senttimetick() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.senttimetick_ = ::int64_t{0};
+}
+inline ::int64_t S_MatchMakeKeepAlive::senttimetick() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_MatchMakeKeepAlive.sentTimeTick)
+  return _internal_senttimetick();
+}
+inline void S_MatchMakeKeepAlive::set_senttimetick(::int64_t value) {
+  _internal_set_senttimetick(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_MatchMakeKeepAlive.sentTimeTick)
+}
+inline ::int64_t S_MatchMakeKeepAlive::_internal_senttimetick() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.senttimetick_;
+}
+inline void S_MatchMakeKeepAlive::_internal_set_senttimetick(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.senttimetick_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // C_MatchMakeKeepAlive
@@ -5167,6 +5213,28 @@ inline ::int32_t C_MatchMakeKeepAlive::_internal_gameid() const {
 inline void C_MatchMakeKeepAlive::_internal_set_gameid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.gameid_ = value;
+}
+
+// int64 sentTimeTick = 2;
+inline void C_MatchMakeKeepAlive::clear_senttimetick() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.senttimetick_ = ::int64_t{0};
+}
+inline ::int64_t C_MatchMakeKeepAlive::senttimetick() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.C_MatchMakeKeepAlive.sentTimeTick)
+  return _internal_senttimetick();
+}
+inline void C_MatchMakeKeepAlive::set_senttimetick(::int64_t value) {
+  _internal_set_senttimetick(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.C_MatchMakeKeepAlive.sentTimeTick)
+}
+inline ::int64_t C_MatchMakeKeepAlive::_internal_senttimetick() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.senttimetick_;
+}
+inline void C_MatchMakeKeepAlive::_internal_set_senttimetick(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.senttimetick_ = value;
 }
 
 // -------------------------------------------------------------------
