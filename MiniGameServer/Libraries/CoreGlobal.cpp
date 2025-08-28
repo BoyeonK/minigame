@@ -56,7 +56,7 @@ void ThreadManager::Launch(function<void(void)> callback) {
 		InitTLS();
 		callback();
 		DestroyTLS();
-		}));
+	}));
 }
 
 void ThreadManager::Join() {

@@ -17,6 +17,8 @@ int main() {
 	GServerService->StartAccept();
 	
 	//Worker Thread 생성
+
+	//Timer Queue를 담당할 worker thread
 	GThreadManager->Launch([=]() {
 		while (true) {
 			ThreadManager::DoTimerQueueDistribution();
@@ -24,6 +26,7 @@ int main() {
 		}
 	});
 
+	//기타 잡무 담당 worker thread.
 	for (int i = 0; i < 5; i++) {
 		GThreadManager->Launch([=]() {
 			while (true) {
@@ -34,6 +37,16 @@ int main() {
 			}
 		});
 	}
+
+	GThreadManager->Launch([=]() {
+		while (true) {
+			for (int i = 1; i <= 1; i++) {
+				GGameManagers[i]->MatchMake();
+				GGameManagers[i]->RenewMatchQueue();
+				this_thread::sleep_for(20ms);
+			}
+		}
+	});
 
 	GThreadManager->Join();
 }

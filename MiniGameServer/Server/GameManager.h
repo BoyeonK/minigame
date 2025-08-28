@@ -9,9 +9,11 @@ public:
 	//TODO : psv안에 모든 친구들이 유효한 친구들인지 확인.
 	//유효하면 해당 vector로서 MakeRoom을 실행.
 	virtual void Push(WatingPlayerData&& pd) = 0;
+	virtual void RenewMatchQueue() = 0;
 	virtual void MatchMake() = 0;
 	virtual void MakeRoom(vector<WatingPlayerData>&& pdv) = 0;
 	virtual void Update() = 0;
+
 	void AddRoom(shared_ptr<GameRoom> room) {
 		unique_lock<shared_mutex> lock(_roomsLock);
 		_rooms.push_back(room);
@@ -29,6 +31,14 @@ public:
 	}
 
 	void Push(WatingPlayerData&& pd) override;
+
+	void RenewMatchQueue() {
+		if (::GetTickCount64() - _lastRenewTick > 3000) {
+			_lastRenewTick = ::GetTickCount64();
+			_matchQueue.FlushTempQueueAndSort();
+		}
+	}
+
 	void MatchMake() override {
 		vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
 		for (auto& pdv : pdvv) {
@@ -75,4 +85,5 @@ private:
 	MatchQueue _matchQueue;
     int32_t _quota = 4;
 	vector<bool> _excluded;
+	uint64_t _lastRenewTick = 0;
 };
