@@ -569,7 +569,7 @@ void DRenewElosCallData::Proceed() {
     }
 }
 
-void DRenewElosCallData::ReadElos(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, SQLINTEGER& elo1, SQLINTEGER& elo2, SQLINTEGER& elo3) {
+void DRenewElosCallData::ReadElosFromElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, SQLINTEGER& elo1, SQLINTEGER& elo2, SQLINTEGER& elo3) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         throw runtime_error("S2D_RenewElos : hStmt1 Alloc Failed");
