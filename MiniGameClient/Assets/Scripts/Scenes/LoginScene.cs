@@ -1,5 +1,6 @@
 using Google.Protobuf.Protocol;
 using System;
+using System.Threading;
 using UnityEngine;
 
 public class LoginScene : BaseScene {
@@ -26,7 +27,7 @@ public class LoginScene : BaseScene {
     private OptionSelecterController _optionSelecter;
 
     private int _matchMakeOpt = 0;
-    bool _isMatchMaking = false;
+    int _isMatchMaking = 0;
     
     //Scene이 바뀔 때, 이 친구가 대표로 나서서 모든 초기화 작업을 해 줄거임.
     protected override void Init() {
@@ -243,7 +244,6 @@ public class LoginScene : BaseScene {
     public void SelectStartGame() {
         GoToMatchMakeStage();
     }
-
     public void SelectLeaderboard() {
         Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다. ㅠㅠ");
     }
@@ -255,6 +255,22 @@ public class LoginScene : BaseScene {
     }
     public void SelectQuit() {
         QuitApplicationUI();
+    }
+
+    public void TryMatchMake(int gameId) {
+        //TryMatch 중복실행 체크
+        if (Interlocked.CompareExchange(ref _isMatchMaking, 1, 0) != 0)
+            return;
+
+        //중복실행이 아닌데 0이 아니다? 무언가 이상함. 초기화 시도.
+        int state = Managers.Network.GetSession().TrySetMatchMakeState(gameId);
+        if (state != 0) {
+            //서버에 등록된 매칭 취소 요청 및 state를 다시 0으로.
+            Managers.Network.GetSession().CancelMatchMake(state);
+            return;
+        }
+
+        
     }
 
     private void QuitApplicationUI() {

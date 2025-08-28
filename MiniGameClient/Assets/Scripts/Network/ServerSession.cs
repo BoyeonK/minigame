@@ -16,6 +16,19 @@ public class ServerSession : PacketSession {
         set => Interlocked.Exchange(ref _id, value);
     }
 
+	private int _matchMakeState = 0;
+
+	public int TrySetMatchMakeState(int gameId)	{
+		return Interlocked.CompareExchange(ref _matchMakeState, gameId, 0);
+	}
+
+	public void CancelMatchMake(int gameId) {
+        C_MatchMakeCancel pkt = new C_MatchMakeCancel();
+        pkt.GameId = gameId;
+        _matchMakeState = 0;
+        Send(pkt);
+    }
+
 	public void Send(IMessage packet) {
 		string msgName = packet.Descriptor.Name.Replace("_", string.Empty);
 		MsgId msgId = (MsgId)Enum.Parse(typeof(MsgId), msgName);

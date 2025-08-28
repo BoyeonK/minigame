@@ -67,7 +67,6 @@ public class NetworkManager {
 			//
 			_session = new ServerSession();
 			//
-			//
 
 			_isConnected = false;
 		}
@@ -77,9 +76,13 @@ public class NetworkManager {
 
 	}
 
-	#region Session의 통신 결과를 Client에게 널리 알릴 델리게이터
-	//FM대로하면, private로 선언하고 구독 및 구취하는 함수를 public으로 열어야 함.
-	public Action OnConnectedAct;
+    #region Packet을 만들어 전송
+
+    #endregion
+
+    #region Session의 통신 결과를 Client에게 널리 알릴 델리게이터
+    //FM대로하면, private로 선언하고 구독 및 구취하는 함수를 public으로 열어야 함.
+    public Action OnConnectedAct;
 	public Action OnConnectedFailedAct;
 	public Action OnLoginAct;
     public Action OnLogoutAct;
