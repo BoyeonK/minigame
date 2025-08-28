@@ -1,9 +1,8 @@
 using Google.Protobuf;
+using Google.Protobuf.Protocol;
 using ServerCore;
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
 
@@ -71,6 +70,39 @@ public class NetworkManager {
 			_isConnected = false;
 		}
 	}
+
+	public void TryLogin(string id, string password) {
+        if (id == "" || password == "") {
+            Managers.UI.ShowErrorUIOnlyConfirm("입력값이 잘못되었습니다.", () => { });
+            return;
+        }
+
+        if (IsConnected() && !(IsLogined())) {
+            Debug.Log("로그인 시도");
+            C_Encrypted pkt = PacketMaker.MakeCLogin(_session, id, password);
+            Send(pkt);
+        }
+    }
+
+	public void TryLogout() {
+        Debug.Log("로그아웃 시도");
+        C_Encrypted pkt = PacketMaker.MakeCLogout(Managers.Network.GetSession());
+        Managers.Network.Send(pkt);
+        Managers.Network.GetSession().ID = 0;
+    }
+
+	public void TryCreateAccount(string id, string pw, string pwc) {
+        if (id == "" || pw == "" || pwc == "" || pw != pwc) {
+            Managers.UI.ShowErrorUIOnlyConfirm("입력값이 잘못되었습니다.", () => { });
+            return;
+        }
+
+        if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
+            Debug.Log("계정생성 시도");
+            C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), id, pw);
+            Managers.Network.Send(pkt);
+        }
+    }
 
 	public void Update() {
 

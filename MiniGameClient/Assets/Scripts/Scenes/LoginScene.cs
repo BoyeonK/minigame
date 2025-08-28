@@ -294,7 +294,7 @@ public class LoginScene : BaseScene {
                 Managers.Network.TryDisconnect();
                 break;
             case Stage.Lobby:
-                Managers.UI.ShowErrorUIConfirmOrCancel("로그아웃 하시겠습니까?", LogOut);
+                Managers.UI.ShowErrorUIConfirmOrCancel("로그아웃 하시겠습니까?", Logout);
                 break;
             case Stage.MatchMake:
                 GoToLobbyStage();
@@ -304,14 +304,9 @@ public class LoginScene : BaseScene {
         }
     }
 
-  
-
-    public void LogOut() {
-        Debug.Log("로그아웃 시도");
-        C_Encrypted pkt = PacketMaker.MakeCLogout(Managers.Network.GetSession());
-        Managers.Network.Send(pkt);
+    public void Logout() {
         GoToLoginStage();
-        Managers.Network.GetSession().ID = 0;
+        Managers.Network.TryLogout();
     }
 
     public override void Clear() {

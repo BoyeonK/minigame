@@ -72,16 +72,7 @@ public class UI_CreateAccountPopup : UI_Popup {
         }
         else { return; }
 
-        if (id == "" || pw == "" || pwc == "" || pw != pwc) {
-            Managers.UI.ShowErrorUIOnlyConfirm("입력값이 잘못되었습니다.", () => { });
-            return;
-        }
-
-        if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
-            Debug.Log("계정생성 시도");
-            C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), id, pw);
-            Managers.Network.Send(pkt);
-        }
+        Managers.Network.TryCreateAccount(id, pw, pwc);
     }
 
     private void FocusToNxt() {

@@ -64,18 +64,10 @@ public class UI_LoginPopup : UI_Popup {
         }
         else { return; }
 
-        if (id == "" || password == "") {
-            Managers.UI.ShowErrorUIOnlyConfirm("입력값이 잘못되었습니다.", () => { });
-            return;
-        }
-
-        if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
-            Debug.Log("로그인 시도");
-            C_Encrypted pkt = PacketMaker.MakeCLogin(Managers.Network.GetSession(), id, password);
-            Managers.Network.Send(pkt);
-        }
+        Managers.Network.TryLogin(id, password);
     }
 
+    //Tab눌렀을때 패스워드 창으로 포커스 이동
     private void FocusToNxt() {
         GameObject current = EventSystem.current.currentSelectedGameObject;
         if (current == null) return;
