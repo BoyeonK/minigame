@@ -66,8 +66,27 @@ void PlayerSession::SetDbid(int32_t dbid) {
 	_dbid = dbid;
 }
 
+bool PlayerSession::TryChangeMatchingState(GameType& expected, GameType desired) {
+	return _matchingState.compare_exchange_strong(expected, desired);
+}
+
 void PlayerSession::SetElos(int32_t elo1, int32_t elo2, int32_t elo3) {
 	_elo1 = elo1;
 	_elo2 = elo2;
 	_elo3 = elo3;
 }
+
+int32_t PlayerSession::GetElo(const int32_t& idx) const {
+	switch (idx) {
+	case(1):
+		return _elo1;
+	case(2):
+		return _elo2;
+	case(3):
+		return _elo3;
+	default:
+		return 0;
+	}
+}
+
+

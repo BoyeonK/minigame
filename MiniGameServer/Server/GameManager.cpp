@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "GameManager.h"
 
-void PingPongManager::Push(shared_ptr<PlayerSession> playerSessionRef) {
-	WatingPlayerData pd;
+void PingPongManager::Push(WatingPlayerData&& pd) {
+	_matchQueue.Push(move(pd));
 }

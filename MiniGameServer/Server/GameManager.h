@@ -5,9 +5,10 @@
 #include "PlayerSession.h"
 
 class GameManager {
-protected:
+public:
 	//TODO : psv안에 모든 친구들이 유효한 친구들인지 확인.
 	//유효하면 해당 vector로서 MakeRoom을 실행.
+	virtual void Push(WatingPlayerData&& pd) = 0;
 	virtual void MatchMake() = 0;
 	virtual void MakeRoom(vector<WatingPlayerData>&& pdv) = 0;
 	virtual void Update() = 0;
@@ -16,6 +17,7 @@ protected:
 		_rooms.push_back(room);
 	}
 
+protected:
 	vector<shared_ptr<GameRoom>> _rooms;
 	shared_mutex _roomsLock;
 };
@@ -26,7 +28,7 @@ public:
 		_excluded = vector<bool>(_quota);
 	}
 
-	void Push(shared_ptr<PlayerSession> playerSessionRef);
+	void Push(WatingPlayerData&& pd) override;
 	void MatchMake() override {
 		vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
 		for (auto& pdv : pdvv) {

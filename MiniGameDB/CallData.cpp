@@ -542,7 +542,7 @@ void DRenewElosCallData::Proceed() {
             });
 
             SQLINTEGER elo1 = 0, elo2 = 0, elo3 = 0;
-            ReadElos(hDbc, hStmt1, dbid, elo1, elo2, elo3);
+            ReadElosFromElosTable(hDbc, hStmt1, dbid, elo1, elo2, elo3);
 
             if (elo1 != 0 || elo2 != 0 || elo3 != 0) {
                 _reply.set_elo1(elo1);

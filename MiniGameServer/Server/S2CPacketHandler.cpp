@@ -157,11 +157,56 @@ bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& p
 }
 
 bool Handle_C_MatchMakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeRequest& pkt) {
-	return false;
+	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
+
+	auto it = GGameManagers.find(pkt.gameid());
+	if (it == GGameManagers.end())
+		return false;
+
+	int32_t elo = playerSessionRef->GetElo(pkt.gameid());
+	if (elo == 0)
+		return false;
+
+	GameType expected = GameType::None;
+	GameType desired;
+	
+	switch (pkt.gameid()) {
+	case(1):
+		desired = GameType::PingPong;
+		break;
+	case(2):
+		desired = GameType::Danmaku;
+		break;
+	default:
+		return false;
+	}
+
+	WatingPlayerData pd;
+	if (!playerSessionRef->TryChangeMatchingState(expected, desired))
+		return false;
+	pd._elo = elo;
+	pd._playerSessionRef = playerSessionRef;
+	it->second->Push(move(pd));
+	return true;
 }
 
 bool Handle_C_MatchMakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeCancel& pkt) {
-	return false;
+	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
+
+	GameType expected;
+	GameType desired = GameType::None;
+
+	switch (pkt.gameid()) {
+	case(1):
+		expected = GameType::PingPong;
+		break;
+	case(2):
+		expected = GameType::Danmaku;
+		break;
+	default:
+		return false;
+	}
+	return playerSessionRef->TryChangeMatchingState(expected, desired);
 }
 
 bool Handle_C_MatchMakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeKeepAlive& pkt) {

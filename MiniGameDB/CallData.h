@@ -94,7 +94,7 @@ public:
     void ReturnToPool() override { objectPool<DRenewElosCallData>::dealloc(this); }
 
 private:
-    void ReadElos(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, SQLINTEGER& elo1, SQLINTEGER& elo2, SQLINTEGER& elo3);
+    void ReadElosFromElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, SQLINTEGER& elo1, SQLINTEGER& elo2, SQLINTEGER& elo3);
 
     S2D_Protocol::S2D_RenewElos _request;
     S2D_Protocol::D2S_RenewElos _reply;

@@ -16,8 +16,10 @@ public:
 	void SetSecureLevel(int32_t lv);
 	void SetDbid(int32_t dbid);
 	int32_t GetDbid() const { return _dbid; }
+	bool TryChangeMatchingState(GameType& expected, GameType desired);
 	GameType GetMatchingState() const { return _matchingState; }
 	void SetElos(int32_t elo1, int32_t elo2, int32_t elo3);
+	int32_t GetElo(const int32_t& idx) const;
 
 private:
 	EVP_PKEY* _RSAKey;

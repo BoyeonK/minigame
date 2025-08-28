@@ -9,7 +9,7 @@
 extern class CryptoManager* GCryptoManager;
 extern class DBClientImpl* DBManager;
 extern class shared_ptr<S2CServerServiceImpl> GServerService;
-extern vector<shared_ptr<GameManager>> GGameManagers;
+extern map<int32_t, shared_ptr<GameManager>> GGameManagers;
 
 class CryptoManager {
 public:
