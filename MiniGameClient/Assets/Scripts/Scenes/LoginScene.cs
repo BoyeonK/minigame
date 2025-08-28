@@ -1,4 +1,5 @@
 using Google.Protobuf.Protocol;
+using System;
 using UnityEngine;
 
 public class LoginScene : BaseScene {
@@ -17,10 +18,15 @@ public class LoginScene : BaseScene {
     UI_LoginPopup _uiLoginPopup;
     UI_CreateAccountPopup _uiCreateAccountPopup;
     UI_LobbyMenu _uiLobbyMenu;
+    UI_MatchMakeMenu _uiMatchMakeMenu;
+
     private int _loginOpt = 0;
 
     private int _lobbyOpt = 0;
     private OptionSelecterController _optionSelecter;
+
+    private int _matchMakeOpt = 0;
+    bool _isMatchMaking = false;
     
     //Scene이 바뀔 때, 이 친구가 대표로 나서서 모든 초기화 작업을 해 줄거임.
     protected override void Init() {
@@ -33,10 +39,12 @@ public class LoginScene : BaseScene {
         _uiLoginPopup = Managers.UI.ShowPopupUI<UI_LoginPopup>();
         _uiCreateAccountPopup = Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
         _uiLobbyMenu = Managers.UI.ShowSceneUI<UI_LobbyMenu>();
+        _uiMatchMakeMenu = Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
         Managers.UI.DisableUI("UI_LoginOrCreateAccount");
         Managers.UI.DisableUI("UI_LoginPopup");
         Managers.UI.DisableUI("UI_CreateAccountPopup");
         Managers.UI.DisableUI("UI_LobbyMenu");
+        Managers.UI.DisableUI("UI_MatchMakeMenu");
 
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {
@@ -48,6 +56,8 @@ public class LoginScene : BaseScene {
 
         Managers.Input.AddKeyListener(KeyCode.UpArrow, UpLobbyOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.UpArrow, UpMatchMakeOpt, InputManager.KeyState.Up);
+        Managers.Input.AddKeyListener(KeyCode.DownArrow, DownMatchMakeOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.UpArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.DownArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Input.AddKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Down);
@@ -121,6 +131,36 @@ public class LoginScene : BaseScene {
         }
     }
 
+    public void SetMatchMakeOpt(int opt) {
+        if (_matchMakeOpt == opt)
+            return;
+        _matchMakeOpt = opt;
+        if (_stage == Stage.MatchMake) {
+            _matchMakeOpt = opt;
+            ApplyMatchMakeOpt();
+        }
+    }
+
+    private void UpMatchMakeOpt() {
+        if (_stage == Stage.MatchMake) {
+            _matchMakeOpt = (_matchMakeOpt + 2) % 3;
+            ApplyMatchMakeOpt();
+        }
+    }
+
+    private void DownMatchMakeOpt() {
+        if (_stage == Stage.MatchMake) {
+            _matchMakeOpt = (_matchMakeOpt + 1) % 3;
+            ApplyMatchMakeOpt();
+        }
+    }
+
+    private void ApplyMatchMakeOpt() {
+        if (_stage == Stage.MatchMake) {
+            _uiMatchMakeMenu.SetSelectedOpt(_matchMakeOpt);
+        }
+    }
+
     private void ConnectToServerSucceed() {
         if (_stage == Stage.Connect) {
             Managers.ExecuteAtMainThread(GoToLoginStage);
@@ -158,12 +198,17 @@ public class LoginScene : BaseScene {
         Managers.UI.DisableUI("UI_CreateAccountPopup");
         Managers.UI.DisableUI("UI_LoginPopup");
         Managers.UI.DisableUI("UI_LoginOrCreateAccount");
+        Managers.UI.DisableUI("UI_MatchMakeMenu");
         
         Managers.UI.ShowSceneUI<UI_LobbyMenu>();
     }
 
     private void GoToMatchMakeStage() {
+        _matchMakeOpt = 0;
+        _stage = Stage.MatchMake;
+        Managers.UI.DisableUI("UI_LobbyMenu");
 
+        Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
     }
 
     private void ConnectToServerFailed() {
@@ -196,7 +241,7 @@ public class LoginScene : BaseScene {
     }
 
     public void SelectStartGame() {
-
+        GoToMatchMakeStage();
     }
 
     public void SelectLeaderboard() {
@@ -236,11 +281,14 @@ public class LoginScene : BaseScene {
                 Managers.UI.ShowErrorUIConfirmOrCancel("로그아웃 하시겠습니까?", LogOut);
                 break;
             case Stage.MatchMake:
+                GoToLobbyStage();
                 break;
             default:
                 break;
         }
     }
+
+  
 
     public void LogOut() {
         Debug.Log("로그아웃 시도");
@@ -253,6 +301,8 @@ public class LoginScene : BaseScene {
     public override void Clear() {
         Managers.Input.RemoveKeyListener(KeyCode.UpArrow, UpLobbyOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.UpArrow, UpMatchMakeOpt, InputManager.KeyState.Up);
+        Managers.Input.RemoveKeyListener(KeyCode.DownArrow, DownMatchMakeOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.UpArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, ChangeLoginOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Down);

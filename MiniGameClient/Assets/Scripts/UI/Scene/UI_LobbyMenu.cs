@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class UI_LobbyMenu : UI_Scene { 
     enum Texts {
