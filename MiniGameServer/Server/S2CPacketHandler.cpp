@@ -156,7 +156,7 @@ bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& p
 	return isSucceed;
 }
 
-bool Handle_C_MatchMakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeRequest& pkt) {
+bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeRequest& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
 
 	auto it = GGameManagers.find(pkt.gameid());
@@ -190,7 +190,7 @@ bool Handle_C_MatchMakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	return true;
 }
 
-bool Handle_C_MatchMakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeCancel& pkt) {
+bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeCancel& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
 
 	GameType expected;
@@ -209,7 +209,7 @@ bool Handle_C_MatchMakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_
 	return playerSessionRef->TryChangeMatchingState(expected, desired);
 }
 
-bool Handle_C_MatchMakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeKeepAlive& pkt) {
+bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeKeepAlive& pkt) {
 	return false;
 }
 

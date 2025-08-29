@@ -27,7 +27,7 @@ enum : uint16_t {
 	PKT_C_MATCHMAKEKEEPALIVE = 14,
 	PKT_S_REDOMATCHMAKE = 15,
 	PKT_S_EXCLUDEDFROMMATCH = 16,
-	PKT_S_MATCHCOMPLETED = 17,
+	PKT_S_MATCHMAKECOMPLETED = 17,
 	PKT_C_GAMESCENELOADINGPROGRESS = 18,
 };
 
@@ -37,9 +37,9 @@ bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 bool Handle_C_Login(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt);
 bool Handle_C_CreateAccount(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_CreateAccount& pkt);
 bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& pkt);
-bool Handle_C_MatchMakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeRequest& pkt);
-bool Handle_C_MatchMakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeCancel& pkt);
-bool Handle_C_MatchMakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchMakeKeepAlive& pkt);
+bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeRequest& pkt);
+bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeCancel& pkt);
+bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeKeepAlive& pkt);
 bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_GameSceneLoadingProgress& pkt);
 
 class S2CPacketHandler {
@@ -54,9 +54,9 @@ public:
 		GPacketHandler[PKT_C_LOGIN] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Login>(Handle_C_Login, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_CREATE_ACCOUNT] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_CreateAccount>(Handle_C_CreateAccount, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_LOGOUT] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Logout>(Handle_C_Logout, sessionRef, buffer, len); };
-		GPacketHandler[PKT_C_MATCHMAKEREQUEST] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchMakeRequest>(Handle_C_MatchMakeRequest, sessionRef, buffer, len); };
-		GPacketHandler[PKT_C_MATCHMAKECANCEL] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchMakeCancel>(Handle_C_MatchMakeCancel, sessionRef, buffer, len); };
-		GPacketHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchMakeKeepAlive>(Handle_C_MatchMakeKeepAlive, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_MATCHMAKEREQUEST] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchmakeRequest>(Handle_C_MatchmakeRequest, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_MATCHMAKECANCEL] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchmakeCancel>(Handle_C_MatchmakeCancel, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchmakeKeepAlive>(Handle_C_MatchmakeKeepAlive, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_GAMESCENELOADINGPROGRESS] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_GameSceneLoadingProgress>(Handle_C_GameSceneLoadingProgress, sessionRef, buffer, len); };
 
 		//C_Encrypted를 복호화하여 얻은 바이너리를 알맞은 protobuf타입으로 캐스팅하고, 알맞은 핸들러 함수를 호출.
@@ -65,9 +65,9 @@ public:
 		PlaintextHandler[PKT_C_LOGIN] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Login>(Handle_C_Login, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_CREATE_ACCOUNT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_CreateAccount>(Handle_C_CreateAccount, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_LOGOUT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Logout>(Handle_C_Logout, sessionRef, plaintext); };
-		PlaintextHandler[PKT_C_MATCHMAKEREQUEST] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchMakeRequest>(Handle_C_MatchMakeRequest, sessionRef, plaintext); };
-		PlaintextHandler[PKT_C_MATCHMAKECANCEL] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchMakeCancel>(Handle_C_MatchMakeCancel, sessionRef, plaintext); };
-		PlaintextHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchMakeKeepAlive>(Handle_C_MatchMakeKeepAlive, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_MATCHMAKEREQUEST] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchmakeRequest>(Handle_C_MatchmakeRequest, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_MATCHMAKECANCEL] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchmakeCancel>(Handle_C_MatchmakeCancel, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchmakeKeepAlive>(Handle_C_MatchmakeKeepAlive, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_GAMESCENELOADINGPROGRESS] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_GameSceneLoadingProgress>(Handle_C_GameSceneLoadingProgress, sessionRef, plaintext); };
 	}
 
@@ -88,20 +88,20 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Login& pkt) { return MakeSendBufferRef(pkt, PKT_S_LOGIN); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_CreateAccount& pkt) { return MakeSendBufferRef(pkt, PKT_S_CREATE_ACCOUNT); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Logout& pkt) { return MakeSendBufferRef(pkt, PKT_S_LOGOUT); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchMakeKeepAlive& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKEKEEPALIVE); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_RedoMatchMake& pkt) { return MakeSendBufferRef(pkt, PKT_S_REDOMATCHMAKE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeKeepAlive& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKEKEEPALIVE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_RedoMatchmake& pkt) { return MakeSendBufferRef(pkt, PKT_S_REDOMATCHMAKE); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchCompleted& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHCOMPLETED); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeCompleted& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKECOMPLETED); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME_RESPONSE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Login& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_LOGIN, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_CreateAccount& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_CREATE_ACCOUNT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Logout& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_LOGOUT, AESKey); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchMakeKeepAlive& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKEKEEPALIVE, AESKey); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_RedoMatchMake& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_REDOMATCHMAKE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeKeepAlive& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKEKEEPALIVE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_RedoMatchmake& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_REDOMATCHMAKE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH, AESKey); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchCompleted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHCOMPLETED, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeCompleted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKECOMPLETED, AESKey); }
 
 private:
 	template<typename PBType, typename HandlerFunc>

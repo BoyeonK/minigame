@@ -15,14 +15,14 @@ enum MsgId {
     S_CREATE_ACCOUNT = 8;
     C_LOGOUT = 9;
     S_LOGOUT = 10;
-    C_MATCHMAKEREQUEST = 11;
-    C_MATCHMAKECANCEL = 12;
-    S_MATCHMAKEKEEPALIVE = 13;
-    C_MATCHMAKEKEEPALIVE = 14;
-    S_REDOMATCHMAKE = 15;
-    S_EXCLUDEDFROMMATCH = 16;
-    S_MATCHCOMPLETED = 17;
-    C_GAMESCENELOADINGPROGRESS = 18;
+    C_MATCHMAKE_REQUEST = 11;
+    C_MATCHMAKE_CANCEL = 12;
+    S_MATCHMAKE_KEEPALIVE = 13;
+    C_MATCHMAKE_KEEPALIVE = 14;
+    S_REDO_MATCHMAKE = 15;
+    S_EXCLUDED_FROM_MATCH = 16;
+    S_MATCHMAKE_COMPLETED = 17;
+    C_GAME_SCENE_LOADING_PROGRESS = 18;
 }
 
 //최초에 TCP방식의 Connect가 성공하면 해당 session의 보안레벨은 '보안레벨 0'이다.
@@ -143,29 +143,29 @@ message S_Logout {
             //C_MatchMakeCancel에 대한 패킷핸들러 함수가 동작했거나, (플레이어의 매칭 취소 요청)
 
 //클라이언트의 매칭 요청
-message C_MatchMakeRequest {
+message C_MatchmakeRequest {
     int32 gameId = 1;
 }
 
 //클라이언트의 매칭 취소 요청
-message C_MatchMakeCancel {
+message C_MatchmakeCancel {
     int32 gameId = 1;
 }
 
 //올바른 조합을 찾았을 때, Session의 유효성 검사용
-message S_MatchMakeKeepAlive {
+message S_MatchmakeKeepAlive {
     int32 gameId = 1;
     int64 sentTimeTick = 2;
 }
 
 //유효성 검사에 대한 응답.
-message C_MatchMakeKeepAlive {
+message C_MatchmakeKeepAlive {
     int32 gameId = 1;
     int64 sentTimeTick = 2;
 }
 
 //매칭 실패로 인한 매칭 재개 통보.
-message S_RedoMatchMake {
+message S_RedoMatchmake {
     int32 gameId = 1;
 }
 
@@ -175,7 +175,7 @@ message S_ExcludedFromMatch {
 }
 
 //매칭성공. 해당 게임을 준비하기위해 Scene변경을 유도.
-message S_MatchCompleted {
+message S_MatchmakeCompleted {
     int32 gameId = 1;
 }
 
