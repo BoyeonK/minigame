@@ -20,6 +20,7 @@ bool Handle_C_Encrypted(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 	const string& ciphertext_str = pkt.ciphertext();
 	const string& tag_str = pkt.tag();
 	int32_t msgId = pkt.msgid();
+
 	vector<unsigned char> aesKey = playerSessionRef->GetAESKey();
 
 	vector<unsigned char> aad(sizeof(msgId));
@@ -187,6 +188,9 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	pd._elo = elo;
 	pd._playerSessionRef = playerSessionRef;
 	it->second->Push(move(pd));
+#ifdef _DEBUG
+	cout << "임시 대기열에 진입." << endl;
+#endif 
 	return true;
 }
 

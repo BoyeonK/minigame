@@ -114,11 +114,16 @@ public class NetworkManager {
             CancelMatchMake(state);
             return;
         }
+
+		C_Encrypted pkt = PacketMaker.MakeCMatchMakeRequest(_session, gameId);
+		Send(pkt);
     }
 
     public void CancelMatchMake(int gameId) {
-		C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_session, gameId);
-		_matchMakeState = 0;
+        int state = Interlocked.CompareExchange(ref _matchMakeState, 0, gameId);
+        if (state != gameId)
+            return;
+        C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_session, gameId);
         Send(pkt);
     }
 

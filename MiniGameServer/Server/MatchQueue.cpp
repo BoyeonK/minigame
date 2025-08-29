@@ -17,6 +17,10 @@ void MatchQueue::FlushTempQueueAndSort() {
         return;
     }
 
+#ifdef _DEBUG
+    cout << "찐 대기열에 무언가 진입" << endl;
+#endif
+
     {
         lock_guard<mutex> lock(_SQlock);
         _searchQueue.insert(

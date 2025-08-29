@@ -108,17 +108,17 @@ class PacketMaker {
         return pkt;
     }
 
-    private static C_MatchmakeRequest MakeCMatchMakeRequestInternal(ServerSession session, int gameId) {
+    private static C_MatchmakeRequest MakeCMatchMakeRequestInternal(PacketSession session, int gameId) {
         return new C_MatchmakeRequest { GameId = gameId };
     }
 
-    public static C_Encrypted MakeCMatchMakeRequest(ServerSession session, int gameId) {
+    public static C_Encrypted MakeCMatchMakeRequest(PacketSession session, int gameId) {
         C_MatchmakeRequest rawPkt = MakeCMatchMakeRequestInternal(session, gameId);
         C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CMatchmakeRequest);
-        return new C_Encrypted();
+        return pkt;
     }
 
-    public static C_MatchmakeCancel MakeCMatchMakeCancel(ServerSession session, int gameId) { 
+    public static C_MatchmakeCancel MakeCMatchMakeCancel(PacketSession session, int gameId) { 
         return new C_MatchmakeCancel { GameId = gameId };
     }
 }
