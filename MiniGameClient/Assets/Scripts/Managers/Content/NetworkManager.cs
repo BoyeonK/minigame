@@ -13,8 +13,9 @@ public class NetworkManager {
 	//통신에 사용할 연결 상태는 Session에서 따로 관리할 예정. (편의성 측면에서의 반정규화 느낌으루다가)
 	//이게 단순 bool값이 아니라 어떤 객체였다면 메모리에 할당한 이후, 그 포인터를 양쪽에서 사용하는 느낌으루다가 만들었을 것.
 	private bool _isConnected = false;
+    private int _matchMakeState = 0;
 
-	public void Init() { }
+    public void Init() { }
 
 	public ServerSession GetSession() {
 		return _session;
@@ -35,6 +36,7 @@ public class NetworkManager {
 	}
 
 	public void TryConnectToServer() {
+		//이미 연결되있지도 않으면서, 현재 연결 함수가 작동중이 아닌 경우.
 		if (_isConnected == true || Interlocked.CompareExchange(ref _isTryingConnect, 1, 0) != 0) {
 			return;
 		}
@@ -86,7 +88,7 @@ public class NetworkManager {
 
 	public void TryLogout() {
         Debug.Log("로그아웃 시도");
-        C_Encrypted pkt = PacketMaker.MakeCLogout(Managers.Network.GetSession());
+        C_Encrypted pkt = PacketMaker.MakeCLogout(_session);
         Managers.Network.Send(pkt);
         Managers.Network.GetSession().ID = 0;
     }
@@ -99,12 +101,28 @@ public class NetworkManager {
 
         if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
             Debug.Log("계정생성 시도");
-            C_Encrypted pkt = PacketMaker.MakeCCreateAccount(Managers.Network.GetSession(), id, pw);
+            C_Encrypted pkt = PacketMaker.MakeCCreateAccount(_session, id, pw);
             Managers.Network.Send(pkt);
         }
     }
 
-	public void Update() {
+	public void TryMatchMake(int gameId) {
+		//중복실행이 아닌데 0이 아니다? 무언가 이상함. 초기화 시도.
+		int state = Interlocked.CompareExchange(ref _matchMakeState, gameId, 0);
+        if (state != 0) {
+            //서버에 등록된 매칭 취소 요청 및 state를 다시 0으로.
+            CancelMatchMake(state);
+            return;
+        }
+    }
+
+    public void CancelMatchMake(int gameId) {
+		C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_session, gameId);
+		_matchMakeState = 0;
+        Send(pkt);
+    }
+
+    public void Update() {
 
 	}
 

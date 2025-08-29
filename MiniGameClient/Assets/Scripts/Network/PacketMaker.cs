@@ -32,11 +32,6 @@ class PacketMaker {
 
         //무결성 검사를 위해 pktId를 추가 인증 데이터로 사용.
         byte[] aad = BitConverter.GetBytes(pktId);
-        /*
-        if (!BitConverter.IsLittleEndian) {
-            Array.Reverse(aad);
-        }
-        */
 
         //BouncyCastle 라이브러리 사용을 위한 객체 초기화
         GcmBlockCipher gcmCipher = new GcmBlockCipher(new AesEngine());
@@ -111,5 +106,19 @@ class PacketMaker {
         C_Logout rawPkt = MakeCLogoutInternal(session);
         C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CLogout);
         return pkt;
+    }
+
+    private static C_MatchmakeRequest MakeCMatchMakeRequestInternal(ServerSession session, int gameId) {
+        return new C_MatchmakeRequest { GameId = gameId };
+    }
+
+    public static C_Encrypted MakeCMatchMakeRequest(ServerSession session, int gameId) {
+        C_MatchmakeRequest rawPkt = MakeCMatchMakeRequestInternal(session, gameId);
+        C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CMatchmakeRequest);
+        return new C_Encrypted();
+    }
+
+    public static C_MatchmakeCancel MakeCMatchMakeCancel(ServerSession session, int gameId) { 
+        return new C_MatchmakeCancel { GameId = gameId };
     }
 }

@@ -214,7 +214,6 @@ public class LoginScene : BaseScene {
 
     private void ConnectToServerFailed() {
         Managers.ExecuteAtMainThread(() => {
-            //Managers.UI.ShowErrorUI("서버와의 연결에 실패했습니다.", false);
             Managers.UI.ShowErrorUIOnlyConfirm("서버와의 연결에 실패했습니다.");
         });
     }
@@ -257,19 +256,10 @@ public class LoginScene : BaseScene {
         QuitApplicationUI();
     }
 
-    public void TryMatchMake(int gameId) {
+    public void MatchMake(int gameId) {
         //TryMatch 중복실행 체크
         if (Interlocked.CompareExchange(ref _isMatchMaking, 1, 0) != 0)
             return;
-
-        //중복실행이 아닌데 0이 아니다? 무언가 이상함. 초기화 시도.
-        int state = Managers.Network.GetSession().TrySetMatchMakeState(gameId);
-        if (state != 0) {
-            //서버에 등록된 매칭 취소 요청 및 state를 다시 0으로.
-            Managers.Network.GetSession().CancelMatchMake(state);
-            return;
-        }
-
         
     }
 
