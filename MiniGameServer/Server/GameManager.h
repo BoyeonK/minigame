@@ -47,14 +47,17 @@ public:
 			fill(_excluded.begin(), _excluded.end(), false);
 			for (int i = 0; i < _quota; i++) {
 				shared_ptr<PlayerSession> playerSessionRef = pdv[i]._playerSessionRef.lock();
-				if (playerSessionRef == nullptr || playerSessionRef->GetMatchingState() != GameType::PingPong) {
+				if (playerSessionRef == nullptr) {
 					isReady = false;
 					_excluded[i] = true;
-
-					//S2DPacketMaker
-					//playerSessionRef->Send()
-					//TODO : 해당 playerSession에 대해 대기열에서 제외
-						//필요하다면, 제외된 사실을 Client에 통보.
+				}
+				else if (playerSessionRef->GetMatchingState() != GameType::PingPong) {
+					isReady = false;
+					_excluded[i] = true;
+					S2C_Protocol::S_ExcludedFromMatch pkt = S2CPacketMaker::MakeSExcludedFromMatch(false);
+					shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
+					playerSessionRef->Send(sendBufferRef);
+					playerSessionRef->SetMatchingState(GameType::None);
 				}
 			}
 

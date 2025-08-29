@@ -16,6 +16,7 @@ public:
 	void SetSecureLevel(int32_t lv);
 	void SetDbid(int32_t dbid);
 	int32_t GetDbid() const { return _dbid; }
+	void SetMatchingState(const GameType& value);
 	bool TryChangeMatchingState(GameType& expected, GameType desired);
 	GameType GetMatchingState() const { return _matchingState; }
 	void SetElos(int32_t elo1, int32_t elo2, int32_t elo3);

@@ -66,6 +66,10 @@ void PlayerSession::SetDbid(int32_t dbid) {
 	_dbid = dbid;
 }
 
+void PlayerSession::SetMatchingState(const GameType& value) {
+	_matchingState = value;
+}
+
 bool PlayerSession::TryChangeMatchingState(GameType& expected, GameType desired) {
 	return _matchingState.compare_exchange_strong(expected, desired);
 }

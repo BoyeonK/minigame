@@ -210,7 +210,21 @@ bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_
 	default:
 		return false;
 	}
-	return playerSessionRef->TryChangeMatchingState(expected, desired);
+
+	//현재 gameId의 매칭을 취소 시도.
+	bool isSucceed = playerSessionRef->TryChangeMatchingState(expected, desired);
+
+	//클라이언트가 진행중인 매칭이 gameId의 매칭이 아닌 경우 (정상적인 상황이 아님)
+	if (!isSucceed) {
+		//모든 대기열에서 벗어난 상황임을 통보하고, 대기열 상태를 None으로 바꿈.
+		//클라이언트로 하여금 정상 상태로 돌아갈 수 있도록 노력
+		S2C_Protocol::S_ExcludedFromMatch pkt = S2CPacketMaker::MakeSExcludedFromMatch(false);
+		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
+		playerSessionRef->Send(sendBufferRef);
+		playerSessionRef->SetMatchingState(GameType::None);
+	}
+
+	return true;
 }
 
 bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeKeepAlive& pkt) {
