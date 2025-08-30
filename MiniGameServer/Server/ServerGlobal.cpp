@@ -325,6 +325,6 @@ void PingPongManager::MatchMake() {
 }
 
 void PingPongManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
-	shared_ptr<PingPongGameRoom> newRoom = { objectPool<PingPongGameRoom>::alloc(), objectPool<PingPongGameRoom>::dealloc };
-	newRoom->DoAsyncAfter(&PingPongGameRoom::Init, pdv);
+	PingPongGameRoom* pNewRoom = objectPool<PingPongGameRoom>::alloc();
+	pNewRoom->DoAsyncAfter(&PingPongGameRoom::Init, pdv);
 }

@@ -24,38 +24,10 @@ class PingPongGameRoom : public GameRoom {
 	};
 
 public:
-	void Init(vector<WatingPlayerData> pdv) override {
-		//각 Session에 KeepAlive패킷을 BroadCast.
-		//1초 후, (Ping이 1초가 넘는것은, 이상하다.) 모든 패킷으로부터 응답을 받았다면 시작
-		//모든 Session으로부터 응답을 받지 못했다면 
-			//응답한 Session은 다시 대기열로...
-			//응답하지 않은 Session의 매치를 취소 or 연결을 종료.
-		bool ready = true;
-		vector<WatingPlayerData> rematchPd;
-		
-		for (auto& pd : pdv) {
-			shared_ptr<PlayerSession> playerSessionRef = pd._playerSessionRef.lock();
-
-			if (playerSessionRef == nullptr) {
-				ready = false;
-				continue;
-			}
-			/*
-			S2C_Protocol::S_MatchmakeKeepAlive pkt = S2CPacketMaker::MakeSMatchmakeKeepAlive(1);
-			shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-			playerSessionRef->Send(sendBuffer);
-			rematchPd.push_back(pd);
-			*/
-		}
-
-		if (ready) {
-
-		}
-	}
-
-	void Update() override {
-		
-	}
+	void Init(vector<WatingPlayerData> pdv) override;
+	void Init2(vector<WatingPlayerData> pdv);
+	void ReturnToPool();
+	void Update() override { }
 
 private:
 	int32_t _quota = 4;

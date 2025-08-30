@@ -33,7 +33,7 @@ public:
 	}
 
 	template<typename T, typename Ret, typename... Args>
-	void DoTimerAsync(Ret(T::* memFunc)(Args...), Args... args, uint64_t tickAfter) {
+	void DoTimerAsync(uint64_t tickAfter, Ret(T::* memFunc)(Args...), Args... args) {
 		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
 		shared_ptr<Job> job = { objectPool<Job>::alloc(ownerWRef, memFunc, std::forward<Args>(args)...), objectPool<Job>::dealloc };
 		GJobTimer->Reserve(tickAfter, shared_from_this(), job);
