@@ -1,6 +1,6 @@
 #pragma once
-#include "ServerGlobal.h"
 #include "S2C_Protocol.pb.h"
+#include "ServerGlobal.h"
 
 class S2CPacketMaker {
 public:

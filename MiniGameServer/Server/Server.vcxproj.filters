@@ -16,6 +16,12 @@
     <Filter Include="S2C\Network">
       <UniqueIdentifier>{3d3d1e7e-7167-4c73-828f-668a734623fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="S2C\Network\Protocol">
+      <UniqueIdentifier>{406d5227-45de-4d82-aa42-1cc5d2872c73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="S2D\Protocol">
+      <UniqueIdentifier>{d0918d57-57ca-4d3f-b6af-fd929ea7f151}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -30,34 +36,10 @@
     <ClInclude Include="gRPC_test.h">
       <Filter>S2D</Filter>
     </ClInclude>
-    <ClInclude Include="S2D_Protocol.grpc.pb.h">
-      <Filter>S2D</Filter>
-    </ClInclude>
-    <ClInclude Include="S2D_Protocol.pb.h">
-      <Filter>S2D</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerSession.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
-    <ClInclude Include="S2C_Protocol.pb.h">
-      <Filter>S2C\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="S2CPacketHandler.h">
-      <Filter>S2C\Network</Filter>
-    </ClInclude>
     <ClInclude Include="DBClientImpl.h">
-      <Filter>S2D</Filter>
-    </ClInclude>
-    <ClInclude Include="S2CServerServiceImpl.h">
-      <Filter>S2C\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="S2D_CallData.h">
-      <Filter>S2D</Filter>
-    </ClInclude>
-    <ClInclude Include="S2CPacketMaker.h">
-      <Filter>S2C\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="S2DPacketMaker.h">
       <Filter>S2D</Filter>
     </ClInclude>
     <ClInclude Include="GameRoom.h">
@@ -66,11 +48,38 @@
     <ClInclude Include="MatchQueue.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>S2C\Network</Filter>
-    </ClInclude>
     <ClInclude Include="GameType.h">
       <Filter>S2C\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="S2CServerServiceImpl.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2CPacketMaker.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2CPacketHandler.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2C_Protocol.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2DPacketMaker.h">
+      <Filter>S2D\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2D_Protocol.pb.h">
+      <Filter>S2D\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2D_Protocol.grpc.pb.h">
+      <Filter>S2D\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2D_CallData.h">
+      <Filter>S2D\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="WatingPlayerData.h">
+      <Filter>S2C\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Deviset.h">
+      <Filter>S2C\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -89,34 +98,10 @@
     <ClCompile Include="gRPC_test.cpp">
       <Filter>S2D</Filter>
     </ClCompile>
-    <ClCompile Include="S2D_Protocol.grpc.pb.cc">
-      <Filter>S2D</Filter>
-    </ClCompile>
-    <ClCompile Include="S2D_Protocol.pb.cc">
-      <Filter>S2D</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerSession.cpp">
       <Filter>S2C\Network</Filter>
     </ClCompile>
-    <ClCompile Include="S2C_Protocol.pb.cc">
-      <Filter>S2C\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="S2CPacketHandler.cpp">
-      <Filter>S2C\Network</Filter>
-    </ClCompile>
     <ClCompile Include="DBClientImpl.cpp">
-      <Filter>S2D</Filter>
-    </ClCompile>
-    <ClCompile Include="S2CServerServiceImpl.cpp">
-      <Filter>S2C\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="S2D_CallData.cpp">
-      <Filter>S2D</Filter>
-    </ClCompile>
-    <ClCompile Include="S2CPacketMaker.cpp">
-      <Filter>S2C\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="S2DPacketMaker.cpp">
       <Filter>S2D</Filter>
     </ClCompile>
     <ClCompile Include="GameRoom.cpp">
@@ -125,11 +110,38 @@
     <ClCompile Include="MatchQueue.cpp">
       <Filter>S2C\Network</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>S2C\Network</Filter>
-    </ClCompile>
     <ClCompile Include="GameType.cpp">
       <Filter>S2C\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="S2CServerServiceImpl.cpp">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2CPacketMaker.cpp">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2CPacketHandler.cpp">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2DPacketMaker.cpp">
+      <Filter>S2D\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2D_Protocol.pb.cc">
+      <Filter>S2D\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2D_Protocol.grpc.pb.cc">
+      <Filter>S2D\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2D_CallData.cpp">
+      <Filter>S2D\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="WatingPlayerData.cpp">
+      <Filter>S2C\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Deviset.cpp">
+      <Filter>S2C\Network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

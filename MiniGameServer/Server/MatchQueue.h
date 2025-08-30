@@ -1,29 +1,8 @@
 #pragma once
-#include "PlayerSession.h"
+#include "WatingPlayerData.h"
+#include "Deviset.h"
 
-struct WatingPlayerData {
-	int32_t _elo;
-	weak_ptr<PlayerSession> _playerSessionRef;
-	uint64_t queuedTick = ::GetTickCount64();
-
-	bool IsValidPlayer() const {
-		shared_ptr<PlayerSession> playerSessionRef = _playerSessionRef.lock();
-		if (playerSessionRef == nullptr || playerSessionRef->GetMatchingState() != GameType::None)
-			return false;
-		return true;
-	}
-};
-
-struct Deviset {
-	Deviset(double devi, int32_t idx) : _devi(devi), _idx(idx) {}
-
-	double _devi;
-	int32_t _idx;
-
-	bool operator < (const Deviset& other) const {
-		return this->_devi > other._devi;
-	}
-};
+class PlayerSession;
 
 class MatchQueue {
 public:

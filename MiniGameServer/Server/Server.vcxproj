@@ -161,7 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Deviset.h" />
     <ClInclude Include="GameRoom.h" />
     <ClInclude Include="GameType.h" />
     <ClInclude Include="MatchQueue.h" />
@@ -179,9 +179,10 @@
     <ClInclude Include="PlayerSession.h" />
     <ClInclude Include="S2CPacketMaker.h" />
     <ClInclude Include="S2CServerServiceImpl.h" />
+    <ClInclude Include="WatingPlayerData.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Deviset.cpp" />
     <ClCompile Include="GameRoom.cpp" />
     <ClCompile Include="GameType.cpp" />
     <ClCompile Include="MatchQueue.cpp" />
@@ -212,6 +213,7 @@
     <ClCompile Include="PlayerSession.cpp" />
     <ClCompile Include="S2CPacketMaker.cpp" />
     <ClCompile Include="S2CServerServiceImpl.cpp" />
+    <ClCompile Include="WatingPlayerData.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

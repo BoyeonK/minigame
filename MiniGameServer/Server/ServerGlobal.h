@@ -1,15 +1,14 @@
 #pragma once
-#include <mutex>
 #include <unordered_map>
 #include <cstring>
 #include "DBClientImpl.h"
 #include "S2CServerServiceImpl.h"
-#include "GameManager.h"
+#include "GameRoom.h"
+#include "WatingPlayerData.h"
 
 extern class CryptoManager* GCryptoManager;
 extern class DBClientImpl* DBManager;
 extern class shared_ptr<S2CServerServiceImpl> GServerService;
-extern map<int32_t, shared_ptr<GameManager>> GGameManagers;
 
 class CryptoManager {
 public:
@@ -40,3 +39,48 @@ private:
 	atomic<uint32_t> _inPool;
 	atomic<uint32_t> _outPool;
 };
+
+class GameManager {
+public:
+	//TODO : psv안에 모든 친구들이 유효한 친구들인지 확인.
+	//유효하면 해당 vector로서 MakeRoom을 실행.
+	virtual void Push(WatingPlayerData&& pd) = 0;
+	virtual void RenewMatchQueue() = 0;
+	virtual void MatchMake() = 0;
+	virtual void MakeRoom(vector<WatingPlayerData>&& pdv) = 0;
+	virtual void Update() = 0;
+
+	void AddRoom(shared_ptr<GameRoom> room) {
+		unique_lock<shared_mutex> lock(_roomsLock);
+		_rooms.push_back(room);
+	}
+
+protected:
+	vector<shared_ptr<GameRoom>> _rooms;
+	shared_mutex _roomsLock;
+};
+
+class PingPongManager : public GameManager {
+public:
+	PingPongManager() {
+		_excluded = vector<bool>(_quota);
+	}
+
+	void Push(WatingPlayerData&& pd) override;
+	void RenewMatchQueue();
+	void MatchMake() override;
+	void MakeRoom(vector<WatingPlayerData>&& pdv) override;
+
+	void Update() override {}
+
+	void StartGame() {}
+
+private:
+	GameType _ty = GameType::PingPong;
+	MatchQueue _matchQueue;
+	int32_t _quota = 4;
+	vector<bool> _excluded;
+	uint64_t _lastRenewTick = 0;
+};
+
+extern map<int32_t, shared_ptr<GameManager>> GGameManagers;

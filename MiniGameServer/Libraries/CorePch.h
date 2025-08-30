@@ -6,6 +6,8 @@
 #include <cstdint>
 #include <string>
 #include <atomic>
+#include <mutex>
+#include <shared_mutex>
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
