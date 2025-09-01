@@ -281,12 +281,12 @@ bool CryptoManager::Encrypt(
 	return true;
 }
 
-void TestMatchManager::Push(WatingPlayerData&& pd) {
+void TestMatchManager::Push(WatingPlayerData pd) {
 	_matchQueue.Push(move(pd));
 }
 
-void TestMatchManager::Push(const vector<WatingPlayerData>& pdv) {
-	_matchQueue.Push(pdv);
+void TestMatchManager::Push(vector<WatingPlayerData> pdv) {
+	_matchQueue.Push(move(pdv));
 }
 
 void TestMatchManager::RenewMatchQueue() {
@@ -303,7 +303,7 @@ void TestMatchManager::MatchMake() {
 		bool isReady = true;
 		fill(_excluded.begin(), _excluded.end(), false);
 		for (int i = 0; i < _quota; i++) {
-			shared_ptr<PlayerSession> playerSessionRef = pdv[i]._playerSessionRef.lock();
+			shared_ptr<PlayerSession> playerSessionRef = pdv[i].playerSessionWRef.lock();
 			if (playerSessionRef == nullptr) {
 				isReady = false;
 				_excluded[i] = true;
@@ -337,12 +337,12 @@ void TestMatchManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	newRoomRef->DoAsyncAfter(&TestMatchGameRoom::Init, move(pdv));
 }
 
-void PingPongManager::Push(WatingPlayerData&& pd) {
+void PingPongManager::Push(WatingPlayerData pd) {
 	_matchQueue.Push(move(pd));
 }
 
-void PingPongManager::Push(const vector<WatingPlayerData>& pdv) {
-	_matchQueue.Push(pdv);
+void PingPongManager::Push(vector<WatingPlayerData> pdv) {
+	_matchQueue.Push(move(pdv));
 }
 
 void PingPongManager::RenewMatchQueue() {
@@ -359,7 +359,7 @@ void PingPongManager::MatchMake() {
 		bool isReady = true;
 		fill(_excluded.begin(), _excluded.end(), false);
 		for (int i = 0; i < _quota; i++) {
-			shared_ptr<PlayerSession> playerSessionRef = pdv[i]._playerSessionRef.lock();
+			shared_ptr<PlayerSession> playerSessionRef = pdv[i].playerSessionWRef.lock();
 			if (playerSessionRef == nullptr) {
 				isReady = false;
 				_excluded[i] = true;

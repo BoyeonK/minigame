@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "MatchQueue.h"
 
-void MatchQueue::Push(WatingPlayerData&& newPlayer){
+void MatchQueue::Push(WatingPlayerData newPlayer){
 	lock_guard<mutex> lock(_TQlock);
 	_tempQueue.push_back(move(newPlayer));
 }
@@ -38,16 +38,17 @@ void MatchQueue::FlushTempQueueAndSort() {
 
         sort(_searchQueue.begin(), _searchQueue.end(),
             [](WatingPlayerData& a, WatingPlayerData& b) {
-                return a._elo < b._elo;
+                return a.elo < b.elo;
             }
         );
     }
 }
 
 void MatchQueue::RemoveInvalidPlayer() {
+    GameType validGameType = _gameType;
     auto new_end = remove_if(_searchQueue.begin(), _searchQueue.end(),
-        [](WatingPlayerData& player) {
-            return !player.IsValidPlayer();
+        [validGameType](WatingPlayerData& player) {
+            return !player.IsValidPlayer(validGameType);
         });
 
     _searchQueue.erase(new_end, _searchQueue.end());
@@ -70,7 +71,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
 
     //3. 0번째 index에 대한 분산 계산, 조건에 맞으면 pq에 push
     for (int i = 0; i < _quota; i++) {
-        newElo = _searchQueue[i]._elo;
+        newElo = _searchQueue[i].elo;
         sum += newElo;
         sqsum += newElo * newElo;
     }
@@ -83,8 +84,8 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
 
     //4. 이후의 분산 계산 및 조건에 맞으면 pq에 push
     for (int i = 1; i <= mxmidx; i++) {
-        oldElo = _searchQueue[i - 1]._elo;
-        newElo = _searchQueue[i + _quota]._elo;
+        oldElo = _searchQueue[i - 1].elo;
+        newElo = _searchQueue[i + _quota].elo;
         sum += (newElo - oldElo);
         sqsum += (newElo * newElo - oldElo * oldElo);
         mean = static_cast<double>(sum) / _quota;

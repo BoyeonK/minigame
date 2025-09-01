@@ -44,8 +44,8 @@ class GameManager {
 public:
 	//TODO : psv안에 모든 친구들이 유효한 친구들인지 확인.
 	//유효하면 해당 vector로서 MakeRoom을 실행.
-	virtual void Push(WatingPlayerData&& pd) = 0;
-	virtual void Push(const vector<WatingPlayerData>& pdv) = 0;
+	virtual void Push(WatingPlayerData pd) = 0;
+	virtual void Push(vector<WatingPlayerData> pdv) = 0;
 	virtual void RenewMatchQueue() = 0;
 	virtual void MatchMake() = 0;
 	virtual void MakeRoom(vector<WatingPlayerData>&& pdv) = 0;
@@ -63,12 +63,12 @@ protected:
 
 class TestMatchManager : public GameManager {
 public:
-	TestMatchManager() {
+	TestMatchManager() : _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
-	void Push(WatingPlayerData&& pd) override;
-	void Push(const vector<WatingPlayerData>& pdv) override;
+	void Push(WatingPlayerData pd) override;
+	void Push(vector<WatingPlayerData> pdv) override;
 	void RenewMatchQueue();
 	void MatchMake() override;
 	void MakeRoom(vector<WatingPlayerData>&& pdv) override;
@@ -87,12 +87,12 @@ private:
 
 class PingPongManager : public GameManager {
 public:
-	PingPongManager() {
+	PingPongManager() : _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
-	void Push(WatingPlayerData&& pd) override;
-	void Push(const vector<WatingPlayerData>& pdv) override;
+	void Push(WatingPlayerData pd) override;
+	void Push(vector<WatingPlayerData> pdv) override;
 	void RenewMatchQueue();
 	void MatchMake() override;
 	void MakeRoom(vector<WatingPlayerData>&& pdv) override;

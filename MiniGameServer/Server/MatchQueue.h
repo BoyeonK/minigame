@@ -6,7 +6,11 @@ class PlayerSession;
 
 class MatchQueue {
 public:
-	void Push(WatingPlayerData&& newPlayer);
+	MatchQueue(GameType gt, int32_t quota) : _gameType(gt), _quota(quota) {
+
+	}
+
+	void Push(WatingPlayerData newPlayer);
 	void Push(const vector<WatingPlayerData>& pdv);
 	void FlushTempQueueAndSort();
 	void RemoveInvalidPlayer();
@@ -18,14 +22,16 @@ public:
 
 private:
 	mutex _TQlock;
+	vector<WatingPlayerData> _tempQueue;
+
 	vector<WatingPlayerData> _searchQueue;
+	mutex _SQlock;
+
 	vector<bool> _selectedChecks;
 	vector<int32_t> _selectedPlayerIdxs;
 	priority_queue<Deviset> _pq;
 	int32_t _allowDevi = 50;
-	vector<WatingPlayerData> _tempQueue;
-	mutex _SQlock;
-	int32_t _gameNum = 0;
-	int32_t _quota = 4;
+	GameType _gameType = GameType::Undefined;
+	int32_t _quota;
 };
 
