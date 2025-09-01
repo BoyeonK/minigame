@@ -6,7 +6,7 @@ using CallbackType = std::function<void()>;
 class Job {
 public:
 	Job(CallbackType&& callback) : _callback(move(callback)) { }
-
+	/*
 	template<typename T, typename Ret, typename... Args>
 	Job(weak_ptr<T> ownerWRef, Ret(T::* memFunc)(Args...), Args&&... args)  {
 		_callback = [ownerWRef, memFunc, args...]() { 
@@ -14,6 +14,18 @@ public:
 			if (owner != nullptr)
 				(owner.get()->*memFunc)(args...);
 		};
+	}
+	*/
+	template<typename T, typename Ret, typename... Args>
+	Job(weak_ptr<T> ownerWRef, Ret(T::* memFunc)(Args...), Args&&... args) {
+		auto argsTuple = make_tuple(forward<Args>(args)...);
+		_callback = [ownerWRef, memFunc, tup = move(argsTuple)]() mutable {
+			shared_ptr<T> owner = ownerWRef.lock();
+			if (owner != nullptr)
+				apply([&](auto&&... unpacked) {
+				(owner.get()->*memFunc)(forward<decltype(unpacked)>(unpacked)...);
+					}, move(tup));
+			};
 	}
 
 	//lambda capture를 통해, shared_ptr을 복사한 경우 문제가 될 수 있다. (되도록 weak_ptr을 쓰려고는 하지만)
