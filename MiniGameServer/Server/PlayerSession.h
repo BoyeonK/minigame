@@ -25,6 +25,7 @@ public:
 	void SetElos(int32_t elo1, int32_t elo2, int32_t elo3);
 	int32_t GetElo(const int32_t& idx) const;
 
+	int64_t GetLastKeepAliveTick() const;
 	void SetLastKeepAliveTick(const int64_t& tick);
 
 private:
@@ -36,5 +37,5 @@ private:
 	int32_t _elo1 = 0;
 	int32_t _elo2 = 0;
 	int32_t _elo3 = 0;
-	int64_t _lastKeepAliveTick = 0;
+	atomic<int64_t> _lastKeepAliveTick = 0;
 };

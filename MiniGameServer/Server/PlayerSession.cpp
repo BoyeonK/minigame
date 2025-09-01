@@ -93,8 +93,12 @@ int32_t PlayerSession::GetElo(const int32_t& idx) const {
 	}
 }
 
+int64_t PlayerSession::GetLastKeepAliveTick() const {
+	return _lastKeepAliveTick;
+}
+
 void PlayerSession::SetLastKeepAliveTick(const int64_t& tick) {
-	_lastKeepAliveTick = tick;
+	_lastKeepAliveTick.store(tick);
 }
 
 
