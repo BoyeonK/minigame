@@ -332,8 +332,9 @@ void TestMatchManager::MatchMake() {
 }
 
 void TestMatchManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
-	TestMatchGameRoom* pNewRoom = objectPool<TestMatchGameRoom>::alloc();
-	pNewRoom->DoAsyncAfter(&TestMatchGameRoom::Init, pdv);
+	shared_ptr<TestMatchGameRoom> newRoomRef = { objectPool<TestMatchGameRoom>::alloc(), objectPool<TestMatchGameRoom>::dealloc };
+	AddRoom(newRoomRef);
+	newRoomRef->DoAsyncAfter(&TestMatchGameRoom::Init, move(pdv));
 }
 
 void PingPongManager::Push(WatingPlayerData&& pd) {
@@ -387,6 +388,8 @@ void PingPongManager::MatchMake() {
 }
 
 void PingPongManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
+	/*
 	PingPongGameRoom* pNewRoom = objectPool<PingPongGameRoom>::alloc();
 	pNewRoom->DoAsyncAfter(&PingPongGameRoom::Init, pdv);
+	*/
 }
