@@ -14,6 +14,7 @@ public:
 		BeforeStart,
 		OnGoing,
 		Counting,
+		EndGame,
 	};
 
 	virtual void Init(vector<WatingPlayerData> pdv) = 0;
@@ -26,6 +27,7 @@ class TestMatchGameRoom : public GameRoom {
 public:
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
+	void Start() {}
 	void ReturnToPool();
 	void Update() override {}
 
