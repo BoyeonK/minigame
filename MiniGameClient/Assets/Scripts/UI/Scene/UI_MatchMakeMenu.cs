@@ -11,18 +11,18 @@ public class UI_MatchMakeMenu : UI_Scene {
 
     LoginScene _loginScene;
 
+    private TextMeshProUGUI _vampireSurvival;
     private TextMeshProUGUI _pingpong;
     private TextMeshProUGUI _danmaku;
-    private TextMeshProUGUI _vampireSurvival;
 
+    private RectTransform _rectVampireSurvival;
     private RectTransform _rectPingpong;
     private RectTransform _rectDanmaku;
-    private RectTransform _rectVampireSurvival;
 
+    private UI_EventHandler _vampireSurvivalEventHandler;
     private UI_EventHandler _pingpongEventHandler;
     private UI_EventHandler _danmakuEventHandler;
-    private UI_EventHandler _vampireSurvivalEventHandler;
-
+    
     private float _rectSpeed = 5f;
     private float _range = 6f;
 
@@ -50,14 +50,14 @@ public class UI_MatchMakeMenu : UI_Scene {
 
         switch (_selectedOpt) {
             case 0:
-                _pingpong.color = _selectedColor;
-                break;
-            case 1:
-                _danmaku.color = _selectedColor;
-                break;
-            case 2:
                 _vampireSurvival.color = _selectedColor;
                 break;
+            case 1:
+                _pingpong.color = _selectedColor;
+                break;
+            case 2:
+                _danmaku.color = _selectedColor;
+                break;    
         }
     }
 
@@ -74,14 +74,14 @@ public class UI_MatchMakeMenu : UI_Scene {
         float rot = -3f + pingPongValue;
         switch (_selectedOpt) {
             case 0:
-                _rectPingpong.localRotation = Quaternion.Euler(0f, 0f, rot);
-                break;
-            case 1:
-                _rectDanmaku.localRotation = Quaternion.Euler(0f, 0f, rot);
-                break;
-            case 2:
                 _rectVampireSurvival.localRotation = Quaternion.Euler(0f, 0f, rot);
                 break;
+            case 1:
+                _rectPingpong.localRotation = Quaternion.Euler(0f, 0f, rot);
+                break;
+            case 2:
+                _rectDanmaku.localRotation = Quaternion.Euler(0f, 0f, rot);
+                break;   
         }
     }
 
@@ -95,21 +95,35 @@ public class UI_MatchMakeMenu : UI_Scene {
         GameObject go = GameObject.Find("LoginScene");
         _loginScene = go.GetComponent<LoginScene>();
         Bind<TextMeshProUGUI>(typeof(Texts));
+        _vampireSurvival = Get<TextMeshProUGUI>((int)Texts.VampireSurvival);
         _pingpong = Get<TextMeshProUGUI>((int)Texts.Pingpong);
         _danmaku = Get<TextMeshProUGUI>((int)Texts.Danmaku);
-        _vampireSurvival = Get<TextMeshProUGUI>((int)Texts.VampireSurvival);
-
+        
+        if (_vampireSurvival != null) {
+            _rectVampireSurvival = _vampireSurvival.GetComponent<RectTransform>();
+            _vampireSurvivalEventHandler = _vampireSurvival.GetComponent<UI_EventHandler>();
+            if (_vampireSurvivalEventHandler != null) {
+                _vampireSurvivalEventHandler.Clear();
+                _vampireSurvivalEventHandler.OnClickHandler += (PointerEventData data) => {
+                    _loginScene.SetMatchMakeOpt(0);
+                    StartMatchMake();
+                };
+                _vampireSurvivalEventHandler.OnPointerEnterHandler += (PointerEventData data) => {
+                    _loginScene.SetMatchMakeOpt(0);
+                };
+            }
+        }
         if (_pingpong != null) {
             _rectPingpong = _pingpong.GetComponent<RectTransform>();
             _pingpongEventHandler = _pingpong.GetComponent<UI_EventHandler>();
             if (_pingpongEventHandler != null) {
                 _pingpongEventHandler.Clear();
                 _pingpongEventHandler.OnClickHandler += (PointerEventData data) => {
-                    _loginScene.SetMatchMakeOpt(0);
+                    _loginScene.SetMatchMakeOpt(1);
                     StartMatchMake();
                 };
                 _pingpongEventHandler.OnPointerEnterHandler += (PointerEventData data) => {
-                    _loginScene.SetMatchMakeOpt(0);
+                    _loginScene.SetMatchMakeOpt(1);
                 };
             }
         }
@@ -119,24 +133,10 @@ public class UI_MatchMakeMenu : UI_Scene {
             if (_danmakuEventHandler != null) {
                 _danmakuEventHandler.Clear();
                 _danmakuEventHandler.OnClickHandler += (PointerEventData data) => {
-                    _loginScene.SetMatchMakeOpt(1);
-                    StartMatchMake();
-                };
-                _danmakuEventHandler.OnPointerEnterHandler += (PointerEventData data) => {
-                    _loginScene.SetMatchMakeOpt(1);
-                };
-            }
-        }
-        if (_vampireSurvival != null) {
-            _rectVampireSurvival = _vampireSurvival.GetComponent<RectTransform>();
-            _vampireSurvivalEventHandler = _vampireSurvival.GetComponent<UI_EventHandler>();
-            if (_vampireSurvivalEventHandler != null) {
-                _vampireSurvivalEventHandler.Clear();
-                _vampireSurvivalEventHandler.OnClickHandler += (PointerEventData data) => {
                     _loginScene.SetMatchMakeOpt(2);
                     StartMatchMake();
                 };
-                _vampireSurvivalEventHandler.OnPointerEnterHandler += (PointerEventData data) => {
+                _danmakuEventHandler.OnPointerEnterHandler += (PointerEventData data) => {
                     _loginScene.SetMatchMakeOpt(2);
                 };
             }
