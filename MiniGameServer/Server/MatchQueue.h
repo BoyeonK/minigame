@@ -7,6 +7,7 @@ class PlayerSession;
 class MatchQueue {
 public:
 	void Push(WatingPlayerData&& newPlayer);
+	void Push(const vector<WatingPlayerData>& pdv);
 	void FlushTempQueueAndSort();
 	void RemoveInvalidPlayer();
 

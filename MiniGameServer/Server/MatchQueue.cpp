@@ -6,6 +6,13 @@ void MatchQueue::Push(WatingPlayerData&& newPlayer){
 	_tempQueue.push_back(move(newPlayer));
 }
 
+void MatchQueue::Push(const vector<WatingPlayerData>& pdv) {
+    lock_guard<mutex> lock(_TQlock);
+    for (auto& pd : pdv) {
+        _tempQueue.push_back(pd);
+    }
+}
+
 void MatchQueue::FlushTempQueueAndSort() {
     vector<WatingPlayerData> playersToMove;
     {

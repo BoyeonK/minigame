@@ -14,9 +14,12 @@ class ServerGlobal {
 public:
 	ServerGlobal() {
 		GCryptoManager = new CryptoManager();
-		
+
+		shared_ptr<TestMatchManager> TMManager = make_shared<TestMatchManager>();
+		GGameManagers[1] = TMManager;
+
 		shared_ptr<PingPongManager> PPManager = make_shared<PingPongManager>();
-		GGameManagers[1] = PPManager;
+		GGameManagers[2] = PPManager;
 	}
 	~ServerGlobal() {
 		delete GCryptoManager;
@@ -278,8 +281,67 @@ bool CryptoManager::Encrypt(
 	return true;
 }
 
+void TestMatchManager::Push(WatingPlayerData&& pd) {
+	_matchQueue.Push(move(pd));
+}
+
+void TestMatchManager::Push(const vector<WatingPlayerData>& pdv) {
+	_matchQueue.Push(pdv);
+}
+
+void TestMatchManager::RenewMatchQueue() {
+	if (::GetTickCount64() - _lastRenewTick > 3000) {
+		_lastRenewTick = ::GetTickCount64();
+		_matchQueue.FlushTempQueueAndSort();
+		cout << "matchQueueRenewed" << endl;
+	}
+}
+
+void TestMatchManager::MatchMake() {
+	vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
+	for (auto& pdv : pdvv) {
+		bool isReady = true;
+		fill(_excluded.begin(), _excluded.end(), false);
+		for (int i = 0; i < _quota; i++) {
+			shared_ptr<PlayerSession> playerSessionRef = pdv[i]._playerSessionRef.lock();
+			if (playerSessionRef == nullptr) {
+				isReady = false;
+				_excluded[i] = true;
+			}
+			else if (playerSessionRef->GetMatchingState() != GameType::TestMatch) {
+				isReady = false;
+				_excluded[i] = true;
+
+				S2C_Protocol::S_ExcludedFromMatch pkt = S2CPacketMaker::MakeSExcludedFromMatch(false);
+				shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
+				playerSessionRef->Send(sendBufferRef);
+				playerSessionRef->SetMatchingState(GameType::None);
+			}
+		}
+
+		if (isReady) {
+			MakeRoom(move(pdv));
+		}
+		else {
+			for (int i = 0; i < _quota; i++) {
+				if (!_excluded[i])
+					_matchQueue.Push(move(pdv[i]));
+			}
+		}
+	}
+}
+
+void TestMatchManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
+	TestMatchGameRoom* pNewRoom = objectPool<TestMatchGameRoom>::alloc();
+	pNewRoom->DoAsyncAfter(&TestMatchGameRoom::Init, pdv);
+}
+
 void PingPongManager::Push(WatingPlayerData&& pd) {
 	_matchQueue.Push(move(pd));
+}
+
+void PingPongManager::Push(const vector<WatingPlayerData>& pdv) {
+	_matchQueue.Push(pdv);
 }
 
 void PingPongManager::RenewMatchQueue() {
