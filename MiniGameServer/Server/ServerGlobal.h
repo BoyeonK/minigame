@@ -51,19 +51,18 @@ public:
 	virtual void MakeRoom(vector<WatingPlayerData>&& pdv) = 0;
 	virtual void Update() = 0;
 
-	void AddRoom(shared_ptr<GameRoom> room) {
-		unique_lock<shared_mutex> lock(_roomsLock);
-		_rooms.push_back(room);
-	}
+	void AddRoom(shared_ptr<GameRoom> room);
+	void RemoveInvalidRoom();
 
 protected:
+	uint64_t _lastRenewRoomTick = 0;
 	vector<shared_ptr<GameRoom>> _rooms;
 	shared_mutex _roomsLock;
 };
 
 class TestMatchManager : public GameManager {
 public:
-	TestMatchManager() : _matchQueue(_ty, _quota) {
+	TestMatchManager() : _ty(GameType::TestMatch), _quota(1), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
@@ -79,15 +78,15 @@ public:
 
 private:
 	GameType _ty = GameType::TestMatch;
-	MatchQueue _matchQueue;
 	int32_t _quota = 1;
+	MatchQueue _matchQueue;
 	vector<bool> _excluded;
 	uint64_t _lastRenewTick = 0;
 };
 
 class PingPongManager : public GameManager {
 public:
-	PingPongManager() : _matchQueue(_ty, _quota) {
+	PingPongManager() : _ty(GameType::PingPong), _quota(4), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 

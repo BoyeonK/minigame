@@ -43,6 +43,7 @@ int main() {
 			for (int i = 1; i <= 1; i++) {
 				GGameManagers[i]->MatchMake();
 				GGameManagers[i]->RenewMatchQueue();
+				GGameManagers[i]->RemoveInvalidRoom();
 				this_thread::sleep_for(20ms);
 			}
 		}

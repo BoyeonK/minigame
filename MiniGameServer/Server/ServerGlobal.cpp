@@ -337,6 +337,25 @@ void TestMatchManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	newRoomRef->DoAsyncAfter(&TestMatchGameRoom::Init, move(pdv));
 }
 
+void GameManager::AddRoom(shared_ptr<GameRoom> room) {
+	unique_lock<shared_mutex> lock(_roomsLock);
+	_rooms.push_back(room);
+}
+
+void GameManager::RemoveInvalidRoom() {
+	if (::GetTickCount64() - _lastRenewRoomTick > 5000) {
+		unique_lock<shared_mutex> lock(_roomsLock);
+		_lastRenewRoomTick = ::GetTickCount64();
+		auto new_end = remove_if(_rooms.begin(), _rooms.end(),
+			[](const shared_ptr<GameRoom>& gameRoomRef) {
+				return (gameRoomRef->GetState() == GameRoom::GameState::EndGame);
+			});
+
+		_rooms.erase(new_end, _rooms.end());
+		cout << "Invalid Room Cleared" << endl;
+	}
+}
+
 void PingPongManager::Push(WatingPlayerData pd) {
 	_matchQueue.Push(move(pd));
 }
@@ -388,8 +407,5 @@ void PingPongManager::MatchMake() {
 }
 
 void PingPongManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
-	/*
-	PingPongGameRoom* pNewRoom = objectPool<PingPongGameRoom>::alloc();
-	pNewRoom->DoAsyncAfter(&PingPongGameRoom::Init, pdv);
-	*/
+
 }

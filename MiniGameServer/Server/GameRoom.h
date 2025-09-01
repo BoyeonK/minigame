@@ -19,12 +19,23 @@ public:
 
 	virtual void Init(vector<WatingPlayerData> pdv) = 0;
 	virtual void Update() = 0;
-
+	GameState GetState();
+	
+protected:
 	vector<weak_ptr<PlayerSession>> _playerWRefs;
+	GameType _ty;
+	GameState _state = GameState::BeforeInit;
 };
 
 class TestMatchGameRoom : public GameRoom {
 public:
+	TestMatchGameRoom() {
+		_ty = GameType::TestMatch;
+	}
+	~TestMatchGameRoom() {
+		cout << "·ë »ç¸Á" << endl;
+	}
+
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
 	void Start() {}
@@ -33,12 +44,14 @@ public:
 
 private:
 	int32_t _quota = 1;
-	GameType _ty = GameType::TestMatch;
-	GameState _state = GameState::BeforeInit;
 };
 
 class PingPongGameRoom : public GameRoom {
 public:
+	PingPongGameRoom() {
+		_ty = GameType::PingPong;
+	}
+
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
 	void ReturnToPool();
@@ -46,6 +59,4 @@ public:
 
 private:
 	int32_t _quota = 4;
-	GameType _ty = GameType::PingPong;
-	GameState _state = GameState::BeforeInit;
 };

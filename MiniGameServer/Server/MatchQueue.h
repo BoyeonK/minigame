@@ -6,9 +6,7 @@ class PlayerSession;
 
 class MatchQueue {
 public:
-	MatchQueue(GameType gt, int32_t quota) : _gameType(gt), _quota(quota) {
-
-	}
+	MatchQueue(GameType gt, int32_t quota) : _gameType(gt), _quota(quota) { }
 
 	void Push(WatingPlayerData newPlayer);
 	void Push(const vector<WatingPlayerData>& pdv);
