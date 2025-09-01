@@ -236,6 +236,11 @@ class PacketHandler {
 		}
 	}
 
-	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) { }
+	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) {
+		if (Managers.Network.ResponseExcludedFromMatch()) {
+			//TODO : 게임선택상태로 되돌림.
+			
+		}
+	}
 }
 

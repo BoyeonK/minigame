@@ -138,6 +138,20 @@ public class NetworkManager {
 		return false;
 	}
 
+	//이걸 받은 순간, 이미 서버에서는 대기열 밖으로 밀려난 상황.
+	public bool ResponseExcludedFromMatch()	{
+		int expected = _matchGameType;
+		while (true) {
+            int previousState = Interlocked.CompareExchange(ref _matchGameType, (int)GameType.None, expected);
+			if (previousState == (int)GameType.InProgress)
+				return false;
+
+			if (previousState == expected) {
+				return true;
+			}
+			expected = previousState;
+        }
+	}
 
     public void Update() {
 

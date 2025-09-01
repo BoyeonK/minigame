@@ -51,6 +51,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SMatchmakeKeepAlive, UnpackPacket<S_MatchmakeKeepAlive>);
         _handler.Add((ushort)MsgId.SMatchmakeKeepAlive, PacketHandler.S_MatchmakeKeepAliveHandler);
         _msgFactories.Add((ushort)MsgId.SMatchmakeKeepAlive, () => new S_MatchmakeKeepAlive());
+
+        _onRecv.Add((ushort)MsgId.SExcludedFromMatch, UnpackPacket<S_ExcludedFromMatch>);
+        _handler.Add((ushort)MsgId.SExcludedFromMatch, PacketHandler.S_ExcludedFromMatchHandler);
+        _msgFactories.Add((ushort)MsgId.SExcludedFromMatch, () => new S_ExcludedFromMatch());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {
