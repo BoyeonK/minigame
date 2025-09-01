@@ -28,4 +28,22 @@ public class Define {
         QuaterView,
     }
     */
+
+    public enum GameType {
+        None,
+        TestMatch,
+        PingPong,
+        Danmaku,
+        Undefined,
+    }
+
+    public static GameType IntToGameType(int type) {
+        switch (type) {
+            case 0: return GameType.None;
+            case 1: return GameType.TestMatch;
+            case 2: return GameType.PingPong;
+            case 3: return GameType.Danmaku;
+            default: return GameType.Undefined;
+        }
+    }
 }

@@ -87,7 +87,7 @@ public class UI_MatchMakeMenu : UI_Scene {
 
     //이게 매치메이킹 로직이 되어야 함.
     private void StartMatchMake() {
-        Managers.Network.TryMatchMake(_selectedOpt + 1);
+        Managers.Network.TryMatchMake(Define.IntToGameType(_selectedOpt + 1));
     }
 
     public override void Init() {

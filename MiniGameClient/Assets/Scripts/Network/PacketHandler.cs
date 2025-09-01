@@ -225,5 +225,11 @@ class PacketHandler {
             });
         }
 	}
+
+	public static void S_MatchMakeKeepAliveHandler(PacketSession session, IMessage packet) { 
+		S_MatchmakeKeepAlive recvPkt = packet as S_MatchmakeKeepAlive;
+		//TODO : 내 세션이 찾는 중인 게임이 서버에서 찾았다고 한 게임과 같다면
+		int recvId = recvPkt.GameId;
+	}
 }
 

@@ -5,6 +5,7 @@ using System;
 using System.Net;
 using System.Threading;
 using UnityEngine;
+using static Define;
 
 public class NetworkManager {
 	ServerSession _session = new ServerSession();
@@ -13,7 +14,10 @@ public class NetworkManager {
 	//통신에 사용할 연결 상태는 Session에서 따로 관리할 예정. (편의성 측면에서의 반정규화 느낌으루다가)
 	//이게 단순 bool값이 아니라 어떤 객체였다면 메모리에 할당한 이후, 그 포인터를 양쪽에서 사용하는 느낌으루다가 만들었을 것.
 	private bool _isConnected = false;
-    private int _matchMakeState = 0;
+	
+	//매칭중인 게임 종류
+    private int _matchGameType = 0;
+	
 
     public void Init() { }
 
@@ -106,25 +110,25 @@ public class NetworkManager {
         }
     }
 
-	public void TryMatchMake(int gameId) {
-		//중복실행이 아닌데 0이 아니다? 무언가 이상함. 초기화 시도.
-		int state = Interlocked.CompareExchange(ref _matchMakeState, gameId, 0);
-        if (state != 0) {
-            //서버에 등록된 매칭 취소 요청 및 state를 다시 0으로.
-            CancelMatchMake(state);
-            return;
-        }
+	public void TryMatchMake(GameType gameType) {
+		int desired = (int)gameType;
+		int matchState = Interlocked.CompareExchange(ref _matchGameType, desired, 0);
+        //이전 값이 0이 아니었을 경우 (이미 매칭중이었을 경우) 아무것도 하지 않고 리턴.
+        if (matchState != 0) {
+			return;
+		}
 
-		C_Encrypted pkt = PacketMaker.MakeCMatchMakeRequest(_session, gameId);
+		C_Encrypted pkt = PacketMaker.MakeCMatchMakeRequest(_session, (int)gameType);
 		Send(pkt);
     }
 
     public void CancelMatchMake(int gameId) {
-        int state = Interlocked.CompareExchange(ref _matchMakeState, 0, gameId);
-        if (state != gameId)
-            return;
-        C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_session, gameId);
-        Send(pkt);
+		int matchState = Interlocked.CompareExchange(ref _matchGameType, 0, gameId);
+		//이미 다른 스레드에 의해 매칭 종료됨
+		if (matchState == gameId) {
+			C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_session, gameId);
+			Send(pkt);
+		}
     }
 
     public void Update() {
