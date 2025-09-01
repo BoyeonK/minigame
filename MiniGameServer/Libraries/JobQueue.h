@@ -15,13 +15,13 @@ public:
 
 	//Ret는 void로 작성해도 될 것 같다.
 	template<typename T, typename Ret, typename... Args>
-	void DoAsync(Ret(T::*memFunc)(Args...), Args... args) {
+	void DoAsync(Ret(T::*memFunc)(Args...), Args&&... args) {
 		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
 		Push({ objectPool<Job>::alloc(ownerWRef, memFunc, std::forward<Args>(args)...), objectPool<Job>::dealloc });
 	}
 
 	template<typename T, typename Ret, typename... Args>
-	void DoAsyncAfter(Ret(T::* memFunc)(Args...), Args... args) {
+	void DoAsyncAfter(Ret(T::* memFunc)(Args...), Args&&... args) {
 		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
 		Push({ objectPool<Job>::alloc(ownerWRef, memFunc, std::forward<Args>(args)...), objectPool<Job>::dealloc }, true);
 	}
@@ -33,7 +33,7 @@ public:
 	}
 
 	template<typename T, typename Ret, typename... Args>
-	void DoTimerAsync(uint64_t tickAfter, Ret(T::* memFunc)(Args...), Args... args) {
+	void DoTimerAsync(uint64_t tickAfter, Ret(T::* memFunc)(Args...), Args&&... args) {
 		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
 		shared_ptr<Job> job = { objectPool<Job>::alloc(ownerWRef, memFunc, std::forward<Args>(args)...), objectPool<Job>::dealloc };
 		GJobTimer->Reserve(tickAfter, shared_from_this(), job);
