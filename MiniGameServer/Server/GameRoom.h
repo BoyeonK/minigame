@@ -5,13 +5,6 @@ class PlayerSession;
 
 class GameRoom : public JobQueue {
 public:
-	virtual void Init(vector<WatingPlayerData> pdv) = 0;
-	virtual void Update() = 0;
-
-	vector<weak_ptr<PlayerSession>> _playerWRefs;
-};
-
-class PingPongGameRoom : public GameRoom {
 	//BeforeInit : Room이 최초 생성된 경우.
 	//BeforeStart : Player의 로딩 및 KeepAlive여부 재확인
 	//OnGoing : 게임이 진행중인 경우. (여기서 더 세분화 될 수도 있음)
@@ -23,6 +16,26 @@ class PingPongGameRoom : public GameRoom {
 		Counting,
 	};
 
+	virtual void Init(vector<WatingPlayerData> pdv) = 0;
+	virtual void Update() = 0;
+
+	vector<weak_ptr<PlayerSession>> _playerWRefs;
+};
+
+class TestMatchGameRoom : public GameRoom {
+public:
+	void Init(vector<WatingPlayerData> pdv) override;
+	void Init2(vector<WatingPlayerData> pdv);
+	void ReturnToPool();
+	void Update() override {}
+
+private:
+	int32_t _quota = 1;
+	GameType _ty = GameType::TestMatch;
+	GameState _state = GameState::BeforeInit;
+};
+
+class PingPongGameRoom : public GameRoom {
 public:
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
