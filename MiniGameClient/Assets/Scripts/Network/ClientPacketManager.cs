@@ -47,6 +47,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SLogout, UnpackPacket<S_Logout>);
         _handler.Add((ushort)MsgId.SLogout, PacketHandler.S_LogoutHandler);
         _msgFactories.Add((ushort)MsgId.SLogout, () => new S_Logout());
+
+        _onRecv.Add((ushort)MsgId.SMatchmakeKeepAlive, UnpackPacket<S_MatchmakeKeepAlive>);
+        _handler.Add((ushort)MsgId.SMatchmakeKeepAlive, PacketHandler.S_MatchmakeKeepAliveHandler);
+        _msgFactories.Add((ushort)MsgId.SMatchmakeKeepAlive, () => new S_MatchmakeKeepAlive());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

@@ -809,25 +809,25 @@ const char descriptor_table_protodef_S2C_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SEC
     "chmake\022\016\n\006gameId\030\001 \001(\005\",\n\023S_ExcludedFrom"
     "Match\022\025\n\risUserRequest\030\001 \001(\010\"&\n\024S_Matchm"
     "akeCompleted\022\016\n\006gameId\030\001 \001(\005\"0\n\032C_GameSc"
-    "eneLoadingProgress\022\022\n\npersentage\030\001 \001(\005*\227"
+    "eneLoadingProgress\022\022\n\npersentage\030\001 \001(\005*\231"
     "\003\n\005MsgId\022\r\n\tS_WELCOME\020\000\022\r\n\tC_WELCOME\020\001\022\026"
     "\n\022S_WELCOME_RESPONSE\020\002\022\017\n\013S_ENCRYPTED\020\003\022"
     "\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_LOGIN\020\005\022\013\n\007S_LOGIN"
     "\020\006\022\024\n\020C_CREATE_ACCOUNT\020\007\022\024\n\020S_CREATE_ACC"
     "OUNT\020\010\022\014\n\010C_LOGOUT\020\t\022\014\n\010S_LOGOUT\020\n\022\027\n\023C_"
     "MATCHMAKE_REQUEST\020\013\022\026\n\022C_MATCHMAKE_CANCE"
-    "L\020\014\022\031\n\025S_MATCHMAKE_KEEPALIVE\020\r\022\031\n\025C_MATC"
-    "HMAKE_KEEPALIVE\020\016\022\024\n\020S_REDO_MATCHMAKE\020\017\022"
-    "\031\n\025S_EXCLUDED_FROM_MATCH\020\020\022\031\n\025S_MATCHMAK"
-    "E_COMPLETED\020\021\022!\n\035C_GAME_SCENE_LOADING_PR"
-    "OGRESS\020\022B\033\252\002\030Google.Protobuf.Protocolb\006p"
-    "roto3"
+    "L\020\014\022\032\n\026S_MATCHMAKE_KEEP_ALIVE\020\r\022\032\n\026C_MAT"
+    "CHMAKE_KEEP_ALIVE\020\016\022\024\n\020S_REDO_MATCHMAKE\020"
+    "\017\022\031\n\025S_EXCLUDED_FROM_MATCH\020\020\022\031\n\025S_MATCHM"
+    "AKE_COMPLETED\020\021\022!\n\035C_GAME_SCENE_LOADING_"
+    "PROGRESS\020\022B\033\252\002\030Google.Protobuf.Protocolb"
+    "\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_2eproto = {
     false,
     false,
-    1405,
+    1407,
     descriptor_table_protodef_S2C_5fProtocol_2eproto,
     "S2C_Protocol.proto",
     &descriptor_table_S2C_5fProtocol_2eproto_once,

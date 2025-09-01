@@ -13,6 +13,7 @@ using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+using static Define;
 
 //아래의 Handler함수들은 customHandler를 통해서 main thread에서 '모두' 실행되는 구조이므로
 //UnityEngine의 메서드들을 사용하여 작성해도 무방하다.
@@ -226,10 +227,15 @@ class PacketHandler {
         }
 	}
 
-	public static void S_MatchMakeKeepAliveHandler(PacketSession session, IMessage packet) { 
+	public static void S_MatchmakeKeepAliveHandler(PacketSession session, IMessage packet) { 
 		S_MatchmakeKeepAlive recvPkt = packet as S_MatchmakeKeepAlive;
-		//TODO : 내 세션이 찾는 중인 게임이 서버에서 찾았다고 한 게임과 같다면
-		int recvId = recvPkt.GameId;
+		//내 세션이 찾는 중인 게임이 서버에서 찾았다고 한 게임과 같다면 응답.
+		if (Managers.Network.ResponseKeepAlive(recvPkt.GameId)) {
+            C_MatchmakeKeepAlive pkt = PacketMaker.MakeCMatchMakeKeepAlive(recvPkt.GameId, recvPkt.SentTimeTick);
+			Managers.Network.Send(pkt);
+		}
 	}
+
+	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) { }
 }
 

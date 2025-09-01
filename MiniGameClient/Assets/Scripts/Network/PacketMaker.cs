@@ -121,4 +121,8 @@ class PacketMaker {
     public static C_MatchmakeCancel MakeCMatchMakeCancel(PacketSession session, int gameId) { 
         return new C_MatchmakeCancel { GameId = gameId };
     }
+
+    public static C_MatchmakeKeepAlive MakeCMatchMakeKeepAlive(int gameId, Int64 tick) {
+        return new C_MatchmakeKeepAlive { GameId = gameId, SentTimeTick = tick };
+    }
 }

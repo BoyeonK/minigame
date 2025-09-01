@@ -17,7 +17,6 @@ public class NetworkManager {
 	
 	//매칭중인 게임 종류
     private int _matchGameType = 0;
-	
 
     public void Init() { }
 
@@ -130,6 +129,15 @@ public class NetworkManager {
 			Send(pkt);
 		}
     }
+
+	public bool ResponseKeepAlive(int gameId) {
+		int matchState = Interlocked.CompareExchange(ref _matchGameType, (int)GameType.InProgress, gameId);
+		if (matchState == gameId) {
+			return true;
+		}
+		return false;
+	}
+
 
     public void Update() {
 
