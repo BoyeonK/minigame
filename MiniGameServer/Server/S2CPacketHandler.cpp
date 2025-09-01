@@ -169,24 +169,16 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 		return false;
 
 	GameType expected = GameType::None;
-	GameType desired;
-	
-	switch (pkt.gameid()) {
-	case(1):
-		desired = GameType::PingPong;
-		break;
-	case(2):
-		desired = GameType::Danmaku;
-		break;
-	default:
+	GameType desired = IntToGameType(pkt.gameid());
+	if (desired == GameType::Undefined)
 		return false;
-	}
 
 	WatingPlayerData pd;
 	if (!playerSessionRef->TryChangeMatchingState(expected, desired))
 		return false;
-	pd._elo = elo;
-	pd._playerSessionRef = playerSessionRef;
+	pd.elo = elo;
+	pd.playerSessionWRef = playerSessionRef;
+	pd.queuedTick = ::GetTickCount64();
 	it->second->Push(move(pd));
 #ifdef _DEBUG
 	cout << "임시 대기열에 진입." << endl;
@@ -197,19 +189,10 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeCancel& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
 
-	GameType expected;
+	GameType expected = IntToGameType(pkt.gameid());
 	GameType desired = GameType::None;
-
-	switch (pkt.gameid()) {
-	case(1):
-		expected = GameType::PingPong;
-		break;
-	case(2):
-		expected = GameType::Danmaku;
-		break;
-	default:
+	if (expected == GameType::Undefined)
 		return false;
-	}
 
 	//현재 gameId의 매칭을 취소 시도.
 	bool isSucceed = playerSessionRef->TryChangeMatchingState(expected, desired);

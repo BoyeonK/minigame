@@ -7,8 +7,8 @@ void TestMatchGameRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
 
 	for (auto& pd : pdv) {
-		shared_ptr<PlayerSession> playerSessionRef = pd._playerSessionRef.lock();
-		_playerWRefs.push_back(pd._playerSessionRef);
+		shared_ptr<PlayerSession> playerSessionRef = pd.playerSessionWRef.lock();
+		_playerWRefs.push_back(pd.playerSessionWRef);
 		if (playerSessionRef == nullptr) {
 			ready = false;
 			break;
@@ -75,7 +75,7 @@ void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {
 	vector<WatingPlayerData> rematchPd;
 
 	for (auto& pd : pdv) {
-		shared_ptr<PlayerSession> playerSessionRef = pd._playerSessionRef.lock();
+		shared_ptr<PlayerSession> playerSessionRef = pd.playerSessionWRef.lock();
 
 		if (playerSessionRef == nullptr) {
 			ready = false;
