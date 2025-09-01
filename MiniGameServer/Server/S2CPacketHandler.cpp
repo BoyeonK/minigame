@@ -214,7 +214,7 @@ bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol:
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
 	if (playerSessionRef == nullptr)
 		return false;
-	/*
+
 	if (playerSessionRef->GetMatchingState() != IntToGameType(pkt.gameid())) {
 		//모든 대기열에서 벗어난 상황임을 통보하고, 대기열 상태를 None으로 바꿈.
 		//클라이언트로 하여금 정상 상태로 돌아갈 수 있도록 노력
@@ -224,7 +224,7 @@ bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol:
 		playerSessionRef->SetMatchingState(GameType::None);
 		return false;
 	}
-	*/
+
 	playerSessionRef->SetLastKeepAliveTick(pkt.senttimetick());
 	return true;
 }

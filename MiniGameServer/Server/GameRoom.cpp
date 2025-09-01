@@ -52,8 +52,8 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 
 	if (canStart) {
 		//이제는 정말 게임을 진행할 것임.
-		//지금부터는 해당 플레이어의 게임종료 등의 이유로 세션이 유효하지 않더라도
-		//진행 가능한 방식으로 코드를 작성해야 함.
+		//지금부터는 해당 플레이어의 게임종료 등의 이유로 세션이 유효하지 않더라도 진행 가능한 방식으로 코드를 작성해야 함.
+		//지금부터 연결상태가 좋지 않으면 플레이어 책임으로 간주.
 		_state = GameState::BeforeStart;
 
 		//TODO : S_MatchMakeComplete 패킷을 broadcast해서 Scene변경을 유도 및, 로딩 진행 정도에 따라 C_GameSceneLoadingProgress패킷을 전송받음.
