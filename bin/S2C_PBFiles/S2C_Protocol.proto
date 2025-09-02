@@ -16,13 +16,15 @@ enum MsgId {
     C_LOGOUT = 9;
     S_LOGOUT = 10;
     C_MATCHMAKE_REQUEST = 11;
-    C_MATCHMAKE_CANCEL = 12;
-    S_MATCHMAKE_KEEP_ALIVE = 13;
-    C_MATCHMAKE_KEEP_ALIVE = 14;
-    S_REDO_MATCHMAKE = 15;
-    S_EXCLUDED_FROM_MATCH = 16;
-    S_MATCHMAKE_COMPLETED = 17;
-    C_GAME_SCENE_LOADING_PROGRESS = 18;
+    S_MATCHMAKE_REQUSET = 12;
+    C_MATCHMAKE_CANCEL = 13;
+    S_MATCHMAKE_CANCEL = 14;
+    S_MATCHMAKE_KEEP_ALIVE = 15;
+    C_MATCHMAKE_KEEP_ALIVE = 16;
+    S_REDO_MATCHMAKE = 17;
+    S_EXCLUDED_FROM_MATCH = 18;
+    S_MATCHMAKE_COMPLETED = 19;
+    C_GAME_SCENE_LOADING_PROGRESS = 20;
 }
 
 //최초에 TCP방식의 Connect가 성공하면 해당 session의 보안레벨은 '보안레벨 0'이다.
@@ -132,13 +134,19 @@ message S_Logout {
 }
 
 //매치메이킹 영역
-//1. (로그인이 완료된) 클라이언트에서 원하는 게임id를 담아 매치메이킹을 요청한다.
-//2. elo기준으로 적당한 인원조합을 꾸려 게임 룸을 만든다.
-    //2-1. 대기열을 elo순으로 정렬. 게임인원만큼의 모집단에서 분산이 허용elo 분산보다 낮은 조합을 찾고, 그 중에서 다시 분산이 가장 낮은 조합부터 매칭 시도.
-    //2-2. 해당 session이 살아있는지 확인하기 위해 매칭된 그룹에게 S_KeepAlive 패킷을 전송
-        //2-2-1. 모든 인원으로부터 C_KeepAlive패킷을 받은 경우 매칭완료 S_MatchCompleted
-        //2-2-2. 내가 아닌 '특정 인원'이 유효하지않아 매치메이킹이 재개됨 S_RedoMatchMake
-        //2-2-3. 그 '특정 인원'이 나임. S_ExcludedFromMatch 매치메이킹에서 제외됨.
+//1. (로그인이 완료된) 클라이언트에서 원하는 게임id를 담아 매치메이킹을 요청한다
+//2. 서버에서 매치메이킹 가능 여부를 판단 후 결과를 클라이언트에 전송
+    //2-1. 모종의 이유로 대기열 접속이 불가능 할 수 있음. (현재 진행중인 게임이 있을 경우(탈주자), 점검중인 경우 등을 고려)
+    //2-2. 성공한 경우, 클라이언트 및 서버에서 _matchState를 변경
+//3. 클라이언트의 요청에 의한 매치메이킹 종료
+    //3-1. 모종의 이유로 실패할 수 있음 (요청이 보내지는 과정에서 이미 매칭이 완료된 경우, 완료된 매칭을 우선으로 함.)
+    //3-2. 성공한 경우, 클라이언트 및 서버에서 _matchState변경
+//4. elo기준으로 적당한 인원조합을 꾸려 매칭을 완료. 이 플레이어들을 모아 게임 룸을 만든다.
+//대기열을 elo순으로 정렬. 게임인원만큼의 모집단에서 분산이 허용elo 분산보다 낮은 조합을 찾고, 그 중에서 다시 분산이 가장 낮은 조합부터 매칭 시도.
+    //4-1. 해당 session이 살아있는지 확인하기 위해 매칭된 그룹에게 S_KeepAlive 패킷을 전송
+        //4-1-1. 모든 인원으로부터 C_KeepAlive패킷을 받은 경우 매칭완료 S_MatchCompleted
+        //4-1-2. 내가 아닌 '특정 인원'이 유효하지않아 매치메이킹이 재개됨 S_RedoMatchMake
+        //4-1-3. 그 '특정 인원'이 나임. S_ExcludedFromMatch 매치메이킹에서 제외됨.
             //Session의 핑이 1000ms이상이거나 (S_KeepAlive에 대한 응답 C_KeepAlive가 1초 이상 걸림), 
             //C_MatchMakeCancel에 대한 패킷핸들러 함수가 동작했거나, (플레이어의 매칭 취소 요청)
 
@@ -147,9 +155,21 @@ message C_MatchmakeRequest {
     int32 gameId = 1;
 }
 
+//매칭 요청에 대한 처리 결과를 담은 응답
+message S_MatchmakeRequest {
+    int32 gameId = 1;
+    bool isSucceed = 2;
+}
+
 //클라이언트의 매칭 취소 요청
 message C_MatchmakeCancel {
     int32 gameId = 1;
+}
+
+//매칭취소 요청에 대한 처리 결과를 담은 응답
+message S_MatchmakeCancel {
+    int32 gameId = 1;
+    bool isSucceed = 2;
 }
 
 //올바른 조합을 찾았을 때, Session의 유효성 검사용
@@ -179,6 +199,8 @@ message S_MatchmakeCompleted {
     int32 gameId = 1;
 }
 
+//Scene을 변경하고, 게임 리소스의 로딩이 얼마나 진행됬는가를 서버에 전송
+//모든 인원으로부터 persentage 100의 응답을 받거나, 허용된 일정 시간이 초과한 경우 본격적으로 게임 시작.
 message C_GameSceneLoadingProgress {
     int32 persentage = 1;
 }
