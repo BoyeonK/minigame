@@ -52,11 +52,12 @@ bool Listener::StartAccept() {
 void Listener::RegisterAccept(AcceptTask* pAcceptTask) {
 	shared_ptr<Service> service = _serverServiceWRef.lock();
 	shared_ptr<Session> sessionRef = service->CreateSessionRef();
+
 	service = nullptr;
 
 	pAcceptTask->Init();
 	pAcceptTask->_sessionRef = sessionRef;
-	
+
 	DWORD bytesReceived;
 	if (false == SocketUtils::AcceptEx(
 		_socketHandle,
@@ -95,18 +96,18 @@ void Listener::Dispatch(CPTask* pCpTask, int32_t NumOfBytes) {
 }
 
 void Listener::ProcessAccept(AcceptTask* pAcceptTask) {
-	shared_ptr<Session> sessionRef = pAcceptTask->_sessionRef;
+	shared_ptr<Session> sessionRef = move(pAcceptTask->_sessionRef);
 
 	//Listener Socket과 동일한 옵션을 AcceptedSocket에 전달 시도
 	if (false == SocketUtils::SetUpdateAcceptSocket(sessionRef->GetSocket(), _socketHandle)) {
-		sessionRef == nullptr;
+		sessionRef = nullptr;
 		RegisterAccept(pAcceptTask);
 		return;
 	}
 	SOCKADDR_IN sockAddress;
 	int32_t sizeOfSockAddr = sizeof(sockAddress);
 	if (SOCKET_ERROR == ::getpeername(sessionRef->GetSocket(), reinterpret_cast<SOCKADDR*>(&sockAddress), &sizeOfSockAddr)) {
-		sessionRef == nullptr;
+		sessionRef = nullptr;
 		RegisterAccept(pAcceptTask);
 		return;
 	}
@@ -114,7 +115,7 @@ void Listener::ProcessAccept(AcceptTask* pAcceptTask) {
 	sessionRef->SetNetAddress(NetAddress(sockAddress));
 	shared_ptr<ServerService> service = _serverServiceWRef.lock();
 	if (service == nullptr) {
-		sessionRef == nullptr;
+		sessionRef = nullptr;
 		cout << "Invalid server service" << endl;
 		return;
 	}

@@ -8,6 +8,7 @@ Session::Session() : _RecvBuffer(BUFFER_SIZE) {
 }
 
 Session::~Session() {
+	cout << "Session Closed" << endl;
 	SocketUtils::Close(_socketHandle);
 }
 
@@ -175,6 +176,7 @@ void Session::ProcessConnect() {
 void Session::ProcessDisconnect() {
 	OnDisconnected();
 	GetService()->ReleaseSession(GetSessionRef());
+	cout << _DCT._OwnerRef.use_count() << " <- 이게 1이어야 함" << endl;
 	_DCT._OwnerRef = nullptr;
 }
 
