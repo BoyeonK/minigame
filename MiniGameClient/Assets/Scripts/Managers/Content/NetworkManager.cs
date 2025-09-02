@@ -5,6 +5,7 @@ using System;
 using System.Net;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static Define;
 
 public class NetworkManager {
@@ -16,7 +17,10 @@ public class NetworkManager {
 	private bool _isConnected = false;
 	
 	//매칭중인 게임 종류
-    private int _matchGameType = 0;
+    private GameType _matchGameType = GameType.None;
+	//중복 요청을 막기 위한 변수
+	private int _isMatchRequesting = 0;
+	private readonly object _lock = new object();
 
     public void Init() { }
 
@@ -110,34 +114,73 @@ public class NetworkManager {
     }
 
 	public void TryMatchMake(GameType gameType) {
-		int desired = (int)gameType;
-		int matchState = Interlocked.CompareExchange(ref _matchGameType, desired, 0);
-        //이전 값이 0이 아니었을 경우 (이미 매칭중이었을 경우) 아무것도 하지 않고 리턴.
-        if (matchState != 0) {
-			return;
-		}
-
-		C_Encrypted pkt = PacketMaker.MakeCMatchMakeRequest(_session, (int)gameType);
-		Send(pkt);
+		lock (_lock) {
+			if (_isMatchRequesting == 1 || _matchGameType != 0) {
+				return;
+			}
+			_isMatchRequesting = 1;
+        }
+        C_Encrypted pkt = PacketMaker.MakeCMatchMakeRequest(_session, (int)gameType);
+        Send(pkt);
     }
 
-    public void CancelMatchMake(int gameId) {
-		int matchState = Interlocked.CompareExchange(ref _matchGameType, 0, gameId);
-		//이미 다른 스레드에 의해 매칭 종료됨
-		if (matchState == gameId) {
-			C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_session, gameId);
-			Send(pkt);
+	public void ProcessMatchMake(int gameId) {
+		lock(_lock) { 
+			_matchGameType = IntToGameType(gameId);
+			_isMatchRequesting = 0;
 		}
+		//TODO : 현재 매칭중이라는 것을 UI로 표시하고, 매칭 취소버튼을 UI로 제공
+		Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 진입"); });
     }
 
-	public bool ResponseKeepAlive(int gameId) {
+	public void ProcessMatchMake(int gameId, string err) {
+		lock (_lock) {
+			_isMatchRequesting = 0;
+        }
+		Managers.ExecuteAtMainThread(() => { Managers.UI.ShowErrorUIOnlyConfirm(err); });
+    }
+
+    public void TryMatchMakeCancel() {
+		int gameId = 0;
+		lock (_lock) {
+            if (_isMatchRequesting == 1) {
+                return;
+            }
+			
+			_isMatchRequesting = 1;
+            gameId = (int)_matchGameType;
+        }
+        C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_session, gameId);
+        Send(pkt);
+    }
+
+	public void ProcessMatchMakeCancel(int gameId) {
+        lock (_lock) {
+            _isMatchRequesting = 0;
+            if (_matchGameType != IntToGameType(gameId)) 
+                return;
+
+			_matchGameType = GameType.None;
+        }
+        Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소"); });
+    }
+
+    public void ProcessMatchMakeCancel(int gameId, string err) {
+		lock (_lock) {
+			_isMatchRequesting = 0;
+		}
+        Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패"); });
+    }
+
+    /*
+    public bool ResponseKeepAlive(int gameId) {
 		int matchState = Interlocked.CompareExchange(ref _matchGameType, (int)GameType.InProgress, gameId);
 		if (matchState == gameId) {
 			return true;
 		}
 		return false;
 	}
-
+	
 	//이걸 받은 순간, 이미 서버에서는 대기열 밖으로 밀려난 상황.
 	public bool ResponseExcludedFromMatch()	{
 		int expected = _matchGameType;
@@ -152,7 +195,7 @@ public class NetworkManager {
 			expected = previousState;
         }
 	}
-
+	*/
     public void Update() {
 
 	}

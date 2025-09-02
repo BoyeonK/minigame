@@ -157,8 +157,9 @@ message C_MatchmakeRequest {
 
 //매칭 요청에 대한 처리 결과를 담은 응답
 message S_MatchmakeRequest {
-    int32 gameId = 1;
-    bool isSucceed = 2;
+    bool isSucceed = 1;
+    int32 gameId = 2;
+    string err = 3;
 }
 
 //클라이언트의 매칭 취소 요청
@@ -168,8 +169,9 @@ message C_MatchmakeCancel {
 
 //매칭취소 요청에 대한 처리 결과를 담은 응답
 message S_MatchmakeCancel {
-    int32 gameId = 1;
-    bool isSucceed = 2;
+    bool isSucceed = 1;
+    int32 gameId = 2;
+    string err = 3;
 }
 
 //올바른 조합을 찾았을 때, Session의 유효성 검사용
@@ -203,4 +205,14 @@ message S_MatchmakeCompleted {
 //모든 인원으로부터 persentage 100의 응답을 받거나, 허용된 일정 시간이 초과한 경우 본격적으로 게임 시작.
 message C_GameSceneLoadingProgress {
     int32 persentage = 1;
+}
+
+//세션의 종료 및 초기 화면으로 돌아가는것을 유도.
+message S_KillSession {
+    string err = 1;
+}
+
+//클라이언트의 종료를 유도
+message S_KillApplication {
+    string err = 1;
 }

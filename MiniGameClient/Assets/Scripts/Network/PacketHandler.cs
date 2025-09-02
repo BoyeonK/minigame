@@ -206,6 +206,7 @@ class PacketHandler {
 		}
 	}
 
+	//TODO : 세션을 초기화하는게 나을 것 같음.
 	public static void S_LogoutHandler(PacketSession session, IMessage packet) {
 		S_Logout recvPkt = packet as S_Logout;
 		bool isSucceed = recvPkt.Success;
@@ -227,20 +228,33 @@ class PacketHandler {
         }
 	}
 
+	public static void S_MatchmakeRequestHandler(PacketSession session, IMessage packet) {
+        S_MatchmakeRequest recvPkt = packet as S_MatchmakeRequest;
+		if (recvPkt.IsSucceed) {
+			Managers.Network.ProcessMatchMake(recvPkt.GameId);
+		} else {
+			Managers.Network.ProcessMatchMake(recvPkt.GameId, recvPkt.Err);
+		}
+    }
+
+	public static void S_MatchmakeCancelHandler(PacketSession session, IMessage packet) {
+        S_MatchmakeCancel recvPkt = packet as S_MatchmakeCancel;
+        if (recvPkt.IsSucceed) {
+            Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId);
+        }
+        else {
+            Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId ,recvPkt.Err);
+        }
+    }
+
 	public static void S_MatchmakeKeepAliveHandler(PacketSession session, IMessage packet) { 
 		S_MatchmakeKeepAlive recvPkt = packet as S_MatchmakeKeepAlive;
 		//내 세션이 찾는 중인 게임이 서버에서 찾았다고 한 게임과 같다면 응답.
-		if (Managers.Network.ResponseKeepAlive(recvPkt.GameId)) {
-            C_MatchmakeKeepAlive pkt = PacketMaker.MakeCMatchMakeKeepAlive(recvPkt.GameId, recvPkt.SentTimeTick);
-			Managers.Network.Send(pkt);
-		}
+
 	}
 
 	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) {
-		if (Managers.Network.ResponseExcludedFromMatch()) {
-			//TODO : 게임선택상태로 되돌림.
-			
-		}
+
 	}
 }
 

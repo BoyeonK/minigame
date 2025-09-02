@@ -107,6 +107,35 @@ struct S_RedoMatchmakeDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_RedoMatchmakeDefaultTypeInternal _S_RedoMatchmake_default_instance_;
 
+inline constexpr S_MatchmakeRequest::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : err_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        issucceed_{false},
+        gameid_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_MatchmakeRequest::S_MatchmakeRequest(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_MatchmakeRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_MatchmakeRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_MatchmakeRequestDefaultTypeInternal() {}
+  union {
+    S_MatchmakeRequest _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_MatchmakeRequestDefaultTypeInternal _S_MatchmakeRequest_default_instance_;
+
 inline constexpr S_MatchmakeKeepAlive::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : senttimetick_{::int64_t{0}},
@@ -158,6 +187,35 @@ struct S_MatchmakeCompletedDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_MatchmakeCompletedDefaultTypeInternal _S_MatchmakeCompleted_default_instance_;
 
+inline constexpr S_MatchmakeCancel::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : err_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        issucceed_{false},
+        gameid_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_MatchmakeCancel::S_MatchmakeCancel(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_MatchmakeCancelDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_MatchmakeCancelDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_MatchmakeCancelDefaultTypeInternal() {}
+  union {
+    S_MatchmakeCancel _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_MatchmakeCancelDefaultTypeInternal _S_MatchmakeCancel_default_instance_;
+
 inline constexpr S_Logout::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : success_{false},
@@ -208,6 +266,60 @@ struct S_LoginDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_LoginDefaultTypeInternal _S_Login_default_instance_;
+
+inline constexpr S_KillSession::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : err_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_KillSession::S_KillSession(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_KillSessionDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_KillSessionDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_KillSessionDefaultTypeInternal() {}
+  union {
+    S_KillSession _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_KillSessionDefaultTypeInternal _S_KillSession_default_instance_;
+
+inline constexpr S_KillApplication::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : err_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_KillApplication::S_KillApplication(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_KillApplicationDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_KillApplicationDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_KillApplicationDefaultTypeInternal() {}
+  union {
+    S_KillApplication _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_KillApplicationDefaultTypeInternal _S_KillApplication_default_instance_;
 
 inline constexpr S_ExcludedFromMatch::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -675,6 +787,17 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_MatchmakeRequest, _impl_.gameid_),
         ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeRequest, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeRequest, _impl_.issucceed_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeRequest, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeRequest, _impl_.err_),
+        ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_MatchmakeCancel, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -683,6 +806,17 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_MatchmakeCancel, _impl_.gameid_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeCancel, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeCancel, _impl_.issucceed_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeCancel, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeCancel, _impl_.err_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_MatchmakeKeepAlive, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -739,6 +873,24 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_GameSceneLoadingProgress, _impl_.persentage_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_KillSession, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_KillSession, _impl_.err_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_KillApplication, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_KillApplication, _impl_.err_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -755,13 +907,17 @@ static const ::_pbi::MigrationSchema
         {95, -1, -1, sizeof(::S2C_Protocol::C_Logout)},
         {104, -1, -1, sizeof(::S2C_Protocol::S_Logout)},
         {113, -1, -1, sizeof(::S2C_Protocol::C_MatchmakeRequest)},
-        {122, -1, -1, sizeof(::S2C_Protocol::C_MatchmakeCancel)},
-        {131, -1, -1, sizeof(::S2C_Protocol::S_MatchmakeKeepAlive)},
-        {141, -1, -1, sizeof(::S2C_Protocol::C_MatchmakeKeepAlive)},
-        {151, -1, -1, sizeof(::S2C_Protocol::S_RedoMatchmake)},
-        {160, -1, -1, sizeof(::S2C_Protocol::S_ExcludedFromMatch)},
-        {169, -1, -1, sizeof(::S2C_Protocol::S_MatchmakeCompleted)},
-        {178, -1, -1, sizeof(::S2C_Protocol::C_GameSceneLoadingProgress)},
+        {122, -1, -1, sizeof(::S2C_Protocol::S_MatchmakeRequest)},
+        {133, -1, -1, sizeof(::S2C_Protocol::C_MatchmakeCancel)},
+        {142, -1, -1, sizeof(::S2C_Protocol::S_MatchmakeCancel)},
+        {153, -1, -1, sizeof(::S2C_Protocol::S_MatchmakeKeepAlive)},
+        {163, -1, -1, sizeof(::S2C_Protocol::C_MatchmakeKeepAlive)},
+        {173, -1, -1, sizeof(::S2C_Protocol::S_RedoMatchmake)},
+        {182, -1, -1, sizeof(::S2C_Protocol::S_ExcludedFromMatch)},
+        {191, -1, -1, sizeof(::S2C_Protocol::S_MatchmakeCompleted)},
+        {200, -1, -1, sizeof(::S2C_Protocol::C_GameSceneLoadingProgress)},
+        {209, -1, -1, sizeof(::S2C_Protocol::S_KillSession)},
+        {218, -1, -1, sizeof(::S2C_Protocol::S_KillApplication)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_Welcome_default_instance_._instance,
@@ -776,13 +932,17 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_C_Logout_default_instance_._instance,
     &::S2C_Protocol::_S_Logout_default_instance_._instance,
     &::S2C_Protocol::_C_MatchmakeRequest_default_instance_._instance,
+    &::S2C_Protocol::_S_MatchmakeRequest_default_instance_._instance,
     &::S2C_Protocol::_C_MatchmakeCancel_default_instance_._instance,
+    &::S2C_Protocol::_S_MatchmakeCancel_default_instance_._instance,
     &::S2C_Protocol::_S_MatchmakeKeepAlive_default_instance_._instance,
     &::S2C_Protocol::_C_MatchmakeKeepAlive_default_instance_._instance,
     &::S2C_Protocol::_S_RedoMatchmake_default_instance_._instance,
     &::S2C_Protocol::_S_ExcludedFromMatch_default_instance_._instance,
     &::S2C_Protocol::_S_MatchmakeCompleted_default_instance_._instance,
     &::S2C_Protocol::_C_GameSceneLoadingProgress_default_instance_._instance,
+    &::S2C_Protocol::_S_KillSession_default_instance_._instance,
+    &::S2C_Protocol::_S_KillApplication_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2C_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -801,39 +961,45 @@ const char descriptor_table_protodef_S2C_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SEC
     " \001(\t\"/\n\017S_CreateAccount\022\017\n\007success\030\001 \001(\010"
     "\022\013\n\003err\030\002 \001(\t\"\030\n\010C_Logout\022\014\n\004dbid\030\001 \001(\005\""
     "\033\n\010S_Logout\022\017\n\007success\030\001 \001(\010\"$\n\022C_Matchm"
-    "akeRequest\022\016\n\006gameId\030\001 \001(\005\"#\n\021C_Matchmak"
-    "eCancel\022\016\n\006gameId\030\001 \001(\005\"<\n\024S_MatchmakeKe"
-    "epAlive\022\016\n\006gameId\030\001 \001(\005\022\024\n\014sentTimeTick\030"
-    "\002 \001(\003\"<\n\024C_MatchmakeKeepAlive\022\016\n\006gameId\030"
-    "\001 \001(\005\022\024\n\014sentTimeTick\030\002 \001(\003\"!\n\017S_RedoMat"
-    "chmake\022\016\n\006gameId\030\001 \001(\005\",\n\023S_ExcludedFrom"
-    "Match\022\025\n\risUserRequest\030\001 \001(\010\"&\n\024S_Matchm"
-    "akeCompleted\022\016\n\006gameId\030\001 \001(\005\"0\n\032C_GameSc"
-    "eneLoadingProgress\022\022\n\npersentage\030\001 \001(\005*\231"
-    "\003\n\005MsgId\022\r\n\tS_WELCOME\020\000\022\r\n\tC_WELCOME\020\001\022\026"
-    "\n\022S_WELCOME_RESPONSE\020\002\022\017\n\013S_ENCRYPTED\020\003\022"
-    "\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_LOGIN\020\005\022\013\n\007S_LOGIN"
-    "\020\006\022\024\n\020C_CREATE_ACCOUNT\020\007\022\024\n\020S_CREATE_ACC"
-    "OUNT\020\010\022\014\n\010C_LOGOUT\020\t\022\014\n\010S_LOGOUT\020\n\022\027\n\023C_"
-    "MATCHMAKE_REQUEST\020\013\022\026\n\022C_MATCHMAKE_CANCE"
-    "L\020\014\022\032\n\026S_MATCHMAKE_KEEP_ALIVE\020\r\022\032\n\026C_MAT"
-    "CHMAKE_KEEP_ALIVE\020\016\022\024\n\020S_REDO_MATCHMAKE\020"
-    "\017\022\031\n\025S_EXCLUDED_FROM_MATCH\020\020\022\031\n\025S_MATCHM"
-    "AKE_COMPLETED\020\021\022!\n\035C_GAME_SCENE_LOADING_"
-    "PROGRESS\020\022B\033\252\002\030Google.Protobuf.Protocolb"
-    "\006proto3"
+    "akeRequest\022\016\n\006gameId\030\001 \001(\005\"D\n\022S_Matchmak"
+    "eRequest\022\021\n\tisSucceed\030\001 \001(\010\022\016\n\006gameId\030\002 "
+    "\001(\005\022\013\n\003err\030\003 \001(\t\"#\n\021C_MatchmakeCancel\022\016\n"
+    "\006gameId\030\001 \001(\005\"C\n\021S_MatchmakeCancel\022\021\n\tis"
+    "Succeed\030\001 \001(\010\022\016\n\006gameId\030\002 \001(\005\022\013\n\003err\030\003 \001"
+    "(\t\"<\n\024S_MatchmakeKeepAlive\022\016\n\006gameId\030\001 \001"
+    "(\005\022\024\n\014sentTimeTick\030\002 \001(\003\"<\n\024C_MatchmakeK"
+    "eepAlive\022\016\n\006gameId\030\001 \001(\005\022\024\n\014sentTimeTick"
+    "\030\002 \001(\003\"!\n\017S_RedoMatchmake\022\016\n\006gameId\030\001 \001("
+    "\005\",\n\023S_ExcludedFromMatch\022\025\n\risUserReques"
+    "t\030\001 \001(\010\"&\n\024S_MatchmakeCompleted\022\016\n\006gameI"
+    "d\030\001 \001(\005\"0\n\032C_GameSceneLoadingProgress\022\022\n"
+    "\npersentage\030\001 \001(\005\"\034\n\rS_KillSession\022\013\n\003er"
+    "r\030\001 \001(\t\" \n\021S_KillApplication\022\013\n\003err\030\001 \001("
+    "\t*\312\003\n\005MsgId\022\r\n\tS_WELCOME\020\000\022\r\n\tC_WELCOME\020"
+    "\001\022\026\n\022S_WELCOME_RESPONSE\020\002\022\017\n\013S_ENCRYPTED"
+    "\020\003\022\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_LOGIN\020\005\022\013\n\007S_LO"
+    "GIN\020\006\022\024\n\020C_CREATE_ACCOUNT\020\007\022\024\n\020S_CREATE_"
+    "ACCOUNT\020\010\022\014\n\010C_LOGOUT\020\t\022\014\n\010S_LOGOUT\020\n\022\027\n"
+    "\023C_MATCHMAKE_REQUEST\020\013\022\027\n\023S_MATCHMAKE_RE"
+    "QUSET\020\014\022\026\n\022C_MATCHMAKE_CANCEL\020\r\022\026\n\022S_MAT"
+    "CHMAKE_CANCEL\020\016\022\032\n\026S_MATCHMAKE_KEEP_ALIV"
+    "E\020\017\022\032\n\026C_MATCHMAKE_KEEP_ALIVE\020\020\022\024\n\020S_RED"
+    "O_MATCHMAKE\020\021\022\031\n\025S_EXCLUDED_FROM_MATCH\020\022"
+    "\022\031\n\025S_MATCHMAKE_COMPLETED\020\023\022!\n\035C_GAME_SC"
+    "ENE_LOADING_PROGRESS\020\024B\033\252\002\030Google.Protob"
+    "uf.Protocolb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_2eproto = {
     false,
     false,
-    1407,
+    1659,
     descriptor_table_protodef_S2C_5fProtocol_2eproto,
     "S2C_Protocol.proto",
     &descriptor_table_S2C_5fProtocol_2eproto_once,
     nullptr,
     0,
-    19,
+    23,
     schemas,
     file_default_instances,
     TableStruct_S2C_5fProtocol_2eproto::offsets,
@@ -846,9 +1012,9 @@ const ::google::protobuf::EnumDescriptor* MsgId_descriptor() {
   return file_level_enum_descriptors_S2C_5fProtocol_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t MsgId_internal_data_[] = {
-    1245184u, 0u, };
+    1376256u, 0u, };
 bool MsgId_IsValid(int value) {
-  return 0 <= value && value <= 18;
+  return 0 <= value && value <= 20;
 }
 // ===================================================================
 
@@ -3927,6 +4093,302 @@ void C_MatchmakeRequest::InternalSwap(C_MatchmakeRequest* PROTOBUF_RESTRICT othe
 }
 // ===================================================================
 
+class S_MatchmakeRequest::_Internal {
+ public:
+};
+
+S_MatchmakeRequest::S_MatchmakeRequest(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_MatchmakeRequest)
+}
+inline PROTOBUF_NDEBUG_INLINE S_MatchmakeRequest::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_MatchmakeRequest& from_msg)
+      : err_(arena, from.err_),
+        _cached_size_{0} {}
+
+S_MatchmakeRequest::S_MatchmakeRequest(
+    ::google::protobuf::Arena* arena,
+    const S_MatchmakeRequest& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_MatchmakeRequest* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, issucceed_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, issucceed_),
+           offsetof(Impl_, gameid_) -
+               offsetof(Impl_, issucceed_) +
+               sizeof(Impl_::gameid_));
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_MatchmakeRequest)
+}
+inline PROTOBUF_NDEBUG_INLINE S_MatchmakeRequest::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : err_(arena),
+        _cached_size_{0} {}
+
+inline void S_MatchmakeRequest::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, issucceed_),
+           0,
+           offsetof(Impl_, gameid_) -
+               offsetof(Impl_, issucceed_) +
+               sizeof(Impl_::gameid_));
+}
+S_MatchmakeRequest::~S_MatchmakeRequest() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_MatchmakeRequest)
+  SharedDtor(*this);
+}
+inline void S_MatchmakeRequest::SharedDtor(MessageLite& self) {
+  S_MatchmakeRequest& this_ = static_cast<S_MatchmakeRequest&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.err_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* S_MatchmakeRequest::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_MatchmakeRequest(arena);
+}
+constexpr auto S_MatchmakeRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(S_MatchmakeRequest),
+                                            alignof(S_MatchmakeRequest));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_MatchmakeRequest::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_MatchmakeRequest_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_MatchmakeRequest::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_MatchmakeRequest>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_MatchmakeRequest::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_MatchmakeRequest>(), &S_MatchmakeRequest::ByteSizeLong,
+            &S_MatchmakeRequest::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_._cached_size_),
+        false,
+    },
+    &S_MatchmakeRequest::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_MatchmakeRequest::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 43, 2> S_MatchmakeRequest::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_MatchmakeRequest>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // bool isSucceed = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(S_MatchmakeRequest, _impl_.issucceed_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_.issucceed_)}},
+    // int32 gameId = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_MatchmakeRequest, _impl_.gameid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_.gameid_)}},
+    // string err = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_.err_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool isSucceed = 1;
+    {PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_.issucceed_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+    // int32 gameId = 2;
+    {PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_.gameid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string err = 3;
+    {PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_.err_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\37\0\0\3\0\0\0\0"
+    "S2C_Protocol.S_MatchmakeRequest"
+    "err"
+  }},
+};
+
+PROTOBUF_NOINLINE void S_MatchmakeRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_MatchmakeRequest)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.err_.ClearToEmpty();
+  ::memset(&_impl_.issucceed_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.gameid_) -
+      reinterpret_cast<char*>(&_impl_.issucceed_)) + sizeof(_impl_.gameid_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_MatchmakeRequest::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_MatchmakeRequest& this_ = static_cast<const S_MatchmakeRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_MatchmakeRequest::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_MatchmakeRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_MatchmakeRequest)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool isSucceed = 1;
+          if (this_._internal_issucceed() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_issucceed(), target);
+          }
+
+          // int32 gameId = 2;
+          if (this_._internal_gameid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_gameid(), target);
+          }
+
+          // string err = 3;
+          if (!this_._internal_err().empty()) {
+            const std::string& _s = this_._internal_err();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.S_MatchmakeRequest.err");
+            target = stream->WriteStringMaybeAliased(3, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_MatchmakeRequest)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_MatchmakeRequest::ByteSizeLong(const MessageLite& base) {
+          const S_MatchmakeRequest& this_ = static_cast<const S_MatchmakeRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_MatchmakeRequest::ByteSizeLong() const {
+          const S_MatchmakeRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_MatchmakeRequest)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string err = 3;
+            if (!this_._internal_err().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_err());
+            }
+            // bool isSucceed = 1;
+            if (this_._internal_issucceed() != 0) {
+              total_size += 2;
+            }
+            // int32 gameId = 2;
+            if (this_._internal_gameid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_gameid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_MatchmakeRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_MatchmakeRequest*>(&to_msg);
+  auto& from = static_cast<const S_MatchmakeRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_MatchmakeRequest)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_err().empty()) {
+    _this->_internal_set_err(from._internal_err());
+  }
+  if (from._internal_issucceed() != 0) {
+    _this->_impl_.issucceed_ = from._impl_.issucceed_;
+  }
+  if (from._internal_gameid() != 0) {
+    _this->_impl_.gameid_ = from._impl_.gameid_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_MatchmakeRequest::CopyFrom(const S_MatchmakeRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_MatchmakeRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_MatchmakeRequest::InternalSwap(S_MatchmakeRequest* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.err_, &other->_impl_.err_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_.gameid_)
+      + sizeof(S_MatchmakeRequest::_impl_.gameid_)
+      - PROTOBUF_FIELD_OFFSET(S_MatchmakeRequest, _impl_.issucceed_)>(
+          reinterpret_cast<char*>(&_impl_.issucceed_),
+          reinterpret_cast<char*>(&other->_impl_.issucceed_));
+}
+
+::google::protobuf::Metadata S_MatchmakeRequest::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
 class C_MatchmakeCancel::_Internal {
  public:
 };
@@ -4130,6 +4592,302 @@ void C_MatchmakeCancel::InternalSwap(C_MatchmakeCancel* PROTOBUF_RESTRICT other)
 }
 
 ::google::protobuf::Metadata C_MatchmakeCancel::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_MatchmakeCancel::_Internal {
+ public:
+};
+
+S_MatchmakeCancel::S_MatchmakeCancel(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_MatchmakeCancel)
+}
+inline PROTOBUF_NDEBUG_INLINE S_MatchmakeCancel::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_MatchmakeCancel& from_msg)
+      : err_(arena, from.err_),
+        _cached_size_{0} {}
+
+S_MatchmakeCancel::S_MatchmakeCancel(
+    ::google::protobuf::Arena* arena,
+    const S_MatchmakeCancel& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_MatchmakeCancel* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, issucceed_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, issucceed_),
+           offsetof(Impl_, gameid_) -
+               offsetof(Impl_, issucceed_) +
+               sizeof(Impl_::gameid_));
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_MatchmakeCancel)
+}
+inline PROTOBUF_NDEBUG_INLINE S_MatchmakeCancel::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : err_(arena),
+        _cached_size_{0} {}
+
+inline void S_MatchmakeCancel::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, issucceed_),
+           0,
+           offsetof(Impl_, gameid_) -
+               offsetof(Impl_, issucceed_) +
+               sizeof(Impl_::gameid_));
+}
+S_MatchmakeCancel::~S_MatchmakeCancel() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_MatchmakeCancel)
+  SharedDtor(*this);
+}
+inline void S_MatchmakeCancel::SharedDtor(MessageLite& self) {
+  S_MatchmakeCancel& this_ = static_cast<S_MatchmakeCancel&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.err_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* S_MatchmakeCancel::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_MatchmakeCancel(arena);
+}
+constexpr auto S_MatchmakeCancel::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(S_MatchmakeCancel),
+                                            alignof(S_MatchmakeCancel));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_MatchmakeCancel::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_MatchmakeCancel_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_MatchmakeCancel::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_MatchmakeCancel>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_MatchmakeCancel::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_MatchmakeCancel>(), &S_MatchmakeCancel::ByteSizeLong,
+            &S_MatchmakeCancel::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_._cached_size_),
+        false,
+    },
+    &S_MatchmakeCancel::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_MatchmakeCancel::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 42, 2> S_MatchmakeCancel::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_MatchmakeCancel>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // bool isSucceed = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(S_MatchmakeCancel, _impl_.issucceed_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_.issucceed_)}},
+    // int32 gameId = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_MatchmakeCancel, _impl_.gameid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_.gameid_)}},
+    // string err = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_.err_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool isSucceed = 1;
+    {PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_.issucceed_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+    // int32 gameId = 2;
+    {PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_.gameid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string err = 3;
+    {PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_.err_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\36\0\0\3\0\0\0\0"
+    "S2C_Protocol.S_MatchmakeCancel"
+    "err"
+  }},
+};
+
+PROTOBUF_NOINLINE void S_MatchmakeCancel::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_MatchmakeCancel)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.err_.ClearToEmpty();
+  ::memset(&_impl_.issucceed_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.gameid_) -
+      reinterpret_cast<char*>(&_impl_.issucceed_)) + sizeof(_impl_.gameid_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_MatchmakeCancel::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_MatchmakeCancel& this_ = static_cast<const S_MatchmakeCancel&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_MatchmakeCancel::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_MatchmakeCancel& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_MatchmakeCancel)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool isSucceed = 1;
+          if (this_._internal_issucceed() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_issucceed(), target);
+          }
+
+          // int32 gameId = 2;
+          if (this_._internal_gameid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_gameid(), target);
+          }
+
+          // string err = 3;
+          if (!this_._internal_err().empty()) {
+            const std::string& _s = this_._internal_err();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.S_MatchmakeCancel.err");
+            target = stream->WriteStringMaybeAliased(3, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_MatchmakeCancel)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_MatchmakeCancel::ByteSizeLong(const MessageLite& base) {
+          const S_MatchmakeCancel& this_ = static_cast<const S_MatchmakeCancel&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_MatchmakeCancel::ByteSizeLong() const {
+          const S_MatchmakeCancel& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_MatchmakeCancel)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string err = 3;
+            if (!this_._internal_err().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_err());
+            }
+            // bool isSucceed = 1;
+            if (this_._internal_issucceed() != 0) {
+              total_size += 2;
+            }
+            // int32 gameId = 2;
+            if (this_._internal_gameid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_gameid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_MatchmakeCancel::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_MatchmakeCancel*>(&to_msg);
+  auto& from = static_cast<const S_MatchmakeCancel&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_MatchmakeCancel)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_err().empty()) {
+    _this->_internal_set_err(from._internal_err());
+  }
+  if (from._internal_issucceed() != 0) {
+    _this->_impl_.issucceed_ = from._impl_.issucceed_;
+  }
+  if (from._internal_gameid() != 0) {
+    _this->_impl_.gameid_ = from._impl_.gameid_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_MatchmakeCancel::CopyFrom(const S_MatchmakeCancel& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_MatchmakeCancel)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_MatchmakeCancel::InternalSwap(S_MatchmakeCancel* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.err_, &other->_impl_.err_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_.gameid_)
+      + sizeof(S_MatchmakeCancel::_impl_.gameid_)
+      - PROTOBUF_FIELD_OFFSET(S_MatchmakeCancel, _impl_.issucceed_)>(
+          reinterpret_cast<char*>(&_impl_.issucceed_),
+          reinterpret_cast<char*>(&other->_impl_.issucceed_));
+}
+
+::google::protobuf::Metadata S_MatchmakeCancel::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -5439,6 +6197,468 @@ void C_GameSceneLoadingProgress::InternalSwap(C_GameSceneLoadingProgress* PROTOB
 }
 
 ::google::protobuf::Metadata C_GameSceneLoadingProgress::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_KillSession::_Internal {
+ public:
+};
+
+S_KillSession::S_KillSession(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_KillSession)
+}
+inline PROTOBUF_NDEBUG_INLINE S_KillSession::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_KillSession& from_msg)
+      : err_(arena, from.err_),
+        _cached_size_{0} {}
+
+S_KillSession::S_KillSession(
+    ::google::protobuf::Arena* arena,
+    const S_KillSession& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_KillSession* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_KillSession)
+}
+inline PROTOBUF_NDEBUG_INLINE S_KillSession::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : err_(arena),
+        _cached_size_{0} {}
+
+inline void S_KillSession::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+S_KillSession::~S_KillSession() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_KillSession)
+  SharedDtor(*this);
+}
+inline void S_KillSession::SharedDtor(MessageLite& self) {
+  S_KillSession& this_ = static_cast<S_KillSession&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.err_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* S_KillSession::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_KillSession(arena);
+}
+constexpr auto S_KillSession::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(S_KillSession),
+                                            alignof(S_KillSession));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_KillSession::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_KillSession_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_KillSession::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_KillSession>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_KillSession::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_KillSession>(), &S_KillSession::ByteSizeLong,
+            &S_KillSession::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_KillSession, _impl_._cached_size_),
+        false,
+    },
+    &S_KillSession::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_KillSession::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 38, 2> S_KillSession::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_KillSession>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string err = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(S_KillSession, _impl_.err_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string err = 1;
+    {PROTOBUF_FIELD_OFFSET(S_KillSession, _impl_.err_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\32\3\0\0\0\0\0\0"
+    "S2C_Protocol.S_KillSession"
+    "err"
+  }},
+};
+
+PROTOBUF_NOINLINE void S_KillSession::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_KillSession)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.err_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_KillSession::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_KillSession& this_ = static_cast<const S_KillSession&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_KillSession::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_KillSession& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_KillSession)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string err = 1;
+          if (!this_._internal_err().empty()) {
+            const std::string& _s = this_._internal_err();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.S_KillSession.err");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_KillSession)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_KillSession::ByteSizeLong(const MessageLite& base) {
+          const S_KillSession& this_ = static_cast<const S_KillSession&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_KillSession::ByteSizeLong() const {
+          const S_KillSession& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_KillSession)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // string err = 1;
+            if (!this_._internal_err().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_err());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_KillSession::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_KillSession*>(&to_msg);
+  auto& from = static_cast<const S_KillSession&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_KillSession)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_err().empty()) {
+    _this->_internal_set_err(from._internal_err());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_KillSession::CopyFrom(const S_KillSession& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_KillSession)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_KillSession::InternalSwap(S_KillSession* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.err_, &other->_impl_.err_, arena);
+}
+
+::google::protobuf::Metadata S_KillSession::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_KillApplication::_Internal {
+ public:
+};
+
+S_KillApplication::S_KillApplication(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_KillApplication)
+}
+inline PROTOBUF_NDEBUG_INLINE S_KillApplication::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_KillApplication& from_msg)
+      : err_(arena, from.err_),
+        _cached_size_{0} {}
+
+S_KillApplication::S_KillApplication(
+    ::google::protobuf::Arena* arena,
+    const S_KillApplication& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_KillApplication* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_KillApplication)
+}
+inline PROTOBUF_NDEBUG_INLINE S_KillApplication::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : err_(arena),
+        _cached_size_{0} {}
+
+inline void S_KillApplication::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+S_KillApplication::~S_KillApplication() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_KillApplication)
+  SharedDtor(*this);
+}
+inline void S_KillApplication::SharedDtor(MessageLite& self) {
+  S_KillApplication& this_ = static_cast<S_KillApplication&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.err_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* S_KillApplication::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_KillApplication(arena);
+}
+constexpr auto S_KillApplication::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(S_KillApplication),
+                                            alignof(S_KillApplication));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_KillApplication::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_KillApplication_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_KillApplication::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_KillApplication>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_KillApplication::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_KillApplication>(), &S_KillApplication::ByteSizeLong,
+            &S_KillApplication::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_KillApplication, _impl_._cached_size_),
+        false,
+    },
+    &S_KillApplication::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_KillApplication::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 42, 2> S_KillApplication::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_KillApplication>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string err = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(S_KillApplication, _impl_.err_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string err = 1;
+    {PROTOBUF_FIELD_OFFSET(S_KillApplication, _impl_.err_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\36\3\0\0\0\0\0\0"
+    "S2C_Protocol.S_KillApplication"
+    "err"
+  }},
+};
+
+PROTOBUF_NOINLINE void S_KillApplication::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_KillApplication)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.err_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_KillApplication::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_KillApplication& this_ = static_cast<const S_KillApplication&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_KillApplication::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_KillApplication& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_KillApplication)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string err = 1;
+          if (!this_._internal_err().empty()) {
+            const std::string& _s = this_._internal_err();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.S_KillApplication.err");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_KillApplication)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_KillApplication::ByteSizeLong(const MessageLite& base) {
+          const S_KillApplication& this_ = static_cast<const S_KillApplication&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_KillApplication::ByteSizeLong() const {
+          const S_KillApplication& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_KillApplication)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // string err = 1;
+            if (!this_._internal_err().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_err());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_KillApplication::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_KillApplication*>(&to_msg);
+  auto& from = static_cast<const S_KillApplication&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_KillApplication)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_err().empty()) {
+    _this->_internal_set_err(from._internal_err());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_KillApplication::CopyFrom(const S_KillApplication& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_KillApplication)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_KillApplication::InternalSwap(S_KillApplication* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.err_, &other->_impl_.err_, arena);
+}
+
+::google::protobuf::Metadata S_KillApplication::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
