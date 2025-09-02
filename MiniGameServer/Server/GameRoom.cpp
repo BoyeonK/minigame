@@ -52,7 +52,7 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 
 		//C_KeepAlive Handler함수에 의해서 lastTick이 변화하지 않았다면,
 		//유효하지 않은 플레이어로 간주하고, 모두 대기열로 돌려보냄.
-		if (now - lastTick > 1000) {
+		if (now - lastTick > 2000) {
 			canStart = false;
 		}
 	}
@@ -68,6 +68,7 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		Start();
 	}
 	else {
+		cout << "영 좋지 않음" << endl;
 		GGameManagers[1]->Push(pdv);
 		_state = GameState::EndGame;
 	}
