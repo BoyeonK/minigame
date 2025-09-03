@@ -231,19 +231,19 @@ class PacketHandler {
 	public static void S_MatchmakeRequestHandler(PacketSession session, IMessage packet) {
         S_MatchmakeRequest recvPkt = packet as S_MatchmakeRequest;
 		if (recvPkt.IsSucceed) {
-			Managers.Network.ProcessMatchMake(recvPkt.GameId);
+			Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessMatchMake(recvPkt.GameId); });
 		} else {
-			Managers.Network.ProcessMatchMake(recvPkt.GameId, recvPkt.Err);
+            Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessMatchMake(recvPkt.GameId, recvPkt.Err); ; });
 		}
     }
 
 	public static void S_MatchmakeCancelHandler(PacketSession session, IMessage packet) {
         S_MatchmakeCancel recvPkt = packet as S_MatchmakeCancel;
         if (recvPkt.IsSucceed) {
-            Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId);
+			Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId); });
         }
         else {
-            Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId ,recvPkt.Err);
+            Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId, recvPkt.Err); ; });
         }
     }
 

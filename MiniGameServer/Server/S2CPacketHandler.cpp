@@ -157,6 +157,13 @@ bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& p
 	return isSucceed;
 }
 
+bool Handle_C_MatchmakeRequestInternal(shared_ptr<PlayerSession> playerSessionRef, bool isSucceed, int gameId, const string& err) {
+	S2C_Protocol::S_MatchmakeRequest responsePkt = S2CPacketMaker::MakeSMatchmakeRequest(isSucceed, gameId, err);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(responsePkt);
+	playerSessionRef->Send(sendBuffer);
+	return isSucceed;
+}
+
 bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeRequest& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
 
@@ -191,8 +198,8 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	return Handle_C_MatchmakeRequestInternal(playerSessionRef, true, pkt.gameid(), "");
 }
 
-bool Handle_C_MatchmakeRequestInternal(shared_ptr<PlayerSession> playerSessionRef, bool isSucceed, int gameId, const string& err) {
-	S2C_Protocol::S_MatchmakeRequest responsePkt = S2CPacketMaker::MakeSMatchmakeRequest(isSucceed, gameId, err);
+bool Handle_C_MatchmakeCancelInternal(shared_ptr<PlayerSession> playerSessionRef, bool isSucceed, int gameId, const string& err) {
+	S2C_Protocol::S_MatchmakeCancel responsePkt = S2CPacketMaker::MakeSMatchmakeCancel(isSucceed, gameId, err);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(responsePkt);
 	playerSessionRef->Send(sendBuffer);
 	return isSucceed;
@@ -204,23 +211,16 @@ bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_
 	GameType expected = IntToGameType(pkt.gameid());
 	GameType desired = GameType::None;
 	if (expected == GameType::Undefined) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "유효한 gameId가 아님");
+		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), "유효한 gameId가 아님");
 	}
 		
 	//현재 gameId의 매칭을 취소 시도.
 	if (!playerSessionRef->TryChangeMatchingState(expected, desired)) {
 		//매치 완료가 선행된 경우와 동기화 문제인 경우로 쪼개야 함.
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "매치 완료된 큐가 있거나, 동기화 문제");
+		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), "매치 완료된 큐가 있거나, 동기화 문제");
 	}
 
-	return Handle_C_MatchmakeRequestInternal(playerSessionRef, true, pkt.gameid(), "");
-}
-
-bool Handle_C_MatchmakeCancelInternal(shared_ptr<PlayerSession> playerSessionRef, bool isSucceed, int gameId, const string& err) {
-	S2C_Protocol::S_MatchmakeCancel responsePkt = S2CPacketMaker::MakeSMatchmakeCancel(isSucceed, gameId, err);
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(responsePkt);
-	playerSessionRef->Send(sendBuffer);
-	return isSucceed;
+	return Handle_C_MatchmakeCancelInternal(playerSessionRef, true, pkt.gameid(), "");
 }
 
 bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeKeepAlive& pkt) {

@@ -48,6 +48,14 @@ class PacketManager {
         _handler.Add((ushort)MsgId.SLogout, PacketHandler.S_LogoutHandler);
         _msgFactories.Add((ushort)MsgId.SLogout, () => new S_Logout());
 
+        _onRecv.Add((ushort)MsgId.SMatchmakeRequest, UnpackPacket<S_MatchmakeRequest>);
+        _handler.Add((ushort)MsgId.SMatchmakeRequest, PacketHandler.S_MatchmakeRequestHandler);
+        _msgFactories.Add((ushort)MsgId.SMatchmakeRequest, () => new S_MatchmakeRequest());
+
+        _onRecv.Add((ushort)MsgId.SMatchmakeCancel, UnpackPacket<S_MatchmakeCancel>);
+        _handler.Add((ushort)MsgId.SMatchmakeCancel, PacketHandler.S_MatchmakeCancelHandler);
+        _msgFactories.Add((ushort)MsgId.SMatchmakeCancel, () => new S_MatchmakeCancel());
+
         _onRecv.Add((ushort)MsgId.SMatchmakeKeepAlive, UnpackPacket<S_MatchmakeKeepAlive>);
         _handler.Add((ushort)MsgId.SMatchmakeKeepAlive, PacketHandler.S_MatchmakeKeepAliveHandler);
         _msgFactories.Add((ushort)MsgId.SMatchmakeKeepAlive, () => new S_MatchmakeKeepAlive());

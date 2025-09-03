@@ -62,7 +62,7 @@ protected:
 
 class TestMatchManager : public GameManager {
 public:
-	TestMatchManager() : _ty(GameType::TestMatch), _quota(1), _matchQueue(_ty, _quota) {
+	TestMatchManager() : _ty(GameType::TestMatch), _quota(2), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
@@ -78,7 +78,7 @@ public:
 
 private:
 	GameType _ty = GameType::TestMatch;
-	int32_t _quota = 1;
+	int32_t _quota;
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;
 	uint64_t _lastRenewTick = 0;

@@ -315,7 +315,7 @@ public class LoginScene : BaseScene {
                 GoToLobbyStage();
                 break;
             case Stage.MatchmakeRegister:
-                Managers.UI.ShowErrorUIConfirmOrCancel("띠용", MatchmakeCancel);
+                Managers.UI.ShowErrorUIConfirmOrCancel("현재 매치를 취소하시겠습니까?", MatchmakeCancel);
                 break;
             default:
                 break;
