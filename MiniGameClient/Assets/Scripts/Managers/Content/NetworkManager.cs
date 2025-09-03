@@ -130,7 +130,7 @@ public class NetworkManager {
 			_isMatchRequesting = 0;
 		}
 		//TODO : 현재 매칭중이라는 것을 UI로 표시하고, 매칭 취소버튼을 UI로 제공
-		Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 진입"); });
+		Debug.Log($"{gameId}번 게임 매칭 대기열 진입");
 		OnMatchmakeRequestSucceedAct.Invoke();
     }
 
@@ -147,7 +147,6 @@ public class NetworkManager {
             if (_isMatchRequesting == 1) {
                 return;
             }
-			
 			_isMatchRequesting = 1;
             gameId = (int)_matchGameType;
         }
@@ -156,14 +155,17 @@ public class NetworkManager {
     }
 
 	public void ProcessMatchMakeCancel(int gameId) {
+		Debug.Log("받은게 있기는 하다.");
         lock (_lock) {
             _isMatchRequesting = 0;
-            if (_matchGameType != IntToGameType(gameId)) 
+            if (_matchGameType != IntToGameType(gameId)) {
+				Debug.Log($"gameId일치X {_matchGameType} : {IntToGameType(gameId)}");
                 return;
-
+            }
+                
 			_matchGameType = GameType.None;
         }
-        Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소"); });
+        Debug.Log($"{gameId}번 게임 매칭 대기열 취소");
 		OnMatchmakeCancelSucceedAct.Invoke();
     }
 
@@ -171,7 +173,7 @@ public class NetworkManager {
 		lock (_lock) {
 			_isMatchRequesting = 0;
 		}
-        Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패"); });
+        Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패");
     }
 
     /*
