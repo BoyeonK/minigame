@@ -85,11 +85,6 @@ public class UI_MatchMakeMenu : UI_Scene {
         }
     }
 
-    //이게 매치메이킹 로직이 되어야 함.
-    private void StartMatchMake() {
-        Managers.Network.TryMatchMake(Define.IntToGameType(_selectedOpt + 1));
-    }
-
     public override void Init() {
         base.Init();
         GameObject go = GameObject.Find("LoginScene");
@@ -106,7 +101,7 @@ public class UI_MatchMakeMenu : UI_Scene {
                 _vampireSurvivalEventHandler.Clear();
                 _vampireSurvivalEventHandler.OnClickHandler += (PointerEventData data) => {
                     _loginScene.SetMatchMakeOpt(0);
-                    StartMatchMake();
+                    _loginScene.StartMatchMake();
                 };
                 _vampireSurvivalEventHandler.OnPointerEnterHandler += (PointerEventData data) => {
                     _loginScene.SetMatchMakeOpt(0);
@@ -120,7 +115,7 @@ public class UI_MatchMakeMenu : UI_Scene {
                 _pingpongEventHandler.Clear();
                 _pingpongEventHandler.OnClickHandler += (PointerEventData data) => {
                     _loginScene.SetMatchMakeOpt(1);
-                    StartMatchMake();
+                    _loginScene.StartMatchMake();
                 };
                 _pingpongEventHandler.OnPointerEnterHandler += (PointerEventData data) => {
                     _loginScene.SetMatchMakeOpt(1);
@@ -134,7 +129,7 @@ public class UI_MatchMakeMenu : UI_Scene {
                 _danmakuEventHandler.Clear();
                 _danmakuEventHandler.OnClickHandler += (PointerEventData data) => {
                     _loginScene.SetMatchMakeOpt(2);
-                    StartMatchMake();
+                    _loginScene.StartMatchMake();
                 };
                 _danmakuEventHandler.OnPointerEnterHandler += (PointerEventData data) => {
                     _loginScene.SetMatchMakeOpt(2);
@@ -142,11 +137,11 @@ public class UI_MatchMakeMenu : UI_Scene {
             }
         }
        
-        Managers.Input.AddKeyListener(KeyCode.Return, StartMatchMake, InputManager.KeyState.Down);
+        Managers.Input.AddKeyListener(KeyCode.Return, _loginScene.StartMatchMake, InputManager.KeyState.Down);
         SetSelectedOpt(0);
     }
 
     private void Clear() {
-        Managers.Input.RemoveKeyListener(KeyCode.Return, StartMatchMake, InputManager.KeyState.Down);
+        Managers.Input.RemoveKeyListener(KeyCode.Return, _loginScene.StartMatchMake, InputManager.KeyState.Down);
     }
 }

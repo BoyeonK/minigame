@@ -131,6 +131,7 @@ public class NetworkManager {
 		}
 		//TODO : 현재 매칭중이라는 것을 UI로 표시하고, 매칭 취소버튼을 UI로 제공
 		Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 진입"); });
+		OnMatchmakeRequestSucceedAct.Invoke();
     }
 
 	public void ProcessMatchMake(int gameId, string err) {
@@ -163,6 +164,7 @@ public class NetworkManager {
 			_matchGameType = GameType.None;
         }
         Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소"); });
+		OnMatchmakeCancelSucceedAct.Invoke();
     }
 
     public void ProcessMatchMakeCancel(int gameId, string err) {
@@ -212,6 +214,8 @@ public class NetworkManager {
     public Action OnLogoutAct;
     public Action OnWrongIdAct;
 	public Action OnWrongPasswordAct;
+	public Action OnMatchmakeRequestSucceedAct;
+	public Action OnMatchmakeCancelSucceedAct;
 
 	public void ConnectCompleted(bool result) {
 		_isConnected = result;

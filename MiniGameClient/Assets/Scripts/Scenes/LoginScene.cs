@@ -9,6 +9,7 @@ public class LoginScene : BaseScene {
         Login,
         Lobby,
         MatchMake,
+        MatchmakeRegister,
     }
 
     private Stage _stage = Stage.Connect;
@@ -27,7 +28,6 @@ public class LoginScene : BaseScene {
     private OptionSelecterController _optionSelecter;
 
     private int _matchMakeOpt = 0;
-    int _isMatchMaking = 0;
     
     //Scene이 바뀔 때, 이 친구가 대표로 나서서 모든 초기화 작업을 해 줄거임.
     protected override void Init() {
@@ -68,6 +68,8 @@ public class LoginScene : BaseScene {
         Managers.Network.OnWrongPasswordAct += WrongPassword;
         Managers.Network.OnLoginAct += LoginSucceed;
         Managers.Network.OnLogoutAct += LogoutSucceed;
+        Managers.Network.OnMatchmakeRequestSucceedAct += MatchmakeRequestSucceed;
+        Managers.Network.OnMatchmakeCancelSucceedAct += MatchmakeCancelSucceed;
     }
 
     private void ChangeLoginOpt() {
@@ -162,6 +164,12 @@ public class LoginScene : BaseScene {
         }
     }
 
+    public void StartMatchMake() {
+        if (_stage == Stage.MatchMake) {
+            Managers.Network.TryMatchMake(Define.IntToGameType(_matchMakeOpt + 1));
+        }
+    }
+
     private void ConnectToServerSucceed() {
         if (_stage == Stage.Connect) {
             Managers.ExecuteAtMainThread(GoToLoginStage);
@@ -208,10 +216,25 @@ public class LoginScene : BaseScene {
         _matchMakeOpt = 0;
         _stage = Stage.MatchMake;
         Managers.UI.DisableUI("UI_LobbyMenu");
+        //Managers.UI.ShowSceneUI<>();
 
         Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
     }
 
+    //이 친구는 Network WorkerThread에서 실행됨.
+    private void GoToMatchMakeRegisterStage() {
+        _stage = Stage.MatchmakeRegister;
+        Managers.UI.DisableUI("UI_MatchMakeMenu");
+
+        //Managers.UI.ShowSceneUI<>();
+    }
+
+    //이 친구는 Network WorkerThread에서 실행됨.
+    private void GoToMatchMakeStageViaCancel() {
+        Managers.ExecuteAtMainThread(() => { GoToMatchMakeStage(); });
+    }
+
+    //이 친구는 Network WorkerThread에서 실행됨.
     private void ConnectToServerFailed() {
         Managers.ExecuteAtMainThread(() => {
             Managers.UI.ShowErrorUIOnlyConfirm("서버와의 연결에 실패했습니다.");
@@ -243,6 +266,15 @@ public class LoginScene : BaseScene {
     public void SelectStartGame() {
         GoToMatchMakeStage();
     }
+
+    public void MatchmakeRequestSucceed() {
+        GoToMatchMakeRegisterStage();
+    }
+
+    public void MatchmakeCancelSucceed() {
+        GoToMatchMakeStageViaCancel();
+    }
+
     public void SelectLeaderboard() {
         Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다. ㅠㅠ");
     }
@@ -254,13 +286,6 @@ public class LoginScene : BaseScene {
     }
     public void SelectQuit() {
         QuitApplicationUI();
-    }
-
-    public void MatchMake(int gameId) {
-        //TryMatch 중복실행 체크
-        if (Interlocked.CompareExchange(ref _isMatchMaking, 1, 0) != 0)
-            return;
-        
     }
 
     private void QuitApplicationUI() {
@@ -289,6 +314,9 @@ public class LoginScene : BaseScene {
             case Stage.MatchMake:
                 GoToLobbyStage();
                 break;
+            case Stage.MatchmakeRegister:
+                Managers.UI.ShowErrorUIConfirmOrCancel("띠용", MatchmakeCancel);
+                break;
             default:
                 break;
         }
@@ -297,6 +325,10 @@ public class LoginScene : BaseScene {
     public void Logout() {
         GoToLoginStage();
         Managers.Network.TryLogout();
+    }
+
+    public void MatchmakeCancel() {
+        Managers.Network.TryMatchMakeCancel();
     }
 
     public override void Clear() {
@@ -313,6 +345,8 @@ public class LoginScene : BaseScene {
         Managers.Network.OnWrongPasswordAct -= WrongPassword;
         Managers.Network.OnLoginAct -= LoginSucceed;
         Managers.Network.OnLogoutAct -= LogoutSucceed;
+        Managers.Network.OnMatchmakeRequestSucceedAct -= MatchmakeRequestSucceed;
+        Managers.Network.OnMatchmakeCancelSucceedAct -= MatchmakeCancelSucceed;
         Debug.Log("Login Scene Cleared");
     }
 }
