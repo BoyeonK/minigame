@@ -150,8 +150,8 @@ bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& p
 		playerSessionRef->SetDbid(0);
 		playerSessionRef->SetSecureLevel(8);
 
-		S2C_Protocol::S_Logout pkt = S2CPacketMaker::MakeSLogout(false);
-		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
+		S2C_Protocol::S_Logout responsePkt = S2CPacketMaker::MakeSLogout(false);
+		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(responsePkt);
 		playerSessionRef->Send(sendBufferRef);
 	}
 	return isSucceed;
@@ -161,21 +161,26 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
 
 	auto it = GGameManagers.find(pkt.gameid());
-	if (it == GGameManagers.end())
-		return false;
-
+	if (it == GGameManagers.end()) {
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "해당 Manager가 준비되지 않음");
+	}
+		
 	int32_t elo = playerSessionRef->GetElo(pkt.gameid());
-	if (elo == 0)
-		return false;
-
+	if (elo == 0) {
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "elo정보를 불러오는데 실패했습니다.");
+	}
+		
 	GameType expected = GameType::None;
 	GameType desired = IntToGameType(pkt.gameid());
-	if (desired == GameType::Undefined)
-		return false;
+	if (desired == GameType::Undefined) {
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "구라 패킷 보내지마라");
+	}
 
 	WatingPlayerData pd;
-	if (!playerSessionRef->TryChangeMatchingState(expected, desired))
-		return false;
+	if (!playerSessionRef->TryChangeMatchingState(expected, desired)) {
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "동기화 문제 발생. 재접속을 권장합니다.");
+	}
+
 	pd.elo = elo;
 	pd.playerSessionWRef = playerSessionRef;
 	pd.queuedTick = ::GetTickCount64();
@@ -183,7 +188,14 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 #ifdef _DEBUG
 	cout << "임시 대기열에 진입." << endl;
 #endif 
-	return true;
+	return Handle_C_MatchmakeRequestInternal(playerSessionRef, true, pkt.gameid(), "");
+}
+
+bool Handle_C_MatchmakeRequestInternal(shared_ptr<PlayerSession> playerSessionRef, bool isSucceed, int gameId, const string& err) {
+	S2C_Protocol::S_MatchmakeRequest responsePkt = S2CPacketMaker::MakeSMatchmakeRequest(isSucceed, gameId, err);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(responsePkt);
+	playerSessionRef->Send(sendBuffer);
+	return isSucceed;
 }
 
 bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeCancel& pkt) {
@@ -191,23 +203,24 @@ bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_
 
 	GameType expected = IntToGameType(pkt.gameid());
 	GameType desired = GameType::None;
-	if (expected == GameType::Undefined)
-		return false;
-
+	if (expected == GameType::Undefined) {
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "유효한 gameId가 아님");
+	}
+		
 	//현재 gameId의 매칭을 취소 시도.
-	bool isSucceed = playerSessionRef->TryChangeMatchingState(expected, desired);
-
-	//클라이언트가 진행중인 매칭이 gameId의 매칭이 아닌 경우 (정상적인 상황이 아님)
-	if (!isSucceed) {
-		//모든 대기열에서 벗어난 상황임을 통보하고, 대기열 상태를 None으로 바꿈.
-		//클라이언트로 하여금 정상 상태로 돌아갈 수 있도록 노력
-		S2C_Protocol::S_ExcludedFromMatch pkt = S2CPacketMaker::MakeSExcludedFromMatch(false);
-		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
-		playerSessionRef->Send(sendBufferRef);
-		playerSessionRef->SetMatchingState(GameType::None);
+	if (!playerSessionRef->TryChangeMatchingState(expected, desired)) {
+		//매치 완료가 선행된 경우와 동기화 문제인 경우로 쪼개야 함.
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "매치 완료된 큐가 있거나, 동기화 문제");
 	}
 
-	return true;
+	return Handle_C_MatchmakeRequestInternal(playerSessionRef, true, pkt.gameid(), "");
+}
+
+bool Handle_C_MatchmakeCancelInternal(shared_ptr<PlayerSession> playerSessionRef, bool isSucceed, int gameId, const string& err) {
+	S2C_Protocol::S_MatchmakeCancel responsePkt = S2CPacketMaker::MakeSMatchmakeCancel(isSucceed, gameId, err);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(responsePkt);
+	playerSessionRef->Send(sendBuffer);
+	return isSucceed;
 }
 
 bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeKeepAlive& pkt) {

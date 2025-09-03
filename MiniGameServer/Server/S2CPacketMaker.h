@@ -62,6 +62,22 @@ public:
 		return pkt;
 	}
 
+	static S2C_Protocol::S_MatchmakeRequest MakeSMatchmakeRequest(const bool& isSucceed, const int32_t& gameId, const string& err = "") {
+		S2C_Protocol::S_MatchmakeRequest pkt;
+		pkt.set_issucceed(isSucceed);
+		pkt.set_gameid(gameId);
+		pkt.set_err(err);
+		return pkt;
+	}
+
+	static S2C_Protocol::S_MatchmakeCancel MakeSMatchmakeCancel(const bool& isSucceed, const int32_t& gameId, const string& err = "") {
+		S2C_Protocol::S_MatchmakeCancel pkt;
+		pkt.set_issucceed(isSucceed);
+		pkt.set_gameid(gameId);
+		pkt.set_err(err);
+		return pkt;
+	}
+
 	static S2C_Protocol::S_MatchmakeKeepAlive MakeSMatchmakeKeepAlive(const int32_t& gameId) {
 		S2C_Protocol::S_MatchmakeKeepAlive pkt;
 		pkt.set_gameid(gameId);
