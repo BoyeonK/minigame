@@ -90,4 +90,10 @@ public:
 		pkt.set_isuserrequest(isUserRequest);
 		return pkt;
 	}
+
+	static S2C_Protocol::S_MatchmakeCompleted MakeSMatchmakeCompleted(const int32_t& gameId) {
+		S2C_Protocol::S_MatchmakeCompleted pkt;
+		pkt.set_gameid(gameId);
+		return pkt;
+	}
 };
