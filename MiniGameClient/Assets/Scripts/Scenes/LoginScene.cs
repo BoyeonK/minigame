@@ -70,6 +70,7 @@ public class LoginScene : BaseScene {
         Managers.Network.OnLogoutAct += LogoutSucceed;
         Managers.Network.OnMatchmakeRequestSucceedAct += MatchmakeRequestSucceed;
         Managers.Network.OnMatchmakeCancelSucceedAct += MatchmakeCancelSucceed;
+        Managers.Network.OnResponseKeepAliveAct += MatchCompletedReadyToChangeScene;
     }
 
     private void ChangeLoginOpt() {
@@ -231,7 +232,7 @@ public class LoginScene : BaseScene {
 
     //이 친구는 Network WorkerThread에서 실행됨.
     private void GoToMatchMakeStageViaCancel() {
-        Managers.ExecuteAtMainThread(() => { GoToMatchMakeStage(); });
+        GoToMatchMakeStage();
     }
 
     //이 친구는 Network WorkerThread에서 실행됨.
@@ -268,11 +269,19 @@ public class LoginScene : BaseScene {
     }
 
     public void MatchmakeRequestSucceed() {
+        //TODO : 현재 이 함수를 받는 상황이 반드시 MatchmakeStage라는 가정이 깔려있음.
         GoToMatchMakeRegisterStage();
     }
 
     public void MatchmakeCancelSucceed() {
+        //TODO : 현재 이 함수를 받는 상황이 반드시 MatchmakeRegisterStage라는 가정이
+        //어느정도 깔려있음. 매치 진행중의 경우 다른 stage로 전환할 수 없도록 해야함.
         GoToMatchMakeStageViaCancel();
+    }
+
+    public void MatchCompletedReadyToChangeScene() {
+        //테스트 코드
+        Managers.UI.ShowErrorUIOnlyConfirm("아시발킵얼라이브");
     }
 
     public void SelectLeaderboard() {
@@ -347,6 +356,7 @@ public class LoginScene : BaseScene {
         Managers.Network.OnLogoutAct -= LogoutSucceed;
         Managers.Network.OnMatchmakeRequestSucceedAct -= MatchmakeRequestSucceed;
         Managers.Network.OnMatchmakeCancelSucceedAct -= MatchmakeCancelSucceed;
+        Managers.Network.OnResponseKeepAliveAct -= MatchCompletedReadyToChangeScene;
         Debug.Log("Login Scene Cleared");
     }
 }

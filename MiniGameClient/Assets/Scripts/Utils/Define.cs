@@ -35,7 +35,7 @@ public class Define {
         PingPong,
         Danmaku,
         Undefined,
-        InProgress,
+        InProcess,
     }
 
     public static GameType IntToGameType(int type) {
@@ -44,7 +44,7 @@ public class Define {
             case 1: return GameType.TestMatch;
             case 2: return GameType.PingPong;
             case 3: return GameType.Danmaku;
-            case 5: return GameType.InProgress;
+            case 5: return GameType.InProcess;
             default: return GameType.Undefined;
         }
     }

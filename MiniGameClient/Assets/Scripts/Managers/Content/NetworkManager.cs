@@ -18,10 +18,10 @@ public class NetworkManager {
 	
 	//매칭중인 게임 종류
     private GameType _matchGameType = GameType.None;
-	//중복 요청을 막기 위한 변수
-	private int _isMatchRequesting = 0;
-	private readonly object _lock = new object();
-
+    private readonly object _matchGameTypeLock = new object();
+    //중복 요청을 막기 위한 변수
+    private int _isMatchRequesting = 0;
+	
     public void Init() { }
 
 	public ServerSession GetSession() {
@@ -114,7 +114,7 @@ public class NetworkManager {
     }
 
 	public void TryMatchMake(GameType gameType) {
-		lock (_lock) {
+		lock (_matchGameTypeLock) {
 			if (_isMatchRequesting == 1 || _matchGameType != 0) {
 				return;
 			}
@@ -125,17 +125,19 @@ public class NetworkManager {
     }
 
 	public void ProcessMatchMake(int gameId) {
-		lock(_lock) { 
+		lock(_matchGameTypeLock) { 
 			_matchGameType = IntToGameType(gameId);
 			_isMatchRequesting = 0;
 		}
 		//TODO : 현재 매칭중이라는 것을 UI로 표시하고, 매칭 취소버튼을 UI로 제공
-		Debug.Log($"{gameId}번 게임 매칭 대기열 진입");
-		OnMatchmakeRequestSucceedAct.Invoke();
+		Managers.ExecuteAtMainThread(() => {
+            Debug.Log($"{gameId}번 게임 매칭 대기열 진입");
+            OnMatchmakeRequestSucceedAct.Invoke();
+        });
     }
 
 	public void ProcessMatchMake(int gameId, string err) {
-		lock (_lock) {
+		lock (_matchGameTypeLock) {
 			_isMatchRequesting = 0;
         }
 		Managers.ExecuteAtMainThread(() => { Managers.UI.ShowErrorUIOnlyConfirm(err); });
@@ -143,7 +145,7 @@ public class NetworkManager {
 
     public void TryMatchMakeCancel() {
 		int gameId = 0;
-		lock (_lock) {
+		lock (_matchGameTypeLock) {
             if (_isMatchRequesting == 1) {
                 return;
             }
@@ -156,50 +158,46 @@ public class NetworkManager {
 
 	public void ProcessMatchMakeCancel(int gameId) {
 		Debug.Log("받은게 있기는 하다.");
-        lock (_lock) {
+        lock (_matchGameTypeLock) {
             _isMatchRequesting = 0;
             if (_matchGameType != IntToGameType(gameId)) {
-				Debug.Log($"gameId일치X {_matchGameType} : {IntToGameType(gameId)}");
+				Managers.ExecuteAtMainThread(() => { Debug.Log($"gameId 불일치 ( {_matchGameType} != {IntToGameType(gameId)} )"); });
                 return;
             }
                 
 			_matchGameType = GameType.None;
         }
-        Debug.Log($"{gameId}번 게임 매칭 대기열 취소");
-		OnMatchmakeCancelSucceedAct.Invoke();
+		Managers.ExecuteAtMainThread(() => {
+            Debug.Log($"{gameId}번 게임 매칭 대기열 취소");
+            OnMatchmakeCancelSucceedAct.Invoke();
+        });  
     }
 
     public void ProcessMatchMakeCancel(int gameId, string err) {
-		lock (_lock) {
+		lock (_matchGameTypeLock) {
 			_isMatchRequesting = 0;
 		}
-        Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패");
+		Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패"); });
     }
 
-    /*
+	//KeepAlive handler가 전해준 id가 현재 상태와 일치하는지 확인.
+	//일치한 경우, InProcess로 변경하고 true를 리턴
     public bool ResponseKeepAlive(int gameId) {
-		int matchState = Interlocked.CompareExchange(ref _matchGameType, (int)GameType.InProgress, gameId);
-		if (matchState == gameId) {
-			return true;
+		lock (_matchGameTypeLock) {
+			if ((int)_matchGameType == gameId) {
+				_matchGameType = GameType.InProcess;
+				Managers.ExecuteAtMainThread(() => { OnResponseKeepAliveAct.Invoke(); }); 
+                return true;
+			}
 		}
 		return false;
 	}
 	
 	//이걸 받은 순간, 이미 서버에서는 대기열 밖으로 밀려난 상황.
-	public bool ResponseExcludedFromMatch()	{
-		int expected = _matchGameType;
-		while (true) {
-            int previousState = Interlocked.CompareExchange(ref _matchGameType, (int)GameType.None, expected);
-			if (previousState == (int)GameType.InProgress)
-				return false;
-
-			if (previousState == expected) {
-				return true;
-			}
-			expected = previousState;
-        }
+	public void ProcessExcludedFromMatch() {
+		Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
 	}
-	*/
+
     public void Update() {
 
 	}
@@ -218,6 +216,8 @@ public class NetworkManager {
 	public Action OnWrongPasswordAct;
 	public Action OnMatchmakeRequestSucceedAct;
 	public Action OnMatchmakeCancelSucceedAct;
+	public Action OnResponseKeepAliveAct;
+	public Action OnExcludedFromMatchAct;
 
 	public void ConnectCompleted(bool result) {
 		_isConnected = result;

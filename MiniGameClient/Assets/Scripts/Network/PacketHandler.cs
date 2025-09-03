@@ -231,30 +231,38 @@ class PacketHandler {
 	public static void S_MatchmakeRequestHandler(PacketSession session, IMessage packet) {
         S_MatchmakeRequest recvPkt = packet as S_MatchmakeRequest;
 		if (recvPkt.IsSucceed) {
-			Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessMatchMake(recvPkt.GameId); });
+			Managers.Network.ProcessMatchMake(recvPkt.GameId);
 		} else {
-            Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessMatchMake(recvPkt.GameId, recvPkt.Err); ; });
+            Managers.Network.ProcessMatchMake(recvPkt.GameId, recvPkt.Err);
 		}
     }
 
 	public static void S_MatchmakeCancelHandler(PacketSession session, IMessage packet) {
         S_MatchmakeCancel recvPkt = packet as S_MatchmakeCancel;
         if (recvPkt.IsSucceed) {
-			Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId); });
+			Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId);
         }
         else {
-            Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId, recvPkt.Err); ; });
+            Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId, recvPkt.Err);
         }
     }
 
 	public static void S_MatchmakeKeepAliveHandler(PacketSession session, IMessage packet) { 
 		S_MatchmakeKeepAlive recvPkt = packet as S_MatchmakeKeepAlive;
-		//내 세션이 찾는 중인 게임이 서버에서 찾았다고 한 게임과 같다면 응답.
+		//내 세션이 찾는 중인 게임이 서버에서 찾았다고 한 게임과 같다면, _state를 변경하고 응답.
+		int received = recvPkt.GameId;
+		
+		//TestCode
+		//received = 0;
 
+		if (Managers.Network.ResponseKeepAlive(received)) {
+			C_MatchmakeKeepAlive responsePkt = PacketMaker.MakeCMatchMakeKeepAlive(received, recvPkt.SentTimeTick);
+			Managers.Network.Send(responsePkt);
+		}
 	}
 
 	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) {
-
+		Managers.Network.ProcessExcludedFromMatch();
 	}
 }
 
