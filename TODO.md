@@ -1,43 +1,62 @@
 ### TODO List
 
-완료된 부분은 취소줄로 처리.
-
 - Server
-  - 대기열 진입 로직 추가.
-    - ~~player의 elo를 토대로 매칭~~
-      - ~~DB에서 해당 player의 elo를 조회~~
-      - ~~매칭될 플레이어의 세션, elo, 매칭 시작시간을 구조체(WatingPlayerData)로 래핑 (weak_ptr<playerSession>, elo, datetime)~~
-      - ~~여러개의 vector를 사용.~~
-        - ~~1 대기열에 들어온 플레이어를 일단 받아들일 대기열~~
-        - ~~2 매칭이 돌아가는 대기열. elo순으로 정렬 vector<WatingPlayerData>~~
-      - ~~대기열에 들어오는 플레이어를 vector안에 집어넣고 elo순으로 정렬하면서, 동시에 sliding window방식의 알고리즘을 적용하는 것은 불가능하므로, 우선 대기열에 들어온 플레이어는 1의 vector에 추가하고, 이후 일정 시간간격마다 한번씩 (현재 3초 정도로 상정하는중) 2의 vector에 추가.~~
-      - ~~window의 elo분산이 허용분산(_allowDevi)보다 낮은 조합을 모두 찾고, 다시 해당 조합을 분산순으로 오름차순으로 정렬하여 가장 낮은 분산의 조합부터 매칭 시도.~~
-        - 오래 대기한 인원에 대해서는 허용 분산을 높혀줄 예정. 정확한 수치는 미정.
-      - 매칭되었으나, 모종의 이유로 파기된 경우.
-        - 파기된 원인을 제공하지 않은 인원에 대해서, 다시 1번 대기열로 인원들을 돌려보낸다.
-        - 파기된 원인을 제공한 경우 -> 응답이 없거나, 확실하게 매칭 중단을 선언하여 경우 매칭 대기열에서 제외.
-  - 승패 결정시
-    - Session의 dbid정보를 토대로 승자와 패자에 elo변경 (트랜잭션)
-    - 기록 변경 (최고점수 갱신시)
+  - GameRoom
+    - BeforeInitState
+      - Init
+        - 매치메이킹 로직으로 정해진 그룹에 대해서 유효한 상태인지 확인
+          - session의 weak_ptr이 유효한가?
+          - Disconnect되지않은 유효한 세션인가?
+          - CAS연산으로 해당 Session의 state를 올바르게 변경에 성공했는가?
+          - 모든 패킷이 위의 과정을 통과하지 못했다면 다시 대기열로.
+        - 위의 과정을 통과한 Session에는 S_MatchmakeKeepAlive패킷을 보내 응답을 유도.
+      - Init2
+        - Init 실행에 따라 모든 세션이 유효하면 TimerJobQueue에 Push되어 1000ms 뒤에 실행 유도됨.
+        - S_MatchmakeKeepAlive패킷에 대한 응답을 해당 Room의 모든 세션에서 확인 S_MatchmakeCompleted
+          - 1000ms이상 걸리는 친구는, 현실적으로 게임 속행이 불가능하다고 판단  
+          - 응답하지 않은 세션이 있는 경우, 다시 모든 인원을 대기열로 돌려보냄.
+            - 대기열은 자체적으로 유효하지 않은 친구들을 걸러내므로, 여기서 올바른 응답을 한 세션만 골라서 돌려보내는 것은 자원낭비.
+        - 모든 세션이 올바르게 응답한 경우, State를 BeforeStartState로 전환. S_MatchmakeCompleted패킷을 Broadcast.
+          - Client로 하여금 Scene의 전환을 유도한다.
+          - 지금부터는 매칭이 완료되었음으로 간주.
+          - 이후부터 세션이 유효하지 않아도 작동하도록 설계
+          - 이후부터 통신에 문제가 발생하면, 전적으로 플레이어의 책임으로 간주한다. (게임 종료로 간주)
+    - BeforeStartState
+      - Start
+        - 각 플레이어가 로딩이 완료되었는지 주기적으로 확인.
+        - 로딩 진행상황을 전달받음. 
+        - (바뀔 수 있음) 필요하다면 각 클라에서 받은 로딩 상황을 Broadcast해서 각 클라이언트가 다른 클라이언트의 진행상황을 알 수 있게 함.
+        - 모든 플레이어가 로딩이 완료된 경우, OnGoingState로 전환. 진짜 게임로직을 시작.
+        - 일정 시간동안 모든 플레이어의 로딩 진행 상황에 대한 진전이 없을경우 (델타값 모두 0), OnGoingState로 전환.
+        - OnGoingState로 전환할 경우, S_GameStart 패킷을 Broadcast.
+    - OnGoingState
+      - 시작된 게임으로부터 인게임 로직. 게임마다 완전히 다르다.
+      - TestGame은 정원 1명인 게임으로, 아무것도 하지 않고 10초후 CountingState로 전환.
+        - OnGoingState(진짜 인게임 로직)을 제외한 나머지가 정상적으로 동작하는지 디버그용.
+    - CountingState
+      - 게임 종료 후, 게임 결과 DB에 반영.
+        - TestGame의 경우, elo가 짝수면 +1, elo가 홀수면 -1 하는 것으로 테스트.
+      - 각 플레이어 세션으로 하여금 다시 로비로 올바르게 복귀할 수 있도록 함.
+      - Room내에서 사용된 자원들을 반환. 올바르게 진행된 경우 EndGameState로 전환.
+    - EndGameState (구현 되어 있음.)
+      - 주기적으로 Matchmake thread에서 EndGame인 방들을 ObjectPool로 반환. (5초마다)
 
 - Client
-  - 인게임 Scene
-    - 일단 매칭됨과 동시에 승패를 나누어 테스트 진행
+  - S_MatchmakeCompleted 패킷을 받은 경우, LoadingScene으로 선제적으로 전환하고, Manager에서 GameScene을 비 동기적으로 로딩.
+  - 일정 주기 혹은 일정 진행상황마다 로딩 진행상황을 서버에 전송.
+  - S_GameStart를 받은 경우, 로딩 완료된 GameScene으로 전환. RequestGameInfo패킷을 보내 서버에 현재 Room의 상태를 받아 GameScene초기화(동기화).
+  - 늦게라도 로딩이 완료된 경우, RequestGameInfo를 보내 클라이언트의 상태와 서버의 상태를 동기화.
+
+  - 튕긴 플레이어 재접속 기능 구현 예정 절대 없음 (엄청 힘들다는걸 알고 있다.)
 
 - DB
-  - Session의 dbid정보를 토대로 승자와 패자에 elo변경 (트랜잭션)
-  - 기록 변경 (최고점수 갱신시)
+  - CountingState가 구현될 때 까지 할 일 없음.
 
 - 공통
-  - ~~3가지 이상의 미니게임을 추가하고,~~ 2가지로 변경. 매치메이킹을 통해 플레이 할 수 있도록 함.
-  - 메모리 안의 특정 int값의 변화 추이를 시각화하기.
-    - python으로 작성한 별도의 응용 프로그램을 만들어서 서버측과 통신할 예정.
-  - SSIS (Integration Service) 사용해서 DB 정보 옮겨보기.
 
 ---
 
 ### 현재 우선순위
 
-- 매치메이칭 로직 완성.
-- dummy를 만들어서 매칭 테스트하기
 - 미니게임 추가하기
+- 인게임 로직 완성하기
