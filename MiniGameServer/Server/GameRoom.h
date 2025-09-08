@@ -38,7 +38,7 @@ public:
 
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
-	void Start() {}
+	void Start();
 	void ReturnToPool();
 	void Update() override {}
 

@@ -264,5 +264,9 @@ class PacketHandler {
 	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) {
 		Managers.Network.ProcessExcludedFromMatch();
 	}
+
+	public static void S_MatchmakeCompleted(PacketSession session, IMessage packet) { 
+		//씬 변경 유도
+	}
 }
 

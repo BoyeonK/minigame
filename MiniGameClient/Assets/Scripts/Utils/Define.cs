@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class Define {
     public enum Scene {
-        Unknown,
+        Undefined,
         Login,
         Lobby,
         Game,
+        TestLoadingScene,
     }
 
     public enum Sound {
