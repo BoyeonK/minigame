@@ -42,6 +42,8 @@ public class NetworkManager {
 		_session.Send(packet);
 	}
 
+	#region Try계열 (UI등의 방법을 통해 유저의 요청을 시작)
+
 	public void TryConnectToServer() {
 		//이미 연결되있지도 않으면서, 현재 연결 함수가 작동중이 아닌 경우.
 		if (_isConnected == true || Interlocked.CompareExchange(ref _isTryingConnect, 1, 0) != 0) {
@@ -67,6 +69,7 @@ public class NetworkManager {
 
 	//이 함수는, 일단 내 설계상 메인스레드에서만 호출할 예정.
 	//경쟁상태를 고려하지 않고 만듬.
+	//TODO : 이 함수가 서버의 Kill을 통해 실행될 수 있음.
 	public void TryDisconnect() {
 		if (_isConnected == true) {
 			_session.Disconnect();
@@ -149,6 +152,12 @@ public class NetworkManager {
             if (_isMatchRequesting == 1) {
                 return;
             }
+			if (_matchGameType == GameType.InProcess) {
+				Managers.ExecuteAtMainThread(() => {
+					Managers.UI.ShowErrorUIOnlyConfirm("잠시 후에 다시 시도해 주세요.");
+				});
+				return;
+			}
 			_isMatchRequesting = 1;
             gameId = (int)_matchGameType;
         }
@@ -202,8 +211,6 @@ public class NetworkManager {
 
 	}
 
-    #region Packet을 만들어 전송
-
     #endregion
 
     #region Session의 통신 결과를 Client에게 널리 알릴 델리게이터
@@ -243,6 +250,10 @@ public class NetworkManager {
 				OnWrongPasswordAct.Invoke();
 				break;
 		}
+	}
+
+	public void MatchmakeCompleted(int gameType) {
+
 	}
 	#endregion
 }

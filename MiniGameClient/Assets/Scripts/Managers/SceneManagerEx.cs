@@ -1,12 +1,32 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+//이 객체가 사용하는 모든 함수는, 유니티의 메서드를 사용해야 하므로 메인스레드에서 실행만을 전제로 만들어졌음.
+//동기화 기법을 사용하지 않을 예정.
 public class SceneManagerEx {
+    private enum LoadingState {
+        None,
+        Loading,
+        Ready
+    }
+    
+    private LoadingState _loadingState = LoadingState.None;
+    private Define.Scene _nextScene = Define.Scene.Undefined;
+    //private bool _sceneActiveImmidiately = false;
+    private AsyncOperation _asyncLoadSceneOp;
+
     public BaseScene CurrentScene { get { return GameObject.FindFirstObjectByType<BaseScene>(); } }
 
+    public void OnUpdate() {
+        if (_loadingState == LoadingState.None)
+            return;
+    }
+    
     public void LoadScene(Define.Scene type) {
+        if (_loadingState != LoadingState.None)
+            return;
+
         Managers.Clear();
         SceneManager.LoadScene(GetSceneName(type));
     }
@@ -14,6 +34,31 @@ public class SceneManagerEx {
     string GetSceneName(Define.Scene type) {
         string name = System.Enum.GetName(typeof(Define.Scene), type);
         return name;
+    }
+
+    public void LoadSceneWithLoadingScene(Define.Scene targetScene, Define.Scene loadingScene) {
+        if (_loadingState != LoadingState.None)
+            return;
+
+        _loadingState = LoadingState.Loading;
+        _nextScene = targetScene;
+        Managers.Clear();
+        SceneManager.LoadScene(GetSceneName(loadingScene));
+    }
+
+    public void LoadSceneAsync() {
+        if (_loadingState != LoadingState.Loading || _nextScene == Define.Scene.Undefined)
+            return;
+
+        _asyncLoadSceneOp = SceneManager.LoadSceneAsync(GetSceneName(_nextScene));
+        _asyncLoadSceneOp.allowSceneActivation = false;
+    }
+
+    public float GetLoadingProgressRate() {
+        if (_loadingState == LoadingState.None)
+            return 0f;
+        else
+            return _asyncLoadSceneOp.progress;
     }
 
     public void Clear() {
