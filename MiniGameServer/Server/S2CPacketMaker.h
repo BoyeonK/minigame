@@ -96,4 +96,10 @@ public:
 		pkt.set_gameid(gameId);
 		return pkt;
 	}
+
+	static S2C_Protocol::S_GameStarted MakeSGameStarted(const int32_t& gameId) {
+		S2C_Protocol::S_GameStarted pkt;
+		pkt.set_gameid(gameId);
+		return pkt;
+	}
 };

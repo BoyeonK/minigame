@@ -25,6 +25,11 @@ enum MsgId {
     S_EXCLUDED_FROM_MATCH = 18;
     S_MATCHMAKE_COMPLETED = 19;
     C_GAME_SCENE_LOADING_PROGRESS = 20;
+    S_GAME_STARTED = 21;
+    C_REQUEST_GAME_STATE = 22;
+    S_TESTGAME_STATE = 23;
+    S_PINGPONG_STATE = 24;
+    S_DANMAKU_STATE = 25;
 }
 
 //최초에 TCP방식의 Connect가 성공하면 해당 session의 보안레벨은 '보안레벨 0'이다.
@@ -205,6 +210,26 @@ message S_MatchmakeCompleted {
 //모든 인원으로부터 persentage 100의 응답을 받거나, 허용된 일정 시간이 초과한 경우 본격적으로 게임 시작.
 message C_GameSceneLoadingProgress {
     int32 persentage = 1;
+}
+
+message S_GameStarted {
+    int32 gameId = 1;
+}
+
+message C_RequestGameState {
+    int32 gameId = 1;
+}
+
+message S_TestGameState {
+
+}
+
+message S_PingPongState {
+
+}
+
+message S_DanmakuState {
+
 }
 
 //세션의 종료 및 초기 화면으로 돌아가는것을 유도.

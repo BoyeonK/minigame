@@ -31,6 +31,11 @@ enum : uint16_t {
 	PKT_S_EXCLUDEDFROMMATCH = 18,
 	PKT_S_MATCHMAKECOMPLETED = 19,
 	PKT_C_GAMESCENELOADINGPROGRESS = 20,
+	PKT_S_GAME_STARTED = 21,
+	PKT_C_REQUEST_GAME_STATE = 22,
+	S_TESTGAME_STATE = 23,
+	S_PINGPONG_STATE = 24,
+	S_DANMAKU_STATE = 25,
 };
 
 bool Handle_Invalid(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
@@ -96,6 +101,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_RedoMatchmake& pkt) { return MakeSendBufferRef(pkt, PKT_S_REDOMATCHMAKE); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeCompleted& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKECOMPLETED); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameStarted& pkt) { return MakeSendBufferRef(pkt, PKT_S_GAME_STARTED); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME_RESPONSE, AESKey); }
@@ -108,6 +114,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_RedoMatchmake& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_REDOMATCHMAKE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeCompleted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKECOMPLETED, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameStarted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_GAME_STARTED, AESKey); }
 
 private:
 	template<typename PBType, typename HandlerFunc>
