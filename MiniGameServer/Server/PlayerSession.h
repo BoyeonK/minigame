@@ -1,6 +1,8 @@
 #pragma once
 #include "GameType.h"
 
+class GameRoom;
+
 class PlayerSession : public PBSession {
 public:
 	//TODO:
@@ -18,12 +20,18 @@ public:
 	void SetDbid(int32_t dbid);
 	int32_t GetDbid() const { return _dbid; }
 
+	void SetElos(int32_t elo1, int32_t elo2, int32_t elo3);
+	int32_t GetElo(const int32_t& idx) const;
+
 	void SetMatchingState(const GameType& value);
 	bool TryChangeMatchingState(GameType& expected, GameType desired);
 	GameType GetMatchingState() const { return _matchingState; }
 
-	void SetElos(int32_t elo1, int32_t elo2, int32_t elo3);
-	int32_t GetElo(const int32_t& idx) const;
+	void SetRoomIdx(const int32_t roomIdx);
+	int32_t GetRoomIdx();
+
+	void SetJoinedRoom(shared_ptr<GameRoom> roomRef);
+	shared_ptr<GameRoom> GetJoinedRoom();
 
 	int64_t GetLastKeepAliveTick() const;
 	void SetLastKeepAliveTick(const int64_t& tick);
@@ -33,9 +41,12 @@ private:
 	vector<unsigned char> _AESKey;
 	int32_t _gameVersion = 0;
 	int32_t _dbid = 0;
-	atomic<GameType> _matchingState = GameType::None;
 	int32_t _elo1 = 0;
 	int32_t _elo2 = 0;
 	int32_t _elo3 = 0;
+
+	atomic<GameType> _matchingState = GameType::None;
+	weak_ptr<GameRoom> _joinedRoomWRef;
 	atomic<int64_t> _lastKeepAliveTick = 0;
+	int32_t _roomIdx;
 };

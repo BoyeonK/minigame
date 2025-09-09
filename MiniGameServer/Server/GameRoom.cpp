@@ -62,6 +62,7 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		//지금부터 연결상태가 좋지 않으면 플레이어 책임으로 간주.
 		//플레이어의 게임종료 등의 이유로 세션이 유효하지 않더라도, 진행 가능한 방식으로 코드를 작성해야 함.
 		_state = GameState::BeforeStart;
+		_preparedPlayer = 0;
 		for (auto& playerSessionWRef : _playerWRefs) {
 			shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
 			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
@@ -70,8 +71,6 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 				playerSessionRef->Send(sendBuffer);
 			}
 		}
-
-		Start();
 	}
 	else {
 		cout << "영 좋지 않음" << endl;
@@ -81,12 +80,31 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 }
 
 void TestMatchGameRoom::Start() {
-	//로딩 진행 정도에 따라 C_GameSceneLoadingProgress패킷을 전송받음.
-	//모든 유저의 Loading이 완료되거나, 일정 시간이 지난 경우 게임 시작.
+	_state = GameState::OnGoing;
+	//TODO : 완료됨을 전파
+	for (auto& playerSessionWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
+		S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
+		if (playerSessionRef != nullptr) {
+			shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+			playerSessionRef->Send(sendBuffer);
+		}
+	}
 }
 
 void TestMatchGameRoom::ReturnToPool() {
 	objectPool<TestMatchGameRoom>::dealloc(this);
+}
+
+void TestMatchGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
+	if (progressRate == 100) {
+		_preparedPlayer += 1;
+	}
+	//TODO : 로딩 진행상황 전파
+
+	if (_preparedPlayer == _quota) {
+		Start();
+	}
 }
 
 void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {

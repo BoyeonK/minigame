@@ -18,6 +18,7 @@ public:
 	};
 
 	virtual void Init(vector<WatingPlayerData> pdv) = 0;
+	virtual void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) = 0;
 	virtual void Update() = 0;
 	GameState GetState();
 	
@@ -25,6 +26,7 @@ protected:
 	vector<weak_ptr<PlayerSession>> _playerWRefs;
 	GameType _ty;
 	GameState _state = GameState::BeforeInit;
+	int32_t _preparedPlayer = 0;
 };
 
 class TestMatchGameRoom : public GameRoom {
@@ -36,11 +38,13 @@ public:
 		cout << "·ë »ç¸Á" << endl;
 	}
 
-	void Init(vector<WatingPlayerData> pdv) override;
-	void Init2(vector<WatingPlayerData> pdv);
-	void Start();
 	void ReturnToPool();
 	void Update() override {}
+
+	void Init(vector<WatingPlayerData> pdv) override;
+	void Init2(vector<WatingPlayerData> pdv);
+	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
+	void Start();
 
 private:
 	int32_t _quota = 1;
@@ -56,6 +60,7 @@ public:
 	void Init2(vector<WatingPlayerData> pdv);
 	void ReturnToPool();
 	void Update() override { }
+	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override {}
 
 private:
 	int32_t _quota = 4;

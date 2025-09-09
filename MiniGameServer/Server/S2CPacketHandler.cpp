@@ -244,5 +244,8 @@ bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol:
 }
 
 bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_GameSceneLoadingProgress& pkt) {
-	return false;
+	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
+	shared_ptr<GameRoom> gameRoom = playerSessionRef->GetJoinedRoom();
+	gameRoom->UpdateProgressBar(playerSessionRef->GetRoomIdx(), pkt.persentage());
+	return true;
 }

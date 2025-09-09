@@ -74,6 +74,22 @@ bool PlayerSession::TryChangeMatchingState(GameType& expected, GameType desired)
 	return _matchingState.compare_exchange_strong(expected, desired);
 }
 
+void PlayerSession::SetRoomIdx(const int32_t roomIdx) {
+	_roomIdx = roomIdx;
+}
+
+int32_t PlayerSession::GetRoomIdx() {
+	return _roomIdx;
+}
+
+void PlayerSession::SetJoinedRoom(shared_ptr<GameRoom> roomRef) {
+	_joinedRoomWRef = roomRef;
+}
+
+shared_ptr<GameRoom> PlayerSession::GetJoinedRoom() {
+	return _joinedRoomWRef.lock();
+}
+
 void PlayerSession::SetElos(int32_t elo1, int32_t elo2, int32_t elo3) {
 	_elo1 = elo1;
 	_elo2 = elo2;
