@@ -15,6 +15,7 @@ public class TestLoadingScene : BaseScene {
     }
 
     private void Start() {
+        Debug.Log("로딩씬 스타트");
         Managers.Scene.LoadSceneAsync();
     }
 
@@ -23,6 +24,7 @@ public class TestLoadingScene : BaseScene {
         while (progress >= _progressRate + 0.1f) {
             _hadProgress = true;
             _progressRate += 0.1f;
+            Debug.Log("+0.1");
         }
         if (Mathf.Abs(1.0f - _progressRate) < _mEpsilon) {
             _isReady = true;
