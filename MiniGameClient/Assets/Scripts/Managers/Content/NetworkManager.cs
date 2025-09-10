@@ -209,6 +209,12 @@ public class NetworkManager {
 		return false;
 	}
 
+	public void ResponseMatchmakeCompleted(int gameId) {
+		Managers.ExecuteAtMainThread(() => {
+			Managers.Scene.LoadSceneWithLoadingScene(IntToGameScene(gameId), Define.Scene.TestLoadingScene);
+		});
+	}
+
 	public void ResponseGameStarted(int gameId) {
 		Managers.ExecuteAtMainThread(() => { OnResponseGameStartedAct.Invoke(); });
 	}
