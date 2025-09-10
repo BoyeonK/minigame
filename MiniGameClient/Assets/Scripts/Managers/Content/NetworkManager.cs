@@ -96,6 +96,8 @@ public class NetworkManager {
         }
     }
 
+	//지금은 직접 0으로 밀고 결과를 통보하지만,
+	//일관성을 위해서 서버 주도적으로 바꿀 필요가 있음.
 	public void TryLogout() {
         Debug.Log("로그아웃 시도");
         C_Encrypted pkt = PacketMaker.MakeCLogout(_session);
@@ -189,6 +191,11 @@ public class NetworkManager {
 		Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패"); });
     }
 
+	public void TrySendLoadingProgressRate(float progressRate) {
+		C_GameSceneLoadingProgress pkt = PacketMaker.MakeCGameSceneLoadingProgress(progressRate);
+		Send(pkt);
+	}
+
 	//KeepAlive handler가 전해준 id가 현재 상태와 일치하는지 확인.
 	//일치한 경우, InProcess로 변경하고 true를 리턴
     public bool ResponseKeepAlive(int gameId) {
@@ -207,11 +214,11 @@ public class NetworkManager {
 		Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
 	}
 
+	#endregion
+
     public void Update() {
 
 	}
-
-    #endregion
 
     #region Session의 통신 결과를 Client에게 널리 알릴 델리게이터
     //FM대로하면, private로 선언하고 구독 및 구취하는 함수를 public으로 열어야 함.

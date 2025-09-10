@@ -15,6 +15,7 @@ class PacketMaker {
     private const int GCM_IV_LENGTH_BYTES = 12;
     private const int GCM_TAG_LENGTH_BITS = 128;
     private const int GCM_TAG_LENGTH_BYTES = 16;
+    private const float _mEpsilon = 0.001f;
 
     private static C_Encrypted MakeCEncryptedInternal<T>(PacketSession session, T rawPkt, int pktId) where T : IMessage {
         byte[] aesKey = session.AESKey;
@@ -124,5 +125,16 @@ class PacketMaker {
 
     public static C_MatchmakeKeepAlive MakeCMatchMakeKeepAlive(int gameId, Int64 tick) {
         return new C_MatchmakeKeepAlive { GameId = gameId, SentTimeTick = tick };
+    }
+
+    public static C_GameSceneLoadingProgress MakeCGameSceneLoadingProgress(float progressRate) {
+        int progressPersent = 0;
+        if (Mathf.Abs(1f - progressRate) < _mEpsilon) {
+            progressPersent = 100;
+        }
+        else {
+            progressPersent = (int)(progressRate * 100);
+        }
+        return new C_GameSceneLoadingProgress { Persentage = progressPersent };
     }
 }

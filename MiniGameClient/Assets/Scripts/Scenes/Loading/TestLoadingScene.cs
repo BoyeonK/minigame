@@ -19,7 +19,7 @@ public class TestLoadingScene : BaseScene {
 
     private void UpdateProgressRate() {
         float progress = Managers.Scene.GetLoadingProgressRate();
-        while (progress >= _progressRate + 0.1) {
+        while (progress >= _progressRate + 0.1f) {
             _hadProgress = true;
             _progressRate += 0.1f;
         }
@@ -36,6 +36,7 @@ public class TestLoadingScene : BaseScene {
             if (_hadProgress) {
                 Debug.Log($"진전이 있었다. 진행률 : {_progressRate}");
                 //TODO : 서버에 진행상황 보내기.
+                Managers.Network.TrySendLoadingProgressRate(_progressRate);
                 _hadProgress = false;
             }
         }
