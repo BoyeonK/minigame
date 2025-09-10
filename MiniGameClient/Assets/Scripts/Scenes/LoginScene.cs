@@ -281,7 +281,7 @@ public class LoginScene : BaseScene {
 
     public void MatchCompletedReadyToChangeScene() {
         //테스트 코드
-        Managers.UI.ShowErrorUIOnlyConfirm("아시발킵얼라이브");
+        Managers.UI.ShowErrorUIOnlyConfirm("매치메이킹 완료됨");
     }
 
     public void SelectLeaderboard() {
