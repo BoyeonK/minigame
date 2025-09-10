@@ -270,5 +270,10 @@ class PacketHandler {
 		S_MatchmakeCompleted recvPkt = packet as S_MatchmakeCompleted;
 		Managers.Network.ResponseMatchmakeCompleted(recvPkt.GameId);
 	}
+
+	public static void S_GameStartedHandler(PacketSession session, IMessage packet)	{
+		S_GameStarted recvPkt = packet as S_GameStarted;
+		Managers.Network.ResponseGameStarted(recvPkt.GameId);
+	}
 }
 

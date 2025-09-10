@@ -16,7 +16,6 @@ public class SceneManagerEx {
     //private bool _sceneActiveImmidiately = false;
     private AsyncOperation _asyncLoadSceneOp;
     private float _progress = 0.0f;
-    private float _mEpsilon = 0.001f;
 
     public BaseScene CurrentScene { get { return GameObject.FindFirstObjectByType<BaseScene>(); } }
 
@@ -24,10 +23,6 @@ public class SceneManagerEx {
         if (_loadingState != LoadingState.Loading || _asyncLoadSceneOp == null)
             return;
         _progress = _asyncLoadSceneOp.progress;
-        if(Mathf.Abs(0.9f - _progress) < _mEpsilon) {
-            _loadingState = LoadingState.Ready;
-            _progress = 1.0f;
-        }
     }
     
     public void LoadScene(Define.Scene type) {

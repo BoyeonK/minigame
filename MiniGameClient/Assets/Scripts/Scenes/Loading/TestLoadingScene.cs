@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class TestLoadingScene : BaseScene {
     private float _progressRate = 0f;
-    private float _mEpsilon = 0.001f;
     private bool _isReady = false;
     private bool _hadProgress = false;
 
@@ -21,14 +20,10 @@ public class TestLoadingScene : BaseScene {
 
     private void UpdateProgressRate() {
         float progress = Managers.Scene.GetLoadingProgressRate();
-        while (progress >= _progressRate + 0.1f) {
+        while (progress >= _progressRate + 0.099f) {
             _hadProgress = true;
             _progressRate += 0.1f;
             Debug.Log("+0.1");
-        }
-        if (Mathf.Abs(1.0f - _progressRate) < _mEpsilon) {
-            _isReady = true;
-            Debug.Log("·Îµù ¿Ï·áµÊ");
         }
     }
 

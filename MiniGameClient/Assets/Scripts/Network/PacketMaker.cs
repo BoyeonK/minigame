@@ -129,12 +129,13 @@ class PacketMaker {
 
     public static C_GameSceneLoadingProgress MakeCGameSceneLoadingProgress(float progressRate) {
         int progressPersent = 0;
-        if (Mathf.Abs(1f - progressRate) < _mEpsilon) {
+        if (Mathf.Abs(0.9f - progressRate) < _mEpsilon) {
             progressPersent = 100;
         }
         else {
             progressPersent = (int)(progressRate * 100);
         }
+        Debug.Log($"진행상황 전송. 전송할 패킷의 진행률 : {progressPersent}");
         return new C_GameSceneLoadingProgress { Persentage = progressPersent };
     }
 }
