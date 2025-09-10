@@ -58,6 +58,7 @@ public class Managers : MonoBehaviour {
     void Update() {
         _input.OnUpdate();
         _network.Update();
+        _scene.OnUpdate();
 
         lock (_lock) {
             while (_jobQueue.Count > 0) {
