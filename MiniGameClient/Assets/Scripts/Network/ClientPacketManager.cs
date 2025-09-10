@@ -67,6 +67,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SMatchmakeCompleted, UnpackPacket<S_MatchmakeCompleted>);
         _handler.Add((ushort)MsgId.SMatchmakeCompleted, PacketHandler.S_MatchmakeCompletedHandler);
         _msgFactories.Add((ushort)MsgId.SMatchmakeCompleted, () => new S_MatchmakeCompleted());
+
+        _onRecv.Add((ushort)MsgId.SGameStarted, UnpackPacket<S_GameStarted>);
+        _handler.Add((ushort)MsgId.SGameStarted, PacketHandler.S_GameStartedHandler);
+        _msgFactories.Add((ushort)MsgId.SGameStarted, () => new S_GameStarted());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {
