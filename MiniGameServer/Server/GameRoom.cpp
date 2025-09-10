@@ -54,6 +54,7 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		//유효하지 않은 플레이어로 간주하고, 모두 대기열로 돌려보냄.
 		if (now - lastTick > 2000) {
 			canStart = false;
+			break;
 		}
 	}
 
@@ -67,6 +68,7 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 			shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
 			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
 			if (playerSessionRef != nullptr) {
+				playerSessionRef->SetJoinedRoom(static_pointer_cast<TestMatchGameRoom>(shared_from_this()));
 				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 				playerSessionRef->Send(sendBuffer);
 			}
@@ -81,6 +83,7 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 
 void TestMatchGameRoom::Start() {
 	_state = GameState::OnGoing;
+	cout << "스타트 함수 실행" << endl;
 	//TODO : 완료됨을 전파
 	for (auto& playerSessionWRef : _playerWRefs) {
 		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
@@ -97,6 +100,7 @@ void TestMatchGameRoom::ReturnToPool() {
 }
 
 void TestMatchGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
+	cout << "업데이트 프로그레그 바" << endl;
 	if (progressRate == 100) {
 		_preparedPlayer += 1;
 	}

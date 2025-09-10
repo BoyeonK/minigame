@@ -245,7 +245,10 @@ bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol:
 
 bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_GameSceneLoadingProgress& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
+	//버그 : GameRoom이 nullptr임
 	shared_ptr<GameRoom> gameRoom = playerSessionRef->GetJoinedRoom();
-	gameRoom->UpdateProgressBar(playerSessionRef->GetRoomIdx(), pkt.persentage());
+	if (gameRoom == nullptr)
+		return false;
+	gameRoom->DoAsync(&GameRoom::UpdateProgressBar, playerSessionRef->GetRoomIdx(), pkt.persentage());
 	return true;
 }
