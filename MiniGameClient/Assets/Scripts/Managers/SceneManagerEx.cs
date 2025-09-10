@@ -70,6 +70,14 @@ public class SceneManagerEx {
         _asyncLoadSceneOp.allowSceneActivation = true;
     }
 
+    //LoadingScene이 아닌 Scene의 초기화 과정에서 호출해야함.
+    public void ResetLoadSceneOp() {
+        _asyncLoadSceneOp = null;
+        _loadingState = LoadingState.None;
+        _nextScene = Define.Scene.Undefined;
+        _progress = 0;
+    }
+
     public void Clear() {
         CurrentScene.Clear();
     }

@@ -5,8 +5,8 @@ public class Define {
         Undefined,
         Login,
         Lobby,
-        Game,
         TestLoadingScene,
+        TestGame,
     }
 
     public enum Sound {
@@ -47,6 +47,13 @@ public class Define {
             case 3: return GameType.Danmaku;
             case 5: return GameType.InProcess;
             default: return GameType.Undefined;
+        }
+    }
+
+    public static Scene IntToGameScene(int gameId) {
+        switch (gameId) {
+            case 1: return Scene.TestGame;
+            default: return Scene.Undefined;
         }
     }
 }

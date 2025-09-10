@@ -262,11 +262,13 @@ class PacketHandler {
 	}
 
 	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) {
-		Managers.Network.ProcessExcludedFromMatch();
+		Managers.Network.ResponseExcludedFromMatch();
 	}
 
-	public static void S_MatchmakeCompleted(PacketSession session, IMessage packet) { 
+	public static void S_MatchmakeCompletedHandler(PacketSession session, IMessage packet) { 
 		//씬 변경 유도
+		S_MatchmakeCompleted recvPkt = packet as S_MatchmakeCompleted;
+		Managers.Network.ResponseMatchmakeCompleted(recvPkt.GameId);
 	}
 }
 
