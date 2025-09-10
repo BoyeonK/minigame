@@ -11,6 +11,7 @@ public class TestLoadingScene : BaseScene {
         _progressRate = 0f;
         _isReady = false;
         SceneType = Define.Scene.TestLoadingScene;
+        Managers.Network.OnResponseGameStartedAct += SceneChange;
     }
 
     private void Start() {
@@ -23,10 +24,9 @@ public class TestLoadingScene : BaseScene {
             _hadProgress = true;
             _progressRate += 0.1f;
         }
-        if (Mathf.Abs(0.9f - _progressRate) < _mEpsilon) {
+        if (Mathf.Abs(1.0f - _progressRate) < _mEpsilon) {
             _isReady = true;
             Debug.Log("로딩 완료됨");
-            //TODO : 서버에 완료됨을 전송.
         }
     }
 
@@ -35,10 +35,17 @@ public class TestLoadingScene : BaseScene {
             UpdateProgressRate();
             if (_hadProgress) {
                 Debug.Log($"진전이 있었다. 진행률 : {_progressRate}");
-                //TODO : 서버에 진행상황 보내기.
                 Managers.Network.TrySendLoadingProgressRate(_progressRate);
                 _hadProgress = false;
             }
         }
+    }
+
+    private void SceneChange() {
+        Managers.Scene.CompleteLoadSceneAsync();
+    }
+
+    public override void Clear() {
+        Managers.Network.OnResponseGameStartedAct -= SceneChange;
     }
 }

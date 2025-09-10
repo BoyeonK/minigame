@@ -208,9 +208,13 @@ public class NetworkManager {
 		}
 		return false;
 	}
+
+	public void ResponseGameStarted(int gameId) {
+		Managers.ExecuteAtMainThread(() => { OnResponseGameStartedAct.Invoke(); });
+	}
 	
 	//이걸 받은 순간, 이미 서버에서는 대기열 밖으로 밀려난 상황.
-	public void ProcessExcludedFromMatch() {
+	public void ResponseExcludedFromMatch() {
 		Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
 	}
 
@@ -231,6 +235,7 @@ public class NetworkManager {
 	public Action OnMatchmakeRequestSucceedAct;
 	public Action OnMatchmakeCancelSucceedAct;
 	public Action OnResponseKeepAliveAct;
+	public Action OnResponseGameStartedAct;
 	public Action OnExcludedFromMatchAct;
 
 	public void ConnectCompleted(bool result) {
