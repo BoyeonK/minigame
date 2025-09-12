@@ -1,12 +1,13 @@
 #pragma once
 #include "XYZ.h"
+#include "GameType.h"
 
 class UnityGameObject {
 
-private:
-	int32_t objectId;
-	int32_t objectType;
-	XYZ Position;
-	//XYZ Rotation;
+protected:
+	int32_t _objectId;
+	GameObjectType _objectType;
+	XYZ _Position;
+	//XYZ _Rotation;
 };
 

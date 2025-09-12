@@ -22,6 +22,9 @@
     <Filter Include="S2D\Protocol">
       <UniqueIdentifier>{d0918d57-57ca-4d3f-b6af-fd929ea7f151}</UniqueIdentifier>
     </Filter>
+    <Filter Include="S2C\GameObjects\TestGameObjects">
+      <UniqueIdentifier>{0621b292-4c2c-4906-945a-70d323295b17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -86,6 +89,15 @@
     </ClInclude>
     <ClInclude Include="S2C_Protocol_Enum.pb.h">
       <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="UnityGameObject.h">
+      <Filter>S2C\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="XYZ.h">
+      <Filter>S2C\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="TestGameBullet.h">
+      <Filter>S2C\GameObjects\TestGameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +166,15 @@
     </ClCompile>
     <ClCompile Include="S2C_Protocol_Enum.pb.cc">
       <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="UnityGameObject.cpp">
+      <Filter>S2C\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="XYZ.cpp">
+      <Filter>S2C\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="TestGameBullet.cpp">
+      <Filter>S2C\GameObjects\TestGameObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

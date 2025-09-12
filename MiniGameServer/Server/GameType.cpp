@@ -15,3 +15,12 @@ GameType IntToGameType(int32_t num) {
 		return GameType::Undefined;
 	}
 }
+
+GameObjectType IntToGameObjectType(int32_t num) {
+	switch (num) {
+	case(1):
+		return GameObjectType::TestGameBullet;
+	default:
+		return GameObjectType::undefined;
+	}
+}

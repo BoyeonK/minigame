@@ -9,3 +9,10 @@ enum class GameType {
 };
 
 GameType IntToGameType(int32_t num); 
+
+enum class GameObjectType {
+	undefined,
+	TestGameBullet,
+};
+
+GameObjectType IntToGameObjectType(int32_t num);

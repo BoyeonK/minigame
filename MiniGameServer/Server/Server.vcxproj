@@ -181,7 +181,10 @@
     <ClInclude Include="PlayerSession.h" />
     <ClInclude Include="S2CPacketMaker.h" />
     <ClInclude Include="S2CServerServiceImpl.h" />
+    <ClInclude Include="TestGameBullet.h" />
+    <ClInclude Include="UnityGameObject.h" />
     <ClInclude Include="WatingPlayerData.h" />
+    <ClInclude Include="XYZ.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Deviset.cpp" />
@@ -221,7 +224,10 @@
     <ClCompile Include="PlayerSession.cpp" />
     <ClCompile Include="S2CPacketMaker.cpp" />
     <ClCompile Include="S2CServerServiceImpl.cpp" />
+    <ClCompile Include="TestGameBullet.cpp" />
+    <ClCompile Include="UnityGameObject.cpp" />
     <ClCompile Include="WatingPlayerData.cpp" />
+    <ClCompile Include="XYZ.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
