@@ -56,4 +56,9 @@ public class Define {
             default: return Scene.Undefined;
         }
     }
+
+    public enum ObjectType {
+        Undefined,
+        TestGameBullet,
+    }
 }
