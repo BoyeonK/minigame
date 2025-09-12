@@ -1,5 +1,6 @@
 #pragma once
 #include "MatchQueue.h"
+#include "UnityGameObject.h"
 
 class PlayerSession;
 
@@ -20,6 +21,7 @@ public:
 	virtual void Init(vector<WatingPlayerData> pdv) = 0;
 	virtual void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) = 0;
 	virtual void Update() = 0;
+	virtual void SendGameState(shared_ptr<PlayerSession> playerSession) = 0;
 	GameState GetState();
 	
 protected:
@@ -27,6 +29,8 @@ protected:
 	GameType _ty;
 	GameState _state = GameState::BeforeInit;
 	int32_t _preparedPlayer = 0;
+	vector<shared_ptr<UnityGameObject>> _vecGameObjects;
+	unordered_map<uint32_t, shared_ptr<UnityGameObject>> _hmGameObject;
 };
 
 class TestMatchGameRoom : public GameRoom {
