@@ -3,34 +3,8 @@ syntax = "proto3";
 package S2C_Protocol;
 option csharp_namespace = "Google.Protobuf.Protocol";
 
-enum MsgId {
-    S_WELCOME = 0;
-    C_WELCOME = 1;
-    S_WELCOME_RESPONSE = 2;
-    S_ENCRYPTED = 3;
-    C_ENCRYPTED = 4;
-    C_LOGIN = 5;
-    S_LOGIN = 6;
-    C_CREATE_ACCOUNT = 7;
-    S_CREATE_ACCOUNT = 8;
-    C_LOGOUT = 9;
-    S_LOGOUT = 10;
-    C_MATCHMAKE_REQUEST = 11;
-    S_MATCHMAKE_REQUEST = 12;
-    C_MATCHMAKE_CANCEL = 13;
-    S_MATCHMAKE_CANCEL = 14;
-    S_MATCHMAKE_KEEP_ALIVE = 15;
-    C_MATCHMAKE_KEEP_ALIVE = 16;
-    S_REDO_MATCHMAKE = 17;
-    S_EXCLUDED_FROM_MATCH = 18;
-    S_MATCHMAKE_COMPLETED = 19;
-    C_GAME_SCENE_LOADING_PROGRESS = 20;
-    S_GAME_STARTED = 21;
-    C_REQUEST_GAME_STATE = 22;
-    S_TESTGAME_STATE = 23;
-    S_PINGPONG_STATE = 24;
-    S_DANMAKU_STATE = 25;
-}
+import "S2C_Protocol_Ingame.proto";
+import "S2C_Protocol_Enum.proto";
 
 //최초에 TCP방식의 Connect가 성공하면 해당 session의 보안레벨은 '보안레벨 0'이다.
 //MsgId 0~4영역(HandShake과정) 보안레벨 0에서 통신 가능.
@@ -59,7 +33,6 @@ enum MsgId {
     //이 사실을 안 누군가가, 로그인하지 않고 msgId 4인 패킷을 무차별 난사한다면, 의미없는 패킷을 복호화하는데 서버의 자원이 소진 될 수 있다.
     //복호화 불가능한 가짜 패킷이나 허용되지 않은 msgId영역에서의 전송이 반복될 경우, 해당 IP혹은 Session을 차단하는 것을 고려해 보았으나..
     //누가 내 토이 프로젝트에 설마 그렇게 까지 하겠는가..
-
 message S_Welcome {
     bytes publicKey = 1;
     int32 gameversion = 2;
@@ -214,22 +187,6 @@ message C_GameSceneLoadingProgress {
 
 message S_GameStarted {
     int32 gameId = 1;
-}
-
-message C_RequestGameState {
-    int32 gameId = 1;
-}
-
-message S_TestGameState {
-
-}
-
-message S_PingPongState {
-
-}
-
-message S_DanmakuState {
-
 }
 
 //세션의 종료 및 초기 화면으로 돌아가는것을 유도.

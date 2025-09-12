@@ -165,6 +165,8 @@
     <ClInclude Include="GameRoom.h" />
     <ClInclude Include="GameType.h" />
     <ClInclude Include="MatchQueue.h" />
+    <ClInclude Include="S2C_Protocol_Enum.pb.h" />
+    <ClInclude Include="S2C_Protocol_Ingame.pb.h" />
     <ClInclude Include="S2DPacketMaker.h" />
     <ClInclude Include="S2D_CallData.h" />
     <ClInclude Include="DBClientImpl.h" />
@@ -186,6 +188,12 @@
     <ClCompile Include="GameRoom.cpp" />
     <ClCompile Include="GameType.cpp" />
     <ClCompile Include="MatchQueue.cpp" />
+    <ClCompile Include="S2C_Protocol_Enum.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_Ingame.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="S2DPacketMaker.cpp" />
     <ClCompile Include="S2D_CallData.cpp" />
     <ClCompile Include="DBClientImpl.cpp" />

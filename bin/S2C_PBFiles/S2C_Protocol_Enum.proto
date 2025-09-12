@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package S2C_Protocol;
+option csharp_namespace = "Google.Protobuf.Protocol";
+
+enum MsgId {
+    S_WELCOME = 0;
+    C_WELCOME = 1;
+    S_WELCOME_RESPONSE = 2;
+    S_ENCRYPTED = 3;
+    C_ENCRYPTED = 4;
+    C_LOGIN = 5;
+    S_LOGIN = 6;
+    C_CREATE_ACCOUNT = 7;
+    S_CREATE_ACCOUNT = 8;
+    C_LOGOUT = 9;
+    S_LOGOUT = 10;
+    C_MATCHMAKE_REQUEST = 11;
+    S_MATCHMAKE_REQUEST = 12;
+    C_MATCHMAKE_CANCEL = 13;
+    S_MATCHMAKE_CANCEL = 14;
+    S_MATCHMAKE_KEEP_ALIVE = 15;
+    C_MATCHMAKE_KEEP_ALIVE = 16;
+    S_REDO_MATCHMAKE = 17;
+    S_EXCLUDED_FROM_MATCH = 18;
+    S_MATCHMAKE_COMPLETED = 19;
+    C_GAME_SCENE_LOADING_PROGRESS = 20;
+    S_GAME_STARTED = 21;
+    C_REQUEST_GAME_STATE = 22;
+    S_TESTGAME_STATE = 23;
+    S_PINGPONG_STATE = 24;
+    S_DANMAKU_STATE = 25;
+}

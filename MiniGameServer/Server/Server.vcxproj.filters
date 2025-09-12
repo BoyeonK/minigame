@@ -81,6 +81,12 @@
     <ClInclude Include="Deviset.h">
       <Filter>S2C\Network</Filter>
     </ClInclude>
+    <ClInclude Include="S2C_Protocol_Ingame.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2C_Protocol_Enum.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -142,6 +148,12 @@
     </ClCompile>
     <ClCompile Include="Deviset.cpp">
       <Filter>S2C\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_Ingame.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_Enum.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
