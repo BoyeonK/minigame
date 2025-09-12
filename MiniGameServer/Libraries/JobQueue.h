@@ -27,7 +27,7 @@ public:
 	}
 
 	//나 이거 왠지 JS에서 써본거같아
-	void DoTimerAsync(CallbackType&& callback, uint64_t tickAfter) {
+	void DoTimerAsync(uint64_t tickAfter, CallbackType&& callback) {
 		shared_ptr<Job> job = { objectPool<Job>::alloc(std::move(callback)), objectPool<Job>::dealloc };
 		GJobTimer->Reserve(tickAfter, shared_from_this(), job);
 	}
