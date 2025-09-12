@@ -21,7 +21,6 @@ public:
 	virtual void Init(vector<WatingPlayerData> pdv) = 0;
 	virtual void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) = 0;
 	virtual void Update() = 0;
-	virtual void SendGameState(shared_ptr<PlayerSession> playerSession) = 0;
 	GameState GetState();
 	
 protected:
@@ -47,8 +46,11 @@ public:
 
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
+
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
 	void Start();
+
+	void MakeTestGameBullets();
 
 private:
 	int32_t _quota = 1;

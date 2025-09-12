@@ -93,6 +93,11 @@ void TestMatchGameRoom::Start() {
 			playerSessionRef->Send(sendBuffer);
 		}
 	}
+	DoTimerAsync(3000, &TestMatchGameRoom::MakeTestGameBullets);
+}
+
+void TestMatchGameRoom::MakeTestGameBullets() {
+	cout << "¾Ó ÃÑ¾Ë ¸¸µé¾î ¶ì" << endl;
 }
 
 void TestMatchGameRoom::ReturnToPool() {

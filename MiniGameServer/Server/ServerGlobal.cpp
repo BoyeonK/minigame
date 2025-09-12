@@ -352,7 +352,7 @@ void GameManager::RemoveInvalidRoom() {
 			});
 
 		_rooms.erase(new_end, _rooms.end());
-		cout << "Invalid Room Cleared" << endl;
+		//cout << "Invalid Room Cleared" << endl;
 	}
 }
 
@@ -368,7 +368,7 @@ void PingPongManager::RenewMatchQueue() {
 	if (::GetTickCount64() - _lastRenewTick > 3000) {
 		_lastRenewTick = ::GetTickCount64();
 		_matchQueue.FlushTempQueueAndSort();
-		cout << "matchQueueRenewed" << endl;
+		//cout << "matchQueueRenewed" << endl;
 	}
 }
 
