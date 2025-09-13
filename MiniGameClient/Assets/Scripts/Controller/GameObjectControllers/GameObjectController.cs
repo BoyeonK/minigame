@@ -3,8 +3,8 @@ using UnityEngine;
 using static Define;
 
 public class GameObjectController : MonoBehaviour {
-	private int _objectId { get; set; }
-	private ObjectType _objectType { get; set; }
+	protected int _objectId { get; set; }
+	protected ObjectType _objectType { get; set; }
 
 	void Start() {
 		Init();
