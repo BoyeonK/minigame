@@ -105,7 +105,7 @@ void TestMatchGameRoom::ReturnToPool() {
 }
 
 void TestMatchGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
-	cout << "업데이트 프로그레그 바" << endl;
+	cout << "업데이트 프로그레스 바" << endl;
 	if (progressRate == 100) {
 		_preparedPlayer += 1;
 	}
