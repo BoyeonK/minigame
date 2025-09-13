@@ -138,4 +138,8 @@ class PacketMaker {
         Debug.Log($"진행상황 전송. 전송할 패킷의 진행률 : {progressPersent}");
         return new C_GameSceneLoadingProgress { Persentage = progressPersent };
     }
+
+    public static C_RequestGameState MakeCRequestGameState(int gameId) {
+        return new C_RequestGameState { GameId = gameId };
+    }
 }

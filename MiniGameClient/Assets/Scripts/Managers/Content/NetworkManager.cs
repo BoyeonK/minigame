@@ -42,8 +42,6 @@ public class NetworkManager {
 		_session.Send(packet);
 	}
 
-	#region Try계열 (UI등의 방법을 통해 유저의 요청을 시작)
-
 	public void TryConnectToServer() {
 		//이미 연결되있지도 않으면서, 현재 연결 함수가 작동중이 아닌 경우.
 		if (_isConnected == true || Interlocked.CompareExchange(ref _isTryingConnect, 1, 0) != 0) {
@@ -224,7 +222,10 @@ public class NetworkManager {
 		Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
 	}
 
-	#endregion
+	public void TryRequestGameState(int gameId) {
+		C_RequestGameState pkt = PacketMaker.MakeCRequestGameState(gameId);
+		Send(pkt);
+	}
 
     public void Update() {
 
