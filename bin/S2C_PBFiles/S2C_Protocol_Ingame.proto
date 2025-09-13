@@ -28,17 +28,28 @@ message S_TestGameState {
 }
 
 message S_PingPongState {
-
+    repeated UnityGameObject objects = 1;
 }
 
 message S_DanmakuState {
-
+    repeated UnityGameObject objects = 1;
 }
 
+//변화가 생긴 Object의 상태 변화를 알려주기 위함.
 message S_DeltaGameObjectSoft {
-    int32 objectId = 1;
+    UnityGameObject object = 1;
 }
 
+//특정 Object가 없거나, 싱크가 드럽게 안맞을 때 강제로 맞추기 위함.
+//없으면 만들고 있으면 강제로 상태 변경하기
 message S_DeltaGameObjectHard {
-    int32 objectId = 1;
+    UnityGameObject object = 1;
+}
+
+message S_SpawnGameObject {
+    UnityGameObject object = 1;
+}
+
+message S_DespawnGameObject {
+    UnityGameObject object = 1;
 }
