@@ -2,6 +2,8 @@
 #include "ServerGlobal.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
+#include "TestGameManager.h"
+#include "PingPongManager.h"
 
 CryptoManager* GCryptoManager = nullptr;
 DBClientImpl* DBManager = nullptr;
@@ -15,7 +17,7 @@ public:
 	ServerGlobal() {
 		GCryptoManager = new CryptoManager();
 
-		shared_ptr<TestMatchManager> TMManager = make_shared<TestMatchManager>();
+		shared_ptr<TestGameManager> TMManager = make_shared<TestGameManager>();
 		GGameManagers[1] = TMManager;
 
 		shared_ptr<PingPongManager> PPManager = make_shared<PingPongManager>();
@@ -281,131 +283,3 @@ bool CryptoManager::Encrypt(
 	return true;
 }
 
-void TestMatchManager::Push(WatingPlayerData pd) {
-	_matchQueue.Push(move(pd));
-}
-
-void TestMatchManager::Push(vector<WatingPlayerData> pdv) {
-	_matchQueue.Push(move(pdv));
-}
-
-void TestMatchManager::RenewMatchQueue() {
-	if (::GetTickCount64() - _lastRenewTick > 3000) {
-		_lastRenewTick = ::GetTickCount64();
-		_matchQueue.FlushTempQueueAndSort();
-		cout << "matchQueueRenewed" << endl;
-	}
-}
-
-void TestMatchManager::MatchMake() {
-	vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
-	for (auto& pdv : pdvv) {
-		bool isReady = true;
-		fill(_excluded.begin(), _excluded.end(), false);
-		for (int i = 0; i < _quota; i++) {
-			shared_ptr<PlayerSession> playerSessionRef = pdv[i].playerSessionWRef.lock();
-			if (playerSessionRef == nullptr) {
-				isReady = false;
-				_excluded[i] = true;
-			}
-			else if (playerSessionRef->GetMatchingState() != GameType::TestMatch) {
-				isReady = false;
-				_excluded[i] = true;
-
-				S2C_Protocol::S_ExcludedFromMatch pkt = S2CPacketMaker::MakeSExcludedFromMatch(false);
-				shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
-				playerSessionRef->Send(sendBufferRef);
-				playerSessionRef->SetMatchingState(GameType::None);
-			}
-		}
-
-		if (isReady) {
-			MakeRoom(move(pdv));
-		}
-		else {
-			for (int i = 0; i < _quota; i++) {
-				if (!_excluded[i])
-					_matchQueue.Push(move(pdv[i]));
-			}
-		}
-	}
-}
-
-void TestMatchManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
-	shared_ptr<TestMatchGameRoom> newRoomRef = { objectPool<TestMatchGameRoom>::alloc(), objectPool<TestMatchGameRoom>::dealloc };
-	AddRoom(newRoomRef);
-	newRoomRef->DoAsyncAfter(&TestMatchGameRoom::Init, move(pdv));
-}
-
-void GameManager::AddRoom(shared_ptr<GameRoom> room) {
-	unique_lock<shared_mutex> lock(_roomsLock);
-	_rooms.push_back(room);
-}
-
-void GameManager::RemoveInvalidRoom() {
-	if (::GetTickCount64() - _lastRenewRoomTick > 5000) {
-		unique_lock<shared_mutex> lock(_roomsLock);
-		_lastRenewRoomTick = ::GetTickCount64();
-		auto new_end = remove_if(_rooms.begin(), _rooms.end(),
-			[](const shared_ptr<GameRoom>& gameRoomRef) {
-				return (gameRoomRef->GetState() == GameRoom::GameState::EndGame);
-			});
-
-		_rooms.erase(new_end, _rooms.end());
-		//cout << "Invalid Room Cleared" << endl;
-	}
-}
-
-void PingPongManager::Push(WatingPlayerData pd) {
-	_matchQueue.Push(move(pd));
-}
-
-void PingPongManager::Push(vector<WatingPlayerData> pdv) {
-	_matchQueue.Push(move(pdv));
-}
-
-void PingPongManager::RenewMatchQueue() {
-	if (::GetTickCount64() - _lastRenewTick > 3000) {
-		_lastRenewTick = ::GetTickCount64();
-		_matchQueue.FlushTempQueueAndSort();
-		//cout << "matchQueueRenewed" << endl;
-	}
-}
-
-void PingPongManager::MatchMake() {
-	vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
-	for (auto& pdv : pdvv) {
-		bool isReady = true;
-		fill(_excluded.begin(), _excluded.end(), false);
-		for (int i = 0; i < _quota; i++) {
-			shared_ptr<PlayerSession> playerSessionRef = pdv[i].playerSessionWRef.lock();
-			if (playerSessionRef == nullptr) {
-				isReady = false;
-				_excluded[i] = true;
-			}
-			else if (playerSessionRef->GetMatchingState() != GameType::PingPong) {
-				isReady = false;
-				_excluded[i] = true;
-
-				S2C_Protocol::S_ExcludedFromMatch pkt = S2CPacketMaker::MakeSExcludedFromMatch(false);
-				shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
-				playerSessionRef->Send(sendBufferRef);
-				playerSessionRef->SetMatchingState(GameType::None);
-			}
-		}
-
-		if (isReady) {
-			MakeRoom(move(pdv));
-		}
-		else {
-			for (int i = 0; i < _quota; i++) {
-				if (!_excluded[i])
-					_matchQueue.Push(move(pdv[i]));
-			}
-		}
-	}
-}
-
-void PingPongManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
-
-}

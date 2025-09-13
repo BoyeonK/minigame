@@ -2,6 +2,7 @@
 #include "S2CPacketHandler.h"
 #include "PlayerSession.h"
 #include "S2CPacketMaker.h"
+#include "GameRoom.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];

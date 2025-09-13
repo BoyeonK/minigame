@@ -22,8 +22,20 @@
     <Filter Include="S2D\Protocol">
       <UniqueIdentifier>{d0918d57-57ca-4d3f-b6af-fd929ea7f151}</UniqueIdentifier>
     </Filter>
-    <Filter Include="S2C\GameObjects\TestGameObjects">
+    <Filter Include="S2C\Network\MatchMaking">
+      <UniqueIdentifier>{f368fcf8-bdb0-46d1-b1d0-c2716e0d4ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="S2C\GameObjects\Common">
+      <UniqueIdentifier>{7bb8e11b-3383-4b95-a006-606b6c52a7d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="S2C\GameObjects\TestGame">
       <UniqueIdentifier>{0621b292-4c2c-4906-945a-70d323295b17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="S2C\GameObjects\TestGame\UnityGameObjects">
+      <UniqueIdentifier>{d09a1666-85af-424b-9c51-0caf4daacc0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="S2C\GameObjects\PingPong">
+      <UniqueIdentifier>{7dc1381c-7dd6-4c78-a877-50464f5fc6df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,9 +45,6 @@
     <ClInclude Include="ServerGlobal.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>S2C\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="gRPC_test.h">
       <Filter>S2D</Filter>
     </ClInclude>
@@ -44,15 +53,6 @@
     </ClInclude>
     <ClInclude Include="DBClientImpl.h">
       <Filter>S2D</Filter>
-    </ClInclude>
-    <ClInclude Include="GameRoom.h">
-      <Filter>S2C\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="MatchQueue.h">
-      <Filter>S2C\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="GameType.h">
-      <Filter>S2C\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="S2CServerServiceImpl.h">
       <Filter>S2C\Network\Protocol</Filter>
@@ -78,26 +78,47 @@
     <ClInclude Include="S2D_CallData.h">
       <Filter>S2D\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="WatingPlayerData.h">
-      <Filter>S2C\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Deviset.h">
-      <Filter>S2C\Network</Filter>
-    </ClInclude>
     <ClInclude Include="S2C_Protocol_Ingame.pb.h">
       <Filter>S2C\Network\Protocol</Filter>
     </ClInclude>
     <ClInclude Include="S2C_Protocol_Enum.pb.h">
       <Filter>S2C\Network\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="UnityGameObject.h">
-      <Filter>S2C\GameObjects</Filter>
+    <ClInclude Include="Deviset.h">
+      <Filter>S2C\Network\MatchMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchQueue.h">
+      <Filter>S2C\Network\MatchMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="WatingPlayerData.h">
+      <Filter>S2C\Network\MatchMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>S2C\GameObjects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="GameType.h">
+      <Filter>S2C\GameObjects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="GameRoom.h">
+      <Filter>S2C\GameObjects\Common</Filter>
     </ClInclude>
     <ClInclude Include="XYZ.h">
-      <Filter>S2C\GameObjects</Filter>
+      <Filter>S2C\GameObjects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="UnityGameObject.h">
+      <Filter>S2C\GameObjects\Common</Filter>
     </ClInclude>
     <ClInclude Include="TestGameBullet.h">
-      <Filter>S2C\GameObjects\TestGameObjects</Filter>
+      <Filter>S2C\GameObjects\TestGame\UnityGameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMatchGameRoom.h">
+      <Filter>S2C\GameObjects\TestGame</Filter>
+    </ClInclude>
+    <ClInclude Include="TestGameManager.h">
+      <Filter>S2C\GameObjects\TestGame</Filter>
+    </ClInclude>
+    <ClInclude Include="PingPongManager.h">
+      <Filter>S2C\GameObjects\PingPong</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +131,6 @@
     <ClCompile Include="ServerGlobal.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>S2C\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="gRPC_test.cpp">
       <Filter>S2D</Filter>
     </ClCompile>
@@ -121,15 +139,6 @@
     </ClCompile>
     <ClCompile Include="DBClientImpl.cpp">
       <Filter>S2D</Filter>
-    </ClCompile>
-    <ClCompile Include="GameRoom.cpp">
-      <Filter>S2C\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="MatchQueue.cpp">
-      <Filter>S2C\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="GameType.cpp">
-      <Filter>S2C\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="S2CServerServiceImpl.cpp">
       <Filter>S2C\Network\Protocol</Filter>
@@ -155,26 +164,47 @@
     <ClCompile Include="S2D_CallData.cpp">
       <Filter>S2D\Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="WatingPlayerData.cpp">
-      <Filter>S2C\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Deviset.cpp">
-      <Filter>S2C\Network</Filter>
-    </ClCompile>
     <ClCompile Include="S2C_Protocol_Ingame.pb.cc">
       <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
     <ClCompile Include="S2C_Protocol_Enum.pb.cc">
       <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="UnityGameObject.cpp">
-      <Filter>S2C\GameObjects</Filter>
+    <ClCompile Include="Deviset.cpp">
+      <Filter>S2C\Network\MatchMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchQueue.cpp">
+      <Filter>S2C\Network\MatchMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="WatingPlayerData.cpp">
+      <Filter>S2C\Network\MatchMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>S2C\GameObjects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="GameType.cpp">
+      <Filter>S2C\GameObjects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="GameRoom.cpp">
+      <Filter>S2C\GameObjects\Common</Filter>
     </ClCompile>
     <ClCompile Include="XYZ.cpp">
-      <Filter>S2C\GameObjects</Filter>
+      <Filter>S2C\GameObjects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="UnityGameObject.cpp">
+      <Filter>S2C\GameObjects\Common</Filter>
     </ClCompile>
     <ClCompile Include="TestGameBullet.cpp">
-      <Filter>S2C\GameObjects\TestGameObjects</Filter>
+      <Filter>S2C\GameObjects\TestGame\UnityGameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMatchGameRoom.cpp">
+      <Filter>S2C\GameObjects\TestGame</Filter>
+    </ClCompile>
+    <ClCompile Include="TestGameManager.cpp">
+      <Filter>S2C\GameObjects\TestGame</Filter>
+    </ClCompile>
+    <ClCompile Include="PingPongManager.cpp">
+      <Filter>S2C\GameObjects\PingPong</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

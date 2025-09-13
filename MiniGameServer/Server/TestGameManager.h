@@ -1,0 +1,26 @@
+#pragma once
+#include "GameManager.h"
+
+class TestGameManager : public GameManager {
+public:
+	TestGameManager() : _ty(GameType::TestMatch), _quota(1), _matchQueue(_ty, _quota) {
+		_excluded = vector<bool>(_quota);
+	}
+
+	void Push(WatingPlayerData pd) override;
+	void Push(vector<WatingPlayerData> pdv) override;
+	void RenewMatchQueue();
+	void MatchMake() override;
+	void MakeRoom(vector<WatingPlayerData>&& pdv) override;
+
+	void Update() override {}
+
+	void StartGame() {}
+
+private:
+	GameType _ty = GameType::TestMatch;
+	int32_t _quota;
+	MatchQueue _matchQueue;
+	vector<bool> _excluded;
+	uint64_t _lastRenewTick = 0;
+};
