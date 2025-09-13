@@ -24,7 +24,7 @@ namespace Google.Protobuf.Protocol {
     static S2CProtocolEnumReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdTMkNfUHJvdG9jb2xfRW51bS5wcm90bxIMUzJDX1Byb3RvY29sKrkECgVN",
+            "ChdTMkNfUHJvdG9jb2xfRW51bS5wcm90bxIMUzJDX1Byb3RvY29sKqkFCgVN",
             "c2dJZBINCglTX1dFTENPTUUQABINCglDX1dFTENPTUUQARIWChJTX1dFTENP",
             "TUVfUkVTUE9OU0UQAhIPCgtTX0VOQ1JZUFRFRBADEg8KC0NfRU5DUllQVEVE",
             "EAQSCwoHQ19MT0dJThAFEgsKB1NfTE9HSU4QBhIUChBDX0NSRUFURV9BQ0NP",
@@ -37,8 +37,10 @@ namespace Google.Protobuf.Protocol {
             "QUtFX0NPTVBMRVRFRBATEiEKHUNfR0FNRV9TQ0VORV9MT0FESU5HX1BST0dS",
             "RVNTEBQSEgoOU19HQU1FX1NUQVJURUQQFRIYChRDX1JFUVVFU1RfR0FNRV9T",
             "VEFURRAWEhQKEFNfVEVTVEdBTUVfU1RBVEUQFxIUChBTX1BJTkdQT05HX1NU",
-            "QVRFEBgSEwoPU19EQU5NQUtVX1NUQVRFEBlCG6oCGEdvb2dsZS5Qcm90b2J1",
-            "Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "QVRFEBgSEwoPU19EQU5NQUtVX1NUQVRFEBkSHAoYU19ERUxUQV9HQU1FX09C",
+            "SkVDVF9TT0ZUEBoSHAoYU19ERUxUQV9HQU1FX09CSkVDVF9IQVJEEBsSFwoT",
+            "U19TUEFXTl9HQU1FX09CSkVDVBAcEhkKFVNfREVTUEFXTl9HQU1FX09CSkVD",
+            "VBAdQhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, null));
@@ -74,6 +76,10 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("S_TESTGAME_STATE")] STestgameState = 23,
     [pbr::OriginalName("S_PINGPONG_STATE")] SPingpongState = 24,
     [pbr::OriginalName("S_DANMAKU_STATE")] SDanmakuState = 25,
+    [pbr::OriginalName("S_DELTA_GAME_OBJECT_SOFT")] SDeltaGameObjectSoft = 26,
+    [pbr::OriginalName("S_DELTA_GAME_OBJECT_HARD")] SDeltaGameObjectHard = 27,
+    [pbr::OriginalName("S_SPAWN_GAME_OBJECT")] SSpawnGameObject = 28,
+    [pbr::OriginalName("S_DESPAWN_GAME_OBJECT")] SDespawnGameObject = 29,
   }
 
   #endregion

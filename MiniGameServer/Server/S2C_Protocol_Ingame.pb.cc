@@ -52,92 +52,6 @@ struct XYZDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 XYZDefaultTypeInternal _XYZ_default_instance_;
-              template <typename>
-PROTOBUF_CONSTEXPR S_PingPongState::S_PingPongState(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase() {
-}
-#endif  // PROTOBUF_CUSTOM_VTABLE
-struct S_PingPongStateDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_PingPongStateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_PingPongStateDefaultTypeInternal() {}
-  union {
-    S_PingPongState _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_PingPongStateDefaultTypeInternal _S_PingPongState_default_instance_;
-
-inline constexpr S_DeltaGameObjectSoft::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : objectid_{0},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR S_DeltaGameObjectSoft::S_DeltaGameObjectSoft(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct S_DeltaGameObjectSoftDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_DeltaGameObjectSoftDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_DeltaGameObjectSoftDefaultTypeInternal() {}
-  union {
-    S_DeltaGameObjectSoft _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DeltaGameObjectSoftDefaultTypeInternal _S_DeltaGameObjectSoft_default_instance_;
-
-inline constexpr S_DeltaGameObjectHard::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : objectid_{0},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR S_DeltaGameObjectHard::S_DeltaGameObjectHard(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct S_DeltaGameObjectHardDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_DeltaGameObjectHardDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_DeltaGameObjectHardDefaultTypeInternal() {}
-  union {
-    S_DeltaGameObjectHard _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DeltaGameObjectHardDefaultTypeInternal _S_DeltaGameObjectHard_default_instance_;
-              template <typename>
-PROTOBUF_CONSTEXPR S_DanmakuState::S_DanmakuState(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase() {
-}
-#endif  // PROTOBUF_CUSTOM_VTABLE
-struct S_DanmakuStateDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_DanmakuStateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_DanmakuStateDefaultTypeInternal() {}
-  union {
-    S_DanmakuState _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DanmakuStateDefaultTypeInternal _S_DanmakuState_default_instance_;
 
 inline constexpr C_RequestGameState::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -215,6 +129,156 @@ struct S_TestGameStateDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_TestGameStateDefaultTypeInternal _S_TestGameState_default_instance_;
+
+inline constexpr S_SpawnGameObject::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        object_{nullptr} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_SpawnGameObject::S_SpawnGameObject(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_SpawnGameObjectDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_SpawnGameObjectDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_SpawnGameObjectDefaultTypeInternal() {}
+  union {
+    S_SpawnGameObject _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_SpawnGameObjectDefaultTypeInternal _S_SpawnGameObject_default_instance_;
+
+inline constexpr S_PingPongState::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : objects_{},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_PingPongState::S_PingPongState(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_PingPongStateDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_PingPongStateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_PingPongStateDefaultTypeInternal() {}
+  union {
+    S_PingPongState _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_PingPongStateDefaultTypeInternal _S_PingPongState_default_instance_;
+
+inline constexpr S_DespawnGameObject::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        object_{nullptr} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_DespawnGameObject::S_DespawnGameObject(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_DespawnGameObjectDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_DespawnGameObjectDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_DespawnGameObjectDefaultTypeInternal() {}
+  union {
+    S_DespawnGameObject _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DespawnGameObjectDefaultTypeInternal _S_DespawnGameObject_default_instance_;
+
+inline constexpr S_DeltaGameObjectSoft::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        object_{nullptr} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_DeltaGameObjectSoft::S_DeltaGameObjectSoft(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_DeltaGameObjectSoftDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_DeltaGameObjectSoftDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_DeltaGameObjectSoftDefaultTypeInternal() {}
+  union {
+    S_DeltaGameObjectSoft _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DeltaGameObjectSoftDefaultTypeInternal _S_DeltaGameObjectSoft_default_instance_;
+
+inline constexpr S_DeltaGameObjectHard::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        object_{nullptr} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_DeltaGameObjectHard::S_DeltaGameObjectHard(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_DeltaGameObjectHardDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_DeltaGameObjectHardDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_DeltaGameObjectHardDefaultTypeInternal() {}
+  union {
+    S_DeltaGameObjectHard _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DeltaGameObjectHardDefaultTypeInternal _S_DeltaGameObjectHard_default_instance_;
+
+inline constexpr S_DanmakuState::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : objects_{},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_DanmakuState::S_DanmakuState(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_DanmakuStateDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_DanmakuStateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_DanmakuStateDefaultTypeInternal() {}
+  union {
+    S_DanmakuState _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DanmakuStateDefaultTypeInternal _S_DanmakuState_default_instance_;
 }  // namespace S2C_Protocol
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_S2C_5fProtocol_5fIngame_2eproto = nullptr;
@@ -274,6 +338,7 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_PingPongState, _impl_.objects_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DanmakuState, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -282,7 +347,8 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DanmakuState, _impl_.objects_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DeltaGameObjectSoft, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DeltaGameObjectSoft, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -290,8 +356,9 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DeltaGameObjectSoft, _impl_.objectid_),
-        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DeltaGameObjectSoft, _impl_.object_),
+        0,
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DeltaGameObjectHard, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DeltaGameObjectHard, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -299,7 +366,28 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DeltaGameObjectHard, _impl_.objectid_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DeltaGameObjectHard, _impl_.object_),
+        0,
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_SpawnGameObject, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_SpawnGameObject, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_SpawnGameObject, _impl_.object_),
+        0,
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DespawnGameObject, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DespawnGameObject, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DespawnGameObject, _impl_.object_),
+        0,
 };
 
 static const ::_pbi::MigrationSchema
@@ -309,9 +397,11 @@ static const ::_pbi::MigrationSchema
         {25, -1, -1, sizeof(::S2C_Protocol::C_RequestGameState)},
         {34, -1, -1, sizeof(::S2C_Protocol::S_TestGameState)},
         {43, -1, -1, sizeof(::S2C_Protocol::S_PingPongState)},
-        {51, -1, -1, sizeof(::S2C_Protocol::S_DanmakuState)},
-        {59, -1, -1, sizeof(::S2C_Protocol::S_DeltaGameObjectSoft)},
-        {68, -1, -1, sizeof(::S2C_Protocol::S_DeltaGameObjectHard)},
+        {52, -1, -1, sizeof(::S2C_Protocol::S_DanmakuState)},
+        {61, 70, -1, sizeof(::S2C_Protocol::S_DeltaGameObjectSoft)},
+        {71, 80, -1, sizeof(::S2C_Protocol::S_DeltaGameObjectHard)},
+        {81, 90, -1, sizeof(::S2C_Protocol::S_SpawnGameObject)},
+        {91, 100, -1, sizeof(::S2C_Protocol::S_DespawnGameObject)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_XYZ_default_instance_._instance,
@@ -322,6 +412,8 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_DanmakuState_default_instance_._instance,
     &::S2C_Protocol::_S_DeltaGameObjectSoft_default_instance_._instance,
     &::S2C_Protocol::_S_DeltaGameObjectHard_default_instance_._instance,
+    &::S2C_Protocol::_S_SpawnGameObject_default_instance_._instance,
+    &::S2C_Protocol::_S_DespawnGameObject_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2C_5fProtocol_5fIngame_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -332,22 +424,30 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fIngame_2eproto[] ABSL_ATTR
     "2C_Protocol.XYZ\"$\n\022C_RequestGameState\022\016\n"
     "\006gameId\030\001 \001(\005\"A\n\017S_TestGameState\022.\n\007obje"
     "cts\030\001 \003(\0132\035.S2C_Protocol.UnityGameObject"
-    "\"\021\n\017S_PingPongState\"\020\n\016S_DanmakuState\")\n"
-    "\025S_DeltaGameObjectSoft\022\020\n\010objectId\030\001 \001(\005"
-    "\")\n\025S_DeltaGameObjectHard\022\020\n\010objectId\030\001 "
-    "\001(\005B\033\252\002\030Google.Protobuf.Protocolb\006proto3"
+    "\"A\n\017S_PingPongState\022.\n\007objects\030\001 \003(\0132\035.S"
+    "2C_Protocol.UnityGameObject\"@\n\016S_Danmaku"
+    "State\022.\n\007objects\030\001 \003(\0132\035.S2C_Protocol.Un"
+    "ityGameObject\"F\n\025S_DeltaGameObjectSoft\022-"
+    "\n\006object\030\001 \001(\0132\035.S2C_Protocol.UnityGameO"
+    "bject\"F\n\025S_DeltaGameObjectHard\022-\n\006object"
+    "\030\001 \001(\0132\035.S2C_Protocol.UnityGameObject\"B\n"
+    "\021S_SpawnGameObject\022-\n\006object\030\001 \001(\0132\035.S2C"
+    "_Protocol.UnityGameObject\"D\n\023S_DespawnGa"
+    "meObject\022-\n\006object\030\001 \001(\0132\035.S2C_Protocol."
+    "UnityGameObjectB\033\252\002\030Google.Protobuf.Prot"
+    "ocolb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fIngame_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fIngame_2eproto = {
     false,
     false,
-    440,
+    732,
     descriptor_table_protodef_S2C_5fProtocol_5fIngame_2eproto,
     "S2C_Protocol_Ingame.proto",
     &descriptor_table_S2C_5fProtocol_5fIngame_2eproto_once,
     nullptr,
     0,
-    8,
+    10,
     schemas,
     file_default_instances,
     TableStruct_S2C_5fProtocol_5fIngame_2eproto::offsets,
@@ -1388,26 +1488,53 @@ class S_PingPongState::_Internal {
 
 S_PingPongState::S_PingPongState(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_PingPongState)
 }
+inline PROTOBUF_NDEBUG_INLINE S_PingPongState::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_PingPongState& from_msg)
+      : objects_{visibility, arena, from.objects_},
+        _cached_size_{0} {}
+
 S_PingPongState::S_PingPongState(
     ::google::protobuf::Arena* arena,
     const S_PingPongState& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   S_PingPongState* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
   // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_PingPongState)
+}
+inline PROTOBUF_NDEBUG_INLINE S_PingPongState::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : objects_{visibility, arena},
+        _cached_size_{0} {}
+
+inline void S_PingPongState::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+S_PingPongState::~S_PingPongState() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_PingPongState)
+  SharedDtor(*this);
+}
+inline void S_PingPongState::SharedDtor(MessageLite& self) {
+  S_PingPongState& this_ = static_cast<S_PingPongState&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
 }
 
 inline void* S_PingPongState::PlacementNew_(const void*, void* mem,
@@ -1415,8 +1542,20 @@ inline void* S_PingPongState::PlacementNew_(const void*, void* mem,
   return ::new (mem) S_PingPongState(arena);
 }
 constexpr auto S_PingPongState::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_PingPongState),
-                                            alignof(S_PingPongState));
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(S_PingPongState, _impl_.objects_) +
+          decltype(S_PingPongState::_impl_.objects_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+        sizeof(S_PingPongState), alignof(S_PingPongState), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&S_PingPongState::PlacementNew_,
+                                 sizeof(S_PingPongState),
+                                 alignof(S_PingPongState));
+  }
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -1427,10 +1566,10 @@ const ::google::protobuf::internal::ClassDataFull S_PingPongState::_class_data_ 
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
         &S_PingPongState::MergeImpl,
-        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<S_PingPongState>(),
+        ::google::protobuf::Message::GetNewImpl<S_PingPongState>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
         &S_PingPongState::SharedDtor,
-        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<S_PingPongState>(), &S_PingPongState::ByteSizeLong,
+        ::google::protobuf::Message::GetClearImpl<S_PingPongState>(), &S_PingPongState::ByteSizeLong,
             &S_PingPongState::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
         PROTOBUF_FIELD_OFFSET(S_PingPongState, _impl_._cached_size_),
@@ -1446,17 +1585,17 @@ const ::google::protobuf::internal::ClassData* S_PingPongState::GetClassData() c
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_PingPongState::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> S_PingPongState::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    0, 0,  // max_field_number, fast_idx_mask
+    1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967295,  // skipmap
-    offsetof(decltype(_table_), field_names),  // no field_entries
-    0,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1464,24 +1603,124 @@ const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_PingPongState::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_PingPongState>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // repeated .S2C_Protocol.UnityGameObject objects = 1;
+    {::_pbi::TcParser::FastMtR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(S_PingPongState, _impl_.objects_)}},
   }}, {{
     65535, 65535
-  }},
-  // no field_entries, or aux_entries
-  {{
+  }}, {{
+    // repeated .S2C_Protocol.UnityGameObject objects = 1;
+    {PROTOBUF_FIELD_OFFSET(S_PingPongState, _impl_.objects_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::S2C_Protocol::UnityGameObject>()},
+  }}, {{
   }},
 };
 
+PROTOBUF_NOINLINE void S_PingPongState::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_PingPongState)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.objects_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_PingPongState::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_PingPongState& this_ = static_cast<const S_PingPongState&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_PingPongState::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_PingPongState& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_PingPongState)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // repeated .S2C_Protocol.UnityGameObject objects = 1;
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_objects_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_objects().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    1, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_PingPongState)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_PingPongState::ByteSizeLong(const MessageLite& base) {
+          const S_PingPongState& this_ = static_cast<const S_PingPongState&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_PingPongState::ByteSizeLong() const {
+          const S_PingPongState& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_PingPongState)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated .S2C_Protocol.UnityGameObject objects = 1;
+            {
+              total_size += 1UL * this_._internal_objects_size();
+              for (const auto& msg : this_._internal_objects()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_PingPongState::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_PingPongState*>(&to_msg);
+  auto& from = static_cast<const S_PingPongState&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_PingPongState)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_objects()->MergeFrom(
+      from._internal_objects());
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_PingPongState::CopyFrom(const S_PingPongState& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_PingPongState)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
 
-
-
-
-
+void S_PingPongState::InternalSwap(S_PingPongState* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.objects_.InternalSwap(&other->_impl_.objects_);
+}
 
 ::google::protobuf::Metadata S_PingPongState::GetMetadata() const {
-  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
@@ -1491,26 +1730,53 @@ class S_DanmakuState::_Internal {
 
 S_DanmakuState::S_DanmakuState(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_DanmakuState)
 }
+inline PROTOBUF_NDEBUG_INLINE S_DanmakuState::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_DanmakuState& from_msg)
+      : objects_{visibility, arena, from.objects_},
+        _cached_size_{0} {}
+
 S_DanmakuState::S_DanmakuState(
     ::google::protobuf::Arena* arena,
     const S_DanmakuState& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   S_DanmakuState* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
   // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_DanmakuState)
+}
+inline PROTOBUF_NDEBUG_INLINE S_DanmakuState::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : objects_{visibility, arena},
+        _cached_size_{0} {}
+
+inline void S_DanmakuState::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+S_DanmakuState::~S_DanmakuState() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_DanmakuState)
+  SharedDtor(*this);
+}
+inline void S_DanmakuState::SharedDtor(MessageLite& self) {
+  S_DanmakuState& this_ = static_cast<S_DanmakuState&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
 }
 
 inline void* S_DanmakuState::PlacementNew_(const void*, void* mem,
@@ -1518,8 +1784,20 @@ inline void* S_DanmakuState::PlacementNew_(const void*, void* mem,
   return ::new (mem) S_DanmakuState(arena);
 }
 constexpr auto S_DanmakuState::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_DanmakuState),
-                                            alignof(S_DanmakuState));
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(S_DanmakuState, _impl_.objects_) +
+          decltype(S_DanmakuState::_impl_.objects_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+        sizeof(S_DanmakuState), alignof(S_DanmakuState), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&S_DanmakuState::PlacementNew_,
+                                 sizeof(S_DanmakuState),
+                                 alignof(S_DanmakuState));
+  }
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -1530,10 +1808,10 @@ const ::google::protobuf::internal::ClassDataFull S_DanmakuState::_class_data_ =
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
         &S_DanmakuState::MergeImpl,
-        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<S_DanmakuState>(),
+        ::google::protobuf::Message::GetNewImpl<S_DanmakuState>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
         &S_DanmakuState::SharedDtor,
-        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<S_DanmakuState>(), &S_DanmakuState::ByteSizeLong,
+        ::google::protobuf::Message::GetClearImpl<S_DanmakuState>(), &S_DanmakuState::ByteSizeLong,
             &S_DanmakuState::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
         PROTOBUF_FIELD_OFFSET(S_DanmakuState, _impl_._cached_size_),
@@ -1549,17 +1827,17 @@ const ::google::protobuf::internal::ClassData* S_DanmakuState::GetClassData() co
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_DanmakuState::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> S_DanmakuState::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    0, 0,  // max_field_number, fast_idx_mask
+    1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967295,  // skipmap
-    offsetof(decltype(_table_), field_names),  // no field_entries
-    0,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1567,29 +1845,133 @@ const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_DanmakuState::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_DanmakuState>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // repeated .S2C_Protocol.UnityGameObject objects = 1;
+    {::_pbi::TcParser::FastMtR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(S_DanmakuState, _impl_.objects_)}},
   }}, {{
     65535, 65535
-  }},
-  // no field_entries, or aux_entries
-  {{
+  }}, {{
+    // repeated .S2C_Protocol.UnityGameObject objects = 1;
+    {PROTOBUF_FIELD_OFFSET(S_DanmakuState, _impl_.objects_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::S2C_Protocol::UnityGameObject>()},
+  }}, {{
   }},
 };
 
+PROTOBUF_NOINLINE void S_DanmakuState::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_DanmakuState)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.objects_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_DanmakuState::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_DanmakuState& this_ = static_cast<const S_DanmakuState&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_DanmakuState::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_DanmakuState& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_DanmakuState)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // repeated .S2C_Protocol.UnityGameObject objects = 1;
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_objects_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_objects().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    1, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_DanmakuState)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_DanmakuState::ByteSizeLong(const MessageLite& base) {
+          const S_DanmakuState& this_ = static_cast<const S_DanmakuState&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_DanmakuState::ByteSizeLong() const {
+          const S_DanmakuState& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_DanmakuState)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated .S2C_Protocol.UnityGameObject objects = 1;
+            {
+              total_size += 1UL * this_._internal_objects_size();
+              for (const auto& msg : this_._internal_objects()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_DanmakuState::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_DanmakuState*>(&to_msg);
+  auto& from = static_cast<const S_DanmakuState&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_DanmakuState)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_objects()->MergeFrom(
+      from._internal_objects());
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_DanmakuState::CopyFrom(const S_DanmakuState& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_DanmakuState)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
 
-
-
-
-
+void S_DanmakuState::InternalSwap(S_DanmakuState* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.objects_.InternalSwap(&other->_impl_.objects_);
+}
 
 ::google::protobuf::Metadata S_DanmakuState::GetMetadata() const {
-  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
 class S_DeltaGameObjectSoft::_Internal {
  public:
+  using HasBits =
+      decltype(std::declval<S_DeltaGameObjectSoft>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectSoft, _impl_._has_bits_);
 };
 
 S_DeltaGameObjectSoft::S_DeltaGameObjectSoft(::google::protobuf::Arena* arena)
@@ -1601,10 +1983,31 @@ S_DeltaGameObjectSoft::S_DeltaGameObjectSoft(::google::protobuf::Arena* arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_DeltaGameObjectSoft)
 }
+inline PROTOBUF_NDEBUG_INLINE S_DeltaGameObjectSoft::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_DeltaGameObjectSoft& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
 S_DeltaGameObjectSoft::S_DeltaGameObjectSoft(
-    ::google::protobuf::Arena* arena, const S_DeltaGameObjectSoft& from)
-    : S_DeltaGameObjectSoft(arena) {
-  MergeFrom(from);
+    ::google::protobuf::Arena* arena,
+    const S_DeltaGameObjectSoft& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_DeltaGameObjectSoft* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.object_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::UnityGameObject>(
+                              arena, *from._impl_.object_)
+                        : nullptr;
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_DeltaGameObjectSoft)
 }
 inline PROTOBUF_NDEBUG_INLINE S_DeltaGameObjectSoft::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -1613,7 +2016,7 @@ inline PROTOBUF_NDEBUG_INLINE S_DeltaGameObjectSoft::Impl_::Impl_(
 
 inline void S_DeltaGameObjectSoft::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.objectid_ = {};
+  _impl_.object_ = {};
 }
 S_DeltaGameObjectSoft::~S_DeltaGameObjectSoft() {
   // @@protoc_insertion_point(destructor:S2C_Protocol.S_DeltaGameObjectSoft)
@@ -1623,6 +2026,7 @@ inline void S_DeltaGameObjectSoft::SharedDtor(MessageLite& self) {
   S_DeltaGameObjectSoft& this_ = static_cast<S_DeltaGameObjectSoft&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.object_;
   this_._impl_.~Impl_();
 }
 
@@ -1662,17 +2066,17 @@ const ::google::protobuf::internal::ClassData* S_DeltaGameObjectSoft::GetClassDa
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_DeltaGameObjectSoft::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> S_DeltaGameObjectSoft::_table_ = {
   {
-    0,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectSoft, _impl_._has_bits_),
     0, // no _extensions_
     1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
     4294967294,  // skipmap
     offsetof(decltype(_table_), field_entries),
     1,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1680,18 +2084,18 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_DeltaGameObjectSoft::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_DeltaGameObjectSoft>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 objectId = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_DeltaGameObjectSoft, _impl_.objectid_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectSoft, _impl_.objectid_)}},
+    // .S2C_Protocol.UnityGameObject object = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectSoft, _impl_.object_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int32 objectId = 1;
-    {PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectSoft, _impl_.objectid_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
+    // .S2C_Protocol.UnityGameObject object = 1;
+    {PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectSoft, _impl_.object_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::S2C_Protocol::UnityGameObject>()},
+  }}, {{
   }},
 };
 
@@ -1702,7 +2106,12 @@ PROTOBUF_NOINLINE void S_DeltaGameObjectSoft::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.objectid_ = 0;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.object_ != nullptr);
+    _impl_.object_->Clear();
+  }
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -1721,11 +2130,12 @@ PROTOBUF_NOINLINE void S_DeltaGameObjectSoft::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // int32 objectId = 1;
-          if (this_._internal_objectid() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_objectid(), target);
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .S2C_Protocol.UnityGameObject object = 1;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.object_, this_._impl_.object_->GetCachedSize(), target,
+                stream);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1752,10 +2162,11 @@ PROTOBUF_NOINLINE void S_DeltaGameObjectSoft::Clear() {
           (void)cached_has_bits;
 
            {
-            // int32 objectId = 1;
-            if (this_._internal_objectid() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_objectid());
+            // .S2C_Protocol.UnityGameObject object = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.object_);
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1765,14 +2176,23 @@ PROTOBUF_NOINLINE void S_DeltaGameObjectSoft::Clear() {
 void S_DeltaGameObjectSoft::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<S_DeltaGameObjectSoft*>(&to_msg);
   auto& from = static_cast<const S_DeltaGameObjectSoft&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_DeltaGameObjectSoft)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_objectid() != 0) {
-    _this->_impl_.objectid_ = from._impl_.objectid_;
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.object_ != nullptr);
+    if (_this->_impl_.object_ == nullptr) {
+      _this->_impl_.object_ =
+          ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::UnityGameObject>(arena, *from._impl_.object_);
+    } else {
+      _this->_impl_.object_->MergeFrom(*from._impl_.object_);
+    }
   }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1787,7 +2207,8 @@ void S_DeltaGameObjectSoft::CopyFrom(const S_DeltaGameObjectSoft& from) {
 void S_DeltaGameObjectSoft::InternalSwap(S_DeltaGameObjectSoft* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.objectid_, other->_impl_.objectid_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.object_, other->_impl_.object_);
 }
 
 ::google::protobuf::Metadata S_DeltaGameObjectSoft::GetMetadata() const {
@@ -1797,6 +2218,10 @@ void S_DeltaGameObjectSoft::InternalSwap(S_DeltaGameObjectSoft* PROTOBUF_RESTRIC
 
 class S_DeltaGameObjectHard::_Internal {
  public:
+  using HasBits =
+      decltype(std::declval<S_DeltaGameObjectHard>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectHard, _impl_._has_bits_);
 };
 
 S_DeltaGameObjectHard::S_DeltaGameObjectHard(::google::protobuf::Arena* arena)
@@ -1808,10 +2233,31 @@ S_DeltaGameObjectHard::S_DeltaGameObjectHard(::google::protobuf::Arena* arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_DeltaGameObjectHard)
 }
+inline PROTOBUF_NDEBUG_INLINE S_DeltaGameObjectHard::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_DeltaGameObjectHard& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
 S_DeltaGameObjectHard::S_DeltaGameObjectHard(
-    ::google::protobuf::Arena* arena, const S_DeltaGameObjectHard& from)
-    : S_DeltaGameObjectHard(arena) {
-  MergeFrom(from);
+    ::google::protobuf::Arena* arena,
+    const S_DeltaGameObjectHard& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_DeltaGameObjectHard* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.object_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::UnityGameObject>(
+                              arena, *from._impl_.object_)
+                        : nullptr;
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_DeltaGameObjectHard)
 }
 inline PROTOBUF_NDEBUG_INLINE S_DeltaGameObjectHard::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -1820,7 +2266,7 @@ inline PROTOBUF_NDEBUG_INLINE S_DeltaGameObjectHard::Impl_::Impl_(
 
 inline void S_DeltaGameObjectHard::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.objectid_ = {};
+  _impl_.object_ = {};
 }
 S_DeltaGameObjectHard::~S_DeltaGameObjectHard() {
   // @@protoc_insertion_point(destructor:S2C_Protocol.S_DeltaGameObjectHard)
@@ -1830,6 +2276,7 @@ inline void S_DeltaGameObjectHard::SharedDtor(MessageLite& self) {
   S_DeltaGameObjectHard& this_ = static_cast<S_DeltaGameObjectHard&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.object_;
   this_._impl_.~Impl_();
 }
 
@@ -1869,17 +2316,17 @@ const ::google::protobuf::internal::ClassData* S_DeltaGameObjectHard::GetClassDa
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_DeltaGameObjectHard::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> S_DeltaGameObjectHard::_table_ = {
   {
-    0,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectHard, _impl_._has_bits_),
     0, // no _extensions_
     1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
     4294967294,  // skipmap
     offsetof(decltype(_table_), field_entries),
     1,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1887,18 +2334,18 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_DeltaGameObjectHard::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_DeltaGameObjectHard>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 objectId = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_DeltaGameObjectHard, _impl_.objectid_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectHard, _impl_.objectid_)}},
+    // .S2C_Protocol.UnityGameObject object = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectHard, _impl_.object_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int32 objectId = 1;
-    {PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectHard, _impl_.objectid_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
+    // .S2C_Protocol.UnityGameObject object = 1;
+    {PROTOBUF_FIELD_OFFSET(S_DeltaGameObjectHard, _impl_.object_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::S2C_Protocol::UnityGameObject>()},
+  }}, {{
   }},
 };
 
@@ -1909,7 +2356,12 @@ PROTOBUF_NOINLINE void S_DeltaGameObjectHard::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.objectid_ = 0;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.object_ != nullptr);
+    _impl_.object_->Clear();
+  }
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -1928,11 +2380,12 @@ PROTOBUF_NOINLINE void S_DeltaGameObjectHard::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // int32 objectId = 1;
-          if (this_._internal_objectid() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_objectid(), target);
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .S2C_Protocol.UnityGameObject object = 1;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.object_, this_._impl_.object_->GetCachedSize(), target,
+                stream);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1959,10 +2412,11 @@ PROTOBUF_NOINLINE void S_DeltaGameObjectHard::Clear() {
           (void)cached_has_bits;
 
            {
-            // int32 objectId = 1;
-            if (this_._internal_objectid() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_objectid());
+            // .S2C_Protocol.UnityGameObject object = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.object_);
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1972,14 +2426,23 @@ PROTOBUF_NOINLINE void S_DeltaGameObjectHard::Clear() {
 void S_DeltaGameObjectHard::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<S_DeltaGameObjectHard*>(&to_msg);
   auto& from = static_cast<const S_DeltaGameObjectHard&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_DeltaGameObjectHard)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_objectid() != 0) {
-    _this->_impl_.objectid_ = from._impl_.objectid_;
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.object_ != nullptr);
+    if (_this->_impl_.object_ == nullptr) {
+      _this->_impl_.object_ =
+          ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::UnityGameObject>(arena, *from._impl_.object_);
+    } else {
+      _this->_impl_.object_->MergeFrom(*from._impl_.object_);
+    }
   }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1994,10 +2457,511 @@ void S_DeltaGameObjectHard::CopyFrom(const S_DeltaGameObjectHard& from) {
 void S_DeltaGameObjectHard::InternalSwap(S_DeltaGameObjectHard* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.objectid_, other->_impl_.objectid_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.object_, other->_impl_.object_);
 }
 
 ::google::protobuf::Metadata S_DeltaGameObjectHard::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_SpawnGameObject::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<S_SpawnGameObject>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(S_SpawnGameObject, _impl_._has_bits_);
+};
+
+S_SpawnGameObject::S_SpawnGameObject(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_SpawnGameObject)
+}
+inline PROTOBUF_NDEBUG_INLINE S_SpawnGameObject::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_SpawnGameObject& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
+S_SpawnGameObject::S_SpawnGameObject(
+    ::google::protobuf::Arena* arena,
+    const S_SpawnGameObject& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_SpawnGameObject* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.object_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::UnityGameObject>(
+                              arena, *from._impl_.object_)
+                        : nullptr;
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_SpawnGameObject)
+}
+inline PROTOBUF_NDEBUG_INLINE S_SpawnGameObject::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S_SpawnGameObject::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.object_ = {};
+}
+S_SpawnGameObject::~S_SpawnGameObject() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_SpawnGameObject)
+  SharedDtor(*this);
+}
+inline void S_SpawnGameObject::SharedDtor(MessageLite& self) {
+  S_SpawnGameObject& this_ = static_cast<S_SpawnGameObject&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.object_;
+  this_._impl_.~Impl_();
+}
+
+inline void* S_SpawnGameObject::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_SpawnGameObject(arena);
+}
+constexpr auto S_SpawnGameObject::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_SpawnGameObject),
+                                            alignof(S_SpawnGameObject));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_SpawnGameObject::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_SpawnGameObject_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_SpawnGameObject::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_SpawnGameObject>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_SpawnGameObject::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_SpawnGameObject>(), &S_SpawnGameObject::ByteSizeLong,
+            &S_SpawnGameObject::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_SpawnGameObject, _impl_._cached_size_),
+        false,
+    },
+    &S_SpawnGameObject::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fIngame_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_SpawnGameObject::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> S_SpawnGameObject::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(S_SpawnGameObject, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_SpawnGameObject>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .S2C_Protocol.UnityGameObject object = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(S_SpawnGameObject, _impl_.object_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .S2C_Protocol.UnityGameObject object = 1;
+    {PROTOBUF_FIELD_OFFSET(S_SpawnGameObject, _impl_.object_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::S2C_Protocol::UnityGameObject>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S_SpawnGameObject::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_SpawnGameObject)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.object_ != nullptr);
+    _impl_.object_->Clear();
+  }
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_SpawnGameObject::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_SpawnGameObject& this_ = static_cast<const S_SpawnGameObject&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_SpawnGameObject::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_SpawnGameObject& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_SpawnGameObject)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .S2C_Protocol.UnityGameObject object = 1;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.object_, this_._impl_.object_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_SpawnGameObject)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_SpawnGameObject::ByteSizeLong(const MessageLite& base) {
+          const S_SpawnGameObject& this_ = static_cast<const S_SpawnGameObject&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_SpawnGameObject::ByteSizeLong() const {
+          const S_SpawnGameObject& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_SpawnGameObject)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // .S2C_Protocol.UnityGameObject object = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.object_);
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_SpawnGameObject::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_SpawnGameObject*>(&to_msg);
+  auto& from = static_cast<const S_SpawnGameObject&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_SpawnGameObject)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.object_ != nullptr);
+    if (_this->_impl_.object_ == nullptr) {
+      _this->_impl_.object_ =
+          ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::UnityGameObject>(arena, *from._impl_.object_);
+    } else {
+      _this->_impl_.object_->MergeFrom(*from._impl_.object_);
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_SpawnGameObject::CopyFrom(const S_SpawnGameObject& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_SpawnGameObject)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_SpawnGameObject::InternalSwap(S_SpawnGameObject* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.object_, other->_impl_.object_);
+}
+
+::google::protobuf::Metadata S_SpawnGameObject::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_DespawnGameObject::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<S_DespawnGameObject>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(S_DespawnGameObject, _impl_._has_bits_);
+};
+
+S_DespawnGameObject::S_DespawnGameObject(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_DespawnGameObject)
+}
+inline PROTOBUF_NDEBUG_INLINE S_DespawnGameObject::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_DespawnGameObject& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
+S_DespawnGameObject::S_DespawnGameObject(
+    ::google::protobuf::Arena* arena,
+    const S_DespawnGameObject& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_DespawnGameObject* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.object_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::UnityGameObject>(
+                              arena, *from._impl_.object_)
+                        : nullptr;
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_DespawnGameObject)
+}
+inline PROTOBUF_NDEBUG_INLINE S_DespawnGameObject::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S_DespawnGameObject::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.object_ = {};
+}
+S_DespawnGameObject::~S_DespawnGameObject() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_DespawnGameObject)
+  SharedDtor(*this);
+}
+inline void S_DespawnGameObject::SharedDtor(MessageLite& self) {
+  S_DespawnGameObject& this_ = static_cast<S_DespawnGameObject&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  delete this_._impl_.object_;
+  this_._impl_.~Impl_();
+}
+
+inline void* S_DespawnGameObject::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_DespawnGameObject(arena);
+}
+constexpr auto S_DespawnGameObject::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_DespawnGameObject),
+                                            alignof(S_DespawnGameObject));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_DespawnGameObject::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_DespawnGameObject_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_DespawnGameObject::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_DespawnGameObject>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_DespawnGameObject::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_DespawnGameObject>(), &S_DespawnGameObject::ByteSizeLong,
+            &S_DespawnGameObject::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_DespawnGameObject, _impl_._cached_size_),
+        false,
+    },
+    &S_DespawnGameObject::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fIngame_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_DespawnGameObject::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> S_DespawnGameObject::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(S_DespawnGameObject, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_DespawnGameObject>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .S2C_Protocol.UnityGameObject object = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(S_DespawnGameObject, _impl_.object_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .S2C_Protocol.UnityGameObject object = 1;
+    {PROTOBUF_FIELD_OFFSET(S_DespawnGameObject, _impl_.object_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::S2C_Protocol::UnityGameObject>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S_DespawnGameObject::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_DespawnGameObject)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.object_ != nullptr);
+    _impl_.object_->Clear();
+  }
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_DespawnGameObject::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_DespawnGameObject& this_ = static_cast<const S_DespawnGameObject&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_DespawnGameObject::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_DespawnGameObject& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_DespawnGameObject)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .S2C_Protocol.UnityGameObject object = 1;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                1, *this_._impl_.object_, this_._impl_.object_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_DespawnGameObject)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_DespawnGameObject::ByteSizeLong(const MessageLite& base) {
+          const S_DespawnGameObject& this_ = static_cast<const S_DespawnGameObject&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_DespawnGameObject::ByteSizeLong() const {
+          const S_DespawnGameObject& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_DespawnGameObject)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // .S2C_Protocol.UnityGameObject object = 1;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.object_);
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_DespawnGameObject::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_DespawnGameObject*>(&to_msg);
+  auto& from = static_cast<const S_DespawnGameObject&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_DespawnGameObject)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.object_ != nullptr);
+    if (_this->_impl_.object_ == nullptr) {
+      _this->_impl_.object_ =
+          ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::UnityGameObject>(arena, *from._impl_.object_);
+    } else {
+      _this->_impl_.object_->MergeFrom(*from._impl_.object_);
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_DespawnGameObject::CopyFrom(const S_DespawnGameObject& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_DespawnGameObject)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_DespawnGameObject::InternalSwap(S_DespawnGameObject* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.object_, other->_impl_.object_);
+}
+
+::google::protobuf::Metadata S_DespawnGameObject::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

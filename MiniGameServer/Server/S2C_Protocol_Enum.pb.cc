@@ -35,7 +35,7 @@ static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 const char descriptor_table_protodef_S2C_5fProtocol_5fEnum_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\027S2C_Protocol_Enum.proto\022\014S2C_Protocol*"
-    "\271\004\n\005MsgId\022\r\n\tS_WELCOME\020\000\022\r\n\tC_WELCOME\020\001\022"
+    "\251\005\n\005MsgId\022\r\n\tS_WELCOME\020\000\022\r\n\tC_WELCOME\020\001\022"
     "\026\n\022S_WELCOME_RESPONSE\020\002\022\017\n\013S_ENCRYPTED\020\003"
     "\022\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_LOGIN\020\005\022\013\n\007S_LOGI"
     "N\020\006\022\024\n\020C_CREATE_ACCOUNT\020\007\022\024\n\020S_CREATE_AC"
@@ -49,14 +49,16 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fEnum_2eproto[] ABSL_ATTRIB
     "E_LOADING_PROGRESS\020\024\022\022\n\016S_GAME_STARTED\020\025"
     "\022\030\n\024C_REQUEST_GAME_STATE\020\026\022\024\n\020S_TESTGAME"
     "_STATE\020\027\022\024\n\020S_PINGPONG_STATE\020\030\022\023\n\017S_DANM"
-    "AKU_STATE\020\031B\033\252\002\030Google.Protobuf.Protocol"
-    "b\006proto3"
+    "AKU_STATE\020\031\022\034\n\030S_DELTA_GAME_OBJECT_SOFT\020"
+    "\032\022\034\n\030S_DELTA_GAME_OBJECT_HARD\020\033\022\027\n\023S_SPA"
+    "WN_GAME_OBJECT\020\034\022\031\n\025S_DESPAWN_GAME_OBJEC"
+    "T\020\035B\033\252\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fEnum_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fEnum_2eproto = {
     false,
     false,
-    648,
+    760,
     descriptor_table_protodef_S2C_5fProtocol_5fEnum_2eproto,
     "S2C_Protocol_Enum.proto",
     &descriptor_table_S2C_5fProtocol_5fEnum_2eproto_once,
@@ -75,9 +77,9 @@ const ::google::protobuf::EnumDescriptor* MsgId_descriptor() {
   return file_level_enum_descriptors_S2C_5fProtocol_5fEnum_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t MsgId_internal_data_[] = {
-    1703936u, 0u, };
+    1966080u, 0u, };
 bool MsgId_IsValid(int value) {
-  return 0 <= value && value <= 25;
+  return 0 <= value && value <= 29;
 }
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace S2C_Protocol
