@@ -3,4 +3,8 @@
 
 TestGameBullet::TestGameBullet() {
 	_objectType = GameObjectType::TestGameBullet;
+	_isPool = true;
+}
+
+void TestGameBullet::Update() {
 }
