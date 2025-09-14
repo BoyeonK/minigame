@@ -227,6 +227,18 @@ public class NetworkManager {
 		Send(pkt);
 	}
 
+	public void ProcessTestGameState(IMessage packet) {
+        S_TestGameState recvPkt = packet as S_TestGameState;
+    }
+
+    public void ProcessPingPongStateState(IMessage packet) {
+
+    }
+
+    public void ProcessDanmakuStateState(IMessage packet) {
+
+    }
+
     public void Update() {
 
 	}
@@ -244,6 +256,7 @@ public class NetworkManager {
 	public Action OnResponseKeepAliveAct;
 	public Action OnResponseGameStartedAct;
 	public Action OnExcludedFromMatchAct;
+	public Action OnProcessRequestGameStateAct;
 
 	public void ConnectCompleted(bool result) {
 		_isConnected = result;

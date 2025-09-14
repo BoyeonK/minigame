@@ -275,5 +275,9 @@ class PacketHandler {
 		S_GameStarted recvPkt = packet as S_GameStarted;
 		Managers.Network.ResponseGameStarted(recvPkt.GameId);
 	}
+
+	public static void S_TestGameStateHandler(PacketSession session, IMessage packet) {
+		Managers.Network.ProcessTestGameState(packet);
+	}
 }
 
