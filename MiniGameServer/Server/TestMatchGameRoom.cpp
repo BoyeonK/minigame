@@ -89,11 +89,39 @@ void TestMatchGameRoom::Start() {
 			playerSessionRef->Send(sendBuffer);
 		}
 	}
-	DoTimerAsync(3000, &TestMatchGameRoom::MakeTestGameBullets);
+	DoTimerAsync(3000, &TestMatchGameRoom::Phase1);
+}
+
+void TestMatchGameRoom::SendGameState(int32_t playerIdx) {
+	if (playerIdx > (_quota - 1))
+		return;
+
+	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
+	if (playerSessionRef == nullptr)
+		return;
+
+	S2C_Protocol::S_TestGameState pkt = MakeSTestGameState();
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	playerSessionRef->Send(sendBuffer);
 }
 
 void TestMatchGameRoom::MakeTestGameBullets() {
-	cout << "¾Ó ÃÑ¾Ë ¸¸µé¾î ¶ì" << endl;
+}
+
+void TestMatchGameRoom::Phase1() {
+
+}
+
+void TestMatchGameRoom::Phase2() {
+
+}
+
+S2C_Protocol::S_TestGameState TestMatchGameRoom::MakeSTestGameState() {
+	S2C_Protocol::S_TestGameState pkt;
+	for (auto& goRef : _vecGameObjects) {
+		goRef->SerializeObject(pkt.add_objects());
+	}
+	return pkt;
 }
 
 void TestMatchGameRoom::ReturnToPool() {

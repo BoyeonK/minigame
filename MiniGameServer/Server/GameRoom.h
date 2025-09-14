@@ -18,11 +18,12 @@ public:
 		EndGame,
 	};
 
-	virtual void Init(vector<WatingPlayerData> pdv) = 0;
-	virtual void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) = 0;
 	virtual void Update() = 0;
+	virtual void Init(vector<WatingPlayerData> pdv) = 0;
 	GameState GetState();
-	
+	virtual void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) = 0;
+	virtual void SendGameState(int32_t playerIdx) = 0;
+
 protected:
 	vector<weak_ptr<PlayerSession>> _playerWRefs;
 	GameType _ty;
@@ -38,10 +39,10 @@ public:
 		_ty = GameType::PingPong;
 	}
 
+	void ReturnToPool();
+	void Update() override {}
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
-	void ReturnToPool();
-	void Update() override { }
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override {}
 
 private:
