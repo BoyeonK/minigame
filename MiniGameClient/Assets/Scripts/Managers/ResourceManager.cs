@@ -1,4 +1,8 @@
+using Google.Protobuf.Protocol;
+using System;
 using UnityEngine;
+using static Define;
+using Object = UnityEngine.Object;
 
 public class ResourceManager {
     public T Load<T>(string path) where T : Object {
@@ -41,4 +45,16 @@ public class ResourceManager {
             
         Object.Destroy(go);
     }
+
+    /*
+    public GameObject Spawn(UnityGameObject serializedGameObject) {
+        string objectName = Enum.GetName(typeof(ObjectType), serializedGameObject.ObjectType);
+        if (objectName == null) {
+            return null;
+        }
+        string path = $"GameObjects/{objectName}";
+        GameObject go = Instantiate(path);
+        return go;
+    }
+    */
 }
