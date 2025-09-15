@@ -1,15 +1,15 @@
 #include "pch.h"
-#include "JobTimer.h"
+#include "ActorEventScheduler.h"
 
-void JobTimer::Reserve(uint64_t tickAfter, weak_ptr<JobQueue> owner, shared_ptr<Job> job) {
+void ActorEventScheduler::Reserve(uint64_t tickAfter, weak_ptr<Actor> owner, shared_ptr<ActorEvent> event) {
 	const uint64_t executeTick = ::GetTickCount64() + tickAfter;
-	JobData* pjobData = objectPool<JobData>::alloc(owner, job);
+	SchduledActorEvent* pScheduledEvent = objectPool<SchduledActorEvent>::alloc(owner, event);
 
 	WRITE_RWLOCK;
-	_items.push(TimerItem{ executeTick, pjobData });
+	_items.push(TimerItem{ executeTick, pScheduledEvent });
 }
 
-void JobTimer::Distrubute(uint64_t now) {
+void ActorEventScheduler::Distrubute(uint64_t now) {
 	//atomic변수이기때문에, exchange가 true로 리턴되면 누군가 이미 함수를 실행한 상황
 	if (_distributing.exchange(true) == true)
 		return;
@@ -28,20 +28,20 @@ void JobTimer::Distrubute(uint64_t now) {
 	}
 
 	for (TimerItem& item : onTimeItems) {
-		if (shared_ptr<JobQueue> owner = item.pJobData->_owner.lock())
-			owner->Push(item.pJobData->_job);
+		if (shared_ptr<Actor> owner = item.pScheuledActorEvent->_ownerWRef.lock())
+			owner->Push(item.pScheuledActorEvent->_actorEvent);
 
-		objectPool<JobData>::dealloc(item.pJobData);
+		objectPool<SchduledActorEvent>::dealloc(item.pScheuledActorEvent);
 	}
 
 	_distributing.store(false);
 }
 
-void JobTimer::Clear() {
+void ActorEventScheduler::Clear() {
 	WRITE_RWLOCK;
 	while (_items.empty() == false) {
 		const TimerItem& timerItem = _items.top();
-		objectPool<JobData>::dealloc(timerItem.pJobData);
+		objectPool<SchduledActorEvent>::dealloc(timerItem.pScheuledActorEvent);
 		_items.pop();
 	}
 }

@@ -2,34 +2,34 @@
 #include "CoreGlobal.h"
 #include "SocketUtils.h"
 #include "SendBuffer.h"
-#include "JobQueue.h"
-#include "GlobalQueue.h"
-#include "JobTimer.h"
+#include "Actor.h"
+#include "GlobalActorQueue.h"
+#include "ActorEventScheduler.h"
 
 ThreadManager* GThreadManager = nullptr;
 SendBufferManager* GSendBufferManager = nullptr;
-GlobalQueue* GlobalJobQueue = nullptr;
-JobTimer* GJobTimer = nullptr;
+GlobalActorQueue* GActorQueue = nullptr;
+ActorEventScheduler* GActorEventScheduler = nullptr;
 thread_local uint32_t MyThreadID = 0;
 thread_local uint64_t LEndTickCount = 0;
 thread_local shared_ptr<SendBufferChunk> LSendBufferChunkRef = nullptr;
-thread_local JobQueue* LCurrentJobQueue = nullptr;
+thread_local Actor* LCurrentActor = nullptr;
 
 class CoreGlobal {
 public:
 	CoreGlobal() {
 		GThreadManager = new ThreadManager();
 		GSendBufferManager = new SendBufferManager();
-		GlobalJobQueue = new GlobalQueue();
-		GJobTimer = new JobTimer();
+		GActorQueue = new GlobalActorQueue();
+		GActorEventScheduler = new ActorEventScheduler();
 		SocketUtils::Init();
 	}
 
 	~CoreGlobal() {
 		delete GThreadManager;
 		delete GSendBufferManager;
-		delete GlobalJobQueue;
-		delete GJobTimer;
+		delete GActorQueue;
+		delete GActorEventScheduler;
 		SocketUtils::Clear();
 	}
 } GCoreGlobal;
@@ -68,11 +68,11 @@ void ThreadManager::Join() {
 }
 
 void ThreadManager::DoGlobalQueueWork() {
-	while (LCurrentJobQueue == nullptr) {
+	while (LCurrentActor == nullptr) {
 		uint64_t now = ::GetTickCount64();
 		if (now > LEndTickCount)
 			break;
-		shared_ptr<JobQueue> jobQueue = GlobalJobQueue->Pop();
+		shared_ptr<Actor> jobQueue = GActorQueue->Pop();
 		if (jobQueue == nullptr)
 			break;
 		jobQueue->Execute();
@@ -81,5 +81,5 @@ void ThreadManager::DoGlobalQueueWork() {
 
 void ThreadManager::DoTimerQueueDistribution() {
 	const uint64_t now = ::GetTickCount64();
-	GJobTimer->Distrubute(now);
+	GActorEventScheduler->Distrubute(now);
 }

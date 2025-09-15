@@ -4,12 +4,12 @@
 
 extern class ThreadManager* GThreadManager;
 extern class SendBufferManager* GSendBufferManager;
-extern class GlobalQueue* GlobalJobQueue;
-extern class JobTimer* GJobTimer;
+extern class GlobalActorQueue* GActorQueue;
+extern class ActorEventScheduler* GActorEventScheduler;
 extern thread_local uint32_t MyThreadID;
 extern thread_local uint64_t LEndTickCount;
 extern thread_local shared_ptr<SendBufferChunk> LSendBufferChunkRef;
-extern thread_local class JobQueue* LCurrentJobQueue;
+extern thread_local class Actor* LCurrentActor;
 
 class ThreadManager {
 public:

@@ -27,19 +27,19 @@
     <ClCompile Include="SocketUtils.cpp">
       <Filter>GlobalVariables</Filter>
     </ClCompile>
-    <ClCompile Include="GlobalQueue.cpp">
+    <ClCompile Include="GlobalActorQueue.cpp">
       <Filter>Job</Filter>
     </ClCompile>
-    <ClCompile Include="Job.cpp">
+    <ClCompile Include="ActorEvent.cpp">
       <Filter>Job</Filter>
     </ClCompile>
-    <ClCompile Include="JobQueue.cpp">
+    <ClCompile Include="Actor.cpp">
       <Filter>Job</Filter>
     </ClCompile>
-    <ClCompile Include="JobTimer.cpp">
+    <ClCompile Include="ActorEventScheduler.cpp">
       <Filter>Job</Filter>
     </ClCompile>
-    <ClCompile Include="LockQueue.cpp">
+    <ClCompile Include="MPSCQueue.cpp">
       <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="MyLibraries.cpp">
@@ -86,22 +86,22 @@
     <ClInclude Include="SocketUtils.h">
       <Filter>GlobalVariables</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalQueue.h">
+    <ClInclude Include="GlobalActorQueue.h">
       <Filter>Job</Filter>
     </ClInclude>
-    <ClInclude Include="Job.h">
+    <ClInclude Include="ActorEvent.h">
       <Filter>Job</Filter>
     </ClInclude>
-    <ClInclude Include="JobQueue.h">
+    <ClInclude Include="Actor.h">
       <Filter>Job</Filter>
     </ClInclude>
-    <ClInclude Include="JobTimer.h">
+    <ClInclude Include="ActorEventScheduler.h">
       <Filter>Job</Filter>
     </ClInclude>
     <ClInclude Include="CorePch.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="LockQueue.h">
+    <ClInclude Include="MPSCQueue.h">
       <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="MyLibraries.h">

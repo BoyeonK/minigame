@@ -22,7 +22,7 @@ void TestMatchGameRoom::Init(vector<WatingPlayerData> pdv) {
 
 	if (ready) {
 		//1초 후, (Ping이 1초가 넘는것은, 이상하다.) 모든 패킷으로부터 응답을 받았다면 시작
-		DoTimerAsync(1000, &TestMatchGameRoom::Init2, move(pdv));
+		PostEventAfter(1000, &TestMatchGameRoom::Init2, move(pdv));
 	}
 	else {
 		//유효하지 않은 세션이 있었을 경우, 모두 대기열로 돌려보냄.
@@ -89,7 +89,7 @@ void TestMatchGameRoom::Start() {
 			playerSessionRef->Send(sendBuffer);
 		}
 	}
-	DoTimerAsync(3000, &TestMatchGameRoom::Phase1);
+	PostEventAfter(3000, &TestMatchGameRoom::Phase1);
 }
 
 void TestMatchGameRoom::SendGameState(int32_t playerIdx) {

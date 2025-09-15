@@ -4,7 +4,7 @@
 
 class PlayerSession;
 
-class GameRoom : public JobQueue {
+class GameRoom : public Actor {
 public:
 	//BeforeInit : Room이 최초 생성된 경우.
 	//BeforeStart : Player의 로딩 및 KeepAlive여부 재확인

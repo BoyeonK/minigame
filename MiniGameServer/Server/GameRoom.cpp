@@ -27,7 +27,7 @@ void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {
 
 	if (ready) {
 		//1초 후, (Ping이 1초가 넘는것은, 이상하다.) 모든 패킷으로부터 응답을 받았다면 시작
-		DoTimerAsync(1000, &PingPongGameRoom::Init2, move(pdv));
+		PostEventAfter(1000, &PingPongGameRoom::Init2, move(pdv));
 	}
 	else {
 		GGameManagers[2]->Push(rematchPd);

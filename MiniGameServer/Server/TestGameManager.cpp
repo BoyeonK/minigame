@@ -57,5 +57,5 @@ void TestGameManager::MatchMake() {
 void TestGameManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	shared_ptr<TestMatchGameRoom> newRoomRef = { objectPool<TestMatchGameRoom>::alloc(), objectPool<TestMatchGameRoom>::dealloc };
 	AddRoom(newRoomRef);
-	newRoomRef->DoAsyncAfter(&TestMatchGameRoom::Init, move(pdv));
+	newRoomRef->PostEvent(&TestMatchGameRoom::Init, move(pdv));
 }

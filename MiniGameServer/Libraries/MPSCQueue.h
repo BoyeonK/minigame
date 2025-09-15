@@ -1,7 +1,7 @@
 #pragma once
 
 template<typename T>
-class LockQueue {
+class MPSCQueue {
 public:
 	void Push(T item) {
 		WRITE_RWLOCK;
