@@ -79,13 +79,13 @@ enum MsgId : int {
   C_GAME_SCENE_LOADING_PROGRESS = 20,
   S_GAME_STARTED = 21,
   C_REQUEST_GAME_STATE = 22,
-  S_TESTGAME_STATE = 23,
-  S_PINGPONG_STATE = 24,
-  S_DANMAKU_STATE = 25,
-  S_DELTA_GAME_OBJECT_SOFT = 26,
-  S_DELTA_GAME_OBJECT_HARD = 27,
-  S_SPAWN_GAME_OBJECT = 28,
-  S_DESPAWN_GAME_OBJECT = 29,
+  S_DELTA_GAME_OBJECT_SOFT = 23,
+  S_DELTA_GAME_OBJECT_HARD = 24,
+  S_SPAWN_GAME_OBJECT = 25,
+  S_DESPAWN_GAME_OBJECT = 26,
+  S_TESTGAME_STATE = 100,
+  S_PINGPONG_STATE = 200,
+  S_DANMAKU_STATE = 300,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ =
@@ -95,8 +95,8 @@ enum MsgId : int {
 bool MsgId_IsValid(int value);
 extern const uint32_t MsgId_internal_data_[];
 constexpr MsgId MsgId_MIN = static_cast<MsgId>(0);
-constexpr MsgId MsgId_MAX = static_cast<MsgId>(29);
-constexpr int MsgId_ARRAYSIZE = 29 + 1;
+constexpr MsgId MsgId_MAX = static_cast<MsgId>(300);
+constexpr int MsgId_ARRAYSIZE = 300 + 1;
 const ::google::protobuf::EnumDescriptor*
 MsgId_descriptor();
 template <typename T>
@@ -104,13 +104,7 @@ const std::string& MsgId_Name(T value) {
   static_assert(std::is_same<T, MsgId>::value ||
                     std::is_integral<T>::value,
                 "Incorrect type passed to MsgId_Name().");
-  return MsgId_Name(static_cast<MsgId>(value));
-}
-template <>
-inline const std::string& MsgId_Name(MsgId value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<MsgId_descriptor,
-                                                 0, 29>(
-      static_cast<int>(value));
+  return ::google::protobuf::internal::NameOfEnum(MsgId_descriptor(), value);
 }
 inline bool MsgId_Parse(absl::string_view name, MsgId* value) {
   return ::google::protobuf::internal::ParseNamedEnum<MsgId>(
