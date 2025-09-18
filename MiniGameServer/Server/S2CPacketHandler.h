@@ -39,6 +39,7 @@ enum : uint16_t {
 	PKT_S_DESPAWN_GAME_OBJECT = 26,
 
 	PKT_S_TESTGAME_STATE = 100,
+	PKT_S_TESTGAME_END = 101,
 
 	PKT_S_PINGPONG_STATE = 200,
 
@@ -113,14 +114,29 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeCompleted& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKECOMPLETED); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameStarted& pkt) { return MakeSendBufferRef(pkt, PKT_S_GAME_STARTED); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_PingPongState& pkt) { return MakeSendBufferRef(pkt, PKT_S_PINGPONG_STATE); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DanmakuState& pkt) { return MakeSendBufferRef(pkt, PKT_S_DANMAKU_STATE); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DeltaGameObjectSoft& pkt) { return MakeSendBufferRef(pkt, PKT_S_DELTA_GAME_OBJECT_SOFT); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DeltaGameObjectHard& pkt) { return MakeSendBufferRef(pkt, PKT_S_DELTA_GAME_OBJECT_HARD); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_SpawnGameObject& pkt) { return MakeSendBufferRef(pkt, PKT_S_SPAWN_GAME_OBJECT); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DespawnGameObject& pkt) { return MakeSendBufferRef(pkt, PKT_S_DESPAWN_GAME_OBJECT); }
+#pragma region TestGame
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameEnd& pkt) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_END); }
 
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameEnd& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_END, AESKey); }
+
+#pragma endregion
+#pragma region PingPong
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_PingPongState& pkt) { return MakeSendBufferRef(pkt, PKT_S_PINGPONG_STATE); }
+
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_PingPongState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_PINGPONG_STATE, AESKey); }
+
+#pragma endregion
+#pragma region Danmaku
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DanmakuState& pkt) { return MakeSendBufferRef(pkt, PKT_S_DANMAKU_STATE); }
+
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DanmakuState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_DANMAKU_STATE, AESKey); }
+#pragma endregion
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME_RESPONSE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Login& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_LOGIN, AESKey); }
@@ -133,9 +149,6 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeCompleted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKECOMPLETED, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameStarted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_GAME_STARTED, AESKey); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE, AESKey); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_PingPongState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_PINGPONG_STATE, AESKey); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DanmakuState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_DANMAKU_STATE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DeltaGameObjectSoft& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_DELTA_GAME_OBJECT_SOFT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DeltaGameObjectHard& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_DELTA_GAME_OBJECT_HARD, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_SpawnGameObject& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_SPAWN_GAME_OBJECT, AESKey); }

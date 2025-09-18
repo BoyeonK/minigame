@@ -110,14 +110,9 @@ void TestGameRoom::MakeTestGameBullet(float x, float y, float z) {
 	shared_ptr<TestGameBullet> bulletRef = TestGameBullet::NewTestGameBullet(x, y, z);
 	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
 	RegisterGameObject(bulletRef);
-	for (auto& playerWRef : _playerWRefs) {
-		shared_ptr<PlayerSession> playerRef = playerWRef.lock();
-		if (playerRef == nullptr)
-			continue;
-		S2C_Protocol::S_SpawnGameObject pkt = S2CPacketMaker::MakeSSpawnGameObject(bulletRef);
-		shared_ptr<SendBuffer> sendBuff = S2CPacketHandler::MakeSendBufferRef(pkt);
-		playerRef->Send(sendBuff);
-	}
+	S2C_Protocol::S_SpawnGameObject pkt = S2CPacketMaker::MakeSSpawnGameObject(bulletRef);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
 }
 
 void TestGameRoom::Phase1() {
@@ -126,11 +121,23 @@ void TestGameRoom::Phase1() {
 	PostEventAfter(2000, &TestGameRoom::MakeTestGameBullet, 0.0f, 0.0f, 0.0f);
 	PostEventAfter(3000, &TestGameRoom::MakeTestGameBullet, 1.0f, 0.0f, 0.0f);
 	PostEventAfter(4000, &TestGameRoom::MakeTestGameBullet, 2.0f, 0.0f, 0.0f);
-	PostEventAfter(6000, &TestGameRoom::CalculateGameResult);
+	PostEventAfter(6000, &TestGameRoom::EndPhase);
+}
+
+void TestGameRoom::EndPhase() {
+	//TestGame에서는 아무 결과도 계산하지 않고, 게임이 끝났다는 정보 외에는 아무른 결과도 알려주지 않음.
+
+	//게임 결과 계산
+	CalculateGameResult();
+
+	//해당 결과 통보
+	S2C_Protocol::S_TestGameEnd pkt = S2CPacketMaker::MakeSTestGameEnd();
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
 }
 
 void TestGameRoom::CalculateGameResult() {
-
+	
 }
 
 S2C_Protocol::S_TestGameState TestGameRoom::MakeSTestGameState() {

@@ -22,6 +22,7 @@ public:
 
 	void MakeTestGameBullet(float x, float y, float z);
 	void Phase1();
+	void EndPhase();
 	void CalculateGameResult();
 
 	S2C_Protocol::S_TestGameState MakeSTestGameState();

@@ -23,3 +23,14 @@ void GameRoom::RegisterGameObject(shared_ptr<UnityGameObject> obj) {
 	_vecGameObjects.push_back(obj);
 	//_hmGameObjects.insert()
 }
+
+void GameRoom::BroadCast(shared_ptr<SendBuffer> sendBuffer) {
+	if (sendBuffer == nullptr)
+		return;
+	for (auto& playerWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerRef = playerWRef.lock();
+		if (playerRef == nullptr)
+			continue;
+		playerRef->Send(sendBuffer);
+	}
+}

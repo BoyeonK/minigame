@@ -129,4 +129,9 @@ public:
 		obj.SerializeObject(pkt.mutable_object());
 		return pkt;
 	}
+
+	static S2C_Protocol::S_TestGameEnd MakeSTestGameEnd() {
+		S2C_Protocol::S_TestGameEnd pkt;
+		return pkt;
+	}
 };

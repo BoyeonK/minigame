@@ -27,6 +27,7 @@ public:
 	virtual void SendGameState(int32_t playerIdx) = 0;
 	int32_t GenerateUniqueGameObjectId();
 	void RegisterGameObject(shared_ptr<UnityGameObject> obj);
+	void BroadCast(shared_ptr<SendBuffer> sendBuffer);
 
 protected:
 	int32_t _roomId;
