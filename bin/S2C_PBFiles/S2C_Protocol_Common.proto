@@ -33,6 +33,25 @@ enum MsgId {
     S_DESPAWN_GAME_OBJECT = 26;
 
     S_TESTGAME_STATE = 100;
+    S_TESTGAME_END = 101;
+
     S_PINGPONG_STATE = 200;
+
     S_DANMAKU_STATE = 300;
+
+}
+
+message XYZ {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+//objectId : 서버 내 Room에서 사용하는 해당 object의 식별자
+//objectType : GameObject의 타입 식별자
+message UnityGameObject {
+    int32 objectId = 1;
+    int32 objectType = 2;
+    XYZ position = 3;
+    //XYZ Rotation = 2;
 }

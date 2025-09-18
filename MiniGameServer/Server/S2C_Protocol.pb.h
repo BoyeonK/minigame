@@ -30,7 +30,7 @@
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
 #include "S2C_Protocol_Ingame.pb.h"
-#include "S2C_Protocol_Enum.pb.h"
+#include "S2C_Protocol_Common.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.

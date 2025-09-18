@@ -4,7 +4,7 @@ package S2C_Protocol;
 option csharp_namespace = "Google.Protobuf.Protocol";
 
 import "S2C_Protocol_Ingame.proto";
-import "S2C_Protocol_Enum.proto";
+import "S2C_Protocol_Common.proto";
 
 //최초에 TCP방식의 Connect가 성공하면 해당 session의 보안레벨은 '보안레벨 0'이다.
 //MsgId 0~4영역(HandShake과정) 보안레벨 0에서 통신 가능.

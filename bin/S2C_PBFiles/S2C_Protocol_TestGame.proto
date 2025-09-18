@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package S2C_Protocol;
+option csharp_namespace = "Google.Protobuf.Protocol";
+
+import "S2C_Protocol_Common.proto";
+
+message S_TestGameState {
+    repeated UnityGameObject objects = 1;
+}
+
+message S_TestGameEnd {
+    
+}

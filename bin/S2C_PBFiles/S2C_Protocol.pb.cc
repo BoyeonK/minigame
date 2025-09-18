@@ -984,49 +984,49 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_S2C_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\022S2C_Protocol.proto\022\014S2C_Protocol\032\031S2C_"
-    "Protocol_Ingame.proto\032\027S2C_Protocol_Enum"
-    ".proto\"3\n\tS_Welcome\022\021\n\tpublicKey\030\001 \001(\014\022\023"
-    "\n\013gameversion\030\002 \001(\005\",\n\tC_Welcome\022\016\n\006aesK"
-    "ey\030\001 \001(\014\022\017\n\007message\030\002 \001(\t\"5\n\021S_WelcomeRe"
-    "sponse\022\017\n\007message\030\001 \001(\t\022\017\n\007success\030\002 \001(\010"
-    "\"I\n\013S_Encrypted\022\n\n\002iv\030\001 \001(\014\022\022\n\nciphertex"
-    "t\030\002 \001(\014\022\013\n\003tag\030\003 \001(\014\022\r\n\005msgId\030\004 \001(\005\"I\n\013C"
-    "_Encrypted\022\n\n\002iv\030\001 \001(\014\022\022\n\nciphertext\030\002 \001"
-    "(\014\022\013\n\003tag\030\003 \001(\014\022\r\n\005msgId\030\004 \001(\005\"\'\n\007C_Logi"
-    "n\022\n\n\002id\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"6\n\007S_Log"
-    "in\022\016\n\004dbid\030\001 \001(\005H\000\022\r\n\003err\030\002 \001(\tH\000B\014\n\nval"
-    "ue_case\"/\n\017C_CreateAccount\022\n\n\002id\030\001 \001(\t\022\020"
-    "\n\010password\030\002 \001(\t\"/\n\017S_CreateAccount\022\017\n\007s"
-    "uccess\030\001 \001(\010\022\013\n\003err\030\002 \001(\t\"\030\n\010C_Logout\022\014\n"
-    "\004dbid\030\001 \001(\005\"\033\n\010S_Logout\022\017\n\007success\030\001 \001(\010"
-    "\"$\n\022C_MatchmakeRequest\022\016\n\006gameId\030\001 \001(\005\"D"
-    "\n\022S_MatchmakeRequest\022\021\n\tisSucceed\030\001 \001(\010\022"
-    "\016\n\006gameId\030\002 \001(\005\022\013\n\003err\030\003 \001(\t\"#\n\021C_Matchm"
-    "akeCancel\022\016\n\006gameId\030\001 \001(\005\"C\n\021S_Matchmake"
-    "Cancel\022\021\n\tisSucceed\030\001 \001(\010\022\016\n\006gameId\030\002 \001("
-    "\005\022\013\n\003err\030\003 \001(\t\"<\n\024S_MatchmakeKeepAlive\022\016"
-    "\n\006gameId\030\001 \001(\005\022\024\n\014sentTimeTick\030\002 \001(\003\"<\n\024"
-    "C_MatchmakeKeepAlive\022\016\n\006gameId\030\001 \001(\005\022\024\n\014"
-    "sentTimeTick\030\002 \001(\003\"!\n\017S_RedoMatchmake\022\016\n"
-    "\006gameId\030\001 \001(\005\",\n\023S_ExcludedFromMatch\022\025\n\r"
-    "isUserRequest\030\001 \001(\010\"&\n\024S_MatchmakeComple"
-    "ted\022\016\n\006gameId\030\001 \001(\005\"0\n\032C_GameSceneLoadin"
-    "gProgress\022\022\n\npersentage\030\001 \001(\005\"\037\n\rS_GameS"
-    "tarted\022\016\n\006gameId\030\001 \001(\005\"\034\n\rS_KillSession\022"
-    "\013\n\003err\030\001 \001(\t\" \n\021S_KillApplication\022\013\n\003err"
-    "\030\001 \001(\tB\033\252\002\030Google.Protobuf.Protocolb\006pro"
-    "to3"
+    "Protocol_Ingame.proto\032\031S2C_Protocol_Comm"
+    "on.proto\"3\n\tS_Welcome\022\021\n\tpublicKey\030\001 \001(\014"
+    "\022\023\n\013gameversion\030\002 \001(\005\",\n\tC_Welcome\022\016\n\006ae"
+    "sKey\030\001 \001(\014\022\017\n\007message\030\002 \001(\t\"5\n\021S_Welcome"
+    "Response\022\017\n\007message\030\001 \001(\t\022\017\n\007success\030\002 \001"
+    "(\010\"I\n\013S_Encrypted\022\n\n\002iv\030\001 \001(\014\022\022\n\nciphert"
+    "ext\030\002 \001(\014\022\013\n\003tag\030\003 \001(\014\022\r\n\005msgId\030\004 \001(\005\"I\n"
+    "\013C_Encrypted\022\n\n\002iv\030\001 \001(\014\022\022\n\nciphertext\030\002"
+    " \001(\014\022\013\n\003tag\030\003 \001(\014\022\r\n\005msgId\030\004 \001(\005\"\'\n\007C_Lo"
+    "gin\022\n\n\002id\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"6\n\007S_L"
+    "ogin\022\016\n\004dbid\030\001 \001(\005H\000\022\r\n\003err\030\002 \001(\tH\000B\014\n\nv"
+    "alue_case\"/\n\017C_CreateAccount\022\n\n\002id\030\001 \001(\t"
+    "\022\020\n\010password\030\002 \001(\t\"/\n\017S_CreateAccount\022\017\n"
+    "\007success\030\001 \001(\010\022\013\n\003err\030\002 \001(\t\"\030\n\010C_Logout\022"
+    "\014\n\004dbid\030\001 \001(\005\"\033\n\010S_Logout\022\017\n\007success\030\001 \001"
+    "(\010\"$\n\022C_MatchmakeRequest\022\016\n\006gameId\030\001 \001(\005"
+    "\"D\n\022S_MatchmakeRequest\022\021\n\tisSucceed\030\001 \001("
+    "\010\022\016\n\006gameId\030\002 \001(\005\022\013\n\003err\030\003 \001(\t\"#\n\021C_Matc"
+    "hmakeCancel\022\016\n\006gameId\030\001 \001(\005\"C\n\021S_Matchma"
+    "keCancel\022\021\n\tisSucceed\030\001 \001(\010\022\016\n\006gameId\030\002 "
+    "\001(\005\022\013\n\003err\030\003 \001(\t\"<\n\024S_MatchmakeKeepAlive"
+    "\022\016\n\006gameId\030\001 \001(\005\022\024\n\014sentTimeTick\030\002 \001(\003\"<"
+    "\n\024C_MatchmakeKeepAlive\022\016\n\006gameId\030\001 \001(\005\022\024"
+    "\n\014sentTimeTick\030\002 \001(\003\"!\n\017S_RedoMatchmake\022"
+    "\016\n\006gameId\030\001 \001(\005\",\n\023S_ExcludedFromMatch\022\025"
+    "\n\risUserRequest\030\001 \001(\010\"&\n\024S_MatchmakeComp"
+    "leted\022\016\n\006gameId\030\001 \001(\005\"0\n\032C_GameSceneLoad"
+    "ingProgress\022\022\n\npersentage\030\001 \001(\005\"\037\n\rS_Gam"
+    "eStarted\022\016\n\006gameId\030\001 \001(\005\"\034\n\rS_KillSessio"
+    "n\022\013\n\003err\030\001 \001(\t\" \n\021S_KillApplication\022\013\n\003e"
+    "rr\030\001 \001(\tB\033\252\002\030Google.Protobuf.Protocolb\006p"
+    "roto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_2eproto_deps[2] =
     {
-        &::descriptor_table_S2C_5fProtocol_5fEnum_2eproto,
+        &::descriptor_table_S2C_5fProtocol_5fCommon_2eproto,
         &::descriptor_table_S2C_5fProtocol_5fIngame_2eproto,
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_2eproto = {
     false,
     false,
-    1283,
+    1285,
     descriptor_table_protodef_S2C_5fProtocol_2eproto,
     "S2C_Protocol.proto",
     &descriptor_table_S2C_5fProtocol_2eproto_once,
