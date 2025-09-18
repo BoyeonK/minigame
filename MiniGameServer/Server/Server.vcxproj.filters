@@ -81,9 +81,6 @@
     <ClInclude Include="S2C_Protocol_Ingame.pb.h">
       <Filter>S2C\Network\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="S2C_Protocol_Enum.pb.h">
-      <Filter>S2C\Network\Protocol</Filter>
-    </ClInclude>
     <ClInclude Include="Deviset.h">
       <Filter>S2C\Network\MatchMaking</Filter>
     </ClInclude>
@@ -111,7 +108,7 @@
     <ClInclude Include="TestGameBullet.h">
       <Filter>S2C\GameObjects\TestGame\UnityGameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="TestMatchGameRoom.h">
+    <ClInclude Include="TestGameRoom.h">
       <Filter>S2C\GameObjects\TestGame</Filter>
     </ClInclude>
     <ClInclude Include="TestGameManager.h">
@@ -119,6 +116,21 @@
     </ClInclude>
     <ClInclude Include="PingPongManager.h">
       <Filter>S2C\GameObjects\PingPong</Filter>
+    </ClInclude>
+    <ClInclude Include="PingPongGameRoom.h">
+      <Filter>S2C\GameObjects\PingPong</Filter>
+    </ClInclude>
+    <ClInclude Include="S2C_Protocol_Common.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2C_Protocol_Danmaku.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2C_Protocol_PingPong.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="S2C_Protocol_TestGame.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +179,6 @@
     <ClCompile Include="S2C_Protocol_Ingame.pb.cc">
       <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="S2C_Protocol_Enum.pb.cc">
-      <Filter>S2C\Network\Protocol</Filter>
-    </ClCompile>
     <ClCompile Include="Deviset.cpp">
       <Filter>S2C\Network\MatchMaking</Filter>
     </ClCompile>
@@ -197,7 +206,7 @@
     <ClCompile Include="TestGameBullet.cpp">
       <Filter>S2C\GameObjects\TestGame\UnityGameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="TestMatchGameRoom.cpp">
+    <ClCompile Include="TestGameRoom.cpp">
       <Filter>S2C\GameObjects\TestGame</Filter>
     </ClCompile>
     <ClCompile Include="TestGameManager.cpp">
@@ -205,6 +214,21 @@
     </ClCompile>
     <ClCompile Include="PingPongManager.cpp">
       <Filter>S2C\GameObjects\PingPong</Filter>
+    </ClCompile>
+    <ClCompile Include="PingPongGameRoom.cpp">
+      <Filter>S2C\GameObjects\PingPong</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_Common.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_Danmaku.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_PingPong.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_TestGame.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

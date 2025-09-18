@@ -1,6 +1,7 @@
 #pragma once
 #include "S2C_Protocol.pb.h"
 #include "ServerGlobal.h"
+#include "UnityGameObject.h"
 
 class S2CPacketMaker {
 public:
@@ -100,6 +101,32 @@ public:
 	static S2C_Protocol::S_GameStarted MakeSGameStarted(const int32_t& gameId) {
 		S2C_Protocol::S_GameStarted pkt;
 		pkt.set_gameid(gameId);
+		return pkt;
+	}
+
+	static S2C_Protocol::S_DeltaGameObjectHard MakeSDeltaGameObjectHard(const UnityGameObject& obj) {
+		S2C_Protocol::S_DeltaGameObjectHard pkt;
+		obj.SerializeObject(pkt.mutable_object());
+		return pkt;
+	}
+
+	static S2C_Protocol::S_DeltaGameObjectSoft MakeSDeltaGameObjectSoft(const UnityGameObject& obj) {
+		S2C_Protocol::S_DeltaGameObjectSoft pkt;
+		obj.SerializeObject(pkt.mutable_object());
+		return pkt;
+	}
+
+	static S2C_Protocol::S_SpawnGameObject MakeSSpawnGameObject(shared_ptr<UnityGameObject> objRef) {
+		S2C_Protocol::S_SpawnGameObject pkt;
+		if (objRef != nullptr) 
+			objRef->SerializeObject(pkt.mutable_object());
+
+		return pkt;
+	}
+
+	static S2C_Protocol::S_DespawnGameObject MakeSDespawnGameObject(const UnityGameObject& obj) {
+		S2C_Protocol::S_DespawnGameObject pkt;
+		obj.SerializeObject(pkt.mutable_object());
 		return pkt;
 	}
 };
