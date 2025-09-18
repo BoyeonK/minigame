@@ -18,33 +18,24 @@ public:
 		EndGame,
 	};
 
+	void SetRoomId(int32_t roomId);
+	int32_t GetRoomId() const;
 	virtual void Update() = 0;
 	virtual void Init(vector<WatingPlayerData> pdv) = 0;
-	GameState GetState();
+	GameState GetState() const;
 	virtual void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) = 0;
 	virtual void SendGameState(int32_t playerIdx) = 0;
+	int32_t GenerateUniqueGameObjectId();
+	void RegisterGameObject(shared_ptr<UnityGameObject> obj);
 
 protected:
+	int32_t _roomId;
+	int32_t _nxtObjectId = 0;
 	vector<weak_ptr<PlayerSession>> _playerWRefs;
 	GameType _ty;
 	GameState _state = GameState::BeforeInit;
 	int32_t _preparedPlayer = 0;
 	vector<shared_ptr<UnityGameObject>> _vecGameObjects;
-	unordered_map<uint32_t, shared_ptr<UnityGameObject>> _hmGameObject;
+	unordered_map<int32_t, shared_ptr<UnityGameObject>> _hmGameObjects;
 };
 
-class PingPongGameRoom : public GameRoom {
-public:
-	PingPongGameRoom() {
-		_ty = GameType::PingPong;
-	}
-
-	void ReturnToPool();
-	void Update() override {}
-	void Init(vector<WatingPlayerData> pdv) override;
-	void Init2(vector<WatingPlayerData> pdv);
-	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override {}
-
-private:
-	int32_t _quota = 4;
-};
