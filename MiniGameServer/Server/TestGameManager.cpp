@@ -2,7 +2,7 @@
 #include "TestGameManager.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
-#include "TestMatchGameRoom.h"
+#include "TestGameRoom.h"
 
 void TestGameManager::Push(WatingPlayerData pd) {
 	_matchQueue.Push(move(pd));
@@ -55,7 +55,8 @@ void TestGameManager::MatchMake() {
 }
 
 void TestGameManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
-	shared_ptr<TestMatchGameRoom> newRoomRef = { objectPool<TestMatchGameRoom>::alloc(), objectPool<TestMatchGameRoom>::dealloc };
+	shared_ptr<TestGameRoom> newRoomRef = { objectPool<TestGameRoom>::alloc(), objectPool<TestGameRoom>::dealloc };
+	newRoomRef->SetRoomId(_nxtRoomId.fetch_add(1));
 	AddRoom(newRoomRef);
-	newRoomRef->PostEvent(&TestMatchGameRoom::Init, move(pdv));
+	newRoomRef->PostEvent(&TestGameRoom::Init, move(pdv));
 }

@@ -2,7 +2,7 @@
 #include "GameManager.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
-#include "TestMatchGameRoom.h"
+#include "TestGameRoom.h"
 
 void GameManager::AddRoom(shared_ptr<GameRoom> room) {
 	unique_lock<shared_mutex> lock(_roomsLock);
