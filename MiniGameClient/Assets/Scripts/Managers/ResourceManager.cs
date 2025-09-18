@@ -45,16 +45,4 @@ public class ResourceManager {
             
         Object.Destroy(go);
     }
-
-    /*
-    public GameObject Spawn(UnityGameObject serializedGameObject) {
-        string objectName = Enum.GetName(typeof(ObjectType), serializedGameObject.ObjectType);
-        if (objectName == null) {
-            return null;
-        }
-        string path = $"GameObjects/{objectName}";
-        GameObject go = Instantiate(path);
-        return go;
-    }
-    */
 }

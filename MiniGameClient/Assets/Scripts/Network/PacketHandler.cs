@@ -279,5 +279,11 @@ class PacketHandler {
 	public static void S_TestGameStateHandler(PacketSession session, IMessage packet) {
 		Managers.Network.ProcessTestGameState(packet);
 	}
+
+	public static void S_SpawnGameObjectHandler(PacketSession session, IMessage packet)	{
+		S_SpawnGameObject recvPkt = packet as S_SpawnGameObject;
+		UnityGameObject serializedObj = recvPkt.Object;
+		Managers.ExecuteAtMainThread(() => { Managers.Object.CreateObject(serializedObj); });
+	}
 }
 

@@ -6,13 +6,8 @@ using UnityEngine;
 public class ObjectManager {
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 
-	//Object 분류 별로 따로 dictionary를 파도 된다.
-	//Dictionary<int, GameObject> _players = new Dictionary<int, GameObject>();
-	//Dictionary<int, GameObject> _monsters = new Dictionary<int, GameObject>();
-	//Dictionary<int, GameObject> _envs = new Dictionary<int, GameObject>();
-
 	public void Remove(int id) {
-		GameObject go = FindById(id);
+		GameObject go = FindByObjectId(id);
 		if (go == null)
 			return;
 
@@ -20,12 +15,23 @@ public class ObjectManager {
 		Managers.Resource.Destroy(go);
 	}
 
-	public GameObject FindById(int id) {
+	public GameObject FindByObjectId(int id) {
 		GameObject go = null;
 		_objects.TryGetValue(id, out go);
 		return go;
 	}
 
+	public GameObject CreateObject(UnityGameObject objMessage) {
+		int objectId = objMessage.ObjectId;
+		string objectType = Enum.GetName(typeof(Define.ObjectType), objMessage.ObjectType);
+		GameObject go = Managers.Resource.Instantiate($"GameObjects/{objectType}");
+		if (go != null)
+			_objects[objectId] = go;
+
+		return go;
+	}
+
+	/*
 	public GameObject Find(Func<GameObject, bool> condition) {
 		foreach (GameObject obj in _objects.Values) {
 			if (condition.Invoke(obj))
@@ -34,6 +40,7 @@ public class ObjectManager {
 
 		return null;
 	}
+	*/
 
 	public void Clear()	{
 		foreach (GameObject obj in _objects.Values)
