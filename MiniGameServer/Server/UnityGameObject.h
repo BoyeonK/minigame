@@ -4,9 +4,15 @@
 
 class UnityGameObject {
 public:
+	void SetObjectId(int32_t id);
+	int32_t GetObjectId() const;
+
 	S2C_Protocol::XYZ SerializePosition() const;
+	void SerializePosition(S2C_Protocol::XYZ* pXYZ) const;
+
 	S2C_Protocol::UnityGameObject SerializeObject() const;
-	void SerializeObject(S2C_Protocol::UnityGameObject* dest) const;
+	void SerializeObject(S2C_Protocol::UnityGameObject* pObj) const;
+
 	void SetPosition(float x, float y, float z);
 	XYZ GetPosition() const;
 	virtual void Update() = 0;

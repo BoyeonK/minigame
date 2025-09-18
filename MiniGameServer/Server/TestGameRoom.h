@@ -1,12 +1,12 @@
 #pragma once
 #include "GameRoom.h"
 
-class TestMatchGameRoom : public GameRoom {
+class TestGameRoom : public GameRoom {
 public:
-	TestMatchGameRoom() {
+	TestGameRoom() {
 		_ty = GameType::TestMatch;
 	}
-	~TestMatchGameRoom() {
+	~TestGameRoom() {
 		cout << "·ë »ç¸Á" << endl;
 	}
 
@@ -20,9 +20,9 @@ public:
 	void Start();
 	void SendGameState(int32_t playerIdx) override;
 
-	void MakeTestGameBullets();
+	void MakeTestGameBullet(float x, float y, float z);
 	void Phase1();
-	void Phase2();
+	void CalculateGameResult();
 
 	S2C_Protocol::S_TestGameState MakeSTestGameState();
 

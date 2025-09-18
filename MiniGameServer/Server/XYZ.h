@@ -5,6 +5,8 @@ struct XYZ {
 
 	void SetPosition(float X, float Y, float Z);
     float Magnitude() const;
+    S2C_Protocol::XYZ Serialize() const;
+    void Serialize(S2C_Protocol::XYZ* pXYZ) const;
     void Normalize();
 	XYZ Normalized() const;
 
@@ -21,9 +23,9 @@ struct XYZ {
         return *this; 
     }
 
-	float x = 0;
-	float y = 0;
-	float z = 0;
+	float x;
+	float y;
+	float z;
 };
 
 inline XYZ operator*(float scalar, const XYZ& vec) {

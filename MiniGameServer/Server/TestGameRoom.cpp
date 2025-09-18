@@ -1,9 +1,10 @@
 #include "pch.h"
-#include "TestMatchGameRoom.h"
+#include "TestGameRoom.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
+#include "TestGameBullet.h"
 
-void TestMatchGameRoom::Init(vector<WatingPlayerData> pdv) {
+void TestGameRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
 	cout << "룸 생성, Init1" << endl;
 
@@ -22,7 +23,7 @@ void TestMatchGameRoom::Init(vector<WatingPlayerData> pdv) {
 
 	if (ready) {
 		//1초 후, (Ping이 1초가 넘는것은, 이상하다.) 모든 패킷으로부터 응답을 받았다면 시작
-		PostEventAfter(1000, &TestMatchGameRoom::Init2, move(pdv));
+		PostEventAfter(1000, &TestGameRoom::Init2, move(pdv));
 	}
 	else {
 		//유효하지 않은 세션이 있었을 경우, 모두 대기열로 돌려보냄.
@@ -32,7 +33,7 @@ void TestMatchGameRoom::Init(vector<WatingPlayerData> pdv) {
 	}
 }
 
-void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
+void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	cout << "Init2" << endl;
 
 	bool canStart = true;
@@ -64,7 +65,7 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 			shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
 			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
 			if (playerSessionRef != nullptr) {
-				playerSessionRef->SetJoinedRoom(static_pointer_cast<TestMatchGameRoom>(shared_from_this()));
+				playerSessionRef->SetJoinedRoom(static_pointer_cast<TestGameRoom>(shared_from_this()));
 				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 				playerSessionRef->Send(sendBuffer);
 			}
@@ -77,7 +78,7 @@ void TestMatchGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	}
 }
 
-void TestMatchGameRoom::Start() {
+void TestGameRoom::Start() {
 	_state = GameState::OnGoing;
 	cout << "스타트 함수 실행" << endl;
 	//TODO : 완료됨을 전파
@@ -89,10 +90,10 @@ void TestMatchGameRoom::Start() {
 			playerSessionRef->Send(sendBuffer);
 		}
 	}
-	PostEventAfter(3000, &TestMatchGameRoom::Phase1);
+	PostEventAfter(3000, &TestGameRoom::Phase1);
 }
 
-void TestMatchGameRoom::SendGameState(int32_t playerIdx) {
+void TestGameRoom::SendGameState(int32_t playerIdx) {
 	if (playerIdx > (_quota - 1))
 		return;
 
@@ -105,18 +106,34 @@ void TestMatchGameRoom::SendGameState(int32_t playerIdx) {
 	playerSessionRef->Send(sendBuffer);
 }
 
-void TestMatchGameRoom::MakeTestGameBullets() {
+void TestGameRoom::MakeTestGameBullet(float x, float y, float z) {
+	shared_ptr<TestGameBullet> bulletRef = TestGameBullet::NewTestGameBullet(x, y, z);
+	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
+	RegisterGameObject(bulletRef);
+	for (auto& playerWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerRef = playerWRef.lock();
+		if (playerRef == nullptr)
+			continue;
+		S2C_Protocol::S_SpawnGameObject pkt = S2CPacketMaker::MakeSSpawnGameObject(bulletRef);
+		shared_ptr<SendBuffer> sendBuff = S2CPacketHandler::MakeSendBufferRef(pkt);
+		playerRef->Send(sendBuff);
+	}
 }
 
-void TestMatchGameRoom::Phase1() {
+void TestGameRoom::Phase1() {
+	DispatchEvent(&TestGameRoom::MakeTestGameBullet, -2.0f, 0.0f, 0.0f);
+	PostEventAfter(1000, &TestGameRoom::MakeTestGameBullet, -1.0f, 0.0f, 0.0f);
+	PostEventAfter(2000, &TestGameRoom::MakeTestGameBullet, 0.0f, 0.0f, 0.0f);
+	PostEventAfter(3000, &TestGameRoom::MakeTestGameBullet, 1.0f, 0.0f, 0.0f);
+	PostEventAfter(4000, &TestGameRoom::MakeTestGameBullet, 2.0f, 0.0f, 0.0f);
+	PostEventAfter(6000, &TestGameRoom::CalculateGameResult);
+}
+
+void TestGameRoom::CalculateGameResult() {
 
 }
 
-void TestMatchGameRoom::Phase2() {
-
-}
-
-S2C_Protocol::S_TestGameState TestMatchGameRoom::MakeSTestGameState() {
+S2C_Protocol::S_TestGameState TestGameRoom::MakeSTestGameState() {
 	S2C_Protocol::S_TestGameState pkt;
 	for (auto& goRef : _vecGameObjects) {
 		goRef->SerializeObject(pkt.add_objects());
@@ -124,11 +141,11 @@ S2C_Protocol::S_TestGameState TestMatchGameRoom::MakeSTestGameState() {
 	return pkt;
 }
 
-void TestMatchGameRoom::ReturnToPool() {
-	objectPool<TestMatchGameRoom>::dealloc(this);
+void TestGameRoom::ReturnToPool() {
+	objectPool<TestGameRoom>::dealloc(this);
 }
 
-void TestMatchGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
+void TestGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
 	cout << "업데이트 프로그레스 바" << endl;
 	if (progressRate == 100) {
 		_preparedPlayer += 1;

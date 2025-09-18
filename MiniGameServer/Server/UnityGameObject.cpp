@@ -1,35 +1,37 @@
 #include "pch.h"
 #include "UnityGameObject.h"
 
+void UnityGameObject::SetObjectId(int32_t id) {
+    _objectId = id;
+}
+
+int32_t UnityGameObject::GetObjectId() const {
+    return _objectId;
+}
+
 S2C_Protocol::XYZ UnityGameObject::SerializePosition() const {
-    S2C_Protocol::XYZ serialized;
-    serialized.set_x(_position.x);
-    serialized.set_y(_position.y);
-    serialized.set_z(_position.z);
-    return serialized;
+    return _position.Serialize();
+}
+
+void UnityGameObject::SerializePosition(S2C_Protocol::XYZ* pXYZ) const {
+    _position.Serialize(pXYZ);
 }
 
 S2C_Protocol::UnityGameObject UnityGameObject::SerializeObject() const {
     S2C_Protocol::UnityGameObject serialized;
     serialized.set_objectid(_objectId);
     serialized.set_objecttype(static_cast<int>(_objectType));
-    S2C_Protocol::XYZ* pos_ptr = serialized.mutable_position();
-    pos_ptr->set_x(_position.x);
-    pos_ptr->set_y(_position.y);
-    pos_ptr->set_z(_position.z);
+    _position.Serialize(serialized.mutable_position());
     return serialized;
 }
 
-void UnityGameObject::SerializeObject(S2C_Protocol::UnityGameObject* dest) const {
-    if (dest == nullptr)
+void UnityGameObject::SerializeObject(S2C_Protocol::UnityGameObject* pObj) const {
+    if (pObj == nullptr)
         return;
 
-    dest->set_objectid(_objectId);
-    dest->set_objecttype(static_cast<int>(_objectType));
-    S2C_Protocol::XYZ* pos_ptr = dest->mutable_position();
-    pos_ptr->set_x(_position.x);
-    pos_ptr->set_y(_position.y);
-    pos_ptr->set_z(_position.z);
+    pObj->set_objectid(_objectId);
+    pObj->set_objecttype(static_cast<int>(_objectType));
+    _position.Serialize(pObj->mutable_position());
 }
 
 void UnityGameObject::SetPosition(float x, float y, float z) {
