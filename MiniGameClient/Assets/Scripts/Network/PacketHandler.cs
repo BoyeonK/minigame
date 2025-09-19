@@ -277,7 +277,7 @@ class PacketHandler {
 	}
 
 	public static void S_TestGameStateHandler(PacketSession session, IMessage packet) {
-		Managers.Network.ProcessTestGameState(packet);
+		Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessTestGameState(packet); });
 	}
 
 	public static void S_SpawnGameObjectHandler(PacketSession session, IMessage packet)	{

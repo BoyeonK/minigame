@@ -229,6 +229,9 @@ public class NetworkManager {
 
 	public void ProcessTestGameState(IMessage packet) {
         S_TestGameState recvPkt = packet as S_TestGameState;
+		foreach(UnityGameObject uObj in recvPkt.Objects) {
+			Managers.Object.CreateObject(uObj);
+		}
     }
 
     public void ProcessPingPongStateState(IMessage packet) {
