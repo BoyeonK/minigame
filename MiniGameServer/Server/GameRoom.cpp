@@ -19,9 +19,9 @@ int32_t GameRoom::GenerateUniqueGameObjectId() {
 	return _nxtObjectId++;
 }
 
-void GameRoom::RegisterGameObject(shared_ptr<UnityGameObject> obj) {
+void GameRoom::RegisterGameObject(const shared_ptr<UnityGameObject>& obj) {
 	_vecGameObjects.push_back(obj);
-	//_hmGameObjects.insert()
+	_hmGameObjects.insert({ obj->GetObjectId(), obj});
 }
 
 void GameRoom::BroadCast(shared_ptr<SendBuffer> sendBuffer) {
@@ -34,3 +34,20 @@ void GameRoom::BroadCast(shared_ptr<SendBuffer> sendBuffer) {
 		playerRef->Send(sendBuffer);
 	}
 }
+
+void GameRoom::BroadCastSpawn(const shared_ptr<UnityGameObject>& objRef) {
+	if (objRef == nullptr)
+		return;
+	S2C_Protocol::S_SpawnGameObject pkt = S2CPacketMaker::MakeSSpawnGameObject(objRef);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+}
+
+void GameRoom::BroadCastDespawn(const shared_ptr<UnityGameObject>& objRef) {
+	if (objRef == nullptr)
+		return;
+	S2C_Protocol::S_SpawnGameObject pkt = S2CPacketMaker::MakeSSpawnGameObject(objRef);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+}
+
