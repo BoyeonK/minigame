@@ -31,7 +31,7 @@ void TestGameManager::MatchMake() {
 				isReady = false;
 				_excluded[i] = true;
 			}
-			else if (playerSessionRef->GetMatchingState() != GameType::TestMatch) {
+			else if (playerSessionRef->GetMatchingState() != GameType::TestGame) {
 				isReady = false;
 				_excluded[i] = true;
 

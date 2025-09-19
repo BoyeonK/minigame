@@ -3,7 +3,7 @@
 
 class TestGameManager : public GameManager {
 public:
-	TestGameManager() : _ty(GameType::TestMatch), _quota(1), _matchQueue(_ty, _quota) {
+	TestGameManager() : _ty(GameType::TestGame), _quota(1), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
@@ -18,7 +18,7 @@ public:
 	void StartGame() {}
 
 private:
-	GameType _ty = GameType::TestMatch;
+	GameType _ty = GameType::TestGame;
 	int32_t _quota;
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;

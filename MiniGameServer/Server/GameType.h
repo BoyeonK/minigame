@@ -2,7 +2,7 @@
 
 enum class GameType {
 	None,
-	TestMatch,
+	TestGame,
 	PingPong,
 	Danmaku,
 	Undefined,

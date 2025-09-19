@@ -131,8 +131,8 @@ public:
 		return pkt;
 	}
 
-	static S2C_Protocol::S_TestGameEnd MakeSTestGameEnd() {
-		S2C_Protocol::S_TestGameEnd pkt;
+	static S2C_Protocol::S_EndGame MakeSEndGame() {
+		S2C_Protocol::S_EndGame pkt;
 		return pkt;
 	}
 };

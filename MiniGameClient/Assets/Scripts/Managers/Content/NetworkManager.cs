@@ -242,6 +242,10 @@ public class NetworkManager {
 
     }
 
+	public void ResponseEndGame() {
+
+	}
+
     public void Update() {
 
 	}

@@ -6,7 +6,7 @@ GameType IntToGameType(int32_t num) {
 	case(0):
 		return GameType::None;
 	case(1):
-		return GameType::TestMatch;
+		return GameType::TestGame;
 	case(2):
 		return GameType::PingPong;
 	case(3):

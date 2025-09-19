@@ -5,7 +5,7 @@
 class TestGameRoom : public GameRoom {
 public:
 	TestGameRoom() {
-		_ty = GameType::TestMatch;
+		_ty = GameType::TestGame;
 	}
 	~TestGameRoom() {
 		cout << "·ë »ç¸Á" << endl;

@@ -37,14 +37,16 @@ enum : uint16_t {
 	PKT_S_DELTA_GAME_OBJECT_HARD = 24,
 	PKT_S_SPAWN_GAME_OBJECT = 25,
 	PKT_S_DESPAWN_GAME_OBJECT = 26,
+	PKT_S_END_GAME = 27,
 
 	PKT_S_TESTGAME_STATE = 100,
-	PKT_S_TESTGAME_END = 101,
+	PKT_S_TESTGAME_RESULT = 101,
 
 	PKT_S_PINGPONG_STATE = 200,
+	PKT_S_PINGPONG_RESULT = 201,
 
 	PKT_S_DANMAKU_STATE = 300,
-
+	PKT_S_DANMAKU_RESTULT = 301,
 };
 
 bool Handle_Invalid(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
@@ -136,20 +138,19 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DeltaGameObjectHard& pkt) { return MakeSendBufferRef(pkt, PKT_S_DELTA_GAME_OBJECT_HARD); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_SpawnGameObject& pkt) { return MakeSendBufferRef(pkt, PKT_S_SPAWN_GAME_OBJECT); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DespawnGameObject& pkt) { return MakeSendBufferRef(pkt, PKT_S_DESPAWN_GAME_OBJECT); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_EndGame& pkt) { return MakeSendBufferRef(pkt, PKT_S_END_GAME); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DeltaGameObjectSoft& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_DELTA_GAME_OBJECT_SOFT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DeltaGameObjectHard& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_DELTA_GAME_OBJECT_HARD, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_SpawnGameObject& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_SPAWN_GAME_OBJECT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DespawnGameObject& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_DESPAWN_GAME_OBJECT, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_EndGame& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_END_GAME, AESKey); }
 #pragma endregion
 
 #pragma region TestGame
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameEnd& pkt) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_END); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE, AESKey); }
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameEnd& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_END, AESKey); }
-
 #pragma endregion
 
 #pragma region PingPong

@@ -132,8 +132,13 @@ void TestGameRoom::EndPhase() {
 	//게임 결과 계산
 	CalculateGameResult();
 
+	//세션 종료
+
 	//해당 결과 통보
-	S2C_Protocol::S_TestGameEnd pkt = S2CPacketMaker::MakeSTestGameEnd();
+	S2C_Protocol::S_EndGame pkt = S2CPacketMaker::MakeSEndGame();
+	pkt.set_gameid(int(_ty));
+	S2C_Protocol::S_TestGameResult* pTestGameResult = pkt.mutable_testgameresult();
+
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 }
