@@ -1,5 +1,6 @@
 #pragma once
 #include "GameRoom.h"
+#include "TestGameBullet.h"
 
 class TestGameRoom : public GameRoom {
 public:
@@ -20,7 +21,9 @@ public:
 	void Start();
 	void SendGameState(int32_t playerIdx) override;
 
-	void MakeTestGameBullet(float x, float y, float z);
+	shared_ptr<TestGameBullet> MakeTestGameBullet(float x, float y, float z);
+	void MakeTestGameBulletAndBroadcast(float x, float y, float z);
+
 	void Phase1();
 	void EndPhase();
 	void CalculateGameResult();

@@ -80,16 +80,15 @@ void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 
 void TestGameRoom::Start() {
 	_state = GameState::OnGoing;
+
+	//GameRoom에 있어야할 Object 생성. (따로 함수로 빼는게 나을듯)
+	MakeTestGameBullet(-3.0f, 0.0f, 0.0f);
+	MakeTestGameBullet(3.0f, 0.0f, 0.0f);
+
 	cout << "스타트 함수 실행" << endl;
-	//TODO : 완료됨을 전파
-	for (auto& playerSessionWRef : _playerWRefs) {
-		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
-		S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
-		if (playerSessionRef != nullptr) {
-			shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-			playerSessionRef->Send(sendBuffer);
-		}
-	}
+	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
 	PostEventAfter(3000, &TestGameRoom::Phase1);
 }
 
@@ -106,21 +105,24 @@ void TestGameRoom::SendGameState(int32_t playerIdx) {
 	playerSessionRef->Send(sendBuffer);
 }
 
-void TestGameRoom::MakeTestGameBullet(float x, float y, float z) {
+shared_ptr<TestGameBullet> TestGameRoom::MakeTestGameBullet(float x, float y, float z) {
 	shared_ptr<TestGameBullet> bulletRef = TestGameBullet::NewTestGameBullet(x, y, z);
 	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
 	RegisterGameObject(bulletRef);
-	S2C_Protocol::S_SpawnGameObject pkt = S2CPacketMaker::MakeSSpawnGameObject(bulletRef);
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-	BroadCast(sendBuffer);
+	return bulletRef;
+}
+
+void TestGameRoom::MakeTestGameBulletAndBroadcast(float x, float y, float z) {
+	shared_ptr<TestGameBullet> TGBRef = MakeTestGameBullet(x, y, z);
+	BroadCastSpawn(TGBRef);
 }
 
 void TestGameRoom::Phase1() {
-	DispatchEvent(&TestGameRoom::MakeTestGameBullet, -2.0f, 0.0f, 0.0f);
-	PostEventAfter(1000, &TestGameRoom::MakeTestGameBullet, -1.0f, 0.0f, 0.0f);
-	PostEventAfter(2000, &TestGameRoom::MakeTestGameBullet, 0.0f, 0.0f, 0.0f);
-	PostEventAfter(3000, &TestGameRoom::MakeTestGameBullet, 1.0f, 0.0f, 0.0f);
-	PostEventAfter(4000, &TestGameRoom::MakeTestGameBullet, 2.0f, 0.0f, 0.0f);
+	DispatchEvent(&TestGameRoom::MakeTestGameBulletAndBroadcast, -2.0f, 0.0f, 0.0f);
+	PostEventAfter(1000, &TestGameRoom::MakeTestGameBulletAndBroadcast, -1.0f, 0.0f, 0.0f);
+	PostEventAfter(2000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 0.0f, 0.0f, 0.0f);
+	PostEventAfter(3000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 1.0f, 0.0f, 0.0f);
+	PostEventAfter(4000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 2.0f, 0.0f, 0.0f);
 	PostEventAfter(6000, &TestGameRoom::EndPhase);
 }
 
