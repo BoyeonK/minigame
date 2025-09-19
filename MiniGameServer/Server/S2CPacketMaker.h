@@ -124,9 +124,10 @@ public:
 		return pkt;
 	}
 
-	static S2C_Protocol::S_DespawnGameObject MakeSDespawnGameObject(const UnityGameObject& obj) {
+	static S2C_Protocol::S_DespawnGameObject MakeSDespawnGameObject(shared_ptr<UnityGameObject> objRef) {
 		S2C_Protocol::S_DespawnGameObject pkt;
-		obj.SerializeObject(pkt.mutable_object());
+		if(objRef != nullptr)
+			objRef->SerializeObject(pkt.mutable_object());
 		return pkt;
 	}
 
