@@ -23,11 +23,20 @@ public class ObjectManager {
 
 	public GameObject CreateObject(UnityGameObject objMessage) {
 		int objectId = objMessage.ObjectId;
-		string objectType = Enum.GetName(typeof(Define.ObjectType), objMessage.ObjectType);
-		GameObject go = Managers.Resource.Instantiate($"GameObjects/{objectType}");
-		if (go != null)
-			_objects[objectId] = go;
 
+        if (_objects.ContainsKey(objectId)) {
+            return null;
+        }
+
+        string objectType = Enum.GetName(typeof(Define.ObjectType), objMessage.ObjectType);
+		Debug.Log(objectId);
+		Debug.Log($"GameObjects/{objectType}");
+
+		GameObject go = Managers.Resource.Instantiate($"GameObjects/{objectType}");
+		if (go != null)	{
+            _objects[objectId] = go;
+            go.transform.position = new Vector3(objMessage.Position.X, objMessage.Position.Y, objMessage.Position.Z);
+        }
 		return go;
 	}
 
