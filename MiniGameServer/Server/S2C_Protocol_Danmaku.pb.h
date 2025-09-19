@@ -20,6 +20,7 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
+#include "google/protobuf/generated_message_bases.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
@@ -53,6 +54,9 @@ struct TableStruct_S2C_5fProtocol_5fDanmaku_2eproto {
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_S2C_5fProtocol_5fDanmaku_2eproto;
 namespace S2C_Protocol {
+class S_DanmakuResult;
+struct S_DanmakuResultDefaultTypeInternal;
+extern S_DanmakuResultDefaultTypeInternal _S_DanmakuResult_default_instance_;
 class S_DanmakuState;
 struct S_DanmakuStateDefaultTypeInternal;
 extern S_DanmakuStateDefaultTypeInternal _S_DanmakuState_default_instance_;
@@ -67,6 +71,151 @@ namespace S2C_Protocol {
 // ===================================================================
 
 
+// -------------------------------------------------------------------
+
+class S_DanmakuResult final : public ::google::protobuf::internal::ZeroFieldsBase
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_DanmakuResult) */ {
+ public:
+  inline S_DanmakuResult() : S_DanmakuResult(nullptr) {}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(S_DanmakuResult* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_DanmakuResult));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR S_DanmakuResult(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline S_DanmakuResult(const S_DanmakuResult& from) : S_DanmakuResult(nullptr, from) {}
+  inline S_DanmakuResult(S_DanmakuResult&& from) noexcept
+      : S_DanmakuResult(nullptr, std::move(from)) {}
+  inline S_DanmakuResult& operator=(const S_DanmakuResult& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_DanmakuResult& operator=(S_DanmakuResult&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_DanmakuResult& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_DanmakuResult* internal_default_instance() {
+    return reinterpret_cast<const S_DanmakuResult*>(
+        &_S_DanmakuResult_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 1;
+  friend void swap(S_DanmakuResult& a, S_DanmakuResult& b) { a.Swap(&b); }
+  inline void Swap(S_DanmakuResult* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_DanmakuResult* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_DanmakuResult* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<S_DanmakuResult>(arena);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const S_DanmakuResult& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const S_DanmakuResult& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_DanmakuResult"; }
+
+ protected:
+  explicit S_DanmakuResult(::google::protobuf::Arena* arena);
+  S_DanmakuResult(::google::protobuf::Arena* arena, const S_DanmakuResult& from);
+  S_DanmakuResult(::google::protobuf::Arena* arena, S_DanmakuResult&& from) noexcept
+      : S_DanmakuResult(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_DanmakuResult)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 0, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const S_DanmakuResult& from_msg);
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  friend struct ::TableStruct_S2C_5fProtocol_5fDanmaku_2eproto;
+};
 // -------------------------------------------------------------------
 
 class S_DanmakuState final : public ::google::protobuf::Message
@@ -325,6 +474,10 @@ S_DanmakuState::_internal_mutable_objects() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.objects_;
 }
+
+// -------------------------------------------------------------------
+
+// S_DanmakuResult
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop

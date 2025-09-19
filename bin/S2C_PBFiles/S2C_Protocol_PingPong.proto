@@ -8,3 +8,7 @@ import "S2C_Protocol_Common.proto";
 message S_PingPongState {
     repeated UnityGameObject objects = 1;
 }
+
+message S_PingPongResult {
+    
+}

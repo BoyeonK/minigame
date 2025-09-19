@@ -26,23 +26,23 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace S2C_Protocol {
               template <typename>
-PROTOBUF_CONSTEXPR S_TestGameEnd::S_TestGameEnd(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR S_TestGameResult::S_TestGameResult(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::internal::ZeroFieldsBase() {
 }
 #endif  // PROTOBUF_CUSTOM_VTABLE
-struct S_TestGameEndDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_TestGameEndDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_TestGameEndDefaultTypeInternal() {}
+struct S_TestGameResultDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_TestGameResultDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_TestGameResultDefaultTypeInternal() {}
   union {
-    S_TestGameEnd _instance;
+    S_TestGameResult _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_TestGameEndDefaultTypeInternal _S_TestGameEnd_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_TestGameResultDefaultTypeInternal _S_TestGameResult_default_instance_;
 
 inline constexpr S_TestGameState::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -86,7 +86,7 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_TestGameState, _impl_.objects_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_TestGameEnd, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_TestGameResult, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
@@ -98,19 +98,19 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::S2C_Protocol::S_TestGameState)},
-        {9, -1, -1, sizeof(::S2C_Protocol::S_TestGameEnd)},
+        {9, -1, -1, sizeof(::S2C_Protocol::S_TestGameResult)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_TestGameState_default_instance_._instance,
-    &::S2C_Protocol::_S_TestGameEnd_default_instance_._instance,
+    &::S2C_Protocol::_S_TestGameResult_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2C_5fProtocol_5fTestGame_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\033S2C_Protocol_TestGame.proto\022\014S2C_Proto"
     "col\032\031S2C_Protocol_Common.proto\"A\n\017S_Test"
     "GameState\022.\n\007objects\030\001 \003(\0132\035.S2C_Protoco"
-    "l.UnityGameObject\"\017\n\rS_TestGameEndB\033\252\002\030G"
-    "oogle.Protobuf.Protocolb\006proto3"
+    "l.UnityGameObject\"\022\n\020S_TestGameResultB\033\252"
+    "\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fTestGame_2eproto_deps[1] =
     {
@@ -120,7 +120,7 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fTestGame_2eproto_once
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fTestGame_2eproto = {
     false,
     false,
-    191,
+    194,
     descriptor_table_protodef_S2C_5fProtocol_5fTestGame_2eproto,
     "S2C_Protocol_TestGame.proto",
     &descriptor_table_S2C_5fProtocol_5fTestGame_2eproto_once,
@@ -382,71 +382,71 @@ void S_TestGameState::InternalSwap(S_TestGameState* PROTOBUF_RESTRICT other) {
 }
 // ===================================================================
 
-class S_TestGameEnd::_Internal {
+class S_TestGameResult::_Internal {
  public:
 };
 
-S_TestGameEnd::S_TestGameEnd(::google::protobuf::Arena* arena)
+S_TestGameResult::S_TestGameResult(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::internal::ZeroFieldsBase(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_TestGameEnd)
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_TestGameResult)
 }
-S_TestGameEnd::S_TestGameEnd(
+S_TestGameResult::S_TestGameResult(
     ::google::protobuf::Arena* arena,
-    const S_TestGameEnd& from)
+    const S_TestGameResult& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::internal::ZeroFieldsBase(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  S_TestGameEnd* const _this = this;
+  S_TestGameResult* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
 
-  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_TestGameEnd)
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_TestGameResult)
 }
 
-inline void* S_TestGameEnd::PlacementNew_(const void*, void* mem,
+inline void* S_TestGameResult::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) S_TestGameEnd(arena);
+  return ::new (mem) S_TestGameResult(arena);
 }
-constexpr auto S_TestGameEnd::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_TestGameEnd),
-                                            alignof(S_TestGameEnd));
+constexpr auto S_TestGameResult::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_TestGameResult),
+                                            alignof(S_TestGameResult));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull S_TestGameEnd::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull S_TestGameResult::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_S_TestGameEnd_default_instance_._instance,
+        &_S_TestGameResult_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &S_TestGameEnd::MergeImpl,
-        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<S_TestGameEnd>(),
+        &S_TestGameResult::MergeImpl,
+        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<S_TestGameResult>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &S_TestGameEnd::SharedDtor,
-        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<S_TestGameEnd>(), &S_TestGameEnd::ByteSizeLong,
-            &S_TestGameEnd::_InternalSerialize,
+        &S_TestGameResult::SharedDtor,
+        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<S_TestGameResult>(), &S_TestGameResult::ByteSizeLong,
+            &S_TestGameResult::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(S_TestGameEnd, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(S_TestGameResult, _impl_._cached_size_),
         false,
     },
-    &S_TestGameEnd::kDescriptorMethods,
+    &S_TestGameResult::kDescriptorMethods,
     &descriptor_table_S2C_5fProtocol_5fTestGame_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* S_TestGameEnd::GetClassData() const {
+const ::google::protobuf::internal::ClassData* S_TestGameResult::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_TestGameEnd::_table_ = {
+const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_TestGameResult::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -461,7 +461,7 @@ const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_TestGameEnd::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_TestGameEnd>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_TestGameResult>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
@@ -480,7 +480,7 @@ const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_TestGameEnd::_table_ = {
 
 
 
-::google::protobuf::Metadata S_TestGameEnd::GetMetadata() const {
+::google::protobuf::Metadata S_TestGameResult::GetMetadata() const {
   return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

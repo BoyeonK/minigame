@@ -27,7 +27,7 @@ namespace Google.Protobuf.Protocol {
             "ChlTMkNfUHJvdG9jb2xfQ29tbW9uLnByb3RvEgxTMkNfUHJvdG9jb2wiJgoD",
             "WFlaEgkKAXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCIlwKD1VuaXR5",
             "R2FtZU9iamVjdBIQCghvYmplY3RJZBgBIAEoBRISCgpvYmplY3RUeXBlGAIg",
-            "ASgFEiMKCHBvc2l0aW9uGAMgASgLMhEuUzJDX1Byb3RvY29sLlhZWiq/BQoF",
+            "ASgFEiMKCHBvc2l0aW9uGAMgASgLMhEuUzJDX1Byb3RvY29sLlhZWiqBBgoF",
             "TXNnSWQSDQoJU19XRUxDT01FEAASDQoJQ19XRUxDT01FEAESFgoSU19XRUxD",
             "T01FX1JFU1BPTlNFEAISDwoLU19FTkNSWVBURUQQAxIPCgtDX0VOQ1JZUFRF",
             "RBAEEgsKB0NfTE9HSU4QBRILCgdTX0xPR0lOEAYSFAoQQ19DUkVBVEVfQUND",
@@ -41,10 +41,11 @@ namespace Google.Protobuf.Protocol {
             "UkVTUxAUEhIKDlNfR0FNRV9TVEFSVEVEEBUSGAoUQ19SRVFVRVNUX0dBTUVf",
             "U1RBVEUQFhIcChhTX0RFTFRBX0dBTUVfT0JKRUNUX1NPRlQQFxIcChhTX0RF",
             "TFRBX0dBTUVfT0JKRUNUX0hBUkQQGBIXChNTX1NQQVdOX0dBTUVfT0JKRUNU",
-            "EBkSGQoVU19ERVNQQVdOX0dBTUVfT0JKRUNUEBoSFAoQU19URVNUR0FNRV9T",
-            "VEFURRBkEhIKDlNfVEVTVEdBTUVfRU5EEGUSFQoQU19QSU5HUE9OR19TVEFU",
-            "RRDIARIUCg9TX0RBTk1BS1VfU1RBVEUQrAJCG6oCGEdvb2dsZS5Qcm90b2J1",
-            "Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "EBkSGQoVU19ERVNQQVdOX0dBTUVfT0JKRUNUEBoSDgoKU19FTkRfR0FNRRAb",
+            "EhQKEFNfVEVTVEdBTUVfU1RBVEUQZBIVChFTX1RFU1RHQU1FX1JFU1VMVBBl",
+            "EhUKEFNfUElOR1BPTkdfU1RBVEUQyAESFgoRU19QSU5HUE9OR19SRVNVTFQQ",
+            "yQESFAoPU19EQU5NQUtVX1NUQVRFEKwCEhUKEFNfREFOTUFLVV9SRVNVTFQQ",
+            "rQJCG6oCGEdvb2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -84,10 +85,13 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("S_DELTA_GAME_OBJECT_HARD")] SDeltaGameObjectHard = 24,
     [pbr::OriginalName("S_SPAWN_GAME_OBJECT")] SSpawnGameObject = 25,
     [pbr::OriginalName("S_DESPAWN_GAME_OBJECT")] SDespawnGameObject = 26,
+    [pbr::OriginalName("S_END_GAME")] SEndGame = 27,
     [pbr::OriginalName("S_TESTGAME_STATE")] STestgameState = 100,
-    [pbr::OriginalName("S_TESTGAME_END")] STestgameEnd = 101,
+    [pbr::OriginalName("S_TESTGAME_RESULT")] STestgameResult = 101,
     [pbr::OriginalName("S_PINGPONG_STATE")] SPingpongState = 200,
+    [pbr::OriginalName("S_PINGPONG_RESULT")] SPingpongResult = 201,
     [pbr::OriginalName("S_DANMAKU_STATE")] SDanmakuState = 300,
+    [pbr::OriginalName("S_DANMAKU_RESULT")] SDanmakuResult = 301,
   }
 
   #endregion

@@ -54,9 +54,9 @@ struct TableStruct_S2C_5fProtocol_5fTestGame_2eproto {
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_S2C_5fProtocol_5fTestGame_2eproto;
 namespace S2C_Protocol {
-class S_TestGameEnd;
-struct S_TestGameEndDefaultTypeInternal;
-extern S_TestGameEndDefaultTypeInternal _S_TestGameEnd_default_instance_;
+class S_TestGameResult;
+struct S_TestGameResultDefaultTypeInternal;
+extern S_TestGameResultDefaultTypeInternal _S_TestGameResult_default_instance_;
 class S_TestGameState;
 struct S_TestGameStateDefaultTypeInternal;
 extern S_TestGameStateDefaultTypeInternal _S_TestGameState_default_instance_;
@@ -73,30 +73,30 @@ namespace S2C_Protocol {
 
 // -------------------------------------------------------------------
 
-class S_TestGameEnd final : public ::google::protobuf::internal::ZeroFieldsBase
-/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_TestGameEnd) */ {
+class S_TestGameResult final : public ::google::protobuf::internal::ZeroFieldsBase
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_TestGameResult) */ {
  public:
-  inline S_TestGameEnd() : S_TestGameEnd(nullptr) {}
+  inline S_TestGameResult() : S_TestGameResult(nullptr) {}
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(S_TestGameEnd* msg, std::destroying_delete_t) {
+  void operator delete(S_TestGameResult* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_TestGameEnd));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_TestGameResult));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR S_TestGameEnd(
+  explicit PROTOBUF_CONSTEXPR S_TestGameResult(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline S_TestGameEnd(const S_TestGameEnd& from) : S_TestGameEnd(nullptr, from) {}
-  inline S_TestGameEnd(S_TestGameEnd&& from) noexcept
-      : S_TestGameEnd(nullptr, std::move(from)) {}
-  inline S_TestGameEnd& operator=(const S_TestGameEnd& from) {
+  inline S_TestGameResult(const S_TestGameResult& from) : S_TestGameResult(nullptr, from) {}
+  inline S_TestGameResult(S_TestGameResult&& from) noexcept
+      : S_TestGameResult(nullptr, std::move(from)) {}
+  inline S_TestGameResult& operator=(const S_TestGameResult& from) {
     CopyFrom(from);
     return *this;
   }
-  inline S_TestGameEnd& operator=(S_TestGameEnd&& from) noexcept {
+  inline S_TestGameResult& operator=(S_TestGameResult&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -124,16 +124,16 @@ class S_TestGameEnd final : public ::google::protobuf::internal::ZeroFieldsBase
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const S_TestGameEnd& default_instance() {
+  static const S_TestGameResult& default_instance() {
     return *internal_default_instance();
   }
-  static inline const S_TestGameEnd* internal_default_instance() {
-    return reinterpret_cast<const S_TestGameEnd*>(
-        &_S_TestGameEnd_default_instance_);
+  static inline const S_TestGameResult* internal_default_instance() {
+    return reinterpret_cast<const S_TestGameResult*>(
+        &_S_TestGameResult_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 1;
-  friend void swap(S_TestGameEnd& a, S_TestGameEnd& b) { a.Swap(&b); }
-  inline void Swap(S_TestGameEnd* other) {
+  friend void swap(S_TestGameResult& a, S_TestGameResult& b) { a.Swap(&b); }
+  inline void Swap(S_TestGameResult* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -141,7 +141,7 @@ class S_TestGameEnd final : public ::google::protobuf::internal::ZeroFieldsBase
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(S_TestGameEnd* other) {
+  void UnsafeArenaSwap(S_TestGameResult* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -149,15 +149,15 @@ class S_TestGameEnd final : public ::google::protobuf::internal::ZeroFieldsBase
 
   // implements Message ----------------------------------------------
 
-  S_TestGameEnd* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<S_TestGameEnd>(arena);
+  S_TestGameResult* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<S_TestGameResult>(arena);
   }
   using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const S_TestGameEnd& from) {
+  inline void CopyFrom(const S_TestGameResult& from) {
     ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
   }
   using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const S_TestGameEnd& from) {
+  void MergeFrom(const S_TestGameResult& from) {
     ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
   }
 
@@ -169,13 +169,13 @@ class S_TestGameEnd final : public ::google::protobuf::internal::ZeroFieldsBase
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_TestGameEnd"; }
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_TestGameResult"; }
 
  protected:
-  explicit S_TestGameEnd(::google::protobuf::Arena* arena);
-  S_TestGameEnd(::google::protobuf::Arena* arena, const S_TestGameEnd& from);
-  S_TestGameEnd(::google::protobuf::Arena* arena, S_TestGameEnd&& from) noexcept
-      : S_TestGameEnd(arena) {
+  explicit S_TestGameResult(::google::protobuf::Arena* arena);
+  S_TestGameResult(::google::protobuf::Arena* arena, const S_TestGameResult& from);
+  S_TestGameResult(::google::protobuf::Arena* arena, S_TestGameResult&& from) noexcept
+      : S_TestGameResult(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
@@ -189,7 +189,7 @@ class S_TestGameEnd final : public ::google::protobuf::internal::ZeroFieldsBase
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
-  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_TestGameEnd)
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_TestGameResult)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -211,7 +211,7 @@ class S_TestGameEnd final : public ::google::protobuf::internal::ZeroFieldsBase
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const S_TestGameEnd& from_msg);
+                          const S_TestGameResult& from_msg);
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   friend struct ::TableStruct_S2C_5fProtocol_5fTestGame_2eproto;
@@ -477,7 +477,7 @@ S_TestGameState::_internal_mutable_objects() {
 
 // -------------------------------------------------------------------
 
-// S_TestGameEnd
+// S_TestGameResult
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop

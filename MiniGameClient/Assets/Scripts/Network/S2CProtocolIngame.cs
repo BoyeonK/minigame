@@ -34,8 +34,13 @@ namespace Google.Protobuf.Protocol {
             "dG9jb2wuVW5pdHlHYW1lT2JqZWN0IkIKEVNfU3Bhd25HYW1lT2JqZWN0Ei0K",
             "Bm9iamVjdBgBIAEoCzIdLlMyQ19Qcm90b2NvbC5Vbml0eUdhbWVPYmplY3Qi",
             "RAoTU19EZXNwYXduR2FtZU9iamVjdBItCgZvYmplY3QYASABKAsyHS5TMkNf",
-            "UHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0QhuqAhhHb29nbGUuUHJvdG9idWYu",
-            "UHJvdG9jb2xiBnByb3RvMw=="));
+            "UHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0ItUBCglTX0VuZEdhbWUSDgoGZ2Ft",
+            "ZUlkGAEgASgFEjgKDnRlc3RHYW1lUmVzdWx0GAIgASgLMh4uUzJDX1Byb3Rv",
+            "Y29sLlNfVGVzdEdhbWVSZXN1bHRIABI4Cg5waW5nUG9uZ1Jlc3VsdBgDIAEo",
+            "CzIeLlMyQ19Qcm90b2NvbC5TX1BpbmdQb25nUmVzdWx0SAASNgoNZGFubWFr",
+            "dVJlc3VsdBgEIAEoCzIdLlMyQ19Qcm90b2NvbC5TX0Rhbm1ha3VSZXN1bHRI",
+            "AEIMCgp2YWx1ZV9jYXNlQhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolTestGameReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolPingPongReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolDanmakuReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -43,7 +48,8 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DeltaGameObjectSoft), global::Google.Protobuf.Protocol.S_DeltaGameObjectSoft.Parser, new[]{ "Object" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DeltaGameObjectHard), global::Google.Protobuf.Protocol.S_DeltaGameObjectHard.Parser, new[]{ "Object" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_SpawnGameObject), global::Google.Protobuf.Protocol.S_SpawnGameObject.Parser, new[]{ "Object" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DespawnGameObject), global::Google.Protobuf.Protocol.S_DespawnGameObject.Parser, new[]{ "Object" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DespawnGameObject), global::Google.Protobuf.Protocol.S_DespawnGameObject.Parser, new[]{ "Object" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EndGame), global::Google.Protobuf.Protocol.S_EndGame.Parser, new[]{ "GameId", "TestGameResult", "PingPongResult", "DanmakuResult" }, new[]{ "ValueCase" }, null, null, null)
           }));
     }
     #endregion
@@ -1074,6 +1080,390 @@ namespace Google.Protobuf.Protocol {
               Object = new global::Google.Protobuf.Protocol.UnityGameObject();
             }
             input.ReadMessage(Object);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class S_EndGame : pb::IMessage<S_EndGame>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<S_EndGame> _parser = new pb::MessageParser<S_EndGame>(() => new S_EndGame());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<S_EndGame> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.S2CProtocolIngameReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_EndGame() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_EndGame(S_EndGame other) : this() {
+      gameId_ = other.gameId_;
+      switch (other.ValueCaseCase) {
+        case ValueCaseOneofCase.TestGameResult:
+          TestGameResult = other.TestGameResult.Clone();
+          break;
+        case ValueCaseOneofCase.PingPongResult:
+          PingPongResult = other.PingPongResult.Clone();
+          break;
+        case ValueCaseOneofCase.DanmakuResult:
+          DanmakuResult = other.DanmakuResult.Clone();
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_EndGame Clone() {
+      return new S_EndGame(this);
+    }
+
+    /// <summary>Field number for the "gameId" field.</summary>
+    public const int GameIdFieldNumber = 1;
+    private int gameId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int GameId {
+      get { return gameId_; }
+      set {
+        gameId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "testGameResult" field.</summary>
+    public const int TestGameResultFieldNumber = 2;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.S_TestGameResult TestGameResult {
+      get { return valueCaseCase_ == ValueCaseOneofCase.TestGameResult ? (global::Google.Protobuf.Protocol.S_TestGameResult) valueCase_ : null; }
+      set {
+        valueCase_ = value;
+        valueCaseCase_ = value == null ? ValueCaseOneofCase.None : ValueCaseOneofCase.TestGameResult;
+      }
+    }
+
+    /// <summary>Field number for the "pingPongResult" field.</summary>
+    public const int PingPongResultFieldNumber = 3;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.S_PingPongResult PingPongResult {
+      get { return valueCaseCase_ == ValueCaseOneofCase.PingPongResult ? (global::Google.Protobuf.Protocol.S_PingPongResult) valueCase_ : null; }
+      set {
+        valueCase_ = value;
+        valueCaseCase_ = value == null ? ValueCaseOneofCase.None : ValueCaseOneofCase.PingPongResult;
+      }
+    }
+
+    /// <summary>Field number for the "danmakuResult" field.</summary>
+    public const int DanmakuResultFieldNumber = 4;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.S_DanmakuResult DanmakuResult {
+      get { return valueCaseCase_ == ValueCaseOneofCase.DanmakuResult ? (global::Google.Protobuf.Protocol.S_DanmakuResult) valueCase_ : null; }
+      set {
+        valueCase_ = value;
+        valueCaseCase_ = value == null ? ValueCaseOneofCase.None : ValueCaseOneofCase.DanmakuResult;
+      }
+    }
+
+    private object valueCase_;
+    /// <summary>Enum of possible cases for the "value_case" oneof.</summary>
+    public enum ValueCaseOneofCase {
+      None = 0,
+      TestGameResult = 2,
+      PingPongResult = 3,
+      DanmakuResult = 4,
+    }
+    private ValueCaseOneofCase valueCaseCase_ = ValueCaseOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ValueCaseOneofCase ValueCaseCase {
+      get { return valueCaseCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearValueCase() {
+      valueCaseCase_ = ValueCaseOneofCase.None;
+      valueCase_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as S_EndGame);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_EndGame other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GameId != other.GameId) return false;
+      if (!object.Equals(TestGameResult, other.TestGameResult)) return false;
+      if (!object.Equals(PingPongResult, other.PingPongResult)) return false;
+      if (!object.Equals(DanmakuResult, other.DanmakuResult)) return false;
+      if (ValueCaseCase != other.ValueCaseCase) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GameId != 0) hash ^= GameId.GetHashCode();
+      if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) hash ^= TestGameResult.GetHashCode();
+      if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) hash ^= PingPongResult.GetHashCode();
+      if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) hash ^= DanmakuResult.GetHashCode();
+      hash ^= (int) valueCaseCase_;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (GameId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GameId);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
+        output.WriteRawTag(18);
+        output.WriteMessage(TestGameResult);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
+        output.WriteRawTag(26);
+        output.WriteMessage(PingPongResult);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
+        output.WriteRawTag(34);
+        output.WriteMessage(DanmakuResult);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (GameId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(GameId);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
+        output.WriteRawTag(18);
+        output.WriteMessage(TestGameResult);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
+        output.WriteRawTag(26);
+        output.WriteMessage(PingPongResult);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
+        output.WriteRawTag(34);
+        output.WriteMessage(DanmakuResult);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (GameId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GameId);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TestGameResult);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PingPongResult);
+      }
+      if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(DanmakuResult);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(S_EndGame other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GameId != 0) {
+        GameId = other.GameId;
+      }
+      switch (other.ValueCaseCase) {
+        case ValueCaseOneofCase.TestGameResult:
+          if (TestGameResult == null) {
+            TestGameResult = new global::Google.Protobuf.Protocol.S_TestGameResult();
+          }
+          TestGameResult.MergeFrom(other.TestGameResult);
+          break;
+        case ValueCaseOneofCase.PingPongResult:
+          if (PingPongResult == null) {
+            PingPongResult = new global::Google.Protobuf.Protocol.S_PingPongResult();
+          }
+          PingPongResult.MergeFrom(other.PingPongResult);
+          break;
+        case ValueCaseOneofCase.DanmakuResult:
+          if (DanmakuResult == null) {
+            DanmakuResult = new global::Google.Protobuf.Protocol.S_DanmakuResult();
+          }
+          DanmakuResult.MergeFrom(other.DanmakuResult);
+          break;
+      }
+
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            GameId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            global::Google.Protobuf.Protocol.S_TestGameResult subBuilder = new global::Google.Protobuf.Protocol.S_TestGameResult();
+            if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
+              subBuilder.MergeFrom(TestGameResult);
+            }
+            input.ReadMessage(subBuilder);
+            TestGameResult = subBuilder;
+            break;
+          }
+          case 26: {
+            global::Google.Protobuf.Protocol.S_PingPongResult subBuilder = new global::Google.Protobuf.Protocol.S_PingPongResult();
+            if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
+              subBuilder.MergeFrom(PingPongResult);
+            }
+            input.ReadMessage(subBuilder);
+            PingPongResult = subBuilder;
+            break;
+          }
+          case 34: {
+            global::Google.Protobuf.Protocol.S_DanmakuResult subBuilder = new global::Google.Protobuf.Protocol.S_DanmakuResult();
+            if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
+              subBuilder.MergeFrom(DanmakuResult);
+            }
+            input.ReadMessage(subBuilder);
+            DanmakuResult = subBuilder;
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            GameId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            global::Google.Protobuf.Protocol.S_TestGameResult subBuilder = new global::Google.Protobuf.Protocol.S_TestGameResult();
+            if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
+              subBuilder.MergeFrom(TestGameResult);
+            }
+            input.ReadMessage(subBuilder);
+            TestGameResult = subBuilder;
+            break;
+          }
+          case 26: {
+            global::Google.Protobuf.Protocol.S_PingPongResult subBuilder = new global::Google.Protobuf.Protocol.S_PingPongResult();
+            if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
+              subBuilder.MergeFrom(PingPongResult);
+            }
+            input.ReadMessage(subBuilder);
+            PingPongResult = subBuilder;
+            break;
+          }
+          case 34: {
+            global::Google.Protobuf.Protocol.S_DanmakuResult subBuilder = new global::Google.Protobuf.Protocol.S_DanmakuResult();
+            if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
+              subBuilder.MergeFrom(DanmakuResult);
+            }
+            input.ReadMessage(subBuilder);
+            DanmakuResult = subBuilder;
             break;
           }
         }

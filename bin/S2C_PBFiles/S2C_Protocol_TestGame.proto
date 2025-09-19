@@ -9,6 +9,6 @@ message S_TestGameState {
     repeated UnityGameObject objects = 1;
 }
 
-message S_TestGameEnd {
+message S_TestGameResult {
     
 }

@@ -30,3 +30,12 @@ message S_SpawnGameObject {
 message S_DespawnGameObject {
     UnityGameObject object = 1;
 }
+
+message S_EndGame {
+    int32 gameId = 1;
+    oneof value_case {
+        S_TestGameResult testGameResult = 2;
+        S_PingPongResult pingPongResult = 3;
+        S_DanmakuResult danmakuResult = 4;
+    }
+}

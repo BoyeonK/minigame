@@ -27,13 +27,13 @@ namespace Google.Protobuf.Protocol {
             "ChtTMkNfUHJvdG9jb2xfVGVzdEdhbWUucHJvdG8SDFMyQ19Qcm90b2NvbBoZ",
             "UzJDX1Byb3RvY29sX0NvbW1vbi5wcm90byJBCg9TX1Rlc3RHYW1lU3RhdGUS",
             "LgoHb2JqZWN0cxgBIAMoCzIdLlMyQ19Qcm90b2NvbC5Vbml0eUdhbWVPYmpl",
-            "Y3QiDwoNU19UZXN0R2FtZUVuZEIbqgIYR29vZ2xlLlByb3RvYnVmLlByb3Rv",
-            "Y29sYgZwcm90bzM="));
+            "Y3QiEgoQU19UZXN0R2FtZVJlc3VsdEIbqgIYR29vZ2xlLlByb3RvYnVmLlBy",
+            "b3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_TestGameState), global::Google.Protobuf.Protocol.S_TestGameState.Parser, new[]{ "Objects" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_TestGameEnd), global::Google.Protobuf.Protocol.S_TestGameEnd.Parser, null, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_TestGameResult), global::Google.Protobuf.Protocol.S_TestGameResult.Parser, null, null, null, null, null)
           }));
     }
     #endregion
@@ -228,16 +228,16 @@ namespace Google.Protobuf.Protocol {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class S_TestGameEnd : pb::IMessage<S_TestGameEnd>
+  public sealed partial class S_TestGameResult : pb::IMessage<S_TestGameResult>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<S_TestGameEnd> _parser = new pb::MessageParser<S_TestGameEnd>(() => new S_TestGameEnd());
+    private static readonly pb::MessageParser<S_TestGameResult> _parser = new pb::MessageParser<S_TestGameResult>(() => new S_TestGameResult());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<S_TestGameEnd> Parser { get { return _parser; } }
+    public static pb::MessageParser<S_TestGameResult> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -253,7 +253,7 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_TestGameEnd() {
+    public S_TestGameResult() {
       OnConstruction();
     }
 
@@ -261,25 +261,25 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_TestGameEnd(S_TestGameEnd other) : this() {
+    public S_TestGameResult(S_TestGameResult other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_TestGameEnd Clone() {
-      return new S_TestGameEnd(this);
+    public S_TestGameResult Clone() {
+      return new S_TestGameResult(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as S_TestGameEnd);
+      return Equals(other as S_TestGameResult);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(S_TestGameEnd other) {
+    public bool Equals(S_TestGameResult other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -339,7 +339,7 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(S_TestGameEnd other) {
+    public void MergeFrom(S_TestGameResult other) {
       if (other == null) {
         return;
       }

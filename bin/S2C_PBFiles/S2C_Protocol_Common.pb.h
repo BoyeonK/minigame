@@ -94,10 +94,13 @@ enum MsgId : int {
   S_DELTA_GAME_OBJECT_HARD = 24,
   S_SPAWN_GAME_OBJECT = 25,
   S_DESPAWN_GAME_OBJECT = 26,
+  S_END_GAME = 27,
   S_TESTGAME_STATE = 100,
-  S_TESTGAME_END = 101,
+  S_TESTGAME_RESULT = 101,
   S_PINGPONG_STATE = 200,
+  S_PINGPONG_RESULT = 201,
   S_DANMAKU_STATE = 300,
+  S_DANMAKU_RESULT = 301,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ =
@@ -107,8 +110,8 @@ enum MsgId : int {
 bool MsgId_IsValid(int value);
 extern const uint32_t MsgId_internal_data_[];
 constexpr MsgId MsgId_MIN = static_cast<MsgId>(0);
-constexpr MsgId MsgId_MAX = static_cast<MsgId>(300);
-constexpr int MsgId_ARRAYSIZE = 300 + 1;
+constexpr MsgId MsgId_MAX = static_cast<MsgId>(301);
+constexpr int MsgId_ARRAYSIZE = 301 + 1;
 const ::google::protobuf::EnumDescriptor*
 MsgId_descriptor();
 template <typename T>

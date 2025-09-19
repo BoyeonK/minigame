@@ -25,6 +25,24 @@ namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace S2C_Protocol {
+              template <typename>
+PROTOBUF_CONSTEXPR S_DanmakuResult::S_DanmakuResult(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase() {
+}
+#endif  // PROTOBUF_CUSTOM_VTABLE
+struct S_DanmakuResultDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_DanmakuResultDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_DanmakuResultDefaultTypeInternal() {}
+  union {
+    S_DanmakuResult _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_DanmakuResultDefaultTypeInternal _S_DanmakuResult_default_instance_;
 
 inline constexpr S_DanmakuState::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -67,22 +85,32 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DanmakuState, _impl_.objects_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DanmakuResult, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::S2C_Protocol::S_DanmakuState)},
+        {9, -1, -1, sizeof(::S2C_Protocol::S_DanmakuResult)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_DanmakuState_default_instance_._instance,
+    &::S2C_Protocol::_S_DanmakuResult_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2C_5fProtocol_5fDanmaku_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\032S2C_Protocol_Danmaku.proto\022\014S2C_Protoc"
     "ol\032\031S2C_Protocol_Common.proto\"@\n\016S_Danma"
     "kuState\022.\n\007objects\030\001 \003(\0132\035.S2C_Protocol."
-    "UnityGameObjectB\033\252\002\030Google.Protobuf.Prot"
-    "ocolb\006proto3"
+    "UnityGameObject\"\021\n\017S_DanmakuResultB\033\252\002\030G"
+    "oogle.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fDanmaku_2eproto_deps[1] =
     {
@@ -92,13 +120,13 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fDanmaku_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fDanmaku_2eproto = {
     false,
     false,
-    172,
+    191,
     descriptor_table_protodef_S2C_5fProtocol_5fDanmaku_2eproto,
     "S2C_Protocol_Danmaku.proto",
     &descriptor_table_S2C_5fProtocol_5fDanmaku_2eproto_once,
     descriptor_table_S2C_5fProtocol_5fDanmaku_2eproto_deps,
     1,
-    1,
+    2,
     schemas,
     file_default_instances,
     TableStruct_S2C_5fProtocol_5fDanmaku_2eproto::offsets,
@@ -351,6 +379,109 @@ void S_DanmakuState::InternalSwap(S_DanmakuState* PROTOBUF_RESTRICT other) {
 
 ::google::protobuf::Metadata S_DanmakuState::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_DanmakuResult::_Internal {
+ public:
+};
+
+S_DanmakuResult::S_DanmakuResult(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_DanmakuResult)
+}
+S_DanmakuResult::S_DanmakuResult(
+    ::google::protobuf::Arena* arena,
+    const S_DanmakuResult& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_DanmakuResult* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_DanmakuResult)
+}
+
+inline void* S_DanmakuResult::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_DanmakuResult(arena);
+}
+constexpr auto S_DanmakuResult::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_DanmakuResult),
+                                            alignof(S_DanmakuResult));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_DanmakuResult::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_DanmakuResult_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_DanmakuResult::MergeImpl,
+        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<S_DanmakuResult>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_DanmakuResult::SharedDtor,
+        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<S_DanmakuResult>(), &S_DanmakuResult::ByteSizeLong,
+            &S_DanmakuResult::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_DanmakuResult, _impl_._cached_size_),
+        false,
+    },
+    &S_DanmakuResult::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fDanmaku_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_DanmakuResult::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_DanmakuResult::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    0, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967295,  // skipmap
+    offsetof(decltype(_table_), field_names),  // no field_entries
+    0,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_DanmakuResult>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }},
+  // no field_entries, or aux_entries
+  {{
+  }},
+};
+
+
+
+
+
+
+
+
+::google::protobuf::Metadata S_DanmakuResult::GetMetadata() const {
+  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace S2C_Protocol

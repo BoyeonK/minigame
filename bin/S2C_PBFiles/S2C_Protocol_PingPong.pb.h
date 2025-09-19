@@ -20,6 +20,7 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
+#include "google/protobuf/generated_message_bases.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
@@ -53,6 +54,9 @@ struct TableStruct_S2C_5fProtocol_5fPingPong_2eproto {
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_S2C_5fProtocol_5fPingPong_2eproto;
 namespace S2C_Protocol {
+class S_PingPongResult;
+struct S_PingPongResultDefaultTypeInternal;
+extern S_PingPongResultDefaultTypeInternal _S_PingPongResult_default_instance_;
 class S_PingPongState;
 struct S_PingPongStateDefaultTypeInternal;
 extern S_PingPongStateDefaultTypeInternal _S_PingPongState_default_instance_;
@@ -67,6 +71,151 @@ namespace S2C_Protocol {
 // ===================================================================
 
 
+// -------------------------------------------------------------------
+
+class S_PingPongResult final : public ::google::protobuf::internal::ZeroFieldsBase
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_PingPongResult) */ {
+ public:
+  inline S_PingPongResult() : S_PingPongResult(nullptr) {}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(S_PingPongResult* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_PingPongResult));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR S_PingPongResult(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline S_PingPongResult(const S_PingPongResult& from) : S_PingPongResult(nullptr, from) {}
+  inline S_PingPongResult(S_PingPongResult&& from) noexcept
+      : S_PingPongResult(nullptr, std::move(from)) {}
+  inline S_PingPongResult& operator=(const S_PingPongResult& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_PingPongResult& operator=(S_PingPongResult&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_PingPongResult& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_PingPongResult* internal_default_instance() {
+    return reinterpret_cast<const S_PingPongResult*>(
+        &_S_PingPongResult_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 1;
+  friend void swap(S_PingPongResult& a, S_PingPongResult& b) { a.Swap(&b); }
+  inline void Swap(S_PingPongResult* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_PingPongResult* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_PingPongResult* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<S_PingPongResult>(arena);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const S_PingPongResult& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const S_PingPongResult& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_PingPongResult"; }
+
+ protected:
+  explicit S_PingPongResult(::google::protobuf::Arena* arena);
+  S_PingPongResult(::google::protobuf::Arena* arena, const S_PingPongResult& from);
+  S_PingPongResult(::google::protobuf::Arena* arena, S_PingPongResult&& from) noexcept
+      : S_PingPongResult(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_PingPongResult)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 0, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const S_PingPongResult& from_msg);
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  friend struct ::TableStruct_S2C_5fProtocol_5fPingPong_2eproto;
+};
 // -------------------------------------------------------------------
 
 class S_PingPongState final : public ::google::protobuf::Message
@@ -325,6 +474,10 @@ S_PingPongState::_internal_mutable_objects() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.objects_;
 }
+
+// -------------------------------------------------------------------
+
+// S_PingPongResult
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
