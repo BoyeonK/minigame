@@ -127,12 +127,11 @@ void TestGameRoom::Phase1() {
 }
 
 void TestGameRoom::EndPhase() {
+	_state = GameState::Counting;
 	//TestGame에서는 아무 결과도 계산하지 않고, 게임이 끝났다는 정보 외에는 아무른 결과도 알려주지 않음.
 
 	//게임 결과 계산
 	CalculateGameResult();
-
-	//세션 종료
 
 	//해당 결과 통보
 	S2C_Protocol::S_EndGame pkt = S2CPacketMaker::MakeSEndGame();
@@ -141,10 +140,23 @@ void TestGameRoom::EndPhase() {
 
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
+
+	//세션 종료
+	ClearRoom();
 }
 
 void TestGameRoom::CalculateGameResult() {
 	
+}
+
+void TestGameRoom::ClearRoom() {
+	for (auto& playerWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerRef = playerWRef.lock();
+		if (playerRef == nullptr)
+			continue;
+		playerRef->SetJoinedRoom(nullptr);
+	}
+	_state = GameState::EndGame;
 }
 
 S2C_Protocol::S_TestGameState TestGameRoom::MakeSTestGameState() {

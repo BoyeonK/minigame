@@ -242,9 +242,17 @@ public class NetworkManager {
 
     }
 
-	public void ResponseEndGame() {
-
+	public void ResponseTestGameEnd() {
+		OnTestGameEndAct?.Invoke();
 	}
+
+    public void ResponsePingPongEnd() {
+		OnPingPongEndAct?.Invoke();
+    }
+
+    public void ResponseDanmakuEnd() {
+		OnDanmakuEndAct?.Invoke();
+    }
 
     public void Update() {
 
@@ -264,8 +272,11 @@ public class NetworkManager {
 	public Action OnResponseGameStartedAct;
 	public Action OnExcludedFromMatchAct;
 	public Action OnProcessRequestGameStateAct;
+	public Action OnTestGameEndAct;
+    public Action OnPingPongEndAct;
+    public Action OnDanmakuEndAct;
 
-	public void ConnectCompleted(bool result) {
+    public void ConnectCompleted(bool result) {
 		_isConnected = result;
 		if (_isTryingConnect == 1)
 			_isTryingConnect = 0;

@@ -18,7 +18,9 @@ void GameManager::RemoveInvalidRoom() {
 				return (gameRoomRef->GetState() == GameRoom::GameState::EndGame);
 			});
 
+		if (new_end != _rooms.end())
+			cout << "Invalid Room Cleared" << endl;
+
 		_rooms.erase(new_end, _rooms.end());
-		//cout << "Invalid Room Cleared" << endl;
 	}
 }

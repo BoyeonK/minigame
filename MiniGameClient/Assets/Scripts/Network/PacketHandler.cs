@@ -285,5 +285,23 @@ class PacketHandler {
 		UnityGameObject serializedObj = recvPkt.Object;
 		Managers.ExecuteAtMainThread(() => { Managers.Object.CreateObject(serializedObj); });
 	}
+
+	public static void S_EndGameHandler(PacketSession session, IMessage packet) { 
+		S_EndGame recvPkt = packet as S_EndGame;
+		GameType gameType = IntToGameType(recvPkt.GameId);
+		switch (gameType) {
+			case (GameType.TestMatch):
+				Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseTestGameEnd(); });
+				break;
+			case (GameType.PingPong):
+                Managers.ExecuteAtMainThread(() => { Managers.Network.ResponsePingPongEnd(); });
+                break; 
+			case (GameType.Danmaku):
+                Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseDanmakuEnd(); });
+                break;
+			default:
+				break;
+		}
+	}
 }
 

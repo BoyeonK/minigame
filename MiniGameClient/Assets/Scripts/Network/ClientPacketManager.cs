@@ -79,6 +79,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SSpawnGameObject, UnpackPacket<S_SpawnGameObject>);
         _handler.Add((ushort)MsgId.SSpawnGameObject, PacketHandler.S_SpawnGameObjectHandler);
         _msgFactories.Add((ushort)MsgId.SSpawnGameObject, () => new S_SpawnGameObject());
+
+        _onRecv.Add((ushort)MsgId.SEndGame, UnpackPacket<S_EndGame>);
+        _handler.Add((ushort)MsgId.SEndGame, PacketHandler.S_EndGameHandler);
+        _msgFactories.Add((ushort)MsgId.SEndGame, () => new S_EndGame());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

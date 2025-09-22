@@ -27,6 +27,7 @@ public:
 	void Phase1();
 	void EndPhase();
 	void CalculateGameResult();
+	void ClearRoom();
 
 	S2C_Protocol::S_TestGameState MakeSTestGameState();
 
