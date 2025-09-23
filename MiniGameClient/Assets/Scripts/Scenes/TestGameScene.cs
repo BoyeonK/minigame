@@ -12,7 +12,7 @@ public class TestGameScene : BaseScene {
     }
 
     private void EndGame() {
-       Managers.Scene.LoadScene(Scene.Login);
+        Managers.Scene.LoadScene(Scene.Login);
     }
 
     public override void Clear() {

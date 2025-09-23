@@ -77,6 +77,7 @@ public class LoginScene : BaseScene {
         if (Managers.Network.IsConnected() || Managers.Network.IsLogined()) {
             Managers.UI.ShowSceneUI<UI_LobbyMenu>();
             _stage = Stage.Lobby;
+            Managers.ExecuteAtMainThread(() => { ApplyLobbyOpt(); });
         }
         else {
             Managers.UI.ShowSceneUI<UI_StartGame>();
