@@ -155,6 +155,7 @@ void TestGameRoom::ClearRoom() {
 		if (playerRef == nullptr)
 			continue;
 		playerRef->SetJoinedRoom(nullptr);
+		playerRef->SetMatchingState(GameType::None);
 	}
 	_state = GameState::EndGame;
 }
