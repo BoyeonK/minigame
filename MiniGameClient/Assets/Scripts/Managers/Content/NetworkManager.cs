@@ -101,6 +101,7 @@ public class NetworkManager {
         C_Encrypted pkt = PacketMaker.MakeCLogout(_session);
         Managers.Network.Send(pkt);
         Managers.Network.GetSession().ID = 0;
+
     }
 
 	public void TryCreateAccount(string id, string pw, string pwc) {

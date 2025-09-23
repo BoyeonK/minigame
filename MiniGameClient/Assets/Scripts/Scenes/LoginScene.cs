@@ -260,7 +260,7 @@ public class LoginScene : BaseScene {
     }
 
     public void LogoutSucceed() {
-        //GoToLoginStage();
+        BackToPreviousMenu();
     }
 
     public void LogoutFailed() {
