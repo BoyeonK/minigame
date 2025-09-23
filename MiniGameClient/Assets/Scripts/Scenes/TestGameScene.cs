@@ -12,10 +12,7 @@ public class TestGameScene : BaseScene {
     }
 
     private void EndGame() {
-        Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+       Managers.Scene.LoadScene(Scene.Login);
     }
 
     public override void Clear() {

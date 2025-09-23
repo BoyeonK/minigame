@@ -33,6 +33,7 @@ public class LoginScene : BaseScene {
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
+        Managers.Scene.ResetLoadSceneOp();
 
         //사용할 UI를 미리 메모리에 올려둔다.
         _uiStartGame = Managers.UI.ShowSceneUI<UI_StartGame>();
@@ -41,6 +42,7 @@ public class LoginScene : BaseScene {
         _uiCreateAccountPopup = Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
         _uiLobbyMenu = Managers.UI.ShowSceneUI<UI_LobbyMenu>();
         _uiMatchMakeMenu = Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
+        Managers.UI.DisableUI("UI_StartGame");
         Managers.UI.DisableUI("UI_LoginOrCreateAccount");
         Managers.UI.DisableUI("UI_LoginPopup");
         Managers.UI.DisableUI("UI_CreateAccountPopup");
@@ -71,6 +73,14 @@ public class LoginScene : BaseScene {
         Managers.Network.OnMatchmakeRequestSucceedAct += MatchmakeRequestSucceed;
         Managers.Network.OnMatchmakeCancelSucceedAct += MatchmakeCancelSucceed;
         Managers.Network.OnResponseKeepAliveAct += MatchCompletedReadyToChangeScene;
+
+        if (Managers.Network.IsConnected() || Managers.Network.IsLogined()) {
+            Managers.UI.ShowSceneUI<UI_LobbyMenu>();
+            _stage = Stage.Lobby;
+        }
+        else {
+            Managers.UI.ShowSceneUI<UI_StartGame>();
+        }
     }
 
     private void ChangeLoginOpt() {

@@ -243,7 +243,11 @@ public class NetworkManager {
     }
 
 	public void ResponseTestGameEnd() {
-		OnTestGameEndAct?.Invoke();
+        lock (_matchGameTypeLock) {
+            _isMatchRequesting = 0;
+			_matchGameType = GameType.None;
+        }
+        OnTestGameEndAct?.Invoke();
 	}
 
     public void ResponsePingPongEnd() {
@@ -275,6 +279,7 @@ public class NetworkManager {
 	public Action OnTestGameEndAct;
     public Action OnPingPongEndAct;
     public Action OnDanmakuEndAct;
+    #endregion
 
     public void ConnectCompleted(bool result) {
 		_isConnected = result;
@@ -305,5 +310,5 @@ public class NetworkManager {
 	public void MatchmakeCompleted(int gameType) {
 
 	}
-	#endregion
+	
 }
