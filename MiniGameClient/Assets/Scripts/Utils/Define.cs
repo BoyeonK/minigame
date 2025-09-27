@@ -7,6 +7,7 @@ public class Define {
         Lobby,
         TestLoadingScene,
         TestGame,
+        PingPong,
     }
 
     public enum Sound {

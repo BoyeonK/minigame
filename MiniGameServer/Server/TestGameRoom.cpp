@@ -6,7 +6,7 @@
 
 void TestGameRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
-	cout << "룸 생성, Init1" << endl;
+	cout << "TestGame 룸 생성" << endl;
 
 	for (auto& pd : pdv) {
 		shared_ptr<PlayerSession> playerSessionRef = pd.playerSessionWRef.lock();
@@ -28,7 +28,7 @@ void TestGameRoom::Init(vector<WatingPlayerData> pdv) {
 	else {
 		//유효하지 않은 세션이 있었을 경우, 모두 대기열로 돌려보냄.
 		//대기열은 주기적으로 유효하지 않은 PlayerData를 거르도록 설계되어있음.
-		GGameManagers[1]->Push(move(pdv));
+		GGameManagers[int(_ty)]->Push(move(pdv));
 		_state = GameState::EndGame;
 	}
 }
@@ -72,8 +72,8 @@ void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		}
 	}
 	else {
-		cout << "영 좋지 않음" << endl;
-		GGameManagers[1]->Push(pdv);
+		cout << "게임 시작 불가능." << endl;
+		GGameManagers[int(_ty)]->Push(pdv);
 		_state = GameState::EndGame;
 	}
 }

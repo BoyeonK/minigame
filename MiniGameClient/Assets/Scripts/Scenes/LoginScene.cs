@@ -310,6 +310,7 @@ public class LoginScene : BaseScene {
 
     private void QuitApplicationUI() {
         Managers.UI.ShowErrorUIConfirmOrCancel("게임을 종료하시겠습니까?", () => {
+            Managers.Network.TryDisconnect();
             Managers.ExecuteAtMainThread(() => {
                 Application.Quit();
 #if UNITY_EDITOR

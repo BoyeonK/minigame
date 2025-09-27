@@ -2,6 +2,7 @@
 #include "PingPongManager.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
+#include "PingPongGameRoom.h"
 
 void PingPongManager::Push(WatingPlayerData pd) {
 	_matchQueue.Push(move(pd));
@@ -15,7 +16,6 @@ void PingPongManager::RenewMatchQueue() {
 	if (::GetTickCount64() - _lastRenewTick > 3000) {
 		_lastRenewTick = ::GetTickCount64();
 		_matchQueue.FlushTempQueueAndSort();
-		//cout << "matchQueueRenewed" << endl;
 	}
 }
 
@@ -54,5 +54,8 @@ void PingPongManager::MatchMake() {
 }
 
 void PingPongManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
-
+	shared_ptr<PingPongGameRoom> newRoomRef = { objectPool<PingPongGameRoom>::alloc(), objectPool<PingPongGameRoom>::dealloc };
+	newRoomRef->SetRoomId(_nxtRoomId.fetch_add(1));
+	AddRoom(newRoomRef);
+	newRoomRef->PostEvent(&PingPongGameRoom::Init, move(pdv));
 }
