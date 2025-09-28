@@ -33,6 +33,15 @@ public class RaycastPlane : MonoBehaviour {
         // raycastPlaneLayer (RaycastPlane 레이어)만 감지하도록 LayerMask 적용
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, raycastPlaneLayer)) {
             Vector3 hitPoint = hit.point;
+            if (hitPoint.x > 3.2f)
+                hitPoint.x = 3.2f;
+            if (hitPoint.x < -3.2f)
+                hitPoint.x = -3.2f;
+            if (hitPoint.z > 3.2f)
+                hitPoint.z = 3.2f;
+            if (hitPoint.z < -3.2f)
+                hitPoint.z = -3.2f;
+
             _scene.OnMouseMove(hitPoint);
         }
     }

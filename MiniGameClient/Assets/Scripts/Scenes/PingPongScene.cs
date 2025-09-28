@@ -3,10 +3,7 @@ using static Define;
 
 public class PingPongScene : BaseScene {
     RaycastPlane _raycastPlane;
-    MyPlayerBarController _eastBar;
-    MyPlayerBarController _westBar;
-    MyPlayerBarController _southBar;
-    MyPlayerBarController _northBar;
+    MyPlayerBarController _myPlayerBar;
     private Vector3 _mousePointerPosition;
 
     protected override void Init() {
@@ -25,41 +22,43 @@ public class PingPongScene : BaseScene {
             Debug.LogError("RaycastPlane이 Scene에 없습니다.");
         }
 
-        GameObject eastBar = GameObject.Find("EPlayerBar");
-        GameObject westBar = GameObject.Find("WPlayerBar");
-        GameObject southBar = GameObject.Find("SPlayerBar");
-        GameObject northBar = GameObject.Find("NPlayerBar");
+        MakeMyPlayerBar(2);
+    }
 
-        if (eastBar != null) {
-            _eastBar = eastBar.GetComponent<MyPlayerBarController>();
-            if (_eastBar != null)
-                _eastBar.SetMoveDir(false);
-        }
-        if (westBar != null) {
-            _westBar = westBar.GetComponent<MyPlayerBarController>();
-            if (_westBar != null)
-                _westBar.SetMoveDir(false);
-        }
-        if (southBar != null) {
-            _southBar = southBar.GetComponent<MyPlayerBarController>();
-            if (_southBar != null)
-                _southBar.SetMoveDir(true);
-        }
-        if (northBar != null) {
-            _northBar = northBar.GetComponent<MyPlayerBarController>();
-            if (_northBar != null)
-                _northBar.SetMoveDir(true);
+    public void MakeMyPlayerBar(int playerIdx) {
+        if (_myPlayerBar == null) {
+            GameObject playerBar = Managers.Resource.Instantiate("GameObjects/PlayerBar");
+            _myPlayerBar = playerBar.AddComponent<MyPlayerBarController>();
+            Quaternion rotationForCases01 = Quaternion.Euler(0f, 90f, 0f);
+            switch (playerIdx) {
+                case 0:
+                    playerBar.transform.position = new Vector3(6.4f, 0.2f, 0f);
+                    playerBar.transform.rotation = rotationForCases01;
+                    _myPlayerBar.SetMoveDir(false);
+                    break;
+                case 1:
+                    playerBar.transform.position = new Vector3(-6.4f, 0.2f, 0f);
+                    playerBar.transform.rotation = rotationForCases01;
+                    _myPlayerBar.SetMoveDir(false);
+                    break;
+                case 2:
+                    playerBar.transform.position = new Vector3(0f, 0.2f, -6.4f);
+                    break;
+                case 3:
+                    playerBar.transform.position = new Vector3(0f, 0.2f, 6.4f);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     public void OnMouseMove(Vector3 mousePosition) {
         if (_mousePointerPosition == mousePosition) { return; }
         _mousePointerPosition = mousePosition;
-        //Debug.Log($"{_mousePointerPosition}");
-        _eastBar.MoveToPoint(mousePosition);
-        _westBar.MoveToPoint(mousePosition);
-        _southBar.MoveToPoint(mousePosition);
-        _northBar.MoveToPoint(mousePosition);
+        _myPlayerBar.MoveToPoint(_mousePointerPosition);
+        Debug.Log($"{_mousePointerPosition}");
+        
     }
 
     private void EndGame() {
