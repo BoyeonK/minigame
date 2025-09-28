@@ -61,5 +61,7 @@ public class Define {
     public enum ObjectType {
         Undefined,
         TestGameBullet,
+        MyPlayerBar,
+        EnemyPlayerBar,
     }
 }
