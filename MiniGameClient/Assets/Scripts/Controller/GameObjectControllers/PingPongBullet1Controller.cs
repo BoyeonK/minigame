@@ -21,4 +21,8 @@ public class PingPongBullet1Controller : GameObjectController {
     public void SetSpeed(float speed) {
         _speed = speed;
     }
+
+    public void OnCollision() {
+        Debug.Log("가자에버그레이스몸통박치기");
+    }
 }

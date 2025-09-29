@@ -60,8 +60,7 @@ public class PingPongScene : BaseScene {
         if (_mousePointerPosition == mousePosition) { return; }
         _mousePointerPosition = mousePosition;
         _myPlayerBar.MoveToPoint(_mousePointerPosition);
-        Debug.Log($"{_mousePointerPosition}");
-        
+        //Debug.Log($"{_mousePointerPosition}");
     }
 
     private void TestMakeBulletFunc() {
