@@ -60,15 +60,11 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		//플레이어의 게임종료 등의 이유로 세션이 유효하지 않더라도, 진행 가능한 방식으로 코드를 작성해야 함.
 		_state = GameState::BeforeStart;
 		_preparedPlayer = 0;
-		for (auto& playerSessionWRef : _playerWRefs) {
-			shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
-			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
-			if (playerSessionRef != nullptr) {
-				playerSessionRef->SetJoinedRoom(static_pointer_cast<PingPongGameRoom>(shared_from_this()));
-				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-				playerSessionRef->Send(sendBuffer);
-			}
-		}
+		S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
+		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+		BroadCast(sendBuffer);
+		//30초 뒤에는 강제로 시작해버려
+		PostEventAfter(30000, &PingPongGameRoom::Start);
 	}
 	else {
 		cout << "게임 시작 불가능." << endl;
@@ -77,7 +73,21 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	}
 }
 
+void PingPongGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
+	cout << "업데이트 프로그레스 바" << endl;
+	if (progressRate == 100) {
+		_preparedPlayer += 1;
+	}
+	//TODO : 로딩 진행상황 전파
+
+	if (_preparedPlayer == _quota) {
+		Start();
+	}
+}
+
 void PingPongGameRoom::Start() {
+	if (_state != GameState::BeforeStart)
+		return;
 	_state = GameState::OnGoing;
 
 	cout << "스타트 함수 실행" << endl;
@@ -87,7 +97,18 @@ void PingPongGameRoom::Start() {
 }
 
 void PingPongGameRoom::SendGameState(int32_t playerIdx) {
+	if (playerIdx > (_quota - 1))
+		return;
 
+	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
+	if (playerSessionRef == nullptr)
+		return;
+
+	//0:동 1:서 2:남 3:북
+	S2C_Protocol::S_P_State pkt;
+	pkt.set_playerid(playerIdx);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	playerSessionRef->Send(sendBuffer);
 }
 
 void PingPongGameRoom::ReturnToPool() {

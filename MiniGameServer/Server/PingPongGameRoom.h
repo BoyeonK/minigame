@@ -16,7 +16,7 @@ public:
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
 
-	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override {}
+	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
 	void Start();
 
 	void SendGameState(int32_t playerIdx) override;
