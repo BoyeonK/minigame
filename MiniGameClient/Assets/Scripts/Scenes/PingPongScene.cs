@@ -23,6 +23,7 @@ public class PingPongScene : BaseScene {
         }
 
         MakeMyPlayerBar(2);
+        Invoke(nameof(TestMakeBulletFunc), 5f);
     }
 
     public void MakeMyPlayerBar(int playerIdx) {
@@ -59,6 +60,24 @@ public class PingPongScene : BaseScene {
         _myPlayerBar.MoveToPoint(_mousePointerPosition);
         Debug.Log($"{_mousePointerPosition}");
         
+    }
+
+    private void TestMakeBulletFunc() {
+        Debug.Log("아잉 코루틴 쓰기 시져시져");
+        Vector3 pos = new Vector3(-2.5f, 0.2f, 0f);
+        Vector3 dir = new Vector3(0f, 0f, -1f);
+        for (int i = 0; i < 5; i++) {
+            InternalTestMakeBulletFunc(pos, dir, 1f + i*0.2f);
+            pos.x = pos.x + 1.25f;
+        }   
+    }
+
+    private void InternalTestMakeBulletFunc(Vector3 pos, Vector3 dir, float speed) {
+        GameObject b1 = Managers.Resource.Instantiate("GameObjects/PingPongBullet1");
+        PingPongBulletController p1 = b1.GetComponent<PingPongBulletController>();
+        b1.transform.position = pos;
+        p1.SetSpeed(speed);
+        p1.SetMoveDir(dir);
     }
 
     private void EndGame() {
