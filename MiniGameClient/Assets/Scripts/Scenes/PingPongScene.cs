@@ -7,6 +7,7 @@ public class PingPongScene : BaseScene {
     RaycastPlane _raycastPlane;
     MyPlayerBarController _myPlayerBar;
     private Vector3 _mousePointerPosition;
+    private int _playerIdx = -1;
 
     protected override void Init() {
         base.Init();
@@ -24,14 +25,22 @@ public class PingPongScene : BaseScene {
             Debug.LogError("RaycastPlane이 Scene에 없습니다.");
         }
 
-        MakeMyPlayerBar(2);
-        Invoke(nameof(TestMakeBulletFunc), 5f);
+        //Invoke(nameof(TestMakeBulletFunc), 5f);
+    }
+
+    public void SetId(int playerIdx) {
+        _playerIdx = playerIdx;
+        MakeMyPlayerBar(_playerIdx);
+        //TODO : 시점 돌리기
+        //TODO : 해당 방향 벽 비 활성화
+        //TODO : 해당 방향 적 PlayerBar 제거
     }
 
     public void MakeMyPlayerBar(int playerIdx) {
         if (_myPlayerBar == null) {
             GameObject playerBar = Managers.Resource.Instantiate("GameObjects/PlayerBar");
             _myPlayerBar = playerBar.AddComponent<MyPlayerBarController>();
+            _myPlayerBar.SetPlayerIdx(_playerIdx);
             Quaternion rotationForCases01 = Quaternion.Euler(0f, 90f, 0f);
             switch (playerIdx) {
                 case 0:
@@ -63,6 +72,7 @@ public class PingPongScene : BaseScene {
         //Debug.Log($"{_mousePointerPosition}");
     }
 
+    /*
     private void TestMakeBulletFunc() {
         Debug.Log("아잉 코루틴 쓰기 시져시져");
         Vector3 dir = new Vector3(0f, 0f, -1f);
@@ -82,6 +92,7 @@ public class PingPongScene : BaseScene {
             p1.SetSpeed(1f + 0.2f * i);
         }   
     }
+    */
 
     private void EndGame() {
         Managers.Scene.LoadScene(Scene.Login);

@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class MyPlayerBarController : GameObjectController {
     private bool _isMoveDirX = true;
+    private int _playerIdx = -1;
 
     protected override void Init() {
         _objectType = Define.ObjectType.MyPlayerBar;
     }
 
     public void SetMoveDir(bool isX) { _isMoveDirX = isX; }
+    public void SetPlayerIdx(int playerIdx) { _playerIdx = playerIdx; }
 
     public void MoveToPoint(Vector3 dir) {
         if (_isMoveDirX) {

@@ -235,11 +235,20 @@ public class NetworkManager {
 		}
     }
 
-    public void ProcessPingPongStateState(IMessage packet) {
+    public void ProcessPState(IMessage packet) {
+		BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+		if (scene == null)
+			return;
 
+		if (scene is PingPongScene pingPongScene) {
+            S_P_State pkt = packet as S_P_State;
+            if (pkt == null) return;
+            int playerId = pkt.PlayerId;
+			pingPongScene.SetId(playerId);
+        }
     }
 
-    public void ProcessDanmakuStateState(IMessage packet) {
+    public void ProcessDanmakuState(IMessage packet) {
 
     }
 
