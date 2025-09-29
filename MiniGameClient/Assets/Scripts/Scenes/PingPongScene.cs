@@ -1,4 +1,6 @@
+using Google.Protobuf.Protocol;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Define;
 
 public class PingPongScene : BaseScene {
@@ -64,20 +66,22 @@ public class PingPongScene : BaseScene {
 
     private void TestMakeBulletFunc() {
         Debug.Log("아잉 코루틴 쓰기 시져시져");
-        Vector3 pos = new Vector3(-2.5f, 0.2f, 0f);
         Vector3 dir = new Vector3(0f, 0f, -1f);
         for (int i = 0; i < 5; i++) {
-            InternalTestMakeBulletFunc(pos, dir, 1f + i*0.2f);
-            pos.x = pos.x + 1.25f;
-        }   
-    }
+            UnityGameObject bullet = new UnityGameObject();
+            bullet.ObjectId = i;
+            bullet.ObjectType = 4;
+            XYZ xyz = new XYZ();
+            xyz.X = -2.5f + i * 1.25f;
+            xyz.Y = 0.2f;
+            xyz.Z = 0f;
+            bullet.Position = xyz;
 
-    private void InternalTestMakeBulletFunc(Vector3 pos, Vector3 dir, float speed) {
-        GameObject b1 = Managers.Resource.Instantiate("GameObjects/PingPongBullet1");
-        PingPongBulletController p1 = b1.GetComponent<PingPongBulletController>();
-        b1.transform.position = pos;
-        p1.SetSpeed(speed);
-        p1.SetMoveDir(dir);
+            GameObject b1 = Managers.Object.CreateObject(bullet);
+            PingPongBullet1Controller p1 = b1.GetComponent<PingPongBullet1Controller>();
+            p1.SetMoveDir(dir);
+            p1.SetSpeed(1f + 0.2f * i);
+        }   
     }
 
     private void EndGame() {

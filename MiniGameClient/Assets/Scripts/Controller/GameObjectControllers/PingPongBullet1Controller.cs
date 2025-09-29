@@ -1,9 +1,13 @@
 using UnityEngine;
 
-public class PingPongBulletController : GameObjectController {
+public class PingPongBullet1Controller : GameObjectController {
     private int _lastCol = -1;
     private float _speed = 0;
     private Vector3 _moveDir = Vector3.zero;
+
+    protected override void Init() {
+        _objectType = Define.ObjectType.PingPongBullet1;
+    }
 
     private void Update() {
         if (_speed > 0)
