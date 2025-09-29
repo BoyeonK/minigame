@@ -53,10 +53,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr S_EndGame::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : gameid_{0},
-        value_case_{},
-        _cached_size_{0},
-        _oneof_case_{} {}
+      : _cached_size_{0},
+        testgameresult_{nullptr},
+        gameid_{0} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR S_EndGame::S_EndGame(::_pbi::ConstantInitialized)
@@ -234,19 +233,18 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_DespawnGameObject, _impl_.object_),
         0,
-        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_EndGame, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_EndGame, _internal_metadata_),
         ~0u,  // no _extensions_
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_EndGame, _impl_._oneof_case_[0]),
+        ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_EndGame, _impl_.gameid_),
-        ::_pbi::kInvalidFieldOffsetTag,
-        ::_pbi::kInvalidFieldOffsetTag,
-        ::_pbi::kInvalidFieldOffsetTag,
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_EndGame, _impl_.value_case_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_EndGame, _impl_.testgameresult_),
+        ~0u,
+        0,
 };
 
 static const ::_pbi::MigrationSchema
@@ -256,7 +254,7 @@ static const ::_pbi::MigrationSchema
         {19, 28, -1, sizeof(::S2C_Protocol::S_DeltaGameObjectHard)},
         {29, 38, -1, sizeof(::S2C_Protocol::S_SpawnGameObject)},
         {39, 48, -1, sizeof(::S2C_Protocol::S_DespawnGameObject)},
-        {49, -1, -1, sizeof(::S2C_Protocol::S_EndGame)},
+        {49, 59, -1, sizeof(::S2C_Protocol::S_EndGame)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_C_RequestGameState_default_instance_._instance,
@@ -279,14 +277,10 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fIngame_2eproto[] ABSL_ATTR
     ".UnityGameObject\"B\n\021S_SpawnGameObject\022-\n"
     "\006object\030\001 \001(\0132\035.S2C_Protocol.UnityGameOb"
     "ject\"D\n\023S_DespawnGameObject\022-\n\006object\030\001 "
-    "\001(\0132\035.S2C_Protocol.UnityGameObject\"\325\001\n\tS"
-    "_EndGame\022\016\n\006gameId\030\001 \001(\005\0228\n\016testGameResu"
-    "lt\030\002 \001(\0132\036.S2C_Protocol.S_TestGameResult"
-    "H\000\0228\n\016pingPongResult\030\003 \001(\0132\036.S2C_Protoco"
-    "l.S_PingPongResultH\000\0226\n\rdanmakuResult\030\004 "
-    "\001(\0132\035.S2C_Protocol.S_DanmakuResultH\000B\014\n\n"
-    "value_caseB\033\252\002\030Google.Protobuf.Protocolb"
-    "\006proto3"
+    "\001(\0132\035.S2C_Protocol.UnityGameObject\"S\n\tS_"
+    "EndGame\022\016\n\006gameId\030\001 \001(\005\0226\n\016testGameResul"
+    "t\030\002 \001(\0132\036.S2C_Protocol.S_TestGameResultB"
+    "\033\252\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fIngame_2eproto_deps[4] =
     {
@@ -299,7 +293,7 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fIngame_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fIngame_2eproto = {
     false,
     false,
-    727,
+    596,
     descriptor_table_protodef_S2C_5fProtocol_5fIngame_2eproto,
     "S2C_Protocol_Ingame.proto",
     &descriptor_table_S2C_5fProtocol_5fIngame_2eproto_once,
@@ -1544,81 +1538,16 @@ void S_DespawnGameObject::InternalSwap(S_DespawnGameObject* PROTOBUF_RESTRICT ot
 
 class S_EndGame::_Internal {
  public:
-  static constexpr ::int32_t kOneofCaseOffset =
-      PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_EndGame, _impl_._oneof_case_);
+  using HasBits =
+      decltype(std::declval<S_EndGame>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_._has_bits_);
 };
 
-void S_EndGame::set_allocated_testgameresult(::S2C_Protocol::S_TestGameResult* testgameresult) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  clear_value_case();
-  if (testgameresult) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(testgameresult)->GetArena();
-    if (message_arena != submessage_arena) {
-      testgameresult = ::google::protobuf::internal::GetOwnedMessage(message_arena, testgameresult, submessage_arena);
-    }
-    set_has_testgameresult();
-    _impl_.value_case_.testgameresult_ = testgameresult;
-  }
-  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_EndGame.testGameResult)
-}
 void S_EndGame::clear_testgameresult() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case_case() == kTestGameResult) {
-    if (GetArena() == nullptr) {
-      delete _impl_.value_case_.testgameresult_;
-    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_case_.testgameresult_);
-    }
-    clear_has_value_case();
-  }
-}
-void S_EndGame::set_allocated_pingpongresult(::S2C_Protocol::S_PingPongResult* pingpongresult) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  clear_value_case();
-  if (pingpongresult) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(pingpongresult)->GetArena();
-    if (message_arena != submessage_arena) {
-      pingpongresult = ::google::protobuf::internal::GetOwnedMessage(message_arena, pingpongresult, submessage_arena);
-    }
-    set_has_pingpongresult();
-    _impl_.value_case_.pingpongresult_ = pingpongresult;
-  }
-  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_EndGame.pingPongResult)
-}
-void S_EndGame::clear_pingpongresult() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case_case() == kPingPongResult) {
-    if (GetArena() == nullptr) {
-      delete _impl_.value_case_.pingpongresult_;
-    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_case_.pingpongresult_);
-    }
-    clear_has_value_case();
-  }
-}
-void S_EndGame::set_allocated_danmakuresult(::S2C_Protocol::S_DanmakuResult* danmakuresult) {
-  ::google::protobuf::Arena* message_arena = GetArena();
-  clear_value_case();
-  if (danmakuresult) {
-    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(danmakuresult)->GetArena();
-    if (message_arena != submessage_arena) {
-      danmakuresult = ::google::protobuf::internal::GetOwnedMessage(message_arena, danmakuresult, submessage_arena);
-    }
-    set_has_danmakuresult();
-    _impl_.value_case_.danmakuresult_ = danmakuresult;
-  }
-  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_EndGame.danmakuResult)
-}
-void S_EndGame::clear_danmakuresult() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (value_case_case() == kDanmakuResult) {
-    if (GetArena() == nullptr) {
-      delete _impl_.value_case_.danmakuresult_;
-    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_case_.danmakuresult_);
-    }
-    clear_has_value_case();
-  }
+  if (_impl_.testgameresult_ != nullptr) _impl_.testgameresult_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 S_EndGame::S_EndGame(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -1632,9 +1561,8 @@ S_EndGame::S_EndGame(::google::protobuf::Arena* arena)
 inline PROTOBUF_NDEBUG_INLINE S_EndGame::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::S2C_Protocol::S_EndGame& from_msg)
-      : value_case_{},
-        _cached_size_{0},
-        _oneof_case_{from._oneof_case_[0]} {}
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
 
 S_EndGame::S_EndGame(
     ::google::protobuf::Arena* arena,
@@ -1649,33 +1577,27 @@ S_EndGame::S_EndGame(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.testgameresult_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::S_TestGameResult>(
+                              arena, *from._impl_.testgameresult_)
+                        : nullptr;
   _impl_.gameid_ = from._impl_.gameid_;
-  switch (value_case_case()) {
-    case VALUE_CASE_NOT_SET:
-      break;
-      case kTestGameResult:
-        _impl_.value_case_.testgameresult_ = ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::S_TestGameResult>(arena, *from._impl_.value_case_.testgameresult_);
-        break;
-      case kPingPongResult:
-        _impl_.value_case_.pingpongresult_ = ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::S_PingPongResult>(arena, *from._impl_.value_case_.pingpongresult_);
-        break;
-      case kDanmakuResult:
-        _impl_.value_case_.danmakuresult_ = ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::S_DanmakuResult>(arena, *from._impl_.value_case_.danmakuresult_);
-        break;
-  }
 
   // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_EndGame)
 }
 inline PROTOBUF_NDEBUG_INLINE S_EndGame::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : value_case_{},
-        _cached_size_{0},
-        _oneof_case_{} {}
+      : _cached_size_{0} {}
 
 inline void S_EndGame::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.gameid_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, testgameresult_),
+           0,
+           offsetof(Impl_, gameid_) -
+               offsetof(Impl_, testgameresult_) +
+               sizeof(Impl_::gameid_));
 }
 S_EndGame::~S_EndGame() {
   // @@protoc_insertion_point(destructor:S2C_Protocol.S_EndGame)
@@ -1685,47 +1607,9 @@ inline void S_EndGame::SharedDtor(MessageLite& self) {
   S_EndGame& this_ = static_cast<S_EndGame&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  if (this_.has_value_case()) {
-    this_.clear_value_case();
-  }
+  delete this_._impl_.testgameresult_;
   this_._impl_.~Impl_();
 }
-
-void S_EndGame::clear_value_case() {
-// @@protoc_insertion_point(one_of_clear_start:S2C_Protocol.S_EndGame)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  switch (value_case_case()) {
-    case kTestGameResult: {
-      if (GetArena() == nullptr) {
-        delete _impl_.value_case_.testgameresult_;
-      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_case_.testgameresult_);
-      }
-      break;
-    }
-    case kPingPongResult: {
-      if (GetArena() == nullptr) {
-        delete _impl_.value_case_.pingpongresult_;
-      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_case_.pingpongresult_);
-      }
-      break;
-    }
-    case kDanmakuResult: {
-      if (GetArena() == nullptr) {
-        delete _impl_.value_case_.danmakuresult_;
-      } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-        ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.value_case_.danmakuresult_);
-      }
-      break;
-    }
-    case VALUE_CASE_NOT_SET: {
-      break;
-    }
-  }
-  _impl_._oneof_case_[0] = VALUE_CASE_NOT_SET;
-}
-
 
 inline void* S_EndGame::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
@@ -1763,16 +1647,16 @@ const ::google::protobuf::internal::ClassData* S_EndGame::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 4, 3, 0, 2> S_EndGame::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> S_EndGame::_table_ = {
   {
-    0,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_._has_bits_),
     0, // no _extensions_
-    4, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
-    3,  // num_aux_entries
+    2,  // num_field_entries
+    1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
@@ -1781,6 +1665,9 @@ const ::_pbi::TcParseTable<0, 4, 3, 0, 2> S_EndGame::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_EndGame>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
+    // .S2C_Protocol.S_TestGameResult testGameResult = 2;
+    {::_pbi::TcParser::FastMtS1,
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.testgameresult_)}},
     // int32 gameId = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_EndGame, _impl_.gameid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.gameid_)}},
@@ -1788,21 +1675,13 @@ const ::_pbi::TcParseTable<0, 4, 3, 0, 2> S_EndGame::_table_ = {
     65535, 65535
   }}, {{
     // int32 gameId = 1;
-    {PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.gameid_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.gameid_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // .S2C_Protocol.S_TestGameResult testGameResult = 2;
-    {PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.value_case_.testgameresult_), _Internal::kOneofCaseOffset + 0, 0,
-    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .S2C_Protocol.S_PingPongResult pingPongResult = 3;
-    {PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.value_case_.pingpongresult_), _Internal::kOneofCaseOffset + 0, 1,
-    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .S2C_Protocol.S_DanmakuResult danmakuResult = 4;
-    {PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.value_case_.danmakuresult_), _Internal::kOneofCaseOffset + 0, 2,
-    (0 | ::_fl::kFcOneof | ::_fl::kMessage | ::_fl::kTvTable)},
+    {PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.testgameresult_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::S2C_Protocol::S_TestGameResult>()},
-    {::_pbi::TcParser::GetTable<::S2C_Protocol::S_PingPongResult>()},
-    {::_pbi::TcParser::GetTable<::S2C_Protocol::S_DanmakuResult>()},
   }}, {{
   }},
 };
@@ -1814,8 +1693,13 @@ PROTOBUF_NOINLINE void S_EndGame::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.testgameresult_ != nullptr);
+    _impl_.testgameresult_->Clear();
+  }
   _impl_.gameid_ = 0;
-  clear_value_case();
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -1841,28 +1725,14 @@ PROTOBUF_NOINLINE void S_EndGame::Clear() {
                     stream, this_._internal_gameid(), target);
           }
 
-          switch (this_.value_case_case()) {
-            case kTestGameResult: {
-              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                  2, *this_._impl_.value_case_.testgameresult_, this_._impl_.value_case_.testgameresult_->GetCachedSize(), target,
-                  stream);
-              break;
-            }
-            case kPingPongResult: {
-              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                  3, *this_._impl_.value_case_.pingpongresult_, this_._impl_.value_case_.pingpongresult_->GetCachedSize(), target,
-                  stream);
-              break;
-            }
-            case kDanmakuResult: {
-              target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                  4, *this_._impl_.value_case_.danmakuresult_, this_._impl_.value_case_.danmakuresult_->GetCachedSize(), target,
-                  stream);
-              break;
-            }
-            default:
-              break;
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .S2C_Protocol.S_TestGameResult testGameResult = 2;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                2, *this_._impl_.testgameresult_, this_._impl_.testgameresult_->GetCachedSize(), target,
+                stream);
           }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -1886,34 +1756,20 @@ PROTOBUF_NOINLINE void S_EndGame::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // .S2C_Protocol.S_TestGameResult testGameResult = 2;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.testgameresult_);
+            }
+          }
            {
             // int32 gameId = 1;
             if (this_._internal_gameid() != 0) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_gameid());
-            }
-          }
-          switch (this_.value_case_case()) {
-            // .S2C_Protocol.S_TestGameResult testGameResult = 2;
-            case kTestGameResult: {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.value_case_.testgameresult_);
-              break;
-            }
-            // .S2C_Protocol.S_PingPongResult pingPongResult = 3;
-            case kPingPongResult: {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.value_case_.pingpongresult_);
-              break;
-            }
-            // .S2C_Protocol.S_DanmakuResult danmakuResult = 4;
-            case kDanmakuResult: {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.value_case_.danmakuresult_);
-              break;
-            }
-            case VALUE_CASE_NOT_SET: {
-              break;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1929,51 +1785,20 @@ void S_EndGame::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::googl
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.testgameresult_ != nullptr);
+    if (_this->_impl_.testgameresult_ == nullptr) {
+      _this->_impl_.testgameresult_ =
+          ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::S_TestGameResult>(arena, *from._impl_.testgameresult_);
+    } else {
+      _this->_impl_.testgameresult_->MergeFrom(*from._impl_.testgameresult_);
+    }
+  }
   if (from._internal_gameid() != 0) {
     _this->_impl_.gameid_ = from._impl_.gameid_;
   }
-  if (const uint32_t oneof_from_case = from._impl_._oneof_case_[0]) {
-    const uint32_t oneof_to_case = _this->_impl_._oneof_case_[0];
-    const bool oneof_needs_init = oneof_to_case != oneof_from_case;
-    if (oneof_needs_init) {
-      if (oneof_to_case != 0) {
-        _this->clear_value_case();
-      }
-      _this->_impl_._oneof_case_[0] = oneof_from_case;
-    }
-
-    switch (oneof_from_case) {
-      case kTestGameResult: {
-        if (oneof_needs_init) {
-          _this->_impl_.value_case_.testgameresult_ =
-              ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::S_TestGameResult>(arena, *from._impl_.value_case_.testgameresult_);
-        } else {
-          _this->_impl_.value_case_.testgameresult_->MergeFrom(from._internal_testgameresult());
-        }
-        break;
-      }
-      case kPingPongResult: {
-        if (oneof_needs_init) {
-          _this->_impl_.value_case_.pingpongresult_ =
-              ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::S_PingPongResult>(arena, *from._impl_.value_case_.pingpongresult_);
-        } else {
-          _this->_impl_.value_case_.pingpongresult_->MergeFrom(from._internal_pingpongresult());
-        }
-        break;
-      }
-      case kDanmakuResult: {
-        if (oneof_needs_init) {
-          _this->_impl_.value_case_.danmakuresult_ =
-              ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::S_DanmakuResult>(arena, *from._impl_.value_case_.danmakuresult_);
-        } else {
-          _this->_impl_.value_case_.danmakuresult_->MergeFrom(from._internal_danmakuresult());
-        }
-        break;
-      }
-      case VALUE_CASE_NOT_SET:
-        break;
-    }
-  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1988,9 +1813,13 @@ void S_EndGame::CopyFrom(const S_EndGame& from) {
 void S_EndGame::InternalSwap(S_EndGame* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.gameid_, other->_impl_.gameid_);
-  swap(_impl_.value_case_, other->_impl_.value_case_);
-  swap(_impl_._oneof_case_[0], other->_impl_._oneof_case_[0]);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.gameid_)
+      + sizeof(S_EndGame::_impl_.gameid_)
+      - PROTOBUF_FIELD_OFFSET(S_EndGame, _impl_.testgameresult_)>(
+          reinterpret_cast<char*>(&_impl_.testgameresult_),
+          reinterpret_cast<char*>(&other->_impl_.testgameresult_));
 }
 
 ::google::protobuf::Metadata S_EndGame::GetMetadata() const {

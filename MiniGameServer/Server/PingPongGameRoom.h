@@ -19,6 +19,8 @@ public:
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override {}
 	void Start();
 
+	void SendGameState(int32_t playerIdx) override;
+
 private:
 	int32_t _quota = 4;
 };

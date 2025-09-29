@@ -128,7 +128,7 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto[] ABSL_ATTR
     "l\"&\n\003XYZ\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001("
     "\002\"\\\n\017UnityGameObject\022\020\n\010objectId\030\001 \001(\005\022\022"
     "\n\nobjectType\030\002 \001(\005\022#\n\010position\030\003 \001(\0132\021.S"
-    "2C_Protocol.XYZ*\201\006\n\005MsgId\022\r\n\tS_WELCOME\020\000"
+    "2C_Protocol.XYZ*\306\007\n\005MsgId\022\r\n\tS_WELCOME\020\000"
     "\022\r\n\tC_WELCOME\020\001\022\026\n\022S_WELCOME_RESPONSE\020\002\022"
     "\017\n\013S_ENCRYPTED\020\003\022\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_L"
     "OGIN\020\005\022\013\n\007S_LOGIN\020\006\022\024\n\020C_CREATE_ACCOUNT\020"
@@ -145,16 +145,21 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto[] ABSL_ATTR
     "LTA_GAME_OBJECT_HARD\020\030\022\027\n\023S_SPAWN_GAME_O"
     "BJECT\020\031\022\031\n\025S_DESPAWN_GAME_OBJECT\020\032\022\016\n\nS_"
     "END_GAME\020\033\022\024\n\020S_TESTGAME_STATE\020d\022\025\n\021S_TE"
-    "STGAME_RESULT\020e\022\025\n\020S_PINGPONG_STATE\020\310\001\022\026"
-    "\n\021S_PINGPONG_RESULT\020\311\001\022\024\n\017S_DANMAKU_STAT"
-    "E\020\254\002\022\025\n\020S_DANMAKU_RESULT\020\255\002B\033\252\002\030Google.P"
-    "rotobuf.Protocolb\006proto3"
+    "STGAME_RESULT\020e\022\016\n\tS_P_STATE\020\310\001\022\017\n\nS_P_R"
+    "ESULT\020\311\001\022\030\n\023S_P_READY_FOR_START\020\312\001\022$\n\037S_"
+    "P_REQUEST_PLAYER_BAR_POSITION\020\313\001\022%\n C_P_"
+    "RESPONSE_PLAYER_BAR_POSITION\020\314\001\022#\n\036S_P_C"
+    "HANGE_PLAYER_BAR_POSITION\020\315\001\022\017\n\nS_P_BULL"
+    "ET\020\316\001\022\026\n\021C_P_COLLISION_BAR\020\317\001\022\034\n\027C_P_COL"
+    "LISION_GOAL_LINE\020\320\001\022\024\n\017S_DANMAKU_STATE\020\254"
+    "\002\022\025\n\020S_DANMAKU_RESULT\020\255\002B\033\252\002\030Google.Prot"
+    "obuf.Protocolb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fCommon_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fCommon_2eproto = {
     false,
     false,
-    984,
+    1181,
     descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto,
     "S2C_Protocol_Common.proto",
     &descriptor_table_S2C_5fProtocol_5fCommon_2eproto_once,
@@ -173,7 +178,7 @@ const ::google::protobuf::EnumDescriptor* MsgId_descriptor() {
   return file_level_enum_descriptors_S2C_5fProtocol_5fCommon_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t MsgId_internal_data_[] = {
-    1835008u, 393216u, 201u, 101u, 301u, 100u, 200u, 300u, };
+    1835008u, 131264u, 0u, 0u, 768u, 0u, 0u, 2093056u, 301u, 300u, };
 bool MsgId_IsValid(int value) {
   return ::_pbi::ValidateEnum(value, MsgId_internal_data_);
 }

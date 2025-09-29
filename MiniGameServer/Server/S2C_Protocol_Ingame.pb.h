@@ -332,12 +332,6 @@ class S_EndGame final : public ::google::protobuf::Message
   static const S_EndGame& default_instance() {
     return *internal_default_instance();
   }
-  enum ValueCaseCase {
-    kTestGameResult = 2,
-    kPingPongResult = 3,
-    kDanmakuResult = 4,
-    VALUE_CASE_NOT_SET = 0,
-  };
   static inline const S_EndGame* internal_default_instance() {
     return reinterpret_cast<const S_EndGame*>(
         &_S_EndGame_default_instance_);
@@ -429,27 +423,11 @@ class S_EndGame final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kGameIdFieldNumber = 1,
     kTestGameResultFieldNumber = 2,
-    kPingPongResultFieldNumber = 3,
-    kDanmakuResultFieldNumber = 4,
+    kGameIdFieldNumber = 1,
   };
-  // int32 gameId = 1;
-  void clear_gameid() ;
-  ::int32_t gameid() const;
-  void set_gameid(::int32_t value);
-
-  private:
-  ::int32_t _internal_gameid() const;
-  void _internal_set_gameid(::int32_t value);
-
-  public:
   // .S2C_Protocol.S_TestGameResult testGameResult = 2;
   bool has_testgameresult() const;
-  private:
-  bool _internal_has_testgameresult() const;
-
-  public:
   void clear_testgameresult() ;
   const ::S2C_Protocol::S_TestGameResult& testgameresult() const;
   PROTOBUF_NODISCARD ::S2C_Protocol::S_TestGameResult* release_testgameresult();
@@ -463,57 +441,22 @@ class S_EndGame final : public ::google::protobuf::Message
   ::S2C_Protocol::S_TestGameResult* _internal_mutable_testgameresult();
 
   public:
-  // .S2C_Protocol.S_PingPongResult pingPongResult = 3;
-  bool has_pingpongresult() const;
-  private:
-  bool _internal_has_pingpongresult() const;
-
-  public:
-  void clear_pingpongresult() ;
-  const ::S2C_Protocol::S_PingPongResult& pingpongresult() const;
-  PROTOBUF_NODISCARD ::S2C_Protocol::S_PingPongResult* release_pingpongresult();
-  ::S2C_Protocol::S_PingPongResult* mutable_pingpongresult();
-  void set_allocated_pingpongresult(::S2C_Protocol::S_PingPongResult* value);
-  void unsafe_arena_set_allocated_pingpongresult(::S2C_Protocol::S_PingPongResult* value);
-  ::S2C_Protocol::S_PingPongResult* unsafe_arena_release_pingpongresult();
+  // int32 gameId = 1;
+  void clear_gameid() ;
+  ::int32_t gameid() const;
+  void set_gameid(::int32_t value);
 
   private:
-  const ::S2C_Protocol::S_PingPongResult& _internal_pingpongresult() const;
-  ::S2C_Protocol::S_PingPongResult* _internal_mutable_pingpongresult();
+  ::int32_t _internal_gameid() const;
+  void _internal_set_gameid(::int32_t value);
 
   public:
-  // .S2C_Protocol.S_DanmakuResult danmakuResult = 4;
-  bool has_danmakuresult() const;
-  private:
-  bool _internal_has_danmakuresult() const;
-
-  public:
-  void clear_danmakuresult() ;
-  const ::S2C_Protocol::S_DanmakuResult& danmakuresult() const;
-  PROTOBUF_NODISCARD ::S2C_Protocol::S_DanmakuResult* release_danmakuresult();
-  ::S2C_Protocol::S_DanmakuResult* mutable_danmakuresult();
-  void set_allocated_danmakuresult(::S2C_Protocol::S_DanmakuResult* value);
-  void unsafe_arena_set_allocated_danmakuresult(::S2C_Protocol::S_DanmakuResult* value);
-  ::S2C_Protocol::S_DanmakuResult* unsafe_arena_release_danmakuresult();
-
-  private:
-  const ::S2C_Protocol::S_DanmakuResult& _internal_danmakuresult() const;
-  ::S2C_Protocol::S_DanmakuResult* _internal_mutable_danmakuresult();
-
-  public:
-  void clear_value_case();
-  ValueCaseCase value_case_case() const;
   // @@protoc_insertion_point(class_scope:S2C_Protocol.S_EndGame)
  private:
   class _Internal;
-  void set_has_testgameresult();
-  void set_has_pingpongresult();
-  void set_has_danmakuresult();
-  inline bool has_value_case() const;
-  inline void clear_has_value_case();
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 4, 3,
+      1, 2, 1,
       0, 2>
       _table_;
 
@@ -531,16 +474,10 @@ class S_EndGame final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_EndGame& from_msg);
-    ::int32_t gameid_;
-    union ValueCaseUnion {
-      constexpr ValueCaseUnion() : _constinit_{} {}
-      ::google::protobuf::internal::ConstantInitialized _constinit_;
-      ::S2C_Protocol::S_TestGameResult* testgameresult_;
-      ::S2C_Protocol::S_PingPongResult* pingpongresult_;
-      ::S2C_Protocol::S_DanmakuResult* danmakuresult_;
-    } value_case_;
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::uint32_t _oneof_case_[1];
+    ::S2C_Protocol::S_TestGameResult* testgameresult_;
+    ::int32_t gameid_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1777,217 +1714,95 @@ inline void S_EndGame::_internal_set_gameid(::int32_t value) {
 
 // .S2C_Protocol.S_TestGameResult testGameResult = 2;
 inline bool S_EndGame::has_testgameresult() const {
-  return value_case_case() == kTestGameResult;
-}
-inline bool S_EndGame::_internal_has_testgameresult() const {
-  return value_case_case() == kTestGameResult;
-}
-inline void S_EndGame::set_has_testgameresult() {
-  _impl_._oneof_case_[0] = kTestGameResult;
-}
-inline ::S2C_Protocol::S_TestGameResult* S_EndGame::release_testgameresult() {
-  // @@protoc_insertion_point(field_release:S2C_Protocol.S_EndGame.testGameResult)
-  if (value_case_case() == kTestGameResult) {
-    clear_has_value_case();
-    auto* temp = _impl_.value_case_.testgameresult_;
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.value_case_.testgameresult_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.testgameresult_ != nullptr);
+  return value;
 }
 inline const ::S2C_Protocol::S_TestGameResult& S_EndGame::_internal_testgameresult() const {
-  return value_case_case() == kTestGameResult ? *_impl_.value_case_.testgameresult_ : reinterpret_cast<::S2C_Protocol::S_TestGameResult&>(::S2C_Protocol::_S_TestGameResult_default_instance_);
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::S2C_Protocol::S_TestGameResult* p = _impl_.testgameresult_;
+  return p != nullptr ? *p : reinterpret_cast<const ::S2C_Protocol::S_TestGameResult&>(::S2C_Protocol::_S_TestGameResult_default_instance_);
 }
 inline const ::S2C_Protocol::S_TestGameResult& S_EndGame::testgameresult() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:S2C_Protocol.S_EndGame.testGameResult)
   return _internal_testgameresult();
 }
-inline ::S2C_Protocol::S_TestGameResult* S_EndGame::unsafe_arena_release_testgameresult() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:S2C_Protocol.S_EndGame.testGameResult)
-  if (value_case_case() == kTestGameResult) {
-    clear_has_value_case();
-    auto* temp = _impl_.value_case_.testgameresult_;
-    _impl_.value_case_.testgameresult_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
 inline void S_EndGame::unsafe_arena_set_allocated_testgameresult(::S2C_Protocol::S_TestGameResult* value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_value_case();
-  if (value) {
-    set_has_testgameresult();
-    _impl_.value_case_.testgameresult_ = value;
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.testgameresult_);
+  }
+  _impl_.testgameresult_ = reinterpret_cast<::S2C_Protocol::S_TestGameResult*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.S_EndGame.testGameResult)
 }
-inline ::S2C_Protocol::S_TestGameResult* S_EndGame::_internal_mutable_testgameresult() {
-  if (value_case_case() != kTestGameResult) {
-    clear_value_case();
-    set_has_testgameresult();
-    _impl_.value_case_.testgameresult_ =
-        ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::S_TestGameResult>(GetArena());
+inline ::S2C_Protocol::S_TestGameResult* S_EndGame::release_testgameresult() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::S2C_Protocol::S_TestGameResult* released = _impl_.testgameresult_;
+  _impl_.testgameresult_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
   }
-  return _impl_.value_case_.testgameresult_;
+  return released;
+}
+inline ::S2C_Protocol::S_TestGameResult* S_EndGame::unsafe_arena_release_testgameresult() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.S_EndGame.testGameResult)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::S2C_Protocol::S_TestGameResult* temp = _impl_.testgameresult_;
+  _impl_.testgameresult_ = nullptr;
+  return temp;
+}
+inline ::S2C_Protocol::S_TestGameResult* S_EndGame::_internal_mutable_testgameresult() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.testgameresult_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::S_TestGameResult>(GetArena());
+    _impl_.testgameresult_ = reinterpret_cast<::S2C_Protocol::S_TestGameResult*>(p);
+  }
+  return _impl_.testgameresult_;
 }
 inline ::S2C_Protocol::S_TestGameResult* S_EndGame::mutable_testgameresult() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
   ::S2C_Protocol::S_TestGameResult* _msg = _internal_mutable_testgameresult();
   // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_EndGame.testGameResult)
   return _msg;
 }
+inline void S_EndGame::set_allocated_testgameresult(::S2C_Protocol::S_TestGameResult* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.testgameresult_);
+  }
 
-// .S2C_Protocol.S_PingPongResult pingPongResult = 3;
-inline bool S_EndGame::has_pingpongresult() const {
-  return value_case_case() == kPingPongResult;
-}
-inline bool S_EndGame::_internal_has_pingpongresult() const {
-  return value_case_case() == kPingPongResult;
-}
-inline void S_EndGame::set_has_pingpongresult() {
-  _impl_._oneof_case_[0] = kPingPongResult;
-}
-inline ::S2C_Protocol::S_PingPongResult* S_EndGame::release_pingpongresult() {
-  // @@protoc_insertion_point(field_release:S2C_Protocol.S_EndGame.pingPongResult)
-  if (value_case_case() == kPingPongResult) {
-    clear_has_value_case();
-    auto* temp = _impl_.value_case_.pingpongresult_;
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
     }
-    _impl_.value_case_.pingpongresult_ = nullptr;
-    return temp;
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    return nullptr;
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
-}
-inline const ::S2C_Protocol::S_PingPongResult& S_EndGame::_internal_pingpongresult() const {
-  return value_case_case() == kPingPongResult ? *_impl_.value_case_.pingpongresult_ : reinterpret_cast<::S2C_Protocol::S_PingPongResult&>(::S2C_Protocol::_S_PingPongResult_default_instance_);
-}
-inline const ::S2C_Protocol::S_PingPongResult& S_EndGame::pingpongresult() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_EndGame.pingPongResult)
-  return _internal_pingpongresult();
-}
-inline ::S2C_Protocol::S_PingPongResult* S_EndGame::unsafe_arena_release_pingpongresult() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:S2C_Protocol.S_EndGame.pingPongResult)
-  if (value_case_case() == kPingPongResult) {
-    clear_has_value_case();
-    auto* temp = _impl_.value_case_.pingpongresult_;
-    _impl_.value_case_.pingpongresult_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void S_EndGame::unsafe_arena_set_allocated_pingpongresult(::S2C_Protocol::S_PingPongResult* value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_value_case();
-  if (value) {
-    set_has_pingpongresult();
-    _impl_.value_case_.pingpongresult_ = value;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.S_EndGame.pingPongResult)
-}
-inline ::S2C_Protocol::S_PingPongResult* S_EndGame::_internal_mutable_pingpongresult() {
-  if (value_case_case() != kPingPongResult) {
-    clear_value_case();
-    set_has_pingpongresult();
-    _impl_.value_case_.pingpongresult_ =
-        ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::S_PingPongResult>(GetArena());
-  }
-  return _impl_.value_case_.pingpongresult_;
-}
-inline ::S2C_Protocol::S_PingPongResult* S_EndGame::mutable_pingpongresult() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::S2C_Protocol::S_PingPongResult* _msg = _internal_mutable_pingpongresult();
-  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_EndGame.pingPongResult)
-  return _msg;
+
+  _impl_.testgameresult_ = reinterpret_cast<::S2C_Protocol::S_TestGameResult*>(value);
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_EndGame.testGameResult)
 }
 
-// .S2C_Protocol.S_DanmakuResult danmakuResult = 4;
-inline bool S_EndGame::has_danmakuresult() const {
-  return value_case_case() == kDanmakuResult;
-}
-inline bool S_EndGame::_internal_has_danmakuresult() const {
-  return value_case_case() == kDanmakuResult;
-}
-inline void S_EndGame::set_has_danmakuresult() {
-  _impl_._oneof_case_[0] = kDanmakuResult;
-}
-inline ::S2C_Protocol::S_DanmakuResult* S_EndGame::release_danmakuresult() {
-  // @@protoc_insertion_point(field_release:S2C_Protocol.S_EndGame.danmakuResult)
-  if (value_case_case() == kDanmakuResult) {
-    clear_has_value_case();
-    auto* temp = _impl_.value_case_.danmakuresult_;
-    if (GetArena() != nullptr) {
-      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-    }
-    _impl_.value_case_.danmakuresult_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::S2C_Protocol::S_DanmakuResult& S_EndGame::_internal_danmakuresult() const {
-  return value_case_case() == kDanmakuResult ? *_impl_.value_case_.danmakuresult_ : reinterpret_cast<::S2C_Protocol::S_DanmakuResult&>(::S2C_Protocol::_S_DanmakuResult_default_instance_);
-}
-inline const ::S2C_Protocol::S_DanmakuResult& S_EndGame::danmakuresult() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_EndGame.danmakuResult)
-  return _internal_danmakuresult();
-}
-inline ::S2C_Protocol::S_DanmakuResult* S_EndGame::unsafe_arena_release_danmakuresult() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:S2C_Protocol.S_EndGame.danmakuResult)
-  if (value_case_case() == kDanmakuResult) {
-    clear_has_value_case();
-    auto* temp = _impl_.value_case_.danmakuresult_;
-    _impl_.value_case_.danmakuresult_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline void S_EndGame::unsafe_arena_set_allocated_danmakuresult(::S2C_Protocol::S_DanmakuResult* value) {
-  // We rely on the oneof clear method to free the earlier contents
-  // of this oneof. We can directly use the pointer we're given to
-  // set the new value.
-  clear_value_case();
-  if (value) {
-    set_has_danmakuresult();
-    _impl_.value_case_.danmakuresult_ = value;
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.S_EndGame.danmakuResult)
-}
-inline ::S2C_Protocol::S_DanmakuResult* S_EndGame::_internal_mutable_danmakuresult() {
-  if (value_case_case() != kDanmakuResult) {
-    clear_value_case();
-    set_has_danmakuresult();
-    _impl_.value_case_.danmakuresult_ =
-        ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::S_DanmakuResult>(GetArena());
-  }
-  return _impl_.value_case_.danmakuresult_;
-}
-inline ::S2C_Protocol::S_DanmakuResult* S_EndGame::mutable_danmakuresult() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::S2C_Protocol::S_DanmakuResult* _msg = _internal_mutable_danmakuresult();
-  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_EndGame.danmakuResult)
-  return _msg;
-}
-
-inline bool S_EndGame::has_value_case() const {
-  return value_case_case() != VALUE_CASE_NOT_SET;
-}
-inline void S_EndGame::clear_has_value_case() {
-  _impl_._oneof_case_[0] = VALUE_CASE_NOT_SET;
-}
-inline S_EndGame::ValueCaseCase S_EndGame::value_case_case() const {
-  return S_EndGame::ValueCaseCase(_impl_._oneof_case_[0]);
-}
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif  // __GNUC__

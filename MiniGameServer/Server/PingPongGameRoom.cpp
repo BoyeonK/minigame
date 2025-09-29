@@ -86,6 +86,10 @@ void PingPongGameRoom::Start() {
 	BroadCast(sendBuffer);
 }
 
+void PingPongGameRoom::SendGameState(int32_t playerIdx) {
+
+}
+
 void PingPongGameRoom::ReturnToPool() {
 	objectPool<PingPongGameRoom>::dealloc(this);
 }

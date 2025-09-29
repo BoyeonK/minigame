@@ -5,10 +5,46 @@ option csharp_namespace = "Google.Protobuf.Protocol";
 
 import "S2C_Protocol_Common.proto";
 
-message S_PingPongState {
+//C_RequestGameState에 대한 응답
+//Player의 ID를 전달.
+message S_P_State {
     repeated UnityGameObject objects = 1;
+    int32 playerId = 2;
 }
 
-message S_PingPongResult {
+message S_P_Result {
     
+}
+
+message S_P_ReadyForStart {
+
+}
+
+message S_P_RequestPlayerBarPosition {
+    int32 playerId = 1;
+}
+
+message C_P_ResponsePlayerBarPosition {
+    XYZ position = 1;
+}
+
+message S_P_ChangePlayerBarPosition {
+    repeated XYZ positions = 1;
+}
+
+message S_P_Bullet {
+    UnityGameObject bullet = 1;
+    XYZ moveDir = 2;
+    float speed = 3;
+    int32 lastCollider = 4;
+}
+
+message C_P_CollisionBar {
+    UnityGameObject bullet = 1;
+    XYZ moveDir = 2;
+    float speed = 3;
+}
+
+message C_P_CollisionGoalLine {
+
 }

@@ -42,8 +42,15 @@ enum : uint16_t {
 	PKT_S_TESTGAME_STATE = 100,
 	PKT_S_TESTGAME_RESULT = 101,
 
-	PKT_S_PINGPONG_STATE = 200,
-	PKT_S_PINGPONG_RESULT = 201,
+	PKT_S_P_STATE = 200,
+	PKT_S_P_RESULT = 201,
+	PKT_S_P_READY_FOR_START = 202,
+	PKT_S_P_REQUEST_PLAYER_BAR_POSITION = 203,
+	PKT_C_P_RESPONSE_PLAYER_BAR_POSITION = 204,
+	PKT_S_P_CHANGE_PLAYER_BAR_POSITION = 205,
+	PKT_S_P_BULLET = 206,
+	PKT_C_P_COLLISION_BAR = 207,
+	PKT_C_P_COLLISION_GOAL_LINE = 208,
 
 	PKT_S_DANMAKU_STATE = 300,
 	PKT_S_DANMAKU_RESTULT = 301,
@@ -154,9 +161,9 @@ public:
 #pragma endregion
 
 #pragma region PingPong
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_PingPongState& pkt) { return MakeSendBufferRef(pkt, PKT_S_PINGPONG_STATE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_State& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_STATE); }
 
-	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_PingPongState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_PINGPONG_STATE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_State& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_STATE, AESKey); }
 
 #pragma endregion
 

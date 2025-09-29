@@ -34,13 +34,10 @@ namespace Google.Protobuf.Protocol {
             "dG9jb2wuVW5pdHlHYW1lT2JqZWN0IkIKEVNfU3Bhd25HYW1lT2JqZWN0Ei0K",
             "Bm9iamVjdBgBIAEoCzIdLlMyQ19Qcm90b2NvbC5Vbml0eUdhbWVPYmplY3Qi",
             "RAoTU19EZXNwYXduR2FtZU9iamVjdBItCgZvYmplY3QYASABKAsyHS5TMkNf",
-            "UHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0ItUBCglTX0VuZEdhbWUSDgoGZ2Ft",
-            "ZUlkGAEgASgFEjgKDnRlc3RHYW1lUmVzdWx0GAIgASgLMh4uUzJDX1Byb3Rv",
-            "Y29sLlNfVGVzdEdhbWVSZXN1bHRIABI4Cg5waW5nUG9uZ1Jlc3VsdBgDIAEo",
-            "CzIeLlMyQ19Qcm90b2NvbC5TX1BpbmdQb25nUmVzdWx0SAASNgoNZGFubWFr",
-            "dVJlc3VsdBgEIAEoCzIdLlMyQ19Qcm90b2NvbC5TX0Rhbm1ha3VSZXN1bHRI",
-            "AEIMCgp2YWx1ZV9jYXNlQhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xi",
-            "BnByb3RvMw=="));
+            "UHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0IlMKCVNfRW5kR2FtZRIOCgZnYW1l",
+            "SWQYASABKAUSNgoOdGVzdEdhbWVSZXN1bHQYAiABKAsyHi5TMkNfUHJvdG9j",
+            "b2wuU19UZXN0R2FtZVJlc3VsdEIbqgIYR29vZ2xlLlByb3RvYnVmLlByb3Rv",
+            "Y29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolTestGameReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolPingPongReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolDanmakuReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -49,7 +46,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DeltaGameObjectHard), global::Google.Protobuf.Protocol.S_DeltaGameObjectHard.Parser, new[]{ "Object" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_SpawnGameObject), global::Google.Protobuf.Protocol.S_SpawnGameObject.Parser, new[]{ "Object" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DespawnGameObject), global::Google.Protobuf.Protocol.S_DespawnGameObject.Parser, new[]{ "Object" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EndGame), global::Google.Protobuf.Protocol.S_EndGame.Parser, new[]{ "GameId", "TestGameResult", "PingPongResult", "DanmakuResult" }, new[]{ "ValueCase" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EndGame), global::Google.Protobuf.Protocol.S_EndGame.Parser, new[]{ "GameId", "TestGameResult" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1125,18 +1122,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_EndGame(S_EndGame other) : this() {
       gameId_ = other.gameId_;
-      switch (other.ValueCaseCase) {
-        case ValueCaseOneofCase.TestGameResult:
-          TestGameResult = other.TestGameResult.Clone();
-          break;
-        case ValueCaseOneofCase.PingPongResult:
-          PingPongResult = other.PingPongResult.Clone();
-          break;
-        case ValueCaseOneofCase.DanmakuResult:
-          DanmakuResult = other.DanmakuResult.Clone();
-          break;
-      }
-
+      testGameResult_ = other.testGameResult_ != null ? other.testGameResult_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1160,60 +1146,14 @@ namespace Google.Protobuf.Protocol {
 
     /// <summary>Field number for the "testGameResult" field.</summary>
     public const int TestGameResultFieldNumber = 2;
+    private global::Google.Protobuf.Protocol.S_TestGameResult testGameResult_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.Protocol.S_TestGameResult TestGameResult {
-      get { return valueCaseCase_ == ValueCaseOneofCase.TestGameResult ? (global::Google.Protobuf.Protocol.S_TestGameResult) valueCase_ : null; }
+      get { return testGameResult_; }
       set {
-        valueCase_ = value;
-        valueCaseCase_ = value == null ? ValueCaseOneofCase.None : ValueCaseOneofCase.TestGameResult;
+        testGameResult_ = value;
       }
-    }
-
-    /// <summary>Field number for the "pingPongResult" field.</summary>
-    public const int PingPongResultFieldNumber = 3;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.Protocol.S_PingPongResult PingPongResult {
-      get { return valueCaseCase_ == ValueCaseOneofCase.PingPongResult ? (global::Google.Protobuf.Protocol.S_PingPongResult) valueCase_ : null; }
-      set {
-        valueCase_ = value;
-        valueCaseCase_ = value == null ? ValueCaseOneofCase.None : ValueCaseOneofCase.PingPongResult;
-      }
-    }
-
-    /// <summary>Field number for the "danmakuResult" field.</summary>
-    public const int DanmakuResultFieldNumber = 4;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.Protocol.S_DanmakuResult DanmakuResult {
-      get { return valueCaseCase_ == ValueCaseOneofCase.DanmakuResult ? (global::Google.Protobuf.Protocol.S_DanmakuResult) valueCase_ : null; }
-      set {
-        valueCase_ = value;
-        valueCaseCase_ = value == null ? ValueCaseOneofCase.None : ValueCaseOneofCase.DanmakuResult;
-      }
-    }
-
-    private object valueCase_;
-    /// <summary>Enum of possible cases for the "value_case" oneof.</summary>
-    public enum ValueCaseOneofCase {
-      None = 0,
-      TestGameResult = 2,
-      PingPongResult = 3,
-      DanmakuResult = 4,
-    }
-    private ValueCaseOneofCase valueCaseCase_ = ValueCaseOneofCase.None;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public ValueCaseOneofCase ValueCaseCase {
-      get { return valueCaseCase_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void ClearValueCase() {
-      valueCaseCase_ = ValueCaseOneofCase.None;
-      valueCase_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1233,9 +1173,6 @@ namespace Google.Protobuf.Protocol {
       }
       if (GameId != other.GameId) return false;
       if (!object.Equals(TestGameResult, other.TestGameResult)) return false;
-      if (!object.Equals(PingPongResult, other.PingPongResult)) return false;
-      if (!object.Equals(DanmakuResult, other.DanmakuResult)) return false;
-      if (ValueCaseCase != other.ValueCaseCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1244,10 +1181,7 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (GameId != 0) hash ^= GameId.GetHashCode();
-      if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) hash ^= TestGameResult.GetHashCode();
-      if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) hash ^= PingPongResult.GetHashCode();
-      if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) hash ^= DanmakuResult.GetHashCode();
-      hash ^= (int) valueCaseCase_;
+      if (testGameResult_ != null) hash ^= TestGameResult.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1270,17 +1204,9 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(GameId);
       }
-      if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
+      if (testGameResult_ != null) {
         output.WriteRawTag(18);
         output.WriteMessage(TestGameResult);
-      }
-      if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
-        output.WriteRawTag(26);
-        output.WriteMessage(PingPongResult);
-      }
-      if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
-        output.WriteRawTag(34);
-        output.WriteMessage(DanmakuResult);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1296,17 +1222,9 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(GameId);
       }
-      if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
+      if (testGameResult_ != null) {
         output.WriteRawTag(18);
         output.WriteMessage(TestGameResult);
-      }
-      if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
-        output.WriteRawTag(26);
-        output.WriteMessage(PingPongResult);
-      }
-      if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
-        output.WriteRawTag(34);
-        output.WriteMessage(DanmakuResult);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1321,14 +1239,8 @@ namespace Google.Protobuf.Protocol {
       if (GameId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(GameId);
       }
-      if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
+      if (testGameResult_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TestGameResult);
-      }
-      if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PingPongResult);
-      }
-      if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(DanmakuResult);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1345,27 +1257,12 @@ namespace Google.Protobuf.Protocol {
       if (other.GameId != 0) {
         GameId = other.GameId;
       }
-      switch (other.ValueCaseCase) {
-        case ValueCaseOneofCase.TestGameResult:
-          if (TestGameResult == null) {
-            TestGameResult = new global::Google.Protobuf.Protocol.S_TestGameResult();
-          }
-          TestGameResult.MergeFrom(other.TestGameResult);
-          break;
-        case ValueCaseOneofCase.PingPongResult:
-          if (PingPongResult == null) {
-            PingPongResult = new global::Google.Protobuf.Protocol.S_PingPongResult();
-          }
-          PingPongResult.MergeFrom(other.PingPongResult);
-          break;
-        case ValueCaseOneofCase.DanmakuResult:
-          if (DanmakuResult == null) {
-            DanmakuResult = new global::Google.Protobuf.Protocol.S_DanmakuResult();
-          }
-          DanmakuResult.MergeFrom(other.DanmakuResult);
-          break;
+      if (other.testGameResult_ != null) {
+        if (testGameResult_ == null) {
+          TestGameResult = new global::Google.Protobuf.Protocol.S_TestGameResult();
+        }
+        TestGameResult.MergeFrom(other.TestGameResult);
       }
-
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1390,30 +1287,10 @@ namespace Google.Protobuf.Protocol {
             break;
           }
           case 18: {
-            global::Google.Protobuf.Protocol.S_TestGameResult subBuilder = new global::Google.Protobuf.Protocol.S_TestGameResult();
-            if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
-              subBuilder.MergeFrom(TestGameResult);
+            if (testGameResult_ == null) {
+              TestGameResult = new global::Google.Protobuf.Protocol.S_TestGameResult();
             }
-            input.ReadMessage(subBuilder);
-            TestGameResult = subBuilder;
-            break;
-          }
-          case 26: {
-            global::Google.Protobuf.Protocol.S_PingPongResult subBuilder = new global::Google.Protobuf.Protocol.S_PingPongResult();
-            if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
-              subBuilder.MergeFrom(PingPongResult);
-            }
-            input.ReadMessage(subBuilder);
-            PingPongResult = subBuilder;
-            break;
-          }
-          case 34: {
-            global::Google.Protobuf.Protocol.S_DanmakuResult subBuilder = new global::Google.Protobuf.Protocol.S_DanmakuResult();
-            if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
-              subBuilder.MergeFrom(DanmakuResult);
-            }
-            input.ReadMessage(subBuilder);
-            DanmakuResult = subBuilder;
+            input.ReadMessage(TestGameResult);
             break;
           }
         }
@@ -1440,30 +1317,10 @@ namespace Google.Protobuf.Protocol {
             break;
           }
           case 18: {
-            global::Google.Protobuf.Protocol.S_TestGameResult subBuilder = new global::Google.Protobuf.Protocol.S_TestGameResult();
-            if (valueCaseCase_ == ValueCaseOneofCase.TestGameResult) {
-              subBuilder.MergeFrom(TestGameResult);
+            if (testGameResult_ == null) {
+              TestGameResult = new global::Google.Protobuf.Protocol.S_TestGameResult();
             }
-            input.ReadMessage(subBuilder);
-            TestGameResult = subBuilder;
-            break;
-          }
-          case 26: {
-            global::Google.Protobuf.Protocol.S_PingPongResult subBuilder = new global::Google.Protobuf.Protocol.S_PingPongResult();
-            if (valueCaseCase_ == ValueCaseOneofCase.PingPongResult) {
-              subBuilder.MergeFrom(PingPongResult);
-            }
-            input.ReadMessage(subBuilder);
-            PingPongResult = subBuilder;
-            break;
-          }
-          case 34: {
-            global::Google.Protobuf.Protocol.S_DanmakuResult subBuilder = new global::Google.Protobuf.Protocol.S_DanmakuResult();
-            if (valueCaseCase_ == ValueCaseOneofCase.DanmakuResult) {
-              subBuilder.MergeFrom(DanmakuResult);
-            }
-            input.ReadMessage(subBuilder);
-            DanmakuResult = subBuilder;
+            input.ReadMessage(TestGameResult);
             break;
           }
         }
