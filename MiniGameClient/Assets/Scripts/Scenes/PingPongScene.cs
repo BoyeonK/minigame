@@ -12,24 +12,53 @@ public class PingPongScene : BaseScene {
     List<EnemyPlayerBarController> _enemyPlayerBars;
 
     protected override void Init() {
+        //Base - EventSystem등록.
         base.Init();
+
+        //SceneManager에 비 동기적으로 로딩하는데 사용된 자원들 초기화
         SceneType = Scene.TestGame;
         Managers.Scene.ResetLoadSceneOp();
         
+        //서버에게 Scene에 로딩이 완료되었음을 통지. Game정보를 요청
         Managers.Network.TryRequestGameState((int)GameType.PingPong);
         Managers.Network.OnPingPongEndAct += EndGame;
 
-        GameObject go = GameObject.Find("RaycastPlane");
-        if (go != null) {
-            _raycastPlane = go.GetComponent<RaycastPlane>();
+        //Mouse위치를 추적해줄 RaycastPlane을 참조.
+        GameObject goRaycastPlane = GameObject.Find("RaycastPlane");
+        if (goRaycastPlane != null) {
+            _raycastPlane = goRaycastPlane.GetComponent<RaycastPlane>();
         }
         else {
             Debug.LogError("RaycastPlane이 Scene에 없습니다.");
         }
 
+        //적 Bar를 참조.
+        GameObject goEastPlayerBar = GameObject.Find("EPlayerBar");
+        GameObject goWestPlayerBar = GameObject.Find("WPlayerBar");
+        GameObject goSouthPlayerBar = GameObject.Find("SPlayerBar");
+        GameObject goNorthPlayerBar = GameObject.Find("NPlayerBar");
+        if (goEastPlayerBar != null) {
+            EnemyPlayerBarController ebar = goEastPlayerBar.GetComponent<EnemyPlayerBarController>();
+            _enemyPlayerBars.Add(ebar);
+        }
+        if (goWestPlayerBar != null) {
+            EnemyPlayerBarController ebar = goWestPlayerBar.GetComponent<EnemyPlayerBarController>();
+            _enemyPlayerBars.Add(ebar);
+        }
+        if (goSouthPlayerBar != null) {
+            EnemyPlayerBarController ebar = goSouthPlayerBar.GetComponent<EnemyPlayerBarController>();
+            _enemyPlayerBars.Add(ebar);
+        }
+        if (goNorthPlayerBar != null) {
+            EnemyPlayerBarController ebar = goNorthPlayerBar.GetComponent<EnemyPlayerBarController>();
+            _enemyPlayerBars.Add(ebar);
+        }
+
+
         //Invoke(nameof(TestMakeBulletFunc), 5f);
     }
 
+    //플레이어가 어느 방위의 수호자인지 정보가 서버로부터 전달되었을 때.
     public void SetId(int playerIdx) {
         _playerIdx = playerIdx;
         MakeMyPlayerBar(_playerIdx);

@@ -3,7 +3,6 @@ using UnityEngine;
 public class RaycastPlane : MonoBehaviour {
     private LayerMask raycastPlaneLayer; // "RaycastPlane" 레이어만 선택하도록 Inspector에서 설정
     private const string LAYER_NAME = "RaycastPlanesLayer";
-    private Vector3 _hp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
