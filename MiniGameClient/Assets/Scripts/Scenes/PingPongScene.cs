@@ -9,7 +9,8 @@ public class PingPongScene : BaseScene {
     private Vector3 _lastMousePointerPosition;
     private int _playerIdx = -1;
     MyPlayerBarController _myPlayerBar;
-    List<EnemyPlayerBarController> _enemyPlayerBars;
+    List<EnemyPlayerBarController> _enemyPlayerBars = new();
+    PingPongCameraController _pingPongCameraController;
 
     protected override void Init() {
         //Base - EventSystem등록.
@@ -19,10 +20,6 @@ public class PingPongScene : BaseScene {
         SceneType = Scene.TestGame;
         Managers.Scene.ResetLoadSceneOp();
         
-        //서버에게 Scene에 로딩이 완료되었음을 통지. Game정보를 요청
-        Managers.Network.TryRequestGameState((int)GameType.PingPong);
-        Managers.Network.OnPingPongEndAct += EndGame;
-
         //Mouse위치를 추적해줄 RaycastPlane을 참조.
         GameObject goRaycastPlane = GameObject.Find("RaycastPlane");
         if (goRaycastPlane != null) {
@@ -54,18 +51,29 @@ public class PingPongScene : BaseScene {
             _enemyPlayerBars.Add(ebar);
         }
 
+        //CameraController참조
+        GameObject cam = GameObject.Find("TopViewCamera");
+        if (cam != null) { 
+            _pingPongCameraController = cam.GetComponent<PingPongCameraController>();
+        }
+
+        //델리게이터를 구독
+        Managers.Network.OnPingPongEndAct += EndGame;
+
+        //서버에게 Scene에 로딩이 완료되었음을 통지. Game정보를 요청
+        Managers.Network.TryRequestGameState((int)GameType.PingPong);
 
         //Invoke(nameof(TestMakeBulletFunc), 5f);
+        Managers.ExecuteAtMainThread(() => { SetId(0); });
     }
 
     //플레이어가 어느 방위의 수호자인지 정보가 서버로부터 전달되었을 때.
     public void SetId(int playerIdx) {
         _playerIdx = playerIdx;
         MakeMyPlayerBar(_playerIdx);
-        //TODO : 시점 돌리기
-        //TODO : 해당 방향 벽 비 활성화
-        //TODO : 해당 방향 적 PlayerBar 제거
-        //TODO : 나의 GoalLine에 컴포넌트 부착
+        if (_pingPongCameraController != null) { 
+            _pingPongCameraController.SetPlayerIdx(_playerIdx);
+        }
     }
 
     public void MakeMyPlayerBar(int playerIdx) {
@@ -74,26 +82,49 @@ public class PingPongScene : BaseScene {
             _myPlayerBar = playerBar.AddComponent<MyPlayerBarController>();
             _myPlayerBar.SetPlayerIdx(_playerIdx);
             Quaternion rotationForCases01 = Quaternion.Euler(0f, 90f, 0f);
+            GameObject disableBar = null;
+            GameObject goalLine = null;
+
             switch (playerIdx) {
                 case 0:
                     playerBar.transform.position = new Vector3(6.4f, 0.2f, 0f);
                     playerBar.transform.rotation = rotationForCases01;
                     _myPlayerBar.SetMoveDir(false);
+
+                    disableBar = GameObject.Find("EPlayerBar");
+                    goalLine = GameObject.Find("EastGoalLine");
+
                     break;
                 case 1:
                     playerBar.transform.position = new Vector3(-6.4f, 0.2f, 0f);
                     playerBar.transform.rotation = rotationForCases01;
                     _myPlayerBar.SetMoveDir(false);
+
+                    disableBar = GameObject.Find("WPlayerBar");
+                    goalLine = GameObject.Find("WestGoalLine");
+
                     break;
                 case 2:
                     playerBar.transform.position = new Vector3(0f, 0.2f, -6.4f);
+
+                    disableBar = GameObject.Find("SPlayerBar");
+                    goalLine = GameObject.Find("SouthGoalLine");
+
                     break;
                 case 3:
                     playerBar.transform.position = new Vector3(0f, 0.2f, 6.4f);
+
+                    disableBar = GameObject.Find("NPlayerBar");
+                    goalLine = GameObject.Find("NorthGoalLine");
+
                     break;
                 default:
                     break;
             }
+            if (disableBar != null)
+                disableBar.SetActive(false);
+            if (goalLine != null)
+                goalLine.AddComponent<MyGoalLine>();
         }
     }
 
@@ -108,9 +139,8 @@ public class PingPongScene : BaseScene {
             mousePointerPosition.z = -3.2f;
         if (mousePointerPosition != _lastMousePointerPosition) {
             _lastMousePointerPosition = mousePointerPosition;
-            if (_myPlayerBar != null) {
+            if (_myPlayerBar != null)
                 _myPlayerBar.MoveToPoint(mousePointerPosition);
-            }
         }
     }
 
