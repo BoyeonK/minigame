@@ -1,13 +1,15 @@
 using Google.Protobuf.Protocol;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static Define;
 
 public class PingPongScene : BaseScene {
     RaycastPlane _raycastPlane;
-    MyPlayerBarController _myPlayerBar;
-    private Vector3 _mousePointerPosition;
+    private Vector3 _lastMousePointerPosition;
     private int _playerIdx = -1;
+    MyPlayerBarController _myPlayerBar;
+    List<EnemyPlayerBarController> _enemyPlayerBars;
 
     protected override void Init() {
         base.Init();
@@ -34,6 +36,7 @@ public class PingPongScene : BaseScene {
         //TODO : 시점 돌리기
         //TODO : 해당 방향 벽 비 활성화
         //TODO : 해당 방향 적 PlayerBar 제거
+        //TODO : 나의 GoalLine에 컴포넌트 부착
     }
 
     public void MakeMyPlayerBar(int playerIdx) {
@@ -65,11 +68,21 @@ public class PingPongScene : BaseScene {
         }
     }
 
-    public void OnMouseMove(Vector3 mousePosition) {
-        if (_mousePointerPosition == mousePosition) { return; }
-        _mousePointerPosition = mousePosition;
-        _myPlayerBar.MoveToPoint(_mousePointerPosition);
-        //Debug.Log($"{_mousePointerPosition}");
+    public void OnMouseMove(Vector3 mousePointerPosition) {
+        if (mousePointerPosition.x > 3.2f)
+            mousePointerPosition.x = 3.2f;
+        if (mousePointerPosition.x < -3.2f)
+            mousePointerPosition.x = -3.2f;
+        if (mousePointerPosition.z > 3.2f)
+            mousePointerPosition.z = 3.2f;
+        if (mousePointerPosition.z < -3.2f)
+            mousePointerPosition.z = -3.2f;
+        if (mousePointerPosition != _lastMousePointerPosition) {
+            _lastMousePointerPosition = mousePointerPosition;
+            if (_myPlayerBar != null) {
+                _myPlayerBar.MoveToPoint(mousePointerPosition);
+            }
+        }
     }
 
     /*
@@ -93,6 +106,13 @@ public class PingPongScene : BaseScene {
         }   
     }
     */
+
+    private void Update() {
+        if (_raycastPlane != null) {
+            Vector3 mousePointerPosition = _raycastPlane.GetRaycastPoint();
+            OnMouseMove(mousePointerPosition);
+        }
+    }
 
     private void EndGame() {
         Managers.Scene.LoadScene(Scene.Login);

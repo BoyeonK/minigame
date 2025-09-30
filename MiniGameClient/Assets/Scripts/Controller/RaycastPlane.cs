@@ -5,8 +5,6 @@ public class RaycastPlane : MonoBehaviour {
     private const string LAYER_NAME = "RaycastPlanesLayer";
     private Vector3 _hp;
 
-    PingPongScene _scene;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         int layerIdx = LayerMask.NameToLayer(LAYER_NAME);
@@ -15,34 +13,13 @@ public class RaycastPlane : MonoBehaviour {
             return;
         }
         raycastPlaneLayer = 1 << layerIdx;
-
-        GameObject go = GameObject.Find("GameScene");
-        if (go != null) {
-            _scene = go.GetComponent<PingPongScene>();
-        }
-        else {
-            Debug.LogError("RaycastPlane이 Scene 컴포넌트를 로드하는데 실패");
-        }
     }
 
-    // Update is called once per frame
-    void Update() {
+    public Vector3 GetRaycastPoint() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
-        // raycastPlaneLayer (RaycastPlane 레이어)만 감지하도록 LayerMask 적용
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, raycastPlaneLayer)) {
-            Vector3 hitPoint = hit.point;
-            if (hitPoint.x > 3.2f)
-                hitPoint.x = 3.2f;
-            if (hitPoint.x < -3.2f)
-                hitPoint.x = -3.2f;
-            if (hitPoint.z > 3.2f)
-                hitPoint.z = 3.2f;
-            if (hitPoint.z < -3.2f)
-                hitPoint.z = -3.2f;
-
-            _scene.OnMouseMove(hitPoint);
-        }
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, raycastPlaneLayer))
+            return hit.point;
+        return Vector3.zero;
     }
 }
