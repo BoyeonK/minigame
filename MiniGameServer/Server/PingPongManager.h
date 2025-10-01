@@ -19,8 +19,8 @@ public:
 
 private:
 	GameType _ty = GameType::PingPong;
-	MatchQueue _matchQueue;
 	int32_t _quota = 4;
+	MatchQueue _matchQueue;
 	vector<bool> _excluded;
 	uint64_t _lastRenewTick = 0;
 };
