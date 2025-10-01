@@ -209,6 +209,7 @@ public class NetworkManager {
 	}
 
 	public void ResponseMatchmakeCompleted(int gameId) {
+		//TODO : TestLoadingScene말고 진짜 LoadingScene쓰기 혹은 gameId마다 다른 GameScene준비하기
 		Managers.ExecuteAtMainThread(() => {
 			Managers.Scene.LoadSceneWithLoadingScene(IntToGameScene(gameId), Define.Scene.TestLoadingScene);
 		});
