@@ -123,6 +123,7 @@ class PacketHandler {
 			plaintext = DecryptAesGcmInternal(key, iv, ciphertext, tag, aad);
 		}
 		catch (Exception ex) {
+			ex.ToString();
 #if UNITY_EDITOR
 			Managers.ExecuteAtMainThread(() => { Debug.LogError($"복호화 실패: {ex.Message}"); });
 #endif

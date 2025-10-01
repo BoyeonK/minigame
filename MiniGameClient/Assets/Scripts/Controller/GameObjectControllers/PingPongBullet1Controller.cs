@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PingPongBullet1Controller : GameObjectController {
-    private int _lastCol = -1;
+    //private int _lastCol = -1;
     private float _speed = 0;
     private Vector3 _moveDir = Vector3.zero;
 

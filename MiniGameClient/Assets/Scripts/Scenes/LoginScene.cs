@@ -32,6 +32,7 @@ public class LoginScene : BaseScene {
     //Scene이 바뀔 때, 이 친구가 대표로 나서서 모든 초기화 작업을 해 줄거임.
     protected override void Init() {
         base.Init();
+        Screen.SetResolution(720, 480, false);
         SceneType = Define.Scene.Login;
         Managers.Scene.ResetLoadSceneOp();
 
