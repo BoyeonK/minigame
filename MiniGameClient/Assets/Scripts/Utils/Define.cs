@@ -54,6 +54,7 @@ public class Define {
     public static Scene IntToGameScene(int gameId) {
         switch (gameId) {
             case 1: return Scene.TestGame;
+            case 2: return Scene.PingPong;
             default: return Scene.Undefined;
         }
     }
