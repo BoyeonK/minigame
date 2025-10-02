@@ -174,9 +174,11 @@ void TestGameRoom::ReturnToPool() {
 
 void TestGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
 	cout << "업데이트 프로그레스 바" << endl;
+	cout << "_quota : " << _quota << endl;
 	if (progressRate == 100) {
 		_preparedPlayer += 1;
 	}
+	cout << "_preparedPlayer : " << _preparedPlayer << endl;
 	//TODO : 로딩 진행상황 전파
 
 	if (_preparedPlayer == _quota) {

@@ -240,7 +240,6 @@ bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol:
 	}
 
 	playerSessionRef->SetLastKeepAliveTick(pkt.senttimetick());
-	cout << "응답 받음" << endl;
 	return true;
 }
 

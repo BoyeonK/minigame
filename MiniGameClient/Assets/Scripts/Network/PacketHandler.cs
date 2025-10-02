@@ -253,7 +253,7 @@ class PacketHandler {
 		S_MatchmakeKeepAlive recvPkt = packet as S_MatchmakeKeepAlive;
 		//내 세션이 찾는 중인 게임이 서버에서 찾았다고 한 게임과 같다면, _state를 변경하고 응답.
 		int received = recvPkt.GameId;
-		
+		Debug.Log(received);
 		//TestCode
 		//received = 0;
 
