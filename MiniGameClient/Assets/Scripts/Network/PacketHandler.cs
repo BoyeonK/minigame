@@ -305,6 +305,7 @@ class PacketHandler {
 				break;
 		}
 	}
+
 	public static void S_P_StateHandler(PacketSession session, IMessage packet)	{
 		Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessPState(packet); });
 	}

@@ -64,12 +64,14 @@ public class PingPongScene : BaseScene {
         Managers.Network.TryRequestGameState((int)GameType.PingPong);
 
         //Invoke(nameof(TestMakeBulletFunc), 5f);
-        Managers.ExecuteAtMainThread(() => { SetId(0); });
     }
 
     //플레이어가 어느 방위의 수호자인지 정보가 서버로부터 전달되었을 때.
     public void SetId(int playerIdx) {
         _playerIdx = playerIdx;
+
+        Debug.Log(playerIdx);
+
         MakeMyPlayerBar(_playerIdx);
         if (_pingPongCameraController != null) { 
             _pingPongCameraController.SetPlayerIdx(_playerIdx);

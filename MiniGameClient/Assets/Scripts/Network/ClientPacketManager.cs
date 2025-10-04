@@ -83,6 +83,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SEndGame, UnpackPacket<S_EndGame>);
         _handler.Add((ushort)MsgId.SEndGame, PacketHandler.S_EndGameHandler);
         _msgFactories.Add((ushort)MsgId.SEndGame, () => new S_EndGame());
+
+        _onRecv.Add((ushort)MsgId.SPState, UnpackPacket<S_P_State>);
+        _handler.Add((ushort)MsgId.SPState, PacketHandler.S_P_StateHandler);
+        _msgFactories.Add((ushort)MsgId.SPState, () => new S_P_State());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {
