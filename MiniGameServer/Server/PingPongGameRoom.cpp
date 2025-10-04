@@ -60,11 +60,13 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		//플레이어의 게임종료 등의 이유로 세션이 유효하지 않더라도, 진행 가능한 방식으로 코드를 작성해야 함.
 		_state = GameState::BeforeStart;
 		_preparedPlayer = 0;
+		int playerIdx = 0;
 		for (auto& playerSessionWRef : _playerWRefs) {
 			shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
 			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
 			if (playerSessionRef != nullptr) {
 				playerSessionRef->SetJoinedRoom(static_pointer_cast<PingPongGameRoom>(shared_from_this()));
+				playerSessionRef->SetRoomIdx(playerIdx++);
 				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 				playerSessionRef->Send(sendBuffer);
 			}
