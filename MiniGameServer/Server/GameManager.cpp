@@ -10,9 +10,9 @@ void GameManager::AddRoom(shared_ptr<GameRoom> room) {
 }
 
 void GameManager::RemoveInvalidRoom() {
-	if (::GetTickCount64() - _lastRenewRoomTick > 5000) {
+	if (::GetTickCount64() - _lastRemoveRoomTick > 5000) {
 		unique_lock<shared_mutex> lock(_roomsLock);
-		_lastRenewRoomTick = ::GetTickCount64();
+		_lastRemoveRoomTick = ::GetTickCount64();
 		auto new_end = remove_if(_rooms.begin(), _rooms.end(),
 			[](const shared_ptr<GameRoom>& gameRoomRef) {
 				return (gameRoomRef->GetState() == GameRoom::GameState::EndGame);

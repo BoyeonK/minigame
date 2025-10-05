@@ -135,4 +135,9 @@ public:
 		S2C_Protocol::S_EndGame pkt;
 		return pkt;
 	}
+
+	static S2C_Protocol::S_P_RequestPlayerBarPosition MakeSPRequestPlayerBarPosition() {
+		S2C_Protocol::S_P_RequestPlayerBarPosition pkt;
+		return pkt;
+	}
 };

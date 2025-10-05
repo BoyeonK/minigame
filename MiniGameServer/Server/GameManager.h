@@ -18,7 +18,8 @@ public:
 
 protected:
 	atomic<int32_t> _nxtRoomId = 0;
-	uint64_t _lastRenewRoomTick = 0;
+	uint64_t _lastRemoveRoomTick = 0;
+	uint64_t _lastUpdateRoomTick = 0;
 	vector<shared_ptr<GameRoom>> _rooms;
 	shared_mutex _roomsLock;
 };

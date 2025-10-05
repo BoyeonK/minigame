@@ -13,8 +13,8 @@ void PingPongManager::Push(vector<WatingPlayerData> pdv) {
 }
 
 void PingPongManager::RenewMatchQueue() {
-	if (::GetTickCount64() - _lastRenewTick > 3000) {
-		_lastRenewTick = ::GetTickCount64();
+	if (::GetTickCount64() - _lastRenewMatchQueueTick > 3000) {
+		_lastRenewMatchQueueTick = ::GetTickCount64();
 		_matchQueue.FlushTempQueueAndSort();
 	}
 }

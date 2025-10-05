@@ -162,8 +162,18 @@ public:
 
 #pragma region PingPong
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_State& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_STATE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Result& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_RESULT); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_ReadyForStart& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_READY_FOR_START); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_RequestPlayerBarPosition& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_REQUEST_PLAYER_BAR_POSITION); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_ChangePlayerBarPosition& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_CHANGE_PLAYER_BAR_POSITION); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Bullet& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_BULLET); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_State& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_STATE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Result& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_RESULT, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_ReadyForStart& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_READY_FOR_START, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_RequestPlayerBarPosition& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_REQUEST_PLAYER_BAR_POSITION, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_ChangePlayerBarPosition& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_CHANGE_PLAYER_BAR_POSITION, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Bullet& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_BULLET, AESKey); }
 
 #pragma endregion
 

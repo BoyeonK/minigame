@@ -11,7 +11,7 @@ public:
 	}
 
 	void ReturnToPool();
-	void Update() override {}
+	void Update() override;
 
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);

@@ -257,12 +257,9 @@ bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
 	shared_ptr<GameRoom> roomRef = playerSessionRef->GetJoinedRoom();
 
-	
-
 	if (roomRef == nullptr)
 		return false;
 
-	cout << "Request Game State¿äÃ» from : " << playerSessionRef->GetRoomIdx();
 	roomRef->DispatchEvent(&GameRoom::SendGameState, playerSessionRef->GetRoomIdx());
 	return true;
 }

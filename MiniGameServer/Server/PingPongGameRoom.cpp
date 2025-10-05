@@ -124,3 +124,9 @@ void PingPongGameRoom::SendGameState(int32_t playerIdx) {
 void PingPongGameRoom::ReturnToPool() {
 	objectPool<PingPongGameRoom>::dealloc(this);
 }
+
+void PingPongGameRoom::Update() {
+	S2C_Protocol::S_P_RequestPlayerBarPosition pkt = S2CPacketMaker::MakeSPRequestPlayerBarPosition();
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+}

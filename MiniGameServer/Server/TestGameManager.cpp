@@ -13,8 +13,8 @@ void TestGameManager::Push(vector<WatingPlayerData> pdv) {
 }
 
 void TestGameManager::RenewMatchQueue() {
-	if (::GetTickCount64() - _lastRenewTick > 3000) {
-		_lastRenewTick = ::GetTickCount64();
+	if (::GetTickCount64() - _lastRenewMatchQueueTick > 3000) {
+		_lastRenewMatchQueueTick = ::GetTickCount64();
 		_matchQueue.FlushTempQueueAndSort();
 	}
 }
@@ -58,4 +58,12 @@ void TestGameManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	newRoomRef->SetRoomId(_nxtRoomId.fetch_add(1));
 	AddRoom(newRoomRef);
 	newRoomRef->PostEvent(&TestGameRoom::Init, move(pdv));
+}
+
+void TestGameManager::Update() {
+	uint64_t now = ::GetTickCount64();
+	if (now - _lastUpdateRoomTick < _updateTickPeriod)
+		return;
+
+	
 }

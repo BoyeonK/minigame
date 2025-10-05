@@ -22,5 +22,5 @@ private:
 	int32_t _quota = 4;
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;
-	uint64_t _lastRenewTick = 0;
+	uint64_t _lastRenewMatchQueueTick = 0;
 };
