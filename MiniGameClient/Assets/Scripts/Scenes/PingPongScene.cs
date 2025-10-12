@@ -146,6 +146,13 @@ public class PingPongScene : BaseScene {
         }
     }
 
+    public Vector3 GetPlayerBarPosition() {
+        if (_myPlayerBar == null)
+            return _myPlayerBar.GetPosition();
+        else
+            return new Vector3(0f, 0f, 0f);
+    }
+
     /*
     private void TestMakeBulletFunc() {
         Debug.Log("아잉 코루틴 쓰기 시져시져");

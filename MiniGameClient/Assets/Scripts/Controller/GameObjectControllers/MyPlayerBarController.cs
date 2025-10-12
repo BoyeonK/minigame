@@ -24,6 +24,10 @@ public class MyPlayerBarController : GameObjectController {
         }
     }
 
+    public Vector3 GetPosition() {
+        return transform.position;
+    }
+
     void OnTriggerEnter(Collider other) {
         PingPongBullet1Controller specificComp = other.gameObject.GetComponent<PingPongBullet1Controller>();
         if (specificComp != null) {

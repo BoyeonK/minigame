@@ -1,5 +1,6 @@
 using Google.Protobuf;
 using Google.Protobuf.Protocol;
+using Org.BouncyCastle.Bcpg;
 using ServerCore;
 using System;
 using System.Net;
@@ -249,6 +250,27 @@ public class NetworkManager {
         }
     }
 
+    public void ProcessPRequestPlayerBarPositionHandler() {
+        BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+        if (scene == null)
+            return;
+
+        if (scene is PingPongScene pingPongScene) {
+            Vector3 pos = pingPongScene.GetPlayerBarPosition();
+            XYZ serializedPosition = new() {
+                X = pos.x,
+                Y = pos.y,
+                Z = pos.z
+            };
+
+			C_P_ResponsePlayerBarPosition pkt = new C_P_ResponsePlayerBarPosition()	{
+				Position = serializedPosition
+			};
+
+			Send(pkt);
+        }
+    }
+
     public void ProcessDanmakuState(IMessage packet) {
 
     }
@@ -321,5 +343,6 @@ public class NetworkManager {
 	public void MatchmakeCompleted(int gameType) {
 
 	}
-	
+
+    
 }
