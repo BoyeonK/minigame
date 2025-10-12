@@ -43,6 +43,38 @@ struct S_P_ResultDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_P_ResultDefaultTypeInternal _S_P_Result_default_instance_;
+
+inline constexpr S_P_RequestPlayerBarPosition::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : ex_{0},
+        ez_{0},
+        wx_{0},
+        wz_{0},
+        sx_{0},
+        sz_{0},
+        nx_{0},
+        nz_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_P_RequestPlayerBarPosition::S_P_RequestPlayerBarPosition(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_P_RequestPlayerBarPositionDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_P_RequestPlayerBarPositionDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_P_RequestPlayerBarPositionDefaultTypeInternal() {}
+  union {
+    S_P_RequestPlayerBarPosition _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_P_RequestPlayerBarPositionDefaultTypeInternal _S_P_RequestPlayerBarPosition_default_instance_;
               template <typename>
 PROTOBUF_CONSTEXPR S_P_ReadyForStart::S_P_ReadyForStart(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -79,34 +111,6 @@ struct C_P_CollisionGoalLineDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_P_CollisionGoalLineDefaultTypeInternal _C_P_CollisionGoalLine_default_instance_;
-
-inline constexpr S_P_RequestPlayerBarPosition::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        eposition_{nullptr},
-        wposition_{nullptr},
-        sposition_{nullptr},
-        nposition_{nullptr} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR S_P_RequestPlayerBarPosition::S_P_RequestPlayerBarPosition(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct S_P_RequestPlayerBarPositionDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_P_RequestPlayerBarPositionDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_P_RequestPlayerBarPositionDefaultTypeInternal() {}
-  union {
-    S_P_RequestPlayerBarPosition _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_P_RequestPlayerBarPositionDefaultTypeInternal _S_P_RequestPlayerBarPosition_default_instance_;
 
 inline constexpr S_P_ChangePlayerBarPosition::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -272,7 +276,7 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_._has_bits_),
+        ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -280,14 +284,14 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.eposition_),
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.wposition_),
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.sposition_),
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.nposition_),
-        0,
-        1,
-        2,
-        3,
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.ex_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.ez_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.wx_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.wz_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.sx_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.sz_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.nx_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RequestPlayerBarPosition, _impl_.nz_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_P_ResponsePlayerBarPosition, _impl_._has_bits_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_P_ResponsePlayerBarPosition, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -352,7 +356,7 @@ static const ::_pbi::MigrationSchema
         {0, -1, -1, sizeof(::S2C_Protocol::S_P_State)},
         {10, -1, -1, sizeof(::S2C_Protocol::S_P_Result)},
         {18, -1, -1, sizeof(::S2C_Protocol::S_P_ReadyForStart)},
-        {26, 38, -1, sizeof(::S2C_Protocol::S_P_RequestPlayerBarPosition)},
+        {26, -1, -1, sizeof(::S2C_Protocol::S_P_RequestPlayerBarPosition)},
         {42, 51, -1, sizeof(::S2C_Protocol::C_P_ResponsePlayerBarPosition)},
         {52, -1, -1, sizeof(::S2C_Protocol::S_P_ChangePlayerBarPosition)},
         {61, 73, -1, sizeof(::S2C_Protocol::S_P_Bullet)},
@@ -376,23 +380,22 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fPingPong_2eproto[] ABSL_AT
     "col\032\031S2C_Protocol_Common.proto\"M\n\tS_P_St"
     "ate\022.\n\007objects\030\001 \003(\0132\035.S2C_Protocol.Unit"
     "yGameObject\022\020\n\010playerId\030\002 \001(\005\"\014\n\nS_P_Res"
-    "ult\"\023\n\021S_P_ReadyForStart\"\266\001\n\034S_P_Request"
-    "PlayerBarPosition\022$\n\tEposition\030\001 \001(\0132\021.S"
-    "2C_Protocol.XYZ\022$\n\tWposition\030\002 \001(\0132\021.S2C"
-    "_Protocol.XYZ\022$\n\tSposition\030\003 \001(\0132\021.S2C_P"
-    "rotocol.XYZ\022$\n\tNposition\030\004 \001(\0132\021.S2C_Pro"
-    "tocol.XYZ\"D\n\035C_P_ResponsePlayerBarPositi"
-    "on\022#\n\010position\030\001 \001(\0132\021.S2C_Protocol.XYZ\""
-    "C\n\033S_P_ChangePlayerBarPosition\022$\n\tpositi"
-    "ons\030\001 \003(\0132\021.S2C_Protocol.XYZ\"\204\001\n\nS_P_Bul"
-    "let\022-\n\006bullet\030\001 \001(\0132\035.S2C_Protocol.Unity"
-    "GameObject\022\"\n\007moveDir\030\002 \001(\0132\021.S2C_Protoc"
-    "ol.XYZ\022\r\n\005speed\030\003 \001(\002\022\024\n\014lastCollider\030\004 "
-    "\001(\005\"t\n\020C_P_CollisionBar\022-\n\006bullet\030\001 \001(\0132"
-    "\035.S2C_Protocol.UnityGameObject\022\"\n\007moveDi"
-    "r\030\002 \001(\0132\021.S2C_Protocol.XYZ\022\r\n\005speed\030\003 \001("
-    "\002\"\027\n\025C_P_CollisionGoalLineB\033\252\002\030Google.Pr"
-    "otobuf.Protocolb\006proto3"
+    "ult\"\023\n\021S_P_ReadyForStart\"~\n\034S_P_RequestP"
+    "layerBarPosition\022\n\n\002ex\030\001 \001(\002\022\n\n\002ez\030\002 \001(\002"
+    "\022\n\n\002wx\030\003 \001(\002\022\n\n\002wz\030\004 \001(\002\022\n\n\002sx\030\005 \001(\002\022\n\n\002"
+    "sz\030\006 \001(\002\022\n\n\002nx\030\007 \001(\002\022\n\n\002nz\030\010 \001(\002\"D\n\035C_P_"
+    "ResponsePlayerBarPosition\022#\n\010position\030\001 "
+    "\001(\0132\021.S2C_Protocol.XYZ\"C\n\033S_P_ChangePlay"
+    "erBarPosition\022$\n\tpositions\030\001 \003(\0132\021.S2C_P"
+    "rotocol.XYZ\"\204\001\n\nS_P_Bullet\022-\n\006bullet\030\001 \001"
+    "(\0132\035.S2C_Protocol.UnityGameObject\022\"\n\007mov"
+    "eDir\030\002 \001(\0132\021.S2C_Protocol.XYZ\022\r\n\005speed\030\003"
+    " \001(\002\022\024\n\014lastCollider\030\004 \001(\005\"t\n\020C_P_Collis"
+    "ionBar\022-\n\006bullet\030\001 \001(\0132\035.S2C_Protocol.Un"
+    "ityGameObject\022\"\n\007moveDir\030\002 \001(\0132\021.S2C_Pro"
+    "tocol.XYZ\022\r\n\005speed\030\003 \001(\002\"\027\n\025C_P_Collisio"
+    "nGoalLineB\033\252\002\030Google.Protobuf.Protocolb\006"
+    "proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_deps[1] =
     {
@@ -402,7 +405,7 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_once
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fPingPong_2eproto = {
     false,
     false,
-    823,
+    766,
     descriptor_table_protodef_S2C_5fProtocol_5fPingPong_2eproto,
     "S2C_Protocol_PingPong.proto",
     &descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_once,
@@ -899,32 +902,8 @@ const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_P_ReadyForStart::_table_ = {
 
 class S_P_RequestPlayerBarPosition::_Internal {
  public:
-  using HasBits =
-      decltype(std::declval<S_P_RequestPlayerBarPosition>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_._has_bits_);
 };
 
-void S_P_RequestPlayerBarPosition::clear_eposition() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.eposition_ != nullptr) _impl_.eposition_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-void S_P_RequestPlayerBarPosition::clear_wposition() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.wposition_ != nullptr) _impl_.wposition_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-void S_P_RequestPlayerBarPosition::clear_sposition() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.sposition_ != nullptr) _impl_.sposition_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
-void S_P_RequestPlayerBarPosition::clear_nposition() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.nposition_ != nullptr) _impl_.nposition_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000008u;
-}
 S_P_RequestPlayerBarPosition::S_P_RequestPlayerBarPosition(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
@@ -934,40 +913,10 @@ S_P_RequestPlayerBarPosition::S_P_RequestPlayerBarPosition(::google::protobuf::A
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_P_RequestPlayerBarPosition)
 }
-inline PROTOBUF_NDEBUG_INLINE S_P_RequestPlayerBarPosition::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::S2C_Protocol::S_P_RequestPlayerBarPosition& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0} {}
-
 S_P_RequestPlayerBarPosition::S_P_RequestPlayerBarPosition(
-    ::google::protobuf::Arena* arena,
-    const S_P_RequestPlayerBarPosition& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  S_P_RequestPlayerBarPosition* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
-  _impl_.eposition_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(
-                              arena, *from._impl_.eposition_)
-                        : nullptr;
-  _impl_.wposition_ = (cached_has_bits & 0x00000002u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(
-                              arena, *from._impl_.wposition_)
-                        : nullptr;
-  _impl_.sposition_ = (cached_has_bits & 0x00000004u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(
-                              arena, *from._impl_.sposition_)
-                        : nullptr;
-  _impl_.nposition_ = (cached_has_bits & 0x00000008u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(
-                              arena, *from._impl_.nposition_)
-                        : nullptr;
-
-  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_P_RequestPlayerBarPosition)
+    ::google::protobuf::Arena* arena, const S_P_RequestPlayerBarPosition& from)
+    : S_P_RequestPlayerBarPosition(arena) {
+  MergeFrom(from);
 }
 inline PROTOBUF_NDEBUG_INLINE S_P_RequestPlayerBarPosition::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -977,11 +926,11 @@ inline PROTOBUF_NDEBUG_INLINE S_P_RequestPlayerBarPosition::Impl_::Impl_(
 inline void S_P_RequestPlayerBarPosition::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, eposition_),
+               offsetof(Impl_, ex_),
            0,
-           offsetof(Impl_, nposition_) -
-               offsetof(Impl_, eposition_) +
-               sizeof(Impl_::nposition_));
+           offsetof(Impl_, nz_) -
+               offsetof(Impl_, ex_) +
+               sizeof(Impl_::nz_));
 }
 S_P_RequestPlayerBarPosition::~S_P_RequestPlayerBarPosition() {
   // @@protoc_insertion_point(destructor:S2C_Protocol.S_P_RequestPlayerBarPosition)
@@ -991,10 +940,6 @@ inline void S_P_RequestPlayerBarPosition::SharedDtor(MessageLite& self) {
   S_P_RequestPlayerBarPosition& this_ = static_cast<S_P_RequestPlayerBarPosition&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  delete this_._impl_.eposition_;
-  delete this_._impl_.wposition_;
-  delete this_._impl_.sposition_;
-  delete this_._impl_.nposition_;
   this_._impl_.~Impl_();
 }
 
@@ -1034,17 +979,17 @@ const ::google::protobuf::internal::ClassData* S_P_RequestPlayerBarPosition::Get
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 4, 0, 2> S_P_RequestPlayerBarPosition::_table_ = {
+const ::_pbi::TcParseTable<3, 8, 0, 0, 2> S_P_RequestPlayerBarPosition::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_._has_bits_),
+    0,  // no _has_bits_
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    8, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967040,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
-    4,  // num_aux_entries
-    offsetof(decltype(_table_), aux_entries),
+    8,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1052,39 +997,60 @@ const ::_pbi::TcParseTable<2, 4, 4, 0, 2> S_P_RequestPlayerBarPosition::_table_ 
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_P_RequestPlayerBarPosition>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // .S2C_Protocol.XYZ Nposition = 4;
-    {::_pbi::TcParser::FastMtS1,
-     {34, 3, 3, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.nposition_)}},
-    // .S2C_Protocol.XYZ Eposition = 1;
-    {::_pbi::TcParser::FastMtS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.eposition_)}},
-    // .S2C_Protocol.XYZ Wposition = 2;
-    {::_pbi::TcParser::FastMtS1,
-     {18, 1, 1, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.wposition_)}},
-    // .S2C_Protocol.XYZ Sposition = 3;
-    {::_pbi::TcParser::FastMtS1,
-     {26, 2, 2, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.sposition_)}},
+    // float nz = 8;
+    {::_pbi::TcParser::FastF32S1,
+     {69, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.nz_)}},
+    // float ex = 1;
+    {::_pbi::TcParser::FastF32S1,
+     {13, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.ex_)}},
+    // float ez = 2;
+    {::_pbi::TcParser::FastF32S1,
+     {21, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.ez_)}},
+    // float wx = 3;
+    {::_pbi::TcParser::FastF32S1,
+     {29, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.wx_)}},
+    // float wz = 4;
+    {::_pbi::TcParser::FastF32S1,
+     {37, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.wz_)}},
+    // float sx = 5;
+    {::_pbi::TcParser::FastF32S1,
+     {45, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.sx_)}},
+    // float sz = 6;
+    {::_pbi::TcParser::FastF32S1,
+     {53, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.sz_)}},
+    // float nx = 7;
+    {::_pbi::TcParser::FastF32S1,
+     {61, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.nx_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // .S2C_Protocol.XYZ Eposition = 1;
-    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.eposition_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .S2C_Protocol.XYZ Wposition = 2;
-    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.wposition_), _Internal::kHasBitsOffset + 1, 1,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .S2C_Protocol.XYZ Sposition = 3;
-    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.sposition_), _Internal::kHasBitsOffset + 2, 2,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-    // .S2C_Protocol.XYZ Nposition = 4;
-    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.nposition_), _Internal::kHasBitsOffset + 3, 3,
-    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-  }}, {{
-    {::_pbi::TcParser::GetTable<::S2C_Protocol::XYZ>()},
-    {::_pbi::TcParser::GetTable<::S2C_Protocol::XYZ>()},
-    {::_pbi::TcParser::GetTable<::S2C_Protocol::XYZ>()},
-    {::_pbi::TcParser::GetTable<::S2C_Protocol::XYZ>()},
-  }}, {{
+    // float ex = 1;
+    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.ex_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float ez = 2;
+    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.ez_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float wx = 3;
+    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.wx_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float wz = 4;
+    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.wz_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float sx = 5;
+    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.sx_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float sz = 6;
+    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.sz_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float nx = 7;
+    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.nx_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+    // float nz = 8;
+    {PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.nz_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kFloat)},
+  }},
+  // no aux_entries
+  {{
   }},
 };
 
@@ -1095,26 +1061,9 @@ PROTOBUF_NOINLINE void S_P_RequestPlayerBarPosition::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
-    if (cached_has_bits & 0x00000001u) {
-      ABSL_DCHECK(_impl_.eposition_ != nullptr);
-      _impl_.eposition_->Clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      ABSL_DCHECK(_impl_.wposition_ != nullptr);
-      _impl_.wposition_->Clear();
-    }
-    if (cached_has_bits & 0x00000004u) {
-      ABSL_DCHECK(_impl_.sposition_ != nullptr);
-      _impl_.sposition_->Clear();
-    }
-    if (cached_has_bits & 0x00000008u) {
-      ABSL_DCHECK(_impl_.nposition_ != nullptr);
-      _impl_.nposition_->Clear();
-    }
-  }
-  _impl_._has_bits_.Clear();
+  ::memset(&_impl_.ex_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.nz_) -
+      reinterpret_cast<char*>(&_impl_.ex_)) + sizeof(_impl_.nz_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -1133,33 +1082,60 @@ PROTOBUF_NOINLINE void S_P_RequestPlayerBarPosition::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          cached_has_bits = this_._impl_._has_bits_[0];
-          // .S2C_Protocol.XYZ Eposition = 1;
-          if (cached_has_bits & 0x00000001u) {
-            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                1, *this_._impl_.eposition_, this_._impl_.eposition_->GetCachedSize(), target,
-                stream);
+          // float ex = 1;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_ex()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                1, this_._internal_ex(), target);
           }
 
-          // .S2C_Protocol.XYZ Wposition = 2;
-          if (cached_has_bits & 0x00000002u) {
-            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                2, *this_._impl_.wposition_, this_._impl_.wposition_->GetCachedSize(), target,
-                stream);
+          // float ez = 2;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_ez()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                2, this_._internal_ez(), target);
           }
 
-          // .S2C_Protocol.XYZ Sposition = 3;
-          if (cached_has_bits & 0x00000004u) {
-            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                3, *this_._impl_.sposition_, this_._impl_.sposition_->GetCachedSize(), target,
-                stream);
+          // float wx = 3;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_wx()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                3, this_._internal_wx(), target);
           }
 
-          // .S2C_Protocol.XYZ Nposition = 4;
-          if (cached_has_bits & 0x00000008u) {
-            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                4, *this_._impl_.nposition_, this_._impl_.nposition_->GetCachedSize(), target,
-                stream);
+          // float wz = 4;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_wz()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                4, this_._internal_wz(), target);
+          }
+
+          // float sx = 5;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_sx()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                5, this_._internal_sx(), target);
+          }
+
+          // float sz = 6;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_sz()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                6, this_._internal_sz(), target);
+          }
+
+          // float nx = 7;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_nx()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                7, this_._internal_nx(), target);
+          }
+
+          // float nz = 8;
+          if (::absl::bit_cast<::uint32_t>(this_._internal_nz()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteFloatToArray(
+                8, this_._internal_nz(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1186,27 +1162,38 @@ PROTOBUF_NOINLINE void S_P_RequestPlayerBarPosition::Clear() {
           (void)cached_has_bits;
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-          cached_has_bits = this_._impl_._has_bits_[0];
-          if (cached_has_bits & 0x0000000fu) {
-            // .S2C_Protocol.XYZ Eposition = 1;
-            if (cached_has_bits & 0x00000001u) {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.eposition_);
+           {
+            // float ex = 1;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_ex()) != 0) {
+              total_size += 5;
             }
-            // .S2C_Protocol.XYZ Wposition = 2;
-            if (cached_has_bits & 0x00000002u) {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.wposition_);
+            // float ez = 2;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_ez()) != 0) {
+              total_size += 5;
             }
-            // .S2C_Protocol.XYZ Sposition = 3;
-            if (cached_has_bits & 0x00000004u) {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.sposition_);
+            // float wx = 3;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_wx()) != 0) {
+              total_size += 5;
             }
-            // .S2C_Protocol.XYZ Nposition = 4;
-            if (cached_has_bits & 0x00000008u) {
-              total_size += 1 +
-                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.nposition_);
+            // float wz = 4;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_wz()) != 0) {
+              total_size += 5;
+            }
+            // float sx = 5;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_sx()) != 0) {
+              total_size += 5;
+            }
+            // float sz = 6;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_sz()) != 0) {
+              total_size += 5;
+            }
+            // float nx = 7;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_nx()) != 0) {
+              total_size += 5;
+            }
+            // float nz = 8;
+            if (::absl::bit_cast<::uint32_t>(this_._internal_nz()) != 0) {
+              total_size += 5;
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1216,52 +1203,35 @@ PROTOBUF_NOINLINE void S_P_RequestPlayerBarPosition::Clear() {
 void S_P_RequestPlayerBarPosition::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<S_P_RequestPlayerBarPosition*>(&to_msg);
   auto& from = static_cast<const S_P_RequestPlayerBarPosition&>(from_msg);
-  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_P_RequestPlayerBarPosition)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
-    if (cached_has_bits & 0x00000001u) {
-      ABSL_DCHECK(from._impl_.eposition_ != nullptr);
-      if (_this->_impl_.eposition_ == nullptr) {
-        _this->_impl_.eposition_ =
-            ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(arena, *from._impl_.eposition_);
-      } else {
-        _this->_impl_.eposition_->MergeFrom(*from._impl_.eposition_);
-      }
-    }
-    if (cached_has_bits & 0x00000002u) {
-      ABSL_DCHECK(from._impl_.wposition_ != nullptr);
-      if (_this->_impl_.wposition_ == nullptr) {
-        _this->_impl_.wposition_ =
-            ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(arena, *from._impl_.wposition_);
-      } else {
-        _this->_impl_.wposition_->MergeFrom(*from._impl_.wposition_);
-      }
-    }
-    if (cached_has_bits & 0x00000004u) {
-      ABSL_DCHECK(from._impl_.sposition_ != nullptr);
-      if (_this->_impl_.sposition_ == nullptr) {
-        _this->_impl_.sposition_ =
-            ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(arena, *from._impl_.sposition_);
-      } else {
-        _this->_impl_.sposition_->MergeFrom(*from._impl_.sposition_);
-      }
-    }
-    if (cached_has_bits & 0x00000008u) {
-      ABSL_DCHECK(from._impl_.nposition_ != nullptr);
-      if (_this->_impl_.nposition_ == nullptr) {
-        _this->_impl_.nposition_ =
-            ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(arena, *from._impl_.nposition_);
-      } else {
-        _this->_impl_.nposition_->MergeFrom(*from._impl_.nposition_);
-      }
-    }
+  if (::absl::bit_cast<::uint32_t>(from._internal_ex()) != 0) {
+    _this->_impl_.ex_ = from._impl_.ex_;
   }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  if (::absl::bit_cast<::uint32_t>(from._internal_ez()) != 0) {
+    _this->_impl_.ez_ = from._impl_.ez_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_wx()) != 0) {
+    _this->_impl_.wx_ = from._impl_.wx_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_wz()) != 0) {
+    _this->_impl_.wz_ = from._impl_.wz_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_sx()) != 0) {
+    _this->_impl_.sx_ = from._impl_.sx_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_sz()) != 0) {
+    _this->_impl_.sz_ = from._impl_.sz_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_nx()) != 0) {
+    _this->_impl_.nx_ = from._impl_.nx_;
+  }
+  if (::absl::bit_cast<::uint32_t>(from._internal_nz()) != 0) {
+    _this->_impl_.nz_ = from._impl_.nz_;
+  }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1276,13 +1246,12 @@ void S_P_RequestPlayerBarPosition::CopyFrom(const S_P_RequestPlayerBarPosition& 
 void S_P_RequestPlayerBarPosition::InternalSwap(S_P_RequestPlayerBarPosition* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.nposition_)
-      + sizeof(S_P_RequestPlayerBarPosition::_impl_.nposition_)
-      - PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.eposition_)>(
-          reinterpret_cast<char*>(&_impl_.eposition_),
-          reinterpret_cast<char*>(&other->_impl_.eposition_));
+      PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.nz_)
+      + sizeof(S_P_RequestPlayerBarPosition::_impl_.nz_)
+      - PROTOBUF_FIELD_OFFSET(S_P_RequestPlayerBarPosition, _impl_.ex_)>(
+          reinterpret_cast<char*>(&_impl_.ex_),
+          reinterpret_cast<char*>(&other->_impl_.ex_));
 }
 
 ::google::protobuf::Metadata S_P_RequestPlayerBarPosition::GetMetadata() const {

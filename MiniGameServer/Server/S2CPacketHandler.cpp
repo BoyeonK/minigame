@@ -3,6 +3,7 @@
 #include "PlayerSession.h"
 #include "S2CPacketMaker.h"
 #include "GameRoom.h"
+#include "PingPongGameRoom.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
@@ -264,8 +265,14 @@ bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	return true;
 }
 
-bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestGameState& pkt) {
-	return false;
+bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponsePlayerBarPosition& pkt) {
+	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
+	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
+	if (roomRef == nullptr)
+		return false;
+
+	roomRef->DispatchEvent(&PingPongGameRoom::ResponsePlayerBarPosition, playerSessionRef->GetRoomIdx(), { pkt.position().x(), pkt.position().z() });
+	return true;
 }
 
 bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionBar& pkt) {

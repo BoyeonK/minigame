@@ -106,9 +106,27 @@ void PingPongGameRoom::Start() {
 	BroadCast(sendBuffer);
 }
 
-void PingPongGameRoom::RenewPlayerBarPosition() {
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(renewBarRequestPkt);
+void PingPongGameRoom::RequestPlayerBarPosition() {
+	S2C_Protocol::S_P_RequestPlayerBarPosition pkt;
+	pkt.set_ex(_playerBarPositions[0].first);
+	pkt.set_ez(_playerBarPositions[0].second);
+	pkt.set_wx(_playerBarPositions[1].first);
+	pkt.set_wz(_playerBarPositions[1].second);
+	pkt.set_sx(_playerBarPositions[2].first);
+	pkt.set_sz(_playerBarPositions[2].second);
+	pkt.set_nx(_playerBarPositions[3].first);
+	pkt.set_nz(_playerBarPositions[3].second);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
+}
+
+void PingPongGameRoom::ResponsePlayerBarPosition(int32_t playerIdx, pair<float, float> barPos) {
+	if (playerIdx > _quota)
+		return;
+	if (playerIdx < 0)
+		return;
+
+	_playerBarPositions[playerIdx] = barPos;
 }
 
 void PingPongGameRoom::SendGameState(int32_t playerIdx) {
@@ -131,7 +149,8 @@ void PingPongGameRoom::ReturnToPool() {
 }
 
 void PingPongGameRoom::Update() {
-	S2C_Protocol::S_P_RequestPlayerBarPosition pkt = S2CPacketMaker::MakeSPRequestPlayerBarPosition();
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-	BroadCast(sendBuffer);
+	if (!_isUpdateCall)
+		return;
+
+	RequestPlayerBarPosition();
 }
