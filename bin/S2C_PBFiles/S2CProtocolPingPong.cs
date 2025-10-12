@@ -28,8 +28,11 @@ namespace Google.Protobuf.Protocol {
             "UzJDX1Byb3RvY29sX0NvbW1vbi5wcm90byJNCglTX1BfU3RhdGUSLgoHb2Jq",
             "ZWN0cxgBIAMoCzIdLlMyQ19Qcm90b2NvbC5Vbml0eUdhbWVPYmplY3QSEAoI",
             "cGxheWVySWQYAiABKAUiDAoKU19QX1Jlc3VsdCITChFTX1BfUmVhZHlGb3JT",
-            "dGFydCIwChxTX1BfUmVxdWVzdFBsYXllckJhclBvc2l0aW9uEhAKCHBsYXll",
-            "cklkGAEgASgFIkQKHUNfUF9SZXNwb25zZVBsYXllckJhclBvc2l0aW9uEiMK",
+            "dGFydCK2AQocU19QX1JlcXVlc3RQbGF5ZXJCYXJQb3NpdGlvbhIkCglFcG9z",
+            "aXRpb24YASABKAsyES5TMkNfUHJvdG9jb2wuWFlaEiQKCVdwb3NpdGlvbhgC",
+            "IAEoCzIRLlMyQ19Qcm90b2NvbC5YWVoSJAoJU3Bvc2l0aW9uGAMgASgLMhEu",
+            "UzJDX1Byb3RvY29sLlhZWhIkCglOcG9zaXRpb24YBCABKAsyES5TMkNfUHJv",
+            "dG9jb2wuWFlaIkQKHUNfUF9SZXNwb25zZVBsYXllckJhclBvc2l0aW9uEiMK",
             "CHBvc2l0aW9uGAEgASgLMhEuUzJDX1Byb3RvY29sLlhZWiJDChtTX1BfQ2hh",
             "bmdlUGxheWVyQmFyUG9zaXRpb24SJAoJcG9zaXRpb25zGAEgAygLMhEuUzJD",
             "X1Byb3RvY29sLlhZWiKEAQoKU19QX0J1bGxldBItCgZidWxsZXQYASABKAsy",
@@ -46,7 +49,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_State), global::Google.Protobuf.Protocol.S_P_State.Parser, new[]{ "Objects", "PlayerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_Result), global::Google.Protobuf.Protocol.S_P_Result.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_ReadyForStart), global::Google.Protobuf.Protocol.S_P_ReadyForStart.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_RequestPlayerBarPosition), global::Google.Protobuf.Protocol.S_P_RequestPlayerBarPosition.Parser, new[]{ "PlayerId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_RequestPlayerBarPosition), global::Google.Protobuf.Protocol.S_P_RequestPlayerBarPosition.Parser, new[]{ "Eposition", "Wposition", "Sposition", "Nposition" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_P_ResponsePlayerBarPosition), global::Google.Protobuf.Protocol.C_P_ResponsePlayerBarPosition.Parser, new[]{ "Position" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_ChangePlayerBarPosition), global::Google.Protobuf.Protocol.S_P_ChangePlayerBarPosition.Parser, new[]{ "Positions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_Bullet), global::Google.Protobuf.Protocol.S_P_Bullet.Parser, new[]{ "Bullet", "MoveDir", "Speed", "LastCollider" }, null, null, null, null),
@@ -643,7 +646,10 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_P_RequestPlayerBarPosition(S_P_RequestPlayerBarPosition other) : this() {
-      playerId_ = other.playerId_;
+      eposition_ = other.eposition_ != null ? other.eposition_.Clone() : null;
+      wposition_ = other.wposition_ != null ? other.wposition_.Clone() : null;
+      sposition_ = other.sposition_ != null ? other.sposition_.Clone() : null;
+      nposition_ = other.nposition_ != null ? other.nposition_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -653,15 +659,51 @@ namespace Google.Protobuf.Protocol {
       return new S_P_RequestPlayerBarPosition(this);
     }
 
-    /// <summary>Field number for the "playerId" field.</summary>
-    public const int PlayerIdFieldNumber = 1;
-    private int playerId_;
+    /// <summary>Field number for the "Eposition" field.</summary>
+    public const int EpositionFieldNumber = 1;
+    private global::Google.Protobuf.Protocol.XYZ eposition_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int PlayerId {
-      get { return playerId_; }
+    public global::Google.Protobuf.Protocol.XYZ Eposition {
+      get { return eposition_; }
       set {
-        playerId_ = value;
+        eposition_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Wposition" field.</summary>
+    public const int WpositionFieldNumber = 2;
+    private global::Google.Protobuf.Protocol.XYZ wposition_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.XYZ Wposition {
+      get { return wposition_; }
+      set {
+        wposition_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Sposition" field.</summary>
+    public const int SpositionFieldNumber = 3;
+    private global::Google.Protobuf.Protocol.XYZ sposition_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.XYZ Sposition {
+      get { return sposition_; }
+      set {
+        sposition_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Nposition" field.</summary>
+    public const int NpositionFieldNumber = 4;
+    private global::Google.Protobuf.Protocol.XYZ nposition_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.Protocol.XYZ Nposition {
+      get { return nposition_; }
+      set {
+        nposition_ = value;
       }
     }
 
@@ -680,7 +722,10 @@ namespace Google.Protobuf.Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (PlayerId != other.PlayerId) return false;
+      if (!object.Equals(Eposition, other.Eposition)) return false;
+      if (!object.Equals(Wposition, other.Wposition)) return false;
+      if (!object.Equals(Sposition, other.Sposition)) return false;
+      if (!object.Equals(Nposition, other.Nposition)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -688,7 +733,10 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (PlayerId != 0) hash ^= PlayerId.GetHashCode();
+      if (eposition_ != null) hash ^= Eposition.GetHashCode();
+      if (wposition_ != null) hash ^= Wposition.GetHashCode();
+      if (sposition_ != null) hash ^= Sposition.GetHashCode();
+      if (nposition_ != null) hash ^= Nposition.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -707,9 +755,21 @@ namespace Google.Protobuf.Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (PlayerId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(PlayerId);
+      if (eposition_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Eposition);
+      }
+      if (wposition_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Wposition);
+      }
+      if (sposition_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Sposition);
+      }
+      if (nposition_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Nposition);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -721,9 +781,21 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (PlayerId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(PlayerId);
+      if (eposition_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Eposition);
+      }
+      if (wposition_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Wposition);
+      }
+      if (sposition_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Sposition);
+      }
+      if (nposition_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Nposition);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -735,8 +807,17 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (PlayerId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerId);
+      if (eposition_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Eposition);
+      }
+      if (wposition_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Wposition);
+      }
+      if (sposition_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Sposition);
+      }
+      if (nposition_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Nposition);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -750,8 +831,29 @@ namespace Google.Protobuf.Protocol {
       if (other == null) {
         return;
       }
-      if (other.PlayerId != 0) {
-        PlayerId = other.PlayerId;
+      if (other.eposition_ != null) {
+        if (eposition_ == null) {
+          Eposition = new global::Google.Protobuf.Protocol.XYZ();
+        }
+        Eposition.MergeFrom(other.Eposition);
+      }
+      if (other.wposition_ != null) {
+        if (wposition_ == null) {
+          Wposition = new global::Google.Protobuf.Protocol.XYZ();
+        }
+        Wposition.MergeFrom(other.Wposition);
+      }
+      if (other.sposition_ != null) {
+        if (sposition_ == null) {
+          Sposition = new global::Google.Protobuf.Protocol.XYZ();
+        }
+        Sposition.MergeFrom(other.Sposition);
+      }
+      if (other.nposition_ != null) {
+        if (nposition_ == null) {
+          Nposition = new global::Google.Protobuf.Protocol.XYZ();
+        }
+        Nposition.MergeFrom(other.Nposition);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -772,8 +874,32 @@ namespace Google.Protobuf.Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            PlayerId = input.ReadInt32();
+          case 10: {
+            if (eposition_ == null) {
+              Eposition = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(Eposition);
+            break;
+          }
+          case 18: {
+            if (wposition_ == null) {
+              Wposition = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(Wposition);
+            break;
+          }
+          case 26: {
+            if (sposition_ == null) {
+              Sposition = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(Sposition);
+            break;
+          }
+          case 34: {
+            if (nposition_ == null) {
+              Nposition = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(Nposition);
             break;
           }
         }
@@ -795,8 +921,32 @@ namespace Google.Protobuf.Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            PlayerId = input.ReadInt32();
+          case 10: {
+            if (eposition_ == null) {
+              Eposition = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(Eposition);
+            break;
+          }
+          case 18: {
+            if (wposition_ == null) {
+              Wposition = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(Wposition);
+            break;
+          }
+          case 26: {
+            if (sposition_ == null) {
+              Sposition = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(Sposition);
+            break;
+          }
+          case 34: {
+            if (nposition_ == null) {
+              Nposition = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(Nposition);
             break;
           }
         }

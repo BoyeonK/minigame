@@ -239,196 +239,6 @@ class S_P_Result final : public ::google::protobuf::internal::ZeroFieldsBase
 };
 // -------------------------------------------------------------------
 
-class S_P_RequestPlayerBarPosition final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_P_RequestPlayerBarPosition) */ {
- public:
-  inline S_P_RequestPlayerBarPosition() : S_P_RequestPlayerBarPosition(nullptr) {}
-  ~S_P_RequestPlayerBarPosition() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(S_P_RequestPlayerBarPosition* msg, std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_P_RequestPlayerBarPosition));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR S_P_RequestPlayerBarPosition(
-      ::google::protobuf::internal::ConstantInitialized);
-
-  inline S_P_RequestPlayerBarPosition(const S_P_RequestPlayerBarPosition& from) : S_P_RequestPlayerBarPosition(nullptr, from) {}
-  inline S_P_RequestPlayerBarPosition(S_P_RequestPlayerBarPosition&& from) noexcept
-      : S_P_RequestPlayerBarPosition(nullptr, std::move(from)) {}
-  inline S_P_RequestPlayerBarPosition& operator=(const S_P_RequestPlayerBarPosition& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline S_P_RequestPlayerBarPosition& operator=(S_P_RequestPlayerBarPosition&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const S_P_RequestPlayerBarPosition& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const S_P_RequestPlayerBarPosition* internal_default_instance() {
-    return reinterpret_cast<const S_P_RequestPlayerBarPosition*>(
-        &_S_P_RequestPlayerBarPosition_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 3;
-  friend void swap(S_P_RequestPlayerBarPosition& a, S_P_RequestPlayerBarPosition& b) { a.Swap(&b); }
-  inline void Swap(S_P_RequestPlayerBarPosition* other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(S_P_RequestPlayerBarPosition* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  S_P_RequestPlayerBarPosition* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<S_P_RequestPlayerBarPosition>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const S_P_RequestPlayerBarPosition& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const S_P_RequestPlayerBarPosition& from) { S_P_RequestPlayerBarPosition::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(
-      ::google::protobuf::MessageLite& to_msg,
-      const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* _InternalSerialize(
-      const MessageLite& msg, ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target,
-      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(S_P_RequestPlayerBarPosition* other);
- private:
-  template <typename T>
-  friend ::absl::string_view(
-      ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_P_RequestPlayerBarPosition"; }
-
- protected:
-  explicit S_P_RequestPlayerBarPosition(::google::protobuf::Arena* arena);
-  S_P_RequestPlayerBarPosition(::google::protobuf::Arena* arena, const S_P_RequestPlayerBarPosition& from);
-  S_P_RequestPlayerBarPosition(::google::protobuf::Arena* arena, S_P_RequestPlayerBarPosition&& from) noexcept
-      : S_P_RequestPlayerBarPosition(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
-  static void* PlacementNew_(const void*, void* mem,
-                             ::google::protobuf::Arena* arena);
-  static constexpr auto InternalNewImpl_();
-  static const ::google::protobuf::internal::ClassDataFull _class_data_;
-
- public:
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kPlayerIdFieldNumber = 1,
-  };
-  // int32 playerId = 1;
-  void clear_playerid() ;
-  ::int32_t playerid() const;
-  void set_playerid(::int32_t value);
-
-  private:
-  ::int32_t _internal_playerid() const;
-  void _internal_set_playerid(::int32_t value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_P_RequestPlayerBarPosition)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(
-        ::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena);
-    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                          ::google::protobuf::Arena* arena, const Impl_& from,
-                          const S_P_RequestPlayerBarPosition& from_msg);
-    ::int32_t playerid_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_S2C_5fProtocol_5fPingPong_2eproto;
-};
-// -------------------------------------------------------------------
-
 class S_P_ReadyForStart final : public ::google::protobuf::internal::ZeroFieldsBase
 /* @@protoc_insertion_point(class_definition:S2C_Protocol.S_P_ReadyForStart) */ {
  public:
@@ -715,6 +525,253 @@ class C_P_CollisionGoalLine final : public ::google::protobuf::internal::ZeroFie
                           const C_P_CollisionGoalLine& from_msg);
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
+  friend struct ::TableStruct_S2C_5fProtocol_5fPingPong_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_P_RequestPlayerBarPosition final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_P_RequestPlayerBarPosition) */ {
+ public:
+  inline S_P_RequestPlayerBarPosition() : S_P_RequestPlayerBarPosition(nullptr) {}
+  ~S_P_RequestPlayerBarPosition() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(S_P_RequestPlayerBarPosition* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_P_RequestPlayerBarPosition));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR S_P_RequestPlayerBarPosition(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline S_P_RequestPlayerBarPosition(const S_P_RequestPlayerBarPosition& from) : S_P_RequestPlayerBarPosition(nullptr, from) {}
+  inline S_P_RequestPlayerBarPosition(S_P_RequestPlayerBarPosition&& from) noexcept
+      : S_P_RequestPlayerBarPosition(nullptr, std::move(from)) {}
+  inline S_P_RequestPlayerBarPosition& operator=(const S_P_RequestPlayerBarPosition& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_P_RequestPlayerBarPosition& operator=(S_P_RequestPlayerBarPosition&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_P_RequestPlayerBarPosition& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_P_RequestPlayerBarPosition* internal_default_instance() {
+    return reinterpret_cast<const S_P_RequestPlayerBarPosition*>(
+        &_S_P_RequestPlayerBarPosition_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 3;
+  friend void swap(S_P_RequestPlayerBarPosition& a, S_P_RequestPlayerBarPosition& b) { a.Swap(&b); }
+  inline void Swap(S_P_RequestPlayerBarPosition* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_P_RequestPlayerBarPosition* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_P_RequestPlayerBarPosition* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S_P_RequestPlayerBarPosition>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const S_P_RequestPlayerBarPosition& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const S_P_RequestPlayerBarPosition& from) { S_P_RequestPlayerBarPosition::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(S_P_RequestPlayerBarPosition* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_P_RequestPlayerBarPosition"; }
+
+ protected:
+  explicit S_P_RequestPlayerBarPosition(::google::protobuf::Arena* arena);
+  S_P_RequestPlayerBarPosition(::google::protobuf::Arena* arena, const S_P_RequestPlayerBarPosition& from);
+  S_P_RequestPlayerBarPosition(::google::protobuf::Arena* arena, S_P_RequestPlayerBarPosition&& from) noexcept
+      : S_P_RequestPlayerBarPosition(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kEpositionFieldNumber = 1,
+    kWpositionFieldNumber = 2,
+    kSpositionFieldNumber = 3,
+    kNpositionFieldNumber = 4,
+  };
+  // .S2C_Protocol.XYZ Eposition = 1;
+  bool has_eposition() const;
+  void clear_eposition() ;
+  const ::S2C_Protocol::XYZ& eposition() const;
+  PROTOBUF_NODISCARD ::S2C_Protocol::XYZ* release_eposition();
+  ::S2C_Protocol::XYZ* mutable_eposition();
+  void set_allocated_eposition(::S2C_Protocol::XYZ* value);
+  void unsafe_arena_set_allocated_eposition(::S2C_Protocol::XYZ* value);
+  ::S2C_Protocol::XYZ* unsafe_arena_release_eposition();
+
+  private:
+  const ::S2C_Protocol::XYZ& _internal_eposition() const;
+  ::S2C_Protocol::XYZ* _internal_mutable_eposition();
+
+  public:
+  // .S2C_Protocol.XYZ Wposition = 2;
+  bool has_wposition() const;
+  void clear_wposition() ;
+  const ::S2C_Protocol::XYZ& wposition() const;
+  PROTOBUF_NODISCARD ::S2C_Protocol::XYZ* release_wposition();
+  ::S2C_Protocol::XYZ* mutable_wposition();
+  void set_allocated_wposition(::S2C_Protocol::XYZ* value);
+  void unsafe_arena_set_allocated_wposition(::S2C_Protocol::XYZ* value);
+  ::S2C_Protocol::XYZ* unsafe_arena_release_wposition();
+
+  private:
+  const ::S2C_Protocol::XYZ& _internal_wposition() const;
+  ::S2C_Protocol::XYZ* _internal_mutable_wposition();
+
+  public:
+  // .S2C_Protocol.XYZ Sposition = 3;
+  bool has_sposition() const;
+  void clear_sposition() ;
+  const ::S2C_Protocol::XYZ& sposition() const;
+  PROTOBUF_NODISCARD ::S2C_Protocol::XYZ* release_sposition();
+  ::S2C_Protocol::XYZ* mutable_sposition();
+  void set_allocated_sposition(::S2C_Protocol::XYZ* value);
+  void unsafe_arena_set_allocated_sposition(::S2C_Protocol::XYZ* value);
+  ::S2C_Protocol::XYZ* unsafe_arena_release_sposition();
+
+  private:
+  const ::S2C_Protocol::XYZ& _internal_sposition() const;
+  ::S2C_Protocol::XYZ* _internal_mutable_sposition();
+
+  public:
+  // .S2C_Protocol.XYZ Nposition = 4;
+  bool has_nposition() const;
+  void clear_nposition() ;
+  const ::S2C_Protocol::XYZ& nposition() const;
+  PROTOBUF_NODISCARD ::S2C_Protocol::XYZ* release_nposition();
+  ::S2C_Protocol::XYZ* mutable_nposition();
+  void set_allocated_nposition(::S2C_Protocol::XYZ* value);
+  void unsafe_arena_set_allocated_nposition(::S2C_Protocol::XYZ* value);
+  ::S2C_Protocol::XYZ* unsafe_arena_release_nposition();
+
+  private:
+  const ::S2C_Protocol::XYZ& _internal_nposition() const;
+  ::S2C_Protocol::XYZ* _internal_mutable_nposition();
+
+  public:
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_P_RequestPlayerBarPosition)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 4, 4,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const S_P_RequestPlayerBarPosition& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::S2C_Protocol::XYZ* eposition_;
+    ::S2C_Protocol::XYZ* wposition_;
+    ::S2C_Protocol::XYZ* sposition_;
+    ::S2C_Protocol::XYZ* nposition_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_S2C_5fProtocol_5fPingPong_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1877,26 +1934,368 @@ inline void S_P_State::_internal_set_playerid(::int32_t value) {
 
 // S_P_RequestPlayerBarPosition
 
-// int32 playerId = 1;
-inline void S_P_RequestPlayerBarPosition::clear_playerid() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.playerid_ = 0;
+// .S2C_Protocol.XYZ Eposition = 1;
+inline bool S_P_RequestPlayerBarPosition::has_eposition() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.eposition_ != nullptr);
+  return value;
 }
-inline ::int32_t S_P_RequestPlayerBarPosition::playerid() const {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.playerId)
-  return _internal_playerid();
-}
-inline void S_P_RequestPlayerBarPosition::set_playerid(::int32_t value) {
-  _internal_set_playerid(value);
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_RequestPlayerBarPosition.playerId)
-}
-inline ::int32_t S_P_RequestPlayerBarPosition::_internal_playerid() const {
+inline const ::S2C_Protocol::XYZ& S_P_RequestPlayerBarPosition::_internal_eposition() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.playerid_;
+  const ::S2C_Protocol::XYZ* p = _impl_.eposition_;
+  return p != nullptr ? *p : reinterpret_cast<const ::S2C_Protocol::XYZ&>(::S2C_Protocol::_XYZ_default_instance_);
 }
-inline void S_P_RequestPlayerBarPosition::_internal_set_playerid(::int32_t value) {
+inline const ::S2C_Protocol::XYZ& S_P_RequestPlayerBarPosition::eposition() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.Eposition)
+  return _internal_eposition();
+}
+inline void S_P_RequestPlayerBarPosition::unsafe_arena_set_allocated_eposition(::S2C_Protocol::XYZ* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.playerid_ = value;
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.eposition_);
+  }
+  _impl_.eposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.S_P_RequestPlayerBarPosition.Eposition)
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::release_eposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::S2C_Protocol::XYZ* released = _impl_.eposition_;
+  _impl_.eposition_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::unsafe_arena_release_eposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.S_P_RequestPlayerBarPosition.Eposition)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::S2C_Protocol::XYZ* temp = _impl_.eposition_;
+  _impl_.eposition_ = nullptr;
+  return temp;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::_internal_mutable_eposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.eposition_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::XYZ>(GetArena());
+    _impl_.eposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(p);
+  }
+  return _impl_.eposition_;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::mutable_eposition() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::S2C_Protocol::XYZ* _msg = _internal_mutable_eposition();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_P_RequestPlayerBarPosition.Eposition)
+  return _msg;
+}
+inline void S_P_RequestPlayerBarPosition::set_allocated_eposition(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.eposition_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.eposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_P_RequestPlayerBarPosition.Eposition)
+}
+
+// .S2C_Protocol.XYZ Wposition = 2;
+inline bool S_P_RequestPlayerBarPosition::has_wposition() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.wposition_ != nullptr);
+  return value;
+}
+inline const ::S2C_Protocol::XYZ& S_P_RequestPlayerBarPosition::_internal_wposition() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::S2C_Protocol::XYZ* p = _impl_.wposition_;
+  return p != nullptr ? *p : reinterpret_cast<const ::S2C_Protocol::XYZ&>(::S2C_Protocol::_XYZ_default_instance_);
+}
+inline const ::S2C_Protocol::XYZ& S_P_RequestPlayerBarPosition::wposition() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.Wposition)
+  return _internal_wposition();
+}
+inline void S_P_RequestPlayerBarPosition::unsafe_arena_set_allocated_wposition(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.wposition_);
+  }
+  _impl_.wposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.S_P_RequestPlayerBarPosition.Wposition)
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::release_wposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::S2C_Protocol::XYZ* released = _impl_.wposition_;
+  _impl_.wposition_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::unsafe_arena_release_wposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.S_P_RequestPlayerBarPosition.Wposition)
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::S2C_Protocol::XYZ* temp = _impl_.wposition_;
+  _impl_.wposition_ = nullptr;
+  return temp;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::_internal_mutable_wposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.wposition_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::XYZ>(GetArena());
+    _impl_.wposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(p);
+  }
+  return _impl_.wposition_;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::mutable_wposition() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  ::S2C_Protocol::XYZ* _msg = _internal_mutable_wposition();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_P_RequestPlayerBarPosition.Wposition)
+  return _msg;
+}
+inline void S_P_RequestPlayerBarPosition::set_allocated_wposition(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.wposition_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+
+  _impl_.wposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_P_RequestPlayerBarPosition.Wposition)
+}
+
+// .S2C_Protocol.XYZ Sposition = 3;
+inline bool S_P_RequestPlayerBarPosition::has_sposition() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.sposition_ != nullptr);
+  return value;
+}
+inline const ::S2C_Protocol::XYZ& S_P_RequestPlayerBarPosition::_internal_sposition() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::S2C_Protocol::XYZ* p = _impl_.sposition_;
+  return p != nullptr ? *p : reinterpret_cast<const ::S2C_Protocol::XYZ&>(::S2C_Protocol::_XYZ_default_instance_);
+}
+inline const ::S2C_Protocol::XYZ& S_P_RequestPlayerBarPosition::sposition() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.Sposition)
+  return _internal_sposition();
+}
+inline void S_P_RequestPlayerBarPosition::unsafe_arena_set_allocated_sposition(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.sposition_);
+  }
+  _impl_.sposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.S_P_RequestPlayerBarPosition.Sposition)
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::release_sposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::S2C_Protocol::XYZ* released = _impl_.sposition_;
+  _impl_.sposition_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::unsafe_arena_release_sposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.S_P_RequestPlayerBarPosition.Sposition)
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::S2C_Protocol::XYZ* temp = _impl_.sposition_;
+  _impl_.sposition_ = nullptr;
+  return temp;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::_internal_mutable_sposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.sposition_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::XYZ>(GetArena());
+    _impl_.sposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(p);
+  }
+  return _impl_.sposition_;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::mutable_sposition() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000004u;
+  ::S2C_Protocol::XYZ* _msg = _internal_mutable_sposition();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_P_RequestPlayerBarPosition.Sposition)
+  return _msg;
+}
+inline void S_P_RequestPlayerBarPosition::set_allocated_sposition(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.sposition_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+
+  _impl_.sposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_P_RequestPlayerBarPosition.Sposition)
+}
+
+// .S2C_Protocol.XYZ Nposition = 4;
+inline bool S_P_RequestPlayerBarPosition::has_nposition() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.nposition_ != nullptr);
+  return value;
+}
+inline const ::S2C_Protocol::XYZ& S_P_RequestPlayerBarPosition::_internal_nposition() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::S2C_Protocol::XYZ* p = _impl_.nposition_;
+  return p != nullptr ? *p : reinterpret_cast<const ::S2C_Protocol::XYZ&>(::S2C_Protocol::_XYZ_default_instance_);
+}
+inline const ::S2C_Protocol::XYZ& S_P_RequestPlayerBarPosition::nposition() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.Nposition)
+  return _internal_nposition();
+}
+inline void S_P_RequestPlayerBarPosition::unsafe_arena_set_allocated_nposition(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.nposition_);
+  }
+  _impl_.nposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000008u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.S_P_RequestPlayerBarPosition.Nposition)
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::release_nposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  ::S2C_Protocol::XYZ* released = _impl_.nposition_;
+  _impl_.nposition_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::unsafe_arena_release_nposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.S_P_RequestPlayerBarPosition.Nposition)
+
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  ::S2C_Protocol::XYZ* temp = _impl_.nposition_;
+  _impl_.nposition_ = nullptr;
+  return temp;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::_internal_mutable_nposition() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.nposition_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::XYZ>(GetArena());
+    _impl_.nposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(p);
+  }
+  return _impl_.nposition_;
+}
+inline ::S2C_Protocol::XYZ* S_P_RequestPlayerBarPosition::mutable_nposition() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000008u;
+  ::S2C_Protocol::XYZ* _msg = _internal_mutable_nposition();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_P_RequestPlayerBarPosition.Nposition)
+  return _msg;
+}
+inline void S_P_RequestPlayerBarPosition::set_allocated_nposition(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.nposition_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000008u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008u;
+  }
+
+  _impl_.nposition_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.S_P_RequestPlayerBarPosition.Nposition)
 }
 
 // -------------------------------------------------------------------

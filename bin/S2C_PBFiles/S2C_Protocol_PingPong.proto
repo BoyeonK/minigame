@@ -21,7 +21,10 @@ message S_P_ReadyForStart {
 }
 
 message S_P_RequestPlayerBarPosition {
-    int32 playerId = 1;
+    XYZ Eposition = 1;
+    XYZ Wposition = 2;
+    XYZ Sposition = 3;
+    XYZ Nposition = 4;
 }
 
 message C_P_ResponsePlayerBarPosition {
