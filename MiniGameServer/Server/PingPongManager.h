@@ -13,7 +13,7 @@ public:
 	void MatchMake() override;
 	void MakeRoom(vector<WatingPlayerData>&& pdv) override;
 
-	void Update() override {}
+	void Update() override;
 
 	void StartGame() {}
 
@@ -23,4 +23,6 @@ private:
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;
 	uint64_t _lastRenewMatchQueueTick = 0;
+	uint64_t _updateTickPeriod = 66;
+	uint64_t _testCounter = 0;
 };

@@ -110,8 +110,8 @@ public:
 
 			//PingPong
 		PlaintextHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, plaintext); };
-		PlaintextHandler[PKT_C_P_COLLISION_BAR] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_CollisionBar, sessionRef, plaintext); };
-		PlaintextHandler[PKT_C_P_COLLISION_GOAL_LINE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_CollisionGoalLine, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_P_COLLISION_BAR] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_CollisionBar>(Handle_C_P_CollisionBar, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_P_COLLISION_GOAL_LINE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_CollisionGoalLine>(Handle_C_P_CollisionGoalLine, sessionRef, plaintext); };
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {

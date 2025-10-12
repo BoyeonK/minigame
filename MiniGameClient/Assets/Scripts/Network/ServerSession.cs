@@ -40,7 +40,7 @@ public class ServerSession : PacketSession {
 
 	public override void OnRecvPacket(ArraySegment<byte> buffer) {
 		PacketManager.Instance.OnRecvPacket(this, buffer);
-		Debug.Log("Recv!");
+		//Debug.Log("Recv!");
 	}
 
 	public override void OnSend(int numOfBytes)	{

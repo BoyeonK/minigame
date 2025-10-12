@@ -64,8 +64,8 @@ void TestGameManager::Update() {
 	uint64_t now = ::GetTickCount64();
 	if (now - _lastUpdateRoomTick < _updateTickPeriod)
 		return;
-	
 	_lastUpdateRoomTick = now;
+
 	{
 		lock_guard<shared_mutex> lock(_roomsLock);
 		for (auto& roomRef : _rooms) {
