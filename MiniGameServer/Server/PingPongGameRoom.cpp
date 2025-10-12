@@ -105,7 +105,11 @@ void PingPongGameRoom::Start() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 
-	//_isUpdateCall = true;
+	PostEventAfter(5000, &PingPongGameRoom::TestPhase1);
+}
+
+void PingPongGameRoom::TestPhase1() {
+	_isUpdateCall = true;
 }
 
 void PingPongGameRoom::RequestPlayerBarPosition() {

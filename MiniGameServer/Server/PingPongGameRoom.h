@@ -18,6 +18,8 @@ public:
 
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
 	void Start();
+	void TestPhase1();
+
 	void RequestPlayerBarPosition();
 	void ResponsePlayerBarPosition(int32_t playerIdx, float x, float z);
 
@@ -28,6 +30,4 @@ private:
 	bool _isUpdateCall = false;
 	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;
 	vector<pair<float, float>> _playerBarPositions{ {6.4f, 0}, {-6.4f, 0}, {0, -6.4f}, {0, 6.4f} };
-
-	int32_t _testCounter = 0;
 };
