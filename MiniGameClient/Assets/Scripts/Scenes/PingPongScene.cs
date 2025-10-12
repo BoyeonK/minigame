@@ -153,6 +153,21 @@ public class PingPongScene : BaseScene {
             return new Vector3(0f, 0f, 0f);
     }
 
+    public void RenewPlayerBarPosition(S_P_RequestPlayerBarPosition positionPkt) {
+        if (_playerIdx != 0) {
+            _enemyPlayerBars[0].SetPosition(positionPkt.Ex, positionPkt.Ez);
+        }
+        if (_playerIdx != 1) {
+            _enemyPlayerBars[0].SetPosition(positionPkt.Wx, positionPkt.Wz);
+        }
+        if (_playerIdx != 2) {
+            _enemyPlayerBars[0].SetPosition(positionPkt.Sx, positionPkt.Sz);
+        }
+        if (_playerIdx != 3) {
+            _enemyPlayerBars[0].SetPosition(positionPkt.Nx, positionPkt.Nz);
+        }
+    }
+
     /*
     private void TestMakeBulletFunc() {
         Debug.Log("아잉 코루틴 쓰기 시져시져");

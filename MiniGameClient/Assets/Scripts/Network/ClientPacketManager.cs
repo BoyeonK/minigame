@@ -87,6 +87,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SPState, UnpackPacket<S_P_State>);
         _handler.Add((ushort)MsgId.SPState, PacketHandler.S_P_StateHandler);
         _msgFactories.Add((ushort)MsgId.SPState, () => new S_P_State());
+
+        _onRecv.Add((ushort)MsgId.SPRequestPlayerBarPosition, UnpackPacket<S_P_RequestPlayerBarPosition>);
+        _handler.Add((ushort)MsgId.SPRequestPlayerBarPosition, PacketHandler.S_P_RequestPlayerBarPositionHandler);
+        _msgFactories.Add((ushort)MsgId.SPRequestPlayerBarPosition, () => new S_P_RequestPlayerBarPosition());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

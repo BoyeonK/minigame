@@ -250,12 +250,16 @@ public class NetworkManager {
         }
     }
 
-    public void ProcessPRequestPlayerBarPositionHandler() {
+    public void ProcessPRequestPlayerBarPositionHandler(IMessage recvPkt) {
         BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
         if (scene == null)
             return;
 
         if (scene is PingPongScene pingPongScene) {
+			S_P_RequestPlayerBarPosition positionPkt = recvPkt as S_P_RequestPlayerBarPosition;
+			if (positionPkt == null) 
+				return;
+			pingPongScene.RenewPlayerBarPosition(positionPkt);
             Vector3 pos = pingPongScene.GetPlayerBarPosition();
             XYZ serializedPosition = new() {
                 X = pos.x,
