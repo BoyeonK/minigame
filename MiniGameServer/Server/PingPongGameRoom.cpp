@@ -106,6 +106,11 @@ void PingPongGameRoom::Start() {
 	BroadCast(sendBuffer);
 }
 
+void PingPongGameRoom::RenewPlayerBarPosition() {
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(renewBarRequestPkt);
+	BroadCast(sendBuffer);
+}
+
 void PingPongGameRoom::SendGameState(int32_t playerIdx) {
 	if (playerIdx > (_quota - 1))
 		return;

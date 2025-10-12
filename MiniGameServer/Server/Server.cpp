@@ -44,6 +44,7 @@ int main() {
 				GGameManagers[i]->MatchMake();
 				GGameManagers[i]->RenewMatchQueue();
 				GGameManagers[i]->RemoveInvalidRoom();
+				GGameManagers[i]->Update();
 			}
 			this_thread::sleep_for(20ms);
 		}

@@ -2,6 +2,8 @@
 #include "GameRoom.h"
 
 class PingPongGameRoom : public GameRoom {
+	static S2C_Protocol::S_P_RequestPlayerBarPosition renewBarRequestPkt;
+
 public:
 	PingPongGameRoom() {
 		_ty = GameType::PingPong;
@@ -18,9 +20,11 @@ public:
 
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
 	void Start();
+	void RenewPlayerBarPosition();
 
 	void SendGameState(int32_t playerIdx) override;
 
 private:
 	int32_t _quota = 4;
+	bool _isUpdateCall = false;
 };
