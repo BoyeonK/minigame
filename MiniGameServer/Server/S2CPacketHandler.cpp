@@ -263,3 +263,15 @@ bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	roomRef->DispatchEvent(&GameRoom::SendGameState, playerSessionRef->GetRoomIdx());
 	return true;
 }
+
+bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestGameState& pkt) {
+	return false;
+}
+
+bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionBar& pkt) {
+	return false;
+}
+
+bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionGoalLine& pkt) {
+	return false;
+}

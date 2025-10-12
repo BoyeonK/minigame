@@ -68,6 +68,11 @@ bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol:
 bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_GameSceneLoadingProgress& pkt);
 bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestGameState& pkt);
 
+	//PingPong
+bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestGameState& pkt);
+bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionBar& pkt);
+bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionGoalLine& pkt);
+
 class S2CPacketHandler {
 public:
 	static void Init() {
@@ -86,6 +91,11 @@ public:
 		GPacketHandler[PKT_C_GAMESCENELOADINGPROGRESS] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_GameSceneLoadingProgress>(Handle_C_GameSceneLoadingProgress, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_REQUEST_GAME_STATE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_RequestGameState>(Handle_C_RequestGameState, sessionRef, buffer, len); };
 
+			//PingPong
+		GPacketHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_P_COLLISION_BAR] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_CollisionBar>(Handle_C_P_CollisionBar, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_P_COLLISION_GOAL_LINE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_CollisionGoalLine>(Handle_C_P_CollisionGoalLine, sessionRef, buffer, len); };
+
 		//C_Encrypted를 복호화하여 얻은 바이너리를 알맞은 protobuf타입으로 캐스팅하고, 알맞은 핸들러 함수를 호출.
 		//암호화 하지 않을 패킷에 대해서 PlaintextHandler의 내용을 채울 필요는 없지만, 해서 나쁠건 없으니까.
 		PlaintextHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Welcome>(Handle_C_Welcome, sessionRef, plaintext); };
@@ -97,6 +107,11 @@ public:
 		PlaintextHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchmakeKeepAlive>(Handle_C_MatchmakeKeepAlive, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_GAMESCENELOADINGPROGRESS] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_GameSceneLoadingProgress>(Handle_C_GameSceneLoadingProgress, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_REQUEST_GAME_STATE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_RequestGameState>(Handle_C_RequestGameState, sessionRef, plaintext); };
+
+			//PingPong
+		PlaintextHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_P_COLLISION_BAR] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_CollisionBar, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_P_COLLISION_GOAL_LINE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_CollisionGoalLine, sessionRef, plaintext); };
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
