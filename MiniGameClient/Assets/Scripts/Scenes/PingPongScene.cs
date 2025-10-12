@@ -9,7 +9,11 @@ public class PingPongScene : BaseScene {
     private Vector3 _lastMousePointerPosition;
     private int _playerIdx = -1;
     MyPlayerBarController _myPlayerBar;
-    List<EnemyPlayerBarController> _enemyPlayerBars = new();
+    EnemyPlayerBarController _eastPlayerBar;
+    EnemyPlayerBarController _westPlayerBar;
+    EnemyPlayerBarController _southPlayerBar;
+    EnemyPlayerBarController _northPlayerBar;
+
     PingPongCameraController _pingPongCameraController;
 
     protected override void Init() {
@@ -35,20 +39,16 @@ public class PingPongScene : BaseScene {
         GameObject goSouthPlayerBar = GameObject.Find("SPlayerBar");
         GameObject goNorthPlayerBar = GameObject.Find("NPlayerBar");
         if (goEastPlayerBar != null) {
-            EnemyPlayerBarController ebar = goEastPlayerBar.GetComponent<EnemyPlayerBarController>();
-            _enemyPlayerBars.Add(ebar);
+            _eastPlayerBar = goEastPlayerBar.GetComponent<EnemyPlayerBarController>();
         }
         if (goWestPlayerBar != null) {
-            EnemyPlayerBarController ebar = goWestPlayerBar.GetComponent<EnemyPlayerBarController>();
-            _enemyPlayerBars.Add(ebar);
+            _westPlayerBar = goWestPlayerBar.GetComponent<EnemyPlayerBarController>();
         }
         if (goSouthPlayerBar != null) {
-            EnemyPlayerBarController ebar = goSouthPlayerBar.GetComponent<EnemyPlayerBarController>();
-            _enemyPlayerBars.Add(ebar);
+            _southPlayerBar = goSouthPlayerBar.GetComponent<EnemyPlayerBarController>();
         }
         if (goNorthPlayerBar != null) {
-            EnemyPlayerBarController ebar = goNorthPlayerBar.GetComponent<EnemyPlayerBarController>();
-            _enemyPlayerBars.Add(ebar);
+            _northPlayerBar = goNorthPlayerBar.GetComponent<EnemyPlayerBarController>();
         }
 
         //CameraController참조
@@ -147,7 +147,7 @@ public class PingPongScene : BaseScene {
     }
 
     public Vector3 GetPlayerBarPosition() {
-        if (_myPlayerBar == null)
+        if (_myPlayerBar != null)
             return _myPlayerBar.GetPosition();
         else
             return new Vector3(0f, 0f, 0f);
@@ -155,40 +155,18 @@ public class PingPongScene : BaseScene {
 
     public void RenewPlayerBarPosition(S_P_RequestPlayerBarPosition positionPkt) {
         if (_playerIdx != 0) {
-            _enemyPlayerBars[0].SetPosition(positionPkt.Ex, positionPkt.Ez);
+            _eastPlayerBar.SetPosition(positionPkt.Ex, positionPkt.Ez);
         }
         if (_playerIdx != 1) {
-            _enemyPlayerBars[0].SetPosition(positionPkt.Wx, positionPkt.Wz);
+            _westPlayerBar.SetPosition(positionPkt.Wx, positionPkt.Wz);
         }
         if (_playerIdx != 2) {
-            _enemyPlayerBars[0].SetPosition(positionPkt.Sx, positionPkt.Sz);
+            _southPlayerBar.SetPosition(positionPkt.Sx, positionPkt.Sz);
         }
         if (_playerIdx != 3) {
-            _enemyPlayerBars[0].SetPosition(positionPkt.Nx, positionPkt.Nz);
+            _northPlayerBar.SetPosition(positionPkt.Nx, positionPkt.Nz);
         }
     }
-
-    /*
-    private void TestMakeBulletFunc() {
-        Debug.Log("아잉 코루틴 쓰기 시져시져");
-        Vector3 dir = new Vector3(0f, 0f, -1f);
-        for (int i = 0; i < 5; i++) {
-            UnityGameObject bullet = new UnityGameObject();
-            bullet.ObjectId = i;
-            bullet.ObjectType = 4;
-            XYZ xyz = new XYZ();
-            xyz.X = -2.5f + i * 1.25f;
-            xyz.Y = 0.2f;
-            xyz.Z = 0f;
-            bullet.Position = xyz;
-
-            GameObject b1 = Managers.Object.CreateObject(bullet);
-            PingPongBullet1Controller p1 = b1.GetComponent<PingPongBullet1Controller>();
-            p1.SetMoveDir(dir);
-            p1.SetSpeed(1f + 0.2f * i);
-        }   
-    }
-    */
 
     private void Update() {
         if (_raycastPlane != null) {

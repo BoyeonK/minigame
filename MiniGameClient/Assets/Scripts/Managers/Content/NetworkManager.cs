@@ -250,7 +250,7 @@ public class NetworkManager {
         }
     }
 
-    public void ProcessPRequestPlayerBarPositionHandler(IMessage recvPkt) {
+    public void ProcessPRequestPlayerBarPosition(IMessage recvPkt) {
         BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
         if (scene == null)
             return;

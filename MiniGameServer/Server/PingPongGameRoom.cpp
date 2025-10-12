@@ -113,25 +113,39 @@ void PingPongGameRoom::TestPhase1() {
 }
 
 void PingPongGameRoom::RequestPlayerBarPosition() {
-	_requestPlayerBarPosPkt.set_ex(_playerBarPositions[0].first);
-	_requestPlayerBarPosPkt.set_ez(_playerBarPositions[0].second);
-	_requestPlayerBarPosPkt.set_wx(_playerBarPositions[1].first);
-	_requestPlayerBarPosPkt.set_wz(_playerBarPositions[1].second);
-	_requestPlayerBarPosPkt.set_sx(_playerBarPositions[2].first);
-	_requestPlayerBarPosPkt.set_sz(_playerBarPositions[2].second);
-	_requestPlayerBarPosPkt.set_nx(_playerBarPositions[3].first);
-	_requestPlayerBarPosPkt.set_nz(_playerBarPositions[3].second);
+	_requestPlayerBarPosPkt.set_ex(_ex);
+	_requestPlayerBarPosPkt.set_ez(_ez);
+	_requestPlayerBarPosPkt.set_wx(_wx);
+	_requestPlayerBarPosPkt.set_wz(_wz);
+	_requestPlayerBarPosPkt.set_sx(_sx);
+	_requestPlayerBarPosPkt.set_sz(_sz);
+	_requestPlayerBarPosPkt.set_nx(_nx);
+	_requestPlayerBarPosPkt.set_nz(_nz);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_requestPlayerBarPosPkt);
 	BroadCast(sendBuffer);
 }
 
 void PingPongGameRoom::ResponsePlayerBarPosition(int32_t playerIdx, float x, float z) {
-	if (playerIdx > _quota)
-		return;
-	if (playerIdx < 0)
-		return;
-
-	_playerBarPositions[playerIdx] = { x, z };
+	switch (playerIdx) {
+	case(0):
+		_ex = x;
+		_ez = z;
+		break;
+	case(1):
+		_wx = x;
+		_wz = z;
+		break;
+	case(2):
+		_sx = x;
+		_sz = z;
+		break;
+	case(3):
+		_nx = x;
+		_nz = z;
+		break;
+	default:
+		break;
+	}
 }
 
 void PingPongGameRoom::SendGameState(int32_t playerIdx) {

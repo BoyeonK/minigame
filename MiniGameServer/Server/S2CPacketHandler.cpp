@@ -271,7 +271,7 @@ bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_
 	if (roomRef == nullptr)
 		return false;
 
-	roomRef->DispatchEvent(&PingPongGameRoom::ResponsePlayerBarPosition, playerSessionRef->GetRoomIdx(), pkt.position().x(), pkt.position().z());
+	roomRef->PostEvent(&PingPongGameRoom::ResponsePlayerBarPosition, playerSessionRef->GetRoomIdx(), pkt.position().x(), pkt.position().z());
 	return true;
 }
 

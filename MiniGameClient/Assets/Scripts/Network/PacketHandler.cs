@@ -311,7 +311,7 @@ class PacketHandler {
 	}
 
 	public static void S_P_RequestPlayerBarPositionHandler(PacketSession session, IMessage packet) {
-		Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessPRequestPlayerBarPositionHandler(packet); });
+		Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessPRequestPlayerBarPosition(packet); });
 	}
 }
 

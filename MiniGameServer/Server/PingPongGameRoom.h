@@ -29,5 +29,13 @@ private:
 	int32_t _quota = 4;
 	bool _isUpdateCall = false;
 	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;
-	vector<pair<float, float>> _playerBarPositions{ {6.4f, 0}, {-6.4f, 0}, {0, -6.4f}, {0, 6.4f} };
+
+	float _ex = 6.4f;
+	float _ez = 0;
+	float _wx = -6.4f;
+	float _wz = 0;
+	float _sx = 0;
+	float _sz = -6.4f;
+	float _nx = 0;
+	float _nz = 6.4f;
 };
