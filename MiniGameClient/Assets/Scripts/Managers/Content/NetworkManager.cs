@@ -272,7 +272,7 @@ public class NetworkManager {
 				Position = serializedPosition
 			};
 
-			//Send(pkt);
+			Send(pkt);
         }
     }
 
