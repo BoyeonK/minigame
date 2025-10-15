@@ -1,10 +1,10 @@
 #pragma once
 
 struct SchduledActorEvent {
-	SchduledActorEvent(weak_ptr<Actor> owner, shared_ptr<ActorEvent> event) : _ownerWRef(owner), _actorEvent(event) { }
+	SchduledActorEvent(weak_ptr<Actor> owner, ActorEvent* event) : _ownerWRef(owner), _actorEvent(event) { }
 
 	weak_ptr<Actor> _ownerWRef;
-	shared_ptr<ActorEvent> _actorEvent;
+	ActorEvent* _actorEvent;
 };
 
 struct TimerItem {
@@ -18,7 +18,7 @@ struct TimerItem {
 
 class ActorEventScheduler {
 public:
-	void Reserve(uint64_t tickAfter, weak_ptr<Actor> owner, shared_ptr<ActorEvent> event);
+	void Reserve(uint64_t tickAfter, weak_ptr<Actor> owner, ActorEvent* event);
 	void Distrubute(uint64_t now);
 	void Clear();
 
