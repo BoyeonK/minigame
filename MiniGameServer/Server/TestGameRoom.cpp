@@ -23,7 +23,7 @@ void TestGameRoom::Init(vector<WatingPlayerData> pdv) {
 
 	if (ready) {
 		//1초 후, (Ping이 1초가 넘는것은, 이상하다.) 모든 패킷으로부터 응답을 받았다면 시작
-		PostEventAfter(1000, &TestGameRoom::Init2, move(pdv));
+		PostAfter(1000, &TestGameRoom::Init2, move(pdv));
 	}
 	else {
 		//유효하지 않은 세션이 있었을 경우, 모두 대기열로 돌려보냄.
@@ -89,7 +89,7 @@ void TestGameRoom::Start() {
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
-	PostEventAfter(3000, &TestGameRoom::Phase1);
+	PostAfter(3000, &TestGameRoom::Phase1);
 }
 
 void TestGameRoom::SendGameState(int32_t playerIdx) {
@@ -118,12 +118,12 @@ void TestGameRoom::MakeTestGameBulletAndBroadcast(float x, float y, float z) {
 }
 
 void TestGameRoom::Phase1() {
-	DispatchEvent(&TestGameRoom::MakeTestGameBulletAndBroadcast, -2.0f, 0.0f, 0.0f);
-	PostEventAfter(1000, &TestGameRoom::MakeTestGameBulletAndBroadcast, -1.0f, 0.0f, 0.0f);
-	PostEventAfter(2000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 0.0f, 0.0f, 0.0f);
-	PostEventAfter(3000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 1.0f, 0.0f, 0.0f);
-	PostEventAfter(4000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 2.0f, 0.0f, 0.0f);
-	PostEventAfter(6000, &TestGameRoom::EndPhase);
+	Post(&TestGameRoom::MakeTestGameBulletAndBroadcast, -2.0f, 0.0f, 0.0f);
+	PostAfter(1000, &TestGameRoom::MakeTestGameBulletAndBroadcast, -1.0f, 0.0f, 0.0f);
+	PostAfter(2000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 0.0f, 0.0f, 0.0f);
+	PostAfter(3000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 1.0f, 0.0f, 0.0f);
+	PostAfter(4000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 2.0f, 0.0f, 0.0f);
+	PostAfter(6000, &TestGameRoom::EndPhase);
 }
 
 void TestGameRoom::EndPhase() {

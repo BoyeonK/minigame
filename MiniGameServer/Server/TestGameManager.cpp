@@ -57,7 +57,7 @@ void TestGameManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	shared_ptr<TestGameRoom> newRoomRef = { objectPool<TestGameRoom>::alloc(), objectPool<TestGameRoom>::dealloc };
 	newRoomRef->SetRoomId(_nxtRoomId.fetch_add(1));
 	AddRoom(newRoomRef);
-	newRoomRef->PostEvent(&TestGameRoom::Init, move(pdv));
+	newRoomRef->Post(&TestGameRoom::Init, move(pdv));
 }
 
 void TestGameManager::Update() {
@@ -69,7 +69,7 @@ void TestGameManager::Update() {
 	{
 		lock_guard<shared_mutex> lock(_roomsLock);
 		for (auto& roomRef : _rooms) {
-			roomRef->PostEvent(&GameRoom::Update);
+			roomRef->Post(&GameRoom::Update);
 		}
 	}
 }

@@ -57,7 +57,7 @@ void PingPongManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	shared_ptr<PingPongGameRoom> newRoomRef = { objectPool<PingPongGameRoom>::alloc(), objectPool<PingPongGameRoom>::dealloc };
 	newRoomRef->SetRoomId(_nxtRoomId.fetch_add(1));
 	AddRoom(newRoomRef);
-	newRoomRef->PostEvent(&PingPongGameRoom::Init, move(pdv));
+	newRoomRef->Post(&PingPongGameRoom::Init, move(pdv));
 }
 
 void PingPongManager::Update() {
@@ -69,7 +69,7 @@ void PingPongManager::Update() {
 	{
 		lock_guard<shared_mutex> lock(_roomsLock);
 		for (auto& roomRef : _rooms) {
-			roomRef->PostEvent(&GameRoom::Update);
+			roomRef->Post(&GameRoom::Update);
 		}
 	}
 }

@@ -22,7 +22,7 @@ void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {
 
 	if (ready) {
 		//1초 후, (Ping이 1초가 넘는것은, 이상하다.) 모든 패킷으로부터 응답을 받았다면 시작
-		PostEventAfter(1000, &PingPongGameRoom::Init2, move(pdv));
+		PostAfter(1000, &PingPongGameRoom::Init2, move(pdv));
 	}
 	else {
 		//유효하지 않은 세션이 있었을 경우, 모두 대기열로 돌려보냄.
@@ -72,7 +72,7 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 			}
 		}
 		//30초 뒤에는 강제로 시작해버려
-		PostEventAfter(30000, &PingPongGameRoom::Start);
+		PostAfter(30000, &PingPongGameRoom::Start);
 	}
 	else {
 		cout << "게임 시작 불가능." << endl;
@@ -105,7 +105,7 @@ void PingPongGameRoom::Start() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 
-	PostEventAfter(5000, &PingPongGameRoom::TestPhase1);
+	PostAfter(5000, &PingPongGameRoom::TestPhase1);
 }
 
 void PingPongGameRoom::TestPhase1() {
