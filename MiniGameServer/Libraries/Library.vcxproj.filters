@@ -4,9 +4,6 @@
     <Filter Include="GlobalVariables">
       <UniqueIdentifier>{3adb2120-925b-4a3e-83c2-5a3aeaee8bec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Job">
-      <UniqueIdentifier>{a5053d8e-1725-4db3-9843-c2fadbf71cbd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="main">
       <UniqueIdentifier>{1e45a1d3-8dce-46ba-9ffe-8279ac985658}</UniqueIdentifier>
     </Filter>
@@ -19,6 +16,9 @@
     <Filter Include="Thread">
       <UniqueIdentifier>{ed425fb0-11e9-4a34-af6d-f9f5c30bc51a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ActorModel">
+      <UniqueIdentifier>{a5053d8e-1725-4db3-9843-c2fadbf71cbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CoreGlobal.cpp">
@@ -28,19 +28,16 @@
       <Filter>GlobalVariables</Filter>
     </ClCompile>
     <ClCompile Include="GlobalActorQueue.cpp">
-      <Filter>Job</Filter>
+      <Filter>ActorModel</Filter>
     </ClCompile>
     <ClCompile Include="ActorEvent.cpp">
-      <Filter>Job</Filter>
+      <Filter>ActorModel</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>Job</Filter>
+      <Filter>ActorModel</Filter>
     </ClCompile>
     <ClCompile Include="ActorEventScheduler.cpp">
-      <Filter>Job</Filter>
-    </ClCompile>
-    <ClCompile Include="MPSCQueue.cpp">
-      <Filter>main</Filter>
+      <Filter>ActorModel</Filter>
     </ClCompile>
     <ClCompile Include="MyLibraries.cpp">
       <Filter>main</Filter>
@@ -78,6 +75,12 @@
     <ClCompile Include="RWLock.cpp">
       <Filter>Thread</Filter>
     </ClCompile>
+    <ClCompile Include="MPSCQueue.cpp">
+      <Filter>ActorModel</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorMailbox.cpp">
+      <Filter>ActorModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoreGlobal.h">
@@ -87,21 +90,18 @@
       <Filter>GlobalVariables</Filter>
     </ClInclude>
     <ClInclude Include="GlobalActorQueue.h">
-      <Filter>Job</Filter>
+      <Filter>ActorModel</Filter>
     </ClInclude>
     <ClInclude Include="ActorEvent.h">
-      <Filter>Job</Filter>
+      <Filter>ActorModel</Filter>
     </ClInclude>
     <ClInclude Include="Actor.h">
-      <Filter>Job</Filter>
+      <Filter>ActorModel</Filter>
     </ClInclude>
     <ClInclude Include="ActorEventScheduler.h">
-      <Filter>Job</Filter>
+      <Filter>ActorModel</Filter>
     </ClInclude>
     <ClInclude Include="CorePch.h">
-      <Filter>main</Filter>
-    </ClInclude>
-    <ClInclude Include="MPSCQueue.h">
       <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="MyLibraries.h">
@@ -142,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="MyMacros.h">
       <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="MPSCQueue.h">
+      <Filter>ActorModel</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorMailbox.h">
+      <Filter>ActorModel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,5 +6,9 @@ void GlobalActorQueue::Push(shared_ptr<Actor> jobQueue) {
 }
 
 shared_ptr<Actor> GlobalActorQueue::Pop() {
-	return _actorRefs.Pop();
+	shared_ptr<Actor> actorRef = nullptr;
+	if (_actorRefs.TryPop(actorRef)) {
+		return actorRef;
+	}
+	return nullptr;
 }

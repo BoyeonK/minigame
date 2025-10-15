@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor.h"
+#include "MPSCQueue.h"
 
 class GlobalActorQueue {
 public:
