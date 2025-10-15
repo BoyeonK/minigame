@@ -112,6 +112,24 @@ void PingPongGameRoom::TestPhase1() {
 	_isUpdateCall = true;
 }
 
+void PingPongGameRoom::MakeBullet(int32_t bulletType, int32_t objectId, float px, float pz, float sx, float sz, float speed) {
+	S2C_Protocol::S_P_Bullet pkt;
+	S2C_Protocol::UnityGameObject bullet;
+	S2C_Protocol::XYZ position;
+	position.set_x(px);
+	position.set_z(pz);
+	bullet.mutable_position()->CopyFrom(position);
+	S2C_Protocol::XYZ moveDir;
+	moveDir.set_x(sx);
+	moveDir.set_z(sz);
+	pkt.mutable_movedir()->CopyFrom(moveDir);
+	pkt.set_speed(speed);
+	pkt.set_lastcollider(-1);
+
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+}
+
 void PingPongGameRoom::RequestPlayerBarPosition() {
 	_requestPlayerBarPosPkt.set_ex(_ex);
 	_requestPlayerBarPosPkt.set_ez(_ez);

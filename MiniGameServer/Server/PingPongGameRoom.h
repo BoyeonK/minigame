@@ -20,6 +20,8 @@ public:
 	void Start();
 	void TestPhase1();
 
+	void MakeBullet(int32_t bulletType, int32_t objectId, float px, float pz, float sx, float sz, float speed);
+
 	void RequestPlayerBarPosition();
 	void ResponsePlayerBarPosition(int32_t playerIdx, float x, float z);
 

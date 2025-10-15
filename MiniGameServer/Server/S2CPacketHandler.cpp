@@ -276,7 +276,13 @@ bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_
 }
 
 bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionBar& pkt) {
-	return false;
+	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(sessionRef);
+	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
+	if (roomRef == nullptr)
+		return false;
+
+	//roomRef->PostEvent()
+	return true;
 }
 
 bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionGoalLine& pkt) {
