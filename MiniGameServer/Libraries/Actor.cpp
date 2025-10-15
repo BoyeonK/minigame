@@ -19,6 +19,9 @@ void Actor::Push(shared_ptr<ActorEvent> event, bool isPostOnly) {
 void Actor::Execute() {
 	//이 Actor를 Execute중인 thread는 다른 Actor의 작업을 실행하지 않겠다는 결의?
 	bool expected = false;
+	if (_isExecuting.compare_exchange_strong(expected, true)) {
+		GActorQueue->Push(shared_from_this());
+	}
 
 	LCurrentActor = this;
 	while (true) {
@@ -31,12 +34,14 @@ void Actor::Execute() {
 		if (_eventCount.fetch_sub(jobCount) == jobCount) {
 			//해당 Actor의 모든 작업을 끝마침
 			LCurrentActor = nullptr;
+			_isExecuting = false;
 			return;
 		}
 		const uint64_t now = ::GetTickCount64();
 		if (now >= LEndTickCount) {
 			LCurrentActor = nullptr;
 			GActorQueue->Push(shared_from_this());
+			_isExecuting = false;
 			break;
 		}
 	}

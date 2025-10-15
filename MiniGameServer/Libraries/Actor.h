@@ -47,5 +47,6 @@ public:
 protected:
 	MPSCQueue<shared_ptr<ActorEvent>> _events;
 	atomic<int32_t> _eventCount = 0;
+	atomic<bool> _isExecuting = false;
 };
 
