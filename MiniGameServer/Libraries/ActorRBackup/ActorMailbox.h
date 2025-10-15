@@ -33,12 +33,18 @@ public:
         outEvent = next;
         _head.store(next, memory_order_release);
 
-        objectPool<ActorEvent>::dealloc(head);
         _count.fetch_sub(1);
         return true;
     }
 
-    atomic<int> _count;
+    void PopAll(vector<ActorEvent*>& items) {
+        ActorEvent* item;
+        while (TryPop(item)) {
+            items.push_back(item);
+        }
+    }
+
+    atomic<int> _count = 0;
 
 private:
     atomic<ActorEvent*> _head;

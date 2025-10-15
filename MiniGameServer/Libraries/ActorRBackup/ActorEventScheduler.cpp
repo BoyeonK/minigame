@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "ActorEventScheduler.h"
 
-void ActorEventScheduler::Reserve(uint64_t tickAfter, weak_ptr<Actor> owner, shared_ptr<ActorEvent> event) {
+void ActorEventScheduler::Reserve(uint64_t tickAfter, weak_ptr<Actor> owner, ActorEvent* event) {
 	const uint64_t executeTick = ::GetTickCount64() + tickAfter;
 	SchduledActorEvent* pScheduledEvent = objectPool<SchduledActorEvent>::alloc(owner, event);
 

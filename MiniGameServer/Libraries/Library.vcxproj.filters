@@ -78,9 +78,6 @@
     <ClCompile Include="MPSCQueue.cpp">
       <Filter>ActorModel</Filter>
     </ClCompile>
-    <ClCompile Include="ActorMailbox.cpp">
-      <Filter>ActorModel</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoreGlobal.h">
@@ -144,9 +141,6 @@
       <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="MPSCQueue.h">
-      <Filter>ActorModel</Filter>
-    </ClInclude>
-    <ClInclude Include="ActorMailbox.h">
       <Filter>ActorModel</Filter>
     </ClInclude>
   </ItemGroup>

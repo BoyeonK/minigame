@@ -69,9 +69,11 @@ void ThreadManager::Join() {
 
 void ThreadManager::DoGlobalQueueWork() {
 	while (LCurrentActor == nullptr) {
+		/*
 		uint64_t now = ::GetTickCount64();
 		if (now > LEndTickCount)
 			break;
+		*/
 		shared_ptr<Actor> ActorRef = GActorQueue->Pop();
 		if (ActorRef == nullptr)
 			break;

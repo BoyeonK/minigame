@@ -154,7 +154,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ActorMailbox.cpp" />
     <ClCompile Include="CompletionPortCore.cpp" />
     <ClCompile Include="CoreGlobal.cpp" />
     <ClCompile Include="GlobalActorQueue.cpp" />
@@ -179,7 +178,6 @@
     <ClCompile Include="StompAllocator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActorMailbox.h" />
     <ClInclude Include="CompletionPortCore.h" />
     <ClInclude Include="CoreGlobal.h" />
     <ClInclude Include="CorePch.h" />

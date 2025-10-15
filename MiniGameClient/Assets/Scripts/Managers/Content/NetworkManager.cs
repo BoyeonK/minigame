@@ -54,8 +54,8 @@ public class NetworkManager {
 		IPHostEntry ipHost = Dns.GetHostEntry(host);
 
 		//이걸 나중에 UI로 받아야겠음.
-		IPAddress ipAddr = IPAddress.Parse("192.168.0.7");
-		//IPAddress ipAddr = IPAddress.Loopback;
+		//IPAddress ipAddr = IPAddress.Parse("192.168.0.7");
+		IPAddress ipAddr = IPAddress.Loopback;
 
 		//IPAddress ipAddr = Array.Find(ipHost.AddressList, a => a.AddressFamily == AddressFamily.InterNetwork);
 		//IPAddress ipAddr = ipHost.AddressList[0];

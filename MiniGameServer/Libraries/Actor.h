@@ -1,48 +1,51 @@
 #pragma once
 #include "ActorEvent.h"
+#include "MPSCQueue.h"
 #include "ActorEventScheduler.h"
-#include "ActorMailbox.h"
 
 class Actor : public enable_shared_from_this<Actor> {
 public:
-    virtual ~Actor() = default;
+	virtual ~Actor() = default;
 
-    void Post(std::function<void()>&& callback) {
-        ActorEvent* pEvent = objectPool<ActorEvent>::alloc(move(callback));
-        Push(pEvent);
-    }
+	void DispatchEvent(function<void()>&& callback) {
+		Push({ objectPool<ActorEvent>::alloc(std::move(callback)), objectPool<ActorEvent>::dealloc });
+	}
 
-    void PostAfter(uint64_t tickAfter, function<void()>&& callback) {
-        ActorEvent* pEvent = objectPool<ActorEvent>::alloc(move(callback));
-        GActorEventScheduler->Reserve(tickAfter, shared_from_this(), pEvent);
-    }
+	void PostEvent(function<void()>&& callback) {
+		Push({ objectPool<ActorEvent>::alloc(std::move(callback)), objectPool<ActorEvent>::dealloc }, true);
+	}
 
-    template<typename T, typename Ret, typename... Args>
-    void Post(Ret(T::* memFunc)(Args...), Args&&... args) {
-        auto myRef = static_pointer_cast<T>(shared_from_this());
-        weak_ptr<T> myWRef = myRef;
+	//Ret는 void로 작성해도 될 것 같다.
+	template<typename T, typename Ret, typename... Args>
+	void DispatchEvent(Ret(T::*memFunc)(Args...), Args&&... args) {
+		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
+		Push({ objectPool<ActorEvent>::alloc(ownerWRef, memFunc, forward<Args>(args)...), objectPool<ActorEvent>::dealloc });
+	}
 
-        ActorEvent* pEvent = objectPool<ActorEvent>::alloc(myWRef, memFunc, forward<Args>(args)...);
-        Push(pEvent);
-    }
+	template<typename T, typename Ret, typename... Args>
+	void PostEvent(Ret(T::* memFunc)(Args...), Args&&... args) {
+		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
+		Push({ objectPool<ActorEvent>::alloc(ownerWRef, memFunc, forward<Args>(args)...), objectPool<ActorEvent>::dealloc }, true);
+	}
 
-    template<typename T, typename Ret, typename... Args>
-    void PostAfter(uint64_t tickAfter, Ret(T::* memFunc)(Args...), Args&&... args) {
-        auto myRef = static_pointer_cast<T>(shared_from_this());
-        weak_ptr<T> myWRef = myRef;
+	//나 이거 왠지 JS에서 써본거같아
+	void PostEventAfter(uint64_t tickAfter, function<void()>&& callback) {
+		shared_ptr<ActorEvent> eventRef = { objectPool<ActorEvent>::alloc(std::move(callback)), objectPool<ActorEvent>::dealloc };
+		GActorEventScheduler->Reserve(tickAfter, shared_from_this(), eventRef);
+	}
 
-        ActorEvent* pEvent = objectPool<ActorEvent>::alloc(myWRef, memFunc, forward<Args>(args)...);
-        GActorEventScheduler->Reserve(tickAfter, shared_from_this(), pEvent);
-    }
+	template<typename T, typename Ret, typename... Args>
+	void PostEventAfter(uint64_t tickAfter, Ret(T::* memFunc)(Args...), Args&&... args) {
+		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
+		shared_ptr<ActorEvent> eventRef = { objectPool<ActorEvent>::alloc(ownerWRef, memFunc, forward<Args>(args)...), objectPool<ActorEvent>::dealloc };
+		GActorEventScheduler->Reserve(tickAfter, shared_from_this(), eventRef);
+	}
 
-    void Execute();
-    void Push(ActorEvent* pEvent);
-
-private:
-    void Schedule();
+	void Execute();
+	void Push(shared_ptr<ActorEvent> event, bool isPostOnly = false);
 
 protected:
-    ActorMailbox _mailbox;
-    atomic<bool> _isScheduled = false;
+	MPSCQueue<shared_ptr<ActorEvent>> _events;
+	atomic<int32_t> _eventCount = 0;
 };
 

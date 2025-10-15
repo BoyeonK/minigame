@@ -250,7 +250,7 @@ bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Pro
 	shared_ptr<GameRoom> gameRoom = playerSessionRef->GetJoinedRoom();
 	if (gameRoom == nullptr)
 		return false;
-	gameRoom->Post(&GameRoom::UpdateProgressBar, playerSessionRef->GetRoomIdx(), pkt.persentage());
+	gameRoom->PostEvent(&GameRoom::UpdateProgressBar, playerSessionRef->GetRoomIdx(), pkt.persentage());
 	return true;
 }
 
@@ -261,7 +261,7 @@ bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	if (roomRef == nullptr)
 		return false;
 
-	roomRef->Post(&GameRoom::SendGameState, playerSessionRef->GetRoomIdx());
+	roomRef->PostEvent(&GameRoom::SendGameState, playerSessionRef->GetRoomIdx());
 	return true;
 }
 
@@ -271,7 +271,7 @@ bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_
 	if (roomRef == nullptr)
 		return false;
 
-	roomRef->Post(&PingPongGameRoom::ResponsePlayerBarPosition, playerSessionRef->GetRoomIdx(), pkt.position().x(), pkt.position().z());
+	roomRef->PostEvent(&PingPongGameRoom::ResponsePlayerBarPosition, playerSessionRef->GetRoomIdx(), pkt.position().x(), pkt.position().z());
 	return true;
 }
 
