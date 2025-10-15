@@ -3,19 +3,9 @@
 
 class ActorEvent {
 public:
-	ActorEvent(function<void()>&& callback) : _callback(move(callback)) {}
+	ActorEvent() {}
 
-	//기존 방법은 &&를 사용하긴 한다만, 내부 구현은 완벽 전달을 하지 못함. 람다 캡쳐로 싹 복사 하고 있기 때문.
-	/*
-	template<typename T, typename Ret, typename... Args>
-	Job(weak_ptr<T> ownerWRef, Ret(T::* memFunc)(Args...), Args&&... args)  {
-		_callback = [ownerWRef, memFunc, args...]() { 
-			shared_ptr<T> owner = ownerWRef.lock();
-			if (owner != nullptr)
-				(owner.get()->*memFunc)(args...);
-		};
-	}
-	*/
+	explicit ActorEvent(function<void()>&& callback) : _callback(move(callback)) {}
 
 	template<typename T, typename Ret, typename... Args>
 	ActorEvent(weak_ptr<T> ownerWRef, Ret(T::* memFunc)(Args...), Args&&... args) {
@@ -38,7 +28,7 @@ public:
 		}
 	}
 
-private:
 	function<void()> _callback;
+	atomic<ActorEvent*> next = nullptr;
 };
 

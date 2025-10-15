@@ -72,10 +72,10 @@ void ThreadManager::DoGlobalQueueWork() {
 		uint64_t now = ::GetTickCount64();
 		if (now > LEndTickCount)
 			break;
-		shared_ptr<Actor> jobQueue = GActorQueue->Pop();
-		if (jobQueue == nullptr)
+		shared_ptr<Actor> ActorRef = GActorQueue->Pop();
+		if (ActorRef == nullptr)
 			break;
-		jobQueue->Execute();
+		ActorRef->Execute();
 	}
 }
 
