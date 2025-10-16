@@ -32,10 +32,10 @@ public:
 	void BroadCastDespawn(const shared_ptr<UnityGameObject>& objRef);
 
 protected:
-	int32_t _roomId;
+	int32_t _roomId = 0;
 	int32_t _nxtObjectId = 0;
 	vector<weak_ptr<PlayerSession>> _playerWRefs;
-	GameType _ty;
+	GameType _ty = GameType::Undefined;
 	GameState _state = GameState::BeforeInit;
 	int32_t _preparedPlayer = 0;
 	vector<shared_ptr<UnityGameObject>> _vecGameObjects;

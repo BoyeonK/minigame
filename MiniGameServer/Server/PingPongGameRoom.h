@@ -21,7 +21,8 @@ public:
 	void TestPhase1();
 
 	void MakeBullet(int32_t bulletType, int32_t objectId, float px, float pz, float sx, float sz, float speed);
-
+	void Handle_CollisionBar(int32_t objectId, int32_t playerIdx);
+	
 	void RequestPlayerBarPosition();
 	void ResponsePlayerBarPosition(int32_t playerIdx, float x, float z);
 

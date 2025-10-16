@@ -2,6 +2,7 @@
 #include "PingPongGameRoom.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
+#include "PingPongGameBullet.h"
 
 void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
@@ -113,6 +114,33 @@ void PingPongGameRoom::TestPhase1() {
 }
 
 void PingPongGameRoom::MakeBullet(int32_t bulletType, int32_t objectId, float px, float pz, float sx, float sz, float speed) {
+	//1. Bullet의 생성.
+	shared_ptr<PingPongGameBullet> bulletRef = nullptr;
+	switch (bulletType) {
+	case 0: {
+		shared_ptr<PingPongGameBulletRed> redBullet = PingPongGameBulletRed::NewTestGameBullet(px, 0.2f, pz);
+		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(redBullet);
+		break;
+	}
+	case 1: {
+		shared_ptr<PingPongGameBulletBlue> blueBullet = PingPongGameBulletBlue::NewTestGameBullet(px, 0.2f, pz);
+		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(blueBullet);
+		break;
+	}
+	case 2: {
+		shared_ptr<PingPongGameBulletPupple> puppleBullet = PingPongGameBulletPupple::NewTestGameBullet(px, 0.2f, pz);
+		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(puppleBullet);
+		break;
+	}
+	default:
+		break;
+	}
+	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
+	bulletRef->SetMoveVector(sx, sz, speed);
+	bulletRef->UpdateTick(::GetTickCount64());
+	RegisterGameObject(bulletRef);
+
+	//2. 해당 Bullet의 생성을 Bullet의 정보를 담아 직렬화
 	S2C_Protocol::S_P_Bullet pkt;
 
 	S2C_Protocol::UnityGameObject* bullet_ptr = pkt.mutable_bullet();
@@ -127,8 +155,13 @@ void PingPongGameRoom::MakeBullet(int32_t bulletType, int32_t objectId, float px
 	pkt.set_speed(speed);
 	pkt.set_lastcollider(-1);
 
+	//3. 전송.
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
+}
+
+void PingPongGameRoom::Handle_CollisionBar(int32_t objectId, int32_t playerIdx) {
+
 }
 
 void PingPongGameRoom::RequestPlayerBarPosition() {

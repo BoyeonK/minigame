@@ -135,13 +135,7 @@
     <ClInclude Include="S2C_Protocol_TestGame.pb.h">
       <Filter>S2C\Network\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="PingPongGameBulletRed.h">
-      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="PingPongGameBulletPupple.h">
-      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="PingPongGameBulletBlue.h">
+    <ClInclude Include="PingPongGameBullet.h">
       <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
     </ClInclude>
   </ItemGroup>
@@ -242,13 +236,7 @@
     <ClCompile Include="S2C_Protocol_TestGame.pb.cc">
       <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="PingPongGameBulletRed.cpp">
-      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="PingPongGameBulletPupple.cpp">
-      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="PingPongGameBulletBlue.cpp">
+    <ClCompile Include="PingPongGameBullet.cpp">
       <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
     </ClCompile>
   </ItemGroup>

@@ -176,9 +176,7 @@
     <ClInclude Include="GameRoom.h" />
     <ClInclude Include="GameType.h" />
     <ClInclude Include="MatchQueue.h" />
-    <ClInclude Include="PingPongGameBulletBlue.h" />
-    <ClInclude Include="PingPongGameBulletPupple.h" />
-    <ClInclude Include="PingPongGameBulletRed.h" />
+    <ClInclude Include="PingPongGameBullet.h" />
     <ClInclude Include="PingPongGameRoom.h" />
     <ClInclude Include="PingPongManager.h" />
     <ClInclude Include="S2C_Protocol_Common.pb.h" />
@@ -212,9 +210,7 @@
     <ClCompile Include="GameRoom.cpp" />
     <ClCompile Include="GameType.cpp" />
     <ClCompile Include="MatchQueue.cpp" />
-    <ClCompile Include="PingPongGameBulletBlue.cpp" />
-    <ClCompile Include="PingPongGameBulletPupple.cpp" />
-    <ClCompile Include="PingPongGameBulletRed.cpp" />
+    <ClCompile Include="PingPongGameBullet.cpp" />
     <ClCompile Include="PingPongGameRoom.cpp" />
     <ClCompile Include="PingPongManager.cpp" />
     <ClCompile Include="S2C_Protocol_Common.pb.cc">
