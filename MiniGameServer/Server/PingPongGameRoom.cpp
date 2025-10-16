@@ -111,9 +111,14 @@ void PingPongGameRoom::Start() {
 
 void PingPongGameRoom::TestPhase1() {
 	_isUpdateCall = true;
+	PostEventAfter(1000, &PingPongGameRoom::TestPhase2);
 }
 
-void PingPongGameRoom::MakeBullet(int32_t bulletType, int32_t objectId, float px, float pz, float sx, float sz, float speed) {
+void PingPongGameRoom::TestPhase2() {
+	MakeBullet(0, 0, 0, 1, 1, 1);
+}
+
+void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed) {
 	//1. Bullet의 생성.
 	shared_ptr<PingPongGameBullet> bulletRef = nullptr;
 	switch (bulletType) {
@@ -140,10 +145,16 @@ void PingPongGameRoom::MakeBullet(int32_t bulletType, int32_t objectId, float px
 	bulletRef->UpdateTick(::GetTickCount64());
 	RegisterGameObject(bulletRef);
 
+	//Extra. 해당 방향으로 bullet이 직진했을 경우, 감점이 될 플레이어를 계산.
+	//추후, 이 bullet에 대한 그 플레이어의 충돌판정 없이, 그 플레이어의 클라이언트로부터 해당 bullet에 대한 GoalLine판정이 들어오지 않는다면 부정행위 의심.
+
+
 	//2. 해당 Bullet의 생성을 Bullet의 정보를 담아 직렬화
 	S2C_Protocol::S_P_Bullet pkt;
 
 	S2C_Protocol::UnityGameObject* bullet_ptr = pkt.mutable_bullet();
+	bullet_ptr->set_objectid(bulletRef->GetObjectId());
+	bullet_ptr->set_objecttype(bulletRef->GetObjectTypeInteger());
 	S2C_Protocol::XYZ* pos_ptr = bullet_ptr->mutable_position();
 	pos_ptr->set_x(px);
 	pos_ptr->set_z(pz);

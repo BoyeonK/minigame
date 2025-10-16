@@ -19,8 +19,9 @@ public:
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
 	void Start();
 	void TestPhase1();
+	void TestPhase2();
 
-	void MakeBullet(int32_t bulletType, int32_t objectId, float px, float pz, float sx, float sz, float speed);
+	void MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed);
 	void Handle_CollisionBar(int32_t objectId, int32_t playerIdx);
 	
 	void RequestPlayerBarPosition();
