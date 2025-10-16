@@ -9,6 +9,11 @@ int32_t UnityGameObject::GetObjectId() const {
     return _objectId;
 }
 
+int32_t UnityGameObject::GetObjectTypeInteger() const {
+    int32_t ans = (int)_objectType;
+    return ans;
+}
+
 S2C_Protocol::XYZ UnityGameObject::SerializePosition() const {
     return _position.Serialize();
 }

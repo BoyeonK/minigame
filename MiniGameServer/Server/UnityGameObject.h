@@ -7,6 +7,8 @@ public:
 	void SetObjectId(int32_t id);
 	int32_t GetObjectId() const;
 
+	int32_t GetObjectTypeInteger() const;
+
 	S2C_Protocol::XYZ SerializePosition() const;
 	void SerializePosition(S2C_Protocol::XYZ* pXYZ) const;
 
