@@ -13,6 +13,9 @@ GameType IntToGameType(int32_t num);
 enum class GameObjectType {
 	undefined,
 	TestGameBullet,
+	PingPongGameBulletRed,
+	PingPongGameBulletBlue,
+	PingPongGameBulletPupple,
 };
 
 GameObjectType IntToGameObjectType(int32_t num);
