@@ -313,5 +313,9 @@ class PacketHandler {
 	public static void S_P_RequestPlayerBarPositionHandler(PacketSession session, IMessage packet) {
 		Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessPRequestPlayerBarPosition(packet); });
 	}
+
+    public static void S_P_BulletHandler(PacketSession session, IMessage packet) {
+        Managers.ExecuteAtMainThread(() => { Debug.Log("S_P_Bullet 받았음."); });
+    }
 }
 
