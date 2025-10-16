@@ -115,7 +115,15 @@ void PingPongGameRoom::TestPhase1() {
 }
 
 void PingPongGameRoom::TestPhase2() {
-	MakeBullet(0, 0, 0, 1, 1, 1);
+	cout << "phase2" << endl;
+	int32_t bulletType = 1;
+	float px = 0;
+	float pz = 0;
+	float sx = 1;
+	float sz = 1;
+	float speed = 1;
+
+	MakeBullet(bulletType, px, pz, sx, sz, speed);
 }
 
 void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed) {
@@ -138,6 +146,7 @@ void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float 
 		break;
 	}
 	default:
+		return;
 		break;
 	}
 	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
@@ -147,7 +156,6 @@ void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float 
 
 	//Extra. 해당 방향으로 bullet이 직진했을 경우, 감점이 될 플레이어를 계산.
 	//추후, 이 bullet에 대한 그 플레이어의 충돌판정 없이, 그 플레이어의 클라이언트로부터 해당 bullet에 대한 GoalLine판정이 들어오지 않는다면 부정행위 의심.
-
 
 	//2. 해당 Bullet의 생성을 Bullet의 정보를 담아 직렬화
 	S2C_Protocol::S_P_Bullet pkt;
