@@ -37,6 +37,9 @@
     <Filter Include="S2C\GameObjects\PingPong">
       <UniqueIdentifier>{7dc1381c-7dd6-4c78-a877-50464f5fc6df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="S2C\GameObjects\PingPong\UnityGameObjects">
+      <UniqueIdentifier>{91d31fe9-aa5c-4e89-a2a1-e13275a98b93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -131,6 +134,15 @@
     </ClInclude>
     <ClInclude Include="S2C_Protocol_TestGame.pb.h">
       <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="PingPongGameBulletRed.h">
+      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PingPongGameBulletPupple.h">
+      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PingPongGameBulletBlue.h">
+      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +241,15 @@
     </ClCompile>
     <ClCompile Include="S2C_Protocol_TestGame.pb.cc">
       <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="PingPongGameBulletRed.cpp">
+      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PingPongGameBulletPupple.cpp">
+      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PingPongGameBulletBlue.cpp">
+      <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
