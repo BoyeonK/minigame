@@ -64,6 +64,8 @@ public class Define {
         TestGameBullet,
         MyPlayerBar,
         EnemyPlayerBar,
-        PingPongBullet1,
+        PingPongBulletRed,
+        PingPongBulletBlue,
+        PingPongBulletPupple,
     }
 }
