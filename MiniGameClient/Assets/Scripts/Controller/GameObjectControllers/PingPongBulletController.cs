@@ -28,20 +28,3 @@ public class PingPongBulletController : GameObjectController {
     }
 }
 
-public class PingPongBulletRedController : PingPongBulletController {
-    protected override void Init()  {
-        _objectType = Define.ObjectType.PingPongBulletRed;
-    }
-}
-
-public class PingPongBulletBlueController : PingPongBulletController {
-    protected override void Init() {
-        _objectType = Define.ObjectType.PingPongBulletBlue;
-    }
-}
-
-public class PingPongBulletPuppleController : PingPongBulletController {
-    protected override void Init() {
-        _objectType = Define.ObjectType.PingPongBulletPupple;
-    }
-}

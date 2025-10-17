@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4754184601192464645}
   - component: {fileID: 4464186701364714046}
   - component: {fileID: 160386105019390651}
-  - component: {fileID: 4480318864407389031}
+  - component: {fileID: 6456544271417697400}
   m_Layer: 0
   m_Name: PingPongBulletRed
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.2, z: -5.98}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,7 +109,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4480318864407389031
+--- !u!114 &6456544271417697400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,6 +118,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1472984069023455334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9ffa4bda4aec14eafb584e320f7e6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7561b84dbc406a242b14987f7740cf3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

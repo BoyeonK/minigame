@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 663561239267598822}
   - component: {fileID: 5549051171861393111}
   - component: {fileID: 2440900215616161884}
-  - component: {fileID: 1703018818048075618}
+  - component: {fileID: 7312999570722877435}
   m_Layer: 0
   m_Name: PingPongBulletPupple
   m_TagString: Untagged
@@ -109,7 +109,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1703018818048075618
+--- !u!114 &7312999570722877435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,6 +118,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2671552423284672289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9ffa4bda4aec14eafb584e320f7e6f, type: 3}
+  m_Script: {fileID: 11500000, guid: c847f30e73bb7634196e9e8ea34eb114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
