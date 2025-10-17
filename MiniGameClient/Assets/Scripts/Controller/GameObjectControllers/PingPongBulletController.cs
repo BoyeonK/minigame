@@ -1,9 +1,10 @@
+using Google.Protobuf.Protocol;
 using UnityEngine;
 
 public class PingPongBulletController : GameObjectController {
-    private int _lastColider = -1;
-    private float _speed = 0;
-    private Vector3 _moveDir = Vector3.zero;
+    protected int _lastColider = -1;
+    protected float _speed = 0;
+    protected Vector3 _moveDir = Vector3.zero;
 
 
     private void Update() {
@@ -23,10 +24,6 @@ public class PingPongBulletController : GameObjectController {
         _lastColider = lastColider;
     }
 
-    public void OnBarCollision(int playerIdx) {
-        Debug.Log("가자에버그레이스몸통박치기");
-    }
-
-
+    virtual public void OnBarCollision(int playerIdx) { }
 }
 
