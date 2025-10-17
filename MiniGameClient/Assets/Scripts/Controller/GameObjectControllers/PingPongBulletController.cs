@@ -23,8 +23,10 @@ public class PingPongBulletController : GameObjectController {
         _lastColider = lastColider;
     }
 
-    public void OnCollision() {
+    public void OnBarCollision(int playerIdx) {
         Debug.Log("가자에버그레이스몸통박치기");
     }
+
+
 }
 

@@ -155,16 +155,16 @@ public class PingPongScene : BaseScene {
 
     public void RenewPlayerBarPosition(S_P_RequestPlayerBarPosition positionPkt) {
         if (_playerIdx != 0) {
-            _eastPlayerBar.SetPosition(positionPkt.Ex, positionPkt.Ez);
+            _eastPlayerBar.NewSetPosition(positionPkt.Ex, positionPkt.Ez);
         }
         if (_playerIdx != 1) {
-            _westPlayerBar.SetPosition(positionPkt.Wx, positionPkt.Wz);
+            _westPlayerBar.NewSetPosition(positionPkt.Wx, positionPkt.Wz);
         }
         if (_playerIdx != 2) {
-            _southPlayerBar.SetPosition(positionPkt.Sx, positionPkt.Sz);
+            _southPlayerBar.NewSetPosition(positionPkt.Sx, positionPkt.Sz);
         }
         if (_playerIdx != 3) {
-            _northPlayerBar.SetPosition(positionPkt.Nx, positionPkt.Nz);
+            _northPlayerBar.NewSetPosition(positionPkt.Nx, positionPkt.Nz);
         }
     }
 

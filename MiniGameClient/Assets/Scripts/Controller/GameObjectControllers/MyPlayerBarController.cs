@@ -32,7 +32,7 @@ public class MyPlayerBarController : GameObjectController {
         PingPongBulletController specificComp = other.gameObject.GetComponent<PingPongBulletController>();
         if (specificComp != null) {
             Debug.Log("특정 컴포넌트를 가진 오브젝트와 충돌!");
-            specificComp.OnCollision();                   
+            specificComp.OnBarCollision(_playerIdx);                   
         }
     }
 }
