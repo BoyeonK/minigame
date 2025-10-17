@@ -165,6 +165,7 @@ void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float 
 	bullet_ptr->set_objecttype(bulletRef->GetObjectTypeInteger());
 	S2C_Protocol::XYZ* pos_ptr = bullet_ptr->mutable_position();
 	pos_ptr->set_x(px);
+	pos_ptr->set_y(0.2f);
 	pos_ptr->set_z(pz);
 
 	S2C_Protocol::XYZ* moveDir_ptr = pkt.mutable_movedir();
