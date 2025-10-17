@@ -306,16 +306,20 @@ class PacketHandler {
 		}
 	}
 
+	//TODO : 애초에 설계 자체가 최대한 MainThread에 부담을 덜 주기 위해서 이렇게
+	//굳이굳이 나누어 실행하게 만들었는데 이렇게 메인스레드가 하라고 다 던져버리면
+	//무슨 소용인가. 나중에 시간이 허락하면 바꾸도록 한다.
 	public static void S_P_StateHandler(PacketSession session, IMessage packet)	{
 		Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessPState(packet); });
 	}
 
 	public static void S_P_RequestPlayerBarPositionHandler(PacketSession session, IMessage packet) {
-		Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessPRequestPlayerBarPosition(packet); });
+		Managers.ExecuteAtMainThread(() => { Managers.Network.ResponsePRequestPlayerBarPosition(packet); });
 	}
 
     public static void S_P_BulletHandler(PacketSession session, IMessage packet) {
-        Managers.ExecuteAtMainThread(() => { Debug.Log("S_P_Bullet 받았음."); });
+		S_P_Bullet recvPkt = packet as S_P_Bullet;
+        Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessSPBullet(recvPkt.Bullet, recvPkt.MoveDir.X, recvPkt.MoveDir.Z, recvPkt.Speed, recvPkt.LastCollider); });
     }
 }
 

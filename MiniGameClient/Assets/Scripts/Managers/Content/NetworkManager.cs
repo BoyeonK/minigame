@@ -251,7 +251,7 @@ public class NetworkManager {
         }
     }
 
-    public void ProcessPRequestPlayerBarPosition(IMessage recvPkt) {
+    public void ResponsePRequestPlayerBarPosition(IMessage recvPkt) {
         BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
         if (scene == null)
             return;
@@ -273,6 +273,38 @@ public class NetworkManager {
 			};
 
 			Send(pkt);
+        }
+    }
+
+	public void ProcessSPBullet(UnityGameObject serializedBullet, float moveDirX, float moveDirZ, float speed, int lastColider) {
+        BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+        if (scene == null)
+            return;
+
+        if (scene is PingPongScene pingPongScene) {
+            GameObject goBullet = null;
+            PingPongBulletController bulletController = null;
+
+            goBullet = Managers.Object.FindByObjectId(serializedBullet.ObjectId);
+            if (goBullet == null) {
+                goBullet = Managers.Object.CreateObject(serializedBullet);
+                if (goBullet == null)  {
+                    Debug.LogError($"[ProcessSPBullet] 오브젝트 생성 실패: ObjectId={serializedBullet.ObjectId}");
+                    return;
+                }
+            }
+
+            bulletController = goBullet.GetComponent<PingPongBulletController>();
+
+            if (bulletController == null) {
+                Debug.LogError($"[ProcessSPBullet] BulletController를 찾을 수 없습니다! GameObject: {goBullet.name}, ObjectId: {serializedBullet.ObjectId}");
+                return;
+            }
+
+            Vector3 moveDir = new Vector3(moveDirX, 0, moveDirZ);
+            bulletController.SetMoveDir(moveDir);
+            bulletController.SetSpeed(speed);
+            bulletController.SetLastColider(lastColider);
         }
     }
 
