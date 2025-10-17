@@ -21,10 +21,14 @@ GameObjectType IntToGameObjectType(int32_t num) {
 	case(1):
 		return GameObjectType::TestGameBullet;
 	case(2):
-		return GameObjectType::PingPongGameBulletRed;
+		return GameObjectType::MyPlayerBar;
 	case(3):
-		return GameObjectType::PingPongGameBulletBlue;
+		return GameObjectType::EnemyPlayerBar;
 	case(4):
+		return GameObjectType::PingPongGameBulletRed;
+	case(5):
+		return GameObjectType::PingPongGameBulletBlue;
+	case(6):
 		return GameObjectType::PingPongGameBulletPupple;
 	default:
 		return GameObjectType::undefined;
