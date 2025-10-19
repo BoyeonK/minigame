@@ -49,8 +49,9 @@ enum : uint16_t {
 	PKT_C_P_RESPONSE_PLAYER_BAR_POSITION = 204,
 	PKT_S_P_CHANGE_PLAYER_BAR_POSITION = 205,
 	PKT_S_P_BULLET = 206,
-	PKT_C_P_COLLISION_BAR = 207,
-	PKT_C_P_COLLISION_GOAL_LINE = 208,
+	PKT_S_P_BULLETS = 207,
+	PKT_C_P_COLLISION_BAR = 208,
+	PKT_C_P_COLLISION_GOAL_LINE = 209,
 
 	PKT_S_DANMAKU_STATE = 300,
 	PKT_S_DANMAKU_RESTULT = 301,
@@ -182,6 +183,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_RequestPlayerBarPosition& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_REQUEST_PLAYER_BAR_POSITION); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_ChangePlayerBarPosition& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_CHANGE_PLAYER_BAR_POSITION); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Bullet& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_BULLET); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Bullets& pkt) { return MakeSendBufferRef(pkt, PKT_S_P_BULLETS); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_State& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_STATE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Result& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_RESULT, AESKey); }
@@ -189,7 +191,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_RequestPlayerBarPosition& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_REQUEST_PLAYER_BAR_POSITION, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_ChangePlayerBarPosition& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_CHANGE_PLAYER_BAR_POSITION, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Bullet& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_BULLET, AESKey); }
-
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_P_Bullets& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_P_BULLETS, AESKey); }
 #pragma endregion
 
 #pragma region Danmaku

@@ -126,7 +126,7 @@ void PingPongGameRoom::TestPhase2() {
 	MakeBullet(bulletType, px, pz, sx, sz, speed);
 }
 
-void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed) {
+bool PingPongGameRoom::MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt) {
 	//1. Bullet의 생성.
 	shared_ptr<PingPongGameBullet> bulletRef = nullptr;
 	switch (bulletType) {
@@ -146,21 +146,20 @@ void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float 
 		break;
 	}
 	default:
-		return;
+		return false;
 		break;
 	}
+
+	if (bulletRef == nullptr)
+		return false;
+
 	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
 	bulletRef->SetMoveVector(sx, sz, speed);
 	bulletRef->UpdateTick(::GetTickCount64());
 	RegisterGameObject(bulletRef);
 
-	//Extra. 해당 방향으로 bullet이 직진했을 경우, 감점이 될 플레이어를 계산.
-	//추후, 이 bullet에 대한 그 플레이어의 충돌판정 없이, 그 플레이어의 클라이언트로부터 해당 bullet에 대한 GoalLine판정이 들어오지 않는다면 부정행위 의심.
-
 	//2. 해당 Bullet의 생성을 Bullet의 정보를 담아 직렬화
-	S2C_Protocol::S_P_Bullet pkt;
-
-	S2C_Protocol::UnityGameObject* bullet_ptr = pkt.mutable_bullet();
+	S2C_Protocol::UnityGameObject* bullet_ptr = outPkt.mutable_bullet();
 	bullet_ptr->set_objectid(bulletRef->GetObjectId());
 	bullet_ptr->set_objecttype(bulletRef->GetObjectTypeInteger());
 	S2C_Protocol::XYZ* pos_ptr = bullet_ptr->mutable_position();
@@ -168,14 +167,34 @@ void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float 
 	pos_ptr->set_y(0.2f);
 	pos_ptr->set_z(pz);
 
-	S2C_Protocol::XYZ* moveDir_ptr = pkt.mutable_movedir();
+	S2C_Protocol::XYZ* moveDir_ptr = outPkt.mutable_movedir();
 	moveDir_ptr->set_x(sx);
 	moveDir_ptr->set_z(sz);
 
-	pkt.set_speed(speed);
-	pkt.set_lastcollider(-1);
+	outPkt.set_speed(speed);
+	outPkt.set_lastcollider(-1);
 
-	//3. 전송.
+	return true;
+}
+
+void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed) {
+	S2C_Protocol::S_P_Bullet pkt;
+	if (!MakeSerializedBullet(bulletType, px, pz, sx, sz, speed, pkt))
+		return;
+	
+	//TODO : 유효한 패킷인지에 대한 검사 필요
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+}
+
+void PingPongGameRoom::MakeBullets(initializer_list<S2C_Protocol::S_P_Bullet> serializedBullets) {
+	S2C_Protocol::S_P_Bullets pkt;
+	pkt.mutable_bullets()->Reserve(serializedBullets.size());
+
+	for (const auto& bullet : serializedBullets) {
+		pkt.add_bullets()->CopyFrom(bullet);
+	}
+
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 }

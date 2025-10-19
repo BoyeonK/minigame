@@ -46,6 +46,10 @@ message S_P_Bullet {
     int32 lastCollider = 4;
 }
 
+message S_P_Bullets {
+    repeated S_P_Bullet bullets = 1;
+}
+
 message C_P_CollisionBar {
     UnityGameObject bullet = 1;
     XYZ moveDir = 2;

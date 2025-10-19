@@ -66,6 +66,9 @@ extern C_P_ResponsePlayerBarPositionDefaultTypeInternal _C_P_ResponsePlayerBarPo
 class S_P_Bullet;
 struct S_P_BulletDefaultTypeInternal;
 extern S_P_BulletDefaultTypeInternal _S_P_Bullet_default_instance_;
+class S_P_Bullets;
+struct S_P_BulletsDefaultTypeInternal;
+extern S_P_BulletsDefaultTypeInternal _S_P_Bullets_default_instance_;
 class S_P_ChangePlayerBarPosition;
 struct S_P_ChangePlayerBarPositionDefaultTypeInternal;
 extern S_P_ChangePlayerBarPositionDefaultTypeInternal _S_P_ChangePlayerBarPosition_default_instance_;
@@ -716,7 +719,7 @@ class C_P_CollisionGoalLine final : public ::google::protobuf::internal::ZeroFie
     return reinterpret_cast<const C_P_CollisionGoalLine*>(
         &_C_P_CollisionGoalLine_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 8;
+  static constexpr int kIndexInFileMessages = 9;
   friend void swap(C_P_CollisionGoalLine& a, C_P_CollisionGoalLine& b) { a.Swap(&b); }
   inline void Swap(C_P_CollisionGoalLine* other) {
     if (other == this) return;
@@ -1701,7 +1704,7 @@ class C_P_CollisionBar final : public ::google::protobuf::Message
     return reinterpret_cast<const C_P_CollisionBar*>(
         &_C_P_CollisionBar_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 7;
+  static constexpr int kIndexInFileMessages = 8;
   friend void swap(C_P_CollisionBar& a, C_P_CollisionBar& b) { a.Swap(&b); }
   inline void Swap(C_P_CollisionBar* other) {
     if (other == this) return;
@@ -1860,6 +1863,203 @@ class C_P_CollisionBar final : public ::google::protobuf::Message
     ::S2C_Protocol::UnityGameObject* bullet_;
     ::S2C_Protocol::XYZ* movedir_;
     float speed_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_S2C_5fProtocol_5fPingPong_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_P_Bullets final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_P_Bullets) */ {
+ public:
+  inline S_P_Bullets() : S_P_Bullets(nullptr) {}
+  ~S_P_Bullets() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(S_P_Bullets* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_P_Bullets));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR S_P_Bullets(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline S_P_Bullets(const S_P_Bullets& from) : S_P_Bullets(nullptr, from) {}
+  inline S_P_Bullets(S_P_Bullets&& from) noexcept
+      : S_P_Bullets(nullptr, std::move(from)) {}
+  inline S_P_Bullets& operator=(const S_P_Bullets& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_P_Bullets& operator=(S_P_Bullets&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_P_Bullets& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_P_Bullets* internal_default_instance() {
+    return reinterpret_cast<const S_P_Bullets*>(
+        &_S_P_Bullets_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 7;
+  friend void swap(S_P_Bullets& a, S_P_Bullets& b) { a.Swap(&b); }
+  inline void Swap(S_P_Bullets* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_P_Bullets* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_P_Bullets* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S_P_Bullets>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const S_P_Bullets& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const S_P_Bullets& from) { S_P_Bullets::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(S_P_Bullets* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_P_Bullets"; }
+
+ protected:
+  explicit S_P_Bullets(::google::protobuf::Arena* arena);
+  S_P_Bullets(::google::protobuf::Arena* arena, const S_P_Bullets& from);
+  S_P_Bullets(::google::protobuf::Arena* arena, S_P_Bullets&& from) noexcept
+      : S_P_Bullets(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kBulletsFieldNumber = 1,
+  };
+  // repeated .S2C_Protocol.S_P_Bullet bullets = 1;
+  int bullets_size() const;
+  private:
+  int _internal_bullets_size() const;
+
+  public:
+  void clear_bullets() ;
+  ::S2C_Protocol::S_P_Bullet* mutable_bullets(int index);
+  ::google::protobuf::RepeatedPtrField<::S2C_Protocol::S_P_Bullet>* mutable_bullets();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::S2C_Protocol::S_P_Bullet>& _internal_bullets() const;
+  ::google::protobuf::RepeatedPtrField<::S2C_Protocol::S_P_Bullet>* _internal_mutable_bullets();
+  public:
+  const ::S2C_Protocol::S_P_Bullet& bullets(int index) const;
+  ::S2C_Protocol::S_P_Bullet* add_bullets();
+  const ::google::protobuf::RepeatedPtrField<::S2C_Protocol::S_P_Bullet>& bullets() const;
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_P_Bullets)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 1,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const S_P_Bullets& from_msg);
+    ::google::protobuf::RepeatedPtrField< ::S2C_Protocol::S_P_Bullet > bullets_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -2509,6 +2709,59 @@ inline ::int32_t S_P_Bullet::_internal_lastcollider() const {
 inline void S_P_Bullet::_internal_set_lastcollider(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.lastcollider_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// S_P_Bullets
+
+// repeated .S2C_Protocol.S_P_Bullet bullets = 1;
+inline int S_P_Bullets::_internal_bullets_size() const {
+  return _internal_bullets().size();
+}
+inline int S_P_Bullets::bullets_size() const {
+  return _internal_bullets_size();
+}
+inline void S_P_Bullets::clear_bullets() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.bullets_.Clear();
+}
+inline ::S2C_Protocol::S_P_Bullet* S_P_Bullets::mutable_bullets(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_P_Bullets.bullets)
+  return _internal_mutable_bullets()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::S2C_Protocol::S_P_Bullet>* S_P_Bullets::mutable_bullets()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:S2C_Protocol.S_P_Bullets.bullets)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_bullets();
+}
+inline const ::S2C_Protocol::S_P_Bullet& S_P_Bullets::bullets(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_Bullets.bullets)
+  return _internal_bullets().Get(index);
+}
+inline ::S2C_Protocol::S_P_Bullet* S_P_Bullets::add_bullets() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::S2C_Protocol::S_P_Bullet* _add = _internal_mutable_bullets()->Add();
+  // @@protoc_insertion_point(field_add:S2C_Protocol.S_P_Bullets.bullets)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::S2C_Protocol::S_P_Bullet>& S_P_Bullets::bullets() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:S2C_Protocol.S_P_Bullets.bullets)
+  return _internal_bullets();
+}
+inline const ::google::protobuf::RepeatedPtrField<::S2C_Protocol::S_P_Bullet>&
+S_P_Bullets::_internal_bullets() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.bullets_;
+}
+inline ::google::protobuf::RepeatedPtrField<::S2C_Protocol::S_P_Bullet>*
+S_P_Bullets::_internal_mutable_bullets() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.bullets_;
 }
 
 // -------------------------------------------------------------------

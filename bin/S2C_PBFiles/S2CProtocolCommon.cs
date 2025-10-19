@@ -27,7 +27,7 @@ namespace Google.Protobuf.Protocol {
             "ChlTMkNfUHJvdG9jb2xfQ29tbW9uLnByb3RvEgxTMkNfUHJvdG9jb2wiJgoD",
             "WFlaEgkKAXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCIlwKD1VuaXR5",
             "R2FtZU9iamVjdBIQCghvYmplY3RJZBgBIAEoBRISCgpvYmplY3RUeXBlGAIg",
-            "ASgFEiMKCHBvc2l0aW9uGAMgASgLMhEuUzJDX1Byb3RvY29sLlhZWirGBwoF",
+            "ASgFEiMKCHBvc2l0aW9uGAMgASgLMhEuUzJDX1Byb3RvY29sLlhZWirYBwoF",
             "TXNnSWQSDQoJU19XRUxDT01FEAASDQoJQ19XRUxDT01FEAESFgoSU19XRUxD",
             "T01FX1JFU1BPTlNFEAISDwoLU19FTkNSWVBURUQQAxIPCgtDX0VOQ1JZUFRF",
             "RBAEEgsKB0NfTE9HSU4QBRILCgdTX0xPR0lOEAYSFAoQQ19DUkVBVEVfQUND",
@@ -47,10 +47,10 @@ namespace Google.Protobuf.Protocol {
             "WV9GT1JfU1RBUlQQygESJAofU19QX1JFUVVFU1RfUExBWUVSX0JBUl9QT1NJ",
             "VElPThDLARIlCiBDX1BfUkVTUE9OU0VfUExBWUVSX0JBUl9QT1NJVElPThDM",
             "ARIjCh5TX1BfQ0hBTkdFX1BMQVlFUl9CQVJfUE9TSVRJT04QzQESDwoKU19Q",
-            "X0JVTExFVBDOARIWChFDX1BfQ09MTElTSU9OX0JBUhDPARIcChdDX1BfQ09M",
-            "TElTSU9OX0dPQUxfTElORRDQARIUCg9TX0RBTk1BS1VfU1RBVEUQrAISFQoQ",
-            "U19EQU5NQUtVX1JFU1VMVBCtAkIbqgIYR29vZ2xlLlByb3RvYnVmLlByb3Rv",
-            "Y29sYgZwcm90bzM="));
+            "X0JVTExFVBDOARIQCgtTX1BfQlVMTEVUUxDPARIWChFDX1BfQ09MTElTSU9O",
+            "X0JBUhDQARIcChdDX1BfQ09MTElTSU9OX0dPQUxfTElORRDRARIUCg9TX0RB",
+            "Tk1BS1VfU1RBVEUQrAISFQoQU19EQU5NQUtVX1JFU1VMVBCtAkIbqgIYR29v",
+            "Z2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -100,8 +100,9 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("C_P_RESPONSE_PLAYER_BAR_POSITION")] CPResponsePlayerBarPosition = 204,
     [pbr::OriginalName("S_P_CHANGE_PLAYER_BAR_POSITION")] SPChangePlayerBarPosition = 205,
     [pbr::OriginalName("S_P_BULLET")] SPBullet = 206,
-    [pbr::OriginalName("C_P_COLLISION_BAR")] CPCollisionBar = 207,
-    [pbr::OriginalName("C_P_COLLISION_GOAL_LINE")] CPCollisionGoalLine = 208,
+    [pbr::OriginalName("S_P_BULLETS")] SPBullets = 207,
+    [pbr::OriginalName("C_P_COLLISION_BAR")] CPCollisionBar = 208,
+    [pbr::OriginalName("C_P_COLLISION_GOAL_LINE")] CPCollisionGoalLine = 209,
     [pbr::OriginalName("S_DANMAKU_STATE")] SDanmakuState = 300,
     [pbr::OriginalName("S_DANMAKU_RESULT")] SDanmakuResult = 301,
   }

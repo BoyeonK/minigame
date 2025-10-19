@@ -128,7 +128,7 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto[] ABSL_ATTR
     "l\"&\n\003XYZ\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001("
     "\002\"\\\n\017UnityGameObject\022\020\n\010objectId\030\001 \001(\005\022\022"
     "\n\nobjectType\030\002 \001(\005\022#\n\010position\030\003 \001(\0132\021.S"
-    "2C_Protocol.XYZ*\306\007\n\005MsgId\022\r\n\tS_WELCOME\020\000"
+    "2C_Protocol.XYZ*\330\007\n\005MsgId\022\r\n\tS_WELCOME\020\000"
     "\022\r\n\tC_WELCOME\020\001\022\026\n\022S_WELCOME_RESPONSE\020\002\022"
     "\017\n\013S_ENCRYPTED\020\003\022\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_L"
     "OGIN\020\005\022\013\n\007S_LOGIN\020\006\022\024\n\020C_CREATE_ACCOUNT\020"
@@ -150,16 +150,16 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto[] ABSL_ATTR
     "P_REQUEST_PLAYER_BAR_POSITION\020\313\001\022%\n C_P_"
     "RESPONSE_PLAYER_BAR_POSITION\020\314\001\022#\n\036S_P_C"
     "HANGE_PLAYER_BAR_POSITION\020\315\001\022\017\n\nS_P_BULL"
-    "ET\020\316\001\022\026\n\021C_P_COLLISION_BAR\020\317\001\022\034\n\027C_P_COL"
-    "LISION_GOAL_LINE\020\320\001\022\024\n\017S_DANMAKU_STATE\020\254"
-    "\002\022\025\n\020S_DANMAKU_RESULT\020\255\002B\033\252\002\030Google.Prot"
-    "obuf.Protocolb\006proto3"
+    "ET\020\316\001\022\020\n\013S_P_BULLETS\020\317\001\022\026\n\021C_P_COLLISION"
+    "_BAR\020\320\001\022\034\n\027C_P_COLLISION_GOAL_LINE\020\321\001\022\024\n"
+    "\017S_DANMAKU_STATE\020\254\002\022\025\n\020S_DANMAKU_RESULT\020"
+    "\255\002B\033\252\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fCommon_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fCommon_2eproto = {
     false,
     false,
-    1181,
+    1199,
     descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto,
     "S2C_Protocol_Common.proto",
     &descriptor_table_S2C_5fProtocol_5fCommon_2eproto_once,
@@ -178,7 +178,7 @@ const ::google::protobuf::EnumDescriptor* MsgId_descriptor() {
   return file_level_enum_descriptors_S2C_5fProtocol_5fCommon_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t MsgId_internal_data_[] = {
-    1835008u, 131264u, 0u, 0u, 768u, 0u, 0u, 2093056u, 301u, 300u, };
+    1835008u, 131264u, 0u, 0u, 768u, 0u, 0u, 4190208u, 301u, 300u, };
 bool MsgId_IsValid(int value) {
   return ::_pbi::ValidateEnum(value, MsgId_internal_data_);
 }
