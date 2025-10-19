@@ -84,6 +84,34 @@ void PingPongManager::initPattern() {
 	float speedPupple = 1.0f;
 
 	makeSymmetryBullet(easyPatterns[0], int(GameObjectType::PingPongGameBulletRed), 0.0f, 0.0f, 30, speedRed);
+	makeSymmetryBullet(easyPatterns[1], int(GameObjectType::PingPongGameBulletBlue), 0.0f, 0.0f, 30, speedBlue);
+	makeSymmetryBullet(easyPatterns[2], int(GameObjectType::PingPongGameBulletPupple), 0.0f, 0.0f, 30, speedPupple);
+	makeSymmetryBullet(easyPatterns[3], int(GameObjectType::PingPongGameBulletRed), 0.0f, 0.0f, -15, speedRed);
+	makeSymmetryBullet(easyPatterns[4], int(GameObjectType::PingPongGameBulletBlue), 0.0f, 0.0f, -15, speedBlue);
+	makeSymmetryBullet(easyPatterns[5], int(GameObjectType::PingPongGameBulletPupple), 0.0f, 0.0f, -15, speedPupple);
+
+	makeSymmetryBullet(mediumPatterns[0], int(GameObjectType::PingPongGameBulletRed), 0.2f, 0.2f, 30, speedRed);
+	makeSymmetryBullet(mediumPatterns[0], int(GameObjectType::PingPongGameBulletBlue), -0.2f, -0.2f, 15, speedBlue);
+	makeSymmetryBullet(mediumPatterns[1], int(GameObjectType::PingPongGameBulletRed), 0.2f, -0.2f, -30, speedRed);
+	makeSymmetryBullet(mediumPatterns[1], int(GameObjectType::PingPongGameBulletPupple), -0.2f, 0.2f, 30, speedPupple);
+	makeSymmetryBullet(mediumPatterns[2], int(GameObjectType::PingPongGameBulletBlue), 0.2f, 0.2f, -15, speedBlue);
+	makeSymmetryBullet(mediumPatterns[2], int(GameObjectType::PingPongGameBulletPupple), -0.2f, -0.2f, 30, speedPupple);
+	makeSymmetryBullet(mediumPatterns[3], int(GameObjectType::PingPongGameBulletRed), -0.2f, -0.2f, -30, speedRed);
+	makeSymmetryBullet(mediumPatterns[3], int(GameObjectType::PingPongGameBulletBlue), 0.2f, 0.2f, -15, speedBlue);
+	makeSymmetryBullet(mediumPatterns[4], int(GameObjectType::PingPongGameBulletRed), -0.2f, 0.2f, 30, speedRed);
+	makeSymmetryBullet(mediumPatterns[4], int(GameObjectType::PingPongGameBulletPupple), 0.2f, -0.2f, 30, speedPupple);
+	makeSymmetryBullet(mediumPatterns[5], int(GameObjectType::PingPongGameBulletBlue), -0.2f, -0.2f, 15, speedBlue);
+	makeSymmetryBullet(mediumPatterns[5], int(GameObjectType::PingPongGameBulletPupple), 0.2f, 0.2f, -30, speedPupple);
+
+	makeSymmetryBullet(hardPatterns[0], int(GameObjectType::PingPongGameBulletRed), 0.0f, 0.0f, 15, speedRed);
+	makeSymmetryBullet(hardPatterns[0], int(GameObjectType::PingPongGameBulletBlue), 0.1f, 0.1f, -15, speedBlue);
+	makeSymmetryBullet(hardPatterns[0], int(GameObjectType::PingPongGameBulletPupple), -0.1f, -0.1f, 30, speedPupple);
+	makeSymmetryBullet(hardPatterns[1], int(GameObjectType::PingPongGameBulletRed), -0.1f, 0.1f, -15, speedRed);
+	makeSymmetryBullet(hardPatterns[1], int(GameObjectType::PingPongGameBulletBlue), 0.0f, 0.0f, 30, speedBlue);
+	makeSymmetryBullet(hardPatterns[1], int(GameObjectType::PingPongGameBulletPupple), 0.1f, -0.1f, 15, speedPupple);
+	makeSymmetryBullet(hardPatterns[2], int(GameObjectType::PingPongGameBulletRed), 0.0f, -0.1f, 30, speedRed);
+	makeSymmetryBullet(hardPatterns[2], int(GameObjectType::PingPongGameBulletBlue), -0.1f, 0.0f, 15, speedBlue);
+	makeSymmetryBullet(hardPatterns[2], int(GameObjectType::PingPongGameBulletPupple), 0.0f, 0.0f, -15, speedPupple);
 }
 
 void PingPongManager::makeSymmetryBullet(S2C_Protocol::S_P_Bullets& pkt, int32_t bulletType, float px, float pz, int degree, float speed) {
