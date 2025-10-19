@@ -1,5 +1,6 @@
 #pragma once
 #include <mutex>
+#include <random>
 #include "SendBuffer.h"
 
 extern class ThreadManager* GThreadManager;
@@ -10,6 +11,7 @@ extern thread_local uint32_t MyThreadID;
 extern thread_local uint64_t LEndTickCount;
 extern thread_local shared_ptr<SendBufferChunk> LSendBufferChunkRef;
 extern thread_local class Actor* LCurrentActor;
+extern thread_local mt19937 LRanGen;
 
 class ThreadManager {
 public:

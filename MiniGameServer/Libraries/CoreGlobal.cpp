@@ -14,6 +14,7 @@ thread_local uint32_t MyThreadID = 0;
 thread_local uint64_t LEndTickCount = 0;
 thread_local shared_ptr<SendBufferChunk> LSendBufferChunkRef = nullptr;
 thread_local Actor* LCurrentActor = nullptr;
+extern thread_local mt19937 LRanGen;
 
 class CoreGlobal {
 public:
@@ -48,6 +49,8 @@ void ThreadManager::InitTLS() {
 	//이 함수 스코프를 벗어나도 NxtThreadID 변수는 살아있다.
 	static atomic<uint32_t> NxtThreadID = 1;
 	MyThreadID = NxtThreadID.fetch_add(1);
+	random_device rd;
+	LRanGen.seed(rd());
 }
 
 void ThreadManager::Launch(function<void(void)> callback) {
