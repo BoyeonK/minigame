@@ -3,6 +3,7 @@
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
 #include "PingPongGameBullet.h"
+#include <random>
 
 void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
@@ -126,6 +127,10 @@ void PingPongGameRoom::TestPhase2() {
 	MakeBullet(bulletType, px, pz, sx, sz, speed);
 }
 
+void PingPongGameRoom::OnGoingPhase1() {
+	
+}
+
 bool PingPongGameRoom::MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt) {
 	//1. BulletÀÇ »ý¼º.
 	shared_ptr<PingPongGameBullet> bulletRef = nullptr;
@@ -197,6 +202,61 @@ void PingPongGameRoom::MakeBullets(initializer_list<S2C_Protocol::S_P_Bullet> se
 
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
+}
+
+void PingPongGameRoom::MakeBulletsFromPatternMap(const S2C_Protocol::S_P_Bullets& serializedBullets) {
+	S2C_Protocol::S_P_Bullets copyPkt = serializedBullets;
+	int size = copyPkt.bullets_size();
+	for (int i = 0; i < size; i++) {
+		S2C_Protocol::S_P_Bullet* pBullet = copyPkt.mutable_bullets(i);
+		SpawnAndInitializeBullet(pBullet);
+	}
+
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(copyPkt);
+	BroadCast(sendBuffer);
+}
+
+bool PingPongGameRoom::SpawnAndInitializeBullet(S2C_Protocol::S_P_Bullet* pSerializedBullet) {
+	shared_ptr<PingPongGameBullet> bulletRef = nullptr;
+	
+	GameObjectType bulletType = IntToGameObjectType(pSerializedBullet->bullet().objecttype());
+	float px = pSerializedBullet->bullet().position().x();
+	float pz = pSerializedBullet->bullet().position().z();
+	float sx = pSerializedBullet->movedir().x();
+	float sz = pSerializedBullet->movedir().z();
+	float speed = pSerializedBullet->speed();
+
+	switch (bulletType) {
+	case (GameObjectType::PingPongGameBulletRed): {
+		shared_ptr<PingPongGameBulletRed> redBullet = PingPongGameBulletRed::NewTestGameBullet(px, 0.2f, pz);
+		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(redBullet);
+		break;
+	}
+	case (GameObjectType::PingPongGameBulletBlue): {
+		shared_ptr<PingPongGameBulletBlue> blueBullet = PingPongGameBulletBlue::NewTestGameBullet(px, 0.2f, pz);
+		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(blueBullet);
+		break;
+	}
+	case (GameObjectType::PingPongGameBulletPupple): {
+		shared_ptr<PingPongGameBulletPupple> puppleBullet = PingPongGameBulletPupple::NewTestGameBullet(px, 0.2f, pz);
+		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(puppleBullet);
+		break;
+	}
+	default:
+		return false;
+		break;
+	}
+
+	if (bulletRef == nullptr)
+		return false;
+
+	int32_t newObjectId = GenerateUniqueGameObjectId();
+	pSerializedBullet->mutable_bullet()->set_objectid(newObjectId);
+	bulletRef->SetObjectId(newObjectId);
+	bulletRef->SetMoveVector(sx, sz, speed);
+	bulletRef->UpdateTick(::GetTickCount64());
+	RegisterGameObject(bulletRef);
+	return true;
 }
 
 void PingPongGameRoom::Handle_CollisionBar(int32_t objectId, int32_t playerIdx) {

@@ -9,6 +9,7 @@ class PingPongManager : public GameManager {
 public:
 	PingPongManager() : _ty(GameType::PingPong), _quota(4), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
+		InitPattern();
 	}
 
 	void Push(WatingPlayerData pd) override;
@@ -21,7 +22,7 @@ public:
 
 	void StartGame() {}
 
-	void initPattern();
+	void InitPattern();
 	void makeSymmetryBullet(S2C_Protocol::S_P_Bullets& pkt, int32_t bulletType, float px, float pz, int degree, float speed);
 	void makeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet* outPkt);
 	static float GetCos(int degree) {

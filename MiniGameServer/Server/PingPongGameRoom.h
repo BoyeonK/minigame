@@ -20,10 +20,13 @@ public:
 	void Start();
 	void TestPhase1();
 	void TestPhase2();
+	void OnGoingPhase1();
 
 	bool MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt);
 	void MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed);
 	void MakeBullets(initializer_list<S2C_Protocol::S_P_Bullet> serializedBullets);
+	void MakeBulletsFromPatternMap(const S2C_Protocol::S_P_Bullets& serializedBullets);
+	bool SpawnAndInitializeBullet(S2C_Protocol::S_P_Bullet* pSerializedBullet);
 
 	void Handle_CollisionBar(int32_t objectId, int32_t playerIdx);
 	

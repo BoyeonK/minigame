@@ -74,7 +74,7 @@ void PingPongManager::Update() {
 	}
 }
 
-void PingPongManager::initPattern() {
+void PingPongManager::InitPattern() {
 	easyPatterns.resize(6);
 	mediumPatterns.resize(6);
 	hardPatterns.resize(3);
