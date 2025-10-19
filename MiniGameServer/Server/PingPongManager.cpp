@@ -73,3 +73,40 @@ void PingPongManager::Update() {
 		}
 	}
 }
+
+void PingPongManager::initPattern() {
+	easyPatterns.resize(6);
+	mediumPatterns.resize(6);
+	hardPatterns.resize(3);
+
+	float speedRed = 1.5f;
+	float speedBlue = 1.25f;
+	float speedPupple = 1.0f;
+
+	makeSymmetryBullet(easyPatterns[0], int(GameObjectType::PingPongGameBulletRed), 0.0f, 0.0f, 30, speedRed);
+}
+
+void PingPongManager::makeSymmetryBullet(S2C_Protocol::S_P_Bullets& pkt, int32_t bulletType, float px, float pz, int degree, float speed) {
+	for (int i = 0; i < 4; i++) {
+		S2C_Protocol::S_P_Bullet* pBullet = pkt.add_bullets();
+		makeBullet(bulletType, px, pz, GetCos(degree + i * 90), GetSin(degree + i * 90), speed, pBullet);;
+	}
+}
+
+void PingPongManager::makeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet* pBullet) {
+	S2C_Protocol::UnityGameObject* bullet_ptr = pBullet->mutable_bullet();
+	bullet_ptr->set_objecttype(bulletType);
+	S2C_Protocol::XYZ* pos_ptr = bullet_ptr->mutable_position();
+	pos_ptr->set_x(px);
+	pos_ptr->set_y(0.2f);
+	pos_ptr->set_z(pz);
+
+	S2C_Protocol::XYZ* moveDir_ptr = pBullet->mutable_movedir();
+	moveDir_ptr->set_x(sx);
+	moveDir_ptr->set_z(sz);
+
+	pBullet->set_speed(speed);
+	pBullet->set_lastcollider(-1);
+}
+
+
