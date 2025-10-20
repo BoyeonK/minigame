@@ -125,10 +125,17 @@ void PingPongGameRoom::TestPhase2() {
 	float speed = 1;
 
 	MakeBullet(bulletType, px, pz, sx, sz, speed);
+	OnGoingPhase1();
 }
 
 void PingPongGameRoom::OnGoingPhase1() {
-	
+	cout << "OnGoingPhase1" << endl;
+	vector<int> selectedNums(10);
+	uniform_int_distribution<int> dis(0, 5);
+	for (int i = 1; i <= 10; i++) {
+		const S2C_Protocol::S_P_Bullets bullets = pPingPongManager->easyPatterns[dis(LRanGen)];
+		PostEventAfter(2000 * i, &PingPongGameRoom::MakeBulletsFromPatternMap, bullets);
+	}
 }
 
 bool PingPongGameRoom::MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt) {
