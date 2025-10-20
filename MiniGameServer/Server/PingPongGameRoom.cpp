@@ -314,6 +314,7 @@ bool PingPongGameRoom::IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef
 	float deltaPos = abs(bulletRef->_posX + deltaX - px) + abs(bulletRef->_posZ + deltaZ - pz);
 	float toler = pPingPongManager->GetToleranceRate();
 
+	cout << "now : " << now << "   _updateTick : " << bulletRef->_updatedTick << endl;
 	cout << "DeltaX : " << deltaX << "   DeltaZ : " << deltaZ << endl;
 
 	if (deltaPos > toler * bulletRef->_speed)
