@@ -4,10 +4,15 @@
 #include "DBClientImpl.h"
 #include "S2CServerServiceImpl.h"
 #include "GameManager.h"
+#include "TestGameManager.h"
+#include "PingPongManager.h"
 
 extern class CryptoManager* GCryptoManager;
 extern class DBClientImpl* DBManager;
 extern class shared_ptr<S2CServerServiceImpl> GServerService;
+extern map<int32_t, shared_ptr<GameManager>> GGameManagers;
+extern TestGameManager* pTestGameManager;
+extern PingPongManager* pPingPongManager;
 
 class CryptoManager {
 public:
@@ -38,5 +43,3 @@ private:
 	atomic<uint32_t> _inPool;
 	atomic<uint32_t> _outPool;
 };
-
-extern map<int32_t, shared_ptr<GameManager>> GGameManagers;

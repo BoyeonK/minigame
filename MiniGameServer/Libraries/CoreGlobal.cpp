@@ -14,7 +14,7 @@ thread_local uint32_t MyThreadID = 0;
 thread_local uint64_t LEndTickCount = 0;
 thread_local shared_ptr<SendBufferChunk> LSendBufferChunkRef = nullptr;
 thread_local Actor* LCurrentActor = nullptr;
-extern thread_local mt19937 LRanGen;
+thread_local mt19937 LRanGen;
 
 class CoreGlobal {
 public:
