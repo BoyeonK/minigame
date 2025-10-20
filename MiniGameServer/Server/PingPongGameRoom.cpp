@@ -278,7 +278,13 @@ bool PingPongGameRoom::SpawnAndInitializeBullet(S2C_Protocol::S_P_Bullet* pSeria
 	pSerializedBullet->mutable_bullet()->set_objectid(newObjectId);
 	bulletRef->SetObjectId(newObjectId);
 	bulletRef->SetVector(px, pz, sx, sz, speed);
+#if defined(_MSC_VER)
+#pragma optimize("", off)
+#endif
 	bulletRef->UpdateTick(::GetTickCount64());
+#if defined(_MSC_VER)
+#pragma optimize("", on)
+#endif
 	RegisterGameObject(bulletRef);
 	return true;
 }
