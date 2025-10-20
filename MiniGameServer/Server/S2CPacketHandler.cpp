@@ -281,7 +281,7 @@ bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P
 	if (roomRef == nullptr)
 		return false;
 
-	roomRef->PostEvent(&PingPongGameRoom::Handle_CollisionBar, pkt.bullet().position().x(), pkt.bullet().position().z(), pkt.bullet().objectid(), playerSessionRef->GetRoomIdx());
+	roomRef->PostEvent(&PingPongGameRoom::Handle_CollisionBar, pkt.bullet().position().x(), pkt.bullet().position().z(), pkt.speed(), pkt.bullet().objectid(), playerSessionRef->GetRoomIdx());
 	return true;
 }
 

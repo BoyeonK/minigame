@@ -22,6 +22,7 @@ public:
 	void TestPhase1();
 	void TestPhase2();
 	void OnGoingPhase1();
+	void TestP2();
 	void OnGoingPhase2();
 
 	bool MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt);
@@ -30,8 +31,8 @@ public:
 	void MakeBulletsFromPatternMap(const S2C_Protocol::S_P_Bullets& serializedBullets);
 	bool SpawnAndInitializeBullet(S2C_Protocol::S_P_Bullet* pSerializedBullet);
 
-	void Handle_CollisionBar(float px, float pz, int32_t objectId, int32_t playerIdx);
-	bool IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef, float px, float pz, int32_t playerIdx);
+	void Handle_CollisionBar(float px, float pz, float speed, int32_t objectId, int32_t playerIdx);
+	bool IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef, float px, float pz, float speed, int32_t playerIdx);
 	
 	void RequestPlayerBarPosition();
 	void ResponsePlayerBarPosition(int32_t playerIdx, float x, float z);

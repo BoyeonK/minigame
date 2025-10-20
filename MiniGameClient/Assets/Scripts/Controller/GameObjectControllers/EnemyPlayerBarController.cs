@@ -16,10 +16,6 @@ public class EnemyPlayerBarController : GameObjectController {
         _startLerpPosition = transform.position;
     }
 
-    public void SetObjectId(int id) {
-        _objectId = id;
-    }
-
     public void SetPosition(float x, float z) {
         Vector3 now = transform.position;
         now.x = x;

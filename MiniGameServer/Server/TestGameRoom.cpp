@@ -114,6 +114,8 @@ shared_ptr<TestGameBullet> TestGameRoom::MakeTestGameBullet(float x, float y, fl
 
 void TestGameRoom::MakeTestGameBulletAndBroadcast(float x, float y, float z) {
 	shared_ptr<TestGameBullet> TGBRef = MakeTestGameBullet(x, y, z);
+	uint64_t now = GetTickCount64();
+	cout << now << endl;
 	BroadCastSpawn(TGBRef);
 }
 

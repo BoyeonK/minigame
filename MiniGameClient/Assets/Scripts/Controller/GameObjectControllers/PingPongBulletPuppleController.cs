@@ -2,7 +2,7 @@ using Google.Protobuf.Protocol;
 using UnityEngine;
 
 public class PingPongBulletPuppleController : PingPongBulletController {
-    protected override void Init() {
+    public override void Init() {
         _objectType = Define.ObjectType.PingPongBulletPupple;
     }
 

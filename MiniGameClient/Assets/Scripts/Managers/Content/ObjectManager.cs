@@ -36,6 +36,9 @@ public class ObjectManager {
 		if (go != null)	{
             _objects[objectId] = go;
             go.transform.position = new Vector3(objMessage.Position.X, objMessage.Position.Y, objMessage.Position.Z);
+			GameObjectController goc = go.GetComponent<GameObjectController>();
+			if (goc != null) 
+				goc.SetObjectId(objectId);
         }
 		return go;
 	}

@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 public class PingPongBulletRedController : PingPongBulletController {
-    protected override void Init() {
+    public override void Init() {
         _objectType = Define.ObjectType.PingPongBulletRed;
     }
 

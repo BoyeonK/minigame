@@ -1,9 +1,8 @@
 using Google.Protobuf.Protocol;
 using UnityEngine;
 
-
 public class PingPongBulletBlueController : PingPongBulletController {
-    protected override void Init() {
+    public override void Init() {
         _objectType = Define.ObjectType.PingPongBulletBlue;
     }
 

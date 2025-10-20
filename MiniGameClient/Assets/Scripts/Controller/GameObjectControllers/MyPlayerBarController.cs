@@ -4,7 +4,7 @@ public class MyPlayerBarController : GameObjectController {
     private bool _isMoveDirX = true;
     private int _playerIdx = -1;
 
-    protected override void Init() {
+    public override void Init() {
         _objectType = Define.ObjectType.MyPlayerBar;
     }
 

@@ -116,6 +116,7 @@ void PingPongGameRoom::TestPhase1() {
 }
 
 void PingPongGameRoom::TestPhase2() {
+	/*
 	cout << "phase2" << endl;
 	int32_t bulletType = 1;
 	float px = 0;
@@ -123,8 +124,8 @@ void PingPongGameRoom::TestPhase2() {
 	float sx = 1;
 	float sz = 1;
 	float speed = 1;
-
 	MakeBullet(bulletType, px, pz, sx, sz, speed);
+	*/
 	OnGoingPhase1();
 }
 
@@ -132,11 +133,19 @@ void PingPongGameRoom::OnGoingPhase1() {
 	cout << "OnGoingPhase1" << endl;
 	vector<int> selectedNums(10);
 	uniform_int_distribution<int> dis(0, 5);
-	for (int i = 1; i <= 10; i++) {
+
+	int64_t now = ::GetTickCount64();
+	cout << now << "나오우우웅" << endl;
+
+	for (int i = 0; i <= 9; i++) {
 		const S2C_Protocol::S_P_Bullets bullets = pPingPongManager->easyPatterns[dis(LRanGen)];
 		PostEventAfter(2000 * i, &PingPongGameRoom::MakeBulletsFromPatternMap, bullets);
 	}
-	PostEventAfter(25000, &PingPongGameRoom::OnGoingPhase2);
+	PostEventAfter(25000, &PingPongGameRoom::TestP2);
+}
+
+void PingPongGameRoom::TestP2() {
+	OnGoingPhase2();
 }
 
 void PingPongGameRoom::OnGoingPhase2() {
@@ -182,9 +191,10 @@ bool PingPongGameRoom::MakeSerializedBullet(int32_t bulletType, float px, float 
 	if (bulletRef == nullptr)
 		return false;
 
+	uint64_t now = ::GetTickCount64();
 	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
 	bulletRef->SetVector(px, pz, sx, sz, speed);
-	bulletRef->UpdateTick(::GetTickCount64());
+	bulletRef->UpdateTick(now);
 	RegisterGameObject(bulletRef);
 
 	//2. 해당 Bullet의 생성을 Bullet의 정보를 담아 직렬화
@@ -278,18 +288,12 @@ bool PingPongGameRoom::SpawnAndInitializeBullet(S2C_Protocol::S_P_Bullet* pSeria
 	pSerializedBullet->mutable_bullet()->set_objectid(newObjectId);
 	bulletRef->SetObjectId(newObjectId);
 	bulletRef->SetVector(px, pz, sx, sz, speed);
-#if defined(_MSC_VER)
-#pragma optimize("", off)
-#endif
 	bulletRef->UpdateTick(::GetTickCount64());
-#if defined(_MSC_VER)
-#pragma optimize("", on)
-#endif
 	RegisterGameObject(bulletRef);
 	return true;
 }
 
-void PingPongGameRoom::Handle_CollisionBar(float px, float pz, int32_t objectId, int32_t playerIdx) {
+void PingPongGameRoom::Handle_CollisionBar(float px, float pz, float speed, int32_t objectId, int32_t playerIdx) {
 	shared_ptr<PingPongGameBullet> bulletRef;
 
 	auto it = _hmGameObjects.find(objectId);
@@ -299,29 +303,33 @@ void PingPongGameRoom::Handle_CollisionBar(float px, float pz, int32_t objectId,
 	if (bulletRef == nullptr)
 		return;
 	
-	if (IsVaildCollision(bulletRef, px, pz, playerIdx)) {
+	if (IsVaildCollision(bulletRef, px, pz, speed, playerIdx)) {
 		//TODO : 유효한 경우, lastCollider수정. speedvector수정, position수정, 패킷 전송.
 	}
 }
 
-bool PingPongGameRoom::IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef, float px, float pz, int32_t playerIdx) {
+bool PingPongGameRoom::IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef, float px, float pz, float speed, int32_t playerIdx) {
 	if (bulletRef->_lastColider == playerIdx)
 		return false;
+
+	cout << bulletRef->GetObjectId() << endl;
 
 	uint64_t now = ::GetTickCount64();
 	if (bulletRef->_updatedTick > now)
 		return false;
 
 	uint64_t deltaT = now - bulletRef->_updatedTick;
-	float deltaX = deltaT * bulletRef->_moveDirX;
-	float deltaZ = deltaT * bulletRef->_moveDirZ;
+	float deltaX = (deltaT * bulletRef->_moveDirX * speed) / 1000;
+	float deltaZ = (deltaT * bulletRef->_moveDirZ * speed) / 1000;
 	
 	//원래 deltaPos는 차합이 아니라 제곱합을 사용해야 하지만 성능을 위해 최대 루트2배의 오차를 감안하고 이대로 사용.
 	float deltaPos = abs(bulletRef->_posX + deltaX - px) + abs(bulletRef->_posZ + deltaZ - pz);
 	float toler = pPingPongManager->GetToleranceRate();
 
 	cout << "now : " << now << "   _updateTick : " << bulletRef->_updatedTick << endl;
-	cout << "DeltaX : " << deltaX << "   DeltaZ : " << deltaZ << endl;
+	cout << "ExpectedX : " << bulletRef->_posX + deltaX << "   ClientsX : " << px << endl;
+	cout << "ExpectedZ : " << bulletRef->_posZ + deltaZ << "   ClientsZ : " << pz << endl;
+	cout << "DeltaPos : " << deltaPos << endl;
 
 	if (deltaPos > toler * bulletRef->_speed)
 		return false;
