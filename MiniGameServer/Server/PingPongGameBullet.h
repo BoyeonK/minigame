@@ -3,11 +3,13 @@
 
 class PingPongGameBullet : public UnityGameObject {
 public:
-	void SetMoveVector(float sx, float sz, float speed);
+	void SetVector(float px, float pz, float sx, float sz, float speed);
 	void UpdateTick(uint64_t tick);
+	void Update() override;
 
-private:
 	int32_t _lastColider = -1;
+	float _posX = 0;
+	float _posZ = 0;
 	float _moveDirX = 0;
 	float _moveDirZ = 0;
 	float _speed = 0;

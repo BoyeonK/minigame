@@ -29,7 +29,6 @@ public:
 		double radians = degree * M_PI / 180.0;
 		return static_cast<float>(cos(radians));
 	}
-
 	static float GetSin(int degree) {
 		double radians = degree * M_PI / 180.0;
 		return static_cast<float>(sin(radians));
@@ -40,6 +39,7 @@ public:
 	vector<S2C_Protocol::S_P_Bullets> mediumPatterns;
 	//12+ 방향 패턴
 	vector<S2C_Protocol::S_P_Bullets> hardPatterns;
+	float GetToleranceRate();
 
 private:
 	GameType _ty = GameType::PingPong;
@@ -48,4 +48,5 @@ private:
 	vector<bool> _excluded;
 	uint64_t _lastRenewMatchQueueTick = 0;
 	uint64_t _updateTickPeriod = 100;
+	float _toleranceRate = 0.3;
 };

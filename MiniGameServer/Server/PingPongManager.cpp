@@ -137,4 +137,8 @@ void PingPongManager::makeBullet(int32_t bulletType, float px, float pz, float s
 	pBullet->set_lastcollider(-1);
 }
 
+float PingPongManager::GetToleranceRate() {
+	return _toleranceRate;
+}
+
 

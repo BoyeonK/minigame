@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "PingPongGameBullet.h"
 
-void PingPongGameBullet::SetMoveVector(float sx, float sz, float speed) {
+void PingPongGameBullet::SetVector(float px, float pz, float sx, float sz, float speed) {
+	_posX = px;
+	_posZ = pz;
 	_moveDirX = sx;
 	_moveDirZ = sz;
 	_speed = speed;
@@ -9,6 +11,9 @@ void PingPongGameBullet::SetMoveVector(float sx, float sz, float speed) {
 
 void PingPongGameBullet::UpdateTick(uint64_t tick) {
 	_updatedTick = tick;
+}
+
+void PingPongGameBullet::Update() {
 }
 
 PingPongGameBulletRed::PingPongGameBulletRed() {
