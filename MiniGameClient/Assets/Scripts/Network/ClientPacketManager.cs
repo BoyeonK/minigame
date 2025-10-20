@@ -95,6 +95,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SPBullet, UnpackPacket<S_P_Bullet>);
         _handler.Add((ushort)MsgId.SPBullet, PacketHandler.S_P_BulletHandler);
         _msgFactories.Add((ushort)MsgId.SPBullet, () => new S_P_Bullet());
+
+        _onRecv.Add((ushort)MsgId.SPBullets, UnpackPacket<S_P_Bullets>);
+        _handler.Add((ushort)MsgId.SPBullets, PacketHandler.S_P_BulletsHandler);
+        _msgFactories.Add((ushort)MsgId.SPBullets, () => new S_P_Bullets());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

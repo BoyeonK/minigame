@@ -321,5 +321,12 @@ class PacketHandler {
 		S_P_Bullet recvPkt = packet as S_P_Bullet;
         Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessSPBullet(recvPkt.Bullet, recvPkt.MoveDir.X, recvPkt.MoveDir.Z, recvPkt.Speed, recvPkt.LastCollider); });
     }
+
+	public static void S_P_BulletsHandler(PacketSession session, IMessage packet) {
+		S_P_Bullets recvPkt = packet as S_P_Bullets;
+        foreach (var bullet in recvPkt.Bullets) {
+			S_P_BulletHandler(session, bullet);
+        }
+    }
 }
 
