@@ -2,43 +2,32 @@
 
 - Server
   - 0Byte recv를 받았을 경우(높은 확률로 연결 종료로 인한), session의 ptr을 가지고 있는 모든 객체에서의 일관된 소멸 처리
-  - PingPongGameBullet
-    - 갱신 시간 tick 및 해당 위치 정보 2가지를 멤버 변수로 추가하기
-    - 최초 Bullet의 생성
-      - Bullet의 종류, 위치, 속도 (정확히는, 방향과 속력 2가지 정보), 마지막 충돌한 player (최초, -1로 설정)를 가짐
-      - S_P_Bullet이라는 이름의 패킷으로 직렬화하여 해당 Object가 생성됨을 BroadCast
-    - Bar에 의한 충돌의 구현
-      - 해당 Player Bar를 소유한 Client가 충돌했다고 패킷을 보냄.
-      - Client에게 로직을 온전히 맡기는 것은 상당히 위험하다. 따라서 해당 충돌이 유효한지 검사하는 방어책이 필요.
-      - 충돌 발생시, `갱신시의 위치` + `(현재시간 - 갱신시간) * (Bullet의 속도)` 에 해당하는 값이 충돌지점과 일치하는지 (정확히는 충돌지점과의 거리가 일정 torr값 이하인지) 판정.
-      - 실제로는 ping에 의해서 정확히 같은 값이 나올 수가 없음. 다만, 1m이상 차이가 난다고 하면 분명히 이상하다. (Ping이 비정상적으로 높거나.. `그거`임)
-      - 또한, 특정 플레이어 Bar의 위치는, 제한된 위치에 존재할 수 밖에 없음. 해당 위치를 크게 벗어나면 유효하지 않은 충돌로 간주.
-      가령 서쪽문 수호자의 경우 playerBar의 위치는 X = 6.4 로 고정이고, -3.2 < Z < 3.2 임. 이 값을 크게 벗어난 경우, `그거`임.
-      - 위의 과정에 따라 유효한 충돌이라고 판단되는 경우, 위치와 시간을 갱신하고 충돌한 player의 type에 따라 x 혹은 z 속도값을 반전.
-      - 마지막으로 충돌한 playerid를 기록. 해당 player가 다시 충돌했다고 주장한 경우 무시. (중복 충돌 방지)
-      - 해당 결과를 S_P_Bullet으로서 전송.
-        - 클라이언트에서는 해당 objectId를 가진 Bullet이 없는 경우, 새로 생성. 있는 경우 존재하는 Object의 값을 갱신
+  - PingPongGameRoom
+    - OnGoingState
+      - EasyPattern만을 사용하는 Phase1 (20초, 5초대기)
+      - Easy와 Medium이 섞인 Phase2 (20초, 5초대기)
+      - Medium과 Hard가 섞인 Phase3 (20초, 10초 대기) 이후 CountingState로 전환.
+      - Update문이 30번 호출 될 때마다(3초) KeepAlive 패킷을 보내 Ping을 확인.
+      - 응답한 플레이어에게 추가점수 10점.
+      - 이전 KeepAlive패킷에 연속으로 2번 이상 응답하지 않은 경우, 유효하지 않은 연결로 간주.
+    - CountingState
+      - IsUpdate를 false로 전환 (Update문 호출 중단)
+      - 게임 결과를 계산, DB에 반영.
+      - 참가한 Player들이 LobbyScene으로 돌아가도록 유도.
+        - 현재 GameScene안의 모든 Object를 정지시키고 SceneUI로 결과를 통보.
+        - 확인 버튼을 누른 경우 LobbyScene으로 전환.
+      - 모든 과정이 성공함을 리턴한 경우, 사용한 모든 자원을 반환.
+      - 이후, EndState로 전환하여 GameRoom 자체도 Pool에 반환될 수 있게 함.
   - PingPongPlayerGoalLine
     - Line에 충돌한 경우 해당 Player의 점수를 깎음.
-    - Bar에 의한 충돌이 발생한 경우. `갱신시의 위치` + `Bullet의 속도 직선방향`의 GoalLine을 계산.
-    해당 Object의 충돌 없이, 해당 Player의 감점이 일어나지 않은 경우 부정한 방법을 사용중일 가능성에 대한 계산 가능하지만
-    시간관계상 이 부분은 패스. 전적으로 Client를 믿는 방법으로 진행....
+      - Pupple -20점
+      - Blue -15점
+      - red -10점
 
 - Client
   - 최초 접속 시에, 접속할 서버의 IP주소를 입력하도록 하기 (마크처럼)
-  - PlayerBar
-    - 현재 다른 PlayerBar의 위치가 Update문을 통해 특정 주기(현재 66ms)마다 Broadcast되어진다.
-    - 해당 패킷 핸들러를 통한 변화가 급작스럽게 표현되기 때문에, Lerp를 통해 PlayerBar의 이동을 부드럽게 표현할 필요가 있음.
-  - PingPongGameBullet
-    - Bar에 의한 충돌 구현
-      - OnTrigger옵션을 이용하여, Bar와 충돌한 Object, 그 Object의 속력, 이동방향을 직렬화하여 전송.
-      - 사실 그 object의 속도와 이동방향의 경우 Server에서도 가지고 있는 값이다..
-      굳이 전송할 필요는 없지만 일단 같이 전송하고 테스트를 통해 확실히 필요없다고 판단되는 경우 패킷에서 제외하려고 함.
-      - 충돌한 Bullet의 경우, 해당 값이 Ping에 의해서 부자연스레 급작스러운 변화로서 보일 가능성이 있다.
-        - 시간이 허락하는 경우, 실상위치(논리적 위치)와 피상위치(Client상으로 보여지는 위치)를 구분하여
-        피상위치가 실상 위치를 Lerp하는 방식으로 만들어 갑작스러운 실상 위치의 변화를 부드럽게 표현.
   - PingPongPlayerGoalLine
-    - OnTrigger 옵션을 이용하여, Line에 Object가 충돌한 경우. 실점.
+    - OnTrigger 옵션을 이용하여, Line에 Object가 충돌한 경우. 해당 내용을 서버에 전송. (C_P_CollisionGoalLine)
 
 - DB
   - CountingState가 구현될 때 까지 할 일 없음.
