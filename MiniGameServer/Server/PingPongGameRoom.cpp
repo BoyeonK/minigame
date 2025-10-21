@@ -303,9 +303,9 @@ void PingPongGameRoom::Handle_CollisionBar(float px, float pz, float speed, int3
 		bulletRef->_posX = px;
 		bulletRef->_posZ = pz;
 		if (playerIdx < 3)
-			bulletRef->_moveDirZ = -bulletRef->_moveDirZ;
-		else
 			bulletRef->_moveDirX = -bulletRef->_moveDirX;
+		else
+			bulletRef->_moveDirZ = -bulletRef->_moveDirZ;
 		bulletRef->_lastColider = playerIdx;
 		bulletRef->UpdateTick(::GetTickCount64());
 
@@ -317,6 +317,7 @@ void PingPongGameRoom::Handle_CollisionBar(float px, float pz, float speed, int3
 		pBullet->mutable_position()->set_z(bulletRef->_posZ);
 		pkt.mutable_movedir()->set_x(bulletRef->_moveDirX);
 		pkt.mutable_movedir()->set_z(bulletRef->_moveDirZ);
+		pkt.set_speed(bulletRef->_speed);
 		pkt.set_lastcollider(bulletRef->_lastColider);
 
 		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
