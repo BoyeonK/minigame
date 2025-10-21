@@ -1,6 +1,7 @@
 #pragma once
 #include "GameRoom.h"
 #include "PingPongGameBullet.h"
+#include "PingPongGameBullet.h"
 
 class PingPongGameRoom : public GameRoom {
 public:

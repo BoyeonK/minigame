@@ -302,6 +302,8 @@ public class NetworkManager {
             }
 
             Vector3 moveDir = new Vector3(moveDirX, 0, moveDirZ);
+			Vector3 position = new Vector3(serializedBullet.Position.X, 0.2f, serializedBullet.Position.Z);
+			bulletController.SetPositionVector(position);
             bulletController.SetMoveDir(moveDir);
             bulletController.SetSpeed(speed);
             bulletController.SetLastColider(lastColider);

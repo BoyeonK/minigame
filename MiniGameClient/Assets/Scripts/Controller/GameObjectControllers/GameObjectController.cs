@@ -10,6 +10,10 @@ public class GameObjectController : MonoBehaviour {
 		_objectId = objectId;
 	}
 
+	public void SetPositionVector(Vector3 position) { 
+		transform.position = position;
+	}
+
 	void Start() {
 		Init();
 	}
