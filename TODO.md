@@ -4,12 +4,17 @@
   - 0Byte recv를 받았을 경우(높은 확률로 연결 종료로 인한), session의 ptr을 가지고 있는 모든 객체에서의 일관된 소멸 처리
   - PingPongGameRoom
     - OnGoingState
-      - EasyPattern만을 사용하는 Phase1 (20초, 5초대기)
-      - Easy와 Medium이 섞인 Phase2 (20초, 5초대기)
-      - Medium과 Hard가 섞인 Phase3 (20초, 10초 대기) 이후 CountingState로 전환.
-      - Update문이 30번 호출 될 때마다(3초) KeepAlive 패킷을 보내 Ping을 확인.
-      - 응답한 플레이어에게 추가점수 10점.
-      - 이전 KeepAlive패킷에 연속으로 2번 이상 응답하지 않은 경우, 유효하지 않은 연결로 간주.
+      - Phase
+        - EasyPattern만을 사용하는 Phase1 (20초, 6초대기)
+        - Easy와 Medium이 섞인 Phase2 (20초, 6초대기)
+        - Medium과 Hard가 섞인 Phase3 (20초, 6초 대기) 이후 CountingState로 전환.
+      - KeepAlivePkt
+        - Update문이 30번 호출 될 때마다(3초) KeepAlive 패킷을 보내 Ping을 확인.
+        - 응답한 플레이어에게 추가점수 10점.
+          - 연결만 유지되어있어도, 점수 260점은 먹고 시작함과 같음.
+          - 연결이 올바르지 않은 경우, 실점이 적용되지 않는 비율(C_P_CollisionGoalLine)보다 승점이 적용되지 않는 비율(S_P_KeepAlivePkt)이 크도록 하기 위함
+            - 일명, 랜선 흔들기 방지.
+        - 이전 KeepAlive패킷에 연속으로 2번 이상 응답하지 않은 경우, 유효하지 않은 연결로 간주.
     - CountingState
       - IsUpdate를 false로 전환 (Update문 호출 중단)
       - 게임 결과를 계산, DB에 반영.
