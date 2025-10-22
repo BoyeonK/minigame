@@ -107,41 +107,19 @@ void PingPongGameRoom::Start() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 
-	PostEventAfter(5000, &PingPongGameRoom::TestPhase1);
-}
-
-void PingPongGameRoom::TestPhase1() {
-	_isUpdateCall = true;
-	PostEventAfter(1000, &PingPongGameRoom::TestPhase2);
-}
-
-void PingPongGameRoom::TestPhase2() {
-	/*
-	cout << "phase2" << endl;
-	int32_t bulletType = 1;
-	float px = 0;
-	float pz = 0;
-	float sx = 1;
-	float sz = 1;
-	float speed = 1;
-	MakeBullet(bulletType, px, pz, sx, sz, speed);
-	*/
-	OnGoingPhase1();
+	PostEventAfter(5000, &PingPongGameRoom::OnGoingPhase1);
 }
 
 void PingPongGameRoom::OnGoingPhase1() {
 	cout << "OnGoingPhase1" << endl;
+	_isUpdateCall = true;
 	vector<int> selectedNums(10);
 	uniform_int_distribution<int> dis(0, 5);
 	for (int i = 0; i <= 9; i++) {
 		const S2C_Protocol::S_P_Bullets bullets = pPingPongManager->easyPatterns[dis(LRanGen)];
 		PostEventAfter(2000 * i, &PingPongGameRoom::MakeBulletsFromPatternMap, bullets);
 	}
-	PostEventAfter(25000, &PingPongGameRoom::TestP2);
-}
-
-void PingPongGameRoom::TestP2() {
-	OnGoingPhase2();
+	PostEventAfter(26000, &PingPongGameRoom::OnGoingPhase2);
 }
 
 void PingPongGameRoom::OnGoingPhase2() {
@@ -158,8 +136,17 @@ void PingPongGameRoom::OnGoingPhase2() {
 		const S2C_Protocol::S_P_Bullets bullets = pPingPongManager->mediumPatterns[dis(LRanGen)];
 		PostEventAfter(4000 * i, &PingPongGameRoom::MakeBulletsFromPatternMap, bullets);
 	}
+	PostEventAfter(26000, &PingPongGameRoom::OnGoingPhase3);
 }
 
+void PingPongGameRoom::OnGoingPhase3() {
+	cout << "OnGoingPhase3" << endl;
+}
+
+void PingPongGameRoom::CountingPhase() {
+
+}
+/*
 bool PingPongGameRoom::MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt) {
 	//1. BulletÀÇ »ý¼º.
 	shared_ptr<PingPongGameBullet> bulletRef = nullptr;
@@ -232,6 +219,7 @@ void PingPongGameRoom::MakeBullets(initializer_list<S2C_Protocol::S_P_Bullet> se
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 }
+*/
 
 void PingPongGameRoom::MakeBulletsFromPatternMap(const S2C_Protocol::S_P_Bullets& serializedBullets) {
 	S2C_Protocol::S_P_Bullets copyPkt = serializedBullets;
@@ -347,6 +335,10 @@ bool PingPongGameRoom::IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef
 		return false;
 	
 	return true;
+}
+
+void PingPongGameRoom::Handle_CollisionGoalLine(int32_t playerIdx, int32_t point) {
+
 }
 
 void PingPongGameRoom::RequestPlayerBarPosition() {
