@@ -93,14 +93,21 @@ struct S_P_ReadyForStartDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_P_ReadyForStartDefaultTypeInternal _S_P_ReadyForStart_default_instance_;
-              template <typename>
+
+inline constexpr C_P_CollisionGoalLine::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : point_{0},
+        _cached_size_{0} {}
+
+template <typename>
 PROTOBUF_CONSTEXPR C_P_CollisionGoalLine::C_P_CollisionGoalLine(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
+    : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase() {
-}
+    : ::google::protobuf::Message(),
 #endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
 struct C_P_CollisionGoalLineDefaultTypeInternal {
   PROTOBUF_CONSTEXPR C_P_CollisionGoalLineDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
   ~C_P_CollisionGoalLineDefaultTypeInternal() {}
@@ -383,6 +390,7 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_P_CollisionGoalLine, _impl_.point_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -431,8 +439,8 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fPingPong_2eproto[] ABSL_AT
     "llet\"t\n\020C_P_CollisionBar\022-\n\006bullet\030\001 \001(\013"
     "2\035.S2C_Protocol.UnityGameObject\022\"\n\007moveD"
     "ir\030\002 \001(\0132\021.S2C_Protocol.XYZ\022\r\n\005speed\030\003 \001"
-    "(\002\"\027\n\025C_P_CollisionGoalLineB\033\252\002\030Google.P"
-    "rotobuf.Protocolb\006proto3"
+    "(\002\"&\n\025C_P_CollisionGoalLine\022\r\n\005point\030\001 \001"
+    "(\005B\033\252\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_deps[1] =
     {
@@ -442,7 +450,7 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_once
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fPingPong_2eproto = {
     false,
     false,
-    824,
+    839,
     descriptor_table_protodef_S2C_5fProtocol_5fPingPong_2eproto,
     "S2C_Protocol_PingPong.proto",
     &descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_once,
@@ -2745,26 +2753,36 @@ class C_P_CollisionGoalLine::_Internal {
 
 C_P_CollisionGoalLine::C_P_CollisionGoalLine(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:S2C_Protocol.C_P_CollisionGoalLine)
 }
 C_P_CollisionGoalLine::C_P_CollisionGoalLine(
-    ::google::protobuf::Arena* arena,
-    const C_P_CollisionGoalLine& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  C_P_CollisionGoalLine* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
+    ::google::protobuf::Arena* arena, const C_P_CollisionGoalLine& from)
+    : C_P_CollisionGoalLine(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE C_P_CollisionGoalLine::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
 
-  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.C_P_CollisionGoalLine)
+inline void C_P_CollisionGoalLine::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.point_ = {};
+}
+C_P_CollisionGoalLine::~C_P_CollisionGoalLine() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.C_P_CollisionGoalLine)
+  SharedDtor(*this);
+}
+inline void C_P_CollisionGoalLine::SharedDtor(MessageLite& self) {
+  C_P_CollisionGoalLine& this_ = static_cast<C_P_CollisionGoalLine&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
 }
 
 inline void* C_P_CollisionGoalLine::PlacementNew_(const void*, void* mem,
@@ -2784,10 +2802,10 @@ const ::google::protobuf::internal::ClassDataFull C_P_CollisionGoalLine::_class_
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
         &C_P_CollisionGoalLine::MergeImpl,
-        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<C_P_CollisionGoalLine>(),
+        ::google::protobuf::Message::GetNewImpl<C_P_CollisionGoalLine>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
         &C_P_CollisionGoalLine::SharedDtor,
-        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<C_P_CollisionGoalLine>(), &C_P_CollisionGoalLine::ByteSizeLong,
+        ::google::protobuf::Message::GetClearImpl<C_P_CollisionGoalLine>(), &C_P_CollisionGoalLine::ByteSizeLong,
             &C_P_CollisionGoalLine::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
         PROTOBUF_FIELD_OFFSET(C_P_CollisionGoalLine, _impl_._cached_size_),
@@ -2803,15 +2821,15 @@ const ::google::protobuf::internal::ClassData* C_P_CollisionGoalLine::GetClassDa
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 0, 0, 0, 2> C_P_CollisionGoalLine::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> C_P_CollisionGoalLine::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    0, 0,  // max_field_number, fast_idx_mask
+    1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967295,  // skipmap
-    offsetof(decltype(_table_), field_names),  // no field_entries
-    0,  // num_field_entries
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -2821,24 +2839,118 @@ const ::_pbi::TcParseTable<0, 0, 0, 0, 2> C_P_CollisionGoalLine::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::C_P_CollisionGoalLine>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // int32 point = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(C_P_CollisionGoalLine, _impl_.point_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(C_P_CollisionGoalLine, _impl_.point_)}},
   }}, {{
     65535, 65535
+  }}, {{
+    // int32 point = 1;
+    {PROTOBUF_FIELD_OFFSET(C_P_CollisionGoalLine, _impl_.point_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
-  // no field_entries, or aux_entries
+  // no aux_entries
   {{
   }},
 };
 
+PROTOBUF_NOINLINE void C_P_CollisionGoalLine::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.C_P_CollisionGoalLine)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.point_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* C_P_CollisionGoalLine::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const C_P_CollisionGoalLine& this_ = static_cast<const C_P_CollisionGoalLine&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* C_P_CollisionGoalLine::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const C_P_CollisionGoalLine& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.C_P_CollisionGoalLine)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 point = 1;
+          if (this_._internal_point() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_point(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.C_P_CollisionGoalLine)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t C_P_CollisionGoalLine::ByteSizeLong(const MessageLite& base) {
+          const C_P_CollisionGoalLine& this_ = static_cast<const C_P_CollisionGoalLine&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t C_P_CollisionGoalLine::ByteSizeLong() const {
+          const C_P_CollisionGoalLine& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.C_P_CollisionGoalLine)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // int32 point = 1;
+            if (this_._internal_point() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_point());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void C_P_CollisionGoalLine::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<C_P_CollisionGoalLine*>(&to_msg);
+  auto& from = static_cast<const C_P_CollisionGoalLine&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.C_P_CollisionGoalLine)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_point() != 0) {
+    _this->_impl_.point_ = from._impl_.point_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void C_P_CollisionGoalLine::CopyFrom(const C_P_CollisionGoalLine& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.C_P_CollisionGoalLine)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
 
-
-
-
-
+void C_P_CollisionGoalLine::InternalSwap(C_P_CollisionGoalLine* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.point_, other->_impl_.point_);
+}
 
 ::google::protobuf::Metadata C_P_CollisionGoalLine::GetMetadata() const {
-  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace S2C_Protocol

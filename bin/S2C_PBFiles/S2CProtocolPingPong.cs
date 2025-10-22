@@ -40,9 +40,9 @@ namespace Google.Protobuf.Protocol {
             "BSI4CgtTX1BfQnVsbGV0cxIpCgdidWxsZXRzGAEgAygLMhguUzJDX1Byb3Rv",
             "Y29sLlNfUF9CdWxsZXQidAoQQ19QX0NvbGxpc2lvbkJhchItCgZidWxsZXQY",
             "ASABKAsyHS5TMkNfUHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0EiIKB21vdmVE",
-            "aXIYAiABKAsyES5TMkNfUHJvdG9jb2wuWFlaEg0KBXNwZWVkGAMgASgCIhcK",
-            "FUNfUF9Db2xsaXNpb25Hb2FsTGluZUIbqgIYR29vZ2xlLlByb3RvYnVmLlBy",
-            "b3RvY29sYgZwcm90bzM="));
+            "aXIYAiABKAsyES5TMkNfUHJvdG9jb2wuWFlaEg0KBXNwZWVkGAMgASgCIiYK",
+            "FUNfUF9Db2xsaXNpb25Hb2FsTGluZRINCgVwb2ludBgBIAEoBUIbqgIYR29v",
+            "Z2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -55,7 +55,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_Bullet), global::Google.Protobuf.Protocol.S_P_Bullet.Parser, new[]{ "Bullet", "MoveDir", "Speed", "LastCollider" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_Bullets), global::Google.Protobuf.Protocol.S_P_Bullets.Parser, new[]{ "Bullets" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_P_CollisionBar), global::Google.Protobuf.Protocol.C_P_CollisionBar.Parser, new[]{ "Bullet", "MoveDir", "Speed" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_P_CollisionGoalLine), global::Google.Protobuf.Protocol.C_P_CollisionGoalLine.Parser, null, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_P_CollisionGoalLine), global::Google.Protobuf.Protocol.C_P_CollisionGoalLine.Parser, new[]{ "Point" }, null, null, null, null)
           }));
     }
     #endregion
@@ -2302,6 +2302,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_P_CollisionGoalLine(C_P_CollisionGoalLine other) : this() {
+      point_ = other.point_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2309,6 +2310,18 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_P_CollisionGoalLine Clone() {
       return new C_P_CollisionGoalLine(this);
+    }
+
+    /// <summary>Field number for the "point" field.</summary>
+    public const int PointFieldNumber = 1;
+    private int point_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Point {
+      get { return point_; }
+      set {
+        point_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2326,6 +2339,7 @@ namespace Google.Protobuf.Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Point != other.Point) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2333,6 +2347,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (Point != 0) hash ^= Point.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2351,6 +2366,10 @@ namespace Google.Protobuf.Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (Point != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Point);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2361,6 +2380,10 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Point != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Point);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2371,6 +2394,9 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (Point != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Point);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2382,6 +2408,9 @@ namespace Google.Protobuf.Protocol {
     public void MergeFrom(C_P_CollisionGoalLine other) {
       if (other == null) {
         return;
+      }
+      if (other.Point != 0) {
+        Point = other.Point;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2402,6 +2431,10 @@ namespace Google.Protobuf.Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            Point = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -2421,6 +2454,10 @@ namespace Google.Protobuf.Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 8: {
+            Point = input.ReadInt32();
+            break;
+          }
         }
       }
     }

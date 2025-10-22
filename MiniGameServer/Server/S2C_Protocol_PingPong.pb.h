@@ -661,10 +661,11 @@ class S_P_ReadyForStart final : public ::google::protobuf::internal::ZeroFieldsB
 };
 // -------------------------------------------------------------------
 
-class C_P_CollisionGoalLine final : public ::google::protobuf::internal::ZeroFieldsBase
+class C_P_CollisionGoalLine final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:S2C_Protocol.C_P_CollisionGoalLine) */ {
  public:
   inline C_P_CollisionGoalLine() : C_P_CollisionGoalLine(nullptr) {}
+  ~C_P_CollisionGoalLine() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
   void operator delete(C_P_CollisionGoalLine* msg, std::destroying_delete_t) {
@@ -738,21 +739,49 @@ class C_P_CollisionGoalLine final : public ::google::protobuf::internal::ZeroFie
   // implements Message ----------------------------------------------
 
   C_P_CollisionGoalLine* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<C_P_CollisionGoalLine>(arena);
+    return ::google::protobuf::Message::DefaultConstruct<C_P_CollisionGoalLine>(arena);
   }
-  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const C_P_CollisionGoalLine& from) {
-    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
-  }
-  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const C_P_CollisionGoalLine& from) {
-    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
-  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const C_P_CollisionGoalLine& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const C_P_CollisionGoalLine& from) { C_P_CollisionGoalLine::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
   public:
   bool IsInitialized() const {
     return true;
   }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(C_P_CollisionGoalLine* other);
  private:
   template <typename T>
   friend ::absl::string_view(
@@ -777,12 +806,25 @@ class C_P_CollisionGoalLine final : public ::google::protobuf::internal::ZeroFie
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
+  enum : int {
+    kPointFieldNumber = 1,
+  };
+  // int32 point = 1;
+  void clear_point() ;
+  ::int32_t point() const;
+  void set_point(::int32_t value);
+
+  private:
+  ::int32_t _internal_point() const;
+  void _internal_set_point(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:S2C_Protocol.C_P_CollisionGoalLine)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 0, 0,
+      0, 1, 0,
       0, 2>
       _table_;
 
@@ -800,8 +842,11 @@ class C_P_CollisionGoalLine final : public ::google::protobuf::internal::ZeroFie
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const C_P_CollisionGoalLine& from_msg);
+    ::int32_t point_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_S2C_5fProtocol_5fPingPong_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2975,6 +3020,28 @@ inline void C_P_CollisionBar::_internal_set_speed(float value) {
 // -------------------------------------------------------------------
 
 // C_P_CollisionGoalLine
+
+// int32 point = 1;
+inline void C_P_CollisionGoalLine::clear_point() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.point_ = 0;
+}
+inline ::int32_t C_P_CollisionGoalLine::point() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.C_P_CollisionGoalLine.point)
+  return _internal_point();
+}
+inline void C_P_CollisionGoalLine::set_point(::int32_t value) {
+  _internal_set_point(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.C_P_CollisionGoalLine.point)
+}
+inline ::int32_t C_P_CollisionGoalLine::_internal_point() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.point_;
+}
+inline void C_P_CollisionGoalLine::_internal_set_point(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.point_ = value;
+}
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop

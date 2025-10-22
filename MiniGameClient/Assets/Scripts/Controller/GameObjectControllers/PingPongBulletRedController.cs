@@ -35,4 +35,8 @@ public class PingPongBulletRedController : PingPongBulletController {
         //일단 테스트코드이므로 직접 호출.
         Managers.Network.Send(pkt);
     }
+
+    public override int OnGoalLineCollision() {
+        return 10;
+    }
 }

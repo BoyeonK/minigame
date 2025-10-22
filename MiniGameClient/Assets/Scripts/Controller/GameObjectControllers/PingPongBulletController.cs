@@ -6,7 +6,6 @@ public class PingPongBulletController : GameObjectController {
     protected float _speed = 0;
     protected Vector3 _moveDir = Vector3.zero;
 
-
     private void Update() {
         if (_speed > 0)
             transform.Translate(_speed * Time.deltaTime * _moveDir);
@@ -25,5 +24,6 @@ public class PingPongBulletController : GameObjectController {
     }
 
     virtual public void OnBarCollision(int playerIdx) { }
+    virtual public int OnGoalLineCollision() { return 0; }
 }
 

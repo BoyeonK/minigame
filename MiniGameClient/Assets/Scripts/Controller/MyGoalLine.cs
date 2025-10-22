@@ -1,11 +1,12 @@
+using Google.Protobuf.Protocol;
 using UnityEngine;
 
 public class MyGoalLine : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
-        PingPongBulletController specificComp = other.gameObject.GetComponent<PingPongBulletController>();
-        if (specificComp != null) {
-            Debug.Log("1점 따였다데스");
-            //TODO : 실점을 구현
+        if (other.gameObject.TryGetComponent<PingPongBulletController>(out var bulletController)) {
+            int point = bulletController.OnGoalLineCollision();
+            C_P_CollisionGoalLine pkt = new() { Point = point };
+            Managers.Network.Send(pkt);
         }
     }
 }

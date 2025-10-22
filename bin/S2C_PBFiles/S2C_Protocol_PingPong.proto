@@ -57,5 +57,5 @@ message C_P_CollisionBar {
 }
 
 message C_P_CollisionGoalLine {
-
+    int32 point = 1;
 }
