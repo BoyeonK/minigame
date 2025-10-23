@@ -53,7 +53,10 @@ void SLoginCall::CorrectI(int32_t dbid) {
 		playerSessionRef->Send(sendBufferRef);
 
 		//방금 로그인한 세션에 Elo를 최신화
-		DBManager->S2D_RenewElos(playerSessionRef, dbid);
+		//DBManager->S2D_RenewElos(playerSessionRef, dbid);
+
+		//Elo뿐만이 아니라 여러 정보를 가져옴
+		DBManager->S2D_PlayerInfomation(playerSessionRef, dbid);
 	}
 }
 
@@ -115,10 +118,30 @@ void SRenewElosCall::OnSucceed() {
 	if (sessionRef == nullptr) {
 		return;
 	}
+
 	sessionRef->SetElos(reply.elo1(), reply.elo2(), reply.elo3());
 	cout << "Elo 설정 완료" << endl;
 }
 
 void SRenewElosCall::OnFailed() {
 	//TODO: 뭔가 해야될거 같은데 당장 생각이 안나네
+}
+
+void SPlayerInformationCall::OnSucceed() {
+	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return;
+
+	playerSessionRef->SetPlayerId(reply.playerid());
+	for (int i = 0; i < reply.elos_size(); i++) {
+		playerSessionRef->SetElo(i, reply.elos(i));
+	}
+	for (int i = 0; i < reply.personalrecords_size(); i++) {
+		playerSessionRef->SetPersonalRecord(i, reply.personalrecords(i));
+	}
+	cout << "Elo 설정 완료" << endl;
+}
+
+void SPlayerInformationCall::OnFailed() {
+
 }

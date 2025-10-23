@@ -5,6 +5,11 @@ class GameRoom;
 
 class PlayerSession : public PBSession {
 public:
+	PlayerSession() {
+		_elos = vector<int32_t>(4, 1200);
+		_personalRecords = vector<int32_t>(4, 0);
+	}
+
 	//TODO:
 	void OnConnected();
 	void OnDisconnected();
@@ -22,6 +27,11 @@ public:
 
 	void SetElos(int32_t elo1, int32_t elo2, int32_t elo3);
 	int32_t GetElo(const int32_t& idx) const;
+	void SetElo(int32_t idx, int32_t elo);
+	int32_t GetEloo(const int32_t& idx) const;
+
+	void SetPersonalRecord(int32_t idx, int32_t elo);
+	int32_t GetPersonalRecord(const int32_t& idx) const;
 
 	void SetMatchingState(const GameType& value);
 	bool TryChangeMatchingState(GameType& expected, GameType desired);
@@ -52,7 +62,10 @@ private:
 	vector<unsigned char> _AESKey;
 	int32_t _gameVersion = 0;
 	string _playerId;
-	int32_t _dbid = 0;
+	atomic<int32_t> _dbid = 0;
+	//FM대로면 elo를 다룰 때 mutex를 사용해야 함.
+	vector<int32_t> _elos;
+	vector<int32_t> _personalRecords;
 	int32_t _elo1 = 0;
 	int32_t _elo2 = 0;
 	int32_t _elo3 = 0;
@@ -60,5 +73,5 @@ private:
 	atomic<GameType> _matchingState = GameType::None;
 	weak_ptr<GameRoom> _joinedRoomWRef;
 	atomic<int64_t> _lastKeepAliveTick = 0;
-	int32_t _roomIdx;
+	atomic<int32_t> _roomIdx;
 };

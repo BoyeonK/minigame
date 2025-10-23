@@ -94,3 +94,23 @@ public:
 private:
 	weak_ptr<PlayerSession> _clientSessionRef;
 };
+
+class SPlayerInformationCall final : public S2D_CallData {
+public:
+	SPlayerInformationCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
+	~SPlayerInformationCall() {}
+
+	void StartCall();
+	void OnSucceed() override;
+	void OnFailed() override;
+
+	void ReturnToPool() {
+		objectPool<SPlayerInformationCall>::dealloc(this);
+	}
+
+	S2D_Protocol::D2C_ResponsePlayerInfomation reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2C_ResponsePlayerInfomation>> response_reader;
+
+private:
+	weak_ptr<PlayerSession> _clientSessionRef;
+};

@@ -82,7 +82,16 @@ message D2C_ResponsePlayerInfomation {
     string playerId = 1;
     repeated int32 elos = 2;
     repeated int32 personalRecords = 3;
-    repeated int32 publicRecords = 4;
+    //repeated int32 publicRecords = 4;
+}
+
+//최초 연결시 월드레코드를 가져옴
+message S2D_RequestPublicRecords {
+
+}
+
+message D2S_ResponsePublicRecords {
+    repeated int32 publicRecords = 1;
 }
 
 //Elo변경요청

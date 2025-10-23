@@ -53,6 +53,18 @@ bool DBClientImpl::S2D_RenewElos(shared_ptr<PlayerSession> playerSessionRef, int
     return false;
 }
 
+bool DBClientImpl::S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionRef, int dbid) {
+    SPlayerInformationCall* call = objectPool<SPlayerInformationCall>::alloc(playerSessionRef);
+    S2D_Protocol::S2D_RequestPlayerInfomation request = S2DPacketMaker::Make_S2D_RequestPlayerInfomation(dbid);
+
+    call->response_reader = _stub->PrepareAsyncPlayerInfomation(&call->context, request, _cqRef.get());
+    call->response_reader->StartCall();
+
+    call->response_reader->Finish(&call->reply, &call->status, (void*)call);
+
+    return false;
+}
+
 void DBClientImpl::AsyncCompleteRpc() {
     if (_isConnected.load()) {
         void* tag;

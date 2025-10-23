@@ -109,6 +109,22 @@ int32_t PlayerSession::GetElo(const int32_t& idx) const {
 	}
 }
 
+void PlayerSession::SetElo(int32_t idx, int32_t elo) {
+	_elos[idx] = elo;
+}
+
+int32_t PlayerSession::GetEloo(const int32_t& idx) const {
+	return _elos[idx];
+}
+
+void PlayerSession::SetPersonalRecord(int32_t idx, int32_t elo) {
+	_personalRecords[idx] = elo;
+}
+
+int32_t PlayerSession::GetPersonalRecord(const int32_t& idx) const {
+	return _personalRecords[idx];
+}
+
 int64_t PlayerSession::GetLastKeepAliveTick() const {
 	return _lastKeepAliveTick;
 }
@@ -117,11 +133,11 @@ void PlayerSession::SetLastKeepAliveTick(const int64_t& tick) {
 	_lastKeepAliveTick.store(tick);
 }
 
-wstring PlayerSession::GetPlayerId() const {
+string PlayerSession::GetPlayerId() const {
 	return _playerId;
 }
 
-void PlayerSession::SetPlayerId(const wstring& playerId) {
+void PlayerSession::SetPlayerId(const string& playerId) {
 	_playerId = playerId;
 }
 

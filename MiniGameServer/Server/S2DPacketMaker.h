@@ -20,5 +20,11 @@ public:
 		pkt.set_dbid(dbid);
 		return pkt;
 	}
+
+	static S2D_Protocol::S2D_RequestPlayerInfomation Make_S2D_RequestPlayerInfomation(int dbid) {
+		S2D_Protocol::S2D_RequestPlayerInfomation pkt;
+		pkt.set_dbid(dbid);
+		return pkt;
+	}
 };
 
