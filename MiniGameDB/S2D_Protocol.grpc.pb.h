@@ -65,6 +65,27 @@ class S2D_Service final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_RenewElos>> PrepareAsyncRenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_RenewElos>>(PrepareAsyncRenewElosRequestRaw(context, request, cq));
     }
+    virtual ::grpc::Status PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2C_ResponsePlayerInfomation>> AsyncPlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2C_ResponsePlayerInfomation>>(AsyncPlayerInfomationRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2C_ResponsePlayerInfomation>> PrepareAsyncPlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2C_ResponsePlayerInfomation>>(PrepareAsyncPlayerInfomationRaw(context, request, cq));
+    }
+    virtual ::grpc::Status RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::S2D_Protocol::D2S_ResponseRenewElo* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewElo>> AsyncRenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewElo>>(AsyncRenewEloRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewElo>> PrepareAsyncRenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewElo>>(PrepareAsyncRenewEloRaw(context, request, cq));
+    }
+    virtual ::grpc::Status RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>> AsyncRenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>>(AsyncRenewPersonalRecordRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>> PrepareAsyncRenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>>(PrepareAsyncRenewPersonalRecordRaw(context, request, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
@@ -76,6 +97,12 @@ class S2D_Service final {
       virtual void CreateAccountRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount* request, ::S2D_Protocol::D2S_CreateAccount* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void RenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response, std::function<void(::grpc::Status)>) = 0;
       virtual void RenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -89,6 +116,12 @@ class S2D_Service final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_CreateAccount>* PrepareAsyncCreateAccountRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_RenewElos>* AsyncRenewElosRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_RenewElos>* PrepareAsyncRenewElosRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2C_ResponsePlayerInfomation>* AsyncPlayerInfomationRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2C_ResponsePlayerInfomation>* PrepareAsyncPlayerInfomationRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewElo>* AsyncRenewEloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewElo>* PrepareAsyncRenewEloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* AsyncRenewPersonalRecordRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* PrepareAsyncRenewPersonalRecordRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -121,6 +154,27 @@ class S2D_Service final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_RenewElos>> PrepareAsyncRenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_RenewElos>>(PrepareAsyncRenewElosRequestRaw(context, request, cq));
     }
+    ::grpc::Status PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2C_ResponsePlayerInfomation>> AsyncPlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2C_ResponsePlayerInfomation>>(AsyncPlayerInfomationRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2C_ResponsePlayerInfomation>> PrepareAsyncPlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2C_ResponsePlayerInfomation>>(PrepareAsyncPlayerInfomationRaw(context, request, cq));
+    }
+    ::grpc::Status RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::S2D_Protocol::D2S_ResponseRenewElo* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewElo>> AsyncRenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewElo>>(AsyncRenewEloRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewElo>> PrepareAsyncRenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewElo>>(PrepareAsyncRenewEloRaw(context, request, cq));
+    }
+    ::grpc::Status RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>> AsyncRenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>>(AsyncRenewPersonalRecordRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>> PrepareAsyncRenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>>(PrepareAsyncRenewPersonalRecordRaw(context, request, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
@@ -132,6 +186,12 @@ class S2D_Service final {
       void CreateAccountRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount* request, ::S2D_Protocol::D2S_CreateAccount* response, ::grpc::ClientUnaryReactor* reactor) override;
       void RenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response, std::function<void(::grpc::Status)>) override;
       void RenewElosRequest(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response, std::function<void(::grpc::Status)>) override;
+      void PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response, std::function<void(::grpc::Status)>) override;
+      void RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response, std::function<void(::grpc::Status)>) override;
+      void RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -151,10 +211,19 @@ class S2D_Service final {
     ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_CreateAccount>* PrepareAsyncCreateAccountRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_CreateAccount& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_RenewElos>* AsyncRenewElosRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_RenewElos>* PrepareAsyncRenewElosRequestRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RenewElos& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2C_ResponsePlayerInfomation>* AsyncPlayerInfomationRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2C_ResponsePlayerInfomation>* PrepareAsyncPlayerInfomationRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewElo>* AsyncRenewEloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewElo>* PrepareAsyncRenewEloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* AsyncRenewPersonalRecordRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* PrepareAsyncRenewPersonalRecordRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_SayHello_;
     const ::grpc::internal::RpcMethod rpcmethod_LoginRequest_;
     const ::grpc::internal::RpcMethod rpcmethod_CreateAccountRequest_;
     const ::grpc::internal::RpcMethod rpcmethod_RenewElosRequest_;
+    const ::grpc::internal::RpcMethod rpcmethod_PlayerInfomation_;
+    const ::grpc::internal::RpcMethod rpcmethod_RenewElo_;
+    const ::grpc::internal::RpcMethod rpcmethod_RenewPersonalRecord_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -166,6 +235,9 @@ class S2D_Service final {
     virtual ::grpc::Status LoginRequest(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_Login* request, ::S2D_Protocol::D2S_Login* response);
     virtual ::grpc::Status CreateAccountRequest(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_CreateAccount* request, ::S2D_Protocol::D2S_CreateAccount* response);
     virtual ::grpc::Status RenewElosRequest(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response);
+    virtual ::grpc::Status PlayerInfomation(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response);
+    virtual ::grpc::Status RenewElo(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response);
+    virtual ::grpc::Status RenewPersonalRecord(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_SayHello : public BaseClass {
@@ -247,7 +319,67 @@ class S2D_Service final {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_SayHello<WithAsyncMethod_LoginRequest<WithAsyncMethod_CreateAccountRequest<WithAsyncMethod_RenewElosRequest<Service > > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_PlayerInfomation : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_PlayerInfomation() {
+      ::grpc::Service::MarkMethodAsync(4);
+    }
+    ~WithAsyncMethod_PlayerInfomation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PlayerInfomation(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_RequestPlayerInfomation* /*request*/, ::S2D_Protocol::D2C_ResponsePlayerInfomation* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestPlayerInfomation(::grpc::ServerContext* context, ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::grpc::ServerAsyncResponseWriter< ::S2D_Protocol::D2C_ResponsePlayerInfomation>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_RenewElo : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_RenewElo() {
+      ::grpc::Service::MarkMethodAsync(5);
+    }
+    ~WithAsyncMethod_RenewElo() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewElo(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewElo* /*request*/, ::S2D_Protocol::D2S_ResponseRenewElo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRenewElo(::grpc::ServerContext* context, ::S2D_Protocol::S2D_TryRenewElo* request, ::grpc::ServerAsyncResponseWriter< ::S2D_Protocol::D2S_ResponseRenewElo>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_RenewPersonalRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_RenewPersonalRecord() {
+      ::grpc::Service::MarkMethodAsync(6);
+    }
+    ~WithAsyncMethod_RenewPersonalRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewPersonalRecord(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* /*request*/, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRenewPersonalRecord(::grpc::ServerContext* context, ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::grpc::ServerAsyncResponseWriter< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_SayHello<WithAsyncMethod_LoginRequest<WithAsyncMethod_CreateAccountRequest<WithAsyncMethod_RenewElosRequest<WithAsyncMethod_PlayerInfomation<WithAsyncMethod_RenewElo<WithAsyncMethod_RenewPersonalRecord<Service > > > > > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_SayHello : public BaseClass {
    private:
@@ -356,7 +488,88 @@ class S2D_Service final {
     virtual ::grpc::ServerUnaryReactor* RenewElosRequest(
       ::grpc::CallbackServerContext* /*context*/, const ::S2D_Protocol::S2D_RenewElos* /*request*/, ::S2D_Protocol::D2S_RenewElos* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_SayHello<WithCallbackMethod_LoginRequest<WithCallbackMethod_CreateAccountRequest<WithCallbackMethod_RenewElosRequest<Service > > > > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_PlayerInfomation : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_PlayerInfomation() {
+      ::grpc::Service::MarkMethodCallback(4,
+          new ::grpc::internal::CallbackUnaryHandler< ::S2D_Protocol::S2D_RequestPlayerInfomation, ::S2D_Protocol::D2C_ResponsePlayerInfomation>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response) { return this->PlayerInfomation(context, request, response); }));}
+    void SetMessageAllocatorFor_PlayerInfomation(
+        ::grpc::MessageAllocator< ::S2D_Protocol::S2D_RequestPlayerInfomation, ::S2D_Protocol::D2C_ResponsePlayerInfomation>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::S2D_Protocol::S2D_RequestPlayerInfomation, ::S2D_Protocol::D2C_ResponsePlayerInfomation>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_PlayerInfomation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PlayerInfomation(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_RequestPlayerInfomation* /*request*/, ::S2D_Protocol::D2C_ResponsePlayerInfomation* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* PlayerInfomation(
+      ::grpc::CallbackServerContext* /*context*/, const ::S2D_Protocol::S2D_RequestPlayerInfomation* /*request*/, ::S2D_Protocol::D2C_ResponsePlayerInfomation* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_RenewElo : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_RenewElo() {
+      ::grpc::Service::MarkMethodCallback(5,
+          new ::grpc::internal::CallbackUnaryHandler< ::S2D_Protocol::S2D_TryRenewElo, ::S2D_Protocol::D2S_ResponseRenewElo>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response) { return this->RenewElo(context, request, response); }));}
+    void SetMessageAllocatorFor_RenewElo(
+        ::grpc::MessageAllocator< ::S2D_Protocol::S2D_TryRenewElo, ::S2D_Protocol::D2S_ResponseRenewElo>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(5);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::S2D_Protocol::S2D_TryRenewElo, ::S2D_Protocol::D2S_ResponseRenewElo>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_RenewElo() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewElo(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewElo* /*request*/, ::S2D_Protocol::D2S_ResponseRenewElo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* RenewElo(
+      ::grpc::CallbackServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewElo* /*request*/, ::S2D_Protocol::D2S_ResponseRenewElo* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_RenewPersonalRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_RenewPersonalRecord() {
+      ::grpc::Service::MarkMethodCallback(6,
+          new ::grpc::internal::CallbackUnaryHandler< ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response) { return this->RenewPersonalRecord(context, request, response); }));}
+    void SetMessageAllocatorFor_RenewPersonalRecord(
+        ::grpc::MessageAllocator< ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(6);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_RenewPersonalRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewPersonalRecord(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* /*request*/, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* RenewPersonalRecord(
+      ::grpc::CallbackServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* /*request*/, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_SayHello<WithCallbackMethod_LoginRequest<WithCallbackMethod_CreateAccountRequest<WithCallbackMethod_RenewElosRequest<WithCallbackMethod_PlayerInfomation<WithCallbackMethod_RenewElo<WithCallbackMethod_RenewPersonalRecord<Service > > > > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_SayHello : public BaseClass {
@@ -422,6 +635,57 @@ class S2D_Service final {
     }
     // disable synchronous version of this method
     ::grpc::Status RenewElosRequest(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_RenewElos* /*request*/, ::S2D_Protocol::D2S_RenewElos* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_PlayerInfomation : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_PlayerInfomation() {
+      ::grpc::Service::MarkMethodGeneric(4);
+    }
+    ~WithGenericMethod_PlayerInfomation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PlayerInfomation(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_RequestPlayerInfomation* /*request*/, ::S2D_Protocol::D2C_ResponsePlayerInfomation* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_RenewElo : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_RenewElo() {
+      ::grpc::Service::MarkMethodGeneric(5);
+    }
+    ~WithGenericMethod_RenewElo() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewElo(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewElo* /*request*/, ::S2D_Protocol::D2S_ResponseRenewElo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_RenewPersonalRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_RenewPersonalRecord() {
+      ::grpc::Service::MarkMethodGeneric(6);
+    }
+    ~WithGenericMethod_RenewPersonalRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewPersonalRecord(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* /*request*/, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -504,6 +768,66 @@ class S2D_Service final {
     }
     void RequestRenewElosRequest(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_PlayerInfomation : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_PlayerInfomation() {
+      ::grpc::Service::MarkMethodRaw(4);
+    }
+    ~WithRawMethod_PlayerInfomation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PlayerInfomation(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_RequestPlayerInfomation* /*request*/, ::S2D_Protocol::D2C_ResponsePlayerInfomation* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestPlayerInfomation(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_RenewElo : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_RenewElo() {
+      ::grpc::Service::MarkMethodRaw(5);
+    }
+    ~WithRawMethod_RenewElo() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewElo(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewElo* /*request*/, ::S2D_Protocol::D2S_ResponseRenewElo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRenewElo(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_RenewPersonalRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_RenewPersonalRecord() {
+      ::grpc::Service::MarkMethodRaw(6);
+    }
+    ~WithRawMethod_RenewPersonalRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewPersonalRecord(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* /*request*/, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRenewPersonalRecord(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -592,6 +916,72 @@ class S2D_Service final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* RenewElosRequest(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_PlayerInfomation : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_PlayerInfomation() {
+      ::grpc::Service::MarkMethodRawCallback(4,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->PlayerInfomation(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_PlayerInfomation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PlayerInfomation(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_RequestPlayerInfomation* /*request*/, ::S2D_Protocol::D2C_ResponsePlayerInfomation* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* PlayerInfomation(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_RenewElo : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_RenewElo() {
+      ::grpc::Service::MarkMethodRawCallback(5,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->RenewElo(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_RenewElo() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewElo(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewElo* /*request*/, ::S2D_Protocol::D2S_ResponseRenewElo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* RenewElo(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_RenewPersonalRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_RenewPersonalRecord() {
+      ::grpc::Service::MarkMethodRawCallback(6,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->RenewPersonalRecord(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_RenewPersonalRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RenewPersonalRecord(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* /*request*/, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* RenewPersonalRecord(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
@@ -702,9 +1092,90 @@ class S2D_Service final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedRenewElosRequest(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::S2D_Protocol::S2D_RenewElos,::S2D_Protocol::D2S_RenewElos>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_SayHello<WithStreamedUnaryMethod_LoginRequest<WithStreamedUnaryMethod_CreateAccountRequest<WithStreamedUnaryMethod_RenewElosRequest<Service > > > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_PlayerInfomation : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_PlayerInfomation() {
+      ::grpc::Service::MarkMethodStreamed(4,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::S2D_Protocol::S2D_RequestPlayerInfomation, ::S2D_Protocol::D2C_ResponsePlayerInfomation>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::S2D_Protocol::S2D_RequestPlayerInfomation, ::S2D_Protocol::D2C_ResponsePlayerInfomation>* streamer) {
+                       return this->StreamedPlayerInfomation(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_PlayerInfomation() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status PlayerInfomation(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_RequestPlayerInfomation* /*request*/, ::S2D_Protocol::D2C_ResponsePlayerInfomation* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedPlayerInfomation(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::S2D_Protocol::S2D_RequestPlayerInfomation,::S2D_Protocol::D2C_ResponsePlayerInfomation>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_RenewElo : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_RenewElo() {
+      ::grpc::Service::MarkMethodStreamed(5,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::S2D_Protocol::S2D_TryRenewElo, ::S2D_Protocol::D2S_ResponseRenewElo>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::S2D_Protocol::S2D_TryRenewElo, ::S2D_Protocol::D2S_ResponseRenewElo>* streamer) {
+                       return this->StreamedRenewElo(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_RenewElo() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status RenewElo(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewElo* /*request*/, ::S2D_Protocol::D2S_ResponseRenewElo* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedRenewElo(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::S2D_Protocol::S2D_TryRenewElo,::S2D_Protocol::D2S_ResponseRenewElo>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_RenewPersonalRecord : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_RenewPersonalRecord() {
+      ::grpc::Service::MarkMethodStreamed(6,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* streamer) {
+                       return this->StreamedRenewPersonalRecord(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_RenewPersonalRecord() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status RenewPersonalRecord(::grpc::ServerContext* /*context*/, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* /*request*/, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedRenewPersonalRecord(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::S2D_Protocol::S2D_TryRenewPersonalRecord,::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_SayHello<WithStreamedUnaryMethod_LoginRequest<WithStreamedUnaryMethod_CreateAccountRequest<WithStreamedUnaryMethod_RenewElosRequest<WithStreamedUnaryMethod_PlayerInfomation<WithStreamedUnaryMethod_RenewElo<WithStreamedUnaryMethod_RenewPersonalRecord<Service > > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_SayHello<WithStreamedUnaryMethod_LoginRequest<WithStreamedUnaryMethod_CreateAccountRequest<WithStreamedUnaryMethod_RenewElosRequest<Service > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_SayHello<WithStreamedUnaryMethod_LoginRequest<WithStreamedUnaryMethod_CreateAccountRequest<WithStreamedUnaryMethod_RenewElosRequest<WithStreamedUnaryMethod_PlayerInfomation<WithStreamedUnaryMethod_RenewElo<WithStreamedUnaryMethod_RenewPersonalRecord<Service > > > > > > > StreamedService;
 };
 
 }  // namespace S2D_Protocol

@@ -26,6 +26,9 @@ static const char* S2D_Service_method_names[] = {
   "/S2D_Protocol.S2D_Service/LoginRequest",
   "/S2D_Protocol.S2D_Service/CreateAccountRequest",
   "/S2D_Protocol.S2D_Service/RenewElosRequest",
+  "/S2D_Protocol.S2D_Service/PlayerInfomation",
+  "/S2D_Protocol.S2D_Service/RenewElo",
+  "/S2D_Protocol.S2D_Service/RenewPersonalRecord",
 };
 
 std::unique_ptr< S2D_Service::Stub> S2D_Service::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -39,6 +42,9 @@ S2D_Service::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   , rpcmethod_LoginRequest_(S2D_Service_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_CreateAccountRequest_(S2D_Service_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_RenewElosRequest_(S2D_Service_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_PlayerInfomation_(S2D_Service_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RenewElo_(S2D_Service_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RenewPersonalRecord_(S2D_Service_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status S2D_Service::Stub::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::S2D_Protocol::HelloReply* response) {
@@ -133,6 +139,75 @@ void S2D_Service::Stub::async::RenewElosRequest(::grpc::ClientContext* context, 
   return result;
 }
 
+::grpc::Status S2D_Service::Stub::PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::S2D_Protocol::S2D_RequestPlayerInfomation, ::S2D_Protocol::D2C_ResponsePlayerInfomation, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_PlayerInfomation_, context, request, response);
+}
+
+void S2D_Service::Stub::async::PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::S2D_Protocol::S2D_RequestPlayerInfomation, ::S2D_Protocol::D2C_ResponsePlayerInfomation, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_PlayerInfomation_, context, request, response, std::move(f));
+}
+
+void S2D_Service::Stub::async::PlayerInfomation(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_PlayerInfomation_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2C_ResponsePlayerInfomation>* S2D_Service::Stub::PrepareAsyncPlayerInfomationRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::S2D_Protocol::D2C_ResponsePlayerInfomation, ::S2D_Protocol::S2D_RequestPlayerInfomation, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_PlayerInfomation_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2C_ResponsePlayerInfomation>* S2D_Service::Stub::AsyncPlayerInfomationRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncPlayerInfomationRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status S2D_Service::Stub::RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::S2D_Protocol::D2S_ResponseRenewElo* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::S2D_Protocol::S2D_TryRenewElo, ::S2D_Protocol::D2S_ResponseRenewElo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RenewElo_, context, request, response);
+}
+
+void S2D_Service::Stub::async::RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::S2D_Protocol::S2D_TryRenewElo, ::S2D_Protocol::D2S_ResponseRenewElo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RenewElo_, context, request, response, std::move(f));
+}
+
+void S2D_Service::Stub::async::RenewElo(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RenewElo_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewElo>* S2D_Service::Stub::PrepareAsyncRenewEloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::S2D_Protocol::D2S_ResponseRenewElo, ::S2D_Protocol::S2D_TryRenewElo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_RenewElo_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewElo>* S2D_Service::Stub::AsyncRenewEloRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewElo& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncRenewEloRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status S2D_Service::Stub::RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RenewPersonalRecord_, context, request, response);
+}
+
+void S2D_Service::Stub::async::RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RenewPersonalRecord_, context, request, response, std::move(f));
+}
+
+void S2D_Service::Stub::async::RenewPersonalRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RenewPersonalRecord_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* S2D_Service::Stub::PrepareAsyncRenewPersonalRecordRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord, ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_RenewPersonalRecord_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponseRenewPersonalRecord>* S2D_Service::Stub::AsyncRenewPersonalRecordRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncRenewPersonalRecordRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 S2D_Service::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       S2D_Service_method_names[0],
@@ -174,6 +249,36 @@ S2D_Service::Service::Service() {
              ::S2D_Protocol::D2S_RenewElos* resp) {
                return service->RenewElosRequest(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      S2D_Service_method_names[4],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< S2D_Service::Service, ::S2D_Protocol::S2D_RequestPlayerInfomation, ::S2D_Protocol::D2C_ResponsePlayerInfomation, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](S2D_Service::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::S2D_Protocol::S2D_RequestPlayerInfomation* req,
+             ::S2D_Protocol::D2C_ResponsePlayerInfomation* resp) {
+               return service->PlayerInfomation(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      S2D_Service_method_names[5],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< S2D_Service::Service, ::S2D_Protocol::S2D_TryRenewElo, ::S2D_Protocol::D2S_ResponseRenewElo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](S2D_Service::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::S2D_Protocol::S2D_TryRenewElo* req,
+             ::S2D_Protocol::D2S_ResponseRenewElo* resp) {
+               return service->RenewElo(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      S2D_Service_method_names[6],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< S2D_Service::Service, ::S2D_Protocol::S2D_TryRenewPersonalRecord, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](S2D_Service::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::S2D_Protocol::S2D_TryRenewPersonalRecord* req,
+             ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* resp) {
+               return service->RenewPersonalRecord(ctx, req, resp);
+             }, this)));
 }
 
 S2D_Service::Service::~Service() {
@@ -201,6 +306,27 @@ S2D_Service::Service::~Service() {
 }
 
 ::grpc::Status S2D_Service::Service::RenewElosRequest(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_RenewElos* request, ::S2D_Protocol::D2S_RenewElos* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status S2D_Service::Service::PlayerInfomation(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_RequestPlayerInfomation* request, ::S2D_Protocol::D2C_ResponsePlayerInfomation* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status S2D_Service::Service::RenewElo(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_TryRenewElo* request, ::S2D_Protocol::D2S_ResponseRenewElo* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status S2D_Service::Service::RenewPersonalRecord(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response) {
   (void) context;
   (void) request;
   (void) response;

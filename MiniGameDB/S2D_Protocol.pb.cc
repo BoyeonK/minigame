@@ -26,6 +26,112 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace S2D_Protocol {
 
+inline constexpr S2D_TryRenewPublicRecord::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : gameid_{0},
+        recordersdbid_{0},
+        recordersscore_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S2D_TryRenewPublicRecord::S2D_TryRenewPublicRecord(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S2D_TryRenewPublicRecordDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_TryRenewPublicRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_TryRenewPublicRecordDefaultTypeInternal() {}
+  union {
+    S2D_TryRenewPublicRecord _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryRenewPublicRecordDefaultTypeInternal _S2D_TryRenewPublicRecord_default_instance_;
+
+inline constexpr S2D_TryRenewPersonalRecord::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : dbid_{0},
+        gameid_{0},
+        score_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S2D_TryRenewPersonalRecord::S2D_TryRenewPersonalRecord(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S2D_TryRenewPersonalRecordDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_TryRenewPersonalRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_TryRenewPersonalRecordDefaultTypeInternal() {}
+  union {
+    S2D_TryRenewPersonalRecord _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryRenewPersonalRecordDefaultTypeInternal _S2D_TryRenewPersonalRecord_default_instance_;
+
+inline constexpr S2D_TryRenewElo::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : dbid_{0},
+        gameid_{0},
+        elo_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S2D_TryRenewElo::S2D_TryRenewElo(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S2D_TryRenewEloDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_TryRenewEloDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_TryRenewEloDefaultTypeInternal() {}
+  union {
+    S2D_TryRenewElo _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryRenewEloDefaultTypeInternal _S2D_TryRenewElo_default_instance_;
+
+inline constexpr S2D_RequestPlayerInfomation::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : dbid_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S2D_RequestPlayerInfomation::S2D_RequestPlayerInfomation(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S2D_RequestPlayerInfomationDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_RequestPlayerInfomationDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_RequestPlayerInfomationDefaultTypeInternal() {}
+  union {
+    S2D_RequestPlayerInfomation _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_RequestPlayerInfomationDefaultTypeInternal _S2D_RequestPlayerInfomation_default_instance_;
+
 inline constexpr S2D_RenewElos::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : dbid_{0},
@@ -165,6 +271,56 @@ struct HelloReplyDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 HelloReplyDefaultTypeInternal _HelloReply_default_instance_;
 
+inline constexpr D2S_ResponseRenewPersonalRecord::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : success_{false},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR D2S_ResponseRenewPersonalRecord::D2S_ResponseRenewPersonalRecord(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct D2S_ResponseRenewPersonalRecordDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2S_ResponseRenewPersonalRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2S_ResponseRenewPersonalRecordDefaultTypeInternal() {}
+  union {
+    D2S_ResponseRenewPersonalRecord _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_ResponseRenewPersonalRecordDefaultTypeInternal _D2S_ResponseRenewPersonalRecord_default_instance_;
+
+inline constexpr D2S_ResponseRenewElo::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : success_{false},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR D2S_ResponseRenewElo::D2S_ResponseRenewElo(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct D2S_ResponseRenewEloDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2S_ResponseRenewEloDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2S_ResponseRenewEloDefaultTypeInternal() {}
+  union {
+    D2S_ResponseRenewElo _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_ResponseRenewEloDefaultTypeInternal _D2S_ResponseRenewElo_default_instance_;
+
 inline constexpr D2S_RenewElos::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : elo1_{0},
@@ -242,6 +398,64 @@ struct D2S_CreateAccountDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_CreateAccountDefaultTypeInternal _D2S_CreateAccount_default_instance_;
+
+inline constexpr D2C_ResponseRenewPublicRecord::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : success_{false},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR D2C_ResponseRenewPublicRecord::D2C_ResponseRenewPublicRecord(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct D2C_ResponseRenewPublicRecordDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2C_ResponseRenewPublicRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2C_ResponseRenewPublicRecordDefaultTypeInternal() {}
+  union {
+    D2C_ResponseRenewPublicRecord _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2C_ResponseRenewPublicRecordDefaultTypeInternal _D2C_ResponseRenewPublicRecord_default_instance_;
+
+inline constexpr D2C_ResponsePlayerInfomation::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : elos_{},
+        _elos_cached_byte_size_{0},
+        personalrecords_{},
+        _personalrecords_cached_byte_size_{0},
+        publicrecords_{},
+        _publicrecords_cached_byte_size_{0},
+        playerid_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR D2C_ResponsePlayerInfomation::D2C_ResponsePlayerInfomation(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct D2C_ResponsePlayerInfomationDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2C_ResponsePlayerInfomationDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2C_ResponsePlayerInfomationDefaultTypeInternal() {}
+  union {
+    D2C_ResponsePlayerInfomation _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2C_ResponsePlayerInfomationDefaultTypeInternal _D2C_ResponsePlayerInfomation_default_instance_;
 }  // namespace S2D_Protocol
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_S2D_5fProtocol_2eproto = nullptr;
@@ -328,6 +542,87 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_RenewElos, _impl_.elo1_),
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_RenewElos, _impl_.elo2_),
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_RenewElos, _impl_.elo3_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_RequestPlayerInfomation, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_RequestPlayerInfomation, _impl_.dbid_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponsePlayerInfomation, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponsePlayerInfomation, _impl_.playerid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponsePlayerInfomation, _impl_.elos_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponsePlayerInfomation, _impl_.personalrecords_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponsePlayerInfomation, _impl_.publicrecords_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewElo, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewElo, _impl_.dbid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewElo, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewElo, _impl_.elo_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseRenewElo, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseRenewElo, _impl_.success_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPersonalRecord, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPersonalRecord, _impl_.dbid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPersonalRecord, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPersonalRecord, _impl_.score_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseRenewPersonalRecord, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseRenewPersonalRecord, _impl_.success_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPublicRecord, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPublicRecord, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPublicRecord, _impl_.recordersdbid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPublicRecord, _impl_.recordersscore_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponseRenewPublicRecord, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponseRenewPublicRecord, _impl_.success_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -340,6 +635,14 @@ static const ::_pbi::MigrationSchema
         {49, -1, -1, sizeof(::S2D_Protocol::D2S_CreateAccount)},
         {58, -1, -1, sizeof(::S2D_Protocol::S2D_RenewElos)},
         {67, -1, -1, sizeof(::S2D_Protocol::D2S_RenewElos)},
+        {78, -1, -1, sizeof(::S2D_Protocol::S2D_RequestPlayerInfomation)},
+        {87, -1, -1, sizeof(::S2D_Protocol::D2C_ResponsePlayerInfomation)},
+        {99, -1, -1, sizeof(::S2D_Protocol::S2D_TryRenewElo)},
+        {110, -1, -1, sizeof(::S2D_Protocol::D2S_ResponseRenewElo)},
+        {119, -1, -1, sizeof(::S2D_Protocol::S2D_TryRenewPersonalRecord)},
+        {130, -1, -1, sizeof(::S2D_Protocol::D2S_ResponseRenewPersonalRecord)},
+        {139, -1, -1, sizeof(::S2D_Protocol::S2D_TryRenewPublicRecord)},
+        {150, -1, -1, sizeof(::S2D_Protocol::D2C_ResponseRenewPublicRecord)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2D_Protocol::_HelloRequest_default_instance_._instance,
@@ -350,6 +653,14 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2D_Protocol::_D2S_CreateAccount_default_instance_._instance,
     &::S2D_Protocol::_S2D_RenewElos_default_instance_._instance,
     &::S2D_Protocol::_D2S_RenewElos_default_instance_._instance,
+    &::S2D_Protocol::_S2D_RequestPlayerInfomation_default_instance_._instance,
+    &::S2D_Protocol::_D2C_ResponsePlayerInfomation_default_instance_._instance,
+    &::S2D_Protocol::_S2D_TryRenewElo_default_instance_._instance,
+    &::S2D_Protocol::_D2S_ResponseRenewElo_default_instance_._instance,
+    &::S2D_Protocol::_S2D_TryRenewPersonalRecord_default_instance_._instance,
+    &::S2D_Protocol::_D2S_ResponseRenewPersonalRecord_default_instance_._instance,
+    &::S2D_Protocol::_S2D_TryRenewPublicRecord_default_instance_._instance,
+    &::S2D_Protocol::_D2C_ResponseRenewPublicRecord_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2D_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -362,27 +673,48 @@ const char descriptor_table_protodef_S2D_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SEC
     "\n\010password\030\002 \001(\t\"$\n\021D2S_CreateAccount\022\017\n"
     "\007success\030\001 \001(\010\"\035\n\rS2D_RenewElos\022\014\n\004dbid\030"
     "\001 \001(\005\"9\n\rD2S_RenewElos\022\014\n\004elo1\030\001 \001(\005\022\014\n\004"
-    "elo2\030\002 \001(\005\022\014\n\004elo3\030\003 \001(\0052\271\002\n\013S2D_Service"
-    "\022@\n\010SayHello\022\032.S2D_Protocol.HelloRequest"
-    "\032\030.S2D_Protocol.HelloReply\022@\n\014LoginReque"
-    "st\022\027.S2D_Protocol.S2D_Login\032\027.S2D_Protoc"
-    "ol.D2S_Login\022X\n\024CreateAccountRequest\022\037.S"
-    "2D_Protocol.S2D_CreateAccount\032\037.S2D_Prot"
-    "ocol.D2S_CreateAccount\022L\n\020RenewElosReque"
-    "st\022\033.S2D_Protocol.S2D_RenewElos\032\033.S2D_Pr"
-    "otocol.D2S_RenewElosb\006proto3"
+    "elo2\030\002 \001(\005\022\014\n\004elo3\030\003 \001(\005\"+\n\033S2D_RequestP"
+    "layerInfomation\022\014\n\004dbid\030\001 \001(\005\"n\n\034D2C_Res"
+    "ponsePlayerInfomation\022\020\n\010playerId\030\001 \001(\t\022"
+    "\014\n\004elos\030\002 \003(\005\022\027\n\017personalRecords\030\003 \003(\005\022\025"
+    "\n\rpublicRecords\030\004 \003(\005\"<\n\017S2D_TryRenewElo"
+    "\022\014\n\004dbid\030\001 \001(\005\022\016\n\006gameId\030\002 \001(\005\022\013\n\003elo\030\003 "
+    "\001(\005\"\'\n\024D2S_ResponseRenewElo\022\017\n\007success\030\001"
+    " \001(\010\"I\n\032S2D_TryRenewPersonalRecord\022\014\n\004db"
+    "id\030\001 \001(\005\022\016\n\006gameId\030\002 \001(\005\022\r\n\005score\030\003 \001(\005\""
+    "2\n\037D2S_ResponseRenewPersonalRecord\022\017\n\007su"
+    "ccess\030\001 \001(\010\"Y\n\030S2D_TryRenewPublicRecord\022"
+    "\016\n\006gameId\030\001 \001(\005\022\025\n\rrecordersDbid\030\002 \001(\005\022\026"
+    "\n\016recordersScore\030\003 \001(\005\"0\n\035D2C_ResponseRe"
+    "newPublicRecord\022\017\n\007success\030\001 \001(\0102\343\004\n\013S2D"
+    "_Service\022@\n\010SayHello\022\032.S2D_Protocol.Hell"
+    "oRequest\032\030.S2D_Protocol.HelloReply\022@\n\014Lo"
+    "ginRequest\022\027.S2D_Protocol.S2D_Login\032\027.S2"
+    "D_Protocol.D2S_Login\022X\n\024CreateAccountReq"
+    "uest\022\037.S2D_Protocol.S2D_CreateAccount\032\037."
+    "S2D_Protocol.D2S_CreateAccount\022L\n\020RenewE"
+    "losRequest\022\033.S2D_Protocol.S2D_RenewElos\032"
+    "\033.S2D_Protocol.D2S_RenewElos\022i\n\020PlayerIn"
+    "fomation\022).S2D_Protocol.S2D_RequestPlaye"
+    "rInfomation\032*.S2D_Protocol.D2C_ResponseP"
+    "layerInfomation\022M\n\010RenewElo\022\035.S2D_Protoc"
+    "ol.S2D_TryRenewElo\032\".S2D_Protocol.D2S_Re"
+    "sponseRenewElo\022n\n\023RenewPersonalRecord\022(."
+    "S2D_Protocol.S2D_TryRenewPersonalRecord\032"
+    "-.S2D_Protocol.D2S_ResponseRenewPersonal"
+    "Recordb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2D_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2D_5fProtocol_2eproto = {
     false,
     false,
-    708,
+    1534,
     descriptor_table_protodef_S2D_5fProtocol_2eproto,
     "S2D_Protocol.proto",
     &descriptor_table_S2D_5fProtocol_2eproto_once,
     nullptr,
     0,
-    8,
+    16,
     schemas,
     file_default_instances,
     TableStruct_S2D_5fProtocol_2eproto::offsets,
@@ -2347,6 +2679,1961 @@ void D2S_RenewElos::InternalSwap(D2S_RenewElos* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata D2S_RenewElos::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S2D_RequestPlayerInfomation::_Internal {
+ public:
+};
+
+S2D_RequestPlayerInfomation::S2D_RequestPlayerInfomation(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_RequestPlayerInfomation)
+}
+S2D_RequestPlayerInfomation::S2D_RequestPlayerInfomation(
+    ::google::protobuf::Arena* arena, const S2D_RequestPlayerInfomation& from)
+    : S2D_RequestPlayerInfomation(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S2D_RequestPlayerInfomation::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S2D_RequestPlayerInfomation::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.dbid_ = {};
+}
+S2D_RequestPlayerInfomation::~S2D_RequestPlayerInfomation() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_RequestPlayerInfomation)
+  SharedDtor(*this);
+}
+inline void S2D_RequestPlayerInfomation::SharedDtor(MessageLite& self) {
+  S2D_RequestPlayerInfomation& this_ = static_cast<S2D_RequestPlayerInfomation&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* S2D_RequestPlayerInfomation::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S2D_RequestPlayerInfomation(arena);
+}
+constexpr auto S2D_RequestPlayerInfomation::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_RequestPlayerInfomation),
+                                            alignof(S2D_RequestPlayerInfomation));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S2D_RequestPlayerInfomation::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S2D_RequestPlayerInfomation_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S2D_RequestPlayerInfomation::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_RequestPlayerInfomation>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S2D_RequestPlayerInfomation::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_RequestPlayerInfomation>(), &S2D_RequestPlayerInfomation::ByteSizeLong,
+            &S2D_RequestPlayerInfomation::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S2D_RequestPlayerInfomation, _impl_._cached_size_),
+        false,
+    },
+    &S2D_RequestPlayerInfomation::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S2D_RequestPlayerInfomation::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S2D_RequestPlayerInfomation::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_RequestPlayerInfomation>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 dbid = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_RequestPlayerInfomation, _impl_.dbid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_RequestPlayerInfomation, _impl_.dbid_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 dbid = 1;
+    {PROTOBUF_FIELD_OFFSET(S2D_RequestPlayerInfomation, _impl_.dbid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S2D_RequestPlayerInfomation::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_RequestPlayerInfomation)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.dbid_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S2D_RequestPlayerInfomation::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S2D_RequestPlayerInfomation& this_ = static_cast<const S2D_RequestPlayerInfomation&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S2D_RequestPlayerInfomation::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S2D_RequestPlayerInfomation& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_RequestPlayerInfomation)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 dbid = 1;
+          if (this_._internal_dbid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_dbid(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_RequestPlayerInfomation)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S2D_RequestPlayerInfomation::ByteSizeLong(const MessageLite& base) {
+          const S2D_RequestPlayerInfomation& this_ = static_cast<const S2D_RequestPlayerInfomation&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S2D_RequestPlayerInfomation::ByteSizeLong() const {
+          const S2D_RequestPlayerInfomation& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_RequestPlayerInfomation)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // int32 dbid = 1;
+            if (this_._internal_dbid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_dbid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S2D_RequestPlayerInfomation::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_RequestPlayerInfomation*>(&to_msg);
+  auto& from = static_cast<const S2D_RequestPlayerInfomation&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_RequestPlayerInfomation)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_dbid() != 0) {
+    _this->_impl_.dbid_ = from._impl_.dbid_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S2D_RequestPlayerInfomation::CopyFrom(const S2D_RequestPlayerInfomation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_RequestPlayerInfomation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S2D_RequestPlayerInfomation::InternalSwap(S2D_RequestPlayerInfomation* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.dbid_, other->_impl_.dbid_);
+}
+
+::google::protobuf::Metadata S2D_RequestPlayerInfomation::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class D2C_ResponsePlayerInfomation::_Internal {
+ public:
+};
+
+D2C_ResponsePlayerInfomation::D2C_ResponsePlayerInfomation(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2C_ResponsePlayerInfomation)
+}
+inline PROTOBUF_NDEBUG_INLINE D2C_ResponsePlayerInfomation::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2D_Protocol::D2C_ResponsePlayerInfomation& from_msg)
+      : elos_{visibility, arena, from.elos_},
+        _elos_cached_byte_size_{0},
+        personalrecords_{visibility, arena, from.personalrecords_},
+        _personalrecords_cached_byte_size_{0},
+        publicrecords_{visibility, arena, from.publicrecords_},
+        _publicrecords_cached_byte_size_{0},
+        playerid_(arena, from.playerid_),
+        _cached_size_{0} {}
+
+D2C_ResponsePlayerInfomation::D2C_ResponsePlayerInfomation(
+    ::google::protobuf::Arena* arena,
+    const D2C_ResponsePlayerInfomation& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  D2C_ResponsePlayerInfomation* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:S2D_Protocol.D2C_ResponsePlayerInfomation)
+}
+inline PROTOBUF_NDEBUG_INLINE D2C_ResponsePlayerInfomation::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : elos_{visibility, arena},
+        _elos_cached_byte_size_{0},
+        personalrecords_{visibility, arena},
+        _personalrecords_cached_byte_size_{0},
+        publicrecords_{visibility, arena},
+        _publicrecords_cached_byte_size_{0},
+        playerid_(arena),
+        _cached_size_{0} {}
+
+inline void D2C_ResponsePlayerInfomation::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+D2C_ResponsePlayerInfomation::~D2C_ResponsePlayerInfomation() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2C_ResponsePlayerInfomation)
+  SharedDtor(*this);
+}
+inline void D2C_ResponsePlayerInfomation::SharedDtor(MessageLite& self) {
+  D2C_ResponsePlayerInfomation& this_ = static_cast<D2C_ResponsePlayerInfomation&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.playerid_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* D2C_ResponsePlayerInfomation::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) D2C_ResponsePlayerInfomation(arena);
+}
+constexpr auto D2C_ResponsePlayerInfomation::InternalNewImpl_() {
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.elos_) +
+          decltype(D2C_ResponsePlayerInfomation::_impl_.elos_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.personalrecords_) +
+          decltype(D2C_ResponsePlayerInfomation::_impl_.personalrecords_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.publicrecords_) +
+          decltype(D2C_ResponsePlayerInfomation::_impl_.publicrecords_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::CopyInit(
+        sizeof(D2C_ResponsePlayerInfomation), alignof(D2C_ResponsePlayerInfomation), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&D2C_ResponsePlayerInfomation::PlacementNew_,
+                                 sizeof(D2C_ResponsePlayerInfomation),
+                                 alignof(D2C_ResponsePlayerInfomation));
+  }
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull D2C_ResponsePlayerInfomation::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_D2C_ResponsePlayerInfomation_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &D2C_ResponsePlayerInfomation::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2C_ResponsePlayerInfomation>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &D2C_ResponsePlayerInfomation::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2C_ResponsePlayerInfomation>(), &D2C_ResponsePlayerInfomation::ByteSizeLong,
+            &D2C_ResponsePlayerInfomation::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_._cached_size_),
+        false,
+    },
+    &D2C_ResponsePlayerInfomation::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* D2C_ResponsePlayerInfomation::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 0, 58, 2> D2C_ResponsePlayerInfomation::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    4, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967280,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    4,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2C_ResponsePlayerInfomation>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // repeated int32 publicRecords = 4;
+    {::_pbi::TcParser::FastV32P1,
+     {34, 63, 0, PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.publicrecords_)}},
+    // string playerId = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.playerid_)}},
+    // repeated int32 elos = 2;
+    {::_pbi::TcParser::FastV32P1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.elos_)}},
+    // repeated int32 personalRecords = 3;
+    {::_pbi::TcParser::FastV32P1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.personalrecords_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string playerId = 1;
+    {PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.playerid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // repeated int32 elos = 2;
+    {PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.elos_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
+    // repeated int32 personalRecords = 3;
+    {PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.personalrecords_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
+    // repeated int32 publicRecords = 4;
+    {PROTOBUF_FIELD_OFFSET(D2C_ResponsePlayerInfomation, _impl_.publicrecords_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
+  }},
+  // no aux_entries
+  {{
+    "\51\10\0\0\0\0\0\0"
+    "S2D_Protocol.D2C_ResponsePlayerInfomation"
+    "playerId"
+  }},
+};
+
+PROTOBUF_NOINLINE void D2C_ResponsePlayerInfomation::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2C_ResponsePlayerInfomation)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.elos_.Clear();
+  _impl_.personalrecords_.Clear();
+  _impl_.publicrecords_.Clear();
+  _impl_.playerid_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* D2C_ResponsePlayerInfomation::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const D2C_ResponsePlayerInfomation& this_ = static_cast<const D2C_ResponsePlayerInfomation&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* D2C_ResponsePlayerInfomation::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const D2C_ResponsePlayerInfomation& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2C_ResponsePlayerInfomation)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string playerId = 1;
+          if (!this_._internal_playerid().empty()) {
+            const std::string& _s = this_._internal_playerid();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2D_Protocol.D2C_ResponsePlayerInfomation.playerId");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // repeated int32 elos = 2;
+          {
+            int byte_size = this_._impl_._elos_cached_byte_size_.Get();
+            if (byte_size > 0) {
+              target = stream->WriteInt32Packed(
+                  2, this_._internal_elos(), byte_size, target);
+            }
+          }
+
+          // repeated int32 personalRecords = 3;
+          {
+            int byte_size = this_._impl_._personalrecords_cached_byte_size_.Get();
+            if (byte_size > 0) {
+              target = stream->WriteInt32Packed(
+                  3, this_._internal_personalrecords(), byte_size, target);
+            }
+          }
+
+          // repeated int32 publicRecords = 4;
+          {
+            int byte_size = this_._impl_._publicrecords_cached_byte_size_.Get();
+            if (byte_size > 0) {
+              target = stream->WriteInt32Packed(
+                  4, this_._internal_publicrecords(), byte_size, target);
+            }
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2C_ResponsePlayerInfomation)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t D2C_ResponsePlayerInfomation::ByteSizeLong(const MessageLite& base) {
+          const D2C_ResponsePlayerInfomation& this_ = static_cast<const D2C_ResponsePlayerInfomation&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t D2C_ResponsePlayerInfomation::ByteSizeLong() const {
+          const D2C_ResponsePlayerInfomation& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2C_ResponsePlayerInfomation)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated int32 elos = 2;
+            {
+              total_size +=
+                  ::_pbi::WireFormatLite::Int32SizeWithPackedTagSize(
+                      this_._internal_elos(), 1,
+                      this_._impl_._elos_cached_byte_size_);
+            }
+            // repeated int32 personalRecords = 3;
+            {
+              total_size +=
+                  ::_pbi::WireFormatLite::Int32SizeWithPackedTagSize(
+                      this_._internal_personalrecords(), 1,
+                      this_._impl_._personalrecords_cached_byte_size_);
+            }
+            // repeated int32 publicRecords = 4;
+            {
+              total_size +=
+                  ::_pbi::WireFormatLite::Int32SizeWithPackedTagSize(
+                      this_._internal_publicrecords(), 1,
+                      this_._impl_._publicrecords_cached_byte_size_);
+            }
+          }
+           {
+            // string playerId = 1;
+            if (!this_._internal_playerid().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_playerid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void D2C_ResponsePlayerInfomation::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2C_ResponsePlayerInfomation*>(&to_msg);
+  auto& from = static_cast<const D2C_ResponsePlayerInfomation&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2C_ResponsePlayerInfomation)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_elos()->MergeFrom(from._internal_elos());
+  _this->_internal_mutable_personalrecords()->MergeFrom(from._internal_personalrecords());
+  _this->_internal_mutable_publicrecords()->MergeFrom(from._internal_publicrecords());
+  if (!from._internal_playerid().empty()) {
+    _this->_internal_set_playerid(from._internal_playerid());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void D2C_ResponsePlayerInfomation::CopyFrom(const D2C_ResponsePlayerInfomation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2C_ResponsePlayerInfomation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void D2C_ResponsePlayerInfomation::InternalSwap(D2C_ResponsePlayerInfomation* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.elos_.InternalSwap(&other->_impl_.elos_);
+  _impl_.personalrecords_.InternalSwap(&other->_impl_.personalrecords_);
+  _impl_.publicrecords_.InternalSwap(&other->_impl_.publicrecords_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.playerid_, &other->_impl_.playerid_, arena);
+}
+
+::google::protobuf::Metadata D2C_ResponsePlayerInfomation::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S2D_TryRenewElo::_Internal {
+ public:
+};
+
+S2D_TryRenewElo::S2D_TryRenewElo(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryRenewElo)
+}
+S2D_TryRenewElo::S2D_TryRenewElo(
+    ::google::protobuf::Arena* arena, const S2D_TryRenewElo& from)
+    : S2D_TryRenewElo(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S2D_TryRenewElo::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S2D_TryRenewElo::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, dbid_),
+           0,
+           offsetof(Impl_, elo_) -
+               offsetof(Impl_, dbid_) +
+               sizeof(Impl_::elo_));
+}
+S2D_TryRenewElo::~S2D_TryRenewElo() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryRenewElo)
+  SharedDtor(*this);
+}
+inline void S2D_TryRenewElo::SharedDtor(MessageLite& self) {
+  S2D_TryRenewElo& this_ = static_cast<S2D_TryRenewElo&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* S2D_TryRenewElo::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S2D_TryRenewElo(arena);
+}
+constexpr auto S2D_TryRenewElo::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryRenewElo),
+                                            alignof(S2D_TryRenewElo));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S2D_TryRenewElo::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S2D_TryRenewElo_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S2D_TryRenewElo::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_TryRenewElo>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S2D_TryRenewElo::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_TryRenewElo>(), &S2D_TryRenewElo::ByteSizeLong,
+            &S2D_TryRenewElo::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_._cached_size_),
+        false,
+    },
+    &S2D_TryRenewElo::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S2D_TryRenewElo::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewElo::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryRenewElo>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 dbid = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewElo, _impl_.dbid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.dbid_)}},
+    // int32 gameId = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewElo, _impl_.gameid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.gameid_)}},
+    // int32 elo = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewElo, _impl_.elo_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.elo_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 dbid = 1;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.dbid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 gameId = 2;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.gameid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 elo = 3;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.elo_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S2D_TryRenewElo::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryRenewElo)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.dbid_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.elo_) -
+      reinterpret_cast<char*>(&_impl_.dbid_)) + sizeof(_impl_.elo_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S2D_TryRenewElo::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S2D_TryRenewElo& this_ = static_cast<const S2D_TryRenewElo&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S2D_TryRenewElo::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S2D_TryRenewElo& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryRenewElo)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 dbid = 1;
+          if (this_._internal_dbid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_dbid(), target);
+          }
+
+          // int32 gameId = 2;
+          if (this_._internal_gameid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_gameid(), target);
+          }
+
+          // int32 elo = 3;
+          if (this_._internal_elo() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<3>(
+                    stream, this_._internal_elo(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryRenewElo)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S2D_TryRenewElo::ByteSizeLong(const MessageLite& base) {
+          const S2D_TryRenewElo& this_ = static_cast<const S2D_TryRenewElo&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S2D_TryRenewElo::ByteSizeLong() const {
+          const S2D_TryRenewElo& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryRenewElo)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 dbid = 1;
+            if (this_._internal_dbid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_dbid());
+            }
+            // int32 gameId = 2;
+            if (this_._internal_gameid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_gameid());
+            }
+            // int32 elo = 3;
+            if (this_._internal_elo() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_elo());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S2D_TryRenewElo::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_TryRenewElo*>(&to_msg);
+  auto& from = static_cast<const S2D_TryRenewElo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryRenewElo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_dbid() != 0) {
+    _this->_impl_.dbid_ = from._impl_.dbid_;
+  }
+  if (from._internal_gameid() != 0) {
+    _this->_impl_.gameid_ = from._impl_.gameid_;
+  }
+  if (from._internal_elo() != 0) {
+    _this->_impl_.elo_ = from._impl_.elo_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S2D_TryRenewElo::CopyFrom(const S2D_TryRenewElo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryRenewElo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S2D_TryRenewElo::InternalSwap(S2D_TryRenewElo* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.elo_)
+      + sizeof(S2D_TryRenewElo::_impl_.elo_)
+      - PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.dbid_)>(
+          reinterpret_cast<char*>(&_impl_.dbid_),
+          reinterpret_cast<char*>(&other->_impl_.dbid_));
+}
+
+::google::protobuf::Metadata S2D_TryRenewElo::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class D2S_ResponseRenewElo::_Internal {
+ public:
+};
+
+D2S_ResponseRenewElo::D2S_ResponseRenewElo(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2S_ResponseRenewElo)
+}
+D2S_ResponseRenewElo::D2S_ResponseRenewElo(
+    ::google::protobuf::Arena* arena, const D2S_ResponseRenewElo& from)
+    : D2S_ResponseRenewElo(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE D2S_ResponseRenewElo::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void D2S_ResponseRenewElo::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.success_ = {};
+}
+D2S_ResponseRenewElo::~D2S_ResponseRenewElo() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2S_ResponseRenewElo)
+  SharedDtor(*this);
+}
+inline void D2S_ResponseRenewElo::SharedDtor(MessageLite& self) {
+  D2S_ResponseRenewElo& this_ = static_cast<D2S_ResponseRenewElo&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* D2S_ResponseRenewElo::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) D2S_ResponseRenewElo(arena);
+}
+constexpr auto D2S_ResponseRenewElo::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2S_ResponseRenewElo),
+                                            alignof(D2S_ResponseRenewElo));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull D2S_ResponseRenewElo::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_D2S_ResponseRenewElo_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &D2S_ResponseRenewElo::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2S_ResponseRenewElo>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &D2S_ResponseRenewElo::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2S_ResponseRenewElo>(), &D2S_ResponseRenewElo::ByteSizeLong,
+            &D2S_ResponseRenewElo::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewElo, _impl_._cached_size_),
+        false,
+    },
+    &D2S_ResponseRenewElo::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* D2S_ResponseRenewElo::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseRenewElo::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2S_ResponseRenewElo>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // bool success = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2S_ResponseRenewElo, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewElo, _impl_.success_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool success = 1;
+    {PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewElo, _impl_.success_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void D2S_ResponseRenewElo::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2S_ResponseRenewElo)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* D2S_ResponseRenewElo::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const D2S_ResponseRenewElo& this_ = static_cast<const D2S_ResponseRenewElo&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* D2S_ResponseRenewElo::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const D2S_ResponseRenewElo& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2S_ResponseRenewElo)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool success = 1;
+          if (this_._internal_success() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_success(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2S_ResponseRenewElo)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t D2S_ResponseRenewElo::ByteSizeLong(const MessageLite& base) {
+          const D2S_ResponseRenewElo& this_ = static_cast<const D2S_ResponseRenewElo&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t D2S_ResponseRenewElo::ByteSizeLong() const {
+          const D2S_ResponseRenewElo& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2S_ResponseRenewElo)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // bool success = 1;
+            if (this_._internal_success() != 0) {
+              total_size += 2;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void D2S_ResponseRenewElo::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2S_ResponseRenewElo*>(&to_msg);
+  auto& from = static_cast<const D2S_ResponseRenewElo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_ResponseRenewElo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_success() != 0) {
+    _this->_impl_.success_ = from._impl_.success_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void D2S_ResponseRenewElo::CopyFrom(const D2S_ResponseRenewElo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2S_ResponseRenewElo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void D2S_ResponseRenewElo::InternalSwap(D2S_ResponseRenewElo* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.success_, other->_impl_.success_);
+}
+
+::google::protobuf::Metadata D2S_ResponseRenewElo::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S2D_TryRenewPersonalRecord::_Internal {
+ public:
+};
+
+S2D_TryRenewPersonalRecord::S2D_TryRenewPersonalRecord(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryRenewPersonalRecord)
+}
+S2D_TryRenewPersonalRecord::S2D_TryRenewPersonalRecord(
+    ::google::protobuf::Arena* arena, const S2D_TryRenewPersonalRecord& from)
+    : S2D_TryRenewPersonalRecord(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S2D_TryRenewPersonalRecord::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S2D_TryRenewPersonalRecord::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, dbid_),
+           0,
+           offsetof(Impl_, score_) -
+               offsetof(Impl_, dbid_) +
+               sizeof(Impl_::score_));
+}
+S2D_TryRenewPersonalRecord::~S2D_TryRenewPersonalRecord() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryRenewPersonalRecord)
+  SharedDtor(*this);
+}
+inline void S2D_TryRenewPersonalRecord::SharedDtor(MessageLite& self) {
+  S2D_TryRenewPersonalRecord& this_ = static_cast<S2D_TryRenewPersonalRecord&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* S2D_TryRenewPersonalRecord::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S2D_TryRenewPersonalRecord(arena);
+}
+constexpr auto S2D_TryRenewPersonalRecord::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryRenewPersonalRecord),
+                                            alignof(S2D_TryRenewPersonalRecord));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S2D_TryRenewPersonalRecord::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S2D_TryRenewPersonalRecord_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S2D_TryRenewPersonalRecord::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_TryRenewPersonalRecord>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S2D_TryRenewPersonalRecord::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_TryRenewPersonalRecord>(), &S2D_TryRenewPersonalRecord::ByteSizeLong,
+            &S2D_TryRenewPersonalRecord::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_._cached_size_),
+        false,
+    },
+    &S2D_TryRenewPersonalRecord::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S2D_TryRenewPersonalRecord::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewPersonalRecord::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryRenewPersonalRecord>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 dbid = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPersonalRecord, _impl_.dbid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.dbid_)}},
+    // int32 gameId = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPersonalRecord, _impl_.gameid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.gameid_)}},
+    // int32 score = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPersonalRecord, _impl_.score_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.score_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 dbid = 1;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.dbid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 gameId = 2;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.gameid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 score = 3;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.score_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S2D_TryRenewPersonalRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.dbid_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.score_) -
+      reinterpret_cast<char*>(&_impl_.dbid_)) + sizeof(_impl_.score_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S2D_TryRenewPersonalRecord::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S2D_TryRenewPersonalRecord& this_ = static_cast<const S2D_TryRenewPersonalRecord&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S2D_TryRenewPersonalRecord::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S2D_TryRenewPersonalRecord& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 dbid = 1;
+          if (this_._internal_dbid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_dbid(), target);
+          }
+
+          // int32 gameId = 2;
+          if (this_._internal_gameid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_gameid(), target);
+          }
+
+          // int32 score = 3;
+          if (this_._internal_score() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<3>(
+                    stream, this_._internal_score(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryRenewPersonalRecord)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S2D_TryRenewPersonalRecord::ByteSizeLong(const MessageLite& base) {
+          const S2D_TryRenewPersonalRecord& this_ = static_cast<const S2D_TryRenewPersonalRecord&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S2D_TryRenewPersonalRecord::ByteSizeLong() const {
+          const S2D_TryRenewPersonalRecord& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 dbid = 1;
+            if (this_._internal_dbid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_dbid());
+            }
+            // int32 gameId = 2;
+            if (this_._internal_gameid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_gameid());
+            }
+            // int32 score = 3;
+            if (this_._internal_score() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_score());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S2D_TryRenewPersonalRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_TryRenewPersonalRecord*>(&to_msg);
+  auto& from = static_cast<const S2D_TryRenewPersonalRecord&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_dbid() != 0) {
+    _this->_impl_.dbid_ = from._impl_.dbid_;
+  }
+  if (from._internal_gameid() != 0) {
+    _this->_impl_.gameid_ = from._impl_.gameid_;
+  }
+  if (from._internal_score() != 0) {
+    _this->_impl_.score_ = from._impl_.score_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S2D_TryRenewPersonalRecord::CopyFrom(const S2D_TryRenewPersonalRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S2D_TryRenewPersonalRecord::InternalSwap(S2D_TryRenewPersonalRecord* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.score_)
+      + sizeof(S2D_TryRenewPersonalRecord::_impl_.score_)
+      - PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.dbid_)>(
+          reinterpret_cast<char*>(&_impl_.dbid_),
+          reinterpret_cast<char*>(&other->_impl_.dbid_));
+}
+
+::google::protobuf::Metadata S2D_TryRenewPersonalRecord::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class D2S_ResponseRenewPersonalRecord::_Internal {
+ public:
+};
+
+D2S_ResponseRenewPersonalRecord::D2S_ResponseRenewPersonalRecord(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+}
+D2S_ResponseRenewPersonalRecord::D2S_ResponseRenewPersonalRecord(
+    ::google::protobuf::Arena* arena, const D2S_ResponseRenewPersonalRecord& from)
+    : D2S_ResponseRenewPersonalRecord(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE D2S_ResponseRenewPersonalRecord::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void D2S_ResponseRenewPersonalRecord::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.success_ = {};
+}
+D2S_ResponseRenewPersonalRecord::~D2S_ResponseRenewPersonalRecord() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+  SharedDtor(*this);
+}
+inline void D2S_ResponseRenewPersonalRecord::SharedDtor(MessageLite& self) {
+  D2S_ResponseRenewPersonalRecord& this_ = static_cast<D2S_ResponseRenewPersonalRecord&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* D2S_ResponseRenewPersonalRecord::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) D2S_ResponseRenewPersonalRecord(arena);
+}
+constexpr auto D2S_ResponseRenewPersonalRecord::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2S_ResponseRenewPersonalRecord),
+                                            alignof(D2S_ResponseRenewPersonalRecord));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull D2S_ResponseRenewPersonalRecord::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_D2S_ResponseRenewPersonalRecord_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &D2S_ResponseRenewPersonalRecord::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2S_ResponseRenewPersonalRecord>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &D2S_ResponseRenewPersonalRecord::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2S_ResponseRenewPersonalRecord>(), &D2S_ResponseRenewPersonalRecord::ByteSizeLong,
+            &D2S_ResponseRenewPersonalRecord::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewPersonalRecord, _impl_._cached_size_),
+        false,
+    },
+    &D2S_ResponseRenewPersonalRecord::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* D2S_ResponseRenewPersonalRecord::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseRenewPersonalRecord::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2S_ResponseRenewPersonalRecord>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // bool success = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2S_ResponseRenewPersonalRecord, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewPersonalRecord, _impl_.success_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool success = 1;
+    {PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewPersonalRecord, _impl_.success_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void D2S_ResponseRenewPersonalRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* D2S_ResponseRenewPersonalRecord::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const D2S_ResponseRenewPersonalRecord& this_ = static_cast<const D2S_ResponseRenewPersonalRecord&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* D2S_ResponseRenewPersonalRecord::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const D2S_ResponseRenewPersonalRecord& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool success = 1;
+          if (this_._internal_success() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_success(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t D2S_ResponseRenewPersonalRecord::ByteSizeLong(const MessageLite& base) {
+          const D2S_ResponseRenewPersonalRecord& this_ = static_cast<const D2S_ResponseRenewPersonalRecord&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t D2S_ResponseRenewPersonalRecord::ByteSizeLong() const {
+          const D2S_ResponseRenewPersonalRecord& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // bool success = 1;
+            if (this_._internal_success() != 0) {
+              total_size += 2;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void D2S_ResponseRenewPersonalRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2S_ResponseRenewPersonalRecord*>(&to_msg);
+  auto& from = static_cast<const D2S_ResponseRenewPersonalRecord&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_success() != 0) {
+    _this->_impl_.success_ = from._impl_.success_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void D2S_ResponseRenewPersonalRecord::CopyFrom(const D2S_ResponseRenewPersonalRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void D2S_ResponseRenewPersonalRecord::InternalSwap(D2S_ResponseRenewPersonalRecord* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.success_, other->_impl_.success_);
+}
+
+::google::protobuf::Metadata D2S_ResponseRenewPersonalRecord::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S2D_TryRenewPublicRecord::_Internal {
+ public:
+};
+
+S2D_TryRenewPublicRecord::S2D_TryRenewPublicRecord(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryRenewPublicRecord)
+}
+S2D_TryRenewPublicRecord::S2D_TryRenewPublicRecord(
+    ::google::protobuf::Arena* arena, const S2D_TryRenewPublicRecord& from)
+    : S2D_TryRenewPublicRecord(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S2D_TryRenewPublicRecord::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S2D_TryRenewPublicRecord::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, gameid_),
+           0,
+           offsetof(Impl_, recordersscore_) -
+               offsetof(Impl_, gameid_) +
+               sizeof(Impl_::recordersscore_));
+}
+S2D_TryRenewPublicRecord::~S2D_TryRenewPublicRecord() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryRenewPublicRecord)
+  SharedDtor(*this);
+}
+inline void S2D_TryRenewPublicRecord::SharedDtor(MessageLite& self) {
+  S2D_TryRenewPublicRecord& this_ = static_cast<S2D_TryRenewPublicRecord&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* S2D_TryRenewPublicRecord::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S2D_TryRenewPublicRecord(arena);
+}
+constexpr auto S2D_TryRenewPublicRecord::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryRenewPublicRecord),
+                                            alignof(S2D_TryRenewPublicRecord));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S2D_TryRenewPublicRecord::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S2D_TryRenewPublicRecord_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S2D_TryRenewPublicRecord::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_TryRenewPublicRecord>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S2D_TryRenewPublicRecord::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_TryRenewPublicRecord>(), &S2D_TryRenewPublicRecord::ByteSizeLong,
+            &S2D_TryRenewPublicRecord::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_._cached_size_),
+        false,
+    },
+    &S2D_TryRenewPublicRecord::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S2D_TryRenewPublicRecord::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewPublicRecord::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryRenewPublicRecord>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 gameId = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPublicRecord, _impl_.gameid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.gameid_)}},
+    // int32 recordersDbid = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPublicRecord, _impl_.recordersdbid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersdbid_)}},
+    // int32 recordersScore = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPublicRecord, _impl_.recordersscore_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersscore_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 gameId = 1;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.gameid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 recordersDbid = 2;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersdbid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 recordersScore = 3;
+    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersscore_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S2D_TryRenewPublicRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.gameid_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.recordersscore_) -
+      reinterpret_cast<char*>(&_impl_.gameid_)) + sizeof(_impl_.recordersscore_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S2D_TryRenewPublicRecord::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S2D_TryRenewPublicRecord& this_ = static_cast<const S2D_TryRenewPublicRecord&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S2D_TryRenewPublicRecord::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S2D_TryRenewPublicRecord& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 gameId = 1;
+          if (this_._internal_gameid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_gameid(), target);
+          }
+
+          // int32 recordersDbid = 2;
+          if (this_._internal_recordersdbid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_recordersdbid(), target);
+          }
+
+          // int32 recordersScore = 3;
+          if (this_._internal_recordersscore() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<3>(
+                    stream, this_._internal_recordersscore(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryRenewPublicRecord)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S2D_TryRenewPublicRecord::ByteSizeLong(const MessageLite& base) {
+          const S2D_TryRenewPublicRecord& this_ = static_cast<const S2D_TryRenewPublicRecord&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S2D_TryRenewPublicRecord::ByteSizeLong() const {
+          const S2D_TryRenewPublicRecord& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 gameId = 1;
+            if (this_._internal_gameid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_gameid());
+            }
+            // int32 recordersDbid = 2;
+            if (this_._internal_recordersdbid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_recordersdbid());
+            }
+            // int32 recordersScore = 3;
+            if (this_._internal_recordersscore() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_recordersscore());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S2D_TryRenewPublicRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_TryRenewPublicRecord*>(&to_msg);
+  auto& from = static_cast<const S2D_TryRenewPublicRecord&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_gameid() != 0) {
+    _this->_impl_.gameid_ = from._impl_.gameid_;
+  }
+  if (from._internal_recordersdbid() != 0) {
+    _this->_impl_.recordersdbid_ = from._impl_.recordersdbid_;
+  }
+  if (from._internal_recordersscore() != 0) {
+    _this->_impl_.recordersscore_ = from._impl_.recordersscore_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S2D_TryRenewPublicRecord::CopyFrom(const S2D_TryRenewPublicRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S2D_TryRenewPublicRecord::InternalSwap(S2D_TryRenewPublicRecord* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersscore_)
+      + sizeof(S2D_TryRenewPublicRecord::_impl_.recordersscore_)
+      - PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.gameid_)>(
+          reinterpret_cast<char*>(&_impl_.gameid_),
+          reinterpret_cast<char*>(&other->_impl_.gameid_));
+}
+
+::google::protobuf::Metadata S2D_TryRenewPublicRecord::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class D2C_ResponseRenewPublicRecord::_Internal {
+ public:
+};
+
+D2C_ResponseRenewPublicRecord::D2C_ResponseRenewPublicRecord(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+}
+D2C_ResponseRenewPublicRecord::D2C_ResponseRenewPublicRecord(
+    ::google::protobuf::Arena* arena, const D2C_ResponseRenewPublicRecord& from)
+    : D2C_ResponseRenewPublicRecord(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE D2C_ResponseRenewPublicRecord::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void D2C_ResponseRenewPublicRecord::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.success_ = {};
+}
+D2C_ResponseRenewPublicRecord::~D2C_ResponseRenewPublicRecord() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+  SharedDtor(*this);
+}
+inline void D2C_ResponseRenewPublicRecord::SharedDtor(MessageLite& self) {
+  D2C_ResponseRenewPublicRecord& this_ = static_cast<D2C_ResponseRenewPublicRecord&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* D2C_ResponseRenewPublicRecord::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) D2C_ResponseRenewPublicRecord(arena);
+}
+constexpr auto D2C_ResponseRenewPublicRecord::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2C_ResponseRenewPublicRecord),
+                                            alignof(D2C_ResponseRenewPublicRecord));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull D2C_ResponseRenewPublicRecord::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_D2C_ResponseRenewPublicRecord_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &D2C_ResponseRenewPublicRecord::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2C_ResponseRenewPublicRecord>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &D2C_ResponseRenewPublicRecord::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2C_ResponseRenewPublicRecord>(), &D2C_ResponseRenewPublicRecord::ByteSizeLong,
+            &D2C_ResponseRenewPublicRecord::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(D2C_ResponseRenewPublicRecord, _impl_._cached_size_),
+        false,
+    },
+    &D2C_ResponseRenewPublicRecord::kDescriptorMethods,
+    &descriptor_table_S2D_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* D2C_ResponseRenewPublicRecord::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2C_ResponseRenewPublicRecord::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2C_ResponseRenewPublicRecord>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // bool success = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2C_ResponseRenewPublicRecord, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2C_ResponseRenewPublicRecord, _impl_.success_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool success = 1;
+    {PROTOBUF_FIELD_OFFSET(D2C_ResponseRenewPublicRecord, _impl_.success_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void D2C_ResponseRenewPublicRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* D2C_ResponseRenewPublicRecord::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const D2C_ResponseRenewPublicRecord& this_ = static_cast<const D2C_ResponseRenewPublicRecord&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* D2C_ResponseRenewPublicRecord::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const D2C_ResponseRenewPublicRecord& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool success = 1;
+          if (this_._internal_success() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_success(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t D2C_ResponseRenewPublicRecord::ByteSizeLong(const MessageLite& base) {
+          const D2C_ResponseRenewPublicRecord& this_ = static_cast<const D2C_ResponseRenewPublicRecord&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t D2C_ResponseRenewPublicRecord::ByteSizeLong() const {
+          const D2C_ResponseRenewPublicRecord& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // bool success = 1;
+            if (this_._internal_success() != 0) {
+              total_size += 2;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void D2C_ResponseRenewPublicRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2C_ResponseRenewPublicRecord*>(&to_msg);
+  auto& from = static_cast<const D2C_ResponseRenewPublicRecord&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_success() != 0) {
+    _this->_impl_.success_ = from._impl_.success_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void D2C_ResponseRenewPublicRecord::CopyFrom(const D2C_ResponseRenewPublicRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void D2C_ResponseRenewPublicRecord::InternalSwap(D2C_ResponseRenewPublicRecord* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.success_, other->_impl_.success_);
+}
+
+::google::protobuf::Metadata D2C_ResponseRenewPublicRecord::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

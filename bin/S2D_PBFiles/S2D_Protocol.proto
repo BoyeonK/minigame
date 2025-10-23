@@ -8,6 +8,9 @@ service S2D_Service {
     rpc LoginRequest (S2D_Login) returns (D2S_Login);
     rpc CreateAccountRequest (S2D_CreateAccount) returns (D2S_CreateAccount);
     rpc RenewElosRequest (S2D_RenewElos) returns (D2S_RenewElos);
+    rpc PlayerInfomation (S2D_RequestPlayerInfomation) returns (D2C_ResponsePlayerInfomation);
+    rpc RenewElo (S2D_TryRenewElo) returns (D2S_ResponseRenewElo);
+    rpc RenewPersonalRecord (S2D_TryRenewPersonalRecord) returns (D2S_ResponseRenewPersonalRecord);
 }
 
 //SayHello -> 단순한 에코를 실행.
@@ -59,6 +62,7 @@ message D2S_CreateAccount {
     bool success = 1;
 }
 
+//현재 로그인시 Elo만 가져옴.
 message S2D_RenewElos {
     int32 dbid = 1;
 }
@@ -67,4 +71,49 @@ message D2S_RenewElos {
     int32 elo1 = 1;
     int32 elo2 = 2;
     int32 elo3 = 3;
+}
+
+//로그인시, 해당 유저의 ID, 개인기록, 전체월드기록을 가져옴
+message S2D_RequestPlayerInfomation {
+    int32 dbid = 1;
+}
+
+message D2C_ResponsePlayerInfomation {
+    string playerId = 1;
+    repeated int32 elos = 2;
+    repeated int32 personalRecords = 3;
+    repeated int32 publicRecords = 4;
+}
+
+//Elo변경요청
+message S2D_TryRenewElo {
+    int32 dbid = 1;
+    int32 gameId = 2;
+    int32 elo = 3;
+}
+
+message D2S_ResponseRenewElo {
+    bool success = 1;
+}
+
+//개인 머시깽이 변경 요청
+message S2D_TryRenewPersonalRecord {
+    int32 dbid = 1;
+    int32 gameId = 2;
+    int32 score = 3;
+}
+
+message D2S_ResponseRenewPersonalRecord {
+    bool success = 1;
+}
+
+//월드 레코드 변경 요청
+message S2D_TryRenewPublicRecord {
+    int32 gameId = 1;
+    int32 recordersDbid = 2;
+    int32 recordersScore = 3;
+}
+
+message D2C_ResponseRenewPublicRecord {
+    bool success = 1;
 }

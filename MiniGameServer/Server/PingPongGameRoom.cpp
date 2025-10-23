@@ -151,15 +151,14 @@ void PingPongGameRoom::CountingPhase() {
 
 void PingPongGameRoom::CalculateGameResult() {
 	int32_t mxm = -1000;
-	vector<int> winners; //최고점의 플레이어. 같은 최고점이 중복일수 있어서 vector
 	for (int i = 0; i < _quota; i++) {
 		if (_points[i] > mxm) {
-			winners.clear();
+			_winners.clear();
 			mxm = _points[i];
-			winners.push_back(i);
+			_winners.push_back(i);
 		}
 		else if (_points[i] == mxm) {
-			winners.push_back(i);
+			_winners.push_back(i);
 		}
 	}
 
@@ -182,7 +181,7 @@ void PingPongGameRoom::CalculateGameResult() {
 			continue;
 		}
 
-		bool isWinner = find(winners.begin(), winners.end(), i) != winners.end();
+		bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
 
 		S2C_Protocol::S_P_Result playerResultPkt = baseResultPkt;
 		playerResultPkt.set_iswinner(isWinner);
@@ -190,6 +189,20 @@ void PingPongGameRoom::CalculateGameResult() {
 		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(playerResultPkt);
 		playerSessionRef->Send(sendBuffer);
 	}
+}
+
+void PingPongGameRoom::UpdateGameResultToDB() {
+	//TODO : 패자 중에서 최대 elo인 친구와 승자 친구들의 elo를 변화하여 계산. Elo를 업데이트
+	int32_t mnmElo = -1000;
+	if (_winners.size() == _quota)
+		return;
+
+	for (int i = 0; i < _quota; i++) {
+
+	}
+	//개인 최고 기록을 갱신.
+	//전체 최고 기록을 갱신.
+	//패자가 없는 경우 그냥 리턴
 }
 
 /*

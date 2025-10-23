@@ -25,6 +25,7 @@ public:
 	void OnGoingPhase3();
 	void CountingPhase();
 	void CalculateGameResult();
+	void UpdateGameResultToDB();
 
 	//bool MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt);
 	//void MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed);
@@ -46,6 +47,7 @@ private:
 	bool _isUpdateCall = false;
 	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;
 	vector<int32_t> _points;
+	vector<int> _winners;
 
 	float _ex = 6.4f;
 	float _ez = 0;
