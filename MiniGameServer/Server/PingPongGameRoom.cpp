@@ -151,33 +151,47 @@ void PingPongGameRoom::CountingPhase() {
 
 void PingPongGameRoom::CalculateGameResult() {
 	int32_t mxm = -1000;
-	vector<int> winers; //최고점의 플레이어. 같은 최고점이 중복일수 있어서 vector
+	vector<int> winners; //최고점의 플레이어. 같은 최고점이 중복일수 있어서 vector
 	for (int i = 0; i < _quota; i++) {
 		if (_points[i] > mxm) {
-			winers.clear();
+			winners.clear();
 			mxm = _points[i];
-			winers.push_back(i);
+			winners.push_back(i);
 		}
 		else if (_points[i] == mxm) {
-			winers.push_back(i);
+			winners.push_back(i);
 		}
 	}
 
-	vector<bool> isWinner(_quota, false);
-	for (auto& winer : winers)
-		isWinner[winer] = true;
+	S2C_Protocol::S_P_Result baseResultPkt;
+	string lostConnectionId = "fugitive";
 
 	for (int i = 0; i < _quota; i++) {
-		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
-		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
-			continue;
-
-		S2C_Protocol::S_P_Result pkt;
-		//TODO : 승자여부, 아이디들, 점수들 퍼와서 넣어야 됨
-		//TODO : 맨 처음 게임 시작할 때 아이디(string을 미리 들고 와야 할듯)
+		if (auto player = _playerWRefs[i].lock()) {
+			baseResultPkt.add_ids(player->GetPlayerId());
+		}
+		else {
+			baseResultPkt.add_ids(lostConnectionId); 
+		}
+		baseResultPkt.add_scores(_points[i]);
 	}
-	//winers와 points에 대한 처리
+
+	for (int i = 0; i < _quota; i++) {
+		auto playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
+			continue;
+		}
+
+		bool isWinner = find(winners.begin(), winners.end(), i) != winners.end();
+
+		S2C_Protocol::S_P_Result playerResultPkt = baseResultPkt;
+		playerResultPkt.set_iswinner(isWinner);
+
+		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(playerResultPkt);
+		playerSessionRef->Send(sendBuffer);
+	}
 }
+
 /*
 bool PingPongGameRoom::MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt) {
 	//1. Bullet의 생성.

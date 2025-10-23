@@ -129,7 +129,8 @@ bool Handle_C_Login(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
 
-	//playerSessionRef->SetPlayerId(pkt.id());
+	//UTF-8임에 유의한다.
+	playerSessionRef->SetPlayerId(pkt.id());
 	return DBManager->S2D_Login(sessionRef, pkt.id(), pkt.password());
 }
 
