@@ -256,13 +256,14 @@ void DCreateAccountCallData::Proceed() {
                 GDBManager->ReturnHDbc(hDbc);
             });
 
-            SQLHSTMT hStmt1 = nullptr , hStmt2 = nullptr, hStmt3 = nullptr, hStmt4 = nullptr, hStmt5 = nullptr;
+            SQLHSTMT hStmt1 = nullptr , hStmt2 = nullptr, hStmt3 = nullptr, hStmt4 = nullptr, hStmt5 = nullptr, hStmt6 = nullptr;
             Cleaner hStmtCleaner([&]() {
                 if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
                 if (hStmt2 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);
                 if (hStmt3 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt3);
                 if (hStmt4 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt4);
                 if (hStmt5 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt5);
+                if (hStmt6 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt6);
             });
 
             bool isSuccess = false;
@@ -288,6 +289,9 @@ void DCreateAccountCallData::Proceed() {
 
                 //dbid로서 Elos row INSERT
                 CreateElosTable(hDbc, hStmt5, dbid);
+
+                //dbid로서 PersonalRecords row INSERT
+                CreatePersonalRecordsTable(hDbc, hStmt6, dbid);
 
                 ret = SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
                 if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
@@ -513,6 +517,29 @@ void DCreateAccountCallData::CreateElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt5, SQ
     ret = SQLExecute(hStmt5);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt5)) {
         throw runtime_error("D2S_CreateAccount : S5 Execute Failed");
+    }
+}
+
+void DCreateAccountCallData::CreatePersonalRecordsTable(SQLHDBC& hDbc, SQLHSTMT& hStmt6, SQLINTEGER& dbid) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt6);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("D2S_CreateAccount : S6 hStmt5 Alloc Failed");
+    }
+
+    wstring query = L"INSERT INTO PersonalRecords (dbid) VALUES (?)";
+    ret = SQLPrepareW(hStmt6, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt6)) {
+        throw runtime_error("D2S_CreateAccount : S6 Query Setting Failed");
+    }
+
+    ret = SQLBindParameter(hStmt6, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt6)) {
+        throw runtime_error("D2S_CreateAccount : S6 Bind Parameter Failed");
+    }
+
+    ret = SQLExecute(hStmt6);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt6)) {
+        throw runtime_error("D2S_CreateAccount : S6 Execute Failed");
     }
 }
 
