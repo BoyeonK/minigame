@@ -605,3 +605,192 @@ void DRenewElosCallData::ReadElosFromElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, 
         throw runtime_error("S2D_RenewElos : SQLFetch Failed");
     }
 }
+
+void DPlayerInfomationCallData::Proceed() {
+    if (_status == CREATE) {
+        _status = PROCESS;
+        _service->RequestPlayerInfomation(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
+    }
+    else if (_status == PROCESS) {
+        DPlayerInfomationCallData* newCallData = objectPool<DPlayerInfomationCallData>::alloc(_service, _completionQueueRef);
+
+        int dbid = _request.dbid();
+        grpc::Status stat = grpc::Status::OK;
+
+        try {
+            SQLHDBC hDbc = GDBManager->PopHDbc();
+            if (hDbc == nullptr) {
+                throw runtime_error("Invalid hDbc");
+            }
+            Cleaner hDbcCleaner([&]() {
+                GDBManager->ReturnHDbc(hDbc);
+            });
+
+            SQLHSTMT hStmt1 = nullptr, hStmt2 = nullptr, hStmt3 = nullptr;
+            Cleaner hStmtCleaner([&]() {
+                if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+                if (hStmt2 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);
+                if (hStmt3 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt3);
+            });
+
+            wstring playerId;
+            playerId = L"";
+            vector<SQLINTEGER> elos;
+            vector<SQLINTEGER> records;
+            ReadPlayerId(hDbc, hStmt1, dbid, playerId);
+            ReadElos(hDbc, hStmt2, dbid, elos);
+            ReadPersonalRecords(hDbc, hStmt3, dbid, records);
+
+            string u8playerId = GDBManager->ws2sRef(playerId);
+            _reply.set_playerid(u8playerId);
+            for (SQLINTEGER elo : elos) {
+                _reply.add_elos(elo);
+            }
+            for (SQLINTEGER record : records) {
+                _reply.add_personalrecords(record);
+            }
+        }
+        catch (runtime_error& e) {
+            cout << e.what() << endl;
+        }
+
+        _status = FINISH;
+        _responder.Finish(_reply, stat, this);
+    }
+    // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
+    else {
+        objectPool<DPlayerInfomationCallData>::dealloc(this);
+    }
+}
+
+void DPlayerInfomationCallData::ReadPlayerId(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, wstring& playerId) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("S2D_PlayerInformation : hStmt1 Alloc Failed");
+    }
+
+    wstring query = L"SELECT player_id FROM Players WHERE dbid = ?";
+    ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_PlayerInformation : Query Setting Failed");
+    }
+
+    int objectId = dbid;
+    ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &objectId, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_PlayerInformation : Bind Parameter Failed");
+    }
+
+    ret = SQLExecute(hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_PlayerInformation : Execute Failed");
+    }
+
+    ret = SQLFetch(hStmt1);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        SQLWCHAR playerIdBuffer[101]; // 예: 최대 100자 + NULL 종결 문자
+        SQLLEN indicator = 0; // 실제 데이터 길이 또는 NULL 여부를 받을 변수
+        ret = SQLGetData(hStmt1, 1, SQL_C_WCHAR, playerIdBuffer, sizeof(playerIdBuffer), &indicator);
+        if (SQL_SUCCEEDED(ret)) {
+            if (indicator == SQL_NULL_DATA) {
+                throw runtime_error("S2D_PlayerInformation : Player ID is NULL.");
+            }
+            else {
+                playerId = wstring(playerIdBuffer);
+            }
+        }
+        else {
+            throw runtime_error("S2D_PlayerInformation : SQLGetData Failed");
+        }
+    }
+    else if (ret == SQL_NO_DATA) {
+        throw runtime_error("S2D_PlayerInformation : Player not found with the given dbid.");
+    }
+    else {
+        throw runtime_error("S2D_PlayerInformation : SQLFetch Failed");
+    }
+}
+
+void DPlayerInfomationCallData::ReadElos(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid, vector<SQLINTEGER>& elos) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("S2D_PlayerInformation : hStmt2 Alloc Failed");
+    }
+
+    wstring query = L"SELECT elo1, elo2, elo3 FROM Elos WHERE dbid = ?";
+    ret = SQLPrepareW(hStmt2, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw runtime_error("S2D_PlayerInformation : Query Setting Failed");
+    }
+
+    int objectId = dbid;
+    ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &objectId, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw runtime_error("S2D_PlayerInformation : Bind Parameter Failed");
+    }
+
+    ret = SQLExecute(hStmt2);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw runtime_error("S2D_PlayerInformation : Execute Failed");
+    }
+
+    SQLINTEGER elo1 = 0, elo2 = 0, elo3 = 0;
+    ret = SQLFetch(hStmt2);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        SQLGetData(hStmt2, 1, SQL_C_SLONG, &elo1, sizeof(elo1), NULL);
+        SQLGetData(hStmt2, 2, SQL_C_SLONG, &elo2, sizeof(elo2), NULL);
+        SQLGetData(hStmt2, 3, SQL_C_SLONG, &elo3, sizeof(elo3), NULL);
+        elos.clear();
+        elos.push_back(elo1);
+        elos.push_back(elo2);
+        elos.push_back(elo3);
+    }
+    else if (ret == SQL_NO_DATA) {
+        throw runtime_error("S2D_PlayerInformation : Player not found with the given dbid.");
+    }
+    else {
+        throw runtime_error("S2D_PlayerInformation : SQLFetch Failed");
+    }
+}
+
+void DPlayerInfomationCallData::ReadPersonalRecords(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const int& dbid, vector<SQLINTEGER>& personalRecords) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt3);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("S2D_PlayerInformation : hStmt3 Alloc Failed");
+    }
+
+    wstring query = L"SELECT score1, score2, score3 FROM PersonalRecords WHERE dbid = ?";
+    ret = SQLPrepareW(hStmt3, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt3)) {
+        throw runtime_error("S2D_PlayerInformation : Query Setting Failed");
+    }
+
+    int objectId = dbid;
+    ret = SQLBindParameter(hStmt3, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &objectId, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt3)) {
+        throw runtime_error("S2D_PlayerInformation : Bind Parameter Failed");
+    }
+
+    ret = SQLExecute(hStmt3);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt3)) {
+        throw runtime_error("S2D_PlayerInformation : Execute Failed");
+    }
+
+    SQLINTEGER personalRecord1 = 0, personalRecord2 = 0, personalRecord3 = 0;
+    ret = SQLFetch(hStmt3);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        SQLGetData(hStmt3, 1, SQL_C_SLONG, &personalRecord1, sizeof(personalRecord1), NULL);
+        SQLGetData(hStmt3, 2, SQL_C_SLONG, &personalRecord2, sizeof(personalRecord2), NULL);
+        SQLGetData(hStmt3, 3, SQL_C_SLONG, &personalRecord3, sizeof(personalRecord3), NULL);
+        personalRecords.clear();
+        personalRecords.push_back(personalRecord1);
+        personalRecords.push_back(personalRecord2);
+        personalRecords.push_back(personalRecord3);
+    }
+    else if (ret == SQL_NO_DATA) {
+        throw runtime_error("S2D_PlayerInformation : Player not found with the given dbid.");
+    }
+    else {
+        throw runtime_error("S2D_PlayerInformation : SQLFetch Failed");
+    }
+}

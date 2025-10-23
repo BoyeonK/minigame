@@ -100,3 +100,25 @@ private:
     S2D_Protocol::D2S_RenewElos _reply;
     grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_RenewElos> _responder;
 };
+
+
+class DPlayerInfomationCallData final : public CallData {
+public:
+    DPlayerInfomationCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
+        : CallData(service, cq), _responder(&_ctx) {
+
+        Proceed();
+    }
+
+    void Proceed() override;
+    void ReturnToPool() override { objectPool<DPlayerInfomationCallData>::dealloc(this); }
+
+private:
+    void ReadPlayerId(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, wstring& playerId);
+    void ReadElos(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid, vector<SQLINTEGER>& elos);
+    void ReadPersonalRecords(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid) { };
+
+    S2D_Protocol::S2D_RequestPlayerInfomation _request;
+    S2D_Protocol::D2C_ResponsePlayerInfomation _reply;
+    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2C_ResponsePlayerInfomation> _responder;
+};
