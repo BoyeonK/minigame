@@ -651,6 +651,23 @@ void DBManager::AkagiRedSunsNo2() {
     ret = SQLBindParameter(hStmt5, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
     ret = SQLExecute(hStmt5);
 
+    SQLHSTMT hStmt6 = nullptr;
+    ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt6);
+    if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        return;
+    }
+    Cleaner hStmt6Cleaner([=]() {
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt6);
+        });
+
+    query = L"INSERT INTO PersonalRecords (dbid) VALUES (?)";
+    ret = SQLPrepareW(hStmt6, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt6)) {
+        return;
+    }
+    ret = SQLBindParameter(hStmt6, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
+    ret = SQLExecute(hStmt6);
+
     SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
     Lovely_Labrynth_Of_The_Silver_Castle.dismiss();
 }

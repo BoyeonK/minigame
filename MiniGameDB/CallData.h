@@ -76,6 +76,7 @@ private:
     void ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt3, const string& id, SQLINTEGER& dbid);
     void CreateAccountsTable(SQLHDBC& hDbc, SQLHSTMT& hStmt4, const string& password, SQLINTEGER& dbid);
     void CreateElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt5, SQLINTEGER& dbid);
+    void CreatePersonalRecordsTable(SQLHDBC& hDbc, SQLHSTMT& hStmt6, SQLINTEGER& dbid);
 
     S2D_Protocol::S2D_CreateAccount _request;
     S2D_Protocol::D2S_CreateAccount _reply;
@@ -116,7 +117,7 @@ public:
 private:
     void ReadPlayerId(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, wstring& playerId);
     void ReadElos(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid, vector<SQLINTEGER>& elos);
-    void ReadPersonalRecords(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid) { };
+    void ReadPersonalRecords(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid, vector<SQLINTEGER>& personalRecords);
 
     S2D_Protocol::S2D_RequestPlayerInfomation _request;
     S2D_Protocol::D2C_ResponsePlayerInfomation _reply;

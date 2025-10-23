@@ -5,11 +5,12 @@
 #include <openssl/evp.h>
 
 void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq) {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         objectPool<HelloCallData>::alloc(service, cq);
         objectPool<DLoginCallData>::alloc(service, cq);
         objectPool<DCreateAccountCallData>::alloc(service, cq);
         objectPool<DRenewElosCallData>::alloc(service, cq);
+        objectPool<DPlayerInfomationCallData>::alloc(service, cq);
     }
 }
 
