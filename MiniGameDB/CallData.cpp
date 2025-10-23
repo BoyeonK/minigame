@@ -109,7 +109,7 @@ void DLoginCallData::ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, b
         throw runtime_error("S2D_Login : S1 Query Setting Failed");
     }
 
-    wstring wId = GDBManager->a2wsRef(id);
+    wstring wId = GDBManager->s2wsRef(id);
 
     SQLLEN idLen = SQL_NTS;
     ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wId.size(), 0, (SQLPOINTER)wId.c_str(), 0, &idLen);
@@ -372,7 +372,7 @@ void DCreateAccountCallData::CreatePlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt2,
         throw runtime_error("D2S_CreateAccount : S2 Query Setting Failed");
     }
 
-    wstring wId = GDBManager->a2wsRef(id);
+    wstring wId = GDBManager->s2wsRef(id);
     SQLLEN idLen = SQL_NTS;
     ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wId.size(), 0, (SQLPOINTER)wId.c_str(), 0, &idLen);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
@@ -412,7 +412,7 @@ void DCreateAccountCallData::ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& h
         throw runtime_error("D2S_CreateAccount : S3 Query Setting Failed");
     }
 
-    wstring wId = GDBManager->a2wsRef(id);
+    wstring wId = GDBManager->s2wsRef(id);
     SQLLEN idLen = SQL_NTS;
     ret = SQLBindParameter(hStmt3, 1, SQL_PARAM_INPUT, SQL_C_WCHAR, SQL_WVARCHAR, wId.size(), 0, (SQLPOINTER)wId.c_str(), 0, &idLen);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt3)) {
