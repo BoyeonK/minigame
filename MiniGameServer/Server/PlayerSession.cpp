@@ -117,4 +117,12 @@ void PlayerSession::SetLastKeepAliveTick(const int64_t& tick) {
 	_lastKeepAliveTick.store(tick);
 }
 
+wstring PlayerSession::GetPlayerId() const {
+	return _playerId;
+}
+
+void PlayerSession::SetPlayerId(const wstring& playerId) {
+	_playerId = playerId;
+}
+
 

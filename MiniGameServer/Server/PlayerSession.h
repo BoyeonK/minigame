@@ -36,10 +36,22 @@ public:
 	int64_t GetLastKeepAliveTick() const;
 	void SetLastKeepAliveTick(const int64_t& tick);
 
+	string GetPlayerId() const;
+	void SetPlayerId(const string& playerId);
+
+	static bool IsInvalidPlayerSession(shared_ptr<PlayerSession>& playerSessionRef) {
+		if (playerSessionRef == nullptr)
+			return true;
+		if (playerSessionRef->isConnected() == false)
+			return true;
+		return false;
+	}
+
 private:
 	EVP_PKEY* _RSAKey;
 	vector<unsigned char> _AESKey;
 	int32_t _gameVersion = 0;
+	string _playerId;
 	int32_t _dbid = 0;
 	int32_t _elo1 = 0;
 	int32_t _elo2 = 0;

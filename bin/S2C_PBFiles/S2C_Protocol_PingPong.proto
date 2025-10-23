@@ -13,7 +13,9 @@ message S_P_State {
 }
 
 message S_P_Result {
-    
+    bool isWinner = 1;
+    repeated string ids = 2;
+    repeated int32 scores = 3;
 }
 
 message S_P_ReadyForStart {

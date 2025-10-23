@@ -35,8 +35,8 @@
     - OnTrigger 옵션을 이용하여, Line에 Object가 충돌한 경우. 해당 내용을 서버에 전송. (C_P_CollisionGoalLine)
 
 - DB
-  - CountingState가 구현될 때 까지 할 일 없음.
-  - 별도의 기기에서 실행하기.
+  - 게임 끝난 후 결과 반영하기.
+  - 승, 패자의 elo조정.
 
 ---
 

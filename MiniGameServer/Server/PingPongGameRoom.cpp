@@ -111,7 +111,7 @@ void PingPongGameRoom::Start() {
 }
 
 void PingPongGameRoom::OnGoingPhase1() {
-	cout << "OnGoingPhase1" << endl;
+	cout << "OnGoingPhase1, 테스트를 위하여 2, 3페이즈를 건너뜀" << endl;
 	_isUpdateCall = true;
 	vector<int> selectedNums(10);
 	uniform_int_distribution<int> dis(0, 5);
@@ -119,7 +119,7 @@ void PingPongGameRoom::OnGoingPhase1() {
 		const S2C_Protocol::S_P_Bullets bullets = pPingPongManager->easyPatterns[dis(LRanGen)];
 		PostEventAfter(2000 * i, &PingPongGameRoom::MakeBulletsFromPatternMap, bullets);
 	}
-	PostEventAfter(26000, &PingPongGameRoom::OnGoingPhase2);
+	PostEventAfter(26000, &PingPongGameRoom::CountingPhase);
 }
 
 void PingPongGameRoom::OnGoingPhase2() {
@@ -144,7 +144,39 @@ void PingPongGameRoom::OnGoingPhase3() {
 }
 
 void PingPongGameRoom::CountingPhase() {
+	_state = GameState::Counting;
+	_isUpdateCall = false;
+	CalculateGameResult();
+}
 
+void PingPongGameRoom::CalculateGameResult() {
+	int32_t mxm = -1000;
+	vector<int> winers; //최고점의 플레이어. 같은 최고점이 중복일수 있어서 vector
+	for (int i = 0; i < _quota; i++) {
+		if (_points[i] > mxm) {
+			winers.clear();
+			mxm = _points[i];
+			winers.push_back(i);
+		}
+		else if (_points[i] == mxm) {
+			winers.push_back(i);
+		}
+	}
+
+	vector<bool> isWinner(_quota, false);
+	for (auto& winer : winers)
+		isWinner[winer] = true;
+
+	for (int i = 0; i < _quota; i++) {
+		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+
+		S2C_Protocol::S_P_Result pkt;
+		//TODO : 승자여부, 아이디들, 점수들 퍼와서 넣어야 됨
+		//TODO : 맨 처음 게임 시작할 때 아이디(string을 미리 들고 와야 할듯)
+	}
+	//winers와 points에 대한 처리
 }
 /*
 bool PingPongGameRoom::MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt) {
@@ -338,7 +370,7 @@ bool PingPongGameRoom::IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef
 }
 
 void PingPongGameRoom::Handle_CollisionGoalLine(int32_t playerIdx, int32_t point) {
-
+	_points[playerIdx] = _points[playerIdx] - point;
 }
 
 void PingPongGameRoom::RequestPlayerBarPosition() {

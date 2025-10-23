@@ -27,27 +27,28 @@ namespace Google.Protobuf.Protocol {
             "ChtTMkNfUHJvdG9jb2xfUGluZ1BvbmcucHJvdG8SDFMyQ19Qcm90b2NvbBoZ",
             "UzJDX1Byb3RvY29sX0NvbW1vbi5wcm90byJNCglTX1BfU3RhdGUSLgoHb2Jq",
             "ZWN0cxgBIAMoCzIdLlMyQ19Qcm90b2NvbC5Vbml0eUdhbWVPYmplY3QSEAoI",
-            "cGxheWVySWQYAiABKAUiDAoKU19QX1Jlc3VsdCITChFTX1BfUmVhZHlGb3JT",
-            "dGFydCJ+ChxTX1BfUmVxdWVzdFBsYXllckJhclBvc2l0aW9uEgoKAmV4GAEg",
-            "ASgCEgoKAmV6GAIgASgCEgoKAnd4GAMgASgCEgoKAnd6GAQgASgCEgoKAnN4",
-            "GAUgASgCEgoKAnN6GAYgASgCEgoKAm54GAcgASgCEgoKAm56GAggASgCIkQK",
-            "HUNfUF9SZXNwb25zZVBsYXllckJhclBvc2l0aW9uEiMKCHBvc2l0aW9uGAEg",
-            "ASgLMhEuUzJDX1Byb3RvY29sLlhZWiJDChtTX1BfQ2hhbmdlUGxheWVyQmFy",
-            "UG9zaXRpb24SJAoJcG9zaXRpb25zGAEgAygLMhEuUzJDX1Byb3RvY29sLlhZ",
-            "WiKEAQoKU19QX0J1bGxldBItCgZidWxsZXQYASABKAsyHS5TMkNfUHJvdG9j",
-            "b2wuVW5pdHlHYW1lT2JqZWN0EiIKB21vdmVEaXIYAiABKAsyES5TMkNfUHJv",
-            "dG9jb2wuWFlaEg0KBXNwZWVkGAMgASgCEhQKDGxhc3RDb2xsaWRlchgEIAEo",
-            "BSI4CgtTX1BfQnVsbGV0cxIpCgdidWxsZXRzGAEgAygLMhguUzJDX1Byb3Rv",
-            "Y29sLlNfUF9CdWxsZXQidAoQQ19QX0NvbGxpc2lvbkJhchItCgZidWxsZXQY",
-            "ASABKAsyHS5TMkNfUHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0EiIKB21vdmVE",
-            "aXIYAiABKAsyES5TMkNfUHJvdG9jb2wuWFlaEg0KBXNwZWVkGAMgASgCIiYK",
-            "FUNfUF9Db2xsaXNpb25Hb2FsTGluZRINCgVwb2ludBgBIAEoBUIbqgIYR29v",
-            "Z2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
+            "cGxheWVySWQYAiABKAUiOwoKU19QX1Jlc3VsdBIQCghpc1dpbm5lchgBIAEo",
+            "CBILCgNpZHMYAiADKAkSDgoGc2NvcmVzGAMgAygFIhMKEVNfUF9SZWFkeUZv",
+            "clN0YXJ0In4KHFNfUF9SZXF1ZXN0UGxheWVyQmFyUG9zaXRpb24SCgoCZXgY",
+            "ASABKAISCgoCZXoYAiABKAISCgoCd3gYAyABKAISCgoCd3oYBCABKAISCgoC",
+            "c3gYBSABKAISCgoCc3oYBiABKAISCgoCbngYByABKAISCgoCbnoYCCABKAIi",
+            "RAodQ19QX1Jlc3BvbnNlUGxheWVyQmFyUG9zaXRpb24SIwoIcG9zaXRpb24Y",
+            "ASABKAsyES5TMkNfUHJvdG9jb2wuWFlaIkMKG1NfUF9DaGFuZ2VQbGF5ZXJC",
+            "YXJQb3NpdGlvbhIkCglwb3NpdGlvbnMYASADKAsyES5TMkNfUHJvdG9jb2wu",
+            "WFlaIoQBCgpTX1BfQnVsbGV0Ei0KBmJ1bGxldBgBIAEoCzIdLlMyQ19Qcm90",
+            "b2NvbC5Vbml0eUdhbWVPYmplY3QSIgoHbW92ZURpchgCIAEoCzIRLlMyQ19Q",
+            "cm90b2NvbC5YWVoSDQoFc3BlZWQYAyABKAISFAoMbGFzdENvbGxpZGVyGAQg",
+            "ASgFIjgKC1NfUF9CdWxsZXRzEikKB2J1bGxldHMYASADKAsyGC5TMkNfUHJv",
+            "dG9jb2wuU19QX0J1bGxldCJ0ChBDX1BfQ29sbGlzaW9uQmFyEi0KBmJ1bGxl",
+            "dBgBIAEoCzIdLlMyQ19Qcm90b2NvbC5Vbml0eUdhbWVPYmplY3QSIgoHbW92",
+            "ZURpchgCIAEoCzIRLlMyQ19Qcm90b2NvbC5YWVoSDQoFc3BlZWQYAyABKAIi",
+            "JgoVQ19QX0NvbGxpc2lvbkdvYWxMaW5lEg0KBXBvaW50GAEgASgFQhuqAhhH",
+            "b29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_State), global::Google.Protobuf.Protocol.S_P_State.Parser, new[]{ "Objects", "PlayerId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_Result), global::Google.Protobuf.Protocol.S_P_Result.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_Result), global::Google.Protobuf.Protocol.S_P_Result.Parser, new[]{ "IsWinner", "Ids", "Scores" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_ReadyForStart), global::Google.Protobuf.Protocol.S_P_ReadyForStart.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_P_RequestPlayerBarPosition), global::Google.Protobuf.Protocol.S_P_RequestPlayerBarPosition.Parser, new[]{ "Ex", "Ez", "Wx", "Wz", "Sx", "Sz", "Nx", "Nz" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_P_ResponsePlayerBarPosition), global::Google.Protobuf.Protocol.C_P_ResponsePlayerBarPosition.Parser, new[]{ "Position" }, null, null, null, null),
@@ -325,6 +326,9 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_P_Result(S_P_Result other) : this() {
+      isWinner_ = other.isWinner_;
+      ids_ = other.ids_.Clone();
+      scores_ = other.scores_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -332,6 +336,40 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_P_Result Clone() {
       return new S_P_Result(this);
+    }
+
+    /// <summary>Field number for the "isWinner" field.</summary>
+    public const int IsWinnerFieldNumber = 1;
+    private bool isWinner_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsWinner {
+      get { return isWinner_; }
+      set {
+        isWinner_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ids" field.</summary>
+    public const int IdsFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_ids_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> ids_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<string> Ids {
+      get { return ids_; }
+    }
+
+    /// <summary>Field number for the "scores" field.</summary>
+    public const int ScoresFieldNumber = 3;
+    private static readonly pb::FieldCodec<int> _repeated_scores_codec
+        = pb::FieldCodec.ForInt32(26);
+    private readonly pbc::RepeatedField<int> scores_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<int> Scores {
+      get { return scores_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -349,6 +387,9 @@ namespace Google.Protobuf.Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (IsWinner != other.IsWinner) return false;
+      if(!ids_.Equals(other.ids_)) return false;
+      if(!scores_.Equals(other.scores_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -356,6 +397,9 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (IsWinner != false) hash ^= IsWinner.GetHashCode();
+      hash ^= ids_.GetHashCode();
+      hash ^= scores_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -374,6 +418,12 @@ namespace Google.Protobuf.Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (IsWinner != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(IsWinner);
+      }
+      ids_.WriteTo(output, _repeated_ids_codec);
+      scores_.WriteTo(output, _repeated_scores_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -384,6 +434,12 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (IsWinner != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(IsWinner);
+      }
+      ids_.WriteTo(ref output, _repeated_ids_codec);
+      scores_.WriteTo(ref output, _repeated_scores_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -394,6 +450,11 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (IsWinner != false) {
+        size += 1 + 1;
+      }
+      size += ids_.CalculateSize(_repeated_ids_codec);
+      size += scores_.CalculateSize(_repeated_scores_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -406,6 +467,11 @@ namespace Google.Protobuf.Protocol {
       if (other == null) {
         return;
       }
+      if (other.IsWinner != false) {
+        IsWinner = other.IsWinner;
+      }
+      ids_.Add(other.ids_);
+      scores_.Add(other.scores_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -425,6 +491,19 @@ namespace Google.Protobuf.Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            IsWinner = input.ReadBool();
+            break;
+          }
+          case 18: {
+            ids_.AddEntriesFrom(input, _repeated_ids_codec);
+            break;
+          }
+          case 26:
+          case 24: {
+            scores_.AddEntriesFrom(input, _repeated_scores_codec);
+            break;
+          }
         }
       }
     #endif
@@ -444,6 +523,19 @@ namespace Google.Protobuf.Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 8: {
+            IsWinner = input.ReadBool();
+            break;
+          }
+          case 18: {
+            ids_.AddEntriesFrom(ref input, _repeated_ids_codec);
+            break;
+          }
+          case 26:
+          case 24: {
+            scores_.AddEntriesFrom(ref input, _repeated_scores_codec);
+            break;
+          }
         }
       }
     }
