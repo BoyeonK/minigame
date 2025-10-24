@@ -41,7 +41,7 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	for (auto& playerSessionWRef : _playerWRefs) {
 		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
 		//유효하지 않은 플레이어가 있는 경우, 모두 대기열로 돌려보냄.
-		if (playerSessionRef == nullptr) {
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 			canStart = false;
 			break;
 		}
@@ -62,13 +62,14 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		//플레이어의 게임종료 등의 이유로 세션이 유효하지 않더라도, 진행 가능한 방식으로 코드를 작성해야 함.
 		_state = GameState::BeforeStart;
 		_preparedPlayer = 0;
-		int playerIdx = 0;
-		for (auto& playerSessionWRef : _playerWRefs) {
-			shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
+
+		for (int i = 0; i < _quota; i++) {
+			shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
 			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
-			if (playerSessionRef != nullptr) {
+			if (!PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 				playerSessionRef->SetJoinedRoom(static_pointer_cast<PingPongGameRoom>(shared_from_this()));
-				playerSessionRef->SetRoomIdx(playerIdx++);
+				_elos[i] = playerSessionRef->GetElo(int(_ty));
+				playerSessionRef->SetRoomIdx(i);
 				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 				playerSessionRef->Send(sendBuffer);
 			}
@@ -192,17 +193,43 @@ void PingPongGameRoom::CalculateGameResult() {
 }
 
 void PingPongGameRoom::UpdateGameResultToDB() {
-	//TODO : 패자 중에서 최대 elo인 친구와 승자 친구들의 elo를 변화하여 계산. Elo를 업데이트
-	int32_t mnmElo = -1000;
+	int32_t bestLosersElo = 0;
+	int32_t worstWinnerElo = 3000;
+
+	//4명의 공통승자인 경우 (놀랍게도, 넷이 점수가 같음)
+	//FM대로 하자면 Record갱신은 해 주어야 하지만, 이 경우 모두 게임에서 나간 경우이거나 어뷰징이 의심되므로 결과에 대한 처리를 진행하지 않을 것임.
 	if (_winners.size() == _quota)
 		return;
 
 	for (int i = 0; i < _quota; i++) {
+		auto playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
+			continue;
+		}
 
+		if (_points[i] > playerSessionRef->GetPersonalRecord(int(_ty))) {
+			//TODO : 해당 플레이어의 기록을 갱신.
+			//TODO : Manager클래스에 기록된 월드 최고기록보다 높은경우, 이 플레이어의 dbid와 스코어를 등록
+
+		}
+
+		bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
+		if (isWinner) {
+			if (worstWinnerElo > _elos[i])
+				worstWinnerElo = _elos[i];
+		}
+		else {
+			if (_elos[i] > bestLosersElo)
+				bestLosersElo = _elos[i];
+		}
 	}
-	//개인 최고 기록을 갱신.
-	//전체 최고 기록을 갱신.
-	//패자가 없는 경우 그냥 리턴
+
+	if (worstWinnerElo == 3000 || bestLosersElo == 0)
+		return;
+
+	for (int winnerIndex : _winners) {
+		//TODO : winner의 elo와 bestLosersElo를 가지고 갱신된 elo를 winner elo로 갱신
+	}
 }
 
 /*

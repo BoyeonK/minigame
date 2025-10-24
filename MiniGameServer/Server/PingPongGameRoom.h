@@ -7,6 +7,7 @@ public:
 	PingPongGameRoom() {
 		_ty = GameType::PingPong;
 		_points = vector<int32_t>(4, 0);
+		_elos = vector<int32_t>(4, 0);
 	}
 	~PingPongGameRoom() {
 		cout << "PingPong·ë »ç¸Á" << endl;
@@ -46,6 +47,7 @@ private:
 	int32_t _quota = 4;
 	bool _isUpdateCall = false;
 	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;
+	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<int> _winners;
 

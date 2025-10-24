@@ -38,7 +38,10 @@ protected:
 	GameType _ty = GameType::Undefined;
 	GameState _state = GameState::BeforeInit;
 	int32_t _preparedPlayer = 0;
+
+	//Update문에서의 순회용
 	vector<shared_ptr<UnityGameObject>> _vecGameObjects;
+	//objectId를 통한 접근용
 	unordered_map<int32_t, shared_ptr<UnityGameObject>> _hmGameObjects;
 };
 
