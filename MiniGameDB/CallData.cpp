@@ -9,7 +9,7 @@ void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::Server
         objectPool<HelloCallData>::alloc(service, cq);
         objectPool<DLoginCallData>::alloc(service, cq);
         objectPool<DCreateAccountCallData>::alloc(service, cq);
-        objectPool<DRenewElosCallData>::alloc(service, cq);
+        //objectPool<DRenewElosCallData>::alloc(service, cq);
         objectPool<DPlayerInfomationCallData>::alloc(service, cq);
     }
 }
@@ -544,6 +544,7 @@ void DCreateAccountCallData::CreatePersonalRecordsTable(SQLHDBC& hDbc, SQLHSTMT&
     }
 }
 
+/*
 void DRenewElosCallData::Proceed() {
     if (_status == CREATE) {
         _status = PROCESS;
@@ -633,6 +634,7 @@ void DRenewElosCallData::ReadElosFromElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, 
         throw runtime_error("S2D_RenewElos : SQLFetch Failed");
     }
 }
+*/
 
 void DPlayerInfomationCallData::Proceed() {
     if (_status == CREATE) {

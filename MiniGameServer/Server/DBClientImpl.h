@@ -23,7 +23,7 @@ public:
 #endif
     bool S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password);
     bool S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id, string password);
-    bool S2D_RenewElos(shared_ptr<PlayerSession> playerSessionRef, int dbid);
+    //bool S2D_RenewElos(shared_ptr<PlayerSession> playerSessionRef, int dbid);
     bool S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionRef, int dbid);
 
     void AsyncCompleteRpc();

@@ -83,6 +83,7 @@ private:
     grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_CreateAccount> _responder;
 };
 
+/*
 class DRenewElosCallData final : public CallData {
 public:
     DRenewElosCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
@@ -101,7 +102,7 @@ private:
     S2D_Protocol::D2S_RenewElos _reply;
     grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_RenewElos> _responder;
 };
-
+*/
 
 class DPlayerInfomationCallData final : public CallData {
 public:

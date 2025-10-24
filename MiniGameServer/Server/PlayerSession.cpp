@@ -90,30 +90,11 @@ shared_ptr<GameRoom> PlayerSession::GetJoinedRoom() {
 	return _joinedRoomWRef.lock();
 }
 
-void PlayerSession::SetElos(int32_t elo1, int32_t elo2, int32_t elo3) {
-	_elo1 = elo1;
-	_elo2 = elo2;
-	_elo3 = elo3;
-}
-
-int32_t PlayerSession::GetElo(const int32_t& idx) const {
-	switch (idx) {
-	case(1):
-		return _elo1;
-	case(2):
-		return _elo2;
-	case(3):
-		return _elo3;
-	default:
-		return 0;
-	}
-}
-
 void PlayerSession::SetElo(int32_t idx, int32_t elo) {
 	_elos[idx] = elo;
 }
 
-int32_t PlayerSession::GetEloo(const int32_t& idx) const {
+int32_t PlayerSession::GetElo(const int32_t& idx) const {
 	return _elos[idx];
 }
 

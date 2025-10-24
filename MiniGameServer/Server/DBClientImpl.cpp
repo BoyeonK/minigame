@@ -42,6 +42,7 @@ bool DBClientImpl::S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id
     return true;
 }
 
+/*
 bool DBClientImpl::S2D_RenewElos(shared_ptr<PlayerSession> playerSessionRef, int dbid) {
     SRenewElosCall* call = objectPool<SRenewElosCall>::alloc(playerSessionRef);
     S2D_Protocol::S2D_RenewElos request = S2DPacketMaker::Make_S2D_RenewElos(dbid);
@@ -52,6 +53,7 @@ bool DBClientImpl::S2D_RenewElos(shared_ptr<PlayerSession> playerSessionRef, int
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
     return false;
 }
+*/
 
 bool DBClientImpl::S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionRef, int dbid) {
     SPlayerInformationCall* call = objectPool<SPlayerInformationCall>::alloc(playerSessionRef);

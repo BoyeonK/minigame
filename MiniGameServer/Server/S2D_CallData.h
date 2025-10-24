@@ -74,7 +74,7 @@ public:
 private:
 	weak_ptr<PBSession> _clientSessionRef;
 };
-
+/*
 class SRenewElosCall final : public S2D_CallData {
 public:
 	SRenewElosCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
@@ -94,7 +94,7 @@ public:
 private:
 	weak_ptr<PlayerSession> _clientSessionRef;
 };
-
+*/
 class SPlayerInformationCall final : public S2D_CallData {
 public:
 	SPlayerInformationCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}

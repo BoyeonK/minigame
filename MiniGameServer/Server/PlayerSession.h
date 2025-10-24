@@ -25,10 +25,8 @@ public:
 	void SetDbid(int32_t dbid);
 	int32_t GetDbid() const { return _dbid; }
 
-	void SetElos(int32_t elo1, int32_t elo2, int32_t elo3);
-	int32_t GetElo(const int32_t& idx) const;
 	void SetElo(int32_t idx, int32_t elo);
-	int32_t GetEloo(const int32_t& idx) const;
+	int32_t GetElo(const int32_t& idx) const;
 
 	void SetPersonalRecord(int32_t idx, int32_t elo);
 	int32_t GetPersonalRecord(const int32_t& idx) const;
@@ -66,9 +64,6 @@ private:
 	//FM대로면 elo를 다룰 때 mutex를 사용해야 함.
 	vector<int32_t> _elos;
 	vector<int32_t> _personalRecords;
-	int32_t _elo1 = 0;
-	int32_t _elo2 = 0;
-	int32_t _elo3 = 0;
 
 	atomic<GameType> _matchingState = GameType::None;
 	weak_ptr<GameRoom> _joinedRoomWRef;
