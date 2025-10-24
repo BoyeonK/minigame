@@ -83,27 +83,6 @@ private:
     grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_CreateAccount> _responder;
 };
 
-/*
-class DRenewElosCallData final : public CallData {
-public:
-    DRenewElosCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
-        : CallData(service, cq), _responder(&_ctx) {
-
-        Proceed();
-    }
-
-    void Proceed() override;
-    void ReturnToPool() override { objectPool<DRenewElosCallData>::dealloc(this); }
-
-private:
-    void ReadElosFromElosTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, SQLINTEGER& elo1, SQLINTEGER& elo2, SQLINTEGER& elo3);
-
-    S2D_Protocol::S2D_RenewElos _request;
-    S2D_Protocol::D2S_RenewElos _reply;
-    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_RenewElos> _responder;
-};
-*/
-
 class DPlayerInfomationCallData final : public CallData {
 public:
     DPlayerInfomationCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)

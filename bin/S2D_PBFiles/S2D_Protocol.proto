@@ -7,7 +7,7 @@ service S2D_Service {
     rpc SayHello (HelloRequest) returns (HelloReply);
     rpc LoginRequest (S2D_Login) returns (D2S_Login);
     rpc CreateAccountRequest (S2D_CreateAccount) returns (D2S_CreateAccount);
-    rpc RenewElosRequest (S2D_RenewElos) returns (D2S_RenewElos);
+    //rpc RenewElosRequest (S2D_RenewElos) returns (D2S_RenewElos);
     rpc PlayerInfomation (S2D_RequestPlayerInfomation) returns (D2C_ResponsePlayerInfomation);
     rpc RenewElo (S2D_TryRenewElo) returns (D2S_ResponseRenewElo);
     rpc RenewPersonalRecord (S2D_TryRenewPersonalRecord) returns (D2S_ResponseRenewPersonalRecord);
@@ -62,6 +62,7 @@ message D2S_CreateAccount {
     bool success = 1;
 }
 
+/* RenewElos 프로토콜은 기록 말소됨
 //현재 로그인시 Elo만 가져옴.
 message S2D_RenewElos {
     int32 dbid = 1;
@@ -72,6 +73,7 @@ message D2S_RenewElos {
     int32 elo2 = 2;
     int32 elo3 = 3;
 }
+*/
 
 //로그인시, 해당 유저의 ID, 개인기록, 전체월드기록을 가져옴
 message S2D_RequestPlayerInfomation {

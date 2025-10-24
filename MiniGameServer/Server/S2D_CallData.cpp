@@ -112,21 +112,7 @@ void SCreateAccountCall::CreateFailed() {
 	shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
 	sessionRef->Send(sendBufferRef);
 }
-/*
-void SRenewElosCall::OnSucceed() {
-	shared_ptr<PlayerSession> sessionRef = _clientSessionRef.lock();
-	if (sessionRef == nullptr) {
-		return;
-	}
 
-	sessionRef->SetElos(reply.elo1(), reply.elo2(), reply.elo3());
-	cout << "Elo 설정 완료" << endl;
-}
-
-void SRenewElosCall::OnFailed() {
-	//TODO: 뭔가 해야될거 같은데 당장 생각이 안나네
-}
-*/
 void SPlayerInformationCall::OnSucceed() {
 	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
