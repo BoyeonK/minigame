@@ -198,3 +198,20 @@ message S_KillSession {
 message S_KillApplication {
     string err = 1;
 }
+
+message C_RequestMyRecords {
+    int32 dbid = 1;
+}
+
+message S_ResponseMyRecords {
+    repeated int32 scores = 1;
+}
+
+message C_RequestPublicRecords {
+    int32 dbid = 1;
+}
+
+message S_ResponsePublicRecords{
+    repeated string playerIds = 1;
+    repeated int32 scores = 2;
+}
