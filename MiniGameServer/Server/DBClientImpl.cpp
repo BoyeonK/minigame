@@ -42,7 +42,7 @@ bool DBClientImpl::S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id
     return true;
 }
 
-bool DBClientImpl::S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionRef, int dbid) {
+bool DBClientImpl::S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid) {
     SPlayerInformationCall* call = objectPool<SPlayerInformationCall>::alloc(playerSessionRef);
     S2D_Protocol::S2D_RequestPlayerInfomation request = S2DPacketMaker::Make_S2D_RequestPlayerInfomation(dbid);
 
@@ -50,20 +50,40 @@ bool DBClientImpl::S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionR
     call->response_reader->StartCall();
 
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
-
-    return false;
+    return true;
 }
 
-bool DBClientImpl::S2D_RenewElo(int32_t dbid, int32_t elo) {
-    return false;
+bool DBClientImpl::S2D_RenewElo(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t elo) {
+    SRenewEloCall* call = objectPool<SRenewEloCall>::alloc(playerSessionRef);
+    S2D_Protocol::S2D_TryRenewElo request = S2DPacketMaker::Make_S2D_TryRenewElo(dbid, gameId, elo);
+
+    call->response_reader = _stub->PrepareAsyncRenewElo(&call->context, request, _cqRef.get());
+    call->response_reader->StartCall();
+
+    call->response_reader->Finish(&call->reply, &call->status, (void*)call);
+    return true;
 }
 
-bool DBClientImpl::S2D_RenewPersonalRecord(int32_t dbid, int32_t score) {
-    return false;
+bool DBClientImpl::S2D_RenewPersonalRecord(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t score) {
+    SRenewPersonalRecordCall* call = objectPool<SRenewPersonalRecordCall>::alloc(playerSessionRef);
+    S2D_Protocol::S2D_TryRenewPersonalRecord request = S2DPacketMaker::Make_S2D_TryRenewPersonalRecord(dbid, gameId, score);
+
+    call->response_reader = _stub->PrepareAsyncRenewPersonalRecord(&call->context, request, _cqRef.get());
+    call->response_reader->StartCall();
+
+    call->response_reader->Finish(&call->reply, &call->status, (void*)call);
+    return true;
 }
 
 bool DBClientImpl::S2D_PublicRecord(int32_t gameId) {
-    return false;
+    SPublicRecordCall* call = objectPool<SPublicRecordCall>::alloc();
+    S2D_Protocol::S2D_RequestPublicRecord request = S2DPacketMaker::Make_S2D_RequestPublicRecord(gameId);
+
+    call->response_reader = _stub->PrepareAsyncPublicRecord(&call->context, request, _cqRef.get());
+    call->response_reader->StartCall();
+
+    call->response_reader->Finish(&call->reply, &call->status, (void*)call);
+    return true;
 }
 
 void DBClientImpl::AsyncCompleteRpc() {

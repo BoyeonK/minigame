@@ -87,15 +87,6 @@ message D2C_ResponsePlayerInfomation {
     repeated int32 personalRecords = 3;
 }
 
-//최초 연결시 월드레코드를 가져옴
-message S2D_RequestPublicRecord {
-    int32 gameId = 1;
-}
-
-message D2S_ResponsePublicRecord {
-    int32 publicRecord = 1;
-}
-
 //Elo변경요청
 message S2D_TryRenewElo {
     int32 dbid = 1;
@@ -116,6 +107,15 @@ message S2D_TryRenewPersonalRecord {
 
 message D2S_ResponseRenewPersonalRecord {
     bool success = 1;
+}
+
+//최초 연결시 월드레코드를 가져옴
+message S2D_RequestPublicRecord {
+    int32 gameId = 1;
+}
+
+message D2S_ResponsePublicRecord {
+    int32 publicRecord = 1;
 }
 
 //월드 레코드 변경 요청

@@ -133,7 +133,11 @@ void SPlayerInformationCall::OnFailed() {
 }
 
 void SRenewEloCall::OnSucceed() {
+	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return;
 
+	bool isSuccess = reply.success();
 }
 
 void SRenewEloCall::OnFailed() {
@@ -141,7 +145,11 @@ void SRenewEloCall::OnFailed() {
 }
 
 void SRenewPersonalRecordCall::OnSucceed() {
+	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return;
 
+	bool isSuccess = reply.success();
 }
 
 void SRenewPersonalRecordCall::OnFailed() {
@@ -149,7 +157,11 @@ void SRenewPersonalRecordCall::OnFailed() {
 }
 
 void SPublicRecordCall::OnSucceed() {
+	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return;
 
+	int32_t sex = reply.publicrecord();
 }
 
 void SPublicRecordCall::OnFailed() {

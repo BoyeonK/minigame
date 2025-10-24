@@ -137,7 +137,7 @@ private:
 
 class SPublicRecordCall final : public S2D_CallData {
 public:
-	SPublicRecordCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
+	SPublicRecordCall() {}
 	~SPublicRecordCall() {}
 
 	void StartCall();
@@ -150,7 +150,4 @@ public:
 
 	S2D_Protocol::D2S_ResponsePublicRecord reply;
 	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_ResponsePublicRecord>> response_reader;
-
-private:
-	weak_ptr<PlayerSession> _clientSessionRef;
 };
