@@ -28,6 +28,7 @@ static const char* S2D_Service_method_names[] = {
   "/S2D_Protocol.S2D_Service/PlayerInfomation",
   "/S2D_Protocol.S2D_Service/RenewElo",
   "/S2D_Protocol.S2D_Service/RenewPersonalRecord",
+  "/S2D_Protocol.S2D_Service/PublicRecord",
 };
 
 std::unique_ptr< S2D_Service::Stub> S2D_Service::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -43,6 +44,7 @@ S2D_Service::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   , rpcmethod_PlayerInfomation_(S2D_Service_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_RenewElo_(S2D_Service_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_RenewPersonalRecord_(S2D_Service_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_PublicRecord_(S2D_Service_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status S2D_Service::Stub::SayHello(::grpc::ClientContext* context, const ::S2D_Protocol::HelloRequest& request, ::S2D_Protocol::HelloReply* response) {
@@ -183,6 +185,29 @@ void S2D_Service::Stub::async::RenewPersonalRecord(::grpc::ClientContext* contex
   return result;
 }
 
+::grpc::Status S2D_Service::Stub::PublicRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPublicRecord& request, ::S2D_Protocol::D2S_ResponsePublicRecord* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::S2D_Protocol::S2D_RequestPublicRecord, ::S2D_Protocol::D2S_ResponsePublicRecord, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_PublicRecord_, context, request, response);
+}
+
+void S2D_Service::Stub::async::PublicRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPublicRecord* request, ::S2D_Protocol::D2S_ResponsePublicRecord* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::S2D_Protocol::S2D_RequestPublicRecord, ::S2D_Protocol::D2S_ResponsePublicRecord, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_PublicRecord_, context, request, response, std::move(f));
+}
+
+void S2D_Service::Stub::async::PublicRecord(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPublicRecord* request, ::S2D_Protocol::D2S_ResponsePublicRecord* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_PublicRecord_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponsePublicRecord>* S2D_Service::Stub::PrepareAsyncPublicRecordRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPublicRecord& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::S2D_Protocol::D2S_ResponsePublicRecord, ::S2D_Protocol::S2D_RequestPublicRecord, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_PublicRecord_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::S2D_Protocol::D2S_ResponsePublicRecord>* S2D_Service::Stub::AsyncPublicRecordRaw(::grpc::ClientContext* context, const ::S2D_Protocol::S2D_RequestPublicRecord& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncPublicRecordRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 S2D_Service::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       S2D_Service_method_names[0],
@@ -244,6 +269,16 @@ S2D_Service::Service::Service() {
              ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* resp) {
                return service->RenewPersonalRecord(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      S2D_Service_method_names[6],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< S2D_Service::Service, ::S2D_Protocol::S2D_RequestPublicRecord, ::S2D_Protocol::D2S_ResponsePublicRecord, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](S2D_Service::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::S2D_Protocol::S2D_RequestPublicRecord* req,
+             ::S2D_Protocol::D2S_ResponsePublicRecord* resp) {
+               return service->PublicRecord(ctx, req, resp);
+             }, this)));
 }
 
 S2D_Service::Service::~Service() {
@@ -285,6 +320,13 @@ S2D_Service::Service::~Service() {
 }
 
 ::grpc::Status S2D_Service::Service::RenewPersonalRecord(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_TryRenewPersonalRecord* request, ::S2D_Protocol::D2S_ResponseRenewPersonalRecord* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status S2D_Service::Service::PublicRecord(::grpc::ServerContext* context, const ::S2D_Protocol::S2D_RequestPublicRecord* request, ::S2D_Protocol::D2S_ResponsePublicRecord* response) {
   (void) context;
   (void) request;
   (void) response;

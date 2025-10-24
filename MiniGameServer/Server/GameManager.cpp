@@ -4,6 +4,10 @@
 #include "S2CPacketMaker.h"
 #include "TestGameRoom.h"
 
+int32_t GameManager::GetPublicRecord() {
+	return _publicRecord;
+}
+
 void GameManager::AddRoom(shared_ptr<GameRoom> room) {
 	unique_lock<shared_mutex> lock(_roomsLock);
 	_rooms.push_back(room);

@@ -11,6 +11,7 @@ service S2D_Service {
     rpc PlayerInfomation (S2D_RequestPlayerInfomation) returns (D2C_ResponsePlayerInfomation);
     rpc RenewElo (S2D_TryRenewElo) returns (D2S_ResponseRenewElo);
     rpc RenewPersonalRecord (S2D_TryRenewPersonalRecord) returns (D2S_ResponseRenewPersonalRecord);
+    rpc PublicRecord (S2D_RequestPublicRecord) returns (D2S_ResponsePublicRecord);
 }
 
 //SayHello -> 단순한 에코를 실행.
@@ -84,16 +85,15 @@ message D2C_ResponsePlayerInfomation {
     string playerId = 1;
     repeated int32 elos = 2;
     repeated int32 personalRecords = 3;
-    //repeated int32 publicRecords = 4;
 }
 
 //최초 연결시 월드레코드를 가져옴
-message S2D_RequestPublicRecords {
-
+message S2D_RequestPublicRecord {
+    int32 gameId = 1;
 }
 
-message D2S_ResponsePublicRecords {
-    repeated int32 publicRecords = 1;
+message D2S_ResponsePublicRecord {
+    int32 publicRecord = 1;
 }
 
 //Elo변경요청

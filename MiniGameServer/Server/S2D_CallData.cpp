@@ -131,3 +131,27 @@ void SPlayerInformationCall::OnSucceed() {
 void SPlayerInformationCall::OnFailed() {
 
 }
+
+void SRenewEloCall::OnSucceed() {
+
+}
+
+void SRenewEloCall::OnFailed() {
+
+}
+
+void SRenewPersonalRecordCall::OnSucceed() {
+
+}
+
+void SRenewPersonalRecordCall::OnFailed() {
+
+}
+
+void SPublicRecordCall::OnSucceed() {
+
+}
+
+void SPublicRecordCall::OnFailed() {
+
+}

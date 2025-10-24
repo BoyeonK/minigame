@@ -60,6 +60,16 @@ void TestGameManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	newRoomRef->PostEvent(&TestGameRoom::Init, move(pdv));
 }
 
+bool TestGameManager::TrySetPublicRecord(int32_t dbid, int32_t score) {
+	if (score < _publicRecord)
+		return false;
+	return true;
+}
+
+bool TestGameManager::TrySetPublicRecordFromDB() {
+	return false;
+}
+
 void TestGameManager::Update() {
 	uint64_t now = ::GetTickCount64();
 	if (now - _lastUpdateRoomTick < _updateTickPeriod)

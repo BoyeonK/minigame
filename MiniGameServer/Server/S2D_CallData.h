@@ -94,3 +94,63 @@ public:
 private:
 	weak_ptr<PlayerSession> _clientSessionRef;
 };
+
+class SRenewEloCall final : public S2D_CallData {
+public:
+	SRenewEloCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
+	~SRenewEloCall() {}
+
+	void StartCall();
+	void OnSucceed() override;
+	void OnFailed() override;
+
+	void ReturnToPool() {
+		objectPool<SRenewEloCall>::dealloc(this);
+	}
+
+	S2D_Protocol::D2S_ResponseRenewElo reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_ResponseRenewElo>> response_reader;
+
+private:
+	weak_ptr<PlayerSession> _clientSessionRef;
+};
+
+class SRenewPersonalRecordCall final : public S2D_CallData {
+public:
+	SRenewPersonalRecordCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
+	~SRenewPersonalRecordCall() {}
+
+	void StartCall();
+	void OnSucceed() override;
+	void OnFailed() override;
+
+	void ReturnToPool() {
+		objectPool<SRenewPersonalRecordCall>::dealloc(this);
+	}
+
+	S2D_Protocol::D2S_ResponseRenewPersonalRecord reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_ResponseRenewPersonalRecord>> response_reader;
+
+private:
+	weak_ptr<PlayerSession> _clientSessionRef;
+};
+
+class SPublicRecordCall final : public S2D_CallData {
+public:
+	SPublicRecordCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
+	~SPublicRecordCall() {}
+
+	void StartCall();
+	void OnSucceed() override;
+	void OnFailed() override;
+
+	void ReturnToPool() {
+		objectPool<SPublicRecordCall>::dealloc(this);
+	}
+
+	S2D_Protocol::D2S_ResponsePublicRecord reply;
+	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_ResponsePublicRecord>> response_reader;
+
+private:
+	weak_ptr<PlayerSession> _clientSessionRef;
+};

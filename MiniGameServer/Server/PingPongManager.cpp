@@ -60,6 +60,16 @@ void PingPongManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	newRoomRef->PostEvent(&PingPongGameRoom::Init, move(pdv));
 }
 
+bool PingPongManager::TrySetPublicRecord(int32_t dbid, int32_t score) {
+	if (score < _publicRecord)
+		return false;
+	return true;
+}
+
+bool PingPongManager::TrySetPublicRecordFromDB() {
+	return false;
+}
+
 void PingPongManager::Update() {
 	uint64_t now = ::GetTickCount64();
 	if (now - _lastUpdateRoomTick < _updateTickPeriod)

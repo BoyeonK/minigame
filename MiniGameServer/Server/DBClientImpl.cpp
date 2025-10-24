@@ -54,6 +54,18 @@ bool DBClientImpl::S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionR
     return false;
 }
 
+bool DBClientImpl::S2D_RenewElo(int32_t dbid, int32_t elo) {
+    return false;
+}
+
+bool DBClientImpl::S2D_RenewPersonalRecord(int32_t dbid, int32_t score) {
+    return false;
+}
+
+bool DBClientImpl::S2D_PublicRecord(int32_t gameId) {
+    return false;
+}
+
 void DBClientImpl::AsyncCompleteRpc() {
     if (_isConnected.load()) {
         void* tag;
