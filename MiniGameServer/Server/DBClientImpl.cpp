@@ -76,7 +76,7 @@ bool DBClientImpl::S2D_RenewPersonalRecord(shared_ptr<PlayerSession> playerSessi
 }
 
 bool DBClientImpl::S2D_PublicRecord(int32_t gameId) {
-    SPublicRecordCall* call = objectPool<SPublicRecordCall>::alloc();
+    SPublicRecordCall* call = objectPool<SPublicRecordCall>::alloc(gameId);
     S2D_Protocol::S2D_RequestPublicRecord request = S2DPacketMaker::Make_S2D_RequestPublicRecord(gameId);
 
     call->response_reader = _stub->PrepareAsyncPublicRecord(&call->context, request, _cqRef.get());

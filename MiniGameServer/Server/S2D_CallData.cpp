@@ -157,11 +157,7 @@ void SRenewPersonalRecordCall::OnFailed() {
 }
 
 void SPublicRecordCall::OnSucceed() {
-	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
-	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
-		return;
-
-	int32_t sex = reply.publicrecord();
+	GGameManagers[_gameId]->TrySetPublicRecord(reply.playerid(), reply.publicrecord());
 }
 
 void SPublicRecordCall::OnFailed() {

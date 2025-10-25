@@ -13,7 +13,7 @@ public:
 	virtual void MakeRoom(vector<WatingPlayerData>&& pdv) = 0;
 	virtual void Update() = 0;
 	int32_t GetPublicRecord();
-	virtual bool TrySetPublicRecord(int32_t dbid, int32_t score) = 0;
+	virtual bool TrySetPublicRecord(string playerId, int32_t score) = 0;
 	virtual bool TrySetPublicRecordFromDB() = 0;
 
 	void AddRoom(shared_ptr<GameRoom> room);

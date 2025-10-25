@@ -137,7 +137,7 @@ private:
 
 class SPublicRecordCall final : public S2D_CallData {
 public:
-	SPublicRecordCall() {}
+	SPublicRecordCall(int32_t gameId) : _gameId(gameId) {}
 	~SPublicRecordCall() {}
 
 	void StartCall();
@@ -150,4 +150,7 @@ public:
 
 	S2D_Protocol::D2S_ResponsePublicRecord reply;
 	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_ResponsePublicRecord>> response_reader;
+
+private:
+	int32_t _gameId;
 };

@@ -98,7 +98,7 @@ message D2S_ResponseRenewElo {
     bool success = 1;
 }
 
-//개인 머시깽이 변경 요청
+//개인 레코드 변경 요청
 message S2D_TryRenewPersonalRecord {
     int32 dbid = 1;
     int32 gameId = 2;
@@ -115,7 +115,8 @@ message S2D_RequestPublicRecord {
 }
 
 message D2S_ResponsePublicRecord {
-    int32 publicRecord = 1;
+    string playerId = 1;
+    int32 publicRecord = 2;
 }
 
 //월드 레코드 변경 요청

@@ -696,3 +696,184 @@ void DPlayerInfomationCallData::ReadPersonalRecords(SQLHDBC& hDbc, SQLHSTMT& hSt
         throw runtime_error("S2D_PlayerInformation : SQLFetch Failed");
     }
 }
+
+void DRenewEloCallData::Proceed() {
+    if (_status == CREATE) {
+        _status = PROCESS;
+        _service->RequestRenewElo(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
+    }
+    else if (_status == PROCESS) {
+        DRenewEloCallData* newCallData = objectPool<DRenewEloCallData>::alloc(_service, _completionQueueRef);
+
+        int dbid = _request.dbid();
+        int gameId = _request.gameid();
+        int elo = _request.elo();
+        grpc::Status stat = grpc::Status::OK;
+
+        try {
+            SQLHDBC hDbc = GDBManager->PopHDbc();
+            if (hDbc == nullptr) {
+                throw runtime_error("Invalid hDbc");
+            }
+            Cleaner hDbcCleaner([&]() {
+                GDBManager->ReturnHDbc(hDbc);
+                });
+
+            SQLHSTMT hStmt1 = nullptr;
+            Cleaner hStmtCleaner([&]() {
+                if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+            });
+
+            RenewElo(hDbc, hStmt1, dbid, gameId, elo);
+            _reply.set_success(true);
+        }
+        catch (runtime_error& e) {
+            cout << e.what() << endl;
+        }
+
+        _status = FINISH;
+        _responder.Finish(_reply, stat, this);
+    }
+    // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
+    else {
+        objectPool<DRenewEloCallData>::dealloc(this);
+    }
+}
+
+void DRenewEloCallData::RenewElo(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& elo) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("S2D_RenewElo : hStmt1 Alloc Failed");
+    }
+
+    wstring columnName;
+    switch (gameId) {
+    case(1):
+        columnName = L"elo1";
+        break;
+    case(2):
+        columnName = L"elo2";
+        break;
+    case(3):
+        columnName = L"elo3";
+        break;
+    default:
+        throw runtime_error("gameId is incorrect");
+    }
+
+    wstring query = L"UPDATE Elos SET " + columnName + L" = ? WHERE dbid = ?";
+    ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_RenewElo : Query Setting Failed");
+    }
+
+    SQLINTEGER value = elo;
+    ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &value, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw std::runtime_error("S2D_RenewElo : Bind Parameter 1 (elo) Failed");
+    }
+
+    SQLINTEGER objectId = dbid;
+    ret = SQLBindParameter(hStmt1, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &objectId, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw std::runtime_error("S2D_RenewElo : Bind Parameter 2 (dbid) Failed");
+    }
+
+    ret = SQLExecute(hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_RenewElo : Execute Failed");
+    }
+}
+
+void DRenewPersonalRecordCallData::Proceed() {
+    if (_status == CREATE) {
+        _status = PROCESS;
+        _service->RequestRenewPersonalRecord(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
+    }
+    else if (_status == PROCESS) {
+        DRenewPersonalRecordCallData* newCallData = objectPool<DRenewPersonalRecordCallData>::alloc(_service, _completionQueueRef);
+
+        int dbid = _request.dbid();
+        int gameId = _request.gameid();
+        int score = _request.score();
+        grpc::Status stat = grpc::Status::OK;
+
+        try {
+            SQLHDBC hDbc = GDBManager->PopHDbc();
+            if (hDbc == nullptr) {
+                throw runtime_error("Invalid hDbc");
+            }
+            Cleaner hDbcCleaner([&]() {
+                GDBManager->ReturnHDbc(hDbc);
+                });
+
+            SQLHSTMT hStmt1 = nullptr;
+            Cleaner hStmtCleaner([&]() {
+                if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+            });
+
+            RenewPersonalRecord(hDbc, hStmt1, dbid, gameId, score);
+            _reply.set_success(true);
+
+        }
+        catch (runtime_error& e) {
+            cout << e.what() << endl;
+        }
+
+        _status = FINISH;
+        _responder.Finish(_reply, stat, this);
+    }
+    // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
+    else {
+        objectPool<DRenewPersonalRecordCallData>::dealloc(this);
+    }
+}
+
+void DRenewPersonalRecordCallData::RenewPersonalRecord(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& score) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("S2D_PersonalRecord : hStmt1 Alloc Failed");
+    }
+
+    wstring columnName;
+    switch (gameId) {
+    case(1):
+        columnName = L"score1";
+        break;
+    case(2):
+        columnName = L"score2";
+        break;
+    case(3):
+        columnName = L"score3";
+        break;
+    default:
+        throw runtime_error("gameId is incorrect");
+    }
+
+    wstring query = L"UPDATE PersonalRecords SET " + columnName + L" = ? WHERE dbid = ?";
+    ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_PersonalRecord : Query Setting Failed");
+    }
+
+    SQLINTEGER value = score;
+    ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &value, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw std::runtime_error("S2D_PersonalRecord : Bind Parameter 1 (score) Failed");
+    }
+
+    SQLINTEGER objectId = dbid;
+    ret = SQLBindParameter(hStmt1, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &objectId, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw std::runtime_error("S2D_PersonalRecord : Bind Parameter 2 (dbid) Failed");
+    }
+
+    ret = SQLExecute(hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw runtime_error("S2D_PersonalRecord : Execute Failed");
+    }
+}
+
+void DPublicRecordCallData::Proceed() {
+
+}

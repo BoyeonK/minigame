@@ -103,3 +103,58 @@ private:
     S2D_Protocol::D2C_ResponsePlayerInfomation _reply;
     grpc::ServerAsyncResponseWriter<S2D_Protocol::D2C_ResponsePlayerInfomation> _responder;
 };
+
+class DRenewEloCallData final : public CallData {
+public:
+    DRenewEloCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
+        : CallData(service, cq), _responder(&_ctx) {
+
+        Proceed();
+    }
+
+    void Proceed() override;
+    void ReturnToPool() override { objectPool<DRenewEloCallData>::dealloc(this); }
+
+private:
+    void RenewElo(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& elo);
+
+    S2D_Protocol::S2D_TryRenewElo _request;
+    S2D_Protocol::D2S_ResponseRenewElo _reply;
+    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponseRenewElo> _responder;
+};
+
+class DRenewPersonalRecordCallData final : public CallData {
+public:
+    DRenewPersonalRecordCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
+        : CallData(service, cq), _responder(&_ctx) {
+
+        Proceed();
+    }
+
+    void Proceed() override;
+    void ReturnToPool() override { objectPool<DRenewPersonalRecordCallData>::dealloc(this); }
+
+private:
+    void RenewPersonalRecord(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& score);
+
+    S2D_Protocol::S2D_TryRenewPersonalRecord _request;
+    S2D_Protocol::D2S_ResponseRenewPersonalRecord _reply;
+    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponseRenewPersonalRecord> _responder;
+};
+
+class DPublicRecordCallData final : public CallData {
+public:
+    DPublicRecordCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
+        : CallData(service, cq), _responder(&_ctx) {
+
+        Proceed();
+    }
+
+    void Proceed() override;
+    void ReturnToPool() override { objectPool<DPublicRecordCallData>::dealloc(this); }
+
+private:
+    S2D_Protocol::S2D_RequestPublicRecord _request;
+    S2D_Protocol::D2S_ResponsePublicRecord _reply;
+    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponsePublicRecord> _responder;
+};
