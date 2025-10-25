@@ -12,8 +12,9 @@ public:
 	void RenewMatchQueue();
 	void MatchMake() override;
 	void MakeRoom(vector<WatingPlayerData>&& pdv) override;
-	bool TrySetPublicRecord(int32_t dbid, int32_t score) override;
-	bool TrySetPublicRecordFromDB() override;
+	bool RenewPublicRecordFromDB() override {};
+	bool CompareAndRenewPublicRecord(int32_t dbid, int32_t score) override;
+	bool TrySetPublicRecord() override {};
 
 	void Update() override;
 

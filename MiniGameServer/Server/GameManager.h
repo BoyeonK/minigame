@@ -13,13 +13,16 @@ public:
 	virtual void MakeRoom(vector<WatingPlayerData>&& pdv) = 0;
 	virtual void Update() = 0;
 	int32_t GetPublicRecord();
-	virtual bool TrySetPublicRecord(int32_t dbid, int32_t score) = 0;
-	virtual bool TrySetPublicRecordFromDB() = 0;
+	void SetPublicRecord(string playerId, int32_t record);
+	virtual bool RenewPublicRecordFromDB() = 0;
+	virtual bool CompareAndRenewPublicRecord(int32_t dbid, int32_t score) = 0;
+	virtual bool TrySetPublicRecord() = 0;
 
 	void AddRoom(shared_ptr<GameRoom> room);
 	void RemoveInvalidRoom();
 
 protected:
+	mutex _recordLock;
 	atomic<int32_t> _nxtRoomId = 0;
 	uint64_t _lastRemoveRoomTick = 0;
 	uint64_t _lastUpdateRoomTick = 0;

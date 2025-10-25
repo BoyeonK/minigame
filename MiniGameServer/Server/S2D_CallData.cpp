@@ -137,7 +137,13 @@ void SUpdateEloCall::OnSucceed() {
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
 
-	bool isSuccess = reply.success();
+	if (!reply.success())
+		return;
+
+	if (_gameId == 0 || _elo == 0)
+		return;
+
+	playerSessionRef->SetElo(_gameId, _elo);
 }
 
 void SUpdateEloCall::OnFailed() {
@@ -149,7 +155,13 @@ void SUpdatePersonalRecordCall::OnSucceed() {
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
 
-	bool isSuccess = reply.success();
+	if (!reply.success())
+		return;
+
+	if (_gameId == 0 || _score == 0)
+		return;
+
+	playerSessionRef->SetPersonalRecord(_gameId, _score);
 }
 
 void SUpdatePersonalRecordCall::OnFailed() {
@@ -157,7 +169,7 @@ void SUpdatePersonalRecordCall::OnFailed() {
 }
 
 void SPublicRecordCall::OnSucceed() {
-	//GGameManagers[_gameId]->TrySetPublicRecord(reply.playerid(), reply.publicrecord());
+	GGameManagers[_gameId]->SetPublicRecord(reply.playerid(), reply.publicrecord());
 }
 
 void SPublicRecordCall::OnFailed() {
@@ -165,7 +177,16 @@ void SPublicRecordCall::OnFailed() {
 }
 
 void SUpdatePublicRecordCall::OnSucceed() {
+#ifdef _DEBUG
+	if (reply.success()) {
+		cout << "갱신성공" << endl;
+	}
+	else {
+		cout << "모종의 이유로 실패" << endl;
+	}
+#endif
 }
 
 void SUpdatePublicRecordCall::OnFailed() {
+
 }

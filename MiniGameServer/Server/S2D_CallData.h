@@ -97,7 +97,7 @@ private:
 
 class SUpdateEloCall final : public S2D_CallData {
 public:
-	SUpdateEloCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
+	SUpdateEloCall(weak_ptr<PlayerSession> playerSessionRef, int32_t gameId, int32_t elo) : _clientSessionRef(playerSessionRef), _gameId(gameId), _elo(elo) {}
 	~SUpdateEloCall() {}
 
 	void StartCall();
@@ -113,11 +113,13 @@ public:
 
 private:
 	weak_ptr<PlayerSession> _clientSessionRef;
+	int32_t _gameId = 0;
+	int32_t _elo = 0;
 };
 
 class SUpdatePersonalRecordCall final : public S2D_CallData {
 public:
-	SUpdatePersonalRecordCall(weak_ptr<PlayerSession> playerSessionRef) : _clientSessionRef(playerSessionRef) {}
+	SUpdatePersonalRecordCall(weak_ptr<PlayerSession> playerSessionRef, int32_t gameId, int32_t score) : _clientSessionRef(playerSessionRef), _gameId(gameId), _score(score) {}
 	~SUpdatePersonalRecordCall() {}
 
 	void StartCall();
@@ -133,6 +135,8 @@ public:
 
 private:
 	weak_ptr<PlayerSession> _clientSessionRef;
+	int32_t _gameId = 0;
+	int32_t _score = 0;
 };
 
 class SPublicRecordCall final : public S2D_CallData {

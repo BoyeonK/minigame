@@ -8,6 +8,12 @@ int32_t GameManager::GetPublicRecord() {
 	return _publicRecord;
 }
 
+void GameManager::SetPublicRecord(string playerId, int32_t record) {
+	lock_guard<mutex> lock(_recordLock);
+	_publicRecorder = playerId;
+	_publicRecord = record;
+}
+
 void GameManager::AddRoom(shared_ptr<GameRoom> room) {
 	unique_lock<shared_mutex> lock(_roomsLock);
 	_rooms.push_back(room);
