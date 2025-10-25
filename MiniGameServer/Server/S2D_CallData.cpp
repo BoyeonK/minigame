@@ -132,7 +132,7 @@ void SPlayerInformationCall::OnFailed() {
 
 }
 
-void SRenewEloCall::OnSucceed() {
+void SUpdateEloCall::OnSucceed() {
 	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
@@ -140,11 +140,11 @@ void SRenewEloCall::OnSucceed() {
 	bool isSuccess = reply.success();
 }
 
-void SRenewEloCall::OnFailed() {
+void SUpdateEloCall::OnFailed() {
 
 }
 
-void SRenewPersonalRecordCall::OnSucceed() {
+void SUpdatePersonalRecordCall::OnSucceed() {
 	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
@@ -152,14 +152,20 @@ void SRenewPersonalRecordCall::OnSucceed() {
 	bool isSuccess = reply.success();
 }
 
-void SRenewPersonalRecordCall::OnFailed() {
+void SUpdatePersonalRecordCall::OnFailed() {
 
 }
 
 void SPublicRecordCall::OnSucceed() {
-	GGameManagers[_gameId]->TrySetPublicRecord(reply.playerid(), reply.publicrecord());
+	//GGameManagers[_gameId]->TrySetPublicRecord(reply.playerid(), reply.publicrecord());
 }
 
 void SPublicRecordCall::OnFailed() {
 
+}
+
+void SUpdatePublicRecordCall::OnSucceed() {
+}
+
+void SUpdatePublicRecordCall::OnFailed() {
 }

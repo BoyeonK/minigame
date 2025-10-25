@@ -9,9 +9,10 @@ service S2D_Service {
     rpc CreateAccountRequest (S2D_CreateAccount) returns (D2S_CreateAccount);
     //rpc RenewElosRequest (S2D_RenewElos) returns (D2S_RenewElos);
     rpc PlayerInfomation (S2D_RequestPlayerInfomation) returns (D2C_ResponsePlayerInfomation);
-    rpc RenewElo (S2D_TryRenewElo) returns (D2S_ResponseRenewElo);
-    rpc RenewPersonalRecord (S2D_TryRenewPersonalRecord) returns (D2S_ResponseRenewPersonalRecord);
+    rpc UpdateElo (S2D_TryUpdateElo) returns (D2S_ResponseUpdateElo);
+    rpc UpdatePersonalRecord (S2D_TryUpdatePersonalRecord) returns (D2S_ResponseUpdatePersonalRecord);
     rpc PublicRecord (S2D_RequestPublicRecord) returns (D2S_ResponsePublicRecord);
+    rpc UpdatePublicRecord (S2D_TryUpdatePublicRecord) returns (D2C_ResponseUpdatePublicRecord);
 }
 
 //SayHello -> 단순한 에코를 실행.
@@ -88,24 +89,24 @@ message D2C_ResponsePlayerInfomation {
 }
 
 //Elo변경요청
-message S2D_TryRenewElo {
+message S2D_TryUpdateElo {
     int32 dbid = 1;
     int32 gameId = 2;
     int32 elo = 3;
 }
 
-message D2S_ResponseRenewElo {
+message D2S_ResponseUpdateElo {
     bool success = 1;
 }
 
 //개인 레코드 변경 요청
-message S2D_TryRenewPersonalRecord {
+message S2D_TryUpdatePersonalRecord {
     int32 dbid = 1;
     int32 gameId = 2;
     int32 score = 3;
 }
 
-message D2S_ResponseRenewPersonalRecord {
+message D2S_ResponseUpdatePersonalRecord {
     bool success = 1;
 }
 
@@ -120,12 +121,12 @@ message D2S_ResponsePublicRecord {
 }
 
 //월드 레코드 변경 요청
-message S2D_TryRenewPublicRecord {
+message S2D_TryUpdatePublicRecord {
     int32 gameId = 1;
     int32 recordersDbid = 2;
     int32 recordersScore = 3;
 }
 
-message D2C_ResponseRenewPublicRecord {
+message D2C_ResponseUpdatePublicRecord {
     bool success = 1;
 }

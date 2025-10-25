@@ -53,22 +53,22 @@ bool DBClientImpl::S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionR
     return true;
 }
 
-bool DBClientImpl::S2D_RenewElo(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t elo) {
-    SRenewEloCall* call = objectPool<SRenewEloCall>::alloc(playerSessionRef);
-    S2D_Protocol::S2D_TryRenewElo request = S2DPacketMaker::Make_S2D_TryRenewElo(dbid, gameId, elo);
+bool DBClientImpl::S2D_UpdateElo(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t elo) {
+    SUpdateEloCall* call = objectPool<SUpdateEloCall>::alloc(playerSessionRef);
+    S2D_Protocol::S2D_TryUpdateElo request = S2DPacketMaker::Make_S2D_TryUpdateElo(dbid, gameId, elo);
 
-    call->response_reader = _stub->PrepareAsyncRenewElo(&call->context, request, _cqRef.get());
+    call->response_reader = _stub->PrepareAsyncUpdateElo(&call->context, request, _cqRef.get());
     call->response_reader->StartCall();
 
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
     return true;
 }
 
-bool DBClientImpl::S2D_RenewPersonalRecord(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t score) {
-    SRenewPersonalRecordCall* call = objectPool<SRenewPersonalRecordCall>::alloc(playerSessionRef);
-    S2D_Protocol::S2D_TryRenewPersonalRecord request = S2DPacketMaker::Make_S2D_TryRenewPersonalRecord(dbid, gameId, score);
+bool DBClientImpl::S2D_UpdatePersonalRecord(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t score) {
+    SUpdatePersonalRecordCall* call = objectPool<SUpdatePersonalRecordCall>::alloc(playerSessionRef);
+    S2D_Protocol::S2D_TryUpdatePersonalRecord request = S2DPacketMaker::Make_S2D_TryUpdatePersonalRecord(dbid, gameId, score);
 
-    call->response_reader = _stub->PrepareAsyncRenewPersonalRecord(&call->context, request, _cqRef.get());
+    call->response_reader = _stub->PrepareAsyncUpdatePersonalRecord(&call->context, request, _cqRef.get());
     call->response_reader->StartCall();
 
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);

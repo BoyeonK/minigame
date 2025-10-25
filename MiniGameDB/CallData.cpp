@@ -9,8 +9,10 @@ void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::Server
         objectPool<HelloCallData>::alloc(service, cq);
         objectPool<DLoginCallData>::alloc(service, cq);
         objectPool<DCreateAccountCallData>::alloc(service, cq);
-        //objectPool<DRenewElosCallData>::alloc(service, cq);
         objectPool<DPlayerInfomationCallData>::alloc(service, cq);
+        objectPool<DUpdateEloCallData>::alloc(service, cq);
+        objectPool<DUpdatePersonalRecordCallData>::alloc(service, cq);
+        objectPool<DPublicRecordCallData>::alloc(service, cq);
     }
 }
 
@@ -697,13 +699,13 @@ void DPlayerInfomationCallData::ReadPersonalRecords(SQLHDBC& hDbc, SQLHSTMT& hSt
     }
 }
 
-void DRenewEloCallData::Proceed() {
+void DUpdateEloCallData::Proceed() {
     if (_status == CREATE) {
         _status = PROCESS;
-        _service->RequestRenewElo(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
+        _service->RequestUpdateElo(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
     }
     else if (_status == PROCESS) {
-        DRenewEloCallData* newCallData = objectPool<DRenewEloCallData>::alloc(_service, _completionQueueRef);
+        DUpdateEloCallData* newCallData = objectPool<DUpdateEloCallData>::alloc(_service, _completionQueueRef);
 
         int dbid = _request.dbid();
         int gameId = _request.gameid();
@@ -724,7 +726,7 @@ void DRenewEloCallData::Proceed() {
                 if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
             });
 
-            RenewElo(hDbc, hStmt1, dbid, gameId, elo);
+            UpdateElo(hDbc, hStmt1, dbid, gameId, elo);
             _reply.set_success(true);
         }
         catch (runtime_error& e) {
@@ -736,14 +738,14 @@ void DRenewEloCallData::Proceed() {
     }
     // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
     else {
-        objectPool<DRenewEloCallData>::dealloc(this);
+        objectPool<DUpdateEloCallData>::dealloc(this);
     }
 }
 
-void DRenewEloCallData::RenewElo(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& elo) {
+void DUpdateEloCallData::UpdateElo(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& elo) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-        throw runtime_error("S2D_RenewElo : hStmt1 Alloc Failed");
+        throw runtime_error("S2D_UpdateElo : hStmt1 Alloc Failed");
     }
 
     wstring columnName;
@@ -764,34 +766,34 @@ void DRenewEloCallData::RenewElo(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbi
     wstring query = L"UPDATE Elos SET " + columnName + L" = ? WHERE dbid = ?";
     ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query.c_str(), SQL_NTS);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
-        throw runtime_error("S2D_RenewElo : Query Setting Failed");
+        throw runtime_error("S2D_UpdateElo : Query Setting Failed");
     }
 
     SQLINTEGER value = elo;
     ret = SQLBindParameter(hStmt1, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &value, 0, NULL);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
-        throw std::runtime_error("S2D_RenewElo : Bind Parameter 1 (elo) Failed");
+        throw std::runtime_error("S2D_UpdateElo : Bind Parameter 1 (elo) Failed");
     }
 
     SQLINTEGER objectId = dbid;
     ret = SQLBindParameter(hStmt1, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &objectId, 0, NULL);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
-        throw std::runtime_error("S2D_RenewElo : Bind Parameter 2 (dbid) Failed");
+        throw std::runtime_error("S2D_UpdateElo : Bind Parameter 2 (dbid) Failed");
     }
 
     ret = SQLExecute(hStmt1);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
-        throw runtime_error("S2D_RenewElo : Execute Failed");
+        throw runtime_error("S2D_UpdateElo : Execute Failed");
     }
 }
 
-void DRenewPersonalRecordCallData::Proceed() {
+void DUpdatePersonalRecordCallData::Proceed() {
     if (_status == CREATE) {
         _status = PROCESS;
-        _service->RequestRenewPersonalRecord(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
+        _service->RequestUpdatePersonalRecord(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
     }
     else if (_status == PROCESS) {
-        DRenewPersonalRecordCallData* newCallData = objectPool<DRenewPersonalRecordCallData>::alloc(_service, _completionQueueRef);
+        DUpdatePersonalRecordCallData* newCallData = objectPool<DUpdatePersonalRecordCallData>::alloc(_service, _completionQueueRef);
 
         int dbid = _request.dbid();
         int gameId = _request.gameid();
@@ -812,7 +814,7 @@ void DRenewPersonalRecordCallData::Proceed() {
                 if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
             });
 
-            RenewPersonalRecord(hDbc, hStmt1, dbid, gameId, score);
+            UpdatePersonalRecord(hDbc, hStmt1, dbid, gameId, score);
             _reply.set_success(true);
 
         }
@@ -825,11 +827,11 @@ void DRenewPersonalRecordCallData::Proceed() {
     }
     // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
     else {
-        objectPool<DRenewPersonalRecordCallData>::dealloc(this);
+        objectPool<DUpdatePersonalRecordCallData>::dealloc(this);
     }
 }
 
-void DRenewPersonalRecordCallData::RenewPersonalRecord(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& score) {
+void DUpdatePersonalRecordCallData::UpdatePersonalRecord(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& score) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
         throw runtime_error("S2D_PersonalRecord : hStmt1 Alloc Failed");
@@ -875,5 +877,10 @@ void DRenewPersonalRecordCallData::RenewPersonalRecord(SQLHDBC& hDbc, SQLHSTMT& 
 }
 
 void DPublicRecordCallData::Proceed() {
+    //TODO : gameId를 받음
+    //해당 gameid에 해당하는 게임의 최대 기록자인 유저의 닉네임과 스코어를 reply로 전송
+}
+
+void DUpdatePublicRecordCallData::Proceed() {
 
 }

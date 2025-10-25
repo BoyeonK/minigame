@@ -104,42 +104,42 @@ private:
     grpc::ServerAsyncResponseWriter<S2D_Protocol::D2C_ResponsePlayerInfomation> _responder;
 };
 
-class DRenewEloCallData final : public CallData {
+class DUpdateEloCallData final : public CallData {
 public:
-    DRenewEloCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
+    DUpdateEloCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
         : CallData(service, cq), _responder(&_ctx) {
 
         Proceed();
     }
 
     void Proceed() override;
-    void ReturnToPool() override { objectPool<DRenewEloCallData>::dealloc(this); }
+    void ReturnToPool() override { objectPool<DUpdateEloCallData>::dealloc(this); }
 
 private:
-    void RenewElo(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& elo);
+    void UpdateElo(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& elo);
 
-    S2D_Protocol::S2D_TryRenewElo _request;
-    S2D_Protocol::D2S_ResponseRenewElo _reply;
-    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponseRenewElo> _responder;
+    S2D_Protocol::S2D_TryUpdateElo _request;
+    S2D_Protocol::D2S_ResponseUpdateElo _reply;
+    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponseUpdateElo> _responder;
 };
 
-class DRenewPersonalRecordCallData final : public CallData {
+class DUpdatePersonalRecordCallData final : public CallData {
 public:
-    DRenewPersonalRecordCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
+    DUpdatePersonalRecordCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
         : CallData(service, cq), _responder(&_ctx) {
 
         Proceed();
     }
 
     void Proceed() override;
-    void ReturnToPool() override { objectPool<DRenewPersonalRecordCallData>::dealloc(this); }
+    void ReturnToPool() override { objectPool<DUpdatePersonalRecordCallData>::dealloc(this); }
 
 private:
-    void RenewPersonalRecord(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& score);
+    void UpdatePersonalRecord(SQLHDBC& hDbc, SQLHSTMT& hStmt1, const int& dbid, const int& gameId, const int& score);
 
-    S2D_Protocol::S2D_TryRenewPersonalRecord _request;
-    S2D_Protocol::D2S_ResponseRenewPersonalRecord _reply;
-    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponseRenewPersonalRecord> _responder;
+    S2D_Protocol::S2D_TryUpdatePersonalRecord _request;
+    S2D_Protocol::D2S_ResponseUpdatePersonalRecord _reply;
+    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponseUpdatePersonalRecord> _responder;
 };
 
 class DPublicRecordCallData final : public CallData {
@@ -157,4 +157,21 @@ private:
     S2D_Protocol::S2D_RequestPublicRecord _request;
     S2D_Protocol::D2S_ResponsePublicRecord _reply;
     grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponsePublicRecord> _responder;
+};
+
+class DUpdatePublicRecordCallData final : public CallData {
+public:
+    DUpdatePublicRecordCallData(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq)
+        : CallData(service, cq), _responder(&_ctx) {
+
+        Proceed();
+    }
+
+    void Proceed() override;
+    void ReturnToPool() override { objectPool<DUpdatePublicRecordCallData>::dealloc(this); }
+
+private:
+    S2D_Protocol::S2D_TryUpdatePublicRecord _request;
+    S2D_Protocol::D2C_ResponseUpdatePublicRecord _reply;
+    grpc::ServerAsyncResponseWriter<S2D_Protocol::D2C_ResponseUpdatePublicRecord> _responder;
 };

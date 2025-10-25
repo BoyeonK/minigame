@@ -21,16 +21,16 @@ public:
 		return pkt;
 	}
 
-	static S2D_Protocol::S2D_TryRenewElo Make_S2D_TryRenewElo(int32_t dbid, int32_t gameId, int32_t elo) {
-		S2D_Protocol::S2D_TryRenewElo pkt;
+	static S2D_Protocol::S2D_TryUpdateElo Make_S2D_TryUpdateElo(int32_t dbid, int32_t gameId, int32_t elo) {
+		S2D_Protocol::S2D_TryUpdateElo pkt;
 		pkt.set_dbid(dbid);
 		pkt.set_gameid(gameId);
 		pkt.set_elo(elo);
 		return pkt;
 	}
 	
-	static S2D_Protocol::S2D_TryRenewPersonalRecord Make_S2D_TryRenewPersonalRecord(int32_t dbid, int32_t gameId, int32_t score) {
-		S2D_Protocol::S2D_TryRenewPersonalRecord pkt;
+	static S2D_Protocol::S2D_TryUpdatePersonalRecord Make_S2D_TryUpdatePersonalRecord(int32_t dbid, int32_t gameId, int32_t score) {
+		S2D_Protocol::S2D_TryUpdatePersonalRecord pkt;
 		pkt.set_dbid(dbid);
 		pkt.set_gameid(gameId);
 		pkt.set_score(score);
@@ -43,8 +43,8 @@ public:
 		return pkt;
 	}
 
-	static S2D_Protocol::S2D_TryRenewPublicRecord Make_S2D_TryRenewPublicRecord(int32_t gameId, int32_t dbid, int32_t score) {
-		S2D_Protocol::S2D_TryRenewPublicRecord pkt;
+	static S2D_Protocol::S2D_TryUpdatePublicRecord Make_S2D_TryUpdatePublicRecord(int32_t gameId, int32_t dbid, int32_t score) {
+		S2D_Protocol::S2D_TryUpdatePublicRecord pkt;
 		pkt.set_gameid(gameId);
 		pkt.set_recordersdbid(dbid);
 		pkt.set_recordersscore(score);

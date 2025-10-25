@@ -24,8 +24,8 @@ public:
     bool S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password);
     bool S2D_CreateAccount(shared_ptr<PBSession> sessionRef, string id, string password);
     bool S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid);
-    bool S2D_RenewElo(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t elo);
-    bool S2D_RenewPersonalRecord(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t score);
+    bool S2D_UpdateElo(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t elo);
+    bool S2D_UpdatePersonalRecord(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t score);
     bool S2D_PublicRecord(int32_t gameId);
 
     void AsyncCompleteRpc();

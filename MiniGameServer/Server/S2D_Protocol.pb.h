@@ -55,9 +55,9 @@ namespace S2D_Protocol {
 class D2C_ResponsePlayerInfomation;
 struct D2C_ResponsePlayerInfomationDefaultTypeInternal;
 extern D2C_ResponsePlayerInfomationDefaultTypeInternal _D2C_ResponsePlayerInfomation_default_instance_;
-class D2C_ResponseRenewPublicRecord;
-struct D2C_ResponseRenewPublicRecordDefaultTypeInternal;
-extern D2C_ResponseRenewPublicRecordDefaultTypeInternal _D2C_ResponseRenewPublicRecord_default_instance_;
+class D2C_ResponseUpdatePublicRecord;
+struct D2C_ResponseUpdatePublicRecordDefaultTypeInternal;
+extern D2C_ResponseUpdatePublicRecordDefaultTypeInternal _D2C_ResponseUpdatePublicRecord_default_instance_;
 class D2S_CreateAccount;
 struct D2S_CreateAccountDefaultTypeInternal;
 extern D2S_CreateAccountDefaultTypeInternal _D2S_CreateAccount_default_instance_;
@@ -67,12 +67,12 @@ extern D2S_LoginDefaultTypeInternal _D2S_Login_default_instance_;
 class D2S_ResponsePublicRecord;
 struct D2S_ResponsePublicRecordDefaultTypeInternal;
 extern D2S_ResponsePublicRecordDefaultTypeInternal _D2S_ResponsePublicRecord_default_instance_;
-class D2S_ResponseRenewElo;
-struct D2S_ResponseRenewEloDefaultTypeInternal;
-extern D2S_ResponseRenewEloDefaultTypeInternal _D2S_ResponseRenewElo_default_instance_;
-class D2S_ResponseRenewPersonalRecord;
-struct D2S_ResponseRenewPersonalRecordDefaultTypeInternal;
-extern D2S_ResponseRenewPersonalRecordDefaultTypeInternal _D2S_ResponseRenewPersonalRecord_default_instance_;
+class D2S_ResponseUpdateElo;
+struct D2S_ResponseUpdateEloDefaultTypeInternal;
+extern D2S_ResponseUpdateEloDefaultTypeInternal _D2S_ResponseUpdateElo_default_instance_;
+class D2S_ResponseUpdatePersonalRecord;
+struct D2S_ResponseUpdatePersonalRecordDefaultTypeInternal;
+extern D2S_ResponseUpdatePersonalRecordDefaultTypeInternal _D2S_ResponseUpdatePersonalRecord_default_instance_;
 class HelloReply;
 struct HelloReplyDefaultTypeInternal;
 extern HelloReplyDefaultTypeInternal _HelloReply_default_instance_;
@@ -91,15 +91,15 @@ extern S2D_RequestPlayerInfomationDefaultTypeInternal _S2D_RequestPlayerInfomati
 class S2D_RequestPublicRecord;
 struct S2D_RequestPublicRecordDefaultTypeInternal;
 extern S2D_RequestPublicRecordDefaultTypeInternal _S2D_RequestPublicRecord_default_instance_;
-class S2D_TryRenewElo;
-struct S2D_TryRenewEloDefaultTypeInternal;
-extern S2D_TryRenewEloDefaultTypeInternal _S2D_TryRenewElo_default_instance_;
-class S2D_TryRenewPersonalRecord;
-struct S2D_TryRenewPersonalRecordDefaultTypeInternal;
-extern S2D_TryRenewPersonalRecordDefaultTypeInternal _S2D_TryRenewPersonalRecord_default_instance_;
-class S2D_TryRenewPublicRecord;
-struct S2D_TryRenewPublicRecordDefaultTypeInternal;
-extern S2D_TryRenewPublicRecordDefaultTypeInternal _S2D_TryRenewPublicRecord_default_instance_;
+class S2D_TryUpdateElo;
+struct S2D_TryUpdateEloDefaultTypeInternal;
+extern S2D_TryUpdateEloDefaultTypeInternal _S2D_TryUpdateElo_default_instance_;
+class S2D_TryUpdatePersonalRecord;
+struct S2D_TryUpdatePersonalRecordDefaultTypeInternal;
+extern S2D_TryUpdatePersonalRecordDefaultTypeInternal _S2D_TryUpdatePersonalRecord_default_instance_;
+class S2D_TryUpdatePublicRecord;
+struct S2D_TryUpdatePublicRecordDefaultTypeInternal;
+extern S2D_TryUpdatePublicRecordDefaultTypeInternal _S2D_TryUpdatePublicRecord_default_instance_;
 }  // namespace S2D_Protocol
 namespace google {
 namespace protobuf {
@@ -113,31 +113,31 @@ namespace S2D_Protocol {
 
 // -------------------------------------------------------------------
 
-class S2D_TryRenewPublicRecord final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:S2D_Protocol.S2D_TryRenewPublicRecord) */ {
+class S2D_TryUpdatePublicRecord final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2D_Protocol.S2D_TryUpdatePublicRecord) */ {
  public:
-  inline S2D_TryRenewPublicRecord() : S2D_TryRenewPublicRecord(nullptr) {}
-  ~S2D_TryRenewPublicRecord() PROTOBUF_FINAL;
+  inline S2D_TryUpdatePublicRecord() : S2D_TryUpdatePublicRecord(nullptr) {}
+  ~S2D_TryUpdatePublicRecord() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(S2D_TryRenewPublicRecord* msg, std::destroying_delete_t) {
+  void operator delete(S2D_TryUpdatePublicRecord* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(S2D_TryRenewPublicRecord));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S2D_TryUpdatePublicRecord));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR S2D_TryRenewPublicRecord(
+  explicit PROTOBUF_CONSTEXPR S2D_TryUpdatePublicRecord(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline S2D_TryRenewPublicRecord(const S2D_TryRenewPublicRecord& from) : S2D_TryRenewPublicRecord(nullptr, from) {}
-  inline S2D_TryRenewPublicRecord(S2D_TryRenewPublicRecord&& from) noexcept
-      : S2D_TryRenewPublicRecord(nullptr, std::move(from)) {}
-  inline S2D_TryRenewPublicRecord& operator=(const S2D_TryRenewPublicRecord& from) {
+  inline S2D_TryUpdatePublicRecord(const S2D_TryUpdatePublicRecord& from) : S2D_TryUpdatePublicRecord(nullptr, from) {}
+  inline S2D_TryUpdatePublicRecord(S2D_TryUpdatePublicRecord&& from) noexcept
+      : S2D_TryUpdatePublicRecord(nullptr, std::move(from)) {}
+  inline S2D_TryUpdatePublicRecord& operator=(const S2D_TryUpdatePublicRecord& from) {
     CopyFrom(from);
     return *this;
   }
-  inline S2D_TryRenewPublicRecord& operator=(S2D_TryRenewPublicRecord&& from) noexcept {
+  inline S2D_TryUpdatePublicRecord& operator=(S2D_TryUpdatePublicRecord&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -165,16 +165,16 @@ class S2D_TryRenewPublicRecord final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const S2D_TryRenewPublicRecord& default_instance() {
+  static const S2D_TryUpdatePublicRecord& default_instance() {
     return *internal_default_instance();
   }
-  static inline const S2D_TryRenewPublicRecord* internal_default_instance() {
-    return reinterpret_cast<const S2D_TryRenewPublicRecord*>(
-        &_S2D_TryRenewPublicRecord_default_instance_);
+  static inline const S2D_TryUpdatePublicRecord* internal_default_instance() {
+    return reinterpret_cast<const S2D_TryUpdatePublicRecord*>(
+        &_S2D_TryUpdatePublicRecord_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 14;
-  friend void swap(S2D_TryRenewPublicRecord& a, S2D_TryRenewPublicRecord& b) { a.Swap(&b); }
-  inline void Swap(S2D_TryRenewPublicRecord* other) {
+  friend void swap(S2D_TryUpdatePublicRecord& a, S2D_TryUpdatePublicRecord& b) { a.Swap(&b); }
+  inline void Swap(S2D_TryUpdatePublicRecord* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -182,7 +182,7 @@ class S2D_TryRenewPublicRecord final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(S2D_TryRenewPublicRecord* other) {
+  void UnsafeArenaSwap(S2D_TryUpdatePublicRecord* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -190,13 +190,13 @@ class S2D_TryRenewPublicRecord final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  S2D_TryRenewPublicRecord* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<S2D_TryRenewPublicRecord>(arena);
+  S2D_TryUpdatePublicRecord* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S2D_TryUpdatePublicRecord>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const S2D_TryRenewPublicRecord& from);
+  void CopyFrom(const S2D_TryUpdatePublicRecord& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const S2D_TryRenewPublicRecord& from) { S2D_TryRenewPublicRecord::MergeImpl(*this, from); }
+  void MergeFrom(const S2D_TryUpdatePublicRecord& from) { S2D_TryUpdatePublicRecord::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(
@@ -233,18 +233,18 @@ class S2D_TryRenewPublicRecord final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(S2D_TryRenewPublicRecord* other);
+  void InternalSwap(S2D_TryUpdatePublicRecord* other);
  private:
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "S2D_Protocol.S2D_TryRenewPublicRecord"; }
+  static ::absl::string_view FullMessageName() { return "S2D_Protocol.S2D_TryUpdatePublicRecord"; }
 
  protected:
-  explicit S2D_TryRenewPublicRecord(::google::protobuf::Arena* arena);
-  S2D_TryRenewPublicRecord(::google::protobuf::Arena* arena, const S2D_TryRenewPublicRecord& from);
-  S2D_TryRenewPublicRecord(::google::protobuf::Arena* arena, S2D_TryRenewPublicRecord&& from) noexcept
-      : S2D_TryRenewPublicRecord(arena) {
+  explicit S2D_TryUpdatePublicRecord(::google::protobuf::Arena* arena);
+  S2D_TryUpdatePublicRecord(::google::protobuf::Arena* arena, const S2D_TryUpdatePublicRecord& from);
+  S2D_TryUpdatePublicRecord(::google::protobuf::Arena* arena, S2D_TryUpdatePublicRecord&& from) noexcept
+      : S2D_TryUpdatePublicRecord(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
@@ -293,7 +293,7 @@ class S2D_TryRenewPublicRecord final : public ::google::protobuf::Message
   void _internal_set_recordersscore(::int32_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:S2D_Protocol.S2D_TryRenewPublicRecord)
+  // @@protoc_insertion_point(class_scope:S2D_Protocol.S2D_TryUpdatePublicRecord)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -315,7 +315,7 @@ class S2D_TryRenewPublicRecord final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const S2D_TryRenewPublicRecord& from_msg);
+                          const S2D_TryUpdatePublicRecord& from_msg);
     ::int32_t gameid_;
     ::int32_t recordersdbid_;
     ::int32_t recordersscore_;
@@ -327,31 +327,31 @@ class S2D_TryRenewPublicRecord final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class S2D_TryRenewPersonalRecord final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:S2D_Protocol.S2D_TryRenewPersonalRecord) */ {
+class S2D_TryUpdatePersonalRecord final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2D_Protocol.S2D_TryUpdatePersonalRecord) */ {
  public:
-  inline S2D_TryRenewPersonalRecord() : S2D_TryRenewPersonalRecord(nullptr) {}
-  ~S2D_TryRenewPersonalRecord() PROTOBUF_FINAL;
+  inline S2D_TryUpdatePersonalRecord() : S2D_TryUpdatePersonalRecord(nullptr) {}
+  ~S2D_TryUpdatePersonalRecord() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(S2D_TryRenewPersonalRecord* msg, std::destroying_delete_t) {
+  void operator delete(S2D_TryUpdatePersonalRecord* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(S2D_TryRenewPersonalRecord));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S2D_TryUpdatePersonalRecord));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR S2D_TryRenewPersonalRecord(
+  explicit PROTOBUF_CONSTEXPR S2D_TryUpdatePersonalRecord(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline S2D_TryRenewPersonalRecord(const S2D_TryRenewPersonalRecord& from) : S2D_TryRenewPersonalRecord(nullptr, from) {}
-  inline S2D_TryRenewPersonalRecord(S2D_TryRenewPersonalRecord&& from) noexcept
-      : S2D_TryRenewPersonalRecord(nullptr, std::move(from)) {}
-  inline S2D_TryRenewPersonalRecord& operator=(const S2D_TryRenewPersonalRecord& from) {
+  inline S2D_TryUpdatePersonalRecord(const S2D_TryUpdatePersonalRecord& from) : S2D_TryUpdatePersonalRecord(nullptr, from) {}
+  inline S2D_TryUpdatePersonalRecord(S2D_TryUpdatePersonalRecord&& from) noexcept
+      : S2D_TryUpdatePersonalRecord(nullptr, std::move(from)) {}
+  inline S2D_TryUpdatePersonalRecord& operator=(const S2D_TryUpdatePersonalRecord& from) {
     CopyFrom(from);
     return *this;
   }
-  inline S2D_TryRenewPersonalRecord& operator=(S2D_TryRenewPersonalRecord&& from) noexcept {
+  inline S2D_TryUpdatePersonalRecord& operator=(S2D_TryUpdatePersonalRecord&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -379,16 +379,16 @@ class S2D_TryRenewPersonalRecord final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const S2D_TryRenewPersonalRecord& default_instance() {
+  static const S2D_TryUpdatePersonalRecord& default_instance() {
     return *internal_default_instance();
   }
-  static inline const S2D_TryRenewPersonalRecord* internal_default_instance() {
-    return reinterpret_cast<const S2D_TryRenewPersonalRecord*>(
-        &_S2D_TryRenewPersonalRecord_default_instance_);
+  static inline const S2D_TryUpdatePersonalRecord* internal_default_instance() {
+    return reinterpret_cast<const S2D_TryUpdatePersonalRecord*>(
+        &_S2D_TryUpdatePersonalRecord_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 10;
-  friend void swap(S2D_TryRenewPersonalRecord& a, S2D_TryRenewPersonalRecord& b) { a.Swap(&b); }
-  inline void Swap(S2D_TryRenewPersonalRecord* other) {
+  friend void swap(S2D_TryUpdatePersonalRecord& a, S2D_TryUpdatePersonalRecord& b) { a.Swap(&b); }
+  inline void Swap(S2D_TryUpdatePersonalRecord* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -396,7 +396,7 @@ class S2D_TryRenewPersonalRecord final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(S2D_TryRenewPersonalRecord* other) {
+  void UnsafeArenaSwap(S2D_TryUpdatePersonalRecord* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -404,13 +404,13 @@ class S2D_TryRenewPersonalRecord final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  S2D_TryRenewPersonalRecord* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<S2D_TryRenewPersonalRecord>(arena);
+  S2D_TryUpdatePersonalRecord* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S2D_TryUpdatePersonalRecord>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const S2D_TryRenewPersonalRecord& from);
+  void CopyFrom(const S2D_TryUpdatePersonalRecord& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const S2D_TryRenewPersonalRecord& from) { S2D_TryRenewPersonalRecord::MergeImpl(*this, from); }
+  void MergeFrom(const S2D_TryUpdatePersonalRecord& from) { S2D_TryUpdatePersonalRecord::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(
@@ -447,18 +447,18 @@ class S2D_TryRenewPersonalRecord final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(S2D_TryRenewPersonalRecord* other);
+  void InternalSwap(S2D_TryUpdatePersonalRecord* other);
  private:
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "S2D_Protocol.S2D_TryRenewPersonalRecord"; }
+  static ::absl::string_view FullMessageName() { return "S2D_Protocol.S2D_TryUpdatePersonalRecord"; }
 
  protected:
-  explicit S2D_TryRenewPersonalRecord(::google::protobuf::Arena* arena);
-  S2D_TryRenewPersonalRecord(::google::protobuf::Arena* arena, const S2D_TryRenewPersonalRecord& from);
-  S2D_TryRenewPersonalRecord(::google::protobuf::Arena* arena, S2D_TryRenewPersonalRecord&& from) noexcept
-      : S2D_TryRenewPersonalRecord(arena) {
+  explicit S2D_TryUpdatePersonalRecord(::google::protobuf::Arena* arena);
+  S2D_TryUpdatePersonalRecord(::google::protobuf::Arena* arena, const S2D_TryUpdatePersonalRecord& from);
+  S2D_TryUpdatePersonalRecord(::google::protobuf::Arena* arena, S2D_TryUpdatePersonalRecord&& from) noexcept
+      : S2D_TryUpdatePersonalRecord(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
@@ -507,7 +507,7 @@ class S2D_TryRenewPersonalRecord final : public ::google::protobuf::Message
   void _internal_set_score(::int32_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:S2D_Protocol.S2D_TryRenewPersonalRecord)
+  // @@protoc_insertion_point(class_scope:S2D_Protocol.S2D_TryUpdatePersonalRecord)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -529,7 +529,7 @@ class S2D_TryRenewPersonalRecord final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const S2D_TryRenewPersonalRecord& from_msg);
+                          const S2D_TryUpdatePersonalRecord& from_msg);
     ::int32_t dbid_;
     ::int32_t gameid_;
     ::int32_t score_;
@@ -541,31 +541,31 @@ class S2D_TryRenewPersonalRecord final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class S2D_TryRenewElo final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:S2D_Protocol.S2D_TryRenewElo) */ {
+class S2D_TryUpdateElo final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2D_Protocol.S2D_TryUpdateElo) */ {
  public:
-  inline S2D_TryRenewElo() : S2D_TryRenewElo(nullptr) {}
-  ~S2D_TryRenewElo() PROTOBUF_FINAL;
+  inline S2D_TryUpdateElo() : S2D_TryUpdateElo(nullptr) {}
+  ~S2D_TryUpdateElo() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(S2D_TryRenewElo* msg, std::destroying_delete_t) {
+  void operator delete(S2D_TryUpdateElo* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(S2D_TryRenewElo));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S2D_TryUpdateElo));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR S2D_TryRenewElo(
+  explicit PROTOBUF_CONSTEXPR S2D_TryUpdateElo(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline S2D_TryRenewElo(const S2D_TryRenewElo& from) : S2D_TryRenewElo(nullptr, from) {}
-  inline S2D_TryRenewElo(S2D_TryRenewElo&& from) noexcept
-      : S2D_TryRenewElo(nullptr, std::move(from)) {}
-  inline S2D_TryRenewElo& operator=(const S2D_TryRenewElo& from) {
+  inline S2D_TryUpdateElo(const S2D_TryUpdateElo& from) : S2D_TryUpdateElo(nullptr, from) {}
+  inline S2D_TryUpdateElo(S2D_TryUpdateElo&& from) noexcept
+      : S2D_TryUpdateElo(nullptr, std::move(from)) {}
+  inline S2D_TryUpdateElo& operator=(const S2D_TryUpdateElo& from) {
     CopyFrom(from);
     return *this;
   }
-  inline S2D_TryRenewElo& operator=(S2D_TryRenewElo&& from) noexcept {
+  inline S2D_TryUpdateElo& operator=(S2D_TryUpdateElo&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -593,16 +593,16 @@ class S2D_TryRenewElo final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const S2D_TryRenewElo& default_instance() {
+  static const S2D_TryUpdateElo& default_instance() {
     return *internal_default_instance();
   }
-  static inline const S2D_TryRenewElo* internal_default_instance() {
-    return reinterpret_cast<const S2D_TryRenewElo*>(
-        &_S2D_TryRenewElo_default_instance_);
+  static inline const S2D_TryUpdateElo* internal_default_instance() {
+    return reinterpret_cast<const S2D_TryUpdateElo*>(
+        &_S2D_TryUpdateElo_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 8;
-  friend void swap(S2D_TryRenewElo& a, S2D_TryRenewElo& b) { a.Swap(&b); }
-  inline void Swap(S2D_TryRenewElo* other) {
+  friend void swap(S2D_TryUpdateElo& a, S2D_TryUpdateElo& b) { a.Swap(&b); }
+  inline void Swap(S2D_TryUpdateElo* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -610,7 +610,7 @@ class S2D_TryRenewElo final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(S2D_TryRenewElo* other) {
+  void UnsafeArenaSwap(S2D_TryUpdateElo* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -618,13 +618,13 @@ class S2D_TryRenewElo final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  S2D_TryRenewElo* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<S2D_TryRenewElo>(arena);
+  S2D_TryUpdateElo* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S2D_TryUpdateElo>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const S2D_TryRenewElo& from);
+  void CopyFrom(const S2D_TryUpdateElo& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const S2D_TryRenewElo& from) { S2D_TryRenewElo::MergeImpl(*this, from); }
+  void MergeFrom(const S2D_TryUpdateElo& from) { S2D_TryUpdateElo::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(
@@ -661,18 +661,18 @@ class S2D_TryRenewElo final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(S2D_TryRenewElo* other);
+  void InternalSwap(S2D_TryUpdateElo* other);
  private:
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "S2D_Protocol.S2D_TryRenewElo"; }
+  static ::absl::string_view FullMessageName() { return "S2D_Protocol.S2D_TryUpdateElo"; }
 
  protected:
-  explicit S2D_TryRenewElo(::google::protobuf::Arena* arena);
-  S2D_TryRenewElo(::google::protobuf::Arena* arena, const S2D_TryRenewElo& from);
-  S2D_TryRenewElo(::google::protobuf::Arena* arena, S2D_TryRenewElo&& from) noexcept
-      : S2D_TryRenewElo(arena) {
+  explicit S2D_TryUpdateElo(::google::protobuf::Arena* arena);
+  S2D_TryUpdateElo(::google::protobuf::Arena* arena, const S2D_TryUpdateElo& from);
+  S2D_TryUpdateElo(::google::protobuf::Arena* arena, S2D_TryUpdateElo&& from) noexcept
+      : S2D_TryUpdateElo(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
@@ -721,7 +721,7 @@ class S2D_TryRenewElo final : public ::google::protobuf::Message
   void _internal_set_elo(::int32_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:S2D_Protocol.S2D_TryRenewElo)
+  // @@protoc_insertion_point(class_scope:S2D_Protocol.S2D_TryUpdateElo)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -743,7 +743,7 @@ class S2D_TryRenewElo final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const S2D_TryRenewElo& from_msg);
+                          const S2D_TryUpdateElo& from_msg);
     ::int32_t dbid_;
     ::int32_t gameid_;
     ::int32_t elo_;
@@ -1955,31 +1955,31 @@ class HelloReply final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class D2S_ResponseRenewPersonalRecord final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:S2D_Protocol.D2S_ResponseRenewPersonalRecord) */ {
+class D2S_ResponseUpdatePersonalRecord final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2D_Protocol.D2S_ResponseUpdatePersonalRecord) */ {
  public:
-  inline D2S_ResponseRenewPersonalRecord() : D2S_ResponseRenewPersonalRecord(nullptr) {}
-  ~D2S_ResponseRenewPersonalRecord() PROTOBUF_FINAL;
+  inline D2S_ResponseUpdatePersonalRecord() : D2S_ResponseUpdatePersonalRecord(nullptr) {}
+  ~D2S_ResponseUpdatePersonalRecord() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(D2S_ResponseRenewPersonalRecord* msg, std::destroying_delete_t) {
+  void operator delete(D2S_ResponseUpdatePersonalRecord* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(D2S_ResponseRenewPersonalRecord));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(D2S_ResponseUpdatePersonalRecord));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR D2S_ResponseRenewPersonalRecord(
+  explicit PROTOBUF_CONSTEXPR D2S_ResponseUpdatePersonalRecord(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline D2S_ResponseRenewPersonalRecord(const D2S_ResponseRenewPersonalRecord& from) : D2S_ResponseRenewPersonalRecord(nullptr, from) {}
-  inline D2S_ResponseRenewPersonalRecord(D2S_ResponseRenewPersonalRecord&& from) noexcept
-      : D2S_ResponseRenewPersonalRecord(nullptr, std::move(from)) {}
-  inline D2S_ResponseRenewPersonalRecord& operator=(const D2S_ResponseRenewPersonalRecord& from) {
+  inline D2S_ResponseUpdatePersonalRecord(const D2S_ResponseUpdatePersonalRecord& from) : D2S_ResponseUpdatePersonalRecord(nullptr, from) {}
+  inline D2S_ResponseUpdatePersonalRecord(D2S_ResponseUpdatePersonalRecord&& from) noexcept
+      : D2S_ResponseUpdatePersonalRecord(nullptr, std::move(from)) {}
+  inline D2S_ResponseUpdatePersonalRecord& operator=(const D2S_ResponseUpdatePersonalRecord& from) {
     CopyFrom(from);
     return *this;
   }
-  inline D2S_ResponseRenewPersonalRecord& operator=(D2S_ResponseRenewPersonalRecord&& from) noexcept {
+  inline D2S_ResponseUpdatePersonalRecord& operator=(D2S_ResponseUpdatePersonalRecord&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -2007,16 +2007,16 @@ class D2S_ResponseRenewPersonalRecord final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const D2S_ResponseRenewPersonalRecord& default_instance() {
+  static const D2S_ResponseUpdatePersonalRecord& default_instance() {
     return *internal_default_instance();
   }
-  static inline const D2S_ResponseRenewPersonalRecord* internal_default_instance() {
-    return reinterpret_cast<const D2S_ResponseRenewPersonalRecord*>(
-        &_D2S_ResponseRenewPersonalRecord_default_instance_);
+  static inline const D2S_ResponseUpdatePersonalRecord* internal_default_instance() {
+    return reinterpret_cast<const D2S_ResponseUpdatePersonalRecord*>(
+        &_D2S_ResponseUpdatePersonalRecord_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 11;
-  friend void swap(D2S_ResponseRenewPersonalRecord& a, D2S_ResponseRenewPersonalRecord& b) { a.Swap(&b); }
-  inline void Swap(D2S_ResponseRenewPersonalRecord* other) {
+  friend void swap(D2S_ResponseUpdatePersonalRecord& a, D2S_ResponseUpdatePersonalRecord& b) { a.Swap(&b); }
+  inline void Swap(D2S_ResponseUpdatePersonalRecord* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -2024,7 +2024,7 @@ class D2S_ResponseRenewPersonalRecord final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(D2S_ResponseRenewPersonalRecord* other) {
+  void UnsafeArenaSwap(D2S_ResponseUpdatePersonalRecord* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -2032,13 +2032,13 @@ class D2S_ResponseRenewPersonalRecord final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  D2S_ResponseRenewPersonalRecord* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<D2S_ResponseRenewPersonalRecord>(arena);
+  D2S_ResponseUpdatePersonalRecord* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<D2S_ResponseUpdatePersonalRecord>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const D2S_ResponseRenewPersonalRecord& from);
+  void CopyFrom(const D2S_ResponseUpdatePersonalRecord& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const D2S_ResponseRenewPersonalRecord& from) { D2S_ResponseRenewPersonalRecord::MergeImpl(*this, from); }
+  void MergeFrom(const D2S_ResponseUpdatePersonalRecord& from) { D2S_ResponseUpdatePersonalRecord::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(
@@ -2075,18 +2075,18 @@ class D2S_ResponseRenewPersonalRecord final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(D2S_ResponseRenewPersonalRecord* other);
+  void InternalSwap(D2S_ResponseUpdatePersonalRecord* other);
  private:
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "S2D_Protocol.D2S_ResponseRenewPersonalRecord"; }
+  static ::absl::string_view FullMessageName() { return "S2D_Protocol.D2S_ResponseUpdatePersonalRecord"; }
 
  protected:
-  explicit D2S_ResponseRenewPersonalRecord(::google::protobuf::Arena* arena);
-  D2S_ResponseRenewPersonalRecord(::google::protobuf::Arena* arena, const D2S_ResponseRenewPersonalRecord& from);
-  D2S_ResponseRenewPersonalRecord(::google::protobuf::Arena* arena, D2S_ResponseRenewPersonalRecord&& from) noexcept
-      : D2S_ResponseRenewPersonalRecord(arena) {
+  explicit D2S_ResponseUpdatePersonalRecord(::google::protobuf::Arena* arena);
+  D2S_ResponseUpdatePersonalRecord(::google::protobuf::Arena* arena, const D2S_ResponseUpdatePersonalRecord& from);
+  D2S_ResponseUpdatePersonalRecord(::google::protobuf::Arena* arena, D2S_ResponseUpdatePersonalRecord&& from) noexcept
+      : D2S_ResponseUpdatePersonalRecord(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
@@ -2113,7 +2113,7 @@ class D2S_ResponseRenewPersonalRecord final : public ::google::protobuf::Message
   void _internal_set_success(bool value);
 
   public:
-  // @@protoc_insertion_point(class_scope:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+  // @@protoc_insertion_point(class_scope:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -2135,7 +2135,7 @@ class D2S_ResponseRenewPersonalRecord final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const D2S_ResponseRenewPersonalRecord& from_msg);
+                          const D2S_ResponseUpdatePersonalRecord& from_msg);
     bool success_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -2145,31 +2145,31 @@ class D2S_ResponseRenewPersonalRecord final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class D2S_ResponseRenewElo final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:S2D_Protocol.D2S_ResponseRenewElo) */ {
+class D2S_ResponseUpdateElo final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2D_Protocol.D2S_ResponseUpdateElo) */ {
  public:
-  inline D2S_ResponseRenewElo() : D2S_ResponseRenewElo(nullptr) {}
-  ~D2S_ResponseRenewElo() PROTOBUF_FINAL;
+  inline D2S_ResponseUpdateElo() : D2S_ResponseUpdateElo(nullptr) {}
+  ~D2S_ResponseUpdateElo() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(D2S_ResponseRenewElo* msg, std::destroying_delete_t) {
+  void operator delete(D2S_ResponseUpdateElo* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(D2S_ResponseRenewElo));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(D2S_ResponseUpdateElo));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR D2S_ResponseRenewElo(
+  explicit PROTOBUF_CONSTEXPR D2S_ResponseUpdateElo(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline D2S_ResponseRenewElo(const D2S_ResponseRenewElo& from) : D2S_ResponseRenewElo(nullptr, from) {}
-  inline D2S_ResponseRenewElo(D2S_ResponseRenewElo&& from) noexcept
-      : D2S_ResponseRenewElo(nullptr, std::move(from)) {}
-  inline D2S_ResponseRenewElo& operator=(const D2S_ResponseRenewElo& from) {
+  inline D2S_ResponseUpdateElo(const D2S_ResponseUpdateElo& from) : D2S_ResponseUpdateElo(nullptr, from) {}
+  inline D2S_ResponseUpdateElo(D2S_ResponseUpdateElo&& from) noexcept
+      : D2S_ResponseUpdateElo(nullptr, std::move(from)) {}
+  inline D2S_ResponseUpdateElo& operator=(const D2S_ResponseUpdateElo& from) {
     CopyFrom(from);
     return *this;
   }
-  inline D2S_ResponseRenewElo& operator=(D2S_ResponseRenewElo&& from) noexcept {
+  inline D2S_ResponseUpdateElo& operator=(D2S_ResponseUpdateElo&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -2197,16 +2197,16 @@ class D2S_ResponseRenewElo final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const D2S_ResponseRenewElo& default_instance() {
+  static const D2S_ResponseUpdateElo& default_instance() {
     return *internal_default_instance();
   }
-  static inline const D2S_ResponseRenewElo* internal_default_instance() {
-    return reinterpret_cast<const D2S_ResponseRenewElo*>(
-        &_D2S_ResponseRenewElo_default_instance_);
+  static inline const D2S_ResponseUpdateElo* internal_default_instance() {
+    return reinterpret_cast<const D2S_ResponseUpdateElo*>(
+        &_D2S_ResponseUpdateElo_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 9;
-  friend void swap(D2S_ResponseRenewElo& a, D2S_ResponseRenewElo& b) { a.Swap(&b); }
-  inline void Swap(D2S_ResponseRenewElo* other) {
+  friend void swap(D2S_ResponseUpdateElo& a, D2S_ResponseUpdateElo& b) { a.Swap(&b); }
+  inline void Swap(D2S_ResponseUpdateElo* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -2214,7 +2214,7 @@ class D2S_ResponseRenewElo final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(D2S_ResponseRenewElo* other) {
+  void UnsafeArenaSwap(D2S_ResponseUpdateElo* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -2222,13 +2222,13 @@ class D2S_ResponseRenewElo final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  D2S_ResponseRenewElo* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<D2S_ResponseRenewElo>(arena);
+  D2S_ResponseUpdateElo* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<D2S_ResponseUpdateElo>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const D2S_ResponseRenewElo& from);
+  void CopyFrom(const D2S_ResponseUpdateElo& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const D2S_ResponseRenewElo& from) { D2S_ResponseRenewElo::MergeImpl(*this, from); }
+  void MergeFrom(const D2S_ResponseUpdateElo& from) { D2S_ResponseUpdateElo::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(
@@ -2265,18 +2265,18 @@ class D2S_ResponseRenewElo final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(D2S_ResponseRenewElo* other);
+  void InternalSwap(D2S_ResponseUpdateElo* other);
  private:
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "S2D_Protocol.D2S_ResponseRenewElo"; }
+  static ::absl::string_view FullMessageName() { return "S2D_Protocol.D2S_ResponseUpdateElo"; }
 
  protected:
-  explicit D2S_ResponseRenewElo(::google::protobuf::Arena* arena);
-  D2S_ResponseRenewElo(::google::protobuf::Arena* arena, const D2S_ResponseRenewElo& from);
-  D2S_ResponseRenewElo(::google::protobuf::Arena* arena, D2S_ResponseRenewElo&& from) noexcept
-      : D2S_ResponseRenewElo(arena) {
+  explicit D2S_ResponseUpdateElo(::google::protobuf::Arena* arena);
+  D2S_ResponseUpdateElo(::google::protobuf::Arena* arena, const D2S_ResponseUpdateElo& from);
+  D2S_ResponseUpdateElo(::google::protobuf::Arena* arena, D2S_ResponseUpdateElo&& from) noexcept
+      : D2S_ResponseUpdateElo(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
@@ -2303,7 +2303,7 @@ class D2S_ResponseRenewElo final : public ::google::protobuf::Message
   void _internal_set_success(bool value);
 
   public:
-  // @@protoc_insertion_point(class_scope:S2D_Protocol.D2S_ResponseRenewElo)
+  // @@protoc_insertion_point(class_scope:S2D_Protocol.D2S_ResponseUpdateElo)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -2325,7 +2325,7 @@ class D2S_ResponseRenewElo final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const D2S_ResponseRenewElo& from_msg);
+                          const D2S_ResponseUpdateElo& from_msg);
     bool success_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -2953,31 +2953,31 @@ class D2S_CreateAccount final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class D2C_ResponseRenewPublicRecord final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:S2D_Protocol.D2C_ResponseRenewPublicRecord) */ {
+class D2C_ResponseUpdatePublicRecord final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2D_Protocol.D2C_ResponseUpdatePublicRecord) */ {
  public:
-  inline D2C_ResponseRenewPublicRecord() : D2C_ResponseRenewPublicRecord(nullptr) {}
-  ~D2C_ResponseRenewPublicRecord() PROTOBUF_FINAL;
+  inline D2C_ResponseUpdatePublicRecord() : D2C_ResponseUpdatePublicRecord(nullptr) {}
+  ~D2C_ResponseUpdatePublicRecord() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(D2C_ResponseRenewPublicRecord* msg, std::destroying_delete_t) {
+  void operator delete(D2C_ResponseUpdatePublicRecord* msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(D2C_ResponseRenewPublicRecord));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(D2C_ResponseUpdatePublicRecord));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR D2C_ResponseRenewPublicRecord(
+  explicit PROTOBUF_CONSTEXPR D2C_ResponseUpdatePublicRecord(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline D2C_ResponseRenewPublicRecord(const D2C_ResponseRenewPublicRecord& from) : D2C_ResponseRenewPublicRecord(nullptr, from) {}
-  inline D2C_ResponseRenewPublicRecord(D2C_ResponseRenewPublicRecord&& from) noexcept
-      : D2C_ResponseRenewPublicRecord(nullptr, std::move(from)) {}
-  inline D2C_ResponseRenewPublicRecord& operator=(const D2C_ResponseRenewPublicRecord& from) {
+  inline D2C_ResponseUpdatePublicRecord(const D2C_ResponseUpdatePublicRecord& from) : D2C_ResponseUpdatePublicRecord(nullptr, from) {}
+  inline D2C_ResponseUpdatePublicRecord(D2C_ResponseUpdatePublicRecord&& from) noexcept
+      : D2C_ResponseUpdatePublicRecord(nullptr, std::move(from)) {}
+  inline D2C_ResponseUpdatePublicRecord& operator=(const D2C_ResponseUpdatePublicRecord& from) {
     CopyFrom(from);
     return *this;
   }
-  inline D2C_ResponseRenewPublicRecord& operator=(D2C_ResponseRenewPublicRecord&& from) noexcept {
+  inline D2C_ResponseUpdatePublicRecord& operator=(D2C_ResponseUpdatePublicRecord&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -3005,16 +3005,16 @@ class D2C_ResponseRenewPublicRecord final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const D2C_ResponseRenewPublicRecord& default_instance() {
+  static const D2C_ResponseUpdatePublicRecord& default_instance() {
     return *internal_default_instance();
   }
-  static inline const D2C_ResponseRenewPublicRecord* internal_default_instance() {
-    return reinterpret_cast<const D2C_ResponseRenewPublicRecord*>(
-        &_D2C_ResponseRenewPublicRecord_default_instance_);
+  static inline const D2C_ResponseUpdatePublicRecord* internal_default_instance() {
+    return reinterpret_cast<const D2C_ResponseUpdatePublicRecord*>(
+        &_D2C_ResponseUpdatePublicRecord_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 15;
-  friend void swap(D2C_ResponseRenewPublicRecord& a, D2C_ResponseRenewPublicRecord& b) { a.Swap(&b); }
-  inline void Swap(D2C_ResponseRenewPublicRecord* other) {
+  friend void swap(D2C_ResponseUpdatePublicRecord& a, D2C_ResponseUpdatePublicRecord& b) { a.Swap(&b); }
+  inline void Swap(D2C_ResponseUpdatePublicRecord* other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -3022,7 +3022,7 @@ class D2C_ResponseRenewPublicRecord final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(D2C_ResponseRenewPublicRecord* other) {
+  void UnsafeArenaSwap(D2C_ResponseUpdatePublicRecord* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -3030,13 +3030,13 @@ class D2C_ResponseRenewPublicRecord final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  D2C_ResponseRenewPublicRecord* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<D2C_ResponseRenewPublicRecord>(arena);
+  D2C_ResponseUpdatePublicRecord* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<D2C_ResponseUpdatePublicRecord>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const D2C_ResponseRenewPublicRecord& from);
+  void CopyFrom(const D2C_ResponseUpdatePublicRecord& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const D2C_ResponseRenewPublicRecord& from) { D2C_ResponseRenewPublicRecord::MergeImpl(*this, from); }
+  void MergeFrom(const D2C_ResponseUpdatePublicRecord& from) { D2C_ResponseUpdatePublicRecord::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(
@@ -3073,18 +3073,18 @@ class D2C_ResponseRenewPublicRecord final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(D2C_ResponseRenewPublicRecord* other);
+  void InternalSwap(D2C_ResponseUpdatePublicRecord* other);
  private:
   template <typename T>
   friend ::absl::string_view(
       ::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "S2D_Protocol.D2C_ResponseRenewPublicRecord"; }
+  static ::absl::string_view FullMessageName() { return "S2D_Protocol.D2C_ResponseUpdatePublicRecord"; }
 
  protected:
-  explicit D2C_ResponseRenewPublicRecord(::google::protobuf::Arena* arena);
-  D2C_ResponseRenewPublicRecord(::google::protobuf::Arena* arena, const D2C_ResponseRenewPublicRecord& from);
-  D2C_ResponseRenewPublicRecord(::google::protobuf::Arena* arena, D2C_ResponseRenewPublicRecord&& from) noexcept
-      : D2C_ResponseRenewPublicRecord(arena) {
+  explicit D2C_ResponseUpdatePublicRecord(::google::protobuf::Arena* arena);
+  D2C_ResponseUpdatePublicRecord(::google::protobuf::Arena* arena, const D2C_ResponseUpdatePublicRecord& from);
+  D2C_ResponseUpdatePublicRecord(::google::protobuf::Arena* arena, D2C_ResponseUpdatePublicRecord&& from) noexcept
+      : D2C_ResponseUpdatePublicRecord(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
@@ -3111,7 +3111,7 @@ class D2C_ResponseRenewPublicRecord final : public ::google::protobuf::Message
   void _internal_set_success(bool value);
 
   public:
-  // @@protoc_insertion_point(class_scope:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+  // @@protoc_insertion_point(class_scope:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -3133,7 +3133,7 @@ class D2C_ResponseRenewPublicRecord final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const D2C_ResponseRenewPublicRecord& from_msg);
+                          const D2C_ResponseUpdatePublicRecord& from_msg);
     bool success_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -3971,192 +3971,192 @@ inline ::google::protobuf::RepeatedField<::int32_t>* D2C_ResponsePlayerInfomatio
 
 // -------------------------------------------------------------------
 
-// S2D_TryRenewElo
+// S2D_TryUpdateElo
 
 // int32 dbid = 1;
-inline void S2D_TryRenewElo::clear_dbid() {
+inline void S2D_TryUpdateElo::clear_dbid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.dbid_ = 0;
 }
-inline ::int32_t S2D_TryRenewElo::dbid() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewElo.dbid)
+inline ::int32_t S2D_TryUpdateElo::dbid() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdateElo.dbid)
   return _internal_dbid();
 }
-inline void S2D_TryRenewElo::set_dbid(::int32_t value) {
+inline void S2D_TryUpdateElo::set_dbid(::int32_t value) {
   _internal_set_dbid(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewElo.dbid)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdateElo.dbid)
 }
-inline ::int32_t S2D_TryRenewElo::_internal_dbid() const {
+inline ::int32_t S2D_TryUpdateElo::_internal_dbid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.dbid_;
 }
-inline void S2D_TryRenewElo::_internal_set_dbid(::int32_t value) {
+inline void S2D_TryUpdateElo::_internal_set_dbid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.dbid_ = value;
 }
 
 // int32 gameId = 2;
-inline void S2D_TryRenewElo::clear_gameid() {
+inline void S2D_TryUpdateElo::clear_gameid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.gameid_ = 0;
 }
-inline ::int32_t S2D_TryRenewElo::gameid() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewElo.gameId)
+inline ::int32_t S2D_TryUpdateElo::gameid() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdateElo.gameId)
   return _internal_gameid();
 }
-inline void S2D_TryRenewElo::set_gameid(::int32_t value) {
+inline void S2D_TryUpdateElo::set_gameid(::int32_t value) {
   _internal_set_gameid(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewElo.gameId)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdateElo.gameId)
 }
-inline ::int32_t S2D_TryRenewElo::_internal_gameid() const {
+inline ::int32_t S2D_TryUpdateElo::_internal_gameid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.gameid_;
 }
-inline void S2D_TryRenewElo::_internal_set_gameid(::int32_t value) {
+inline void S2D_TryUpdateElo::_internal_set_gameid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.gameid_ = value;
 }
 
 // int32 elo = 3;
-inline void S2D_TryRenewElo::clear_elo() {
+inline void S2D_TryUpdateElo::clear_elo() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.elo_ = 0;
 }
-inline ::int32_t S2D_TryRenewElo::elo() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewElo.elo)
+inline ::int32_t S2D_TryUpdateElo::elo() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdateElo.elo)
   return _internal_elo();
 }
-inline void S2D_TryRenewElo::set_elo(::int32_t value) {
+inline void S2D_TryUpdateElo::set_elo(::int32_t value) {
   _internal_set_elo(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewElo.elo)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdateElo.elo)
 }
-inline ::int32_t S2D_TryRenewElo::_internal_elo() const {
+inline ::int32_t S2D_TryUpdateElo::_internal_elo() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.elo_;
 }
-inline void S2D_TryRenewElo::_internal_set_elo(::int32_t value) {
+inline void S2D_TryUpdateElo::_internal_set_elo(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.elo_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// D2S_ResponseRenewElo
+// D2S_ResponseUpdateElo
 
 // bool success = 1;
-inline void D2S_ResponseRenewElo::clear_success() {
+inline void D2S_ResponseUpdateElo::clear_success() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.success_ = false;
 }
-inline bool D2S_ResponseRenewElo::success() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.D2S_ResponseRenewElo.success)
+inline bool D2S_ResponseUpdateElo::success() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.D2S_ResponseUpdateElo.success)
   return _internal_success();
 }
-inline void D2S_ResponseRenewElo::set_success(bool value) {
+inline void D2S_ResponseUpdateElo::set_success(bool value) {
   _internal_set_success(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.D2S_ResponseRenewElo.success)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.D2S_ResponseUpdateElo.success)
 }
-inline bool D2S_ResponseRenewElo::_internal_success() const {
+inline bool D2S_ResponseUpdateElo::_internal_success() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.success_;
 }
-inline void D2S_ResponseRenewElo::_internal_set_success(bool value) {
+inline void D2S_ResponseUpdateElo::_internal_set_success(bool value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.success_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// S2D_TryRenewPersonalRecord
+// S2D_TryUpdatePersonalRecord
 
 // int32 dbid = 1;
-inline void S2D_TryRenewPersonalRecord::clear_dbid() {
+inline void S2D_TryUpdatePersonalRecord::clear_dbid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.dbid_ = 0;
 }
-inline ::int32_t S2D_TryRenewPersonalRecord::dbid() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewPersonalRecord.dbid)
+inline ::int32_t S2D_TryUpdatePersonalRecord::dbid() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdatePersonalRecord.dbid)
   return _internal_dbid();
 }
-inline void S2D_TryRenewPersonalRecord::set_dbid(::int32_t value) {
+inline void S2D_TryUpdatePersonalRecord::set_dbid(::int32_t value) {
   _internal_set_dbid(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewPersonalRecord.dbid)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdatePersonalRecord.dbid)
 }
-inline ::int32_t S2D_TryRenewPersonalRecord::_internal_dbid() const {
+inline ::int32_t S2D_TryUpdatePersonalRecord::_internal_dbid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.dbid_;
 }
-inline void S2D_TryRenewPersonalRecord::_internal_set_dbid(::int32_t value) {
+inline void S2D_TryUpdatePersonalRecord::_internal_set_dbid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.dbid_ = value;
 }
 
 // int32 gameId = 2;
-inline void S2D_TryRenewPersonalRecord::clear_gameid() {
+inline void S2D_TryUpdatePersonalRecord::clear_gameid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.gameid_ = 0;
 }
-inline ::int32_t S2D_TryRenewPersonalRecord::gameid() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewPersonalRecord.gameId)
+inline ::int32_t S2D_TryUpdatePersonalRecord::gameid() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdatePersonalRecord.gameId)
   return _internal_gameid();
 }
-inline void S2D_TryRenewPersonalRecord::set_gameid(::int32_t value) {
+inline void S2D_TryUpdatePersonalRecord::set_gameid(::int32_t value) {
   _internal_set_gameid(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewPersonalRecord.gameId)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdatePersonalRecord.gameId)
 }
-inline ::int32_t S2D_TryRenewPersonalRecord::_internal_gameid() const {
+inline ::int32_t S2D_TryUpdatePersonalRecord::_internal_gameid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.gameid_;
 }
-inline void S2D_TryRenewPersonalRecord::_internal_set_gameid(::int32_t value) {
+inline void S2D_TryUpdatePersonalRecord::_internal_set_gameid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.gameid_ = value;
 }
 
 // int32 score = 3;
-inline void S2D_TryRenewPersonalRecord::clear_score() {
+inline void S2D_TryUpdatePersonalRecord::clear_score() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.score_ = 0;
 }
-inline ::int32_t S2D_TryRenewPersonalRecord::score() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewPersonalRecord.score)
+inline ::int32_t S2D_TryUpdatePersonalRecord::score() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdatePersonalRecord.score)
   return _internal_score();
 }
-inline void S2D_TryRenewPersonalRecord::set_score(::int32_t value) {
+inline void S2D_TryUpdatePersonalRecord::set_score(::int32_t value) {
   _internal_set_score(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewPersonalRecord.score)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdatePersonalRecord.score)
 }
-inline ::int32_t S2D_TryRenewPersonalRecord::_internal_score() const {
+inline ::int32_t S2D_TryUpdatePersonalRecord::_internal_score() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.score_;
 }
-inline void S2D_TryRenewPersonalRecord::_internal_set_score(::int32_t value) {
+inline void S2D_TryUpdatePersonalRecord::_internal_set_score(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.score_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// D2S_ResponseRenewPersonalRecord
+// D2S_ResponseUpdatePersonalRecord
 
 // bool success = 1;
-inline void D2S_ResponseRenewPersonalRecord::clear_success() {
+inline void D2S_ResponseUpdatePersonalRecord::clear_success() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.success_ = false;
 }
-inline bool D2S_ResponseRenewPersonalRecord::success() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.D2S_ResponseRenewPersonalRecord.success)
+inline bool D2S_ResponseUpdatePersonalRecord::success() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.D2S_ResponseUpdatePersonalRecord.success)
   return _internal_success();
 }
-inline void D2S_ResponseRenewPersonalRecord::set_success(bool value) {
+inline void D2S_ResponseUpdatePersonalRecord::set_success(bool value) {
   _internal_set_success(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.D2S_ResponseRenewPersonalRecord.success)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.D2S_ResponseUpdatePersonalRecord.success)
 }
-inline bool D2S_ResponseRenewPersonalRecord::_internal_success() const {
+inline bool D2S_ResponseUpdatePersonalRecord::_internal_success() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.success_;
 }
-inline void D2S_ResponseRenewPersonalRecord::_internal_set_success(bool value) {
+inline void D2S_ResponseUpdatePersonalRecord::_internal_set_success(bool value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.success_ = value;
 }
@@ -4263,96 +4263,96 @@ inline void D2S_ResponsePublicRecord::_internal_set_publicrecord(::int32_t value
 
 // -------------------------------------------------------------------
 
-// S2D_TryRenewPublicRecord
+// S2D_TryUpdatePublicRecord
 
 // int32 gameId = 1;
-inline void S2D_TryRenewPublicRecord::clear_gameid() {
+inline void S2D_TryUpdatePublicRecord::clear_gameid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.gameid_ = 0;
 }
-inline ::int32_t S2D_TryRenewPublicRecord::gameid() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewPublicRecord.gameId)
+inline ::int32_t S2D_TryUpdatePublicRecord::gameid() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdatePublicRecord.gameId)
   return _internal_gameid();
 }
-inline void S2D_TryRenewPublicRecord::set_gameid(::int32_t value) {
+inline void S2D_TryUpdatePublicRecord::set_gameid(::int32_t value) {
   _internal_set_gameid(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewPublicRecord.gameId)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdatePublicRecord.gameId)
 }
-inline ::int32_t S2D_TryRenewPublicRecord::_internal_gameid() const {
+inline ::int32_t S2D_TryUpdatePublicRecord::_internal_gameid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.gameid_;
 }
-inline void S2D_TryRenewPublicRecord::_internal_set_gameid(::int32_t value) {
+inline void S2D_TryUpdatePublicRecord::_internal_set_gameid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.gameid_ = value;
 }
 
 // int32 recordersDbid = 2;
-inline void S2D_TryRenewPublicRecord::clear_recordersdbid() {
+inline void S2D_TryUpdatePublicRecord::clear_recordersdbid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.recordersdbid_ = 0;
 }
-inline ::int32_t S2D_TryRenewPublicRecord::recordersdbid() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewPublicRecord.recordersDbid)
+inline ::int32_t S2D_TryUpdatePublicRecord::recordersdbid() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdatePublicRecord.recordersDbid)
   return _internal_recordersdbid();
 }
-inline void S2D_TryRenewPublicRecord::set_recordersdbid(::int32_t value) {
+inline void S2D_TryUpdatePublicRecord::set_recordersdbid(::int32_t value) {
   _internal_set_recordersdbid(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewPublicRecord.recordersDbid)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdatePublicRecord.recordersDbid)
 }
-inline ::int32_t S2D_TryRenewPublicRecord::_internal_recordersdbid() const {
+inline ::int32_t S2D_TryUpdatePublicRecord::_internal_recordersdbid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.recordersdbid_;
 }
-inline void S2D_TryRenewPublicRecord::_internal_set_recordersdbid(::int32_t value) {
+inline void S2D_TryUpdatePublicRecord::_internal_set_recordersdbid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.recordersdbid_ = value;
 }
 
 // int32 recordersScore = 3;
-inline void S2D_TryRenewPublicRecord::clear_recordersscore() {
+inline void S2D_TryUpdatePublicRecord::clear_recordersscore() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.recordersscore_ = 0;
 }
-inline ::int32_t S2D_TryRenewPublicRecord::recordersscore() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryRenewPublicRecord.recordersScore)
+inline ::int32_t S2D_TryUpdatePublicRecord::recordersscore() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.S2D_TryUpdatePublicRecord.recordersScore)
   return _internal_recordersscore();
 }
-inline void S2D_TryRenewPublicRecord::set_recordersscore(::int32_t value) {
+inline void S2D_TryUpdatePublicRecord::set_recordersscore(::int32_t value) {
   _internal_set_recordersscore(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryRenewPublicRecord.recordersScore)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.S2D_TryUpdatePublicRecord.recordersScore)
 }
-inline ::int32_t S2D_TryRenewPublicRecord::_internal_recordersscore() const {
+inline ::int32_t S2D_TryUpdatePublicRecord::_internal_recordersscore() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.recordersscore_;
 }
-inline void S2D_TryRenewPublicRecord::_internal_set_recordersscore(::int32_t value) {
+inline void S2D_TryUpdatePublicRecord::_internal_set_recordersscore(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.recordersscore_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// D2C_ResponseRenewPublicRecord
+// D2C_ResponseUpdatePublicRecord
 
 // bool success = 1;
-inline void D2C_ResponseRenewPublicRecord::clear_success() {
+inline void D2C_ResponseUpdatePublicRecord::clear_success() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.success_ = false;
 }
-inline bool D2C_ResponseRenewPublicRecord::success() const {
-  // @@protoc_insertion_point(field_get:S2D_Protocol.D2C_ResponseRenewPublicRecord.success)
+inline bool D2C_ResponseUpdatePublicRecord::success() const {
+  // @@protoc_insertion_point(field_get:S2D_Protocol.D2C_ResponseUpdatePublicRecord.success)
   return _internal_success();
 }
-inline void D2C_ResponseRenewPublicRecord::set_success(bool value) {
+inline void D2C_ResponseUpdatePublicRecord::set_success(bool value) {
   _internal_set_success(value);
-  // @@protoc_insertion_point(field_set:S2D_Protocol.D2C_ResponseRenewPublicRecord.success)
+  // @@protoc_insertion_point(field_set:S2D_Protocol.D2C_ResponseUpdatePublicRecord.success)
 }
-inline bool D2C_ResponseRenewPublicRecord::_internal_success() const {
+inline bool D2C_ResponseUpdatePublicRecord::_internal_success() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.success_;
 }
-inline void D2C_ResponseRenewPublicRecord::_internal_set_success(bool value) {
+inline void D2C_ResponseUpdatePublicRecord::_internal_set_success(bool value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.success_ = value;
 }

@@ -26,7 +26,7 @@ namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace S2D_Protocol {
 
-inline constexpr S2D_TryRenewPublicRecord::Impl_::Impl_(
+inline constexpr S2D_TryUpdatePublicRecord::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : gameid_{0},
         recordersdbid_{0},
@@ -34,7 +34,7 @@ inline constexpr S2D_TryRenewPublicRecord::Impl_::Impl_(
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR S2D_TryRenewPublicRecord::S2D_TryRenewPublicRecord(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR S2D_TryUpdatePublicRecord::S2D_TryUpdatePublicRecord(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -42,18 +42,18 @@ PROTOBUF_CONSTEXPR S2D_TryRenewPublicRecord::S2D_TryRenewPublicRecord(::_pbi::Co
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct S2D_TryRenewPublicRecordDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S2D_TryRenewPublicRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S2D_TryRenewPublicRecordDefaultTypeInternal() {}
+struct S2D_TryUpdatePublicRecordDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_TryUpdatePublicRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_TryUpdatePublicRecordDefaultTypeInternal() {}
   union {
-    S2D_TryRenewPublicRecord _instance;
+    S2D_TryUpdatePublicRecord _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryRenewPublicRecordDefaultTypeInternal _S2D_TryRenewPublicRecord_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryUpdatePublicRecordDefaultTypeInternal _S2D_TryUpdatePublicRecord_default_instance_;
 
-inline constexpr S2D_TryRenewPersonalRecord::Impl_::Impl_(
+inline constexpr S2D_TryUpdatePersonalRecord::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : dbid_{0},
         gameid_{0},
@@ -61,7 +61,7 @@ inline constexpr S2D_TryRenewPersonalRecord::Impl_::Impl_(
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR S2D_TryRenewPersonalRecord::S2D_TryRenewPersonalRecord(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR S2D_TryUpdatePersonalRecord::S2D_TryUpdatePersonalRecord(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -69,18 +69,18 @@ PROTOBUF_CONSTEXPR S2D_TryRenewPersonalRecord::S2D_TryRenewPersonalRecord(::_pbi
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct S2D_TryRenewPersonalRecordDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S2D_TryRenewPersonalRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S2D_TryRenewPersonalRecordDefaultTypeInternal() {}
+struct S2D_TryUpdatePersonalRecordDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_TryUpdatePersonalRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_TryUpdatePersonalRecordDefaultTypeInternal() {}
   union {
-    S2D_TryRenewPersonalRecord _instance;
+    S2D_TryUpdatePersonalRecord _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryRenewPersonalRecordDefaultTypeInternal _S2D_TryRenewPersonalRecord_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryUpdatePersonalRecordDefaultTypeInternal _S2D_TryUpdatePersonalRecord_default_instance_;
 
-inline constexpr S2D_TryRenewElo::Impl_::Impl_(
+inline constexpr S2D_TryUpdateElo::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : dbid_{0},
         gameid_{0},
@@ -88,7 +88,7 @@ inline constexpr S2D_TryRenewElo::Impl_::Impl_(
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR S2D_TryRenewElo::S2D_TryRenewElo(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR S2D_TryUpdateElo::S2D_TryUpdateElo(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -96,16 +96,16 @@ PROTOBUF_CONSTEXPR S2D_TryRenewElo::S2D_TryRenewElo(::_pbi::ConstantInitialized)
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct S2D_TryRenewEloDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S2D_TryRenewEloDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S2D_TryRenewEloDefaultTypeInternal() {}
+struct S2D_TryUpdateEloDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S2D_TryUpdateEloDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S2D_TryUpdateEloDefaultTypeInternal() {}
   union {
-    S2D_TryRenewElo _instance;
+    S2D_TryUpdateElo _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryRenewEloDefaultTypeInternal _S2D_TryRenewElo_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S2D_TryUpdateEloDefaultTypeInternal _S2D_TryUpdateElo_default_instance_;
 
 inline constexpr S2D_RequestPublicRecord::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -271,13 +271,13 @@ struct HelloReplyDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 HelloReplyDefaultTypeInternal _HelloReply_default_instance_;
 
-inline constexpr D2S_ResponseRenewPersonalRecord::Impl_::Impl_(
+inline constexpr D2S_ResponseUpdatePersonalRecord::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : success_{false},
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR D2S_ResponseRenewPersonalRecord::D2S_ResponseRenewPersonalRecord(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR D2S_ResponseUpdatePersonalRecord::D2S_ResponseUpdatePersonalRecord(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -285,24 +285,24 @@ PROTOBUF_CONSTEXPR D2S_ResponseRenewPersonalRecord::D2S_ResponseRenewPersonalRec
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct D2S_ResponseRenewPersonalRecordDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR D2S_ResponseRenewPersonalRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~D2S_ResponseRenewPersonalRecordDefaultTypeInternal() {}
+struct D2S_ResponseUpdatePersonalRecordDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2S_ResponseUpdatePersonalRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2S_ResponseUpdatePersonalRecordDefaultTypeInternal() {}
   union {
-    D2S_ResponseRenewPersonalRecord _instance;
+    D2S_ResponseUpdatePersonalRecord _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_ResponseRenewPersonalRecordDefaultTypeInternal _D2S_ResponseRenewPersonalRecord_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_ResponseUpdatePersonalRecordDefaultTypeInternal _D2S_ResponseUpdatePersonalRecord_default_instance_;
 
-inline constexpr D2S_ResponseRenewElo::Impl_::Impl_(
+inline constexpr D2S_ResponseUpdateElo::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : success_{false},
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR D2S_ResponseRenewElo::D2S_ResponseRenewElo(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR D2S_ResponseUpdateElo::D2S_ResponseUpdateElo(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -310,16 +310,16 @@ PROTOBUF_CONSTEXPR D2S_ResponseRenewElo::D2S_ResponseRenewElo(::_pbi::ConstantIn
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct D2S_ResponseRenewEloDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR D2S_ResponseRenewEloDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~D2S_ResponseRenewEloDefaultTypeInternal() {}
+struct D2S_ResponseUpdateEloDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2S_ResponseUpdateEloDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2S_ResponseUpdateEloDefaultTypeInternal() {}
   union {
-    D2S_ResponseRenewElo _instance;
+    D2S_ResponseUpdateElo _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_ResponseRenewEloDefaultTypeInternal _D2S_ResponseRenewElo_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_ResponseUpdateEloDefaultTypeInternal _D2S_ResponseUpdateElo_default_instance_;
 
 inline constexpr D2S_ResponsePublicRecord::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -400,13 +400,13 @@ struct D2S_CreateAccountDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2S_CreateAccountDefaultTypeInternal _D2S_CreateAccount_default_instance_;
 
-inline constexpr D2C_ResponseRenewPublicRecord::Impl_::Impl_(
+inline constexpr D2C_ResponseUpdatePublicRecord::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : success_{false},
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR D2C_ResponseRenewPublicRecord::D2C_ResponseRenewPublicRecord(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR D2C_ResponseUpdatePublicRecord::D2C_ResponseUpdatePublicRecord(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -414,16 +414,16 @@ PROTOBUF_CONSTEXPR D2C_ResponseRenewPublicRecord::D2C_ResponseRenewPublicRecord(
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct D2C_ResponseRenewPublicRecordDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR D2C_ResponseRenewPublicRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~D2C_ResponseRenewPublicRecordDefaultTypeInternal() {}
+struct D2C_ResponseUpdatePublicRecordDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR D2C_ResponseUpdatePublicRecordDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~D2C_ResponseUpdatePublicRecordDefaultTypeInternal() {}
   union {
-    D2C_ResponseRenewPublicRecord _instance;
+    D2C_ResponseUpdatePublicRecord _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2C_ResponseRenewPublicRecordDefaultTypeInternal _D2C_ResponseRenewPublicRecord_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 D2C_ResponseUpdatePublicRecordDefaultTypeInternal _D2C_ResponseUpdatePublicRecord_default_instance_;
 
 inline constexpr D2C_ResponsePlayerInfomation::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -542,45 +542,45 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponsePlayerInfomation, _impl_.elos_),
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponsePlayerInfomation, _impl_.personalrecords_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewElo, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdateElo, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewElo, _impl_.dbid_),
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewElo, _impl_.gameid_),
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewElo, _impl_.elo_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdateElo, _impl_.dbid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdateElo, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdateElo, _impl_.elo_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseRenewElo, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseUpdateElo, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseRenewElo, _impl_.success_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseUpdateElo, _impl_.success_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPersonalRecord, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdatePersonalRecord, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPersonalRecord, _impl_.dbid_),
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPersonalRecord, _impl_.gameid_),
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPersonalRecord, _impl_.score_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdatePersonalRecord, _impl_.dbid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdatePersonalRecord, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdatePersonalRecord, _impl_.score_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseRenewPersonalRecord, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseUpdatePersonalRecord, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseRenewPersonalRecord, _impl_.success_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponseUpdatePersonalRecord, _impl_.success_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_RequestPublicRecord, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -601,25 +601,25 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponsePublicRecord, _impl_.playerid_),
         PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2S_ResponsePublicRecord, _impl_.publicrecord_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPublicRecord, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdatePublicRecord, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPublicRecord, _impl_.gameid_),
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPublicRecord, _impl_.recordersdbid_),
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryRenewPublicRecord, _impl_.recordersscore_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdatePublicRecord, _impl_.gameid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdatePublicRecord, _impl_.recordersdbid_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::S2D_TryUpdatePublicRecord, _impl_.recordersscore_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponseRenewPublicRecord, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponseUpdatePublicRecord, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponseRenewPublicRecord, _impl_.success_),
+        PROTOBUF_FIELD_OFFSET(::S2D_Protocol::D2C_ResponseUpdatePublicRecord, _impl_.success_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -632,14 +632,14 @@ static const ::_pbi::MigrationSchema
         {49, -1, -1, sizeof(::S2D_Protocol::D2S_CreateAccount)},
         {58, -1, -1, sizeof(::S2D_Protocol::S2D_RequestPlayerInfomation)},
         {67, -1, -1, sizeof(::S2D_Protocol::D2C_ResponsePlayerInfomation)},
-        {78, -1, -1, sizeof(::S2D_Protocol::S2D_TryRenewElo)},
-        {89, -1, -1, sizeof(::S2D_Protocol::D2S_ResponseRenewElo)},
-        {98, -1, -1, sizeof(::S2D_Protocol::S2D_TryRenewPersonalRecord)},
-        {109, -1, -1, sizeof(::S2D_Protocol::D2S_ResponseRenewPersonalRecord)},
+        {78, -1, -1, sizeof(::S2D_Protocol::S2D_TryUpdateElo)},
+        {89, -1, -1, sizeof(::S2D_Protocol::D2S_ResponseUpdateElo)},
+        {98, -1, -1, sizeof(::S2D_Protocol::S2D_TryUpdatePersonalRecord)},
+        {109, -1, -1, sizeof(::S2D_Protocol::D2S_ResponseUpdatePersonalRecord)},
         {118, -1, -1, sizeof(::S2D_Protocol::S2D_RequestPublicRecord)},
         {127, -1, -1, sizeof(::S2D_Protocol::D2S_ResponsePublicRecord)},
-        {137, -1, -1, sizeof(::S2D_Protocol::S2D_TryRenewPublicRecord)},
-        {148, -1, -1, sizeof(::S2D_Protocol::D2C_ResponseRenewPublicRecord)},
+        {137, -1, -1, sizeof(::S2D_Protocol::S2D_TryUpdatePublicRecord)},
+        {148, -1, -1, sizeof(::S2D_Protocol::D2C_ResponseUpdatePublicRecord)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2D_Protocol::_HelloRequest_default_instance_._instance,
@@ -650,14 +650,14 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2D_Protocol::_D2S_CreateAccount_default_instance_._instance,
     &::S2D_Protocol::_S2D_RequestPlayerInfomation_default_instance_._instance,
     &::S2D_Protocol::_D2C_ResponsePlayerInfomation_default_instance_._instance,
-    &::S2D_Protocol::_S2D_TryRenewElo_default_instance_._instance,
-    &::S2D_Protocol::_D2S_ResponseRenewElo_default_instance_._instance,
-    &::S2D_Protocol::_S2D_TryRenewPersonalRecord_default_instance_._instance,
-    &::S2D_Protocol::_D2S_ResponseRenewPersonalRecord_default_instance_._instance,
+    &::S2D_Protocol::_S2D_TryUpdateElo_default_instance_._instance,
+    &::S2D_Protocol::_D2S_ResponseUpdateElo_default_instance_._instance,
+    &::S2D_Protocol::_S2D_TryUpdatePersonalRecord_default_instance_._instance,
+    &::S2D_Protocol::_D2S_ResponseUpdatePersonalRecord_default_instance_._instance,
     &::S2D_Protocol::_S2D_RequestPublicRecord_default_instance_._instance,
     &::S2D_Protocol::_D2S_ResponsePublicRecord_default_instance_._instance,
-    &::S2D_Protocol::_S2D_TryRenewPublicRecord_default_instance_._instance,
-    &::S2D_Protocol::_D2C_ResponseRenewPublicRecord_default_instance_._instance,
+    &::S2D_Protocol::_S2D_TryUpdatePublicRecord_default_instance_._instance,
+    &::S2D_Protocol::_D2C_ResponseUpdatePublicRecord_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2D_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -671,41 +671,44 @@ const char descriptor_table_protodef_S2D_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SEC
     "\007success\030\001 \001(\010\"+\n\033S2D_RequestPlayerInfom"
     "ation\022\014\n\004dbid\030\001 \001(\005\"W\n\034D2C_ResponsePlaye"
     "rInfomation\022\020\n\010playerId\030\001 \001(\t\022\014\n\004elos\030\002 "
-    "\003(\005\022\027\n\017personalRecords\030\003 \003(\005\"<\n\017S2D_TryR"
-    "enewElo\022\014\n\004dbid\030\001 \001(\005\022\016\n\006gameId\030\002 \001(\005\022\013\n"
-    "\003elo\030\003 \001(\005\"\'\n\024D2S_ResponseRenewElo\022\017\n\007su"
-    "ccess\030\001 \001(\010\"I\n\032S2D_TryRenewPersonalRecor"
-    "d\022\014\n\004dbid\030\001 \001(\005\022\016\n\006gameId\030\002 \001(\005\022\r\n\005score"
-    "\030\003 \001(\005\"2\n\037D2S_ResponseRenewPersonalRecor"
-    "d\022\017\n\007success\030\001 \001(\010\")\n\027S2D_RequestPublicR"
-    "ecord\022\016\n\006gameId\030\001 \001(\005\"B\n\030D2S_ResponsePub"
-    "licRecord\022\020\n\010playerId\030\001 \001(\t\022\024\n\014publicRec"
-    "ord\030\002 \001(\005\"Y\n\030S2D_TryRenewPublicRecord\022\016\n"
-    "\006gameId\030\001 \001(\005\022\025\n\rrecordersDbid\030\002 \001(\005\022\026\n\016"
-    "recordersScore\030\003 \001(\005\"0\n\035D2C_ResponseRene"
-    "wPublicRecord\022\017\n\007success\030\001 \001(\0102\364\004\n\013S2D_S"
-    "ervice\022@\n\010SayHello\022\032.S2D_Protocol.HelloR"
-    "equest\032\030.S2D_Protocol.HelloReply\022@\n\014Logi"
-    "nRequest\022\027.S2D_Protocol.S2D_Login\032\027.S2D_"
-    "Protocol.D2S_Login\022X\n\024CreateAccountReque"
-    "st\022\037.S2D_Protocol.S2D_CreateAccount\032\037.S2"
-    "D_Protocol.D2S_CreateAccount\022i\n\020PlayerIn"
-    "fomation\022).S2D_Protocol.S2D_RequestPlaye"
-    "rInfomation\032*.S2D_Protocol.D2C_ResponseP"
-    "layerInfomation\022M\n\010RenewElo\022\035.S2D_Protoc"
-    "ol.S2D_TryRenewElo\032\".S2D_Protocol.D2S_Re"
-    "sponseRenewElo\022n\n\023RenewPersonalRecord\022(."
-    "S2D_Protocol.S2D_TryRenewPersonalRecord\032"
-    "-.S2D_Protocol.D2S_ResponseRenewPersonal"
-    "Record\022]\n\014PublicRecord\022%.S2D_Protocol.S2"
-    "D_RequestPublicRecord\032&.S2D_Protocol.D2S"
-    "_ResponsePublicRecordb\006proto3"
+    "\003(\005\022\027\n\017personalRecords\030\003 \003(\005\"=\n\020S2D_TryU"
+    "pdateElo\022\014\n\004dbid\030\001 \001(\005\022\016\n\006gameId\030\002 \001(\005\022\013"
+    "\n\003elo\030\003 \001(\005\"(\n\025D2S_ResponseUpdateElo\022\017\n\007"
+    "success\030\001 \001(\010\"J\n\033S2D_TryUpdatePersonalRe"
+    "cord\022\014\n\004dbid\030\001 \001(\005\022\016\n\006gameId\030\002 \001(\005\022\r\n\005sc"
+    "ore\030\003 \001(\005\"3\n D2S_ResponseUpdatePersonalR"
+    "ecord\022\017\n\007success\030\001 \001(\010\")\n\027S2D_RequestPub"
+    "licRecord\022\016\n\006gameId\030\001 \001(\005\"B\n\030D2S_Respons"
+    "ePublicRecord\022\020\n\010playerId\030\001 \001(\t\022\024\n\014publi"
+    "cRecord\030\002 \001(\005\"Z\n\031S2D_TryUpdatePublicReco"
+    "rd\022\016\n\006gameId\030\001 \001(\005\022\025\n\rrecordersDbid\030\002 \001("
+    "\005\022\026\n\016recordersScore\030\003 \001(\005\"1\n\036D2C_Respons"
+    "eUpdatePublicRecord\022\017\n\007success\030\001 \001(\0102\347\005\n"
+    "\013S2D_Service\022@\n\010SayHello\022\032.S2D_Protocol."
+    "HelloRequest\032\030.S2D_Protocol.HelloReply\022@"
+    "\n\014LoginRequest\022\027.S2D_Protocol.S2D_Login\032"
+    "\027.S2D_Protocol.D2S_Login\022X\n\024CreateAccoun"
+    "tRequest\022\037.S2D_Protocol.S2D_CreateAccoun"
+    "t\032\037.S2D_Protocol.D2S_CreateAccount\022i\n\020Pl"
+    "ayerInfomation\022).S2D_Protocol.S2D_Reques"
+    "tPlayerInfomation\032*.S2D_Protocol.D2C_Res"
+    "ponsePlayerInfomation\022P\n\tUpdateElo\022\036.S2D"
+    "_Protocol.S2D_TryUpdateElo\032#.S2D_Protoco"
+    "l.D2S_ResponseUpdateElo\022q\n\024UpdatePersona"
+    "lRecord\022).S2D_Protocol.S2D_TryUpdatePers"
+    "onalRecord\032..S2D_Protocol.D2S_ResponseUp"
+    "datePersonalRecord\022]\n\014PublicRecord\022%.S2D"
+    "_Protocol.S2D_RequestPublicRecord\032&.S2D_"
+    "Protocol.D2S_ResponsePublicRecord\022k\n\022Upd"
+    "atePublicRecord\022\'.S2D_Protocol.S2D_TryUp"
+    "datePublicRecord\032,.S2D_Protocol.D2C_Resp"
+    "onseUpdatePublicRecordb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2D_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2D_5fProtocol_2eproto = {
     false,
     false,
-    1549,
+    1670,
     descriptor_table_protodef_S2D_5fProtocol_2eproto,
     "S2D_Protocol.proto",
     &descriptor_table_S2D_5fProtocol_2eproto_once,
@@ -2726,30 +2729,30 @@ void D2C_ResponsePlayerInfomation::InternalSwap(D2C_ResponsePlayerInfomation* PR
 }
 // ===================================================================
 
-class S2D_TryRenewElo::_Internal {
+class S2D_TryUpdateElo::_Internal {
  public:
 };
 
-S2D_TryRenewElo::S2D_TryRenewElo(::google::protobuf::Arena* arena)
+S2D_TryUpdateElo::S2D_TryUpdateElo(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryRenewElo)
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryUpdateElo)
 }
-S2D_TryRenewElo::S2D_TryRenewElo(
-    ::google::protobuf::Arena* arena, const S2D_TryRenewElo& from)
-    : S2D_TryRenewElo(arena) {
+S2D_TryUpdateElo::S2D_TryUpdateElo(
+    ::google::protobuf::Arena* arena, const S2D_TryUpdateElo& from)
+    : S2D_TryUpdateElo(arena) {
   MergeFrom(from);
 }
-inline PROTOBUF_NDEBUG_INLINE S2D_TryRenewElo::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE S2D_TryUpdateElo::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void S2D_TryRenewElo::SharedCtor(::_pb::Arena* arena) {
+inline void S2D_TryUpdateElo::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, dbid_),
@@ -2758,54 +2761,54 @@ inline void S2D_TryRenewElo::SharedCtor(::_pb::Arena* arena) {
                offsetof(Impl_, dbid_) +
                sizeof(Impl_::elo_));
 }
-S2D_TryRenewElo::~S2D_TryRenewElo() {
-  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryRenewElo)
+S2D_TryUpdateElo::~S2D_TryUpdateElo() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryUpdateElo)
   SharedDtor(*this);
 }
-inline void S2D_TryRenewElo::SharedDtor(MessageLite& self) {
-  S2D_TryRenewElo& this_ = static_cast<S2D_TryRenewElo&>(self);
+inline void S2D_TryUpdateElo::SharedDtor(MessageLite& self) {
+  S2D_TryUpdateElo& this_ = static_cast<S2D_TryUpdateElo&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* S2D_TryRenewElo::PlacementNew_(const void*, void* mem,
+inline void* S2D_TryUpdateElo::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) S2D_TryRenewElo(arena);
+  return ::new (mem) S2D_TryUpdateElo(arena);
 }
-constexpr auto S2D_TryRenewElo::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryRenewElo),
-                                            alignof(S2D_TryRenewElo));
+constexpr auto S2D_TryUpdateElo::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryUpdateElo),
+                                            alignof(S2D_TryUpdateElo));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull S2D_TryRenewElo::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull S2D_TryUpdateElo::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_S2D_TryRenewElo_default_instance_._instance,
+        &_S2D_TryUpdateElo_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &S2D_TryRenewElo::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<S2D_TryRenewElo>(),
+        &S2D_TryUpdateElo::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_TryUpdateElo>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &S2D_TryRenewElo::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<S2D_TryRenewElo>(), &S2D_TryRenewElo::ByteSizeLong,
-            &S2D_TryRenewElo::_InternalSerialize,
+        &S2D_TryUpdateElo::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_TryUpdateElo>(), &S2D_TryUpdateElo::ByteSizeLong,
+            &S2D_TryUpdateElo::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_._cached_size_),
         false,
     },
-    &S2D_TryRenewElo::kDescriptorMethods,
+    &S2D_TryUpdateElo::kDescriptorMethods,
     &descriptor_table_S2D_5fProtocol_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* S2D_TryRenewElo::GetClassData() const {
+const ::google::protobuf::internal::ClassData* S2D_TryUpdateElo::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewElo::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryUpdateElo::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -2820,30 +2823,30 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewElo::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryRenewElo>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryUpdateElo>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
     // int32 dbid = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewElo, _impl_.dbid_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.dbid_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdateElo, _impl_.dbid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_.dbid_)}},
     // int32 gameId = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewElo, _impl_.gameid_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.gameid_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdateElo, _impl_.gameid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_.gameid_)}},
     // int32 elo = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewElo, _impl_.elo_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.elo_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdateElo, _impl_.elo_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_.elo_)}},
   }}, {{
     65535, 65535
   }}, {{
     // int32 dbid = 1;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.dbid_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_.dbid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // int32 gameId = 2;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.gameid_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_.gameid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // int32 elo = 3;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.elo_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_.elo_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
@@ -2851,8 +2854,8 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewElo::_table_ = {
   }},
 };
 
-PROTOBUF_NOINLINE void S2D_TryRenewElo::Clear() {
-// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryRenewElo)
+PROTOBUF_NOINLINE void S2D_TryUpdateElo::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryUpdateElo)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -2865,17 +2868,17 @@ PROTOBUF_NOINLINE void S2D_TryRenewElo::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* S2D_TryRenewElo::_InternalSerialize(
+        ::uint8_t* S2D_TryUpdateElo::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const S2D_TryRenewElo& this_ = static_cast<const S2D_TryRenewElo&>(base);
+          const S2D_TryUpdateElo& this_ = static_cast<const S2D_TryUpdateElo&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* S2D_TryRenewElo::_InternalSerialize(
+        ::uint8_t* S2D_TryUpdateElo::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const S2D_TryRenewElo& this_ = *this;
+          const S2D_TryUpdateElo& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryRenewElo)
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryUpdateElo)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -2905,18 +2908,18 @@ PROTOBUF_NOINLINE void S2D_TryRenewElo::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryRenewElo)
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryUpdateElo)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t S2D_TryRenewElo::ByteSizeLong(const MessageLite& base) {
-          const S2D_TryRenewElo& this_ = static_cast<const S2D_TryRenewElo&>(base);
+        ::size_t S2D_TryUpdateElo::ByteSizeLong(const MessageLite& base) {
+          const S2D_TryUpdateElo& this_ = static_cast<const S2D_TryUpdateElo&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t S2D_TryRenewElo::ByteSizeLong() const {
-          const S2D_TryRenewElo& this_ = *this;
+        ::size_t S2D_TryUpdateElo::ByteSizeLong() const {
+          const S2D_TryUpdateElo& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryRenewElo)
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryUpdateElo)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -2945,10 +2948,10 @@ PROTOBUF_NOINLINE void S2D_TryRenewElo::Clear() {
                                                      &this_._impl_._cached_size_);
         }
 
-void S2D_TryRenewElo::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<S2D_TryRenewElo*>(&to_msg);
-  auto& from = static_cast<const S2D_TryRenewElo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryRenewElo)
+void S2D_TryUpdateElo::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_TryUpdateElo*>(&to_msg);
+  auto& from = static_cast<const S2D_TryUpdateElo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryUpdateElo)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -2965,105 +2968,105 @@ void S2D_TryRenewElo::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void S2D_TryRenewElo::CopyFrom(const S2D_TryRenewElo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryRenewElo)
+void S2D_TryUpdateElo::CopyFrom(const S2D_TryUpdateElo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryUpdateElo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void S2D_TryRenewElo::InternalSwap(S2D_TryRenewElo* PROTOBUF_RESTRICT other) {
+void S2D_TryUpdateElo::InternalSwap(S2D_TryUpdateElo* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.elo_)
-      + sizeof(S2D_TryRenewElo::_impl_.elo_)
-      - PROTOBUF_FIELD_OFFSET(S2D_TryRenewElo, _impl_.dbid_)>(
+      PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_.elo_)
+      + sizeof(S2D_TryUpdateElo::_impl_.elo_)
+      - PROTOBUF_FIELD_OFFSET(S2D_TryUpdateElo, _impl_.dbid_)>(
           reinterpret_cast<char*>(&_impl_.dbid_),
           reinterpret_cast<char*>(&other->_impl_.dbid_));
 }
 
-::google::protobuf::Metadata S2D_TryRenewElo::GetMetadata() const {
+::google::protobuf::Metadata S2D_TryUpdateElo::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
-class D2S_ResponseRenewElo::_Internal {
+class D2S_ResponseUpdateElo::_Internal {
  public:
 };
 
-D2S_ResponseRenewElo::D2S_ResponseRenewElo(::google::protobuf::Arena* arena)
+D2S_ResponseUpdateElo::D2S_ResponseUpdateElo(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2S_ResponseRenewElo)
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2S_ResponseUpdateElo)
 }
-D2S_ResponseRenewElo::D2S_ResponseRenewElo(
-    ::google::protobuf::Arena* arena, const D2S_ResponseRenewElo& from)
-    : D2S_ResponseRenewElo(arena) {
+D2S_ResponseUpdateElo::D2S_ResponseUpdateElo(
+    ::google::protobuf::Arena* arena, const D2S_ResponseUpdateElo& from)
+    : D2S_ResponseUpdateElo(arena) {
   MergeFrom(from);
 }
-inline PROTOBUF_NDEBUG_INLINE D2S_ResponseRenewElo::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE D2S_ResponseUpdateElo::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void D2S_ResponseRenewElo::SharedCtor(::_pb::Arena* arena) {
+inline void D2S_ResponseUpdateElo::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   _impl_.success_ = {};
 }
-D2S_ResponseRenewElo::~D2S_ResponseRenewElo() {
-  // @@protoc_insertion_point(destructor:S2D_Protocol.D2S_ResponseRenewElo)
+D2S_ResponseUpdateElo::~D2S_ResponseUpdateElo() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2S_ResponseUpdateElo)
   SharedDtor(*this);
 }
-inline void D2S_ResponseRenewElo::SharedDtor(MessageLite& self) {
-  D2S_ResponseRenewElo& this_ = static_cast<D2S_ResponseRenewElo&>(self);
+inline void D2S_ResponseUpdateElo::SharedDtor(MessageLite& self) {
+  D2S_ResponseUpdateElo& this_ = static_cast<D2S_ResponseUpdateElo&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* D2S_ResponseRenewElo::PlacementNew_(const void*, void* mem,
+inline void* D2S_ResponseUpdateElo::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) D2S_ResponseRenewElo(arena);
+  return ::new (mem) D2S_ResponseUpdateElo(arena);
 }
-constexpr auto D2S_ResponseRenewElo::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2S_ResponseRenewElo),
-                                            alignof(D2S_ResponseRenewElo));
+constexpr auto D2S_ResponseUpdateElo::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2S_ResponseUpdateElo),
+                                            alignof(D2S_ResponseUpdateElo));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull D2S_ResponseRenewElo::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull D2S_ResponseUpdateElo::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_D2S_ResponseRenewElo_default_instance_._instance,
+        &_D2S_ResponseUpdateElo_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &D2S_ResponseRenewElo::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<D2S_ResponseRenewElo>(),
+        &D2S_ResponseUpdateElo::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2S_ResponseUpdateElo>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &D2S_ResponseRenewElo::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<D2S_ResponseRenewElo>(), &D2S_ResponseRenewElo::ByteSizeLong,
-            &D2S_ResponseRenewElo::_InternalSerialize,
+        &D2S_ResponseUpdateElo::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2S_ResponseUpdateElo>(), &D2S_ResponseUpdateElo::ByteSizeLong,
+            &D2S_ResponseUpdateElo::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewElo, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(D2S_ResponseUpdateElo, _impl_._cached_size_),
         false,
     },
-    &D2S_ResponseRenewElo::kDescriptorMethods,
+    &D2S_ResponseUpdateElo::kDescriptorMethods,
     &descriptor_table_S2D_5fProtocol_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* D2S_ResponseRenewElo::GetClassData() const {
+const ::google::protobuf::internal::ClassData* D2S_ResponseUpdateElo::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseRenewElo::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseUpdateElo::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -3078,17 +3081,17 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseRenewElo::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2S_ResponseRenewElo>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2S_ResponseUpdateElo>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // bool success = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2S_ResponseRenewElo, _impl_.success_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewElo, _impl_.success_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2S_ResponseUpdateElo, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2S_ResponseUpdateElo, _impl_.success_)}},
   }}, {{
     65535, 65535
   }}, {{
     // bool success = 1;
-    {PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewElo, _impl_.success_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(D2S_ResponseUpdateElo, _impl_.success_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kBool)},
   }},
   // no aux_entries
@@ -3096,8 +3099,8 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseRenewElo::_table_ = {
   }},
 };
 
-PROTOBUF_NOINLINE void D2S_ResponseRenewElo::Clear() {
-// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2S_ResponseRenewElo)
+PROTOBUF_NOINLINE void D2S_ResponseUpdateElo::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2S_ResponseUpdateElo)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -3108,17 +3111,17 @@ PROTOBUF_NOINLINE void D2S_ResponseRenewElo::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* D2S_ResponseRenewElo::_InternalSerialize(
+        ::uint8_t* D2S_ResponseUpdateElo::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const D2S_ResponseRenewElo& this_ = static_cast<const D2S_ResponseRenewElo&>(base);
+          const D2S_ResponseUpdateElo& this_ = static_cast<const D2S_ResponseUpdateElo&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* D2S_ResponseRenewElo::_InternalSerialize(
+        ::uint8_t* D2S_ResponseUpdateElo::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const D2S_ResponseRenewElo& this_ = *this;
+          const D2S_ResponseUpdateElo& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2S_ResponseRenewElo)
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2S_ResponseUpdateElo)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -3134,18 +3137,18 @@ PROTOBUF_NOINLINE void D2S_ResponseRenewElo::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2S_ResponseRenewElo)
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2S_ResponseUpdateElo)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t D2S_ResponseRenewElo::ByteSizeLong(const MessageLite& base) {
-          const D2S_ResponseRenewElo& this_ = static_cast<const D2S_ResponseRenewElo&>(base);
+        ::size_t D2S_ResponseUpdateElo::ByteSizeLong(const MessageLite& base) {
+          const D2S_ResponseUpdateElo& this_ = static_cast<const D2S_ResponseUpdateElo&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t D2S_ResponseRenewElo::ByteSizeLong() const {
-          const D2S_ResponseRenewElo& this_ = *this;
+        ::size_t D2S_ResponseUpdateElo::ByteSizeLong() const {
+          const D2S_ResponseUpdateElo& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2S_ResponseRenewElo)
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2S_ResponseUpdateElo)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -3162,10 +3165,10 @@ PROTOBUF_NOINLINE void D2S_ResponseRenewElo::Clear() {
                                                      &this_._impl_._cached_size_);
         }
 
-void D2S_ResponseRenewElo::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<D2S_ResponseRenewElo*>(&to_msg);
-  auto& from = static_cast<const D2S_ResponseRenewElo&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_ResponseRenewElo)
+void D2S_ResponseUpdateElo::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2S_ResponseUpdateElo*>(&to_msg);
+  auto& from = static_cast<const D2S_ResponseUpdateElo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_ResponseUpdateElo)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -3176,49 +3179,49 @@ void D2S_ResponseRenewElo::MergeImpl(::google::protobuf::MessageLite& to_msg, co
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void D2S_ResponseRenewElo::CopyFrom(const D2S_ResponseRenewElo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2S_ResponseRenewElo)
+void D2S_ResponseUpdateElo::CopyFrom(const D2S_ResponseUpdateElo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2S_ResponseUpdateElo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void D2S_ResponseRenewElo::InternalSwap(D2S_ResponseRenewElo* PROTOBUF_RESTRICT other) {
+void D2S_ResponseUpdateElo::InternalSwap(D2S_ResponseUpdateElo* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
         swap(_impl_.success_, other->_impl_.success_);
 }
 
-::google::protobuf::Metadata D2S_ResponseRenewElo::GetMetadata() const {
+::google::protobuf::Metadata D2S_ResponseUpdateElo::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
-class S2D_TryRenewPersonalRecord::_Internal {
+class S2D_TryUpdatePersonalRecord::_Internal {
  public:
 };
 
-S2D_TryRenewPersonalRecord::S2D_TryRenewPersonalRecord(::google::protobuf::Arena* arena)
+S2D_TryUpdatePersonalRecord::S2D_TryUpdatePersonalRecord(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryRenewPersonalRecord)
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryUpdatePersonalRecord)
 }
-S2D_TryRenewPersonalRecord::S2D_TryRenewPersonalRecord(
-    ::google::protobuf::Arena* arena, const S2D_TryRenewPersonalRecord& from)
-    : S2D_TryRenewPersonalRecord(arena) {
+S2D_TryUpdatePersonalRecord::S2D_TryUpdatePersonalRecord(
+    ::google::protobuf::Arena* arena, const S2D_TryUpdatePersonalRecord& from)
+    : S2D_TryUpdatePersonalRecord(arena) {
   MergeFrom(from);
 }
-inline PROTOBUF_NDEBUG_INLINE S2D_TryRenewPersonalRecord::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE S2D_TryUpdatePersonalRecord::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void S2D_TryRenewPersonalRecord::SharedCtor(::_pb::Arena* arena) {
+inline void S2D_TryUpdatePersonalRecord::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, dbid_),
@@ -3227,54 +3230,54 @@ inline void S2D_TryRenewPersonalRecord::SharedCtor(::_pb::Arena* arena) {
                offsetof(Impl_, dbid_) +
                sizeof(Impl_::score_));
 }
-S2D_TryRenewPersonalRecord::~S2D_TryRenewPersonalRecord() {
-  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryRenewPersonalRecord)
+S2D_TryUpdatePersonalRecord::~S2D_TryUpdatePersonalRecord() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryUpdatePersonalRecord)
   SharedDtor(*this);
 }
-inline void S2D_TryRenewPersonalRecord::SharedDtor(MessageLite& self) {
-  S2D_TryRenewPersonalRecord& this_ = static_cast<S2D_TryRenewPersonalRecord&>(self);
+inline void S2D_TryUpdatePersonalRecord::SharedDtor(MessageLite& self) {
+  S2D_TryUpdatePersonalRecord& this_ = static_cast<S2D_TryUpdatePersonalRecord&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* S2D_TryRenewPersonalRecord::PlacementNew_(const void*, void* mem,
+inline void* S2D_TryUpdatePersonalRecord::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) S2D_TryRenewPersonalRecord(arena);
+  return ::new (mem) S2D_TryUpdatePersonalRecord(arena);
 }
-constexpr auto S2D_TryRenewPersonalRecord::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryRenewPersonalRecord),
-                                            alignof(S2D_TryRenewPersonalRecord));
+constexpr auto S2D_TryUpdatePersonalRecord::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryUpdatePersonalRecord),
+                                            alignof(S2D_TryUpdatePersonalRecord));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull S2D_TryRenewPersonalRecord::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull S2D_TryUpdatePersonalRecord::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_S2D_TryRenewPersonalRecord_default_instance_._instance,
+        &_S2D_TryUpdatePersonalRecord_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &S2D_TryRenewPersonalRecord::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<S2D_TryRenewPersonalRecord>(),
+        &S2D_TryUpdatePersonalRecord::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_TryUpdatePersonalRecord>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &S2D_TryRenewPersonalRecord::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<S2D_TryRenewPersonalRecord>(), &S2D_TryRenewPersonalRecord::ByteSizeLong,
-            &S2D_TryRenewPersonalRecord::_InternalSerialize,
+        &S2D_TryUpdatePersonalRecord::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_TryUpdatePersonalRecord>(), &S2D_TryUpdatePersonalRecord::ByteSizeLong,
+            &S2D_TryUpdatePersonalRecord::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_._cached_size_),
         false,
     },
-    &S2D_TryRenewPersonalRecord::kDescriptorMethods,
+    &S2D_TryUpdatePersonalRecord::kDescriptorMethods,
     &descriptor_table_S2D_5fProtocol_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* S2D_TryRenewPersonalRecord::GetClassData() const {
+const ::google::protobuf::internal::ClassData* S2D_TryUpdatePersonalRecord::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewPersonalRecord::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryUpdatePersonalRecord::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -3289,30 +3292,30 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewPersonalRecord::_table_ = 
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryRenewPersonalRecord>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryUpdatePersonalRecord>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
     // int32 dbid = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPersonalRecord, _impl_.dbid_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.dbid_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdatePersonalRecord, _impl_.dbid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_.dbid_)}},
     // int32 gameId = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPersonalRecord, _impl_.gameid_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.gameid_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdatePersonalRecord, _impl_.gameid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_.gameid_)}},
     // int32 score = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPersonalRecord, _impl_.score_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.score_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdatePersonalRecord, _impl_.score_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_.score_)}},
   }}, {{
     65535, 65535
   }}, {{
     // int32 dbid = 1;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.dbid_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_.dbid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // int32 gameId = 2;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.gameid_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_.gameid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // int32 score = 3;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.score_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_.score_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
@@ -3320,8 +3323,8 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewPersonalRecord::_table_ = 
   }},
 };
 
-PROTOBUF_NOINLINE void S2D_TryRenewPersonalRecord::Clear() {
-// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+PROTOBUF_NOINLINE void S2D_TryUpdatePersonalRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryUpdatePersonalRecord)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -3334,17 +3337,17 @@ PROTOBUF_NOINLINE void S2D_TryRenewPersonalRecord::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* S2D_TryRenewPersonalRecord::_InternalSerialize(
+        ::uint8_t* S2D_TryUpdatePersonalRecord::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const S2D_TryRenewPersonalRecord& this_ = static_cast<const S2D_TryRenewPersonalRecord&>(base);
+          const S2D_TryUpdatePersonalRecord& this_ = static_cast<const S2D_TryUpdatePersonalRecord&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* S2D_TryRenewPersonalRecord::_InternalSerialize(
+        ::uint8_t* S2D_TryUpdatePersonalRecord::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const S2D_TryRenewPersonalRecord& this_ = *this;
+          const S2D_TryUpdatePersonalRecord& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryUpdatePersonalRecord)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -3374,18 +3377,18 @@ PROTOBUF_NOINLINE void S2D_TryRenewPersonalRecord::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryRenewPersonalRecord)
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryUpdatePersonalRecord)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t S2D_TryRenewPersonalRecord::ByteSizeLong(const MessageLite& base) {
-          const S2D_TryRenewPersonalRecord& this_ = static_cast<const S2D_TryRenewPersonalRecord&>(base);
+        ::size_t S2D_TryUpdatePersonalRecord::ByteSizeLong(const MessageLite& base) {
+          const S2D_TryUpdatePersonalRecord& this_ = static_cast<const S2D_TryUpdatePersonalRecord&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t S2D_TryRenewPersonalRecord::ByteSizeLong() const {
-          const S2D_TryRenewPersonalRecord& this_ = *this;
+        ::size_t S2D_TryUpdatePersonalRecord::ByteSizeLong() const {
+          const S2D_TryUpdatePersonalRecord& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryUpdatePersonalRecord)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -3414,10 +3417,10 @@ PROTOBUF_NOINLINE void S2D_TryRenewPersonalRecord::Clear() {
                                                      &this_._impl_._cached_size_);
         }
 
-void S2D_TryRenewPersonalRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<S2D_TryRenewPersonalRecord*>(&to_msg);
-  auto& from = static_cast<const S2D_TryRenewPersonalRecord&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+void S2D_TryUpdatePersonalRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_TryUpdatePersonalRecord*>(&to_msg);
+  auto& from = static_cast<const S2D_TryUpdatePersonalRecord&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryUpdatePersonalRecord)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -3434,105 +3437,105 @@ void S2D_TryRenewPersonalRecord::MergeImpl(::google::protobuf::MessageLite& to_m
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void S2D_TryRenewPersonalRecord::CopyFrom(const S2D_TryRenewPersonalRecord& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryRenewPersonalRecord)
+void S2D_TryUpdatePersonalRecord::CopyFrom(const S2D_TryUpdatePersonalRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryUpdatePersonalRecord)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void S2D_TryRenewPersonalRecord::InternalSwap(S2D_TryRenewPersonalRecord* PROTOBUF_RESTRICT other) {
+void S2D_TryUpdatePersonalRecord::InternalSwap(S2D_TryUpdatePersonalRecord* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.score_)
-      + sizeof(S2D_TryRenewPersonalRecord::_impl_.score_)
-      - PROTOBUF_FIELD_OFFSET(S2D_TryRenewPersonalRecord, _impl_.dbid_)>(
+      PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_.score_)
+      + sizeof(S2D_TryUpdatePersonalRecord::_impl_.score_)
+      - PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePersonalRecord, _impl_.dbid_)>(
           reinterpret_cast<char*>(&_impl_.dbid_),
           reinterpret_cast<char*>(&other->_impl_.dbid_));
 }
 
-::google::protobuf::Metadata S2D_TryRenewPersonalRecord::GetMetadata() const {
+::google::protobuf::Metadata S2D_TryUpdatePersonalRecord::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
-class D2S_ResponseRenewPersonalRecord::_Internal {
+class D2S_ResponseUpdatePersonalRecord::_Internal {
  public:
 };
 
-D2S_ResponseRenewPersonalRecord::D2S_ResponseRenewPersonalRecord(::google::protobuf::Arena* arena)
+D2S_ResponseUpdatePersonalRecord::D2S_ResponseUpdatePersonalRecord(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
 }
-D2S_ResponseRenewPersonalRecord::D2S_ResponseRenewPersonalRecord(
-    ::google::protobuf::Arena* arena, const D2S_ResponseRenewPersonalRecord& from)
-    : D2S_ResponseRenewPersonalRecord(arena) {
+D2S_ResponseUpdatePersonalRecord::D2S_ResponseUpdatePersonalRecord(
+    ::google::protobuf::Arena* arena, const D2S_ResponseUpdatePersonalRecord& from)
+    : D2S_ResponseUpdatePersonalRecord(arena) {
   MergeFrom(from);
 }
-inline PROTOBUF_NDEBUG_INLINE D2S_ResponseRenewPersonalRecord::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE D2S_ResponseUpdatePersonalRecord::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void D2S_ResponseRenewPersonalRecord::SharedCtor(::_pb::Arena* arena) {
+inline void D2S_ResponseUpdatePersonalRecord::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   _impl_.success_ = {};
 }
-D2S_ResponseRenewPersonalRecord::~D2S_ResponseRenewPersonalRecord() {
-  // @@protoc_insertion_point(destructor:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+D2S_ResponseUpdatePersonalRecord::~D2S_ResponseUpdatePersonalRecord() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
   SharedDtor(*this);
 }
-inline void D2S_ResponseRenewPersonalRecord::SharedDtor(MessageLite& self) {
-  D2S_ResponseRenewPersonalRecord& this_ = static_cast<D2S_ResponseRenewPersonalRecord&>(self);
+inline void D2S_ResponseUpdatePersonalRecord::SharedDtor(MessageLite& self) {
+  D2S_ResponseUpdatePersonalRecord& this_ = static_cast<D2S_ResponseUpdatePersonalRecord&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* D2S_ResponseRenewPersonalRecord::PlacementNew_(const void*, void* mem,
+inline void* D2S_ResponseUpdatePersonalRecord::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) D2S_ResponseRenewPersonalRecord(arena);
+  return ::new (mem) D2S_ResponseUpdatePersonalRecord(arena);
 }
-constexpr auto D2S_ResponseRenewPersonalRecord::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2S_ResponseRenewPersonalRecord),
-                                            alignof(D2S_ResponseRenewPersonalRecord));
+constexpr auto D2S_ResponseUpdatePersonalRecord::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2S_ResponseUpdatePersonalRecord),
+                                            alignof(D2S_ResponseUpdatePersonalRecord));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull D2S_ResponseRenewPersonalRecord::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull D2S_ResponseUpdatePersonalRecord::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_D2S_ResponseRenewPersonalRecord_default_instance_._instance,
+        &_D2S_ResponseUpdatePersonalRecord_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &D2S_ResponseRenewPersonalRecord::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<D2S_ResponseRenewPersonalRecord>(),
+        &D2S_ResponseUpdatePersonalRecord::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2S_ResponseUpdatePersonalRecord>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &D2S_ResponseRenewPersonalRecord::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<D2S_ResponseRenewPersonalRecord>(), &D2S_ResponseRenewPersonalRecord::ByteSizeLong,
-            &D2S_ResponseRenewPersonalRecord::_InternalSerialize,
+        &D2S_ResponseUpdatePersonalRecord::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2S_ResponseUpdatePersonalRecord>(), &D2S_ResponseUpdatePersonalRecord::ByteSizeLong,
+            &D2S_ResponseUpdatePersonalRecord::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewPersonalRecord, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(D2S_ResponseUpdatePersonalRecord, _impl_._cached_size_),
         false,
     },
-    &D2S_ResponseRenewPersonalRecord::kDescriptorMethods,
+    &D2S_ResponseUpdatePersonalRecord::kDescriptorMethods,
     &descriptor_table_S2D_5fProtocol_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* D2S_ResponseRenewPersonalRecord::GetClassData() const {
+const ::google::protobuf::internal::ClassData* D2S_ResponseUpdatePersonalRecord::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseRenewPersonalRecord::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseUpdatePersonalRecord::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -3547,17 +3550,17 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseRenewPersonalRecord::_tabl
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2S_ResponseRenewPersonalRecord>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2S_ResponseUpdatePersonalRecord>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // bool success = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2S_ResponseRenewPersonalRecord, _impl_.success_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewPersonalRecord, _impl_.success_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2S_ResponseUpdatePersonalRecord, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2S_ResponseUpdatePersonalRecord, _impl_.success_)}},
   }}, {{
     65535, 65535
   }}, {{
     // bool success = 1;
-    {PROTOBUF_FIELD_OFFSET(D2S_ResponseRenewPersonalRecord, _impl_.success_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(D2S_ResponseUpdatePersonalRecord, _impl_.success_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kBool)},
   }},
   // no aux_entries
@@ -3565,8 +3568,8 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2S_ResponseRenewPersonalRecord::_tabl
   }},
 };
 
-PROTOBUF_NOINLINE void D2S_ResponseRenewPersonalRecord::Clear() {
-// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+PROTOBUF_NOINLINE void D2S_ResponseUpdatePersonalRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -3577,17 +3580,17 @@ PROTOBUF_NOINLINE void D2S_ResponseRenewPersonalRecord::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* D2S_ResponseRenewPersonalRecord::_InternalSerialize(
+        ::uint8_t* D2S_ResponseUpdatePersonalRecord::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const D2S_ResponseRenewPersonalRecord& this_ = static_cast<const D2S_ResponseRenewPersonalRecord&>(base);
+          const D2S_ResponseUpdatePersonalRecord& this_ = static_cast<const D2S_ResponseUpdatePersonalRecord&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* D2S_ResponseRenewPersonalRecord::_InternalSerialize(
+        ::uint8_t* D2S_ResponseUpdatePersonalRecord::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const D2S_ResponseRenewPersonalRecord& this_ = *this;
+          const D2S_ResponseUpdatePersonalRecord& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -3603,18 +3606,18 @@ PROTOBUF_NOINLINE void D2S_ResponseRenewPersonalRecord::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t D2S_ResponseRenewPersonalRecord::ByteSizeLong(const MessageLite& base) {
-          const D2S_ResponseRenewPersonalRecord& this_ = static_cast<const D2S_ResponseRenewPersonalRecord&>(base);
+        ::size_t D2S_ResponseUpdatePersonalRecord::ByteSizeLong(const MessageLite& base) {
+          const D2S_ResponseUpdatePersonalRecord& this_ = static_cast<const D2S_ResponseUpdatePersonalRecord&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t D2S_ResponseRenewPersonalRecord::ByteSizeLong() const {
-          const D2S_ResponseRenewPersonalRecord& this_ = *this;
+        ::size_t D2S_ResponseUpdatePersonalRecord::ByteSizeLong() const {
+          const D2S_ResponseUpdatePersonalRecord& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -3631,10 +3634,10 @@ PROTOBUF_NOINLINE void D2S_ResponseRenewPersonalRecord::Clear() {
                                                      &this_._impl_._cached_size_);
         }
 
-void D2S_ResponseRenewPersonalRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<D2S_ResponseRenewPersonalRecord*>(&to_msg);
-  auto& from = static_cast<const D2S_ResponseRenewPersonalRecord&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+void D2S_ResponseUpdatePersonalRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2S_ResponseUpdatePersonalRecord*>(&to_msg);
+  auto& from = static_cast<const D2S_ResponseUpdatePersonalRecord&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -3645,21 +3648,21 @@ void D2S_ResponseRenewPersonalRecord::MergeImpl(::google::protobuf::MessageLite&
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void D2S_ResponseRenewPersonalRecord::CopyFrom(const D2S_ResponseRenewPersonalRecord& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2S_ResponseRenewPersonalRecord)
+void D2S_ResponseUpdatePersonalRecord::CopyFrom(const D2S_ResponseUpdatePersonalRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2S_ResponseUpdatePersonalRecord)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void D2S_ResponseRenewPersonalRecord::InternalSwap(D2S_ResponseRenewPersonalRecord* PROTOBUF_RESTRICT other) {
+void D2S_ResponseUpdatePersonalRecord::InternalSwap(D2S_ResponseUpdatePersonalRecord* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
         swap(_impl_.success_, other->_impl_.success_);
 }
 
-::google::protobuf::Metadata D2S_ResponseRenewPersonalRecord::GetMetadata() const {
+::google::protobuf::Metadata D2S_ResponseUpdatePersonalRecord::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -4128,30 +4131,30 @@ void D2S_ResponsePublicRecord::InternalSwap(D2S_ResponsePublicRecord* PROTOBUF_R
 }
 // ===================================================================
 
-class S2D_TryRenewPublicRecord::_Internal {
+class S2D_TryUpdatePublicRecord::_Internal {
  public:
 };
 
-S2D_TryRenewPublicRecord::S2D_TryRenewPublicRecord(::google::protobuf::Arena* arena)
+S2D_TryUpdatePublicRecord::S2D_TryUpdatePublicRecord(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryRenewPublicRecord)
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.S2D_TryUpdatePublicRecord)
 }
-S2D_TryRenewPublicRecord::S2D_TryRenewPublicRecord(
-    ::google::protobuf::Arena* arena, const S2D_TryRenewPublicRecord& from)
-    : S2D_TryRenewPublicRecord(arena) {
+S2D_TryUpdatePublicRecord::S2D_TryUpdatePublicRecord(
+    ::google::protobuf::Arena* arena, const S2D_TryUpdatePublicRecord& from)
+    : S2D_TryUpdatePublicRecord(arena) {
   MergeFrom(from);
 }
-inline PROTOBUF_NDEBUG_INLINE S2D_TryRenewPublicRecord::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE S2D_TryUpdatePublicRecord::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void S2D_TryRenewPublicRecord::SharedCtor(::_pb::Arena* arena) {
+inline void S2D_TryUpdatePublicRecord::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, gameid_),
@@ -4160,54 +4163,54 @@ inline void S2D_TryRenewPublicRecord::SharedCtor(::_pb::Arena* arena) {
                offsetof(Impl_, gameid_) +
                sizeof(Impl_::recordersscore_));
 }
-S2D_TryRenewPublicRecord::~S2D_TryRenewPublicRecord() {
-  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryRenewPublicRecord)
+S2D_TryUpdatePublicRecord::~S2D_TryUpdatePublicRecord() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.S2D_TryUpdatePublicRecord)
   SharedDtor(*this);
 }
-inline void S2D_TryRenewPublicRecord::SharedDtor(MessageLite& self) {
-  S2D_TryRenewPublicRecord& this_ = static_cast<S2D_TryRenewPublicRecord&>(self);
+inline void S2D_TryUpdatePublicRecord::SharedDtor(MessageLite& self) {
+  S2D_TryUpdatePublicRecord& this_ = static_cast<S2D_TryUpdatePublicRecord&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* S2D_TryRenewPublicRecord::PlacementNew_(const void*, void* mem,
+inline void* S2D_TryUpdatePublicRecord::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) S2D_TryRenewPublicRecord(arena);
+  return ::new (mem) S2D_TryUpdatePublicRecord(arena);
 }
-constexpr auto S2D_TryRenewPublicRecord::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryRenewPublicRecord),
-                                            alignof(S2D_TryRenewPublicRecord));
+constexpr auto S2D_TryUpdatePublicRecord::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S2D_TryUpdatePublicRecord),
+                                            alignof(S2D_TryUpdatePublicRecord));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull S2D_TryRenewPublicRecord::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull S2D_TryUpdatePublicRecord::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_S2D_TryRenewPublicRecord_default_instance_._instance,
+        &_S2D_TryUpdatePublicRecord_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &S2D_TryRenewPublicRecord::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<S2D_TryRenewPublicRecord>(),
+        &S2D_TryUpdatePublicRecord::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S2D_TryUpdatePublicRecord>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &S2D_TryRenewPublicRecord::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<S2D_TryRenewPublicRecord>(), &S2D_TryRenewPublicRecord::ByteSizeLong,
-            &S2D_TryRenewPublicRecord::_InternalSerialize,
+        &S2D_TryUpdatePublicRecord::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S2D_TryUpdatePublicRecord>(), &S2D_TryUpdatePublicRecord::ByteSizeLong,
+            &S2D_TryUpdatePublicRecord::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_._cached_size_),
         false,
     },
-    &S2D_TryRenewPublicRecord::kDescriptorMethods,
+    &S2D_TryUpdatePublicRecord::kDescriptorMethods,
     &descriptor_table_S2D_5fProtocol_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* S2D_TryRenewPublicRecord::GetClassData() const {
+const ::google::protobuf::internal::ClassData* S2D_TryUpdatePublicRecord::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewPublicRecord::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryUpdatePublicRecord::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -4222,30 +4225,30 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewPublicRecord::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryRenewPublicRecord>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::S2D_TryUpdatePublicRecord>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
     // int32 gameId = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPublicRecord, _impl_.gameid_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.gameid_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdatePublicRecord, _impl_.gameid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_.gameid_)}},
     // int32 recordersDbid = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPublicRecord, _impl_.recordersdbid_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersdbid_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdatePublicRecord, _impl_.recordersdbid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_.recordersdbid_)}},
     // int32 recordersScore = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryRenewPublicRecord, _impl_.recordersscore_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersscore_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S2D_TryUpdatePublicRecord, _impl_.recordersscore_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_.recordersscore_)}},
   }}, {{
     65535, 65535
   }}, {{
     // int32 gameId = 1;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.gameid_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_.gameid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // int32 recordersDbid = 2;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersdbid_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_.recordersdbid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // int32 recordersScore = 3;
-    {PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersscore_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_.recordersscore_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
@@ -4253,8 +4256,8 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> S2D_TryRenewPublicRecord::_table_ = {
   }},
 };
 
-PROTOBUF_NOINLINE void S2D_TryRenewPublicRecord::Clear() {
-// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+PROTOBUF_NOINLINE void S2D_TryUpdatePublicRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.S2D_TryUpdatePublicRecord)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -4267,17 +4270,17 @@ PROTOBUF_NOINLINE void S2D_TryRenewPublicRecord::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* S2D_TryRenewPublicRecord::_InternalSerialize(
+        ::uint8_t* S2D_TryUpdatePublicRecord::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const S2D_TryRenewPublicRecord& this_ = static_cast<const S2D_TryRenewPublicRecord&>(base);
+          const S2D_TryUpdatePublicRecord& this_ = static_cast<const S2D_TryUpdatePublicRecord&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* S2D_TryRenewPublicRecord::_InternalSerialize(
+        ::uint8_t* S2D_TryUpdatePublicRecord::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const S2D_TryRenewPublicRecord& this_ = *this;
+          const S2D_TryUpdatePublicRecord& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.S2D_TryUpdatePublicRecord)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -4307,18 +4310,18 @@ PROTOBUF_NOINLINE void S2D_TryRenewPublicRecord::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryRenewPublicRecord)
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.S2D_TryUpdatePublicRecord)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t S2D_TryRenewPublicRecord::ByteSizeLong(const MessageLite& base) {
-          const S2D_TryRenewPublicRecord& this_ = static_cast<const S2D_TryRenewPublicRecord&>(base);
+        ::size_t S2D_TryUpdatePublicRecord::ByteSizeLong(const MessageLite& base) {
+          const S2D_TryUpdatePublicRecord& this_ = static_cast<const S2D_TryUpdatePublicRecord&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t S2D_TryRenewPublicRecord::ByteSizeLong() const {
-          const S2D_TryRenewPublicRecord& this_ = *this;
+        ::size_t S2D_TryUpdatePublicRecord::ByteSizeLong() const {
+          const S2D_TryUpdatePublicRecord& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.S2D_TryUpdatePublicRecord)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -4347,10 +4350,10 @@ PROTOBUF_NOINLINE void S2D_TryRenewPublicRecord::Clear() {
                                                      &this_._impl_._cached_size_);
         }
 
-void S2D_TryRenewPublicRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<S2D_TryRenewPublicRecord*>(&to_msg);
-  auto& from = static_cast<const S2D_TryRenewPublicRecord&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+void S2D_TryUpdatePublicRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S2D_TryUpdatePublicRecord*>(&to_msg);
+  auto& from = static_cast<const S2D_TryUpdatePublicRecord&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.S2D_TryUpdatePublicRecord)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -4367,105 +4370,105 @@ void S2D_TryRenewPublicRecord::MergeImpl(::google::protobuf::MessageLite& to_msg
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void S2D_TryRenewPublicRecord::CopyFrom(const S2D_TryRenewPublicRecord& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryRenewPublicRecord)
+void S2D_TryUpdatePublicRecord::CopyFrom(const S2D_TryUpdatePublicRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.S2D_TryUpdatePublicRecord)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void S2D_TryRenewPublicRecord::InternalSwap(S2D_TryRenewPublicRecord* PROTOBUF_RESTRICT other) {
+void S2D_TryUpdatePublicRecord::InternalSwap(S2D_TryUpdatePublicRecord* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.recordersscore_)
-      + sizeof(S2D_TryRenewPublicRecord::_impl_.recordersscore_)
-      - PROTOBUF_FIELD_OFFSET(S2D_TryRenewPublicRecord, _impl_.gameid_)>(
+      PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_.recordersscore_)
+      + sizeof(S2D_TryUpdatePublicRecord::_impl_.recordersscore_)
+      - PROTOBUF_FIELD_OFFSET(S2D_TryUpdatePublicRecord, _impl_.gameid_)>(
           reinterpret_cast<char*>(&_impl_.gameid_),
           reinterpret_cast<char*>(&other->_impl_.gameid_));
 }
 
-::google::protobuf::Metadata S2D_TryRenewPublicRecord::GetMetadata() const {
+::google::protobuf::Metadata S2D_TryUpdatePublicRecord::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
-class D2C_ResponseRenewPublicRecord::_Internal {
+class D2C_ResponseUpdatePublicRecord::_Internal {
  public:
 };
 
-D2C_ResponseRenewPublicRecord::D2C_ResponseRenewPublicRecord(::google::protobuf::Arena* arena)
+D2C_ResponseUpdatePublicRecord::D2C_ResponseUpdatePublicRecord(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+  // @@protoc_insertion_point(arena_constructor:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
 }
-D2C_ResponseRenewPublicRecord::D2C_ResponseRenewPublicRecord(
-    ::google::protobuf::Arena* arena, const D2C_ResponseRenewPublicRecord& from)
-    : D2C_ResponseRenewPublicRecord(arena) {
+D2C_ResponseUpdatePublicRecord::D2C_ResponseUpdatePublicRecord(
+    ::google::protobuf::Arena* arena, const D2C_ResponseUpdatePublicRecord& from)
+    : D2C_ResponseUpdatePublicRecord(arena) {
   MergeFrom(from);
 }
-inline PROTOBUF_NDEBUG_INLINE D2C_ResponseRenewPublicRecord::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE D2C_ResponseUpdatePublicRecord::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-inline void D2C_ResponseRenewPublicRecord::SharedCtor(::_pb::Arena* arena) {
+inline void D2C_ResponseUpdatePublicRecord::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   _impl_.success_ = {};
 }
-D2C_ResponseRenewPublicRecord::~D2C_ResponseRenewPublicRecord() {
-  // @@protoc_insertion_point(destructor:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+D2C_ResponseUpdatePublicRecord::~D2C_ResponseUpdatePublicRecord() {
+  // @@protoc_insertion_point(destructor:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
   SharedDtor(*this);
 }
-inline void D2C_ResponseRenewPublicRecord::SharedDtor(MessageLite& self) {
-  D2C_ResponseRenewPublicRecord& this_ = static_cast<D2C_ResponseRenewPublicRecord&>(self);
+inline void D2C_ResponseUpdatePublicRecord::SharedDtor(MessageLite& self) {
+  D2C_ResponseUpdatePublicRecord& this_ = static_cast<D2C_ResponseUpdatePublicRecord&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* D2C_ResponseRenewPublicRecord::PlacementNew_(const void*, void* mem,
+inline void* D2C_ResponseUpdatePublicRecord::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) D2C_ResponseRenewPublicRecord(arena);
+  return ::new (mem) D2C_ResponseUpdatePublicRecord(arena);
 }
-constexpr auto D2C_ResponseRenewPublicRecord::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2C_ResponseRenewPublicRecord),
-                                            alignof(D2C_ResponseRenewPublicRecord));
+constexpr auto D2C_ResponseUpdatePublicRecord::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(D2C_ResponseUpdatePublicRecord),
+                                            alignof(D2C_ResponseUpdatePublicRecord));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull D2C_ResponseRenewPublicRecord::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull D2C_ResponseUpdatePublicRecord::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_D2C_ResponseRenewPublicRecord_default_instance_._instance,
+        &_D2C_ResponseUpdatePublicRecord_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &D2C_ResponseRenewPublicRecord::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<D2C_ResponseRenewPublicRecord>(),
+        &D2C_ResponseUpdatePublicRecord::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<D2C_ResponseUpdatePublicRecord>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &D2C_ResponseRenewPublicRecord::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<D2C_ResponseRenewPublicRecord>(), &D2C_ResponseRenewPublicRecord::ByteSizeLong,
-            &D2C_ResponseRenewPublicRecord::_InternalSerialize,
+        &D2C_ResponseUpdatePublicRecord::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<D2C_ResponseUpdatePublicRecord>(), &D2C_ResponseUpdatePublicRecord::ByteSizeLong,
+            &D2C_ResponseUpdatePublicRecord::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(D2C_ResponseRenewPublicRecord, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(D2C_ResponseUpdatePublicRecord, _impl_._cached_size_),
         false,
     },
-    &D2C_ResponseRenewPublicRecord::kDescriptorMethods,
+    &D2C_ResponseUpdatePublicRecord::kDescriptorMethods,
     &descriptor_table_S2D_5fProtocol_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* D2C_ResponseRenewPublicRecord::GetClassData() const {
+const ::google::protobuf::internal::ClassData* D2C_ResponseUpdatePublicRecord::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2C_ResponseRenewPublicRecord::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2C_ResponseUpdatePublicRecord::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -4480,17 +4483,17 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2C_ResponseRenewPublicRecord::_table_
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2C_ResponseRenewPublicRecord>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::S2D_Protocol::D2C_ResponseUpdatePublicRecord>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // bool success = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2C_ResponseRenewPublicRecord, _impl_.success_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2C_ResponseRenewPublicRecord, _impl_.success_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(D2C_ResponseUpdatePublicRecord, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(D2C_ResponseUpdatePublicRecord, _impl_.success_)}},
   }}, {{
     65535, 65535
   }}, {{
     // bool success = 1;
-    {PROTOBUF_FIELD_OFFSET(D2C_ResponseRenewPublicRecord, _impl_.success_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(D2C_ResponseUpdatePublicRecord, _impl_.success_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kBool)},
   }},
   // no aux_entries
@@ -4498,8 +4501,8 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> D2C_ResponseRenewPublicRecord::_table_
   }},
 };
 
-PROTOBUF_NOINLINE void D2C_ResponseRenewPublicRecord::Clear() {
-// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+PROTOBUF_NOINLINE void D2C_ResponseUpdatePublicRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -4510,17 +4513,17 @@ PROTOBUF_NOINLINE void D2C_ResponseRenewPublicRecord::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* D2C_ResponseRenewPublicRecord::_InternalSerialize(
+        ::uint8_t* D2C_ResponseUpdatePublicRecord::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const D2C_ResponseRenewPublicRecord& this_ = static_cast<const D2C_ResponseRenewPublicRecord&>(base);
+          const D2C_ResponseUpdatePublicRecord& this_ = static_cast<const D2C_ResponseUpdatePublicRecord&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* D2C_ResponseRenewPublicRecord::_InternalSerialize(
+        ::uint8_t* D2C_ResponseUpdatePublicRecord::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const D2C_ResponseRenewPublicRecord& this_ = *this;
+          const D2C_ResponseUpdatePublicRecord& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+          // @@protoc_insertion_point(serialize_to_array_start:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -4536,18 +4539,18 @@ PROTOBUF_NOINLINE void D2C_ResponseRenewPublicRecord::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+          // @@protoc_insertion_point(serialize_to_array_end:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t D2C_ResponseRenewPublicRecord::ByteSizeLong(const MessageLite& base) {
-          const D2C_ResponseRenewPublicRecord& this_ = static_cast<const D2C_ResponseRenewPublicRecord&>(base);
+        ::size_t D2C_ResponseUpdatePublicRecord::ByteSizeLong(const MessageLite& base) {
+          const D2C_ResponseUpdatePublicRecord& this_ = static_cast<const D2C_ResponseUpdatePublicRecord&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t D2C_ResponseRenewPublicRecord::ByteSizeLong() const {
-          const D2C_ResponseRenewPublicRecord& this_ = *this;
+        ::size_t D2C_ResponseUpdatePublicRecord::ByteSizeLong() const {
+          const D2C_ResponseUpdatePublicRecord& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+          // @@protoc_insertion_point(message_byte_size_start:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -4564,10 +4567,10 @@ PROTOBUF_NOINLINE void D2C_ResponseRenewPublicRecord::Clear() {
                                                      &this_._impl_._cached_size_);
         }
 
-void D2C_ResponseRenewPublicRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<D2C_ResponseRenewPublicRecord*>(&to_msg);
-  auto& from = static_cast<const D2C_ResponseRenewPublicRecord&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+void D2C_ResponseUpdatePublicRecord::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<D2C_ResponseUpdatePublicRecord*>(&to_msg);
+  auto& from = static_cast<const D2C_ResponseUpdatePublicRecord&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -4578,21 +4581,21 @@ void D2C_ResponseRenewPublicRecord::MergeImpl(::google::protobuf::MessageLite& t
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void D2C_ResponseRenewPublicRecord::CopyFrom(const D2C_ResponseRenewPublicRecord& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2C_ResponseRenewPublicRecord)
+void D2C_ResponseUpdatePublicRecord::CopyFrom(const D2C_ResponseUpdatePublicRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2D_Protocol.D2C_ResponseUpdatePublicRecord)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void D2C_ResponseRenewPublicRecord::InternalSwap(D2C_ResponseRenewPublicRecord* PROTOBUF_RESTRICT other) {
+void D2C_ResponseUpdatePublicRecord::InternalSwap(D2C_ResponseUpdatePublicRecord* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
         swap(_impl_.success_, other->_impl_.success_);
 }
 
-::google::protobuf::Metadata D2C_ResponseRenewPublicRecord::GetMetadata() const {
+::google::protobuf::Metadata D2C_ResponseUpdatePublicRecord::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
