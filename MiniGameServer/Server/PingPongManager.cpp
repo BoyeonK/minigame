@@ -67,6 +67,8 @@ bool PingPongManager::RenewPublicRecordFromDB() {
 bool PingPongManager::CompareAndRenewPublicRecord(int32_t dbid, int32_t score) {
 	if (score < _publicRecord)
 		return false;
+
+	DBManager->S2D_UpdatePublicRecord(int(_ty), dbid, score);
 	return true;
 }
 

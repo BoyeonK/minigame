@@ -86,6 +86,17 @@ bool DBClientImpl::S2D_PublicRecord(int32_t gameId) {
     return true;
 }
 
+bool DBClientImpl::S2D_UpdatePublicRecord(int32_t gameId, int32_t dbid, int32_t score) {
+    SUpdatePublicRecordCall* call = objectPool<SUpdatePublicRecordCall>::alloc();
+    S2D_Protocol::S2D_TryUpdatePublicRecord request = S2DPacketMaker::Make_S2D_TryUpdatePublicRecord(gameId, dbid, score);
+
+    call->response_reader = _stub->PrepareAsyncUpdatePublicRecord(&call->context, request, _cqRef.get());
+    call->response_reader->StartCall();
+
+    call->response_reader->Finish(&call->reply, &call->status, (void*)call);
+    return true;
+}
+
 void DBClientImpl::AsyncCompleteRpc() {
     if (_isConnected.load()) {
         void* tag;

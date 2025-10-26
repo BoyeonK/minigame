@@ -27,6 +27,7 @@ public:
     bool S2D_UpdateElo(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t elo);
     bool S2D_UpdatePersonalRecord(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t score);
     bool S2D_PublicRecord(int32_t gameId);
+    bool S2D_UpdatePublicRecord();
 
     void AsyncCompleteRpc();
 

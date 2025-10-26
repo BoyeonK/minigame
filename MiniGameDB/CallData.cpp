@@ -879,8 +879,77 @@ void DUpdatePersonalRecordCallData::UpdatePersonalRecord(SQLHDBC& hDbc, SQLHSTMT
 void DPublicRecordCallData::Proceed() {
     //TODO : gameId를 받음
     //해당 gameid에 해당하는 게임의 최대 기록자인 유저의 닉네임과 스코어를 reply로 전송
+    if (_status == CREATE) {
+        _status = PROCESS;
+        _service->RequestPublicRecord(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
+    }
+    else if (_status == PROCESS) {
+        DPublicRecordCallData* newCallData = objectPool<DPublicRecordCallData>::alloc(_service, _completionQueueRef);
+
+        grpc::Status stat = grpc::Status::OK;
+
+        try {
+            SQLHDBC hDbc = GDBManager->PopHDbc();
+            if (hDbc == nullptr) {
+                throw runtime_error("Invalid hDbc");
+            }
+            Cleaner hDbcCleaner([&]() {
+                GDBManager->ReturnHDbc(hDbc);
+                });
+
+            SQLHSTMT hStmt1 = nullptr;
+            Cleaner hStmtCleaner([&]() {
+                if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+            });
+
+        }
+        catch (runtime_error& e) {
+            cout << e.what() << endl;
+        }
+
+        _status = FINISH;
+        _responder.Finish(_reply, stat, this);
+    }
+    // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
+    else {
+        objectPool<DPublicRecordCallData>::dealloc(this);
+    }
 }
 
 void DUpdatePublicRecordCallData::Proceed() {
+    if (_status == CREATE) {
+        _status = PROCESS;
+        _service->RequestUpdatePublicRecord(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
+    }
+    else if (_status == PROCESS) {
+        DUpdatePublicRecordCallData* newCallData = objectPool<DUpdatePublicRecordCallData>::alloc(_service, _completionQueueRef);
 
+        grpc::Status stat = grpc::Status::OK;
+
+        try {
+            SQLHDBC hDbc = GDBManager->PopHDbc();
+            if (hDbc == nullptr) {
+                throw runtime_error("Invalid hDbc");
+            }
+            Cleaner hDbcCleaner([&]() {
+                GDBManager->ReturnHDbc(hDbc);
+                });
+
+            SQLHSTMT hStmt1 = nullptr;
+            Cleaner hStmtCleaner([&]() {
+                if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+                });
+
+        }
+        catch (runtime_error& e) {
+            cout << e.what() << endl;
+        }
+
+        _status = FINISH;
+        _responder.Finish(_reply, stat, this);
+    }
+    // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
+    else {
+        objectPool<DUpdatePublicRecordCallData>::dealloc(this);
+    }
 }

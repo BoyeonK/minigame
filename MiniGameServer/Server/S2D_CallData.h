@@ -174,7 +174,4 @@ public:
 
 	S2D_Protocol::D2C_ResponseUpdatePublicRecord reply;
 	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2C_ResponseUpdatePublicRecord>> response_reader;
-
-private:
-	weak_ptr<PlayerSession> _clientSessionRef;
 };
