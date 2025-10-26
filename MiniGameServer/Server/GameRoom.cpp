@@ -51,3 +51,17 @@ void GameRoom::BroadCastDespawn(const shared_ptr<UnityGameObject>& objRef) {
 	BroadCast(sendBuffer);
 }
 
+double GameRoom::Winrate(int32_t elo1, int32_t elo2) {
+	double denominator = (pow(10, (elo2 - elo1) / 400) + 1);
+	return 1.0 / denominator;
+}
+
+int32_t GameRoom::CalculateEloW(int32_t winnerElo, int32_t opponentElo) {
+	double deltaElo = 20 * (1 - Winrate(winnerElo, opponentElo));
+	return static_cast<int32_t>(winnerElo + deltaElo);
+}
+
+int32_t GameRoom::CalculateEloL(int32_t loserElo, int32_t opponentElo) {
+	double deltaElo = -20 * Winrate(loserElo, opponentElo);
+	return static_cast<int32_t>(loserElo + deltaElo);
+}

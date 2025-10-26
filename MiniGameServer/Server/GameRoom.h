@@ -30,6 +30,9 @@ public:
 	void BroadCast(shared_ptr<SendBuffer> sendBuffer);
 	void BroadCastSpawn(const shared_ptr<UnityGameObject>& objRef);
 	void BroadCastDespawn(const shared_ptr<UnityGameObject>& objRef);
+	double Winrate(int32_t elo1, int32_t elo2);
+	int32_t CalculateEloW(int32_t winnerElo, int32_t opponentElo);
+	int32_t CalculateEloL(int32_t loserElo, int32_t opponentElo);
 
 protected:
 	int32_t _roomId = 0;

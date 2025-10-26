@@ -27,6 +27,7 @@ public:
 	void CountingPhase();
 	void CalculateGameResult();
 	void UpdateGameResultToDB();
+	void EndGame();
 
 	//bool MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt);
 	//void MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed);

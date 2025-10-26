@@ -187,9 +187,14 @@ void PingPongGameRoom::CalculateGameResult() {
 		S2C_Protocol::S_P_Result playerResultPkt = baseResultPkt;
 		playerResultPkt.set_iswinner(isWinner);
 
+		playerSessionRef->SetJoinedRoom(nullptr);
+		playerSessionRef->SetMatchingState(GameType::None);
+
 		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(playerResultPkt);
 		playerSessionRef->Send(sendBuffer);
 	}
+
+	PostEvent(&PingPongGameRoom::UpdateGameResultToDB);
 }
 
 void PingPongGameRoom::UpdateGameResultToDB() {
@@ -208,9 +213,9 @@ void PingPongGameRoom::UpdateGameResultToDB() {
 		}
 
 		if (_points[i] > playerSessionRef->GetPersonalRecord(int(_ty))) {
-			//TODO : 해당 플레이어의 기록을 갱신.
-			//TODO : Manager클래스에 기록된 월드 최고기록보다 높은경우, 이 플레이어의 dbid와 스코어를 등록
-
+			int32_t dbid = playerSessionRef->GetDbid();
+			DBManager->S2D_UpdatePersonalRecord(playerSessionRef, dbid, int(_ty), _points[i]);
+			GGameManagers[int(_ty)]->CompareAndRenewPublicRecord(dbid, _points[i]);
 		}
 
 		bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
@@ -227,9 +232,36 @@ void PingPongGameRoom::UpdateGameResultToDB() {
 	if (worstWinnerElo == 3000 || bestLosersElo == 0)
 		return;
 
-	for (int winnerIndex : _winners) {
-		//TODO : winner의 elo와 bestLosersElo를 가지고 갱신된 elo를 winner elo로 갱신
+	for (int i = 0; i < _quota; i++) {
+		bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
+		int32_t calculatedElo = -1;
+		if (isWinner)
+			calculatedElo = CalculateEloW(_elos[i], bestLosersElo);
+		else
+			calculatedElo = CalculateEloL(_elos[i], worstWinnerElo);
+
+		if (calculatedElo == -1)
+			continue;
+
+		auto playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+
+		int32_t dbid = playerSessionRef->GetDbid();
+		DBManager->S2D_UpdateElo(playerSessionRef, dbid, int(_ty), calculatedElo);
 	}
+
+	PostEvent(&PingPongGameRoom::EndGame);
+}
+
+void PingPongGameRoom::EndGame() {
+	//TODO: 모든 자원을 반환
+	_vecGameObjects.clear();
+	_hmGameObjects.clear();
+	_elos.clear();
+	_points.clear();
+	_winners.clear();
+	_state = GameState::EndGame;
 }
 
 /*
