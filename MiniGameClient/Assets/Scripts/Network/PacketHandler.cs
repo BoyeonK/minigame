@@ -288,6 +288,8 @@ class PacketHandler {
 		Managers.ExecuteAtMainThread(() => { Managers.Object.CreateObject(serializedObj); });
 	}
 
+	//최초에는, 이 EndGameHandler패킷으로 모든 게임의 종료 및 결과를 받으려 했으나
+	//게임마다 다른 패킷을 정의하는 쪽이 훨씬 더 다양한 바리에이션을 만들기 편하기 때문에 변경.
 	public static void S_EndGameHandler(PacketSession session, IMessage packet) { 
 		S_EndGame recvPkt = packet as S_EndGame;
 		GameType gameType = IntToGameType(recvPkt.GameId);
@@ -327,6 +329,11 @@ class PacketHandler {
         foreach (var bullet in recvPkt.Bullets) {
 			S_P_BulletHandler(session, bullet);
         }
+    }
+
+    public static void S_P_Result(PacketSession session, IMessage packet) {
+        S_P_Result recvPkt = packet as S_P_Result;
+
     }
 }
 

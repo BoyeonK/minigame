@@ -310,6 +310,10 @@ public class NetworkManager {
         }
     }
 
+	public void ResponseSPResult(bool isWinner) {
+
+	}
+
     public void ProcessDanmakuState(IMessage packet) {
 
     }
