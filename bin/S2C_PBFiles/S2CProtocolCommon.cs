@@ -27,7 +27,7 @@ namespace Google.Protobuf.Protocol {
             "ChlTMkNfUHJvdG9jb2xfQ29tbW9uLnByb3RvEgxTMkNfUHJvdG9jb2wiJgoD",
             "WFlaEgkKAXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCIlwKD1VuaXR5",
             "R2FtZU9iamVjdBIQCghvYmplY3RJZBgBIAEoBRISCgpvYmplY3RUeXBlGAIg",
-            "ASgFEiMKCHBvc2l0aW9uGAMgASgLMhEuUzJDX1Byb3RvY29sLlhZWirhCAoF",
+            "ASgFEiMKCHBvc2l0aW9uGAMgASgLMhEuUzJDX1Byb3RvY29sLlhZWiqUCQoF",
             "TXNnSWQSDQoJU19XRUxDT01FEAASDQoJQ19XRUxDT01FEAESFgoSU19XRUxD",
             "T01FX1JFU1BPTlNFEAISDwoLU19FTkNSWVBURUQQAxIPCgtDX0VOQ1JZUFRF",
             "RBAEEgsKB0NfTE9HSU4QBRILCgdTX0xPR0lOEAYSFAoQQ19DUkVBVEVfQUND",
@@ -51,9 +51,10 @@ namespace Google.Protobuf.Protocol {
             "U0VfUExBWUVSX0JBUl9QT1NJVElPThDMARIjCh5TX1BfQ0hBTkdFX1BMQVlF",
             "Ul9CQVJfUE9TSVRJT04QzQESDwoKU19QX0JVTExFVBDOARIQCgtTX1BfQlVM",
             "TEVUUxDPARIWChFDX1BfQ09MTElTSU9OX0JBUhDQARIcChdDX1BfQ09MTElT",
-            "SU9OX0dPQUxfTElORRDRARIVChBTX1BfUkVORVdfU0NPUkVTENIBEhQKD1Nf",
-            "REFOTUFLVV9TVEFURRCsAhIVChBTX0RBTk1BS1VfUkVTVUxUEK0CQhuqAhhH",
-            "b29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnByb3RvMw=="));
+            "SU9OX0dPQUxfTElORRDRARIVChBTX1BfUkVORVdfU0NPUkVTENIBEhMKDlNf",
+            "UF9LRUVQX0FMSVZFENMBEhwKF0NfUF9SRVNQT05TRV9LRUVQX0FMSVZFENQB",
+            "EhQKD1NfREFOTUFLVV9TVEFURRCsAhIVChBTX0RBTk1BS1VfUkVTVUxUEK0C",
+            "QhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -111,6 +112,8 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("C_P_COLLISION_BAR")] CPCollisionBar = 208,
     [pbr::OriginalName("C_P_COLLISION_GOAL_LINE")] CPCollisionGoalLine = 209,
     [pbr::OriginalName("S_P_RENEW_SCORES")] SPRenewScores = 210,
+    [pbr::OriginalName("S_P_KEEP_ALIVE")] SPKeepAlive = 211,
+    [pbr::OriginalName("C_P_RESPONSE_KEEP_ALIVE")] CPResponseKeepAlive = 212,
     [pbr::OriginalName("S_DANMAKU_STATE")] SDanmakuState = 300,
     [pbr::OriginalName("S_DANMAKU_RESULT")] SDanmakuResult = 301,
   }

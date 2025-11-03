@@ -130,6 +130,56 @@ struct S_P_ReadyForStartDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_P_ReadyForStartDefaultTypeInternal _S_P_ReadyForStart_default_instance_;
 
+inline constexpr S_P_KeepAlive::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : tick_{::int64_t{0}},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_P_KeepAlive::S_P_KeepAlive(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_P_KeepAliveDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_P_KeepAliveDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_P_KeepAliveDefaultTypeInternal() {}
+  union {
+    S_P_KeepAlive _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_P_KeepAliveDefaultTypeInternal _S_P_KeepAlive_default_instance_;
+
+inline constexpr C_P_ResponseKeepAlive::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : tick_{::int64_t{0}},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR C_P_ResponseKeepAlive::C_P_ResponseKeepAlive(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct C_P_ResponseKeepAliveDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_P_ResponseKeepAliveDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_P_ResponseKeepAliveDefaultTypeInternal() {}
+  union {
+    C_P_ResponseKeepAlive _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_P_ResponseKeepAliveDefaultTypeInternal _C_P_ResponseKeepAlive_default_instance_;
+
 inline constexpr C_P_CollisionGoalLine::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : point_{0},
@@ -441,6 +491,24 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_RenewScores, _impl_.scores_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_KeepAlive, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_P_KeepAlive, _impl_.tick_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_P_ResponseKeepAlive, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_P_ResponseKeepAlive, _impl_.tick_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -456,6 +524,8 @@ static const ::_pbi::MigrationSchema
         {90, 101, -1, sizeof(::S2C_Protocol::C_P_CollisionBar)},
         {104, -1, -1, sizeof(::S2C_Protocol::C_P_CollisionGoalLine)},
         {113, -1, -1, sizeof(::S2C_Protocol::S_P_RenewScores)},
+        {122, -1, -1, sizeof(::S2C_Protocol::S_P_KeepAlive)},
+        {131, -1, -1, sizeof(::S2C_Protocol::C_P_ResponseKeepAlive)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_P_State_default_instance_._instance,
@@ -469,6 +539,8 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_C_P_CollisionBar_default_instance_._instance,
     &::S2C_Protocol::_C_P_CollisionGoalLine_default_instance_._instance,
     &::S2C_Protocol::_S_P_RenewScores_default_instance_._instance,
+    &::S2C_Protocol::_S_P_KeepAlive_default_instance_._instance,
+    &::S2C_Protocol::_C_P_ResponseKeepAlive_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2C_5fProtocol_5fPingPong_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -494,8 +566,10 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fPingPong_2eproto[] ABSL_AT
     "l.UnityGameObject\022\"\n\007moveDir\030\002 \001(\0132\021.S2C"
     "_Protocol.XYZ\022\r\n\005speed\030\003 \001(\002\"&\n\025C_P_Coll"
     "isionGoalLine\022\r\n\005point\030\001 \001(\005\"!\n\017S_P_Rene"
-    "wScores\022\016\n\006scores\030\001 \003(\005B\033\252\002\030Google.Proto"
-    "buf.Protocolb\006proto3"
+    "wScores\022\016\n\006scores\030\001 \003(\005\"\035\n\rS_P_KeepAlive"
+    "\022\014\n\004tick\030\001 \001(\003\"%\n\025C_P_ResponseKeepAlive\022"
+    "\014\n\004tick\030\001 \001(\003B\033\252\002\030Google.Protobuf.Protoc"
+    "olb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_deps[1] =
     {
@@ -505,13 +579,13 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_once
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fPingPong_2eproto = {
     false,
     false,
-    940,
+    1010,
     descriptor_table_protodef_S2C_5fProtocol_5fPingPong_2eproto,
     "S2C_Protocol_PingPong.proto",
     &descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_once,
     descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_deps,
     1,
-    11,
+    13,
     schemas,
     file_default_instances,
     TableStruct_S2C_5fProtocol_5fPingPong_2eproto::offsets,
@@ -3482,6 +3556,420 @@ void S_P_RenewScores::InternalSwap(S_P_RenewScores* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata S_P_RenewScores::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_P_KeepAlive::_Internal {
+ public:
+};
+
+S_P_KeepAlive::S_P_KeepAlive(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_P_KeepAlive)
+}
+S_P_KeepAlive::S_P_KeepAlive(
+    ::google::protobuf::Arena* arena, const S_P_KeepAlive& from)
+    : S_P_KeepAlive(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S_P_KeepAlive::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S_P_KeepAlive::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.tick_ = {};
+}
+S_P_KeepAlive::~S_P_KeepAlive() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_P_KeepAlive)
+  SharedDtor(*this);
+}
+inline void S_P_KeepAlive::SharedDtor(MessageLite& self) {
+  S_P_KeepAlive& this_ = static_cast<S_P_KeepAlive&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* S_P_KeepAlive::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_P_KeepAlive(arena);
+}
+constexpr auto S_P_KeepAlive::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_P_KeepAlive),
+                                            alignof(S_P_KeepAlive));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_P_KeepAlive::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_P_KeepAlive_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_P_KeepAlive::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_P_KeepAlive>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_P_KeepAlive::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_P_KeepAlive>(), &S_P_KeepAlive::ByteSizeLong,
+            &S_P_KeepAlive::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_P_KeepAlive, _impl_._cached_size_),
+        false,
+    },
+    &S_P_KeepAlive::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fPingPong_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_P_KeepAlive::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_P_KeepAlive::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_P_KeepAlive>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int64 tick = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(S_P_KeepAlive, _impl_.tick_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_KeepAlive, _impl_.tick_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int64 tick = 1;
+    {PROTOBUF_FIELD_OFFSET(S_P_KeepAlive, _impl_.tick_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S_P_KeepAlive::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_P_KeepAlive)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.tick_ = ::int64_t{0};
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_P_KeepAlive::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_P_KeepAlive& this_ = static_cast<const S_P_KeepAlive&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_P_KeepAlive::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_P_KeepAlive& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_P_KeepAlive)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int64 tick = 1;
+          if (this_._internal_tick() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt64ToArrayWithField<1>(
+                    stream, this_._internal_tick(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_P_KeepAlive)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_P_KeepAlive::ByteSizeLong(const MessageLite& base) {
+          const S_P_KeepAlive& this_ = static_cast<const S_P_KeepAlive&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_P_KeepAlive::ByteSizeLong() const {
+          const S_P_KeepAlive& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_P_KeepAlive)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // int64 tick = 1;
+            if (this_._internal_tick() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+                  this_._internal_tick());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_P_KeepAlive::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_P_KeepAlive*>(&to_msg);
+  auto& from = static_cast<const S_P_KeepAlive&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_P_KeepAlive)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_tick() != 0) {
+    _this->_impl_.tick_ = from._impl_.tick_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_P_KeepAlive::CopyFrom(const S_P_KeepAlive& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_P_KeepAlive)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_P_KeepAlive::InternalSwap(S_P_KeepAlive* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.tick_, other->_impl_.tick_);
+}
+
+::google::protobuf::Metadata S_P_KeepAlive::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class C_P_ResponseKeepAlive::_Internal {
+ public:
+};
+
+C_P_ResponseKeepAlive::C_P_ResponseKeepAlive(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.C_P_ResponseKeepAlive)
+}
+C_P_ResponseKeepAlive::C_P_ResponseKeepAlive(
+    ::google::protobuf::Arena* arena, const C_P_ResponseKeepAlive& from)
+    : C_P_ResponseKeepAlive(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE C_P_ResponseKeepAlive::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void C_P_ResponseKeepAlive::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.tick_ = {};
+}
+C_P_ResponseKeepAlive::~C_P_ResponseKeepAlive() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.C_P_ResponseKeepAlive)
+  SharedDtor(*this);
+}
+inline void C_P_ResponseKeepAlive::SharedDtor(MessageLite& self) {
+  C_P_ResponseKeepAlive& this_ = static_cast<C_P_ResponseKeepAlive&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* C_P_ResponseKeepAlive::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) C_P_ResponseKeepAlive(arena);
+}
+constexpr auto C_P_ResponseKeepAlive::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(C_P_ResponseKeepAlive),
+                                            alignof(C_P_ResponseKeepAlive));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull C_P_ResponseKeepAlive::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_C_P_ResponseKeepAlive_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &C_P_ResponseKeepAlive::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<C_P_ResponseKeepAlive>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &C_P_ResponseKeepAlive::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<C_P_ResponseKeepAlive>(), &C_P_ResponseKeepAlive::ByteSizeLong,
+            &C_P_ResponseKeepAlive::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(C_P_ResponseKeepAlive, _impl_._cached_size_),
+        false,
+    },
+    &C_P_ResponseKeepAlive::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fPingPong_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* C_P_ResponseKeepAlive::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> C_P_ResponseKeepAlive::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::C_P_ResponseKeepAlive>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int64 tick = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(C_P_ResponseKeepAlive, _impl_.tick_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(C_P_ResponseKeepAlive, _impl_.tick_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int64 tick = 1;
+    {PROTOBUF_FIELD_OFFSET(C_P_ResponseKeepAlive, _impl_.tick_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void C_P_ResponseKeepAlive::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.C_P_ResponseKeepAlive)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.tick_ = ::int64_t{0};
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* C_P_ResponseKeepAlive::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const C_P_ResponseKeepAlive& this_ = static_cast<const C_P_ResponseKeepAlive&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* C_P_ResponseKeepAlive::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const C_P_ResponseKeepAlive& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.C_P_ResponseKeepAlive)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int64 tick = 1;
+          if (this_._internal_tick() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt64ToArrayWithField<1>(
+                    stream, this_._internal_tick(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.C_P_ResponseKeepAlive)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t C_P_ResponseKeepAlive::ByteSizeLong(const MessageLite& base) {
+          const C_P_ResponseKeepAlive& this_ = static_cast<const C_P_ResponseKeepAlive&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t C_P_ResponseKeepAlive::ByteSizeLong() const {
+          const C_P_ResponseKeepAlive& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.C_P_ResponseKeepAlive)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // int64 tick = 1;
+            if (this_._internal_tick() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+                  this_._internal_tick());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void C_P_ResponseKeepAlive::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<C_P_ResponseKeepAlive*>(&to_msg);
+  auto& from = static_cast<const C_P_ResponseKeepAlive&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.C_P_ResponseKeepAlive)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_tick() != 0) {
+    _this->_impl_.tick_ = from._impl_.tick_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void C_P_ResponseKeepAlive::CopyFrom(const C_P_ResponseKeepAlive& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.C_P_ResponseKeepAlive)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void C_P_ResponseKeepAlive::InternalSwap(C_P_ResponseKeepAlive* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.tick_, other->_impl_.tick_);
+}
+
+::google::protobuf::Metadata C_P_ResponseKeepAlive::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
