@@ -553,6 +553,8 @@ void DPlayerInfomationCallData::Proceed() {
             for (SQLINTEGER record : records) {
                 _reply.add_personalrecords(record);
             }
+
+            cout << "여기까지 왔으면 DB문제는 아님" << endl;
         }
         catch (runtime_error& e) {
             cout << e.what() << endl;

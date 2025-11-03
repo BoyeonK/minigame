@@ -119,11 +119,11 @@ void SPlayerInformationCall::OnSucceed() {
 		return;
 
 	playerSessionRef->SetPlayerId(reply.playerid());
-	for (int i = 1; i <= reply.elos_size(); i++) {
-		playerSessionRef->SetElo(i, reply.elos(i));
+	for (int i = 0; i < reply.elos_size(); i++) {
+		playerSessionRef->SetElo(i + 1, reply.elos(i));
 	}
-	for (int i = 1; i <= reply.personalrecords_size(); i++) {
-		playerSessionRef->SetPersonalRecord(i, reply.personalrecords(i));
+	for (int i = 0; i < reply.personalrecords_size(); i++) {
+		playerSessionRef->SetPersonalRecord(i + 1, reply.personalrecords(i));
 	}
 	cout << "DB로부터 player의 정보를 가져와서 session에 채움" << endl;
 }
