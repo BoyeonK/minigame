@@ -72,7 +72,10 @@ public class UI_PingPongScoreBoard : UI_Scene {
             return;
 
         if (scores.Count == 4) {
-
+            _player1Score.text = scores[0].ToString();
+            _player2Score.text = scores[1].ToString();
+            _player3Score.text = scores[2].ToString();
+            _player4Score.text = scores[3].ToString();
         }
     }
 
