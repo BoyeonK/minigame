@@ -75,6 +75,9 @@ extern S_P_ChangePlayerBarPositionDefaultTypeInternal _S_P_ChangePlayerBarPositi
 class S_P_ReadyForStart;
 struct S_P_ReadyForStartDefaultTypeInternal;
 extern S_P_ReadyForStartDefaultTypeInternal _S_P_ReadyForStart_default_instance_;
+class S_P_RenewScores;
+struct S_P_RenewScoresDefaultTypeInternal;
+extern S_P_RenewScoresDefaultTypeInternal _S_P_RenewScores_default_instance_;
 class S_P_RequestPlayerBarPosition;
 struct S_P_RequestPlayerBarPositionDefaultTypeInternal;
 extern S_P_RequestPlayerBarPositionDefaultTypeInternal _S_P_RequestPlayerBarPosition_default_instance_;
@@ -598,6 +601,205 @@ class S_P_RequestPlayerBarPosition final : public ::google::protobuf::Message
     float sz_;
     float nx_;
     float nz_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_S2C_5fProtocol_5fPingPong_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_P_RenewScores final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_P_RenewScores) */ {
+ public:
+  inline S_P_RenewScores() : S_P_RenewScores(nullptr) {}
+  ~S_P_RenewScores() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(S_P_RenewScores* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_P_RenewScores));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR S_P_RenewScores(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline S_P_RenewScores(const S_P_RenewScores& from) : S_P_RenewScores(nullptr, from) {}
+  inline S_P_RenewScores(S_P_RenewScores&& from) noexcept
+      : S_P_RenewScores(nullptr, std::move(from)) {}
+  inline S_P_RenewScores& operator=(const S_P_RenewScores& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_P_RenewScores& operator=(S_P_RenewScores&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_P_RenewScores& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_P_RenewScores* internal_default_instance() {
+    return reinterpret_cast<const S_P_RenewScores*>(
+        &_S_P_RenewScores_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 10;
+  friend void swap(S_P_RenewScores& a, S_P_RenewScores& b) { a.Swap(&b); }
+  inline void Swap(S_P_RenewScores* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_P_RenewScores* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_P_RenewScores* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S_P_RenewScores>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const S_P_RenewScores& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const S_P_RenewScores& from) { S_P_RenewScores::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(S_P_RenewScores* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_P_RenewScores"; }
+
+ protected:
+  explicit S_P_RenewScores(::google::protobuf::Arena* arena);
+  S_P_RenewScores(::google::protobuf::Arena* arena, const S_P_RenewScores& from);
+  S_P_RenewScores(::google::protobuf::Arena* arena, S_P_RenewScores&& from) noexcept
+      : S_P_RenewScores(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kScoresFieldNumber = 1,
+  };
+  // repeated int32 scores = 1;
+  int scores_size() const;
+  private:
+  int _internal_scores_size() const;
+
+  public:
+  void clear_scores() ;
+  ::int32_t scores(int index) const;
+  void set_scores(int index, ::int32_t value);
+  void add_scores(::int32_t value);
+  const ::google::protobuf::RepeatedField<::int32_t>& scores() const;
+  ::google::protobuf::RepeatedField<::int32_t>* mutable_scores();
+
+  private:
+  const ::google::protobuf::RepeatedField<::int32_t>& _internal_scores() const;
+  ::google::protobuf::RepeatedField<::int32_t>* _internal_mutable_scores();
+
+  public:
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_P_RenewScores)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const S_P_RenewScores& from_msg);
+    ::google::protobuf::RepeatedField<::int32_t> scores_;
+    ::google::protobuf::internal::CachedSize _scores_cached_byte_size_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1481,7 +1683,8 @@ class S_P_State final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kObjectsFieldNumber = 1,
-    kPlayerIdFieldNumber = 2,
+    kPlayerIdsFieldNumber = 2,
+    kPlayerIdFieldNumber = 3,
   };
   // repeated .S2C_Protocol.UnityGameObject objects = 1;
   int objects_size() const;
@@ -1500,7 +1703,29 @@ class S_P_State final : public ::google::protobuf::Message
   const ::S2C_Protocol::UnityGameObject& objects(int index) const;
   ::S2C_Protocol::UnityGameObject* add_objects();
   const ::google::protobuf::RepeatedPtrField<::S2C_Protocol::UnityGameObject>& objects() const;
-  // int32 playerId = 2;
+  // repeated string playerIds = 2;
+  int playerids_size() const;
+  private:
+  int _internal_playerids_size() const;
+
+  public:
+  void clear_playerids() ;
+  const std::string& playerids(int index) const;
+  std::string* mutable_playerids(int index);
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_playerids(int index, Arg_&& value, Args_... args);
+  std::string* add_playerids();
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void add_playerids(Arg_&& value, Args_... args);
+  const ::google::protobuf::RepeatedPtrField<std::string>& playerids() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* mutable_playerids();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<std::string>& _internal_playerids() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* _internal_mutable_playerids();
+
+  public:
+  // int32 playerId = 3;
   void clear_playerid() ;
   ::int32_t playerid() const;
   void set_playerid(::int32_t value);
@@ -1515,8 +1740,8 @@ class S_P_State final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 1,
-      0, 2>
+      2, 3, 1,
+      40, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -1534,6 +1759,7 @@ class S_P_State final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_P_State& from_msg);
     ::google::protobuf::RepeatedPtrField< ::S2C_Protocol::UnityGameObject > objects_;
+    ::google::protobuf::RepeatedPtrField<std::string> playerids_;
     ::int32_t playerid_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -2262,7 +2488,71 @@ S_P_State::_internal_mutable_objects() {
   return &_impl_.objects_;
 }
 
-// int32 playerId = 2;
+// repeated string playerIds = 2;
+inline int S_P_State::_internal_playerids_size() const {
+  return _internal_playerids().size();
+}
+inline int S_P_State::playerids_size() const {
+  return _internal_playerids_size();
+}
+inline void S_P_State::clear_playerids() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playerids_.Clear();
+}
+inline std::string* S_P_State::add_playerids() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  std::string* _s = _internal_mutable_playerids()->Add();
+  // @@protoc_insertion_point(field_add_mutable:S2C_Protocol.S_P_State.playerIds)
+  return _s;
+}
+inline const std::string& S_P_State::playerids(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_State.playerIds)
+  return _internal_playerids().Get(index);
+}
+inline std::string* S_P_State::mutable_playerids(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_P_State.playerIds)
+  return _internal_mutable_playerids()->Mutable(index);
+}
+template <typename Arg_, typename... Args_>
+inline void S_P_State::set_playerids(int index, Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::AssignToString(
+      *_internal_mutable_playerids()->Mutable(index),
+      std::forward<Arg_>(value), args... );
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_State.playerIds)
+}
+template <typename Arg_, typename... Args_>
+inline void S_P_State::add_playerids(Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::google::protobuf::internal::AddToRepeatedPtrField(*_internal_mutable_playerids(),
+                               std::forward<Arg_>(value),
+                               args... );
+  // @@protoc_insertion_point(field_add:S2C_Protocol.S_P_State.playerIds)
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+S_P_State::playerids() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:S2C_Protocol.S_P_State.playerIds)
+  return _internal_playerids();
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+S_P_State::mutable_playerids() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:S2C_Protocol.S_P_State.playerIds)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_playerids();
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+S_P_State::_internal_playerids() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.playerids_;
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+S_P_State::_internal_mutable_playerids() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.playerids_;
+}
+
+// int32 playerId = 3;
 inline void S_P_State::clear_playerid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.playerid_ = 0;
@@ -3262,6 +3552,55 @@ inline ::int32_t C_P_CollisionGoalLine::_internal_point() const {
 inline void C_P_CollisionGoalLine::_internal_set_point(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.point_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// S_P_RenewScores
+
+// repeated int32 scores = 1;
+inline int S_P_RenewScores::_internal_scores_size() const {
+  return _internal_scores().size();
+}
+inline int S_P_RenewScores::scores_size() const {
+  return _internal_scores_size();
+}
+inline void S_P_RenewScores::clear_scores() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.scores_.Clear();
+}
+inline ::int32_t S_P_RenewScores::scores(int index) const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RenewScores.scores)
+  return _internal_scores().Get(index);
+}
+inline void S_P_RenewScores::set_scores(int index, ::int32_t value) {
+  _internal_mutable_scores()->Set(index, value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_RenewScores.scores)
+}
+inline void S_P_RenewScores::add_scores(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_scores()->Add(value);
+  // @@protoc_insertion_point(field_add:S2C_Protocol.S_P_RenewScores.scores)
+}
+inline const ::google::protobuf::RepeatedField<::int32_t>& S_P_RenewScores::scores() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:S2C_Protocol.S_P_RenewScores.scores)
+  return _internal_scores();
+}
+inline ::google::protobuf::RepeatedField<::int32_t>* S_P_RenewScores::mutable_scores()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:S2C_Protocol.S_P_RenewScores.scores)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_scores();
+}
+inline const ::google::protobuf::RepeatedField<::int32_t>&
+S_P_RenewScores::_internal_scores() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.scores_;
+}
+inline ::google::protobuf::RepeatedField<::int32_t>* S_P_RenewScores::_internal_mutable_scores() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.scores_;
 }
 
 #ifdef __GNUC__

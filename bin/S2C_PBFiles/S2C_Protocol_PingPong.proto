@@ -9,7 +9,8 @@ import "S2C_Protocol_Common.proto";
 //Player의 ID를 전달.
 message S_P_State {
     repeated UnityGameObject objects = 1;
-    int32 playerId = 2;
+    repeated string playerIds = 2;
+    int32 playerId = 3;
 }
 
 message S_P_Result {
@@ -60,4 +61,8 @@ message C_P_CollisionBar {
 
 message C_P_CollisionGoalLine {
     int32 point = 1;
+}
+
+message S_P_RenewScores {
+    repeated int32 scores = 1;
 }

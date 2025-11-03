@@ -15,6 +15,7 @@ public class PingPongScene : BaseScene {
     EnemyPlayerBarController _northPlayerBar;
 
     PingPongCameraController _pingPongCameraController;
+    UI_PingPongScoreBoard _PingPongScoreBoard;
 
     protected override void Init() {
         //Base - EventSystem등록.
@@ -50,6 +51,10 @@ public class PingPongScene : BaseScene {
         if (goNorthPlayerBar != null) {
             _northPlayerBar = goNorthPlayerBar.GetComponent<EnemyPlayerBarController>();
         }
+        GameObject scoreBoard = GameObject.Find("UI_PingPongScoreBoard");
+        if (scoreBoard != null) {
+            _PingPongScoreBoard = scoreBoard.GetComponent<UI_PingPongScoreBoard>();
+        }
 
         //CameraController참조
         GameObject cam = GameObject.Find("TopViewCamera");
@@ -62,8 +67,6 @@ public class PingPongScene : BaseScene {
 
         //서버에게 Scene에 로딩이 완료되었음을 통지. Game정보를 요청
         Managers.Network.TryRequestGameState((int)GameType.PingPong);
-
-        //Invoke(nameof(TestMakeBulletFunc), 5f);
     }
 
     //플레이어가 어느 방위의 수호자인지 정보가 서버로부터 전달되었을 때.

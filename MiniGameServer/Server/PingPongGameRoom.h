@@ -20,6 +20,7 @@ public:
 	void Init2(vector<WatingPlayerData> pdv);
 
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
+
 	void Start();
 	void OnGoingPhase1();
 	void OnGoingPhase2();
@@ -41,6 +42,7 @@ public:
 
 	void RequestPlayerBarPosition();
 	void ResponsePlayerBarPosition(int32_t playerIdx, float x, float z);
+	void RenewScoreBoard();
 
 	void SendGameState(int32_t playerIdx) override;
 
@@ -48,6 +50,7 @@ private:
 	int32_t _quota = 4;
 	bool _isUpdateCall = false;
 	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;
+	S2C_Protocol::S_P_RenewScores _renewScoresPkt;
 	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<int> _winners;

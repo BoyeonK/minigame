@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerId 1
+  m_text: Score3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
   m_sharedMaterial: {fileID: -4219098522723081126, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
@@ -312,9 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PlayerId 1
-
-'
+  m_text: PlayerId 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
   m_sharedMaterial: {fileID: -4219098522723081126, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
@@ -450,7 +448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerId 1
+  m_text: PlayerId 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
   m_sharedMaterial: {fileID: -4219098522723081126, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
@@ -673,7 +671,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerId 1
+  m_text: Score 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
   m_sharedMaterial: {fileID: -4219098522723081126, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
@@ -809,7 +807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerId 1
+  m_text: Score2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
   m_sharedMaterial: {fileID: -4219098522723081126, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
@@ -1160,7 +1158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerId 1
+  m_text: PlayerId 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
   m_sharedMaterial: {fileID: -4219098522723081126, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
@@ -1492,7 +1490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerId 1
+  m_text: Score4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
   m_sharedMaterial: {fileID: -4219098522723081126, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
@@ -1708,6 +1706,50 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &2001753545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2001753547}
+  - component: {fileID: 2001753548}
+  m_Layer: 0
+  m_Name: GameResultScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2001753547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001753545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2001753548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001753545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43e92c601b0ce64f9f2995acd5edd87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1717,3 +1759,4 @@ SceneRoots:
   - {fileID: 1601763374}
   - {fileID: 639191614}
   - {fileID: 1336822957}
+  - {fileID: 2001753547}

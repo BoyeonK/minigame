@@ -495,6 +495,16 @@ void PingPongGameRoom::ResponsePlayerBarPosition(int32_t playerIdx, float x, flo
 	}
 }
 
+void PingPongGameRoom::RenewScoreBoard() {
+	if (_updateCount % 10 != 0)
+		return;
+
+	S2C_Protocol::S_P_RenewScores pkt;
+	for (auto& point : _points)	pkt.add_scores(point);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+}
+
 void PingPongGameRoom::SendGameState(int32_t playerIdx) {
 	if (playerIdx > (_quota - 1))
 		return;
@@ -518,5 +528,7 @@ void PingPongGameRoom::Update() {
 	if (!_isUpdateCall)
 		return;
 
+	_updateCount++;
+	RenewScoreBoard();
 	RequestPlayerBarPosition();
 }
