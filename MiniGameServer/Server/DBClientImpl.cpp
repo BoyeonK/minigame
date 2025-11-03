@@ -54,7 +54,7 @@ bool DBClientImpl::S2D_PlayerInfomation(shared_ptr<PlayerSession> playerSessionR
 }
 
 bool DBClientImpl::S2D_UpdateElo(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t elo) {
-    SUpdateEloCall* call = objectPool<SUpdateEloCall>::alloc(playerSessionRef);
+    SUpdateEloCall* call = objectPool<SUpdateEloCall>::alloc(playerSessionRef, gameId, elo);
     S2D_Protocol::S2D_TryUpdateElo request = S2DPacketMaker::Make_S2D_TryUpdateElo(dbid, gameId, elo);
 
     call->response_reader = _stub->PrepareAsyncUpdateElo(&call->context, request, _cqRef.get());
@@ -65,7 +65,7 @@ bool DBClientImpl::S2D_UpdateElo(shared_ptr<PlayerSession> playerSessionRef, int
 }
 
 bool DBClientImpl::S2D_UpdatePersonalRecord(shared_ptr<PlayerSession> playerSessionRef, int32_t dbid, int32_t gameId, int32_t score) {
-    SUpdatePersonalRecordCall* call = objectPool<SUpdatePersonalRecordCall>::alloc(playerSessionRef);
+    SUpdatePersonalRecordCall* call = objectPool<SUpdatePersonalRecordCall>::alloc(playerSessionRef, gameId, score);
     S2D_Protocol::S2D_TryUpdatePersonalRecord request = S2DPacketMaker::Make_S2D_TryUpdatePersonalRecord(dbid, gameId, score);
 
     call->response_reader = _stub->PrepareAsyncUpdatePersonalRecord(&call->context, request, _cqRef.get());

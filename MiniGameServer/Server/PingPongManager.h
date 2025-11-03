@@ -19,7 +19,7 @@ public:
 	void MakeRoom(vector<WatingPlayerData>&& pdv) override;
 	bool RenewPublicRecordFromDB() override;
 	bool CompareAndRenewPublicRecord(int32_t dbid, int32_t score) override;
-	bool TrySetPublicRecord() override {};
+	bool TrySetPublicRecord() override { return true; };
 
 	void Update() override;
 
