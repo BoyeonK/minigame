@@ -311,6 +311,6 @@ bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol
 	if (playerSessionRef->GetRoomIdx() >= 4 || playerSessionRef->GetRoomIdx() < 0)
 		return false;
 
-	roomRef->PostEvent(&PingPongGameRoom::Handle_CollisionGoalLine, pkt.point(), playerSessionRef->GetRoomIdx());
+	roomRef->PostEvent(&PingPongGameRoom::Handle_CollisionGoalLine, playerSessionRef->GetRoomIdx(), pkt.point());
 	return true;
 }
