@@ -1,11 +1,6 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
-using ServerCore;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using UnityEngine;
+using Org.BouncyCastle.Bcpg;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Encodings;
@@ -13,6 +8,13 @@ using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+using ServerCore;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using UnityEngine;
 using static Define;
 
 //아래의 Handler함수들은 customHandler를 통해서 main thread에서 '모두' 실행되는 구조이므로
@@ -334,6 +336,11 @@ class PacketHandler {
     public static void S_P_Result(PacketSession session, IMessage packet) {
         S_P_Result recvPkt = packet as S_P_Result;
 
+    }
+
+    public static void S_P_RenewScoresHandler(PacketSession session, IMessage packet) {
+		S_P_RenewScores recvPkt = packet as S_P_RenewScores;
+		Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseSPScores(recvPkt.Scores.ToList()); });
     }
 }
 

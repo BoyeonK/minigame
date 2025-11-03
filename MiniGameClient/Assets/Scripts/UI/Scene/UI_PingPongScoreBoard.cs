@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -63,6 +65,15 @@ public class UI_PingPongScoreBoard : UI_Scene {
         }
 
         Managers.Input.AddKeyListener(KeyCode.Tab, HideScoreBar, InputManager.KeyState.Down);
+    }
+
+    public void RenewScores(List<int> scores) {
+        if (scores == null)
+            return;
+
+        if (scores.Count == 4) {
+
+        }
     }
 
     private void Clear() {

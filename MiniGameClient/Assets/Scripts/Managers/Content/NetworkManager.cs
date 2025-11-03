@@ -1,8 +1,10 @@
 using Google.Protobuf;
 using Google.Protobuf.Protocol;
+using NUnit.Framework;
 using Org.BouncyCastle.Bcpg;
 using ServerCore;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using UnityEngine;
@@ -313,6 +315,15 @@ public class NetworkManager {
 	public void ResponseSPResult(bool isWinner) {
 
 	}
+
+	public void ResponseSPScores(List<int> scores) {
+        BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+        if (scene == null)
+            return;
+
+        if (scene is PingPongScene pingPongScene)
+            pingPongScene.RenewScores(scores);
+    }
 
     public void ProcessDanmakuState(IMessage packet) {
 

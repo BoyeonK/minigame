@@ -171,6 +171,10 @@ public class PingPongScene : BaseScene {
         }
     }
 
+    public void RenewScores(List<int> scores) {
+        _PingPongScoreBoard.RenewScores(scores);
+    }
+
     private void Update() {
         if (_raycastPlane != null) {
             Vector3 mousePointerPosition = _raycastPlane.GetRaycastPoint();
