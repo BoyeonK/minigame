@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Google.Protobuf;
+﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
-using ServerCore;
-using UnityEngine;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+using ServerCore;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 class PacketMaker {
     private static readonly SecureRandom _secureRandom = new SecureRandom();
@@ -141,5 +142,15 @@ class PacketMaker {
 
     public static C_RequestGameState MakeCRequestGameState(int gameId) {
         return new C_RequestGameState { GameId = gameId };
+    }
+
+    private static C_P_ResponseKeepAlive MakeCPResponseKeepAliveInternal(long tick) {
+        return new C_P_ResponseKeepAlive { Tick = tick };
+    }
+
+    public static C_Encrypted MakeCPResponseKeepAlive(PacketSession session, long tick) {
+        C_P_ResponseKeepAlive rawPkt = MakeCPResponseKeepAliveInternal(tick);
+        C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CPResponseKeepAlive);
+        return pkt;
     }
 }

@@ -342,5 +342,11 @@ class PacketHandler {
 		S_P_RenewScores recvPkt = packet as S_P_RenewScores;
 		Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseSPScores(recvPkt.Scores.ToList()); });
     }
+
+	public static void S_P_KeepAliveHandler(PacketSession session, IMessage packet) {
+        S_P_KeepAlive recvPkt = packet as S_P_KeepAlive;
+        C_Encrypted pkt = PacketMaker.MakeCPResponseKeepAlive(session, recvPkt.Tick);
+		Managers.Network.Send(pkt);
+	}
 }
 
