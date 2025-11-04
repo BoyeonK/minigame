@@ -314,3 +314,18 @@ bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol
 	roomRef->PostEvent(&PingPongGameRoom::Handle_CollisionGoalLine, playerSessionRef->GetRoomIdx(), pkt.point());
 	return true;
 }
+
+bool Handle_C_P_ResponseKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponseKeepAlive& pkt) {
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
+	
+	if (roomRef == nullptr)
+		return false;
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+	if (playerSessionRef->GetRoomIdx() >= 4 || playerSessionRef->GetRoomIdx() < 0)
+		return false;
+
+	roomRef->PostEvent(&PingPongGameRoom::Handle_Response_KeepAlive, playerSessionRef->GetRoomIdx());
+	return false;
+}

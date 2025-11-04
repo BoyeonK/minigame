@@ -39,10 +39,12 @@ public:
 	void Handle_CollisionBar(float px, float pz, float speed, int32_t objectId, int32_t playerIdx);
 	bool IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef, float px, float pz, float speed, int32_t playerIdx);
 	void Handle_CollisionGoalLine(int32_t playerIdx, int32_t point);
+	void Handle_Response_KeepAlive(int32_t playerIdx);
 
 	void RequestPlayerBarPosition();
 	void ResponsePlayerBarPosition(int32_t playerIdx, float x, float z);
 	void RenewScoreBoard();
+	void BroadCastKeepAlive();
 
 	void SendGameState(int32_t playerIdx) override;
 
@@ -51,6 +53,8 @@ private:
 	bool _isUpdateCall = false;
 	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;
 	S2C_Protocol::S_P_RenewScores _renewScoresPkt;
+	S2C_Protocol::S_P_KeepAlive _keepAlivePkt;
+	uint64_t _keepAliveTick = 0;
 	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<int> _winners;

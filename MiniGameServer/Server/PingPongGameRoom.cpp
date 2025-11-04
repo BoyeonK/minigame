@@ -459,6 +459,14 @@ void PingPongGameRoom::Handle_CollisionGoalLine(int32_t playerIdx, int32_t point
 	_points[playerIdx] = _points[playerIdx] - point;
 }
 
+void PingPongGameRoom::Handle_Response_KeepAlive(int32_t playerIdx) {
+	//TODO: 받은 tick과 지금 tick을 비교. 일치할 경우, 해당 tick에 대해서 점수를 받았는지 확인.
+		//받지 않았을 경우, 점수 추가. 받았을 경우, 패킷 조작범일 가능성
+	//해당 PlayerTick이 일정 기간동안 update되지 않는 경우, 유효하지 않은 연결로 간주해서 내보내는 기능 추가도 고려하는중.
+		//일단은 시험용으로 받는족족 점수를 추가해주기만 한다.
+	_points[playerIdx] = _points[playerIdx] + 10;
+}
+
 void PingPongGameRoom::RequestPlayerBarPosition() {
 	_requestPlayerBarPosPkt.set_ex(_ex);
 	_requestPlayerBarPosPkt.set_ez(_ez);
@@ -503,6 +511,24 @@ void PingPongGameRoom::RenewScoreBoard() {
 	for (auto& point : _points)	pkt.add_scores(point);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
+}
+
+void PingPongGameRoom::BroadCastKeepAlive() {
+	if (_updateCount % 30 != 0)
+		return;
+
+	_keepAliveTick = ::GetTickCount64();
+	_keepAlivePkt.set_tick(_keepAliveTick);
+
+	for (auto& playerSessionWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+
+		S2C_Protocol::S_Encrypted pkt = S2CPacketMaker::MakeSEncrypted(_keepAlivePkt, PKT_S_P_KEEP_ALIVE, playerSessionRef->GetAESKey());
+		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+		playerSessionRef->Send(sendBuffer);
+	}
 }
 
 void PingPongGameRoom::SendGameState(int32_t playerIdx) {
