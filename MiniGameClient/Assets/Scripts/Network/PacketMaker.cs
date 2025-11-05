@@ -144,11 +144,11 @@ class PacketMaker {
         return new C_RequestGameState { GameId = gameId };
     }
 
-    private static C_P_ResponseKeepAlive MakeCPResponseKeepAliveInternal(long tick) {
+    private static C_P_ResponseKeepAlive MakeCPResponseKeepAliveInternal(ulong tick) {
         return new C_P_ResponseKeepAlive { Tick = tick };
     }
 
-    public static C_Encrypted MakeCPResponseKeepAlive(PacketSession session, long tick) {
+    public static C_Encrypted MakeCPResponseKeepAlive(PacketSession session, ulong tick) {
         C_P_ResponseKeepAlive rawPkt = MakeCPResponseKeepAliveInternal(tick);
         C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CPResponseKeepAlive);
         return pkt;

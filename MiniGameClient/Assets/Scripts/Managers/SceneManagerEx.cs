@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 //이 객체가 사용하는 모든 함수는, 유니티의 메서드를 사용해야 하므로 메인스레드에서 실행만을 전제로 만들어졌음.
@@ -16,6 +18,10 @@ public class SceneManagerEx {
     //private bool _sceneActiveImmidiately = false;
     private AsyncOperation _asyncLoadSceneOp;
     private float _progress = 0.0f;
+
+    public bool _isWinner = false;
+    public List<string> _playerIds = new List<string>();
+    public List<int> _scores = new List<int>();
 
     public BaseScene CurrentScene { get { return GameObject.FindFirstObjectByType<BaseScene>(); } }
 
@@ -78,6 +84,13 @@ public class SceneManagerEx {
         GameObject go = GameObject.Find("GameScene");
         if (go == null) return null;
         return go.GetComponent<BaseScene>();
+    }
+
+    public void EndGame(bool isWinner, List<string> ids, List<int> scores) {
+        _isWinner = isWinner;
+        _playerIds = ids;
+        _scores = scores;
+        Managers.Scene.LoadSceneWithLoadingScene(Define.Scene.Lobby, Define.Scene.GameResult);
     }
 
     public void Clear() {

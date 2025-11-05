@@ -312,9 +312,19 @@ public class NetworkManager {
         }
     }
 
-	public void ResponseSPResult(bool isWinner) {
+	public void ResponseSPResult(bool isWinner, List<string> ids, List<int> scores) {
+        BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+        if (scene == null)
+            return;
 
-	}
+		if (scene is PingPongScene pingPongScene) {
+			lock (_matchGameTypeLock) {
+				_isMatchRequesting = 0;
+				_matchGameType = GameType.None;
+			}
+			Managers.ExecuteAtMainThread(() => { pingPongScene.EndGame(isWinner, ids, scores); }); 
+        }
+    }
 
 	public void ResponseSPScores(List<int> scores) {
         BaseScene scene = Managers.Scene.GetCurrentSceneComponent();

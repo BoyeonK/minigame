@@ -62,9 +62,6 @@ public class PingPongScene : BaseScene {
             _pingPongCameraController = cam.GetComponent<PingPongCameraController>();
         }
 
-        //델리게이터를 구독
-        Managers.Network.OnPingPongEndAct += EndGame;
-
         //서버에게 Scene에 로딩이 완료되었음을 통지. Game정보를 요청
         Managers.Network.TryRequestGameState((int)GameType.PingPong);
     }
@@ -182,11 +179,11 @@ public class PingPongScene : BaseScene {
         }
     }
 
-    private void EndGame() {
-        Managers.Scene.LoadScene(Scene.Login);
+    public void EndGame(bool isWinner, List<string> ids, List<int> scores) {
+        
     }
 
     public override void Clear() {
-        Managers.Network.OnPingPongEndAct -= EndGame;
+
     }
 }

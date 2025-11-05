@@ -132,7 +132,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr S_P_KeepAlive::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : tick_{::int64_t{0}},
+      : tick_{::uint64_t{0u}},
         _cached_size_{0} {}
 
 template <typename>
@@ -157,7 +157,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr C_P_ResponseKeepAlive::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : tick_{::int64_t{0}},
+      : tick_{::uint64_t{0u}},
         _cached_size_{0} {}
 
 template <typename>
@@ -567,8 +567,8 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fPingPong_2eproto[] ABSL_AT
     "_Protocol.XYZ\022\r\n\005speed\030\003 \001(\002\"&\n\025C_P_Coll"
     "isionGoalLine\022\r\n\005point\030\001 \001(\005\"!\n\017S_P_Rene"
     "wScores\022\016\n\006scores\030\001 \003(\005\"\035\n\rS_P_KeepAlive"
-    "\022\014\n\004tick\030\001 \001(\003\"%\n\025C_P_ResponseKeepAlive\022"
-    "\014\n\004tick\030\001 \001(\003B\033\252\002\030Google.Protobuf.Protoc"
+    "\022\014\n\004tick\030\001 \001(\004\"%\n\025C_P_ResponseKeepAlive\022"
+    "\014\n\004tick\030\001 \001(\004B\033\252\002\030Google.Protobuf.Protoc"
     "olb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fPingPong_2eproto_deps[1] =
@@ -3652,15 +3652,15 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_P_KeepAlive::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_P_KeepAlive>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int64 tick = 1;
+    // uint64 tick = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(S_P_KeepAlive, _impl_.tick_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_P_KeepAlive, _impl_.tick_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int64 tick = 1;
+    // uint64 tick = 1;
     {PROTOBUF_FIELD_OFFSET(S_P_KeepAlive, _impl_.tick_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt64)},
   }},
   // no aux_entries
   {{
@@ -3674,7 +3674,7 @@ PROTOBUF_NOINLINE void S_P_KeepAlive::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.tick_ = ::int64_t{0};
+  _impl_.tick_ = ::uint64_t{0u};
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -3693,11 +3693,11 @@ PROTOBUF_NOINLINE void S_P_KeepAlive::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // int64 tick = 1;
+          // uint64 tick = 1;
           if (this_._internal_tick() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt64ToArrayWithField<1>(
-                    stream, this_._internal_tick(), target);
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+                1, this_._internal_tick(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -3724,9 +3724,9 @@ PROTOBUF_NOINLINE void S_P_KeepAlive::Clear() {
           (void)cached_has_bits;
 
            {
-            // int64 tick = 1;
+            // uint64 tick = 1;
             if (this_._internal_tick() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+              total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
                   this_._internal_tick());
             }
           }
@@ -3859,15 +3859,15 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> C_P_ResponseKeepAlive::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::C_P_ResponseKeepAlive>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int64 tick = 1;
+    // uint64 tick = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(C_P_ResponseKeepAlive, _impl_.tick_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(C_P_ResponseKeepAlive, _impl_.tick_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int64 tick = 1;
+    // uint64 tick = 1;
     {PROTOBUF_FIELD_OFFSET(C_P_ResponseKeepAlive, _impl_.tick_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt64)},
   }},
   // no aux_entries
   {{
@@ -3881,7 +3881,7 @@ PROTOBUF_NOINLINE void C_P_ResponseKeepAlive::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.tick_ = ::int64_t{0};
+  _impl_.tick_ = ::uint64_t{0u};
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -3900,11 +3900,11 @@ PROTOBUF_NOINLINE void C_P_ResponseKeepAlive::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // int64 tick = 1;
+          // uint64 tick = 1;
           if (this_._internal_tick() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt64ToArrayWithField<1>(
-                    stream, this_._internal_tick(), target);
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+                1, this_._internal_tick(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -3931,9 +3931,9 @@ PROTOBUF_NOINLINE void C_P_ResponseKeepAlive::Clear() {
           (void)cached_has_bits;
 
            {
-            // int64 tick = 1;
+            // uint64 tick = 1;
             if (this_._internal_tick() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+              total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
                   this_._internal_tick());
             }
           }

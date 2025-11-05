@@ -107,6 +107,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SPKeepAlive, UnpackPacket<S_P_KeepAlive>);
         _handler.Add((ushort)MsgId.SPKeepAlive, PacketHandler.S_P_KeepAliveHandler);
         _msgFactories.Add((ushort)MsgId.SPKeepAlive, () => new S_P_KeepAlive());
+
+        _onRecv.Add((ushort)MsgId.SPResult, UnpackPacket<S_P_Result>);
+        _handler.Add((ushort)MsgId.SPResult, PacketHandler.S_P_ResultHandler);
+        _msgFactories.Add((ushort)MsgId.SPResult, () => new S_P_Result());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

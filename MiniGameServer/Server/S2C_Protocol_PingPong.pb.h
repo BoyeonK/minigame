@@ -1107,14 +1107,14 @@ class S_P_KeepAlive final : public ::google::protobuf::Message
   enum : int {
     kTickFieldNumber = 1,
   };
-  // int64 tick = 1;
+  // uint64 tick = 1;
   void clear_tick() ;
-  ::int64_t tick() const;
-  void set_tick(::int64_t value);
+  ::uint64_t tick() const;
+  void set_tick(::uint64_t value);
 
   private:
-  ::int64_t _internal_tick() const;
-  void _internal_set_tick(::int64_t value);
+  ::uint64_t _internal_tick() const;
+  void _internal_set_tick(::uint64_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:S2C_Protocol.S_P_KeepAlive)
@@ -1140,7 +1140,7 @@ class S_P_KeepAlive final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_P_KeepAlive& from_msg);
-    ::int64_t tick_;
+    ::uint64_t tick_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1297,14 +1297,14 @@ class C_P_ResponseKeepAlive final : public ::google::protobuf::Message
   enum : int {
     kTickFieldNumber = 1,
   };
-  // int64 tick = 1;
+  // uint64 tick = 1;
   void clear_tick() ;
-  ::int64_t tick() const;
-  void set_tick(::int64_t value);
+  ::uint64_t tick() const;
+  void set_tick(::uint64_t value);
 
   private:
-  ::int64_t _internal_tick() const;
-  void _internal_set_tick(::int64_t value);
+  ::uint64_t _internal_tick() const;
+  void _internal_set_tick(::uint64_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:S2C_Protocol.C_P_ResponseKeepAlive)
@@ -1330,7 +1330,7 @@ class C_P_ResponseKeepAlive final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const C_P_ResponseKeepAlive& from_msg);
-    ::int64_t tick_;
+    ::uint64_t tick_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -3993,24 +3993,24 @@ inline ::google::protobuf::RepeatedField<::int32_t>* S_P_RenewScores::_internal_
 
 // S_P_KeepAlive
 
-// int64 tick = 1;
+// uint64 tick = 1;
 inline void S_P_KeepAlive::clear_tick() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.tick_ = ::int64_t{0};
+  _impl_.tick_ = ::uint64_t{0u};
 }
-inline ::int64_t S_P_KeepAlive::tick() const {
+inline ::uint64_t S_P_KeepAlive::tick() const {
   // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_KeepAlive.tick)
   return _internal_tick();
 }
-inline void S_P_KeepAlive::set_tick(::int64_t value) {
+inline void S_P_KeepAlive::set_tick(::uint64_t value) {
   _internal_set_tick(value);
   // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_KeepAlive.tick)
 }
-inline ::int64_t S_P_KeepAlive::_internal_tick() const {
+inline ::uint64_t S_P_KeepAlive::_internal_tick() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.tick_;
 }
-inline void S_P_KeepAlive::_internal_set_tick(::int64_t value) {
+inline void S_P_KeepAlive::_internal_set_tick(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.tick_ = value;
 }
@@ -4019,24 +4019,24 @@ inline void S_P_KeepAlive::_internal_set_tick(::int64_t value) {
 
 // C_P_ResponseKeepAlive
 
-// int64 tick = 1;
+// uint64 tick = 1;
 inline void C_P_ResponseKeepAlive::clear_tick() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.tick_ = ::int64_t{0};
+  _impl_.tick_ = ::uint64_t{0u};
 }
-inline ::int64_t C_P_ResponseKeepAlive::tick() const {
+inline ::uint64_t C_P_ResponseKeepAlive::tick() const {
   // @@protoc_insertion_point(field_get:S2C_Protocol.C_P_ResponseKeepAlive.tick)
   return _internal_tick();
 }
-inline void C_P_ResponseKeepAlive::set_tick(::int64_t value) {
+inline void C_P_ResponseKeepAlive::set_tick(::uint64_t value) {
   _internal_set_tick(value);
   // @@protoc_insertion_point(field_set:S2C_Protocol.C_P_ResponseKeepAlive.tick)
 }
-inline ::int64_t C_P_ResponseKeepAlive::_internal_tick() const {
+inline ::uint64_t C_P_ResponseKeepAlive::_internal_tick() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.tick_;
 }
-inline void C_P_ResponseKeepAlive::_internal_set_tick(::int64_t value) {
+inline void C_P_ResponseKeepAlive::_internal_set_tick(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.tick_ = value;
 }

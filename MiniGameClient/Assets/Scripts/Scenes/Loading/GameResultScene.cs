@@ -1,48 +1,29 @@
 using UnityEngine;
 
 public class GameResultScene : BaseScene {
-    private float _progressRate = 0f;
-    private bool _isReady = false;
-    private bool _hadProgress = false;
-
     protected override void Init() {
         base.Init();
-        _progressRate = 0f;
-        _isReady = false;
-        SceneType = Define.Scene.TestLoadingScene;
-        Managers.Network.OnResponseGameStartedAct += SceneChange;
+        SceneType = Define.Scene.GameResult;
+        Managers.Input.AddKeyListener(KeyCode.Return, SceneChange, InputManager.KeyState.Down);
     }
 
     private void Start() {
-        Debug.Log("로딩씬 스타트");
+        Debug.Log("게임 결과창 스타트함수");
         Managers.Scene.LoadSceneAsync();
-    }
 
-    private void UpdateProgressRate() {
-        float progress = Managers.Scene.GetLoadingProgressRate();
-        while (progress >= _progressRate + 0.099f) {
-            _hadProgress = true;
-            _progressRate += 0.1f;
-            Debug.Log("+0.1");
-        }
     }
 
     private void Update() {
-        if (!_isReady) {
-            UpdateProgressRate();
-            if (_hadProgress) {
-                Debug.Log($"진전이 있었다. 진행률 : {_progressRate}");
-                Managers.Network.TrySendLoadingProgressRate(_progressRate);
-                _hadProgress = false;
-            }
-        }
+
     }
 
     private void SceneChange() {
-        Managers.Scene.CompleteLoadSceneAsync();
+        float progress = Managers.Scene.GetLoadingProgressRate();
+        if (progress > 0.8999) 
+            Managers.Scene.CompleteLoadSceneAsync();
     }
 
     public override void Clear() {
-        Managers.Network.OnResponseGameStartedAct -= SceneChange;
+        Managers.Input.RemoveKeyListener(KeyCode.Tab, SceneChange, InputManager.KeyState.Down);
     }
 }

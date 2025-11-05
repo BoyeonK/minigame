@@ -44,8 +44,8 @@ namespace Google.Protobuf.Protocol {
             "dHlHYW1lT2JqZWN0EiIKB21vdmVEaXIYAiABKAsyES5TMkNfUHJvdG9jb2wu",
             "WFlaEg0KBXNwZWVkGAMgASgCIiYKFUNfUF9Db2xsaXNpb25Hb2FsTGluZRIN",
             "CgVwb2ludBgBIAEoBSIhCg9TX1BfUmVuZXdTY29yZXMSDgoGc2NvcmVzGAEg",
-            "AygFIh0KDVNfUF9LZWVwQWxpdmUSDAoEdGljaxgBIAEoAyIlChVDX1BfUmVz",
-            "cG9uc2VLZWVwQWxpdmUSDAoEdGljaxgBIAEoA0IbqgIYR29vZ2xlLlByb3Rv",
+            "AygFIh0KDVNfUF9LZWVwQWxpdmUSDAoEdGljaxgBIAEoBCIlChVDX1BfUmVz",
+            "cG9uc2VLZWVwQWxpdmUSDAoEdGljaxgBIAEoBEIbqgIYR29vZ2xlLlByb3Rv",
             "YnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
@@ -2837,10 +2837,10 @@ namespace Google.Protobuf.Protocol {
 
     /// <summary>Field number for the "tick" field.</summary>
     public const int TickFieldNumber = 1;
-    private long tick_;
+    private ulong tick_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Tick {
+    public ulong Tick {
       get { return tick_; }
       set {
         tick_ = value;
@@ -2870,7 +2870,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Tick != 0L) hash ^= Tick.GetHashCode();
+      if (Tick != 0UL) hash ^= Tick.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2889,9 +2889,9 @@ namespace Google.Protobuf.Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Tick != 0L) {
+      if (Tick != 0UL) {
         output.WriteRawTag(8);
-        output.WriteInt64(Tick);
+        output.WriteUInt64(Tick);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2903,9 +2903,9 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Tick != 0L) {
+      if (Tick != 0UL) {
         output.WriteRawTag(8);
-        output.WriteInt64(Tick);
+        output.WriteUInt64(Tick);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -2917,8 +2917,8 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Tick != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Tick);
+      if (Tick != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Tick);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2932,7 +2932,7 @@ namespace Google.Protobuf.Protocol {
       if (other == null) {
         return;
       }
-      if (other.Tick != 0L) {
+      if (other.Tick != 0UL) {
         Tick = other.Tick;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -2955,7 +2955,7 @@ namespace Google.Protobuf.Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Tick = input.ReadInt64();
+            Tick = input.ReadUInt64();
             break;
           }
         }
@@ -2978,7 +2978,7 @@ namespace Google.Protobuf.Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            Tick = input.ReadInt64();
+            Tick = input.ReadUInt64();
             break;
           }
         }
@@ -3035,10 +3035,10 @@ namespace Google.Protobuf.Protocol {
 
     /// <summary>Field number for the "tick" field.</summary>
     public const int TickFieldNumber = 1;
-    private long tick_;
+    private ulong tick_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Tick {
+    public ulong Tick {
       get { return tick_; }
       set {
         tick_ = value;
@@ -3068,7 +3068,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Tick != 0L) hash ^= Tick.GetHashCode();
+      if (Tick != 0UL) hash ^= Tick.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3087,9 +3087,9 @@ namespace Google.Protobuf.Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Tick != 0L) {
+      if (Tick != 0UL) {
         output.WriteRawTag(8);
-        output.WriteInt64(Tick);
+        output.WriteUInt64(Tick);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3101,9 +3101,9 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Tick != 0L) {
+      if (Tick != 0UL) {
         output.WriteRawTag(8);
-        output.WriteInt64(Tick);
+        output.WriteUInt64(Tick);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -3115,8 +3115,8 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Tick != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Tick);
+      if (Tick != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Tick);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3130,7 +3130,7 @@ namespace Google.Protobuf.Protocol {
       if (other == null) {
         return;
       }
-      if (other.Tick != 0L) {
+      if (other.Tick != 0UL) {
         Tick = other.Tick;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -3153,7 +3153,7 @@ namespace Google.Protobuf.Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Tick = input.ReadInt64();
+            Tick = input.ReadUInt64();
             break;
           }
         }
@@ -3176,7 +3176,7 @@ namespace Google.Protobuf.Protocol {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            Tick = input.ReadInt64();
+            Tick = input.ReadUInt64();
             break;
           }
         }

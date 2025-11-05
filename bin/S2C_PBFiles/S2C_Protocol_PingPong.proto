@@ -74,9 +74,9 @@ message S_P_RenewScores {
 
 //개짓하면 곤란하므로, 이 패킷은 암호화를 적용하겠음.
 message S_P_KeepAlive {
-    int64 tick = 1;
+    uint64 tick = 1;
 }
 
 message C_P_ResponseKeepAlive {
-    int64 tick = 1;
+    uint64 tick = 1;
 }

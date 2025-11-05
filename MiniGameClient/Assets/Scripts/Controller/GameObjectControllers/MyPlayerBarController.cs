@@ -31,7 +31,6 @@ public class MyPlayerBarController : GameObjectController {
     void OnTriggerEnter(Collider other) {
         PingPongBulletController specificComp = other.gameObject.GetComponent<PingPongBulletController>();
         if (specificComp != null) {
-            Debug.Log("특정 컴포넌트를 가진 오브젝트와 충돌!");
             specificComp.OnBarCollision(_playerIdx);                   
         }
     }
