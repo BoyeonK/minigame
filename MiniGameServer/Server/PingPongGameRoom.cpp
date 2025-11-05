@@ -145,6 +145,7 @@ void PingPongGameRoom::OnGoingPhase3() {
 }
 
 void PingPongGameRoom::CountingPhase() {
+	cout << "Calculating" << endl;
 	_state = GameState::Counting;
 	_isUpdateCall = false;
 	CalculateGameResult();
@@ -251,6 +252,7 @@ void PingPongGameRoom::UpdateGameResultToDB() {
 		DBManager->S2D_UpdateElo(playerSessionRef, dbid, int(_ty), calculatedElo);
 	}
 
+	cout << "여기까지 오면 일단 계산과정에서 에러는 없음" << endl;
 	PostEvent(&PingPongGameRoom::EndGame);
 }
 

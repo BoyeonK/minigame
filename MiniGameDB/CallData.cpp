@@ -733,6 +733,8 @@ void DUpdateEloCallData::Proceed() {
             cout << e.what() << endl;
         }
 
+        cout << dbid << "의 " << gameId << "번 게임 elo를 " << elo << "로 변경 요청" << endl;
+
         _status = FINISH;
         _responder.Finish(_reply, stat, this);
     }
