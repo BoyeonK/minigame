@@ -322,7 +322,7 @@ public class NetworkManager {
 				_isMatchRequesting = 0;
 				_matchGameType = GameType.None;
 			}
-			Managers.ExecuteAtMainThread(() => { pingPongScene.EndGame(isWinner, ids, scores); }); 
+			pingPongScene.EndGame(isWinner, ids, scores);
         }
     }
 

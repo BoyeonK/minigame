@@ -334,7 +334,7 @@ class PacketHandler {
 
     public static void S_P_ResultHandler(PacketSession session, IMessage packet) {
         S_P_Result recvPkt = packet as S_P_Result;
-		Managers.Network.ResponseSPResult(recvPkt.IsWinner, recvPkt.Ids.ToList(), recvPkt.Scores.ToList());
+		Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseSPResult(recvPkt.IsWinner, recvPkt.Ids.ToList(), recvPkt.Scores.ToList()); });
     }
 
     public static void S_P_RenewScoresHandler(PacketSession session, IMessage packet) {
