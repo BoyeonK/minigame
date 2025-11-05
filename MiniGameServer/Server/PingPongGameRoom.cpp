@@ -165,7 +165,7 @@ void PingPongGameRoom::CalculateGameResult() {
 	}
 
 	S2C_Protocol::S_P_Result baseResultPkt;
-	string lostConnectionId = "fugitive";
+	string lostConnectionId = u8"≈ª¡÷¿⁄";
 
 	for (int i = 0; i < _quota; i++) {
 		if (auto player = _playerWRefs[i].lock()) {
