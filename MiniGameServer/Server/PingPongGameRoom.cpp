@@ -230,28 +230,29 @@ void PingPongGameRoom::UpdateGameResultToDB() {
 		}
 	}
 
-	if (worstWinnerElo == 3000 || bestLosersElo == 0)
-		return;
+	if (!(worstWinnerElo == 3000 || bestLosersElo == 0)) {
+		for (int i = 0; i < _quota; i++) {
+			bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
+			int32_t calculatedElo = -1;
+			if (isWinner)
+				calculatedElo = CalculateEloW(_elos[i], bestLosersElo);
+			else
+				calculatedElo = CalculateEloL(_elos[i], worstWinnerElo);
 
-	for (int i = 0; i < _quota; i++) {
-		bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
-		int32_t calculatedElo = -1;
-		if (isWinner)
-			calculatedElo = CalculateEloW(_elos[i], bestLosersElo);
-		else
-			calculatedElo = CalculateEloL(_elos[i], worstWinnerElo);
+			if (calculatedElo == -1)
+				continue;
 
-		if (calculatedElo == -1)
-			continue;
+			auto playerSessionRef = _playerWRefs[i].lock();
+			if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+				continue;
 
-		auto playerSessionRef = _playerWRefs[i].lock();
-		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
-			continue;
-
-		int32_t dbid = playerSessionRef->GetDbid();
-		DBManager->S2D_UpdateElo(playerSessionRef, dbid, int(_ty), calculatedElo);
+			int32_t dbid = playerSessionRef->GetDbid();
+			DBManager->S2D_UpdateElo(playerSessionRef, dbid, int(_ty), calculatedElo);
+		}
 	}
-
+	else {
+		cout << "너무 많은 플레이어가 이탈했거나, 정상적인 진행이 되지 않은 게임" << endl;
+	}
 	cout << "여기까지 오면 일단 계산과정에서 에러는 없음" << endl;
 	PostEvent(&PingPongGameRoom::EndGame);
 }
