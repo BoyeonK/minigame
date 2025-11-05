@@ -29,7 +29,6 @@ public class ObjectManager {
         }
 
         string objectType = Enum.GetName(typeof(Define.ObjectType), objMessage.ObjectType);
-		Debug.Log(objectId);
 		Debug.Log($"GameObjects/{objectType}");
 
 		GameObject go = Managers.Resource.Instantiate($"GameObjects/{objectType}");

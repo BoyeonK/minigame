@@ -557,4 +557,5 @@ void PingPongGameRoom::Update() {
 	_updateCount++;
 	RenewScoreBoard();
 	RequestPlayerBarPosition();
+	BroadCastKeepAlive();
 }
