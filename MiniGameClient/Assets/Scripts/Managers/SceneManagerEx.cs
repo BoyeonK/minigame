@@ -90,7 +90,7 @@ public class SceneManagerEx {
         _isWinner = isWinner;
         _playerIds = ids;
         _scores = scores;
-        Managers.Scene.LoadSceneWithLoadingScene(Define.Scene.Lobby, Define.Scene.GameResult);
+        Managers.Scene.LoadSceneWithLoadingScene(Define.Scene.Login, Define.Scene.GameResult);
     }
 
     public void Clear() {

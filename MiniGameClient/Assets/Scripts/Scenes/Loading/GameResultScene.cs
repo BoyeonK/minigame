@@ -1,16 +1,23 @@
 using UnityEngine;
 
 public class GameResultScene : BaseScene {
+    GameResultTextUI _textUI;
+
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.GameResult;
         Managers.Input.AddKeyListener(KeyCode.Return, SceneChange, InputManager.KeyState.Down);
+
+        GameObject textUI = GameObject.Find("GameResultTextUI");
+        if (textUI != null) {
+            _textUI = textUI.GetComponent<GameResultTextUI>();
+        }
     }
 
     private void Start() {
         Debug.Log("게임 결과창 스타트함수");
         Managers.Scene.LoadSceneAsync();
-
+        _textUI.SetResult();
     }
 
     private void Update() {

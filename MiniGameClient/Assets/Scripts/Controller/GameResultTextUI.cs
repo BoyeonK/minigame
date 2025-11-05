@@ -30,11 +30,10 @@ public class GameResultTextUI : MonoBehaviour {
                 if (score != null)
                     _scores.Add(score);
             }
-            SetResult();
         }
     }
 
-    private void SetResult() {
+    public void SetResult() {
         if (_isWinner != null) {
             if (Managers.Scene._isWinner) {
                 _isWinner.text = "½Â¸®";
