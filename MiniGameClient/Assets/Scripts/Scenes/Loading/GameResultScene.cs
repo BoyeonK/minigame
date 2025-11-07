@@ -6,7 +6,7 @@ public class GameResultScene : BaseScene {
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.GameResult;
-        Managers.Input.AddKeyListener(KeyCode.Return, SceneChange, InputManager.KeyState.Down);
+        Managers.Input.AddKeyListener(KeyCode.Tab, SceneChange, InputManager.KeyState.Down);
 
         GameObject textUI = GameObject.Find("GameResultTextUI");
         if (textUI != null) {

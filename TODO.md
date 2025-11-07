@@ -2,51 +2,26 @@
 
 - Server
   - 0Byte recv를 받았을 경우(높은 확률로 연결 종료로 인한), session의 ptr을 가지고 있는 모든 객체에서의 일관된 소멸 처리
-  - PingPongGameRoom
-    - OnGoingState
-      - Phase
-        - EasyPattern만을 사용하는 Phase1 (20초, 6초대기)
-        - Easy와 Medium이 섞인 Phase2 (20초, 6초대기)
-        - Medium과 Hard가 섞인 Phase3 (20초, 6초 대기) 이후 CountingState로 전환.
-      - KeepAlivePkt
-        - Update문이 30번 호출 될 때마다(3초) KeepAlive 패킷을 보내 Ping을 확인.
-        - 응답한 플레이어에게 추가점수 10점.
-          - 연결만 유지되어있어도, 점수 260점은 먹고 시작함과 같음.
-          - 연결이 올바르지 않은 경우, 실점이 적용되지 않는 비율(C_P_CollisionGoalLine)보다 승점이 적용되지 않는 비율(S_P_KeepAlivePkt)이 크도록 하기 위함
-            - 일명, 랜선 흔들기 방지.
-        - 이전 KeepAlive패킷에 연속으로 2번 이상 응답하지 않은 경우, 유효하지 않은 연결로 간주.
-    - CountingState
-      - IsUpdate를 false로 전환 (Update문 호출 중단)
-      - 게임 결과를 계산, DB에 반영.
-      - 참가한 Player들이 LobbyScene으로 돌아가도록 유도.
-        - 현재 GameScene안의 모든 Object를 정지시키고 SceneUI로 결과를 통보.
-        - 확인 버튼을 누른 경우 LobbyScene으로 전환.
-      - 모든 과정이 성공함을 리턴한 경우, 사용한 모든 자원을 반환.
-      - 이후, EndState로 전환하여 GameRoom 자체도 Pool에 반환될 수 있게 함.
-  - PingPongPlayerGoalLine
-    - Line에 충돌한 경우 해당 Player의 점수를 깎음.
-      - Pupple -20점
-      - Blue -15점
-      - red -10점
+  - GameResult
+    - 최초에 DBID를 배열로 가지고있다가, 결과를 전송할 때, DB를 조회하여 playerId를 전송할 수 있도록 함.
 
 - Client
   - 최초 접속 시에, 접속할 서버의 IP주소를 입력하도록 하기 (마크처럼)
-  - PingPongPlayerGoalLine
-    - OnTrigger 옵션을 이용하여, Line에 Object가 충돌한 경우. 해당 내용을 서버에 전송. (C_P_CollisionGoalLine)
+  - LobbyScene
+    - 개인 기록과 월드 레코드를 조회할 수 있도록 함.
+    - 매칭중인 경우 UI표시
+    - 매치 취소 UI표시
+    - 스크린에 인게임 이미지 표시
+  - PingPong
+    - 게임 종료시, 즉각적으로 결과창으로 넘어가지 않고 UI를 띄워 종료됨을 알리고 추가적인 조작으로 결과창 유도
+  - GameResultScene
+    - 버튼으로 Scene전환, LobbyScene이 로딩되는 도중인 경우, 버튼 비활성화
+    - 벽에 부딪힌 Bullet 무효화
 
 - DB
-  - player별로 각 게임 최고 점수 필드 추가
-    - 최초 로그인시, 게임 최고 점수 기록도 elo와 함께 전달해야 함.
-    - 클라이언트의 MyRecord에서 확인할 수 있게 해당 값을 다시 클라이언트에도 전달해야 함.
-  - 각 게임별 최고 점수 Best5와 그 기록을 달성한 플레이어 필드 추가
-    - 각 게임 Manager별로 해당 게임의 최고 득점자의 이름과 그 점수를 DB에서 가져온다.
-    - 
-  - 게임 끝난 후 결과 반영하기.
-  - 승, 패자의 elo조정.
 
 ---
 
 ### 현재 우선순위
 
-- 미니게임 추가하기
-- 인게임 로직 완성하기
+- 클라이언트 쪽에 미구현 기능 채우기
