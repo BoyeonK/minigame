@@ -155,7 +155,7 @@ public:
 
 private:
     void GetDbidAndScore(SQLHDBC& hDbc, SQLHSTMT& hStmt1, int gameId, SQLINTEGER& score, SQLINTEGER& dbid);
-    void GetRecorderId(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid);
+    void GetRecorderId(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid, wstring& playerId);
 
     S2D_Protocol::S2D_RequestPublicRecord _request;
     S2D_Protocol::D2S_ResponsePublicRecord _reply;
