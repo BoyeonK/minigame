@@ -153,4 +153,18 @@ class PacketMaker {
         C_Encrypted pkt = MakeCEncryptedInternal(session, rawPkt, (int)MsgId.CPResponseKeepAlive);
         return pkt;
     }
+
+    public static C_RequestMyRecords MakeCRequestMyRecords(int dbid) { 
+        C_RequestMyRecords pkt = new C_RequestMyRecords() { 
+            Dbid = dbid,
+        };
+        return pkt;
+    }
+
+    public static C_RequestPublicRecords MakeCRequestPublicRecords(int dbid) {
+        C_RequestPublicRecords pkt = new C_RequestPublicRecords() {
+            Dbid = dbid,
+        };
+        return pkt;
+    }
 }

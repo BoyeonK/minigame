@@ -171,8 +171,11 @@ class PacketHandler {
 				else {	
 					ServerSession ss = session as ServerSession;
 					ss.ID = recvPkt.Dbid;
-					Managers.ExecuteAtMainThread(() => { 
-						Debug.Log($"{ss.ID} 내 아이디");
+					C_RequestMyRecords myRecordPkt = PacketMaker.MakeCRequestMyRecords(recvPkt.Dbid);
+                    C_RequestPublicRecords publicRecordPkt = PacketMaker.MakeCRequestPublicRecords(recvPkt.Dbid);
+					Managers.Network.Send(myRecordPkt);
+                    Managers.Network.Send(publicRecordPkt);
+                    Managers.ExecuteAtMainThread(() => { 
                         Managers.Network.LoginCompleted(0);
                     });
                 }
