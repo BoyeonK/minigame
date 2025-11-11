@@ -154,6 +154,9 @@ public:
     void ReturnToPool() override { objectPool<DPublicRecordCallData>::dealloc(this); }
 
 private:
+    void GetDbidAndScore(SQLHDBC& hDbc, SQLHSTMT& hStmt1, int gameId, SQLINTEGER& score, SQLINTEGER& dbid);
+    void GetRecorderId(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid);
+
     S2D_Protocol::S2D_RequestPublicRecord _request;
     S2D_Protocol::D2S_ResponsePublicRecord _reply;
     grpc::ServerAsyncResponseWriter<S2D_Protocol::D2S_ResponsePublicRecord> _responder;

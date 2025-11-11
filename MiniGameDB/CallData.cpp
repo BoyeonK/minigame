@@ -889,21 +889,34 @@ void DPublicRecordCallData::Proceed() {
         DPublicRecordCallData* newCallData = objectPool<DPublicRecordCallData>::alloc(_service, _completionQueueRef);
 
         grpc::Status stat = grpc::Status::OK;
+        int gameId = _request.gameid();
 
         try {
+            if (gameId < 0 || gameId > 3) 
+                throw runtime_error("Invaild gameId");
+
             SQLHDBC hDbc = GDBManager->PopHDbc();
             if (hDbc == nullptr) {
                 throw runtime_error("Invalid hDbc");
             }
             Cleaner hDbcCleaner([&]() {
                 GDBManager->ReturnHDbc(hDbc);
-                });
-
-            SQLHSTMT hStmt1 = nullptr;
-            Cleaner hStmtCleaner([&]() {
-                if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
             });
 
+            SQLHSTMT hStmt1 = nullptr, hStmt2 = nullptr;
+            Cleaner hStmtCleaner([&]() {
+                if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
+                if (hStmt2 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);
+            });
+
+            SQLINTEGER score, dbid;
+            wstring playerId;
+            GetDbidAndScore(hDbc, hStmt1, gameId, score, dbid);
+            GetRecorderId(hDbc, hStmt2, dbid, playerId);
+
+            string u8string = GDBManager->ws2sRef(playerId);
+            _reply.set_playerid(u8string);
+            _reply.set_publicrecord(score);
         }
         catch (runtime_error& e) {
             cout << e.what() << endl;
@@ -915,6 +928,105 @@ void DPublicRecordCallData::Proceed() {
     // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
     else {
         objectPool<DPublicRecordCallData>::dealloc(this);
+    }
+}
+
+void DPublicRecordCallData::GetDbidAndScore(SQLHDBC& hDbc, SQLHSTMT& hStmt1, int gameId, SQLINTEGER& score, SQLINTEGER& dbid) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("S2D_PersonalRecord : hStmt1 Alloc Failed");
+    }
+
+    wstring wDbid = L"dbid";
+    wstring wScore = L"score";
+    switch (gameId) {
+    case(1):
+        wScore = L"score1";
+        wDbid = L"dbid1";
+        break;
+    case(2):
+        wScore = L"score2";
+        wDbid = L"dbid2";
+        break;
+    case(3):
+        wScore = L"score3";
+        wDbid = L"dbid3";
+        break;
+    default:
+        throw runtime_error("gameId is incorrect");
+    }
+
+    wstring query = L"SELECT " + wDbid + L", " + wScore + L" FROM PublicRecords";
+    ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw std::runtime_error("ReadPublicRecord: Query Setting Failed");
+    }
+
+    ret = SQLExecute(hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw std::runtime_error("ReadPublicRecord: Execute Failed");
+    }
+
+    ret = SQLFetch(hStmt1);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        SQLGetData(hStmt1, 1, SQL_C_SLONG, &dbid, sizeof(dbid), NULL);
+        SQLGetData(hStmt1, 2, SQL_C_SLONG, &score, sizeof(score), NULL);
+    }
+    else if (ret == SQL_NO_DATA) {
+        throw std::runtime_error("ReadPublicRecord: Record row not found.");
+    }
+    else {
+        throw std::runtime_error("ReadPublicRecord: SQLFetch Failed");
+    }
+}
+
+void DPublicRecordCallData::GetRecorderId(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const int& dbid, std::wstring& playerId) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw std::runtime_error("GetRecorderId: hStmt Alloc Failed");
+    }
+
+    std::wstring query = L"SELECT player_id FROM Players WHERE dbid = ?";
+    ret = SQLPrepareW(hStmt2, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw std::runtime_error("ReadPlayGetRecorderIderId: Query Prepare Failed");
+    }
+
+    SQLINTEGER objectId = dbid;
+    ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &objectId, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw std::runtime_error("GetRecorderId: Bind Parameter Failed");
+    }
+
+    ret = SQLExecute(hStmt2);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw std::runtime_error("GetRecorderId: Execute Failed");
+    }
+
+    ret = SQLFetch(hStmt2);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        SQLWCHAR playerIdBuffer[17];
+        SQLLEN indicator = 0;
+
+        ret = SQLGetData(hStmt2, 1, SQL_C_WCHAR, playerIdBuffer, sizeof(playerIdBuffer), &indicator);
+        if (SQL_SUCCEEDED(ret)) {
+            if (indicator == SQL_NULL_DATA) {
+                throw std::runtime_error("GetRecorderId: Player ID is NULL.");
+            }
+            else {
+                playerId = std::wstring(playerIdBuffer);
+            }
+        }
+        else {
+            throw std::runtime_error("GetRecorderId: SQLGetData Failed");
+        }
+    }
+    else if (ret == SQL_NO_DATA) {
+        throw std::runtime_error("GetRecorderId: Player not found with the given dbid.");
+    }
+    else {
+        GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2);
+        throw std::runtime_error("GetRecorderId: SQLFetch Failed");
     }
 }
 
