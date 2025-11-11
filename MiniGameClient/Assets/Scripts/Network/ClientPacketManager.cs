@@ -111,6 +111,14 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SPResult, UnpackPacket<S_P_Result>);
         _handler.Add((ushort)MsgId.SPResult, PacketHandler.S_P_ResultHandler);
         _msgFactories.Add((ushort)MsgId.SPResult, () => new S_P_Result());
+
+        _onRecv.Add((ushort)MsgId.SResponseMyRecords, UnpackPacket<S_ResponseMyRecords>);
+        _handler.Add((ushort)MsgId.SResponseMyRecords, PacketHandler.S_ResponseMyRecordsHandler);
+        _msgFactories.Add((ushort)MsgId.SResponseMyRecords, () => new S_ResponseMyRecords());
+
+        _onRecv.Add((ushort)MsgId.SResponsePublicRecords, UnpackPacket<S_ResponsePublicRecords>);
+        _handler.Add((ushort)MsgId.SResponsePublicRecords, PacketHandler.S_ResponsePublicRecordsHandler);
+        _msgFactories.Add((ushort)MsgId.SResponsePublicRecords, () => new S_ResponsePublicRecords());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

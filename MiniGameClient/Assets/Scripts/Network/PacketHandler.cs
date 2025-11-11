@@ -347,5 +347,20 @@ class PacketHandler {
         C_Encrypted pkt = PacketMaker.MakeCPResponseKeepAlive(session, recvPkt.Tick);
 		Managers.Network.Send(pkt);
 	}
+
+	public static void S_ResponseMyRecordsHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_ResponseMyRecords recvPkt))
+            return;
+
+        List<int> scores = recvPkt.Scores.ToList();
+        Managers.Network.SetMyRecords(scores);
+    }
+
+    public static void S_ResponsePublicRecordsHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_ResponsePublicRecords recvPkt))
+            return;
+
+        Managers.Network.SetPublicRecords(recvPkt.PlayerIds.ToList(), recvPkt.Scores.ToList());
+    }
 }
 

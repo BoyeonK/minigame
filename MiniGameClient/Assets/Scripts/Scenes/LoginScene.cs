@@ -8,6 +8,8 @@ public class LoginScene : BaseScene {
         Connect,
         Login,
         Lobby,
+        PersonalRecord,
+        PublicRecord,
         MatchMake,
         MatchmakeRegister,
     }
@@ -21,6 +23,8 @@ public class LoginScene : BaseScene {
     UI_CreateAccountPopup _uiCreateAccountPopup;
     UI_LobbyMenu _uiLobbyMenu;
     UI_MatchMakeMenu _uiMatchMakeMenu;
+    UI_PersonalRecord _uiPersonalRecord;
+    UI_PublicRecord _uiPublicRecord;
 
     private int _loginOpt = 0;
 
@@ -218,6 +222,8 @@ public class LoginScene : BaseScene {
         _stage = Stage.Lobby;
 
         Managers.UI.DisableUI("UI_CreateAccountPopup");
+        Managers.UI.DisableUI("UI_PersonalRecord");
+        Managers.UI.DisableUI("UI_PublicRecord");
         Managers.UI.DisableUI("UI_LoginPopup");
         Managers.UI.DisableUI("UI_LoginOrCreateAccount");
         Managers.UI.DisableUI("UI_MatchMakeMenu");
@@ -297,13 +303,19 @@ public class LoginScene : BaseScene {
     }
 
     public void SelectLeaderboard() {
-        Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다. ㅠㅠ");
+        _stage = Stage.PublicRecord;
+        Managers.UI.DisableUI("UI_LobbyMenu");
+        Managers.UI.ShowSceneUI<UI_PublicRecord>();
     }
+
     public void SelectMyRecord() {
-        Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다. ㅠㅠ");
+        _stage = Stage.PersonalRecord;
+        Managers.UI.DisableUI("UI_LobbyMenu");
+        Managers.UI.ShowSceneUI<UI_PersonalRecord>();
     }
+
     public void SelectOption() {
-        Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다. ㅠㅠ");
+        Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다.");
     }
     public void SelectQuit() {
         QuitApplicationUI();
@@ -332,6 +344,12 @@ public class LoginScene : BaseScene {
                 break;
             case Stage.Lobby:
                 Managers.UI.ShowErrorUIConfirmOrCancel("로그아웃 하시겠습니까?", Logout);
+                break;
+            case Stage.PublicRecord:
+                GoToLobbyStage();
+                break;
+            case Stage.PersonalRecord:
+                GoToLobbyStage();
                 break;
             case Stage.MatchMake:
                 GoToLobbyStage();

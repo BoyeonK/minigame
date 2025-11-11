@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Define;
@@ -24,7 +25,12 @@ public class NetworkManager {
     private readonly object _matchGameTypeLock = new object();
     //중복 요청을 막기 위한 변수
     private int _isMatchRequesting = 0;
-	
+
+    private readonly object _recordLock = new object();
+    List<int> _personalScores = new List<int>();
+    List<int> _publicScores = new List<int>();
+    List<string> _publicIds = new List<string>();
+
     public void Init() { }
 
 	public ServerSession GetSession() {
@@ -85,7 +91,8 @@ public class NetworkManager {
 		}
 	}
 
-	public void TryLogin(string id, string password) {
+    #region Lobby
+    public void TryLogin(string id, string password) {
         if (id == "" || password == "") {
             Managers.UI.ShowErrorUIOnlyConfirm("입력값이 잘못되었습니다.", () => { });
             return;
@@ -99,8 +106,8 @@ public class NetworkManager {
     }
 
 	//지금은 직접 0으로 밀고 결과를 통보하지만,
-	//일관성을 위해서 서버 주도적으로 바꿀 필요가 있음.
-	public void TryLogout() {
+    //일관성을 위해서 서버 주도적으로 바꿀 필요가 있음.
+    public void TryLogout() {
         Debug.Log("로그아웃 시도");
         C_Encrypted pkt = PacketMaker.MakeCLogout(_session);
         Managers.Network.Send(pkt);
@@ -194,9 +201,8 @@ public class NetworkManager {
 		Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패"); });
     }
 
-	public void TrySendLoadingProgressRate(float progressRate) {
-		C_GameSceneLoadingProgress pkt = PacketMaker.MakeCGameSceneLoadingProgress(progressRate);
-		Send(pkt);
+    public void ResponseExcludedFromMatch() {
+		Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
 	}
 
 	//KeepAlive handler가 전해준 id가 현재 상태와 일치하는지 확인.
@@ -219,15 +225,111 @@ public class NetworkManager {
 		});
 	}
 
+    public void ConnectCompleted(bool result) {
+        _isConnected = result;
+        if (_isTryingConnect == 1)
+            _isTryingConnect = 0;
+        if (result) {
+            OnConnectedAct.Invoke();
+        }
+        else {
+            OnConnectedFailedAct.Invoke();
+        }
+    }
+
+    public void LoginCompleted(int result) {
+        switch (result) {
+            case 0:
+                OnLoginAct.Invoke();
+                break;
+            case 1:
+                OnWrongIdAct.Invoke();
+                break;
+            case 2:
+                OnWrongPasswordAct.Invoke();
+                break;
+        }
+    }
+
+    public void MatchmakeCompleted(int gameType) {
+
+    }
+
+    public void TryGetMyRecords() {
+        int dbid = _session.ID;
+        if (dbid == 0)
+            return;
+
+        C_RequestMyRecords pkt = new() { 
+            Dbid = dbid,
+        };
+
+        Send(pkt);
+    }
+
+    public void SetMyRecords(List<int> scores) {
+        lock (_recordLock) {
+            _personalScores = scores;
+        }  
+    }
+
+    public void TryGetPublicRecords() {
+        int dbid = _session.ID;
+        if (dbid == 0)
+            return;
+
+        C_RequestPublicRecords pkt = new() {
+            Dbid = dbid,
+        };
+
+        Send(pkt);
+    }
+    
+    public void SetPublicRecords(List<string> Ids, List<int> scores) {
+        lock (_recordLock) {
+            _publicIds = Ids;
+            _publicScores = scores;
+        }
+    }
+
+    public List<string> GetPublicIds() {
+        List<string> ret;
+        lock (_recordLock) {
+            ret = new List<string>(_publicIds);
+        }
+        return ret;
+    }
+
+    public List<int> GetPublicRecord() {
+        List<int> ret;
+        lock (_recordLock) {
+            ret = new List<int>(_publicScores);
+        }
+        return ret;
+    }
+
+    public List<int> GetPersonalRecord() {
+        List<int> ret;
+        lock (_recordLock) {
+            ret = new List<int>(_personalScores);
+        }
+        return ret;
+    }
+
+    #endregion
+
+    #region LoadingScene
+    public void TrySendLoadingProgressRate(float progressRate) {
+		C_GameSceneLoadingProgress pkt = PacketMaker.MakeCGameSceneLoadingProgress(progressRate);
+		Send(pkt);
+	}
+	
 	public void ResponseGameStarted(int gameId) {
 		Managers.ExecuteAtMainThread(() => { OnResponseGameStartedAct.Invoke(); });
 	}
-	
-	//이걸 받은 순간, 이미 서버에서는 대기열 밖으로 밀려난 상황.
-	public void ResponseExcludedFromMatch() {
-		Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
-	}
+#endregion
 
+#region TestGame
 	public void TryRequestGameState(int gameId) {
 		C_RequestGameState pkt = PacketMaker.MakeCRequestGameState(gameId);
 		Send(pkt);
@@ -240,6 +342,16 @@ public class NetworkManager {
 		}
     }
 
+    public void ResponseTestGameEnd() {
+        lock (_matchGameTypeLock) {
+            _isMatchRequesting = 0;
+            _matchGameType = GameType.None;
+        }
+        OnTestGameEndAct?.Invoke();
+    }
+#endregion
+
+#region PingPong
     public void ProcessPState(IMessage packet) {
 		BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
 		if (scene == null)
@@ -334,18 +446,11 @@ public class NetworkManager {
         if (scene is PingPongScene pingPongScene)
             pingPongScene.RenewScores(scores);
     }
+#endregion
 
     public void ProcessDanmakuState(IMessage packet) {
 
     }
-
-	public void ResponseTestGameEnd() {
-        lock (_matchGameTypeLock) {
-            _isMatchRequesting = 0;
-			_matchGameType = GameType.None;
-        }
-        OnTestGameEndAct?.Invoke();
-	}
 
     public void ResponsePingPongEnd() {
 		OnPingPongEndAct?.Invoke();
@@ -359,7 +464,7 @@ public class NetworkManager {
 
 	}
 
-    #region Session의 통신 결과를 Client에게 널리 알릴 델리게이터
+#region Session의 통신 결과를 Client에게 널리 알릴 델리게이터
     //FM대로하면, private로 선언하고 구독 및 구취하는 함수를 public으로 열어야 함.
     public Action OnConnectedAct;
 	public Action OnConnectedFailedAct;
@@ -376,37 +481,5 @@ public class NetworkManager {
 	public Action OnTestGameEndAct;
     public Action OnPingPongEndAct;
     public Action OnDanmakuEndAct;
-    #endregion
-
-    public void ConnectCompleted(bool result) {
-		_isConnected = result;
-		if (_isTryingConnect == 1)
-			_isTryingConnect = 0;
-		if (result)	{
-			OnConnectedAct.Invoke();
-		}
-		else {
-			OnConnectedFailedAct.Invoke();
-		}
-	}
-
-	public void LoginCompleted(int result) {
-		switch (result) {
-			case 0:
-				OnLoginAct.Invoke();
-				break;
-			case 1:
-				OnWrongIdAct.Invoke();
-				break;
-			case 2:
-				OnWrongPasswordAct.Invoke();
-				break;
-		}
-	}
-
-	public void MatchmakeCompleted(int gameType) {
-
-	}
-
-    
+#endregion
 }
