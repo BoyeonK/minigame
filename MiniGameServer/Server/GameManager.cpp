@@ -5,7 +5,13 @@
 #include "TestGameRoom.h"
 
 int32_t GameManager::GetPublicRecord() {
+	lock_guard<mutex> lock(_recordLock);
 	return _publicRecord;
+}
+
+string GameManager::GetPublicRecorder() {
+	lock_guard<mutex> lock(_recordLock);
+	return _publicRecorder;
 }
 
 void GameManager::SetPublicRecord(string playerId, int32_t record) {

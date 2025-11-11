@@ -135,4 +135,26 @@ public:
 		S2C_Protocol::S_EndGame pkt;
 		return pkt;
 	}
+
+	static S2C_Protocol::S_ResponsePublicRecords MakeSResponsePublicRecords() {
+		S2C_Protocol::S_ResponsePublicRecords pkt;
+		for (const auto& pair : GGameManagers) {
+			int score = pair.second->GetPublicRecord();
+			pkt.add_scores(score);
+
+			string recorder = pair.second->GetPublicRecorder();
+			pkt.add_playerids(recorder);
+		}
+		return pkt;
+	}
+
+	static S2C_Protocol::S_ResponseMyRecords MakeSResponseMyRecords(shared_ptr<PlayerSession> playerSessionRef) {
+		S2C_Protocol::S_ResponseMyRecords pkt;
+		for (int i = 0; i <= 1; i++) {
+			int score = playerSessionRef->GetPersonalRecord(i);
+			pkt.add_scores(score);
+		}
+		
+		return pkt;
+	}
 };

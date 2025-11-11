@@ -38,6 +38,10 @@ enum : uint16_t {
 	PKT_S_SPAWN_GAME_OBJECT = 25,
 	PKT_S_DESPAWN_GAME_OBJECT = 26,
 	PKT_S_END_GAME = 27,
+	PKT_C_REQUEST_MY_RECORDS = 28,
+	PKT_S_RESPONSE_MY_RECORDS = 29,
+	PKT_C_REQUEST_PUBLIC_RECORDS = 30,
+	PKT_S_RESPONSE_PUBLIC_RECORDS = 31,
 
 	PKT_S_TESTGAME_STATE = 100,
 	PKT_S_TESTGAME_RESULT = 101,
@@ -71,6 +75,8 @@ bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_
 bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeKeepAlive& pkt);
 bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_GameSceneLoadingProgress& pkt);
 bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestGameState& pkt);
+bool Handle_C_RequestMyRecords(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestMyRecords& pkt);
+bool Handle_C_RequestPublicRecords(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestPublicRecords& pkt);
 
 	//PingPong
 bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponsePlayerBarPosition& pkt);
@@ -95,6 +101,8 @@ public:
 		GPacketHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_MatchmakeKeepAlive>(Handle_C_MatchmakeKeepAlive, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_GAMESCENELOADINGPROGRESS] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_GameSceneLoadingProgress>(Handle_C_GameSceneLoadingProgress, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_REQUEST_GAME_STATE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_RequestGameState>(Handle_C_RequestGameState, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_REQUEST_MY_RECORDS] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_RequestMyRecords>(Handle_C_RequestMyRecords, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_REQUEST_PUBLIC_RECORDS] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_RequestPublicRecords>(Handle_C_RequestPublicRecords, sessionRef, buffer, len); };
 
 			//PingPong
 		GPacketHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, buffer, len); };
@@ -113,6 +121,8 @@ public:
 		PlaintextHandler[PKT_C_MATCHMAKEKEEPALIVE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_MatchmakeKeepAlive>(Handle_C_MatchmakeKeepAlive, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_GAMESCENELOADINGPROGRESS] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_GameSceneLoadingProgress>(Handle_C_GameSceneLoadingProgress, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_REQUEST_GAME_STATE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_RequestGameState>(Handle_C_RequestGameState, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_REQUEST_MY_RECORDS] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_RequestMyRecords>(Handle_C_RequestMyRecords, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_REQUEST_PUBLIC_RECORDS] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_RequestPublicRecords>(Handle_C_RequestPublicRecords, sessionRef, plaintext); };
 
 			//PingPong
 		PlaintextHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, plaintext); };
@@ -147,6 +157,8 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeCompleted& pkt) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKECOMPLETED); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameStarted& pkt) { return MakeSendBufferRef(pkt, PKT_S_GAME_STARTED); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ResponseMyRecords& pkt) { return MakeSendBufferRef(pkt, PKT_S_RESPONSE_MY_RECORDS); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ResponsePublicRecords& pkt) { return MakeSendBufferRef(pkt, PKT_S_RESPONSE_PUBLIC_RECORDS); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME_RESPONSE, AESKey); }
@@ -160,6 +172,8 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ExcludedFromMatch& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_EXCLUDEDFROMMATCH, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_MatchmakeCompleted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_MATCHMAKECOMPLETED, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameStarted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_GAME_STARTED, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ResponseMyRecords& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_RESPONSE_MY_RECORDS, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ResponsePublicRecords& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_RESPONSE_PUBLIC_RECORDS, AESKey); }
 #pragma endregion
 
 #pragma region IngameCommon

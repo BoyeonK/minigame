@@ -13,6 +13,7 @@ public:
 	virtual void MakeRoom(vector<WatingPlayerData>&& pdv) = 0;
 	virtual void Update() = 0;
 	int32_t GetPublicRecord();
+	string GetPublicRecorder();
 	void SetPublicRecord(string playerId, int32_t record);
 	virtual bool RenewPublicRecordFromDB() = 0;
 	virtual bool CompareAndRenewPublicRecord(int32_t dbid, int32_t score) = 0;

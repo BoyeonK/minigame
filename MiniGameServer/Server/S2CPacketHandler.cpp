@@ -274,6 +274,28 @@ bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	return true;
 }
 
+bool Handle_C_RequestMyRecords(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestMyRecords& pkt) {
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
+	S2C_Protocol::S_ResponseMyRecords sendPkt = S2CPacketMaker::MakeSResponseMyRecords(playerSessionRef);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(sendPkt);
+	playerSessionRef->Send(sendBuffer);
+	return true;
+}
+
+bool Handle_C_RequestPublicRecords(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestPublicRecords& pkt) {
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
+	S2C_Protocol::S_ResponsePublicRecords sendPkt = S2CPacketMaker::MakeSResponsePublicRecords();
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(sendPkt);
+	playerSessionRef->Send(sendBuffer);
+	return true;
+}
+
 bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponsePlayerBarPosition& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
 	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
