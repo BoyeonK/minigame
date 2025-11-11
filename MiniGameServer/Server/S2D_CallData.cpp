@@ -170,6 +170,7 @@ void SUpdatePersonalRecordCall::OnFailed() {
 
 void SPublicRecordCall::OnSucceed() {
 	GGameManagers[_gameId]->SetPublicRecord(reply.playerid(), reply.publicrecord());
+	cout << _gameId << "번 레코드 " << reply.playerid() << "의 점수 " << reply.publicrecord() << endl;
 }
 
 void SPublicRecordCall::OnFailed() {

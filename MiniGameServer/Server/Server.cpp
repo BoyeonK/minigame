@@ -26,6 +26,10 @@ int main() {
 		}
 	});
 
+	for (auto& gameManager : GGameManagers) {
+		gameManager.second->RenewPublicRecordFromDB();
+	}
+
 	//기타 잡무 담당 worker thread.
 	for (int i = 0; i < 5; i++) {
 		GThreadManager->Launch([=]() {
