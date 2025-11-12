@@ -411,7 +411,7 @@ void PingPongGameRoom::Handle_CollisionBar(float px, float pz, float speed, int3
 		//TODO : 유효한 경우, lastCollider수정. speedvector수정, position수정, 패킷 전송.
 		bulletRef->_posX = px;
 		bulletRef->_posZ = pz;
-		if (playerIdx < 3)
+		if (playerIdx < 2)
 			bulletRef->_moveDirX = -bulletRef->_moveDirX;
 		else
 			bulletRef->_moveDirZ = -bulletRef->_moveDirZ;

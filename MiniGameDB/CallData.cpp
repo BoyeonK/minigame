@@ -1039,6 +1039,9 @@ void DUpdatePublicRecordCallData::Proceed() {
         DUpdatePublicRecordCallData* newCallData = objectPool<DUpdatePublicRecordCallData>::alloc(_service, _completionQueueRef);
 
         grpc::Status stat = grpc::Status::OK;
+        int gameId = _request.gameid();
+        int dbid = _request.recordersdbid();
+        int score = _request.recordersscore();
 
         try {
             SQLHDBC hDbc = GDBManager->PopHDbc();
@@ -1047,13 +1050,23 @@ void DUpdatePublicRecordCallData::Proceed() {
             }
             Cleaner hDbcCleaner([&]() {
                 GDBManager->ReturnHDbc(hDbc);
-                });
+            });
 
-            SQLHSTMT hStmt1 = nullptr;
+            SQLHSTMT hStmt1 = nullptr, hStmt2 = nullptr;
             Cleaner hStmtCleaner([&]() {
                 if (hStmt1 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt1);
-                });
+                if (hStmt2 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);
+            });
 
+            SQLINTEGER previousHighScore;
+
+            GetScore(hDbc, hStmt1, gameId, previousHighScore);
+            if (previousHighScore < score) {
+                SQLINTEGER sScore = score;
+                SQLINTEGER sDbid = dbid;
+                SetScore(hDbc, hStmt2, gameId, sScore, sDbid);
+                cout << gameId << "번 게임 기록 " << score << "로 갱신 " << dbid << endl;
+            }
         }
         catch (runtime_error& e) {
             cout << e.what() << endl;
@@ -1065,5 +1078,96 @@ void DUpdatePublicRecordCallData::Proceed() {
     // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
     else {
         objectPool<DUpdatePublicRecordCallData>::dealloc(this);
+    }
+}
+
+void DUpdatePublicRecordCallData::GetScore(SQLHDBC& hDbc, SQLHSTMT& hStmt1, int gameId, SQLINTEGER& score) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("S2D_PersonalRecord : hStmt1 Alloc Failed");
+    }
+
+    wstring wScore = L"score";
+    switch (gameId) {
+    case(1):
+        wScore = L"score1";
+        break;
+    case(2):
+        wScore = L"score2";
+        break;
+    case(3):
+        wScore = L"score3";
+        break;
+    default:
+        throw runtime_error("gameId is incorrect");
+    }
+
+    wstring query = L"SELECT " + wScore + L" FROM PublicRecords";
+    ret = SQLPrepareW(hStmt1, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw std::runtime_error("ReadPublicRecord: Query Setting Failed");
+    }
+
+    ret = SQLExecute(hStmt1);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt1)) {
+        throw std::runtime_error("ReadPublicRecord: Execute Failed");
+    }
+
+    ret = SQLFetch(hStmt1);
+    if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
+        SQLGetData(hStmt1, 2, SQL_C_SLONG, &score, sizeof(score), NULL);
+    }
+    else if (ret == SQL_NO_DATA) {
+        throw std::runtime_error("ReadPublicRecord: Record row not found.");
+    }
+    else {
+        throw std::runtime_error("ReadPublicRecord: SQLFetch Failed");
+    }
+}
+
+void DUpdatePublicRecordCallData::SetScore(SQLHDBC& hDbc, SQLHSTMT& hStmt2, int gameId, SQLINTEGER& score, SQLINTEGER& dbid) {
+    SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
+        throw runtime_error("hStmt2 Alloc Failed");
+    }
+
+    wstring wDbid = L"dbid";
+    wstring wScore = L"score";
+    switch (gameId) {
+    case(1):
+        wScore = L"score1";
+        wDbid = L"dbid1";
+        break;
+    case(2):
+        wScore = L"score2";
+        wDbid = L"dbid2";
+        break;
+    case(3):
+        wScore = L"score3";
+        wDbid = L"dbid3";
+        break;
+    default:
+        throw runtime_error("gameId is incorrect");
+    }
+
+    wstring query = L"UPDATE PublicRecords SET " + wDbid + L" = ?, " + wScore + L" = ?";
+
+    ret = SQLPrepareW(hStmt2, (SQLWCHAR*)query.c_str(), SQL_NTS);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw runtime_error("SetScore : Query Setting Failed");
+    }
+    ret = SQLBindParameter(hStmt2, 1, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &dbid, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw std::runtime_error("SetScore : Bind Parameter 1 (dbid) Failed");
+    }
+
+    ret = SQLBindParameter(hStmt2, 2, SQL_PARAM_INPUT, SQL_C_SLONG, SQL_INTEGER, 0, 0, &score, 0, NULL);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw std::runtime_error("SetScore : Bind Parameter 2 (score) Failed");
+    }
+
+    ret = SQLExecute(hStmt2);
+    if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
+        throw std::runtime_error("SetScore : Execute Failed");
     }
 }
