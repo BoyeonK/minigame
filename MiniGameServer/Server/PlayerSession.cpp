@@ -98,8 +98,9 @@ int32_t PlayerSession::GetElo(const int32_t& idx) const {
 	return _elos[idx];
 }
 
-void PlayerSession::SetPersonalRecord(int32_t idx, int32_t elo) {
-	_personalRecords[idx] = elo;
+void PlayerSession::SetPersonalRecord(int32_t idx, int32_t score) {
+	cout << "퍼스널레코드" << idx << " " << score << endl;
+	_personalRecords[idx] = score;
 }
 
 int32_t PlayerSession::GetPersonalRecord(const int32_t& idx) const {

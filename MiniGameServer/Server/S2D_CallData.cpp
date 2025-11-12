@@ -126,6 +126,10 @@ void SPlayerInformationCall::OnSucceed() {
 		playerSessionRef->SetPersonalRecord(i + 1, reply.personalrecords(i));
 	}
 	cout << "DB로부터 player의 정보를 가져와서 session에 채움" << endl;
+
+	S2C_Protocol::S_ResponseMyRecords pkt = S2CPacketMaker::MakeSResponseMyRecords(playerSessionRef);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	playerSessionRef->Send(sendBuffer);
 }
 
 void SPlayerInformationCall::OnFailed() {
