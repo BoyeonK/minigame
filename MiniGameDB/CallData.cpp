@@ -1058,15 +1058,10 @@ void DUpdatePublicRecordCallData::Proceed() {
                 if (hStmt2 != nullptr) SQLFreeHandle(SQL_HANDLE_STMT, hStmt2);
             });
 
-            SQLINTEGER previousHighScore;
-
-            GetScore(hDbc, hStmt1, gameId, previousHighScore);
-            if (previousHighScore < score) {
-                SQLINTEGER sScore = score;
-                SQLINTEGER sDbid = dbid;
-                SetScore(hDbc, hStmt2, gameId, sScore, sDbid);
-                cout << gameId << "번 게임 기록 " << score << "로 갱신 " << dbid << endl;
-            }
+            SQLINTEGER sScore = score;
+            SQLINTEGER sDbid = dbid;
+            SetScore(hDbc, hStmt2, gameId, sScore, sDbid);
+            cout << gameId << "번 게임 기록 " << score << "로 갱신 " << dbid << endl;
         }
         catch (runtime_error& e) {
             cout << e.what() << endl;
