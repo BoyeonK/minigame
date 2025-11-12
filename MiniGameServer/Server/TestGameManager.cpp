@@ -60,6 +60,10 @@ void TestGameManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
 	newRoomRef->PostEvent(&TestGameRoom::Init, move(pdv));
 }
 
+bool TestGameManager::RenewPublicRecordFromDB() {
+	return DBManager->S2D_PublicRecord(int(_ty));
+}
+
 bool TestGameManager::CompareAndRenewPublicRecord(int32_t dbid, int32_t score) {
 	return false;
 }
