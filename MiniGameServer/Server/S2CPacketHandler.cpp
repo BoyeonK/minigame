@@ -16,7 +16,10 @@ bool Handle_Invalid(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int
 }
 
 bool Handle_C_Encrypted(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encrypted& pkt) {
-	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
 	//TODO : Session에 저장된 AESKey를 통해서 원본 Protobuf로 복구한 후, Handler함수를 동작시킨다.
 	const string& iv_str = pkt.iv();
 	const string& ciphertext_str = pkt.ciphertext();
@@ -88,7 +91,9 @@ bool Handle_C_Encrypted(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 }
 
 bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome& recvPkt) {
-	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
 	cout << "C_Welcome 패킷을 받았다." << endl;
 
 	string encryptedStr = recvPkt.aeskey();
@@ -139,7 +144,10 @@ bool Handle_C_CreateAccount(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Cr
 }
 
 bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& pkt) {
-	PlayerSession* playerSessionRef = static_cast<PlayerSession*>(sessionRef.get());
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
 	bool isSucceed = false;
 	if (pkt.dbid() == playerSessionRef->GetDbid()) {
 		playerSessionRef->SetDbid(0);
@@ -173,6 +181,8 @@ bool Handle_C_MatchmakeRequestInternal(shared_ptr<PlayerSession> playerSessionRe
 
 bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeRequest& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
 
 	auto it = GGameManagers.find(pkt.gameid());
 	if (it == GGameManagers.end()) {
@@ -214,6 +224,8 @@ bool Handle_C_MatchmakeCancelInternal(shared_ptr<PlayerSession> playerSessionRef
 
 bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_MatchmakeCancel& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
 
 	GameType expected = IntToGameType(pkt.gameid());
 	GameType desired = GameType::None;
@@ -251,22 +263,24 @@ bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol:
 
 bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_GameSceneLoadingProgress& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
-	//버그 : GameRoom이 nullptr임
-	shared_ptr<GameRoom> gameRoom = playerSessionRef->GetJoinedRoom();
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
+
+	//버그 : GameRoom이 nullptr임
+	shared_ptr<GameRoom> gameRoom = playerSessionRef->GetJoinedRoom();
 	if (gameRoom == nullptr)
 		return false;
+
 	gameRoom->PostEvent(&GameRoom::UpdateProgressBar, playerSessionRef->GetRoomIdx(), pkt.persentage());
 	return true;
 }
 
 bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestGameState& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
-	shared_ptr<GameRoom> roomRef = playerSessionRef->GetJoinedRoom();
-
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
+
+	shared_ptr<GameRoom> roomRef = playerSessionRef->GetJoinedRoom();
 	if (roomRef == nullptr)
 		return false;
 
@@ -298,10 +312,10 @@ bool Handle_C_RequestPublicRecords(shared_ptr<PBSession> sessionRef, S2C_Protoco
 
 bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponsePlayerBarPosition& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
-	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
-	
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
+
+	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
 	if (roomRef == nullptr)
 		return false;
 
@@ -311,10 +325,10 @@ bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_
 
 bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionBar& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
-	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
-	
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
+
+	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
 	if (roomRef == nullptr)
 		return false;
 
@@ -324,11 +338,12 @@ bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P
 
 bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionGoalLine& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
 	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
 	
 	if (roomRef == nullptr)
-		return false;
-	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
 	if (playerSessionRef->GetRoomIdx() >= 4 || playerSessionRef->GetRoomIdx() < 0)
 		return false;
@@ -339,11 +354,12 @@ bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol
 
 bool Handle_C_P_ResponseKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponseKeepAlive& pkt) {
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
 	shared_ptr<PingPongGameRoom> roomRef = dynamic_pointer_cast<PingPongGameRoom>(playerSessionRef->GetJoinedRoom());
 	
 	if (roomRef == nullptr)
-		return false;
-	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
 	if (playerSessionRef->GetRoomIdx() >= 4 || playerSessionRef->GetRoomIdx() < 0)
 		return false;

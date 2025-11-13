@@ -137,13 +137,13 @@ void MoleRoom::HitSlot(int32_t playerIdx, int32_t slotNum) {
 	SlotState ss = _slotStates[slotNum];
 	switch (ss) {
 	case SlotState::Red:
-
+		HitRed(playerIdx, slotNum);
 		break;
 	case SlotState::Yellow:
-
+		HitYellow(playerIdx);
 		break;
 	case SlotState::Green:
-
+		HitGreen(playerIdx, slotNum);
 		break;
 	default:
 		break;
