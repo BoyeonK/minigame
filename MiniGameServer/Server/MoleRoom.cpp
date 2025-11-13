@@ -80,3 +80,38 @@ void MoleRoom::Init2(vector<WatingPlayerData> pdv) {
 		_state = GameState::EndGame;
 	}
 }
+
+void MoleRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
+	cout << "업데이트 프로그레스 바" << endl;
+	cout << "_quota : " << _quota << endl;
+	if (progressRate == 100) {
+		_preparedPlayer += 1;
+	}
+	cout << "_preparedPlayer : " << _preparedPlayer << endl;
+	//TODO : 로딩 진행상황 전파
+
+	if (_preparedPlayer == _quota) {
+		Start();
+	}
+}
+
+void MoleRoom::Start() {
+	if (_state != GameState::BeforeStart)
+		return;
+	_state = GameState::OnGoing;
+
+	cout << "스타트 함수 실행" << endl;
+	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+
+	PostEventAfter(5000, &MoleRoom::OnGoingPhase1);
+}
+
+void MoleRoom::OnGoingPhase1() {
+
+}
+
+void MoleRoom::OnGoingPhase2() {
+
+}

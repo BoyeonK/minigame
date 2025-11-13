@@ -33,6 +33,7 @@
 #include "S2C_Protocol_PingPong.pb.h"
 #include "S2C_Protocol_Danmaku.pb.h"
 #include "S2C_Protocol_Common.pb.h"
+#include "S2C_Protocol_Mole.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.

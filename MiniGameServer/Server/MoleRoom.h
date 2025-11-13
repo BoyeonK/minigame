@@ -19,7 +19,16 @@ public:
 
 	void Init(vector<WatingPlayerData> pdv) override;
 	void Init2(vector<WatingPlayerData> pdv);
-	void Start() {};
+
+	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
+	
+	void Start();
+	void OnGoingPhase1();
+	void OnGoingPhase2();
+
+	void CountingPhase() {};
+	void CalculateGameResult() {};
+
 
 private:
 	int32_t _quota = 2;

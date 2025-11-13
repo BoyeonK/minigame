@@ -269,23 +269,25 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fIngame_2eproto[] ABSL_ATTR
     "\n\031S2C_Protocol_Ingame.proto\022\014S2C_Protoco"
     "l\032\033S2C_Protocol_TestGame.proto\032\033S2C_Prot"
     "ocol_PingPong.proto\032\032S2C_Protocol_Danmak"
-    "u.proto\032\031S2C_Protocol_Common.proto\"$\n\022C_"
-    "RequestGameState\022\016\n\006gameId\030\001 \001(\005\"F\n\025S_De"
-    "ltaGameObjectSoft\022-\n\006object\030\001 \001(\0132\035.S2C_"
-    "Protocol.UnityGameObject\"F\n\025S_DeltaGameO"
-    "bjectHard\022-\n\006object\030\001 \001(\0132\035.S2C_Protocol"
-    ".UnityGameObject\"B\n\021S_SpawnGameObject\022-\n"
-    "\006object\030\001 \001(\0132\035.S2C_Protocol.UnityGameOb"
-    "ject\"D\n\023S_DespawnGameObject\022-\n\006object\030\001 "
-    "\001(\0132\035.S2C_Protocol.UnityGameObject\"S\n\tS_"
-    "EndGame\022\016\n\006gameId\030\001 \001(\005\0226\n\016testGameResul"
-    "t\030\002 \001(\0132\036.S2C_Protocol.S_TestGameResultB"
-    "\033\252\002\030Google.Protobuf.Protocolb\006proto3"
+    "u.proto\032\031S2C_Protocol_Common.proto\032\027S2C_"
+    "Protocol_Mole.proto\"$\n\022C_RequestGameStat"
+    "e\022\016\n\006gameId\030\001 \001(\005\"F\n\025S_DeltaGameObjectSo"
+    "ft\022-\n\006object\030\001 \001(\0132\035.S2C_Protocol.UnityG"
+    "ameObject\"F\n\025S_DeltaGameObjectHard\022-\n\006ob"
+    "ject\030\001 \001(\0132\035.S2C_Protocol.UnityGameObjec"
+    "t\"B\n\021S_SpawnGameObject\022-\n\006object\030\001 \001(\0132\035"
+    ".S2C_Protocol.UnityGameObject\"D\n\023S_Despa"
+    "wnGameObject\022-\n\006object\030\001 \001(\0132\035.S2C_Proto"
+    "col.UnityGameObject\"S\n\tS_EndGame\022\016\n\006game"
+    "Id\030\001 \001(\005\0226\n\016testGameResult\030\002 \001(\0132\036.S2C_P"
+    "rotocol.S_TestGameResultB\033\252\002\030Google.Prot"
+    "obuf.Protocolb\006proto3"
 };
-static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fIngame_2eproto_deps[4] =
+static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fIngame_2eproto_deps[5] =
     {
         &::descriptor_table_S2C_5fProtocol_5fCommon_2eproto,
         &::descriptor_table_S2C_5fProtocol_5fDanmaku_2eproto,
+        &::descriptor_table_S2C_5fProtocol_5fMole_2eproto,
         &::descriptor_table_S2C_5fProtocol_5fPingPong_2eproto,
         &::descriptor_table_S2C_5fProtocol_5fTestGame_2eproto,
 };
@@ -293,12 +295,12 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fIngame_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fIngame_2eproto = {
     false,
     false,
-    596,
+    621,
     descriptor_table_protodef_S2C_5fProtocol_5fIngame_2eproto,
     "S2C_Protocol_Ingame.proto",
     &descriptor_table_S2C_5fProtocol_5fIngame_2eproto_once,
     descriptor_table_S2C_5fProtocol_5fIngame_2eproto_deps,
-    4,
+    5,
     6,
     schemas,
     file_default_instances,
