@@ -27,7 +27,7 @@ namespace Google.Protobuf.Protocol {
             "ChlTMkNfUHJvdG9jb2xfQ29tbW9uLnByb3RvEgxTMkNfUHJvdG9jb2wiJgoD",
             "WFlaEgkKAXgYASABKAISCQoBeRgCIAEoAhIJCgF6GAMgASgCIlwKD1VuaXR5",
             "R2FtZU9iamVjdBIQCghvYmplY3RJZBgBIAEoBRISCgpvYmplY3RUeXBlGAIg",
-            "ASgFEiMKCHBvc2l0aW9uGAMgASgLMhEuUzJDX1Byb3RvY29sLlhZWiqUCQoF",
+            "ASgFEiMKCHBvc2l0aW9uGAMgASgLMhEuUzJDX1Byb3RvY29sLlhZWiqUCgoF",
             "TXNnSWQSDQoJU19XRUxDT01FEAASDQoJQ19XRUxDT01FEAESFgoSU19XRUxD",
             "T01FX1JFU1BPTlNFEAISDwoLU19FTkNSWVBURUQQAxIPCgtDX0VOQ1JZUFRF",
             "RBAEEgsKB0NfTE9HSU4QBRILCgdTX0xPR0lOEAYSFAoQQ19DUkVBVEVfQUND",
@@ -54,7 +54,10 @@ namespace Google.Protobuf.Protocol {
             "SU9OX0dPQUxfTElORRDRARIVChBTX1BfUkVORVdfU0NPUkVTENIBEhMKDlNf",
             "UF9LRUVQX0FMSVZFENMBEhwKF0NfUF9SRVNQT05TRV9LRUVQX0FMSVZFENQB",
             "EhQKD1NfREFOTUFLVV9TVEFURRCsAhIVChBTX0RBTk1BS1VfUkVTVUxUEK0C",
-            "QhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnByb3RvMw=="));
+            "Eg4KCVNfTV9TVEFURRCQAxIPCgpTX01fUkVTVUxUEJEDEhcKElNfTV9TRVRf",
+            "U0xPVF9TVEFURRCSAxIRCgxDX01fSElUX1NMT1QQkwMSGgoVU19NX1JFU1BP",
+            "TlNFX0hJVF9TTE9UEJQDEhUKEFNfTV9SRU5FV19TQ09SRVMQlQNCG6oCGEdv",
+            "b2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -116,6 +119,12 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("C_P_RESPONSE_KEEP_ALIVE")] CPResponseKeepAlive = 212,
     [pbr::OriginalName("S_DANMAKU_STATE")] SDanmakuState = 300,
     [pbr::OriginalName("S_DANMAKU_RESULT")] SDanmakuResult = 301,
+    [pbr::OriginalName("S_M_STATE")] SMState = 400,
+    [pbr::OriginalName("S_M_RESULT")] SMResult = 401,
+    [pbr::OriginalName("S_M_SET_SLOT_STATE")] SMSetSlotState = 402,
+    [pbr::OriginalName("C_M_HIT_SLOT")] CMHitSlot = 403,
+    [pbr::OriginalName("S_M_RESPONSE_HIT_SLOT")] SMResponseHitSlot = 404,
+    [pbr::OriginalName("S_M_RENEW_SCORES")] SMRenewScores = 405,
   }
 
   #endregion

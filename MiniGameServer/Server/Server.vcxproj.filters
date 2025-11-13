@@ -138,6 +138,9 @@
     <ClInclude Include="PingPongGameBullet.h">
       <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="S2C_Protocol_Mole.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -238,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="PingPongGameBullet.cpp">
       <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_Mole.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

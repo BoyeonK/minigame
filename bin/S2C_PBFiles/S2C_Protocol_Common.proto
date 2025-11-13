@@ -56,6 +56,13 @@ enum MsgId {
 
     S_DANMAKU_STATE = 300;
     S_DANMAKU_RESULT = 301;
+
+    S_M_STATE = 400;
+    S_M_RESULT = 401;
+    S_M_SET_SLOT_STATE = 402;
+    C_M_HIT_SLOT = 403;
+    S_M_RESPONSE_HIT_SLOT = 404;
+    S_M_RENEW_SCORES = 405;
 }
 
 message XYZ {

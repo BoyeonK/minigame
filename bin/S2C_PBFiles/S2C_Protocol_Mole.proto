@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package S2C_Protocol;
+option csharp_namespace = "Google.Protobuf.Protocol";
+
+import "S2C_Protocol_Common.proto";
+
+message S_M_State {
+    repeated string playerIds = 2;
+    int32 playerId = 3;
+}
+
+message S_M_Result {
+    bool isWinner = 1;
+    repeated string ids = 2;
+    repeated int32 scores = 3;
+}
+
+message S_M_SetSlotState {
+    int32 slotIdx = 1;
+    int32 state = 2;
+}
+
+message C_M_HitSlot {
+    int32 slotIdx = 1;
+}
+
+message S_M_ResponseHitSlot {
+    bool isStunned = 1;
+}
+
+message S_M_RenewScores {
+    repeated int32 scores = 1;
+}
+
