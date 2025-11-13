@@ -5,9 +5,13 @@ class MoleRoom : public GameRoom {
 public:
 	MoleRoom() {
 		_ty = GameType::Mole;
-		_points = vector<int32_t>(2, 0);
-		_elos = vector<int32_t>(2, 0);
-		_playerIds = vector<string>(2, 0);
+		_points = vector<int32_t>(_quota, 0);
+		_elos = vector<int32_t>(_quota, 0);
+		_playerIds = vector<string>(_quota, 0);
+		_slotStates = vector<SlotState>(10, SlotState::Yellow);
+		_isStunned = vector<bool>(_quota, false);
+		_failedResponse.set_isstunned(false);
+		_succeedResponse.set_isstunned(true);
 	}
 
 	~MoleRoom() {
@@ -31,6 +35,17 @@ public:
 
 	void RenewScoreBoard();
 
+	void SendGameState(int32_t playerIdx) override;
+
+	enum SlotState {
+		Red,
+		Yellow,
+		Green,
+	};
+
+	void HitSlot(int32_t playerIdx, int32_t slotNum);
+	void SetStun(const int32_t& playerIdx, bool state);
+	
 private:
 	int32_t _quota = 2;
 	bool _isUpdateCall = false;
@@ -38,5 +53,13 @@ private:
 	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<int> _winners;
+	vector<SlotState> _slotStates;
+	vector<bool> _isStunned;
+
+	void HitRed(const int32_t& playerIdx, const int32_t& slotNum);
+	void HitYellow(const int32_t& playerIdx);
+	void HitGreen(const int32_t& playerIdx, const int32_t& slotNum);
+	S2C_Protocol::S_M_ResponseHitSlot _failedResponse;
+	S2C_Protocol::S_M_ResponseHitSlot _succeedResponse;
 };
 

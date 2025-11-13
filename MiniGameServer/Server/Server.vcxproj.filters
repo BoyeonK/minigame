@@ -40,6 +40,12 @@
     <Filter Include="S2C\GameObjects\PingPong\UnityGameObjects">
       <UniqueIdentifier>{91d31fe9-aa5c-4e89-a2a1-e13275a98b93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="S2C\GameObjects\Mole">
+      <UniqueIdentifier>{dae5f6d6-1581-4c96-bd1b-1af0794e3b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="S2C\GameObjects\Mole\UnityGameObjects">
+      <UniqueIdentifier>{cca82558-8260-407d-9b70-95b278884672}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -140,6 +146,12 @@
     </ClInclude>
     <ClInclude Include="S2C_Protocol_Mole.pb.h">
       <Filter>S2C\Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="MoleManager.h">
+      <Filter>S2C\GameObjects\Mole</Filter>
+    </ClInclude>
+    <ClInclude Include="MoleRoom.h">
+      <Filter>S2C\GameObjects\Mole</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +256,12 @@
     </ClCompile>
     <ClCompile Include="S2C_Protocol_Mole.pb.cc">
       <Filter>S2C\Network\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="MoleRoom.cpp">
+      <Filter>S2C\GameObjects\Mole</Filter>
+    </ClCompile>
+    <ClCompile Include="MoleManager.cpp">
+      <Filter>S2C\GameObjects\Mole</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

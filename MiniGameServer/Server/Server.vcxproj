@@ -176,6 +176,8 @@
     <ClInclude Include="GameRoom.h" />
     <ClInclude Include="GameType.h" />
     <ClInclude Include="MatchQueue.h" />
+    <ClInclude Include="MoleRoom.h" />
+    <ClInclude Include="MoleManager.h" />
     <ClInclude Include="PingPongGameBullet.h" />
     <ClInclude Include="PingPongGameRoom.h" />
     <ClInclude Include="PingPongManager.h" />
@@ -211,6 +213,8 @@
     <ClCompile Include="GameRoom.cpp" />
     <ClCompile Include="GameType.cpp" />
     <ClCompile Include="MatchQueue.cpp" />
+    <ClCompile Include="MoleRoom.cpp" />
+    <ClCompile Include="MoleManager.cpp" />
     <ClCompile Include="PingPongGameBullet.cpp" />
     <ClCompile Include="PingPongGameRoom.cpp" />
     <ClCompile Include="PingPongManager.cpp" />
