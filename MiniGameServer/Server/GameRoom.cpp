@@ -28,10 +28,11 @@ void GameRoom::BroadCast(shared_ptr<SendBuffer> sendBuffer) {
 	if (sendBuffer == nullptr)
 		return;
 	for (auto& playerWRef : _playerWRefs) {
-		shared_ptr<PlayerSession> playerRef = playerWRef.lock();
-		if (playerRef == nullptr)
+		shared_ptr<PlayerSession> playerSessionRef = playerWRef.lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 			continue;
-		playerRef->Send(sendBuffer);
+
+		playerSessionRef->Send(sendBuffer);
 	}
 }
 

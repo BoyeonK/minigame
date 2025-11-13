@@ -156,7 +156,7 @@ void MoleRoom::SetStun(const int32_t& playerIdx, bool state) {
 
 void MoleRoom::HitRed(const int32_t& playerIdx, const int32_t& slotNum) {
 	_points[playerIdx] = _points[playerIdx] - 15;
-	_slotStates[slotNum] = SlotState::Yellow;
+	SetSlotState(slotNum, SlotState::Yellow);
 	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
@@ -178,11 +178,20 @@ void MoleRoom::HitYellow(const int32_t& playerIdx) {
 
 void MoleRoom::HitGreen(const int32_t& playerIdx, const int32_t& slotNum) {
 	_points[playerIdx] = _points[playerIdx] + 10;
-	_slotStates[slotNum] = SlotState::Yellow;
+	SetSlotState(slotNum, SlotState::Yellow);
 	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
 
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_succeedResponse);
 	playerSessionRef->Send(sendBuffer);
+}
+
+void MoleRoom::SetSlotState(const int32_t& slotNum, SlotState state) {
+	_slotStates[slotNum] = state;
+	_setSlotStatePkt.set_slotidx(slotNum);
+	_setSlotStatePkt.set_state(int(state));
+
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_setSlotStatePkt);
+	BroadCast(sendBuffer);
 }

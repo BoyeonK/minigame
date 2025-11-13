@@ -4,6 +4,7 @@
 #include "S2CPacketMaker.h"
 #include "GameRoom.h"
 #include "PingPongGameRoom.h"
+#include "MoleRoom.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
@@ -369,5 +370,16 @@ bool Handle_C_P_ResponseKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol
 }
 
 bool Handle_C_M_HitSlot(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_M_HitSlot& pkt) {
-	return false;
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
+	shared_ptr<MoleRoom> roomRef = dynamic_pointer_cast<MoleRoom>(playerSessionRef->GetJoinedRoom());
+	if (roomRef == nullptr)
+		return false;
+	if (playerSessionRef->GetRoomIdx() >= 2 || playerSessionRef->GetRoomIdx() < 0)
+		return false;
+
+	roomRef->PostEvent(&MoleRoom::HitSlot, playerSessionRef->GetRoomIdx(), pkt.slotidx());
+	return true;
 }
