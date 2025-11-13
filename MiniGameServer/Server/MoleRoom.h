@@ -29,6 +29,7 @@ public:
 	void CountingPhase() {};
 	void CalculateGameResult() {};
 
+	void RenewScoreBoard();
 
 private:
 	int32_t _quota = 2;

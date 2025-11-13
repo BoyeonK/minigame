@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "MoleRoom.h"
-#include "S2CPacketMaker.h"
 #include "S2CPacketHandler.h"
+#include "S2CPacketMaker.h"
 
 void MoleRoom::ReturnToPool() {
 	objectPool<MoleRoom>::dealloc(this);
@@ -114,4 +114,14 @@ void MoleRoom::OnGoingPhase1() {
 
 void MoleRoom::OnGoingPhase2() {
 
+}
+
+void MoleRoom::RenewScoreBoard() {
+	if (_updateCount % 10 != 0)
+		return;
+
+	S2C_Protocol::S_M_RenewScores pkt;
+	for (auto& point : _points)	pkt.add_scores(point);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
 }

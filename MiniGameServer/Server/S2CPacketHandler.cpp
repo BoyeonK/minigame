@@ -351,3 +351,7 @@ bool Handle_C_P_ResponseKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol
 	roomRef->PostEvent(&PingPongGameRoom::Handle_Response_KeepAlive, playerSessionRef->GetRoomIdx());
 	return true;
 }
+
+bool Handle_C_M_HitSlot(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_M_HitSlot& pkt) {
+	return false;
+}

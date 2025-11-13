@@ -62,6 +62,13 @@ enum : uint16_t {
 
 	PKT_S_DANMAKU_STATE = 300,
 	PKT_S_DANMAKU_RESTULT = 301,
+
+	PKT_S_M_STATE = 400,
+	PKT_S_M_RESULT = 401,
+	PKT_S_M_SET_SLOT_STATE = 402,
+	PKT_C_M_HIT_SLOT = 403,
+	PKT_S_M_RESPONSE_HIT_SLOT = 404,
+	PKT_S_M_RENEW_SCORES = 405,
 };
 
 bool Handle_Invalid(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
@@ -83,6 +90,9 @@ bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_
 bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionBar& pkt);
 bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionGoalLine& pkt);
 bool Handle_C_P_ResponseKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponseKeepAlive& pkt);
+
+	//Mole
+bool Handle_C_M_HitSlot(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_M_HitSlot& pkt);
 
 class S2CPacketHandler {
 public:
@@ -110,6 +120,9 @@ public:
 		GPacketHandler[PKT_C_P_COLLISION_GOAL_LINE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_CollisionGoalLine>(Handle_C_P_CollisionGoalLine, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_P_RESPONSE_KEEP_ALIVE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_ResponseKeepAlive>(Handle_C_P_ResponseKeepAlive, sessionRef, buffer, len); };
 
+			//Mole
+		GPacketHandler[PKT_C_M_HIT_SLOT] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_M_HitSlot>(Handle_C_M_HitSlot, sessionRef, buffer, len); };
+
 		//C_Encrypted를 복호화하여 얻은 바이너리를 알맞은 protobuf타입으로 캐스팅하고, 알맞은 핸들러 함수를 호출.
 		//암호화 하지 않을 패킷에 대해서 PlaintextHandler의 내용을 채울 필요는 없지만, 해서 나쁠건 없으니까.
 		PlaintextHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Welcome>(Handle_C_Welcome, sessionRef, plaintext); };
@@ -129,6 +142,9 @@ public:
 		PlaintextHandler[PKT_C_P_COLLISION_BAR] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_CollisionBar>(Handle_C_P_CollisionBar, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_P_COLLISION_GOAL_LINE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_CollisionGoalLine>(Handle_C_P_CollisionGoalLine, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_P_RESPONSE_KEEP_ALIVE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponseKeepAlive>(Handle_C_P_ResponseKeepAlive, sessionRef, plaintext); };
+	
+			//Mole
+		PlaintextHandler[PKT_C_M_HIT_SLOT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_M_HitSlot>(Handle_C_M_HitSlot, sessionRef, plaintext); };
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
@@ -222,6 +238,20 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DanmakuState& pkt) { return MakeSendBufferRef(pkt, PKT_S_DANMAKU_STATE); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_DanmakuState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_DANMAKU_STATE, AESKey); }
+#pragma endregion
+
+#pragma region Mole
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_State& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_STATE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_Result& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_RESULT); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_SetSlotState& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_SET_SLOT_STATE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_ResponseHitSlot& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_RESPONSE_HIT_SLOT); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_RenewScores& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_RENEW_SCORES); }
+
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_State& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_STATE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_Result& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_RESULT, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_SetSlotState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_SET_SLOT_STATE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_ResponseHitSlot& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_RESPONSE_HIT_SLOT, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_RenewScores& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_RENEW_SCORES, AESKey); }
 #pragma endregion
 
 private:
