@@ -145,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 77148174}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 3, z: 5}
+  m_LocalPosition: {x: 16, y: 3, z: -5}
   m_LocalScale: {x: 40, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -504,7 +504,7 @@ Transform:
   m_GameObject: {fileID: 451169059}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 18, z: 5}
+  m_LocalPosition: {x: 16, y: 18, z: -5}
   m_LocalScale: {x: 40, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -591,7 +591,7 @@ Transform:
   m_GameObject: {fileID: 560620876}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: -12, z: -4}
+  m_LocalPosition: {x: 16, y: -12, z: -6}
   m_LocalScale: {x: 40, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -751,6 +751,7 @@ GameObject:
   - component: {fileID: 791029929}
   - component: {fileID: 791029928}
   - component: {fileID: 791029927}
+  - component: {fileID: 791029931}
   m_Layer: 5
   m_Name: LoadingBar
   m_TagString: Untagged
@@ -848,6 +849,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &791029931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791029926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb46487e897e9df449e269488d2fbbd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1147418375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,8 +1023,8 @@ Transform:
   m_GameObject: {fileID: 1262066811}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 3, z: -4}
-  m_LocalScale: {x: 40, y: 5, z: 1}
+  m_LocalPosition: {x: 26, y: 3, z: -6}
+  m_LocalScale: {x: 20, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 791029930}
@@ -1312,8 +1325,8 @@ Transform:
   m_GameObject: {fileID: 1352463556}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 18, z: -4}
-  m_LocalScale: {x: 40, y: 5, z: 1}
+  m_LocalPosition: {x: 36, y: 18, z: -6}
+  m_LocalScale: {x: 0, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 791029930}
@@ -1535,7 +1548,7 @@ Transform:
   m_GameObject: {fileID: 1490626652}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: -27, z: 5}
+  m_LocalPosition: {x: 16, y: -27, z: -5}
   m_LocalScale: {x: 40, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1695,6 +1708,7 @@ GameObject:
   - component: {fileID: 1601763373}
   - component: {fileID: 1601763372}
   - component: {fileID: 1601763371}
+  - component: {fileID: 1601763375}
   m_Layer: 5
   m_Name: TextUI
   m_TagString: Untagged
@@ -1789,6 +1803,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1601763375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601763370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b276694d5233c47b3d3a681bccc8ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1890973248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,7 +1841,7 @@ Transform:
   m_GameObject: {fileID: 1890973248}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: -27, z: -4}
+  m_LocalPosition: {x: 16, y: -27, z: -6}
   m_LocalScale: {x: 40, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2022,8 +2048,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2001753547}
+  - component: {fileID: 2001753548}
   m_Layer: 0
-  m_Name: TestLoadingScene
+  m_Name: LoadingScene1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2044,6 +2071,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2001753548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001753545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861a3fcfc28f65147ab468602c596b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2051453033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2109,7 @@ Transform:
   m_GameObject: {fileID: 2051453033}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: -12, z: 5}
+  m_LocalPosition: {x: 16, y: -12, z: -5}
   m_LocalScale: {x: 40, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
