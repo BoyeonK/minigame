@@ -7,6 +7,17 @@ public:
 		_excluded = vector<bool>(_quota);
 	}
 
+	void Push(WatingPlayerData pd) override;
+	void Push(vector<WatingPlayerData> pdv) override;
+	void RenewMatchQueue();
+	void MatchMake() override;
+	void MakeRoom(vector<WatingPlayerData>&& pdv) override;
+	bool RenewPublicRecordFromDB() override;
+	bool CompareAndRenewPublicRecord(int32_t dbid, int32_t score) override;
+	bool TrySetPublicRecord() override { return true; };
+
+	void Update() override;
+
 private:
 	GameType _ty = GameType::Mole;
 	int32_t _quota = 2;
