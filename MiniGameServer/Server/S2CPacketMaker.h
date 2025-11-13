@@ -98,6 +98,15 @@ public:
 		return pkt;
 	}
 
+	static S2C_Protocol::S_MatchmakeCompleted MakeSMatchmakeCompleted(const int32_t& gameId, const vector<string>& playerIds) {
+		S2C_Protocol::S_MatchmakeCompleted pkt;
+		pkt.set_gameid(gameId);
+		pkt.mutable_playerids()->Reserve(playerIds.size());
+		for (const auto& playerId : playerIds)
+			pkt.add_playerids(playerId);
+		return pkt;
+	}
+
 	static S2C_Protocol::S_GameStarted MakeSGameStarted(const int32_t& gameId) {
 		S2C_Protocol::S_GameStarted pkt;
 		pkt.set_gameid(gameId);

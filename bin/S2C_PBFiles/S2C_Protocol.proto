@@ -177,6 +177,7 @@ message S_ExcludedFromMatch {
 //매칭성공. 해당 게임을 준비하기위해 Scene변경을 유도.
 message S_MatchmakeCompleted {
     int32 gameId = 1;
+    repeated string playerIds = 2;
 }
 
 //Scene을 변경하고, 게임 리소스의 로딩이 얼마나 진행됬는가를 서버에 전송

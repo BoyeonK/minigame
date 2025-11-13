@@ -40,14 +40,17 @@ void MoleRoom::Init2(vector<WatingPlayerData> pdv) {
 	cout << "Init2" << endl;
 
 	bool canStart = true;
-	for (auto& playerSessionWRef : _playerWRefs) {
-		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
+	for (int i = 0; i < _quota; i++) {
+		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
 		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 			canStart = false;
 			break;
 		}
+
 		int64_t now = ::GetTickCount64();
 		int64_t lastTick = playerSessionRef->GetLastKeepAliveTick();
+		_elos[i] = playerSessionRef->GetElo(int(_ty));
+		_playerIds[i] = playerSessionRef->GetPlayerId();
 
 		if (now - lastTick > 2000) {
 			canStart = false;
@@ -61,11 +64,9 @@ void MoleRoom::Init2(vector<WatingPlayerData> pdv) {
 
 		for (int i = 0; i < _quota; i++) {
 			shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
-			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
+			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty), _playerIds);
 			if (!PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 				playerSessionRef->SetJoinedRoom(static_pointer_cast<MoleRoom>(shared_from_this()));
-				_elos[i] = playerSessionRef->GetElo(int(_ty));
-				_playerIds[i] = playerSessionRef->GetPlayerId();
 				playerSessionRef->SetRoomIdx(i);
 				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 				playerSessionRef->Send(sendBuffer);

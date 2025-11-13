@@ -6,6 +6,7 @@ public class Define {
         Login,
         Lobby,
         TestLoadingScene,
+        LoadingScene1,
         TestGame,
         PingPong,
         GameResult,
