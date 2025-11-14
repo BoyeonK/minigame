@@ -328,7 +328,9 @@ public class NetworkManager {
 	}
 	
 	public void ResponseGameStarted(int gameId) {
-		Managers.ExecuteAtMainThread(() => { OnResponseGameStartedAct.Invoke(); });
+		Managers.ExecuteAtMainThread(() => { 
+            OnResponseGameStartedAct.Invoke();
+        });
 	}
 #endregion
 
