@@ -41,7 +41,7 @@ public class LS1LoadingBarController : MonoBehaviour {
     }
 
     void Start() {
-        Init(3);
+        
     }
 
 

@@ -119,6 +119,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SResponsePublicRecords, UnpackPacket<S_ResponsePublicRecords>);
         _handler.Add((ushort)MsgId.SResponsePublicRecords, PacketHandler.S_ResponsePublicRecordsHandler);
         _msgFactories.Add((ushort)MsgId.SResponsePublicRecords, () => new S_ResponsePublicRecords());
+
+        _onRecv.Add((ushort)MsgId.SGameSceneLoadingProgress, UnpackPacket<S_GameSceneLoadingProgress>);
+        _handler.Add((ushort)MsgId.SGameSceneLoadingProgress, PacketHandler.S_GameSceneLoadingProgressHandler);
+        _msgFactories.Add((ushort)MsgId.SGameSceneLoadingProgress, () => new S_GameSceneLoadingProgress());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

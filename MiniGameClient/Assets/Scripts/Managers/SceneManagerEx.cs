@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,9 @@ public class SceneManagerEx {
     public bool _isWinner = false;
     public List<string> _playerIds = new List<string>();
     public List<int> _scores = new List<int>();
+
+    private readonly object _loadingProgressLock = new object();
+    List<int> _loadingProgress = Enumerable.Repeat(0, 4).ToList();
 
     public BaseScene CurrentScene { get { return GameObject.FindFirstObjectByType<BaseScene>(); } }
 
@@ -91,6 +95,12 @@ public class SceneManagerEx {
         _playerIds = ids;
         _scores = scores;
         Managers.Scene.LoadSceneWithLoadingScene(Define.Scene.Login, Define.Scene.GameResult);
+    }
+
+    public void RenewLoadingProgress(int playerIdx, int loadingProgress) {
+        lock (_loadingProgressLock) {
+            _loadingProgress[playerIdx] = loadingProgress;
+        }
     }
 
     public void Clear() {

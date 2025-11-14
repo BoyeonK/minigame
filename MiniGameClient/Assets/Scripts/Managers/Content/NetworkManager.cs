@@ -30,8 +30,9 @@ public class NetworkManager {
     List<int> _personalScores = new List<int>();
     List<int> _publicScores = new List<int>();
     List<string> _publicIds = new List<string>();
-
     List<string> _ingamePlayerIds = new List<string>();
+    public List<string> GetIngamePlayerIds() { return new List<string>(_ingamePlayerIds); }
+
     public void Init() { }
 
 	public ServerSession GetSession() {

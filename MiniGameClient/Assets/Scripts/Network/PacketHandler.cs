@@ -275,6 +275,13 @@ class PacketHandler {
 		Managers.Network.ResponseMatchmakeCompleted(recvPkt.GameId, recvPkt.PlayerIds.ToList());
 	}
 
+	public static void S_GameSceneLoadingProgressHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_GameSceneLoadingProgress recvPkt))
+            return;
+
+		Managers.Scene.RenewLoadingProgress(recvPkt.PlayerIdx, recvPkt.Persentage);
+    }
+
 	public static void S_GameStartedHandler(PacketSession session, IMessage packet)	{
 		S_GameStarted recvPkt = packet as S_GameStarted;
 		Managers.Network.ResponseGameStarted(recvPkt.GameId);
