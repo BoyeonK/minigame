@@ -31,6 +31,7 @@ public class NetworkManager {
     List<int> _publicScores = new List<int>();
     List<string> _publicIds = new List<string>();
 
+    List<string> _ingamePlayerIds = new List<string>();
     public void Init() { }
 
 	public ServerSession GetSession() {
@@ -218,10 +219,12 @@ public class NetworkManager {
 		return false;
 	}
 
-	public void ResponseMatchmakeCompleted(int gameId) {
+	public void ResponseMatchmakeCompleted(int gameId, List<string> playerIds) {
 		//TODO : TestLoadingScene말고 진짜 LoadingScene쓰기 혹은 gameId마다 다른 GameScene준비하기
+        _ingamePlayerIds = playerIds;
+
 		Managers.ExecuteAtMainThread(() => {
-			Managers.Scene.LoadSceneWithLoadingScene(IntToGameScene(gameId), Define.Scene.TestLoadingScene);
+			Managers.Scene.LoadSceneWithLoadingScene(IntToGameScene(gameId), Define.Scene.LoadingScene1);
 		});
 	}
 

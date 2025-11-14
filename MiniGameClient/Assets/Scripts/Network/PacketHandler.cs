@@ -272,7 +272,7 @@ class PacketHandler {
 	public static void S_MatchmakeCompletedHandler(PacketSession session, IMessage packet) { 
 		//씬 변경 유도
 		S_MatchmakeCompleted recvPkt = packet as S_MatchmakeCompleted;
-		Managers.Network.ResponseMatchmakeCompleted(recvPkt.GameId);
+		Managers.Network.ResponseMatchmakeCompleted(recvPkt.GameId, recvPkt.PlayerIds.ToList());
 	}
 
 	public static void S_GameStartedHandler(PacketSession session, IMessage packet)	{
