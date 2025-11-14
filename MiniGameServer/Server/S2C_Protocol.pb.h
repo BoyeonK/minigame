@@ -96,6 +96,9 @@ extern S_EncryptedDefaultTypeInternal _S_Encrypted_default_instance_;
 class S_ExcludedFromMatch;
 struct S_ExcludedFromMatchDefaultTypeInternal;
 extern S_ExcludedFromMatchDefaultTypeInternal _S_ExcludedFromMatch_default_instance_;
+class S_GameSceneLoadingProgress;
+struct S_GameSceneLoadingProgressDefaultTypeInternal;
+extern S_GameSceneLoadingProgressDefaultTypeInternal _S_GameSceneLoadingProgress_default_instance_;
 class S_GameStarted;
 struct S_GameStartedDefaultTypeInternal;
 extern S_GameStartedDefaultTypeInternal _S_GameStarted_default_instance_;
@@ -626,7 +629,7 @@ class S_ResponsePublicRecords final : public ::google::protobuf::Message
     return reinterpret_cast<const S_ResponsePublicRecords*>(
         &_S_ResponsePublicRecords_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 27;
+  static constexpr int kIndexInFileMessages = 28;
   friend void swap(S_ResponsePublicRecords& a, S_ResponsePublicRecords& b) { a.Swap(&b); }
   inline void Swap(S_ResponsePublicRecords* other) {
     if (other == this) return;
@@ -849,7 +852,7 @@ class S_ResponseMyRecords final : public ::google::protobuf::Message
     return reinterpret_cast<const S_ResponseMyRecords*>(
         &_S_ResponseMyRecords_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 25;
+  static constexpr int kIndexInFileMessages = 26;
   friend void swap(S_ResponseMyRecords& a, S_ResponseMyRecords& b) { a.Swap(&b); }
   inline void Swap(S_ResponseMyRecords* other) {
     if (other == this) return;
@@ -2510,7 +2513,7 @@ class S_KillSession final : public ::google::protobuf::Message
     return reinterpret_cast<const S_KillSession*>(
         &_S_KillSession_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 22;
+  static constexpr int kIndexInFileMessages = 23;
   friend void swap(S_KillSession& a, S_KillSession& b) { a.Swap(&b); }
   inline void Swap(S_KillSession* other) {
     if (other == this) return;
@@ -2706,7 +2709,7 @@ class S_KillApplication final : public ::google::protobuf::Message
     return reinterpret_cast<const S_KillApplication*>(
         &_S_KillApplication_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 23;
+  static constexpr int kIndexInFileMessages = 24;
   friend void swap(S_KillApplication& a, S_KillApplication& b) { a.Swap(&b); }
   inline void Swap(S_KillApplication* other) {
     if (other == this) return;
@@ -2902,7 +2905,7 @@ class S_GameStarted final : public ::google::protobuf::Message
     return reinterpret_cast<const S_GameStarted*>(
         &_S_GameStarted_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 21;
+  static constexpr int kIndexInFileMessages = 22;
   friend void swap(S_GameStarted& a, S_GameStarted& b) { a.Swap(&b); }
   inline void Swap(S_GameStarted* other) {
     if (other == this) return;
@@ -3025,6 +3028,208 @@ class S_GameStarted final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_GameStarted& from_msg);
     ::int32_t gameid_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_S2C_5fProtocol_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_GameSceneLoadingProgress final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_GameSceneLoadingProgress) */ {
+ public:
+  inline S_GameSceneLoadingProgress() : S_GameSceneLoadingProgress(nullptr) {}
+  ~S_GameSceneLoadingProgress() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(S_GameSceneLoadingProgress* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_GameSceneLoadingProgress));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR S_GameSceneLoadingProgress(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline S_GameSceneLoadingProgress(const S_GameSceneLoadingProgress& from) : S_GameSceneLoadingProgress(nullptr, from) {}
+  inline S_GameSceneLoadingProgress(S_GameSceneLoadingProgress&& from) noexcept
+      : S_GameSceneLoadingProgress(nullptr, std::move(from)) {}
+  inline S_GameSceneLoadingProgress& operator=(const S_GameSceneLoadingProgress& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_GameSceneLoadingProgress& operator=(S_GameSceneLoadingProgress&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_GameSceneLoadingProgress& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_GameSceneLoadingProgress* internal_default_instance() {
+    return reinterpret_cast<const S_GameSceneLoadingProgress*>(
+        &_S_GameSceneLoadingProgress_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 21;
+  friend void swap(S_GameSceneLoadingProgress& a, S_GameSceneLoadingProgress& b) { a.Swap(&b); }
+  inline void Swap(S_GameSceneLoadingProgress* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_GameSceneLoadingProgress* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_GameSceneLoadingProgress* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S_GameSceneLoadingProgress>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const S_GameSceneLoadingProgress& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const S_GameSceneLoadingProgress& from) { S_GameSceneLoadingProgress::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(S_GameSceneLoadingProgress* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_GameSceneLoadingProgress"; }
+
+ protected:
+  explicit S_GameSceneLoadingProgress(::google::protobuf::Arena* arena);
+  S_GameSceneLoadingProgress(::google::protobuf::Arena* arena, const S_GameSceneLoadingProgress& from);
+  S_GameSceneLoadingProgress(::google::protobuf::Arena* arena, S_GameSceneLoadingProgress&& from) noexcept
+      : S_GameSceneLoadingProgress(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPlayerIdxFieldNumber = 1,
+    kPersentageFieldNumber = 2,
+  };
+  // int32 playerIdx = 1;
+  void clear_playeridx() ;
+  ::int32_t playeridx() const;
+  void set_playeridx(::int32_t value);
+
+  private:
+  ::int32_t _internal_playeridx() const;
+  void _internal_set_playeridx(::int32_t value);
+
+  public:
+  // int32 persentage = 2;
+  void clear_persentage() ;
+  ::int32_t persentage() const;
+  void set_persentage(::int32_t value);
+
+  private:
+  ::int32_t _internal_persentage() const;
+  void _internal_set_persentage(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_GameSceneLoadingProgress)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const S_GameSceneLoadingProgress& from_msg);
+    ::int32_t playeridx_;
+    ::int32_t persentage_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -3948,7 +4153,7 @@ class C_RequestPublicRecords final : public ::google::protobuf::Message
     return reinterpret_cast<const C_RequestPublicRecords*>(
         &_C_RequestPublicRecords_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 26;
+  static constexpr int kIndexInFileMessages = 27;
   friend void swap(C_RequestPublicRecords& a, C_RequestPublicRecords& b) { a.Swap(&b); }
   inline void Swap(C_RequestPublicRecords* other) {
     if (other == this) return;
@@ -4138,7 +4343,7 @@ class C_RequestMyRecords final : public ::google::protobuf::Message
     return reinterpret_cast<const C_RequestMyRecords*>(
         &_C_RequestMyRecords_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 24;
+  static constexpr int kIndexInFileMessages = 25;
   friend void swap(C_RequestMyRecords& a, C_RequestMyRecords& b) { a.Swap(&b); }
   inline void Swap(C_RequestMyRecords* other) {
     if (other == this) return;
@@ -7463,6 +7668,54 @@ inline ::int32_t C_GameSceneLoadingProgress::_internal_persentage() const {
   return _impl_.persentage_;
 }
 inline void C_GameSceneLoadingProgress::_internal_set_persentage(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.persentage_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// S_GameSceneLoadingProgress
+
+// int32 playerIdx = 1;
+inline void S_GameSceneLoadingProgress::clear_playeridx() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playeridx_ = 0;
+}
+inline ::int32_t S_GameSceneLoadingProgress::playeridx() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_GameSceneLoadingProgress.playerIdx)
+  return _internal_playeridx();
+}
+inline void S_GameSceneLoadingProgress::set_playeridx(::int32_t value) {
+  _internal_set_playeridx(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_GameSceneLoadingProgress.playerIdx)
+}
+inline ::int32_t S_GameSceneLoadingProgress::_internal_playeridx() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.playeridx_;
+}
+inline void S_GameSceneLoadingProgress::_internal_set_playeridx(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.playeridx_ = value;
+}
+
+// int32 persentage = 2;
+inline void S_GameSceneLoadingProgress::clear_persentage() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.persentage_ = 0;
+}
+inline ::int32_t S_GameSceneLoadingProgress::persentage() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_GameSceneLoadingProgress.persentage)
+  return _internal_persentage();
+}
+inline void S_GameSceneLoadingProgress::set_persentage(::int32_t value) {
+  _internal_set_persentage(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_GameSceneLoadingProgress.persentage)
+}
+inline ::int32_t S_GameSceneLoadingProgress::_internal_persentage() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.persentage_;
+}
+inline void S_GameSceneLoadingProgress::_internal_set_persentage(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.persentage_ = value;
 }

@@ -400,6 +400,32 @@ struct S_GameStartedDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_GameStartedDefaultTypeInternal _S_GameStarted_default_instance_;
 
+inline constexpr S_GameSceneLoadingProgress::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : playeridx_{0},
+        persentage_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_GameSceneLoadingProgress::S_GameSceneLoadingProgress(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_GameSceneLoadingProgressDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_GameSceneLoadingProgressDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_GameSceneLoadingProgressDefaultTypeInternal() {}
+  union {
+    S_GameSceneLoadingProgress _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_GameSceneLoadingProgressDefaultTypeInternal _S_GameSceneLoadingProgress_default_instance_;
+
 inline constexpr S_ExcludedFromMatch::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : isuserrequest_{false},
@@ -1005,6 +1031,16 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_GameSceneLoadingProgress, _impl_.persentage_),
         ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_GameSceneLoadingProgress, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_GameSceneLoadingProgress, _impl_.playeridx_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_GameSceneLoadingProgress, _impl_.persentage_),
+        ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_GameStarted, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
@@ -1093,13 +1129,14 @@ static const ::_pbi::MigrationSchema
         {182, -1, -1, sizeof(::S2C_Protocol::S_ExcludedFromMatch)},
         {191, -1, -1, sizeof(::S2C_Protocol::S_MatchmakeCompleted)},
         {201, -1, -1, sizeof(::S2C_Protocol::C_GameSceneLoadingProgress)},
-        {210, -1, -1, sizeof(::S2C_Protocol::S_GameStarted)},
-        {219, -1, -1, sizeof(::S2C_Protocol::S_KillSession)},
-        {228, -1, -1, sizeof(::S2C_Protocol::S_KillApplication)},
-        {237, -1, -1, sizeof(::S2C_Protocol::C_RequestMyRecords)},
-        {246, -1, -1, sizeof(::S2C_Protocol::S_ResponseMyRecords)},
-        {255, -1, -1, sizeof(::S2C_Protocol::C_RequestPublicRecords)},
-        {264, -1, -1, sizeof(::S2C_Protocol::S_ResponsePublicRecords)},
+        {210, -1, -1, sizeof(::S2C_Protocol::S_GameSceneLoadingProgress)},
+        {220, -1, -1, sizeof(::S2C_Protocol::S_GameStarted)},
+        {229, -1, -1, sizeof(::S2C_Protocol::S_KillSession)},
+        {238, -1, -1, sizeof(::S2C_Protocol::S_KillApplication)},
+        {247, -1, -1, sizeof(::S2C_Protocol::C_RequestMyRecords)},
+        {256, -1, -1, sizeof(::S2C_Protocol::S_ResponseMyRecords)},
+        {265, -1, -1, sizeof(::S2C_Protocol::C_RequestPublicRecords)},
+        {274, -1, -1, sizeof(::S2C_Protocol::S_ResponsePublicRecords)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_Welcome_default_instance_._instance,
@@ -1123,6 +1160,7 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_ExcludedFromMatch_default_instance_._instance,
     &::S2C_Protocol::_S_MatchmakeCompleted_default_instance_._instance,
     &::S2C_Protocol::_C_GameSceneLoadingProgress_default_instance_._instance,
+    &::S2C_Protocol::_S_GameSceneLoadingProgress_default_instance_._instance,
     &::S2C_Protocol::_S_GameStarted_default_instance_._instance,
     &::S2C_Protocol::_S_KillSession_default_instance_._instance,
     &::S2C_Protocol::_S_KillApplication_default_instance_._instance,
@@ -1162,15 +1200,16 @@ const char descriptor_table_protodef_S2C_5fProtocol_2eproto[] ABSL_ATTRIBUTE_SEC
     "\n\risUserRequest\030\001 \001(\010\"9\n\024S_MatchmakeComp"
     "leted\022\016\n\006gameId\030\001 \001(\005\022\021\n\tplayerIds\030\002 \003(\t"
     "\"0\n\032C_GameSceneLoadingProgress\022\022\n\npersen"
-    "tage\030\001 \001(\005\"\037\n\rS_GameStarted\022\016\n\006gameId\030\001 "
-    "\001(\005\"\034\n\rS_KillSession\022\013\n\003err\030\001 \001(\t\" \n\021S_K"
-    "illApplication\022\013\n\003err\030\001 \001(\t\"\"\n\022C_Request"
-    "MyRecords\022\014\n\004dbid\030\001 \001(\005\"%\n\023S_ResponseMyR"
-    "ecords\022\016\n\006scores\030\001 \003(\005\"&\n\026C_RequestPubli"
-    "cRecords\022\014\n\004dbid\030\001 \001(\005\"<\n\027S_ResponsePubl"
-    "icRecords\022\021\n\tplayerIds\030\001 \003(\t\022\016\n\006scores\030\002"
-    " \003(\005B\033\252\002\030Google.Protobuf.Protocolb\006proto"
-    "3"
+    "tage\030\001 \001(\005\"C\n\032S_GameSceneLoadingProgress"
+    "\022\021\n\tplayerIdx\030\001 \001(\005\022\022\n\npersentage\030\002 \001(\005\""
+    "\037\n\rS_GameStarted\022\016\n\006gameId\030\001 \001(\005\"\034\n\rS_Ki"
+    "llSession\022\013\n\003err\030\001 \001(\t\" \n\021S_KillApplicat"
+    "ion\022\013\n\003err\030\001 \001(\t\"\"\n\022C_RequestMyRecords\022\014"
+    "\n\004dbid\030\001 \001(\005\"%\n\023S_ResponseMyRecords\022\016\n\006s"
+    "cores\030\001 \003(\005\"&\n\026C_RequestPublicRecords\022\014\n"
+    "\004dbid\030\001 \001(\005\"<\n\027S_ResponsePublicRecords\022\021"
+    "\n\tplayerIds\030\001 \003(\t\022\016\n\006scores\030\002 \003(\005B\033\252\002\030Go"
+    "ogle.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_2eproto_deps[2] =
     {
@@ -1181,13 +1220,13 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_2eproto = {
     false,
     false,
-    1481,
+    1550,
     descriptor_table_protodef_S2C_5fProtocol_2eproto,
     "S2C_Protocol.proto",
     &descriptor_table_S2C_5fProtocol_2eproto_once,
     descriptor_table_S2C_5fProtocol_2eproto_deps,
     2,
-    28,
+    29,
     schemas,
     file_default_instances,
     TableStruct_S2C_5fProtocol_2eproto::offsets,
@@ -6439,6 +6478,247 @@ void C_GameSceneLoadingProgress::InternalSwap(C_GameSceneLoadingProgress* PROTOB
 }
 
 ::google::protobuf::Metadata C_GameSceneLoadingProgress::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_GameSceneLoadingProgress::_Internal {
+ public:
+};
+
+S_GameSceneLoadingProgress::S_GameSceneLoadingProgress(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_GameSceneLoadingProgress)
+}
+S_GameSceneLoadingProgress::S_GameSceneLoadingProgress(
+    ::google::protobuf::Arena* arena, const S_GameSceneLoadingProgress& from)
+    : S_GameSceneLoadingProgress(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S_GameSceneLoadingProgress::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S_GameSceneLoadingProgress::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, playeridx_),
+           0,
+           offsetof(Impl_, persentage_) -
+               offsetof(Impl_, playeridx_) +
+               sizeof(Impl_::persentage_));
+}
+S_GameSceneLoadingProgress::~S_GameSceneLoadingProgress() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_GameSceneLoadingProgress)
+  SharedDtor(*this);
+}
+inline void S_GameSceneLoadingProgress::SharedDtor(MessageLite& self) {
+  S_GameSceneLoadingProgress& this_ = static_cast<S_GameSceneLoadingProgress&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* S_GameSceneLoadingProgress::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_GameSceneLoadingProgress(arena);
+}
+constexpr auto S_GameSceneLoadingProgress::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_GameSceneLoadingProgress),
+                                            alignof(S_GameSceneLoadingProgress));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_GameSceneLoadingProgress::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_GameSceneLoadingProgress_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_GameSceneLoadingProgress::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_GameSceneLoadingProgress>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_GameSceneLoadingProgress::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_GameSceneLoadingProgress>(), &S_GameSceneLoadingProgress::ByteSizeLong,
+            &S_GameSceneLoadingProgress::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_GameSceneLoadingProgress, _impl_._cached_size_),
+        false,
+    },
+    &S_GameSceneLoadingProgress::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_GameSceneLoadingProgress::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> S_GameSceneLoadingProgress::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_GameSceneLoadingProgress>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 persentage = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_GameSceneLoadingProgress, _impl_.persentage_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S_GameSceneLoadingProgress, _impl_.persentage_)}},
+    // int32 playerIdx = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_GameSceneLoadingProgress, _impl_.playeridx_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_GameSceneLoadingProgress, _impl_.playeridx_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 playerIdx = 1;
+    {PROTOBUF_FIELD_OFFSET(S_GameSceneLoadingProgress, _impl_.playeridx_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 persentage = 2;
+    {PROTOBUF_FIELD_OFFSET(S_GameSceneLoadingProgress, _impl_.persentage_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S_GameSceneLoadingProgress::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_GameSceneLoadingProgress)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.playeridx_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.persentage_) -
+      reinterpret_cast<char*>(&_impl_.playeridx_)) + sizeof(_impl_.persentage_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_GameSceneLoadingProgress::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_GameSceneLoadingProgress& this_ = static_cast<const S_GameSceneLoadingProgress&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_GameSceneLoadingProgress::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_GameSceneLoadingProgress& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_GameSceneLoadingProgress)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 playerIdx = 1;
+          if (this_._internal_playeridx() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_playeridx(), target);
+          }
+
+          // int32 persentage = 2;
+          if (this_._internal_persentage() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_persentage(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_GameSceneLoadingProgress)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_GameSceneLoadingProgress::ByteSizeLong(const MessageLite& base) {
+          const S_GameSceneLoadingProgress& this_ = static_cast<const S_GameSceneLoadingProgress&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_GameSceneLoadingProgress::ByteSizeLong() const {
+          const S_GameSceneLoadingProgress& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_GameSceneLoadingProgress)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 playerIdx = 1;
+            if (this_._internal_playeridx() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_playeridx());
+            }
+            // int32 persentage = 2;
+            if (this_._internal_persentage() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_persentage());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_GameSceneLoadingProgress::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_GameSceneLoadingProgress*>(&to_msg);
+  auto& from = static_cast<const S_GameSceneLoadingProgress&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_GameSceneLoadingProgress)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_playeridx() != 0) {
+    _this->_impl_.playeridx_ = from._impl_.playeridx_;
+  }
+  if (from._internal_persentage() != 0) {
+    _this->_impl_.persentage_ = from._impl_.persentage_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_GameSceneLoadingProgress::CopyFrom(const S_GameSceneLoadingProgress& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_GameSceneLoadingProgress)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_GameSceneLoadingProgress::InternalSwap(S_GameSceneLoadingProgress* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_GameSceneLoadingProgress, _impl_.persentage_)
+      + sizeof(S_GameSceneLoadingProgress::_impl_.persentage_)
+      - PROTOBUF_FIELD_OFFSET(S_GameSceneLoadingProgress, _impl_.playeridx_)>(
+          reinterpret_cast<char*>(&_impl_.playeridx_),
+          reinterpret_cast<char*>(&other->_impl_.playeridx_));
+}
+
+::google::protobuf::Metadata S_GameSceneLoadingProgress::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================

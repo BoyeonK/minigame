@@ -42,6 +42,7 @@ enum : uint16_t {
 	PKT_S_RESPONSE_MY_RECORDS = 29,
 	PKT_C_REQUEST_PUBLIC_RECORDS = 30,
 	PKT_S_RESPONSE_PUBLIC_RECORDS = 31,
+	PKT_S_GAME_SCENE_LOADING_PROGRESS = 32,
 
 	PKT_S_TESTGAME_STATE = 100,
 	PKT_S_TESTGAME_RESULT = 101,
@@ -175,6 +176,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameStarted& pkt) { return MakeSendBufferRef(pkt, PKT_S_GAME_STARTED); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ResponseMyRecords& pkt) { return MakeSendBufferRef(pkt, PKT_S_RESPONSE_MY_RECORDS); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ResponsePublicRecords& pkt) { return MakeSendBufferRef(pkt, PKT_S_RESPONSE_PUBLIC_RECORDS); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameSceneLoadingProgress& pkt) { return MakeSendBufferRef(pkt, PKT_S_GAME_SCENE_LOADING_PROGRESS); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_WelcomeResponse& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_WELCOME_RESPONSE, AESKey); }
@@ -190,6 +192,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameStarted& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_GAME_STARTED, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ResponseMyRecords& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_RESPONSE_MY_RECORDS, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_ResponsePublicRecords& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_RESPONSE_PUBLIC_RECORDS, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_GameSceneLoadingProgress& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_GAME_SCENE_LOADING_PROGRESS, AESKey); }
 #pragma endregion
 
 #pragma region IngameCommon

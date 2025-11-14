@@ -89,7 +89,11 @@ void MoleRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
 		_preparedPlayer += 1;
 	}
 	cout << "_preparedPlayer : " << _preparedPlayer << endl;
-	//TODO : 로딩 진행상황 전파
+
+	_loadingProgressPkt.set_playeridx(playerIdx);
+	_loadingProgressPkt.set_persentage(progressRate);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_loadingProgressPkt);
+	BroadCast(sendBuffer);
 
 	if (_preparedPlayer == _quota) {
 		Start();

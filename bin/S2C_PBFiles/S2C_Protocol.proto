@@ -186,6 +186,11 @@ message C_GameSceneLoadingProgress {
     int32 persentage = 1;
 }
 
+message S_GameSceneLoadingProgress {
+    int32 playerIdx = 1;
+    int32 persentage = 2;
+}
+
 message S_GameStarted {
     int32 gameId = 1;
 }

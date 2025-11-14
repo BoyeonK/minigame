@@ -267,7 +267,6 @@ bool Handle_C_GameSceneLoadingProgress(shared_ptr<PBSession> sessionRef, S2C_Pro
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
 
-	//버그 : GameRoom이 nullptr임
 	shared_ptr<GameRoom> gameRoom = playerSessionRef->GetJoinedRoom();
 	if (gameRoom == nullptr)
 		return false;

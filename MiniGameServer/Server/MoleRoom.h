@@ -63,5 +63,6 @@ private:
 	S2C_Protocol::S_M_ResponseHitSlot _failedResponse;
 	S2C_Protocol::S_M_ResponseHitSlot _succeedResponse;
 	S2C_Protocol::S_M_SetSlotState _setSlotStatePkt;
+	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;
 };
 

@@ -50,13 +50,15 @@ namespace Google.Protobuf.Protocol {
             "dGNoEhUKDWlzVXNlclJlcXVlc3QYASABKAgiOQoUU19NYXRjaG1ha2VDb21w",
             "bGV0ZWQSDgoGZ2FtZUlkGAEgASgFEhEKCXBsYXllcklkcxgCIAMoCSIwChpD",
             "X0dhbWVTY2VuZUxvYWRpbmdQcm9ncmVzcxISCgpwZXJzZW50YWdlGAEgASgF",
-            "Ih8KDVNfR2FtZVN0YXJ0ZWQSDgoGZ2FtZUlkGAEgASgFIhwKDVNfS2lsbFNl",
-            "c3Npb24SCwoDZXJyGAEgASgJIiAKEVNfS2lsbEFwcGxpY2F0aW9uEgsKA2Vy",
-            "chgBIAEoCSIiChJDX1JlcXVlc3RNeVJlY29yZHMSDAoEZGJpZBgBIAEoBSIl",
-            "ChNTX1Jlc3BvbnNlTXlSZWNvcmRzEg4KBnNjb3JlcxgBIAMoBSImChZDX1Jl",
-            "cXVlc3RQdWJsaWNSZWNvcmRzEgwKBGRiaWQYASABKAUiPAoXU19SZXNwb25z",
-            "ZVB1YmxpY1JlY29yZHMSEQoJcGxheWVySWRzGAEgAygJEg4KBnNjb3JlcxgC",
-            "IAMoBUIbqgIYR29vZ2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
+            "IkMKGlNfR2FtZVNjZW5lTG9hZGluZ1Byb2dyZXNzEhEKCXBsYXllcklkeBgB",
+            "IAEoBRISCgpwZXJzZW50YWdlGAIgASgFIh8KDVNfR2FtZVN0YXJ0ZWQSDgoG",
+            "Z2FtZUlkGAEgASgFIhwKDVNfS2lsbFNlc3Npb24SCwoDZXJyGAEgASgJIiAK",
+            "EVNfS2lsbEFwcGxpY2F0aW9uEgsKA2VychgBIAEoCSIiChJDX1JlcXVlc3RN",
+            "eVJlY29yZHMSDAoEZGJpZBgBIAEoBSIlChNTX1Jlc3BvbnNlTXlSZWNvcmRz",
+            "Eg4KBnNjb3JlcxgBIAMoBSImChZDX1JlcXVlc3RQdWJsaWNSZWNvcmRzEgwK",
+            "BGRiaWQYASABKAUiPAoXU19SZXNwb25zZVB1YmxpY1JlY29yZHMSEQoJcGxh",
+            "eWVySWRzGAEgAygJEg4KBnNjb3JlcxgCIAMoBUIbqgIYR29vZ2xlLlByb3Rv",
+            "YnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolIngameReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -81,6 +83,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_ExcludedFromMatch), global::Google.Protobuf.Protocol.S_ExcludedFromMatch.Parser, new[]{ "IsUserRequest" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_MatchmakeCompleted), global::Google.Protobuf.Protocol.S_MatchmakeCompleted.Parser, new[]{ "GameId", "PlayerIds" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_GameSceneLoadingProgress), global::Google.Protobuf.Protocol.C_GameSceneLoadingProgress.Parser, new[]{ "Persentage" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_GameSceneLoadingProgress), global::Google.Protobuf.Protocol.S_GameSceneLoadingProgress.Parser, new[]{ "PlayerIdx", "Persentage" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_GameStarted), global::Google.Protobuf.Protocol.S_GameStarted.Parser, new[]{ "GameId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_KillSession), global::Google.Protobuf.Protocol.S_KillSession.Parser, new[]{ "Err" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_KillApplication), global::Google.Protobuf.Protocol.S_KillApplication.Parser, new[]{ "Err" }, null, null, null, null),
@@ -5097,6 +5100,241 @@ namespace Google.Protobuf.Protocol {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class S_GameSceneLoadingProgress : pb::IMessage<S_GameSceneLoadingProgress>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<S_GameSceneLoadingProgress> _parser = new pb::MessageParser<S_GameSceneLoadingProgress>(() => new S_GameSceneLoadingProgress());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<S_GameSceneLoadingProgress> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[21]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_GameSceneLoadingProgress() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_GameSceneLoadingProgress(S_GameSceneLoadingProgress other) : this() {
+      playerIdx_ = other.playerIdx_;
+      persentage_ = other.persentage_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public S_GameSceneLoadingProgress Clone() {
+      return new S_GameSceneLoadingProgress(this);
+    }
+
+    /// <summary>Field number for the "playerIdx" field.</summary>
+    public const int PlayerIdxFieldNumber = 1;
+    private int playerIdx_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int PlayerIdx {
+      get { return playerIdx_; }
+      set {
+        playerIdx_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "persentage" field.</summary>
+    public const int PersentageFieldNumber = 2;
+    private int persentage_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Persentage {
+      get { return persentage_; }
+      set {
+        persentage_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as S_GameSceneLoadingProgress);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_GameSceneLoadingProgress other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PlayerIdx != other.PlayerIdx) return false;
+      if (Persentage != other.Persentage) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (PlayerIdx != 0) hash ^= PlayerIdx.GetHashCode();
+      if (Persentage != 0) hash ^= Persentage.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (PlayerIdx != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(PlayerIdx);
+      }
+      if (Persentage != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Persentage);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (PlayerIdx != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(PlayerIdx);
+      }
+      if (Persentage != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Persentage);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (PlayerIdx != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerIdx);
+      }
+      if (Persentage != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Persentage);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(S_GameSceneLoadingProgress other) {
+      if (other == null) {
+        return;
+      }
+      if (other.PlayerIdx != 0) {
+        PlayerIdx = other.PlayerIdx;
+      }
+      if (other.Persentage != 0) {
+        Persentage = other.Persentage;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            PlayerIdx = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Persentage = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            PlayerIdx = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Persentage = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class S_GameStarted : pb::IMessage<S_GameStarted>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -5111,7 +5349,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5312,7 +5550,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5513,7 +5751,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5711,7 +5949,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[24]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5909,7 +6147,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[25]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6098,7 +6336,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[26]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6296,7 +6534,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[27]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
