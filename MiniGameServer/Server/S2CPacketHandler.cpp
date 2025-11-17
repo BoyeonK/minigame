@@ -186,6 +186,9 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 		return false;
 
 	auto it = GGameManagers.find(pkt.gameid());
+
+	cout << "gameId = " << pkt.gameid() << endl;
+
 	if (it == GGameManagers.end()) {
 		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"해당 Manager가 준비되지 않음");
 	}
