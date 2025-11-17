@@ -5,7 +5,6 @@ enum class GameType {
 	TestGame,
 	PingPong,
 	Mole,
-	Danmaku,
 	Undefined,
 };
 

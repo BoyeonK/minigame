@@ -10,7 +10,7 @@ GameType IntToGameType(int32_t num) {
 	case(2):
 		return GameType::PingPong;
 	case(3):
-		return GameType::Danmaku;
+		return GameType::Mole;
 	default:
 		return GameType::Undefined;
 	}

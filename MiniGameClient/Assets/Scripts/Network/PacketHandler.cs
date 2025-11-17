@@ -307,12 +307,6 @@ class PacketHandler {
 			case (GameType.TestMatch):
 				Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseTestGameEnd(); });
 				break;
-			case (GameType.PingPong):
-                Managers.ExecuteAtMainThread(() => { Managers.Network.ResponsePingPongEnd(); });
-                break; 
-			case (GameType.Danmaku):
-                Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseDanmakuEnd(); });
-                break;
 			default:
 				break;
 		}

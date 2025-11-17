@@ -39,7 +39,6 @@ public class Define {
         TestMatch,
         PingPong,
         Mole,
-        Danmaku,
         Undefined,
         InProcess,
     }
