@@ -187,23 +187,23 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 
 	auto it = GGameManagers.find(pkt.gameid());
 	if (it == GGameManagers.end()) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "해당 Manager가 준비되지 않음");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"해당 Manager가 준비되지 않음");
 	}
 		
 	int32_t elo = playerSessionRef->GetElo(pkt.gameid());
 	if (elo == 0) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "elo정보를 불러오는데 실패했습니다.");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"elo정보를 불러오는데 실패했습니다.");
 	}
 		
 	GameType expected = GameType::None;
 	GameType desired = IntToGameType(pkt.gameid());
 	if (desired == GameType::Undefined) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "구라 패킷 보내지마라");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"구라 패킷 보내지마라");
 	}
 
 	WatingPlayerData pd;
 	if (!playerSessionRef->TryChangeMatchingState(expected, desired)) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), "동기화 문제 발생. 재접속을 권장합니다.");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"동기화 문제 발생. 재접속을 권장합니다.");
 	}
 
 	pd.elo = elo;
