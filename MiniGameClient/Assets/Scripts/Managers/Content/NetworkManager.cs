@@ -30,8 +30,10 @@ public class NetworkManager {
     List<int> _personalScores = new List<int>();
     List<int> _publicScores = new List<int>();
     List<string> _publicIds = new List<string>();
+
     List<string> _ingamePlayerIds = new List<string>();
     public List<string> GetIngamePlayerIds() { return new List<string>(_ingamePlayerIds); }
+    public int _gameId;
 
     public void Init() { }
 
@@ -222,6 +224,7 @@ public class NetworkManager {
 
 	public void ResponseMatchmakeCompleted(int gameId, List<string> playerIds) {
 		//TODO : TestLoadingScene말고 진짜 LoadingScene쓰기 혹은 gameId마다 다른 GameScene준비하기
+        _gameId = gameId;
         _ingamePlayerIds = playerIds;
 
 		Managers.ExecuteAtMainThread(() => {
@@ -488,4 +491,14 @@ public class NetworkManager {
     public Action OnPingPongEndAct;
     public Action OnDanmakuEndAct;
 #endregion
+
+
+    public void TestLoadingSceneInit() {
+        _ingamePlayerIds.Clear();
+
+        _ingamePlayerIds.Add("ID1");
+        _ingamePlayerIds.Add("ID2");
+
+        _gameId = 3;
+    }
 }

@@ -6,14 +6,6 @@ public class LS1TextUIController : MonoBehaviour {
     TextMeshProUGUI _title;
     List<TextMeshProUGUI> _playerIds = new List<TextMeshProUGUI>();
 
-    void Start() {
-        List<string> playerIds = new List<string>();
-        playerIds.Add("아이디1");
-        playerIds.Add("아이디2");
-        playerIds.Add("아이디3");
-        Init(2, playerIds);
-    }
-
     public void Init(int gameId, List<string> playerIds) {
         List<TextMeshProUGUI> allTexts = new List<TextMeshProUGUI>();
         GetComponentsInChildren<TextMeshProUGUI>(true, allTexts);
@@ -33,16 +25,16 @@ public class LS1TextUIController : MonoBehaviour {
         if (_title != null) {
             string title = "";
             switch (gameId) {
-                case 0:
+                case 1:
                     title = "테스트용게임";
                     break;
-                case 1:
+                case 2:
                     title = "핑퐁";
                     break;
-                case 2:
+                case 3:
                     title = "두더지잡기";
                     break;
-                case 3:
+                case 4:
                     title = "탄막피하기";
                     break;
                 default:

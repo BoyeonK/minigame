@@ -1,13 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LoadingScene1 : BaseLoadingScene {
     LS1TextUIController _textUI;
     LS1LoadingBarController _loadingBar;
-    int _quota = 2;
+
+    List<string> _playerIds = new List<string>();
+    int _gameId = 0;
 
     protected override void Init() {
         //base.Init();
-        //_quota = Managers.Network.GetIngamePlayerIds().Count;
+        Managers.Network.TestLoadingSceneInit();
+
+        _playerIds = Managers.Network.GetIngamePlayerIds();
+        _gameId = Managers.Network._gameId;
         GameObject goTextUI = GameObject.Find("TextUI");
         GameObject goLoadingBar = GameObject.Find("LoadingBar");
         if (goTextUI != null)
@@ -16,7 +23,9 @@ public class LoadingScene1 : BaseLoadingScene {
             _loadingBar = goLoadingBar.GetComponent<LS1LoadingBarController>();
 
         if (_loadingBar != null)
-            _loadingBar.Init(_quota);
+            _loadingBar.Init(Define.Quota(_gameId));
+        if (_textUI != null)
+            _textUI.Init(_gameId, _playerIds);
     }
 
     private void Start() {
