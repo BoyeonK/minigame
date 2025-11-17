@@ -37,18 +37,18 @@ void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	cout << "Init2" << endl;
 
 	bool canStart = true;
-	for (auto& playerSessionWRef : _playerWRefs) {
-		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
-		//유효하지 않은 플레이어가 있는 경우, 모두 대기열로 돌려보냄.
-		if (playerSessionRef == nullptr) {
+	for (int i = 0; i < _quota; i++) {
+		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 			canStart = false;
 			break;
 		}
+
 		int64_t now = ::GetTickCount64();
 		int64_t lastTick = playerSessionRef->GetLastKeepAliveTick();
+		_elos[i] = playerSessionRef->GetElo(int(_ty));
+		_playerIds[i] = playerSessionRef->GetPlayerId();
 
-		//C_KeepAlive Handler함수에 의해서 lastTick이 변화하지 않았다면,
-		//유효하지 않은 플레이어로 간주하고, 모두 대기열로 돌려보냄.
 		if (now - lastTick > 2000) {
 			canStart = false;
 			break;
@@ -56,16 +56,15 @@ void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	}
 
 	if (canStart) {
-		//이제는 정말 게임을 진행할 것임.
-		//지금부터 연결상태가 좋지 않으면 플레이어 책임으로 간주.
-		//플레이어의 게임종료 등의 이유로 세션이 유효하지 않더라도, 진행 가능한 방식으로 코드를 작성해야 함.
 		_state = GameState::BeforeStart;
 		_preparedPlayer = 0;
-		for (auto& playerSessionWRef : _playerWRefs) {
-			shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
-			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
-			if (playerSessionRef != nullptr) {
+
+		for (int i = 0; i < _quota; i++) {
+			shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
+			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty), _playerIds);
+			if (!PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 				playerSessionRef->SetJoinedRoom(static_pointer_cast<TestGameRoom>(shared_from_this()));
+				playerSessionRef->SetRoomIdx(i);
 				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 				playerSessionRef->Send(sendBuffer);
 			}

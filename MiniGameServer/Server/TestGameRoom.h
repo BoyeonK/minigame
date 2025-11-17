@@ -6,6 +6,8 @@ class TestGameRoom : public GameRoom {
 public:
 	TestGameRoom() {
 		_ty = GameType::TestGame;
+		_elos = vector<int32_t>(_quota, 0);
+		_playerIds = vector<string>(_quota, 0);
 	}
 	~TestGameRoom() {
 		cout << "·ë »ç¸Á" << endl;
@@ -33,4 +35,6 @@ public:
 
 private:
 	int32_t _quota = 1;
+	vector<string> _playerIds;
+	vector<int32_t> _elos;
 };

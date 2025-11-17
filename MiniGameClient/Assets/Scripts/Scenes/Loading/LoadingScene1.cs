@@ -10,8 +10,8 @@ public class LoadingScene1 : BaseLoadingScene {
     int _gameId = 0;
 
     protected override void Init() {
-        //base.Init();
-        Managers.Network.TestLoadingSceneInit();
+        base.Init();
+        //Managers.Network.TestLoadingSceneInit();
 
         _playerIds = Managers.Network.GetIngamePlayerIds();
         _gameId = Managers.Network._gameId;
@@ -29,11 +29,11 @@ public class LoadingScene1 : BaseLoadingScene {
     }
 
     private void Start() {
-        //OnStart();
+        OnStart();
     }
 
     private void Update() {
-        //OnUpdate();
+        OnUpdate();
     }
 
     public override void Clear() {
