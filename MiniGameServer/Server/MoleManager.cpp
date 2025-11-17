@@ -30,7 +30,7 @@ void MoleManager::MatchMake() {
 				isReady = false;
 				_excluded[i] = true;
 			}
-			else if (playerSessionRef->GetMatchingState() != GameType::PingPong) {
+			else if (playerSessionRef->GetMatchingState() != GameType::Mole) {
 				isReady = false;
 				_excluded[i] = true;
 
