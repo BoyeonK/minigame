@@ -11,6 +11,7 @@ shared_ptr<S2CServerServiceImpl> GServerService = nullptr;
 map<int32_t, shared_ptr<GameManager>> GGameManagers;
 TestGameManager* pTestGameManager;
 PingPongManager* pPingPongManager;
+MoleManager* pMoleManager;
 
 //지금은 전역 객체로 선언된 raw pointer를 들고 소멸자에서 사라지게 하고있지만,
 //별도의 소멸자 로직 없이, 멤버 변수로 스마트 포인터를 들고 있어도 될듯?
@@ -26,6 +27,10 @@ public:
 		shared_ptr<PingPongManager> PPManager = make_shared<PingPongManager>();
 		GGameManagers[int(GameType::PingPong)] = PPManager;
 		pPingPongManager = PPManager.get();
+
+		shared_ptr<MoleManager> MManager = make_shared<MoleManager>();
+		GGameManagers[int(GameType::Mole)] = MManager;
+		pMoleManager = MManager.get();
 	}
 	~ServerGlobal() {
 		delete GCryptoManager;

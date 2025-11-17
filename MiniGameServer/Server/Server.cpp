@@ -45,7 +45,7 @@ int main() {
 
 	GThreadManager->Launch([=]() {
 		while (true) {
-			for (int i = 1; i <= 2; i++) {
+			for (int i = 1; i <= 3; i++) {
 				GGameManagers[i]->MatchMake();
 				GGameManagers[i]->RenewMatchQueue();
 				GGameManagers[i]->RemoveInvalidRoom();
