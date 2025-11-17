@@ -18,9 +18,11 @@ public:
 
 	void Update() override;
 
+	void StartGame() {}
+
 private:
 	GameType _ty = GameType::Mole;
-	int32_t _quota = 1;
+	int32_t _quota;
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;
 	uint64_t _lastRenewMatchQueueTick = 0;
