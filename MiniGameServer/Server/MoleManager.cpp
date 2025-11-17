@@ -21,7 +21,9 @@ void MoleManager::RenewMatchQueue() {
 
 void MoleManager::MatchMake() {
 	vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
+	cout << "A" << endl;
 	for (auto& pdv : pdvv) {
+		cout << "B" << endl;
 		bool isReady = true;
 		fill(_excluded.begin(), _excluded.end(), false);
 		for (int i = 0; i < _quota; i++) {

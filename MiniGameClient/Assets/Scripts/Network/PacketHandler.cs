@@ -266,6 +266,7 @@ class PacketHandler {
 	}
 
 	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) {
+		Managers.ExecuteAtMainThread(() => { Debug.Log("뭔가 문제가 있음"); });
 		Managers.Network.ResponseExcludedFromMatch();
 	}
 
