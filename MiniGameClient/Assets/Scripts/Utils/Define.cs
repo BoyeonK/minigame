@@ -9,6 +9,7 @@ public class Define {
         LoadingScene1,
         TestGame,
         PingPong,
+        Mole,
         GameResult,
     }
 
@@ -37,6 +38,7 @@ public class Define {
         None,
         TestMatch,
         PingPong,
+        Mole,
         Danmaku,
         Undefined,
         InProcess,

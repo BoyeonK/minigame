@@ -336,15 +336,16 @@ public class NetworkManager {
             OnResponseGameStartedAct.Invoke();
         });
 	}
-#endregion
+    #endregion
 
-#region TestGame
-	public void TryRequestGameState(int gameId) {
-		C_RequestGameState pkt = PacketMaker.MakeCRequestGameState(gameId);
-		Send(pkt);
-	}
+    public void TryRequestGameState(int gameId) {
+        C_RequestGameState pkt = PacketMaker.MakeCRequestGameState(gameId);
+        Send(pkt);
+    }
 
-	public void ProcessTestGameState(IMessage packet) {
+    #region TestGame
+
+    public void ProcessTestGameState(IMessage packet) {
         S_TestGameState recvPkt = packet as S_TestGameState;
 		foreach(UnityGameObject uObj in recvPkt.Objects) {
 			Managers.Object.CreateObject(uObj);
@@ -455,7 +456,19 @@ public class NetworkManager {
         if (scene is PingPongScene pingPongScene)
             pingPongScene.RenewScores(scores);
     }
-#endregion
+    #endregion
+
+    #region Mole
+    public void ProcessSMState(int playerIdx) {
+        BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+        if (scene == null)
+            return;
+
+        if (scene is MoleScene moleScene)
+            moleScene.LoadState(playerIdx);
+    }
+
+    #endregion
 
     public void ProcessDanmakuState(IMessage packet) {
 

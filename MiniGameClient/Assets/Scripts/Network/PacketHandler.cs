@@ -370,5 +370,14 @@ class PacketHandler {
 
         Managers.Network.SetPublicRecords(recvPkt.PlayerIds.ToList(), recvPkt.Scores.ToList());
     }
+
+	public static void S_M_StateHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_M_State recvPkt))
+            return;
+
+		Managers.ExecuteAtMainThread(() => {
+            Managers.Network.ProcessSMState(recvPkt.PlayerId);
+        });
+    }
 }
 

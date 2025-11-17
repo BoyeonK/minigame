@@ -123,6 +123,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SGameSceneLoadingProgress, UnpackPacket<S_GameSceneLoadingProgress>);
         _handler.Add((ushort)MsgId.SGameSceneLoadingProgress, PacketHandler.S_GameSceneLoadingProgressHandler);
         _msgFactories.Add((ushort)MsgId.SGameSceneLoadingProgress, () => new S_GameSceneLoadingProgress());
+
+        _onRecv.Add((ushort)MsgId.SMState, UnpackPacket<S_M_State>);
+        _handler.Add((ushort)MsgId.SMState, PacketHandler.S_M_StateHandler);
+        _msgFactories.Add((ushort)MsgId.SMState, () => new S_M_State());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

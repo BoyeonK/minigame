@@ -7,7 +7,7 @@ public:
 		_ty = GameType::Mole;
 		_points = vector<int32_t>(_quota, 0);
 		_elos = vector<int32_t>(_quota, 0);
-		_playerIds = vector<string>(_quota, 0);
+		_playerIds = vector<string>(_quota);
 		_slotStates = vector<SlotState>(10, SlotState::Yellow);
 		_isStunned = vector<bool>(_quota, false);
 		_failedResponse.set_isstunned(false);

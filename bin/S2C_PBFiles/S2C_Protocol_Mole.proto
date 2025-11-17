@@ -6,8 +6,7 @@ option csharp_namespace = "Google.Protobuf.Protocol";
 import "S2C_Protocol_Common.proto";
 
 message S_M_State {
-    repeated string playerIds = 2;
-    int32 playerId = 3;
+    int32 playerId = 1;
 }
 
 message S_M_Result {

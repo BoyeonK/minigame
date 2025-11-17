@@ -132,7 +132,17 @@ void MoleRoom::RenewScoreBoard() {
 }
 
 void MoleRoom::SendGameState(int32_t playerIdx) {
+	if (playerIdx > (_quota - 1))
+		return;
 
+	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return;
+
+	S2C_Protocol::S_M_State pkt;
+	pkt.set_playerid(playerIdx);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	playerSessionRef->Send(sendBuffer);
 }
 
 void MoleRoom::HitSlot(int32_t playerIdx, int32_t slotNum) {
