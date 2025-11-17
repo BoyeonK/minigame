@@ -4,6 +4,7 @@
 #include "S2CPacketMaker.h"
 #include "TestGameManager.h"
 #include "PingPongManager.h"
+#include "MoleManager.h"
 
 CryptoManager* GCryptoManager = nullptr;
 DBClientImpl* DBManager = nullptr;
