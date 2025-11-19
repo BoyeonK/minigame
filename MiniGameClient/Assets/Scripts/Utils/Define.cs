@@ -58,6 +58,7 @@ public class Define {
         switch (gameId) {
             case 1: return Scene.TestGame;
             case 2: return Scene.PingPong;
+            case 3: return Scene.Mole;
             default: return Scene.Undefined;
         }
     }
@@ -66,7 +67,7 @@ public class Define {
         switch (gameId) {
             case 1: return 1;
             case 2: return 4;
-            case 3: return 2;
+            case 3: return 1;
             default: return 0;
         }
     }
