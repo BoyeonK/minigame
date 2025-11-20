@@ -509,6 +509,23 @@ public class NetworkManager {
             C_M_HitSlot pkt = new() { SlotIdx = slotNum };
             _netRef.Send(pkt);
         }
+
+        public void ResponseSMHitSlot(bool isStunned) {
+            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            if (scene == null)
+                return;
+
+            if (scene is MoleScene moleScene) {
+                if (isStunned) {
+                    _lastFailedTick = Time.time;
+                    moleScene.Stun();
+                }
+                else {
+
+                }
+            }
+            
+        }
     }
 
     public void TryRequestGameState(int gameId) {

@@ -27,6 +27,10 @@ public class MoleScene : BaseScene {
         _gameBoard.SetSlotState(slotIdx, state);
     }
 
+    public void Stun() {
+        Debug.Log("Ω∫≈œ");
+    }
+
     public override void Clear() {
         
     }

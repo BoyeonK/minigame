@@ -379,7 +379,7 @@ bool Handle_C_M_HitSlot(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_M_HitS
 	shared_ptr<MoleRoom> roomRef = dynamic_pointer_cast<MoleRoom>(playerSessionRef->GetJoinedRoom());
 	if (roomRef == nullptr)
 		return false;
-	if (playerSessionRef->GetRoomIdx() >= 2 || playerSessionRef->GetRoomIdx() < 0)
+	if (playerSessionRef->GetRoomIdx() >= 1 || playerSessionRef->GetRoomIdx() < 0)
 		return false;
 
 	roomRef->PostEvent(&MoleRoom::HitSlot, playerSessionRef->GetRoomIdx(), pkt.slotidx());

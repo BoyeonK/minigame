@@ -127,6 +127,14 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SMState, UnpackPacket<S_M_State>);
         _handler.Add((ushort)MsgId.SMState, PacketHandler.S_M_StateHandler);
         _msgFactories.Add((ushort)MsgId.SMState, () => new S_M_State());
+
+        _onRecv.Add((ushort)MsgId.SMSetSlotState, UnpackPacket<S_M_SetSlotState>);
+        _handler.Add((ushort)MsgId.SMSetSlotState, PacketHandler.S_M_SetSlotStateHandler);
+        _msgFactories.Add((ushort)MsgId.SMSetSlotState, () => new S_M_SetSlotState());
+
+        _onRecv.Add((ushort)MsgId.SMResponseHitSlot, UnpackPacket<S_M_ResponseHitSlot>);
+        _handler.Add((ushort)MsgId.SMResponseHitSlot, PacketHandler.S_M_ResponseHitSlotHandler);
+        _msgFactories.Add((ushort)MsgId.SMResponseHitSlot, () => new S_M_ResponseHitSlot());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

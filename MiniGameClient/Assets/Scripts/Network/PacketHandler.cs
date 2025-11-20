@@ -383,5 +383,14 @@ class PacketHandler {
             Managers.Network.Mole.ProcessSMSetSlotState(recvPkt.SlotIdx, recvPkt.State);
         });
     }
+
+	public static void S_M_ResponseHitSlotHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_M_ResponseHitSlot recvPkt))
+            return;
+
+		Managers.ExecuteAtMainThread(() => {
+			Managers.Network.Mole.ResponseSMHitSlot(recvPkt.IsStunned);
+		});
+    }
 }
 
