@@ -478,6 +478,8 @@ public class NetworkManager {
     public NetworkMoleManager Mole = new NetworkMoleManager();
     public class NetworkMoleManager {
         private NetworkManager _netRef;
+        float _lastFailedTick = 0.0f;
+
         public void Init(NetworkManager netRef) {
             _netRef = netRef;
         }
@@ -491,7 +493,19 @@ public class NetworkManager {
                 moleScene.LoadState(playerIdx);
         }
 
-        public void TryHitSlot(int slotNum) {
+        public void ProcessSMSetSlotState(int slotIdx, int state) {
+            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            if (scene == null)
+                return;
+
+            if (scene is MoleScene moleScene)
+                moleScene.SetSlotState(slotIdx, state);
+        }
+
+        public void TryHitSlot(int slotNum, float tick) {
+            if (tick < _lastFailedTick + 1.0f)
+                return;
+
             C_M_HitSlot pkt = new() { SlotIdx = slotNum };
             _netRef.Send(pkt);
         }
@@ -527,7 +541,6 @@ public class NetworkManager {
     //FM대로하면, private로 선언하고 구독 및 구취하는 함수를 public으로 열어야 함.
     public Action OnConnectedAct;
 	public Action OnConnectedFailedAct;
-	public Action OnProcessRequestGameStateAct;
 	public Action OnTestGameEndAct;
     public Action OnPingPongEndAct;
 #endregion

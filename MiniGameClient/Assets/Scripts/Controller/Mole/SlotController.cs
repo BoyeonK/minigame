@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class SlotController : MonoBehaviour {
     private GameObject _red, _yellow, _green;
@@ -36,7 +35,24 @@ public class SlotController : MonoBehaviour {
 
     private void OnKeyAction() {
         Debug.Log(_index);
-        Managers.Network.Mole.TryHitSlot(_index);
+        float tick = Time.time;
+        Managers.Network.Mole.TryHitSlot(_index, tick);
+    }
+
+    public void SetState(int state) {
+        switch (state) {
+            case 0:
+                SetRed();
+                break;
+            case 1:
+                SetYellow();
+                break;
+            case 2:
+                SetGreen();
+                break;
+            default:
+                return;
+        }
     }
 
     public void SetRed() {

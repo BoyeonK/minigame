@@ -5,11 +5,7 @@ using UnityEngine;
 public class MoleGameBoardController : MonoBehaviour {
     private List<SlotController> _slots = new();
 
-    void Start() {
-        Init();
-    }
-
-    void Init() {
+    public void Init() {
         _slots.Clear();
         for (int i = 0; i <= 9; i++) {
             string slotName = $"Slot{i}";
@@ -27,6 +23,13 @@ public class MoleGameBoardController : MonoBehaviour {
 
     private void OnDisable() {
         Clear();
+    }
+
+    public void SetSlotState(int slotIdx, int state) {
+        if (slotIdx < 0 || slotIdx > 9)
+            return;
+
+        _slots[slotIdx].SetState(state);
     }
 
     void Clear() {

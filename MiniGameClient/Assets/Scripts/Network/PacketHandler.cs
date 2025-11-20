@@ -374,5 +374,14 @@ class PacketHandler {
             Managers.Network.Mole.ProcessSMState(recvPkt.PlayerId);
         });
     }
+
+	public static void S_M_SetSlotStateHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_M_SetSlotState recvPkt))
+            return;
+
+		Managers.ExecuteAtMainThread(() => {
+            Managers.Network.Mole.ProcessSMSetSlotState(recvPkt.SlotIdx, recvPkt.State);
+        });
+    }
 }
 
