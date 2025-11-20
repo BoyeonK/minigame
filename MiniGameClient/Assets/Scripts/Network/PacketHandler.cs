@@ -235,19 +235,19 @@ class PacketHandler {
 	public static void S_MatchmakeRequestHandler(PacketSession session, IMessage packet) {
         S_MatchmakeRequest recvPkt = packet as S_MatchmakeRequest;
 		if (recvPkt.IsSucceed) {
-			Managers.Network.ProcessMatchMake(recvPkt.GameId);
+			Managers.Network.Match.ProcessMatchMake(recvPkt.GameId);
 		} else {
-            Managers.Network.ProcessMatchMake(recvPkt.GameId, recvPkt.Err);
+            Managers.Network.Match.ProcessMatchMake(recvPkt.GameId, recvPkt.Err);
 		}
     }
 
 	public static void S_MatchmakeCancelHandler(PacketSession session, IMessage packet) {
         S_MatchmakeCancel recvPkt = packet as S_MatchmakeCancel;
         if (recvPkt.IsSucceed) {
-			Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId);
+			Managers.Network.Match.ProcessMatchMakeCancel(recvPkt.GameId);
         }
         else {
-            Managers.Network.ProcessMatchMakeCancel(recvPkt.GameId, recvPkt.Err);
+            Managers.Network.Match.ProcessMatchMakeCancel(recvPkt.GameId, recvPkt.Err);
         }
     }
 
@@ -259,7 +259,7 @@ class PacketHandler {
 		//TestCode
 		//received = 0;
 
-		if (Managers.Network.ResponseKeepAlive(received)) {
+		if (Managers.Network.Match.ResponseKeepAlive(received)) {
 			C_MatchmakeKeepAlive responsePkt = PacketMaker.MakeCMatchMakeKeepAlive(received, recvPkt.SentTimeTick);
 			Managers.Network.Send(responsePkt);
 		}
@@ -267,13 +267,13 @@ class PacketHandler {
 
 	public static void S_ExcludedFromMatchHandler(PacketSession session, IMessage packet) {
 		Managers.ExecuteAtMainThread(() => { Debug.Log("뭔가 문제가 있음"); });
-		Managers.Network.ResponseExcludedFromMatch();
+		Managers.Network.Match.ResponseExcludedFromMatch();
 	}
 
 	public static void S_MatchmakeCompletedHandler(PacketSession session, IMessage packet) { 
 		//씬 변경 유도
 		S_MatchmakeCompleted recvPkt = packet as S_MatchmakeCompleted;
-		Managers.Network.ResponseMatchmakeCompleted(recvPkt.GameId, recvPkt.PlayerIds.ToList());
+		Managers.Network.Match.ResponseMatchmakeCompleted(recvPkt.GameId, recvPkt.PlayerIds.ToList());
 	}
 
 	public static void S_GameSceneLoadingProgressHandler(PacketSession session, IMessage packet) {

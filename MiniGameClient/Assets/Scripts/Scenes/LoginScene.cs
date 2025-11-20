@@ -75,9 +75,9 @@ public class LoginScene : BaseScene {
         Managers.Network.OnWrongPasswordAct += WrongPassword;
         Managers.Network.OnLoginAct += LoginSucceed;
         Managers.Network.OnLogoutAct += LogoutSucceed;
-        Managers.Network.OnMatchmakeRequestSucceedAct += MatchmakeRequestSucceed;
-        Managers.Network.OnMatchmakeCancelSucceedAct += MatchmakeCancelSucceed;
-        Managers.Network.OnResponseKeepAliveAct += MatchCompletedReadyToChangeScene;
+        Managers.Network.Match.OnMatchmakeRequestSucceedAct += MatchmakeRequestSucceed;
+        Managers.Network.Match.OnMatchmakeCancelSucceedAct += MatchmakeCancelSucceed;
+        Managers.Network.Match.OnResponseKeepAliveAct += MatchCompletedReadyToChangeScene;
 
         if (Managers.Network.IsConnected() || Managers.Network.IsLogined()) {
             Managers.UI.ShowSceneUI<UI_LobbyMenu>();
@@ -183,7 +183,7 @@ public class LoginScene : BaseScene {
 
     public void StartMatchMake() {
         if (_stage == Stage.MatchMake) {
-            Managers.Network.TryMatchMake(Define.IntToGameType(_matchMakeOpt + 1));
+            Managers.Network.Match.TryMatchMake(Define.IntToGameType(_matchMakeOpt + 1));
         }
     }
 
@@ -368,7 +368,7 @@ public class LoginScene : BaseScene {
     }
 
     public void MatchmakeCancel() {
-        Managers.Network.TryMatchMakeCancel();
+        Managers.Network.Match.TryMatchMakeCancel();
     }
 
     public override void Clear() {
@@ -385,9 +385,9 @@ public class LoginScene : BaseScene {
         Managers.Network.OnWrongPasswordAct -= WrongPassword;
         Managers.Network.OnLoginAct -= LoginSucceed;
         Managers.Network.OnLogoutAct -= LogoutSucceed;
-        Managers.Network.OnMatchmakeRequestSucceedAct -= MatchmakeRequestSucceed;
-        Managers.Network.OnMatchmakeCancelSucceedAct -= MatchmakeCancelSucceed;
-        Managers.Network.OnResponseKeepAliveAct -= MatchCompletedReadyToChangeScene;
+        Managers.Network.Match.OnMatchmakeRequestSucceedAct -= MatchmakeRequestSucceed;
+        Managers.Network.Match.OnMatchmakeCancelSucceedAct -= MatchmakeCancelSucceed;
+        Managers.Network.Match.OnResponseKeepAliveAct -= MatchCompletedReadyToChangeScene;
         Debug.Log("Login Scene Cleared");
     }
 }

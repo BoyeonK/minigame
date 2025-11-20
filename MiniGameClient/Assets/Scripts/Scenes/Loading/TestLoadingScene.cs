@@ -10,7 +10,7 @@ public class TestLoadingScene : BaseScene {
         _progressRate = 0f;
         _isReady = false;
         SceneType = Define.Scene.TestLoadingScene;
-        Managers.Network.OnResponseGameStartedAct += SceneChange;
+        Managers.Network.Match.OnResponseGameStartedAct += SceneChange;
     }
 
     private void Start() {
@@ -43,6 +43,6 @@ public class TestLoadingScene : BaseScene {
     }
 
     public override void Clear() {
-        Managers.Network.OnResponseGameStartedAct -= SceneChange;
+        Managers.Network.Match.OnResponseGameStartedAct -= SceneChange;
     }
 }

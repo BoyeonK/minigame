@@ -9,7 +9,7 @@ public class BaseLoadingScene : BaseScene {
         base.Init();
         _progressRate = 0f;
         _isReady = false;
-        Managers.Network.OnResponseGameStartedAct += SceneChange;
+        Managers.Network.Match.OnResponseGameStartedAct += SceneChange;
     }
 
     private void UpdateProgressRate() {
@@ -42,6 +42,6 @@ public class BaseLoadingScene : BaseScene {
     }
 
     public override void Clear() {
-        Managers.Network.OnResponseGameStartedAct -= SceneChange;
+        Managers.Network.Match.OnResponseGameStartedAct -= SceneChange;
     }
 }

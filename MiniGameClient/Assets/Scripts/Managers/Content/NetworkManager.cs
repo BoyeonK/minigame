@@ -20,22 +20,145 @@ public class NetworkManager {
 	//이게 단순 bool값이 아니라 어떤 객체였다면 메모리에 할당한 이후, 그 포인터를 양쪽에서 사용하는 느낌으루다가 만들었을 것.
 	private bool _isConnected = false;
 	
-	//매칭중인 게임 종류
-    private GameType _matchGameType = GameType.None;
-    private readonly object _matchGameTypeLock = new object();
-    //중복 요청을 막기 위한 변수
-    private int _isMatchRequesting = 0;
-
     private readonly object _recordLock = new object();
     List<int> _personalScores = new List<int>();
     List<int> _publicScores = new List<int>();
     List<string> _publicIds = new List<string>();
 
-    List<string> _ingamePlayerIds = new List<string>();
-    public List<string> GetIngamePlayerIds() { return new List<string>(_ingamePlayerIds); }
-    public int _gameId;
+    public MatchMaker Match = new MatchMaker();
+    public class MatchMaker {
+        private NetworkManager _netRef;
+        protected GameType _matchGameType = GameType.None;
+        protected readonly object _matchGameTypeLock = new object();
+        protected int _isMatchRequesting = 0;
 
-    public void Init() { }
+        List<string> _ingamePlayerIds = new List<string>();
+        public List<string> GetIngamePlayerIds() { return new List<string>(_ingamePlayerIds); }
+        public int _gameId;
+
+        public void Init(NetworkManager netRef) {
+            _netRef = netRef;
+        }
+
+        public void TryMatchMake(GameType gameType) {
+            lock (_matchGameTypeLock) {
+                if (_isMatchRequesting == 1 || _matchGameType != 0) {
+                    return;
+                }
+
+                _isMatchRequesting = 1;
+            }
+            C_Encrypted pkt = PacketMaker.MakeCMatchMakeRequest(_netRef.GetSession(), (int)gameType);
+            _netRef.Send(pkt);
+        }
+
+        public void ProcessMatchMake(int gameId) {
+            lock (_matchGameTypeLock) {
+                _matchGameType = IntToGameType(gameId);
+                _isMatchRequesting = 0;
+            }
+            //TODO : 현재 매칭중이라는 것을 UI로 표시하고, 매칭 취소버튼을 UI로 제공
+            Managers.ExecuteAtMainThread(() => {
+                Debug.Log($"{gameId}번 게임 매칭 대기열 진입");
+                OnMatchmakeRequestSucceedAct.Invoke();
+            });
+        }
+
+        public void ProcessMatchMake(int gameId, string err) {
+            lock (_matchGameTypeLock) {
+                _isMatchRequesting = 0;
+            }
+            Managers.ExecuteAtMainThread(() => { Managers.UI.ShowErrorUIOnlyConfirm(err); });
+        }
+
+        public void TryMatchMakeCancel() {
+            int gameId = 0;
+            lock (_matchGameTypeLock) {
+                if (_isMatchRequesting == 1) {
+                    return;
+                }
+                if (_matchGameType == GameType.InProcess) {
+                    Managers.ExecuteAtMainThread(() => {
+                        Managers.UI.ShowErrorUIOnlyConfirm("잠시 후에 다시 시도해 주세요.");
+                    });
+                    return;
+                }
+                _isMatchRequesting = 1;
+                gameId = (int)_matchGameType;
+            }
+            C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_netRef.GetSession(), gameId);
+            _netRef.Send(pkt);
+        }
+
+        public void ProcessMatchMakeCancel(int gameId) {
+            Debug.Log("받은게 있기는 하다.");
+            lock (_matchGameTypeLock) {
+                _isMatchRequesting = 0;
+                if (_matchGameType != IntToGameType(gameId)) {
+                    Managers.ExecuteAtMainThread(() => { Debug.Log($"gameId 불일치 ( {_matchGameType} != {IntToGameType(gameId)} )"); });
+                    return;
+                }
+
+                _matchGameType = GameType.None;
+            }
+            Managers.ExecuteAtMainThread(() => {
+                Debug.Log($"{gameId}번 게임 매칭 대기열 취소");
+                OnMatchmakeCancelSucceedAct.Invoke();
+            });
+        }
+
+        public void ProcessMatchMakeCancel(int gameId, string err) {
+            lock (_matchGameTypeLock) {
+                _isMatchRequesting = 0;
+            }
+            Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패"); });
+        }
+
+        public void ResponseExcludedFromMatch() {
+            Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
+        }
+
+        //KeepAlive handler가 전해준 id가 현재 상태와 일치하는지 확인.
+        //일치한 경우, InProcess로 변경하고 true를 리턴
+        public bool ResponseKeepAlive(int gameId) {
+            lock (_matchGameTypeLock) {
+                if ((int)_matchGameType == gameId) {
+                    _matchGameType = GameType.InProcess;
+                    Managers.ExecuteAtMainThread(() => { OnResponseKeepAliveAct.Invoke(); });
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void ResponseMatchmakeCompleted(int gameId, List<string> playerIds) {
+            //TODO : TestLoadingScene말고 진짜 LoadingScene쓰기 혹은 gameId마다 다른 GameScene준비하기
+            _gameId = gameId;
+            _ingamePlayerIds = playerIds;
+
+            Managers.ExecuteAtMainThread(() => {
+                Managers.Scene.LoadSceneWithLoadingScene(IntToGameScene(gameId), Define.Scene.LoadingScene1);
+            });
+        }
+
+        public void ResetMatchState() {
+            lock(_matchGameTypeLock) {
+                _isMatchRequesting = 0;
+                _matchGameType = GameType.None;
+            }
+        }
+
+        public Action OnMatchmakeRequestSucceedAct;
+        public Action OnMatchmakeCancelSucceedAct;
+        public Action OnResponseKeepAliveAct;
+        public Action OnResponseGameStartedAct;
+        public Action OnExcludedFromMatchAct;
+    }
+
+
+    public void Init() {
+        Match.Init(this);
+    }
 
 	public ServerSession GetSession() {
 		return _session;
@@ -131,106 +254,6 @@ public class NetworkManager {
             Managers.Network.Send(pkt);
         }
     }
-
-	public void TryMatchMake(GameType gameType) {
-		lock (_matchGameTypeLock) {
-			if (_isMatchRequesting == 1 || _matchGameType != 0) {
-				return;
-			}
-			_isMatchRequesting = 1;
-        }
-        C_Encrypted pkt = PacketMaker.MakeCMatchMakeRequest(_session, (int)gameType);
-        Send(pkt);
-    }
-
-	public void ProcessMatchMake(int gameId) {
-		lock(_matchGameTypeLock) { 
-			_matchGameType = IntToGameType(gameId);
-			_isMatchRequesting = 0;
-		}
-		//TODO : 현재 매칭중이라는 것을 UI로 표시하고, 매칭 취소버튼을 UI로 제공
-		Managers.ExecuteAtMainThread(() => {
-            Debug.Log($"{gameId}번 게임 매칭 대기열 진입");
-            OnMatchmakeRequestSucceedAct.Invoke();
-        });
-    }
-
-	public void ProcessMatchMake(int gameId, string err) {
-		lock (_matchGameTypeLock) {
-			_isMatchRequesting = 0;
-        }
-		Managers.ExecuteAtMainThread(() => { Managers.UI.ShowErrorUIOnlyConfirm(err); });
-    }
-
-    public void TryMatchMakeCancel() {
-		int gameId = 0;
-		lock (_matchGameTypeLock) {
-            if (_isMatchRequesting == 1) {
-                return;
-            }
-			if (_matchGameType == GameType.InProcess) {
-				Managers.ExecuteAtMainThread(() => {
-					Managers.UI.ShowErrorUIOnlyConfirm("잠시 후에 다시 시도해 주세요.");
-				});
-				return;
-			}
-			_isMatchRequesting = 1;
-            gameId = (int)_matchGameType;
-        }
-        C_MatchmakeCancel pkt = PacketMaker.MakeCMatchMakeCancel(_session, gameId);
-        Send(pkt);
-    }
-
-	public void ProcessMatchMakeCancel(int gameId) {
-		Debug.Log("받은게 있기는 하다.");
-        lock (_matchGameTypeLock) {
-            _isMatchRequesting = 0;
-            if (_matchGameType != IntToGameType(gameId)) {
-				Managers.ExecuteAtMainThread(() => { Debug.Log($"gameId 불일치 ( {_matchGameType} != {IntToGameType(gameId)} )"); });
-                return;
-            }
-                
-			_matchGameType = GameType.None;
-        }
-		Managers.ExecuteAtMainThread(() => {
-            Debug.Log($"{gameId}번 게임 매칭 대기열 취소");
-            OnMatchmakeCancelSucceedAct.Invoke();
-        });  
-    }
-
-    public void ProcessMatchMakeCancel(int gameId, string err) {
-		lock (_matchGameTypeLock) {
-			_isMatchRequesting = 0;
-		}
-		Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}번 게임 매칭 대기열 취소 실패"); });
-    }
-
-    public void ResponseExcludedFromMatch() {
-		Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
-	}
-
-	//KeepAlive handler가 전해준 id가 현재 상태와 일치하는지 확인.
-	//일치한 경우, InProcess로 변경하고 true를 리턴
-    public bool ResponseKeepAlive(int gameId) {
-		lock (_matchGameTypeLock) {
-			if ((int)_matchGameType == gameId) {
-				_matchGameType = GameType.InProcess;
-				Managers.ExecuteAtMainThread(() => { OnResponseKeepAliveAct.Invoke(); }); 
-                return true;
-			}
-		}
-		return false;
-	}
-
-	public void ResponseMatchmakeCompleted(int gameId, List<string> playerIds) {
-		//TODO : TestLoadingScene말고 진짜 LoadingScene쓰기 혹은 gameId마다 다른 GameScene준비하기
-        _gameId = gameId;
-        _ingamePlayerIds = playerIds;
-
-		Managers.ExecuteAtMainThread(() => {
-			Managers.Scene.LoadSceneWithLoadingScene(IntToGameScene(gameId), Define.Scene.LoadingScene1);
-		});
-	}
 
     public void ConnectCompleted(bool result) {
         _isConnected = result;
@@ -333,7 +356,7 @@ public class NetworkManager {
 	
 	public void ResponseGameStarted(int gameId) {
 		Managers.ExecuteAtMainThread(() => { 
-            OnResponseGameStartedAct.Invoke();
+            Match.OnResponseGameStartedAct.Invoke();
         });
 	}
     #endregion
@@ -353,10 +376,7 @@ public class NetworkManager {
     }
 
     public void ResponseTestGameEnd() {
-        lock (_matchGameTypeLock) {
-            _isMatchRequesting = 0;
-            _matchGameType = GameType.None;
-        }
+        Match.ResetMatchState();
         OnTestGameEndAct?.Invoke();
     }
 #endregion
@@ -440,11 +460,8 @@ public class NetworkManager {
             return;
 
 		if (scene is PingPongScene pingPongScene) {
-			lock (_matchGameTypeLock) {
-				_isMatchRequesting = 0;
-				_matchGameType = GameType.None;
-			}
-			Managers.Scene.EndGame(isWinner, ids, scores);
+            Match.ResetMatchState();
+            Managers.Scene.EndGame(isWinner, ids, scores);
         }
     }
 
@@ -468,19 +485,12 @@ public class NetworkManager {
             moleScene.LoadState(playerIdx);
     }
 
+    public void TryHitSlot(int slotNum) {
+        C_M_HitSlot pkt = new() { SlotIdx = slotNum };
+        Send(pkt);
+    }
+
     #endregion
-
-    public void ProcessDanmakuState(IMessage packet) {
-
-    }
-
-    public void ResponsePingPongEnd() {
-		OnPingPongEndAct?.Invoke();
-    }
-
-    public void ResponseDanmakuEnd() {
-		OnDanmakuEndAct?.Invoke();
-    }
 
     public void Update() {
 
@@ -494,24 +504,10 @@ public class NetworkManager {
     public Action OnLogoutAct;
     public Action OnWrongIdAct;
 	public Action OnWrongPasswordAct;
-	public Action OnMatchmakeRequestSucceedAct;
-	public Action OnMatchmakeCancelSucceedAct;
-	public Action OnResponseKeepAliveAct;
-	public Action OnResponseGameStartedAct;
-	public Action OnExcludedFromMatchAct;
 	public Action OnProcessRequestGameStateAct;
 	public Action OnTestGameEndAct;
     public Action OnPingPongEndAct;
     public Action OnDanmakuEndAct;
 #endregion
 
-
-    public void TestLoadingSceneInit() {
-        _ingamePlayerIds.Clear();
-
-        _ingamePlayerIds.Add("ID1");
-        _ingamePlayerIds.Add("ID2");
-
-        _gameId = 3;
-    }
 }

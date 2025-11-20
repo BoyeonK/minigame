@@ -13,8 +13,8 @@ public class LoadingScene1 : BaseLoadingScene {
         base.Init();
         //Managers.Network.TestLoadingSceneInit();
 
-        _playerIds = Managers.Network.GetIngamePlayerIds();
-        _gameId = Managers.Network._gameId;
+        _playerIds = Managers.Network.Match.GetIngamePlayerIds();
+        _gameId = Managers.Network.Match._gameId;
         GameObject goTextUI = GameObject.Find("TextUI");
         GameObject goLoadingBar = GameObject.Find("LoadingBar");
         if (goTextUI != null)
