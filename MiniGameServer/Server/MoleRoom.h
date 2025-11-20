@@ -10,8 +10,8 @@ public:
 		_playerIds = vector<string>(_quota);
 		_slotStates = vector<SlotState>(10, SlotState::Yellow);
 		_isStunned = vector<bool>(_quota, false);
-		_failedResponse.set_isstunned(false);
-		_succeedResponse.set_isstunned(true);
+		_failedResponse.set_isstunned(true);
+		_succeedResponse.set_isstunned(false);
 	}
 
 	~MoleRoom() {
