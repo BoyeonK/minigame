@@ -10,7 +10,7 @@ public class TestLoadingScene : BaseScene {
         _progressRate = 0f;
         _isReady = false;
         SceneType = Define.Scene.TestLoadingScene;
-        Managers.Network.Match.OnResponseGameStartedAct += SceneChange;
+        Managers.Network.Loading.OnResponseGameStartedAct += SceneChange;
     }
 
     private void Start() {
@@ -32,7 +32,7 @@ public class TestLoadingScene : BaseScene {
             UpdateProgressRate();
             if (_hadProgress) {
                 Debug.Log($"진전이 있었다. 진행률 : {_progressRate}");
-                Managers.Network.TrySendLoadingProgressRate(_progressRate);
+                Managers.Network.Loading.TrySendLoadingProgressRate(_progressRate);
                 _hadProgress = false;
             }
         }
@@ -43,6 +43,6 @@ public class TestLoadingScene : BaseScene {
     }
 
     public override void Clear() {
-        Managers.Network.Match.OnResponseGameStartedAct -= SceneChange;
+        Managers.Network.Loading.OnResponseGameStartedAct -= SceneChange;
     }
 }

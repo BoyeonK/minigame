@@ -25,8 +25,13 @@ public class NetworkManager {
     List<int> _publicScores = new List<int>();
     List<string> _publicIds = new List<string>();
 
-    public MatchMaker Match = new MatchMaker();
-    public class MatchMaker {
+    public void Init() {
+        Match.Init(this);
+        Loading.Init(this);
+    }
+
+    public NetworkMatchMaker Match = new NetworkMatchMaker();
+    public class NetworkMatchMaker  {
         private NetworkManager _netRef;
         protected GameType _matchGameType = GameType.None;
         protected readonly object _matchGameTypeLock = new object();
@@ -151,15 +156,31 @@ public class NetworkManager {
         public Action OnMatchmakeRequestSucceedAct;
         public Action OnMatchmakeCancelSucceedAct;
         public Action OnResponseKeepAliveAct;
-        public Action OnResponseGameStartedAct;
         public Action OnExcludedFromMatchAct;
     }
 
+    public NetworkLoadingManager Loading = new NetworkLoadingManager();
+    public class NetworkLoadingManager  {
+        private NetworkManager _netRef;
+        public void Init(NetworkManager netRef) {
+            _netRef = netRef;
+        }
 
-    public void Init() {
-        Match.Init(this);
+        public void TrySendLoadingProgressRate(float progressRate) {
+            C_GameSceneLoadingProgress pkt = PacketMaker.MakeCGameSceneLoadingProgress(progressRate);
+            _netRef.Send(pkt);
+        }
+
+        public void ResponseGameStarted(int gameId) {
+            Managers.ExecuteAtMainThread(() => {
+                OnResponseGameStartedAct.Invoke();
+            });
+        }
+
+        public Action OnResponseGameStartedAct;
     }
 
+    
 	public ServerSession GetSession() {
 		return _session;
     }
@@ -346,19 +367,6 @@ public class NetworkManager {
         return ret;
     }
 
-    #endregion
-
-    #region LoadingScene
-    public void TrySendLoadingProgressRate(float progressRate) {
-		C_GameSceneLoadingProgress pkt = PacketMaker.MakeCGameSceneLoadingProgress(progressRate);
-		Send(pkt);
-	}
-	
-	public void ResponseGameStarted(int gameId) {
-		Managers.ExecuteAtMainThread(() => { 
-            Match.OnResponseGameStartedAct.Invoke();
-        });
-	}
     #endregion
 
     public void TryRequestGameState(int gameId) {

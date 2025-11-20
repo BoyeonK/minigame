@@ -9,7 +9,7 @@ public class BaseLoadingScene : BaseScene {
         base.Init();
         _progressRate = 0f;
         _isReady = false;
-        Managers.Network.Match.OnResponseGameStartedAct += SceneChange;
+        Managers.Network.Loading.OnResponseGameStartedAct += SceneChange;
     }
 
     private void UpdateProgressRate() {
@@ -31,7 +31,7 @@ public class BaseLoadingScene : BaseScene {
             UpdateProgressRate();
             if (_hadProgress) {
                 Debug.Log($"진전이 있었다. 진행률 : {_progressRate}");
-                Managers.Network.TrySendLoadingProgressRate(_progressRate);
+                Managers.Network.Loading.TrySendLoadingProgressRate(_progressRate);
                 _hadProgress = false;
             }
         }
@@ -42,6 +42,6 @@ public class BaseLoadingScene : BaseScene {
     }
 
     public override void Clear() {
-        Managers.Network.Match.OnResponseGameStartedAct -= SceneChange;
+        Managers.Network.Loading.OnResponseGameStartedAct -= SceneChange;
     }
 }
