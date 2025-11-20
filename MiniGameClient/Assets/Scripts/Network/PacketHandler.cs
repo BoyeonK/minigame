@@ -163,7 +163,7 @@ class PacketHandler {
 				if (recvPkt.Dbid == 0) {
 					Managers.ExecuteAtMainThread(() => { 
 						Debug.Log("없는 아이디.");
-                        Managers.Network.LoginCompleted(2);
+                        Managers.Network.Lobby.LoginCompleted(2);
                     });
 					// 실패
 				}
@@ -174,7 +174,7 @@ class PacketHandler {
                     C_RequestPublicRecords publicRecordPkt = PacketMaker.MakeCRequestPublicRecords(recvPkt.Dbid);
                     Managers.Network.Send(publicRecordPkt);
                     Managers.ExecuteAtMainThread(() => { 
-                        Managers.Network.LoginCompleted(0);
+                        Managers.Network.Lobby.LoginCompleted(0);
                     });
                 }
 				break;
@@ -183,7 +183,7 @@ class PacketHandler {
 				string errMsg = recvPkt.Err;
 				Managers.ExecuteAtMainThread(() => { 
 					Debug.Log($"{errMsg}");
-                    Managers.Network.LoginCompleted(1);
+                    Managers.Network.Lobby.LoginCompleted(1);
                 });
 				break;
 			// 값이 할당되지 않았을 때 (ㄹㅇ 버그, 서버 문제임)
@@ -216,7 +216,7 @@ class PacketHandler {
 		if (isSucceed) {
 			Managers.ExecuteAtMainThread(() => {
 				Managers.UI.ShowErrorUIOnlyConfirm("성공적으로 로그아웃 되었습니다.");
-				Managers.Network.OnLogoutAct?.Invoke();
+				Managers.Network.Lobby.OnLogoutAct?.Invoke();
 			});
 		}
 		else {
@@ -316,16 +316,16 @@ class PacketHandler {
 	//굳이굳이 나누어 실행하게 만들었는데 이렇게 메인스레드가 하라고 다 던져버리면
 	//무슨 소용인가. 나중에 시간이 허락하면 바꾸도록 한다.
 	public static void S_P_StateHandler(PacketSession session, IMessage packet)	{
-		Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessPState(packet); });
+		Managers.ExecuteAtMainThread(() => { Managers.Network.PingPong.ProcessPState(packet); });
 	}
 
 	public static void S_P_RequestPlayerBarPositionHandler(PacketSession session, IMessage packet) {
-		Managers.ExecuteAtMainThread(() => { Managers.Network.ResponsePRequestPlayerBarPosition(packet); });
+		Managers.ExecuteAtMainThread(() => { Managers.Network.PingPong.ResponsePRequestPlayerBarPosition(packet); });
 	}
 
     public static void S_P_BulletHandler(PacketSession session, IMessage packet) {
 		S_P_Bullet recvPkt = packet as S_P_Bullet;
-        Managers.ExecuteAtMainThread(() => { Managers.Network.ProcessSPBullet(recvPkt.Bullet, recvPkt.MoveDir.X, recvPkt.MoveDir.Z, recvPkt.Speed, recvPkt.LastCollider); });
+        Managers.ExecuteAtMainThread(() => { Managers.Network.PingPong.ProcessSPBullet(recvPkt.Bullet, recvPkt.MoveDir.X, recvPkt.MoveDir.Z, recvPkt.Speed, recvPkt.LastCollider); });
     }
 
 	public static void S_P_BulletsHandler(PacketSession session, IMessage packet) {
@@ -337,12 +337,12 @@ class PacketHandler {
 
     public static void S_P_ResultHandler(PacketSession session, IMessage packet) {
         S_P_Result recvPkt = packet as S_P_Result;
-		Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseSPResult(recvPkt.IsWinner, recvPkt.Ids.ToList(), recvPkt.Scores.ToList()); });
+		Managers.ExecuteAtMainThread(() => { Managers.Network.PingPong.ResponseSPResult(recvPkt.IsWinner, recvPkt.Ids.ToList(), recvPkt.Scores.ToList()); });
     }
 
     public static void S_P_RenewScoresHandler(PacketSession session, IMessage packet) {
 		S_P_RenewScores recvPkt = packet as S_P_RenewScores;
-		Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseSPScores(recvPkt.Scores.ToList()); });
+		Managers.ExecuteAtMainThread(() => { Managers.Network.PingPong.ResponseSPScores(recvPkt.Scores.ToList()); });
     }
 
 	public static void S_P_KeepAliveHandler(PacketSession session, IMessage packet) {
@@ -356,14 +356,14 @@ class PacketHandler {
             return;
 
         List<int> scores = recvPkt.Scores.ToList();
-        Managers.Network.SetMyRecords(scores);
+        Managers.Network.Lobby.SetMyRecords(scores);
     }
 
     public static void S_ResponsePublicRecordsHandler(PacketSession session, IMessage packet) {
         if (!(packet is S_ResponsePublicRecords recvPkt))
             return;
 
-        Managers.Network.SetPublicRecords(recvPkt.PlayerIds.ToList(), recvPkt.Scores.ToList());
+        Managers.Network.Lobby.SetPublicRecords(recvPkt.PlayerIds.ToList(), recvPkt.Scores.ToList());
     }
 
 	public static void S_M_StateHandler(PacketSession session, IMessage packet) {
@@ -371,7 +371,7 @@ class PacketHandler {
             return;
 
 		Managers.ExecuteAtMainThread(() => {
-            Managers.Network.ProcessSMState(recvPkt.PlayerId);
+            Managers.Network.Mole.ProcessSMState(recvPkt.PlayerId);
         });
     }
 }

@@ -36,7 +36,7 @@ public class SlotController : MonoBehaviour {
 
     private void OnKeyAction() {
         Debug.Log(_index);
-        Managers.Network.TryHitSlot(_index);
+        Managers.Network.Mole.TryHitSlot(_index);
     }
 
     public void SetRed() {

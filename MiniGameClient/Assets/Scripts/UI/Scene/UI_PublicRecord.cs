@@ -31,8 +31,8 @@ public class UI_PublicRecord : UI_Scene {
         _scores.Sort((a, b) => string.Compare(a.name, b.name));
         _ids.Sort((a, b) => string.Compare(a.name, b.name));
 
-        List<int> scores = Managers.Network.GetPublicRecord();
-        List<string> ids = Managers.Network.GetPublicIds();
+        List<int> scores = Managers.Network.Lobby.GetPublicRecord();
+        List<string> ids = Managers.Network.Lobby.GetPublicIds();
         for (int i = 0; i < scores.Count; i++) {
             if (i >= _scores.Count)
                 break;

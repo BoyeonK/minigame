@@ -64,7 +64,7 @@ public class UI_LoginPopup : UI_Popup {
         }
         else { return; }
 
-        Managers.Network.TryLogin(id, password);
+        Managers.Network.Lobby.TryLogin(id, password);
     }
 
     //Tab눌렀을때 패스워드 창으로 포커스 이동

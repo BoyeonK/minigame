@@ -27,7 +27,7 @@ public class UI_PersonalRecord : UI_Scene {
         }
         _scores.Sort((a, b) => string.Compare(a.name, b.name));
 
-        List<int> scores = Managers.Network.GetPersonalRecord();
+        List<int> scores = Managers.Network.Lobby.GetPersonalRecord();
         for (int i = 0; i < scores.Count; i++) {
             if (i >= _scores.Count)
                 break;

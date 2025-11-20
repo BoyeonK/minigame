@@ -72,7 +72,7 @@ public class UI_CreateAccountPopup : UI_Popup {
         }
         else { return; }
 
-        Managers.Network.TryCreateAccount(id, pw, pwc);
+        Managers.Network.Lobby.TryCreateAccount(id, pw, pwc);
     }
 
     private void FocusToNxt() {

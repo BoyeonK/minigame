@@ -71,10 +71,10 @@ public class LoginScene : BaseScene {
         Managers.Input.AddKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Down);
         Managers.Network.OnConnectedAct += ConnectToServerSucceed;
         Managers.Network.OnConnectedFailedAct += ConnectToServerFailed;
-        Managers.Network.OnWrongIdAct += WrongId;
-        Managers.Network.OnWrongPasswordAct += WrongPassword;
-        Managers.Network.OnLoginAct += LoginSucceed;
-        Managers.Network.OnLogoutAct += LogoutSucceed;
+        Managers.Network.Lobby.OnWrongIdAct += WrongId;
+        Managers.Network.Lobby.OnWrongPasswordAct += WrongPassword;
+        Managers.Network.Lobby.OnLoginAct += LoginSucceed;
+        Managers.Network.Lobby.OnLogoutAct += LogoutSucceed;
         Managers.Network.Match.OnMatchmakeRequestSucceedAct += MatchmakeRequestSucceed;
         Managers.Network.Match.OnMatchmakeCancelSucceedAct += MatchmakeCancelSucceed;
         Managers.Network.Match.OnResponseKeepAliveAct += MatchCompletedReadyToChangeScene;
@@ -364,7 +364,7 @@ public class LoginScene : BaseScene {
 
     public void Logout() {
         GoToLoginStage();
-        Managers.Network.TryLogout();
+        Managers.Network.Lobby.TryLogout();
     }
 
     public void MatchmakeCancel() {
@@ -381,10 +381,10 @@ public class LoginScene : BaseScene {
         Managers.Input.RemoveKeyListener(KeyCode.Escape, BackToPreviousMenu, InputManager.KeyState.Down);
         Managers.Network.OnConnectedAct -= ConnectToServerSucceed;
         Managers.Network.OnConnectedFailedAct -= ConnectToServerFailed;
-        Managers.Network.OnWrongIdAct -= WrongId;
-        Managers.Network.OnWrongPasswordAct -= WrongPassword;
-        Managers.Network.OnLoginAct -= LoginSucceed;
-        Managers.Network.OnLogoutAct -= LogoutSucceed;
+        Managers.Network.Lobby.OnWrongIdAct -= WrongId;
+        Managers.Network.Lobby.OnWrongPasswordAct -= WrongPassword;
+        Managers.Network.Lobby.OnLoginAct -= LoginSucceed;
+        Managers.Network.Lobby.OnLogoutAct -= LogoutSucceed;
         Managers.Network.Match.OnMatchmakeRequestSucceedAct -= MatchmakeRequestSucceed;
         Managers.Network.Match.OnMatchmakeCancelSucceedAct -= MatchmakeCancelSucceed;
         Managers.Network.Match.OnResponseKeepAliveAct -= MatchCompletedReadyToChangeScene;
