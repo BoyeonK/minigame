@@ -43,7 +43,7 @@ public:
 		Green,
 	};
 
-	void HitSlot(int32_t playerIdx, int32_t slotNum);
+	void HitSlot(int32_t playerIdx, int32_t slotIdx);
 	void SetStun(const int32_t& playerIdx, bool state);
 	
 private:
@@ -59,7 +59,7 @@ private:
 	void HitRed(const int32_t& playerIdx, const int32_t& slotNum);
 	void HitYellow(const int32_t& playerIdx);
 	void HitGreen(const int32_t& playerIdx, const int32_t& slotNum);
-	void SetSlotState(const int32_t& slotNum, SlotState state);
+	void SetSlotState(int32_t slotIdx, SlotState state);
 	S2C_Protocol::S_M_ResponseHitSlot _failedResponse;
 	S2C_Protocol::S_M_ResponseHitSlot _succeedResponse;
 	S2C_Protocol::S_M_SetSlotState _setSlotStatePkt;

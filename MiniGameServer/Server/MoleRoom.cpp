@@ -114,7 +114,15 @@ void MoleRoom::Start() {
 }
 
 void MoleRoom::OnGoingPhase1() {
-
+	PostEventAfter(1000, &MoleRoom::SetSlotState, 1, SlotState::Green);
+	PostEventAfter(2000, &MoleRoom::SetSlotState, 2, SlotState::Green);
+	PostEventAfter(3000, &MoleRoom::SetSlotState, 3, SlotState::Green);
+	PostEventAfter(4000, &MoleRoom::SetSlotState, 4, SlotState::Green);
+	PostEventAfter(5000, &MoleRoom::SetSlotState, 5, SlotState::Green);
+	PostEventAfter(6000, &MoleRoom::SetSlotState, 6, SlotState::Green);
+	PostEventAfter(7000, &MoleRoom::SetSlotState, 7, SlotState::Green);
+	PostEventAfter(8000, &MoleRoom::SetSlotState, 8, SlotState::Green);
+	PostEventAfter(9000, &MoleRoom::SetSlotState, 9, SlotState::Green);
 }
 
 void MoleRoom::OnGoingPhase2() {
@@ -145,20 +153,20 @@ void MoleRoom::SendGameState(int32_t playerIdx) {
 	playerSessionRef->Send(sendBuffer);
 }
 
-void MoleRoom::HitSlot(int32_t playerIdx, int32_t slotNum) {
+void MoleRoom::HitSlot(int32_t playerIdx, int32_t slotIdx) {
 	if (_isStunned[playerIdx])
 		return;
 
-	SlotState ss = _slotStates[slotNum];
+	SlotState ss = _slotStates[slotIdx];
 	switch (ss) {
 	case SlotState::Red:
-		HitRed(playerIdx, slotNum);
+		HitRed(playerIdx, slotIdx);
 		break;
 	case SlotState::Yellow:
 		HitYellow(playerIdx);
 		break;
 	case SlotState::Green:
-		HitGreen(playerIdx, slotNum);
+		HitGreen(playerIdx, slotIdx);
 		break;
 	default:
 		break;
@@ -202,9 +210,12 @@ void MoleRoom::HitGreen(const int32_t& playerIdx, const int32_t& slotNum) {
 	playerSessionRef->Send(sendBuffer);
 }
 
-void MoleRoom::SetSlotState(const int32_t& slotNum, SlotState state) {
-	_slotStates[slotNum] = state;
-	_setSlotStatePkt.set_slotidx(slotNum);
+void MoleRoom::SetSlotState(int32_t slotIdx, SlotState state) {
+	if (_slotStates[slotIdx] == state)
+		return;
+
+	_slotStates[slotIdx] = state;
+	_setSlotStatePkt.set_slotidx(slotIdx);
 	_setSlotStatePkt.set_state(int(state));
 
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_setSlotStatePkt);
