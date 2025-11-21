@@ -2,8 +2,10 @@ using UnityEngine;
 using static Define;
 
 public class MoleScene : BaseScene {
-    MoleGameBoardController _gameBoard;
-
+    private MoleGameBoardController _gameBoard;
+    private MoleCameraController _cameraController;
+    private StunBlur _stunBlur;
+    
     protected override void Init() {
         base.Init();
         SceneType = Scene.Mole;
@@ -16,7 +18,18 @@ public class MoleScene : BaseScene {
             _gameBoard = goGameBoard.GetComponent<MoleGameBoardController>();
             _gameBoard.Init();
         }
-            
+
+        GameObject camera = GameObject.Find("MoleCamera");
+        if (camera != null) {
+            _cameraController = camera.GetComponent<MoleCameraController>();
+            _cameraController.Init();
+        }
+
+        GameObject stunBlur = GameObject.Find("StunBlur");
+        if (stunBlur != null) {
+            _stunBlur = stunBlur.GetComponent<StunBlur>();
+            _stunBlur.Init();
+        }
     }
 
     public void LoadState(int playerIdx) {
@@ -28,7 +41,8 @@ public class MoleScene : BaseScene {
     }
 
     public void Stun() {
-        Debug.Log("Ω∫≈œ");
+        _cameraController.Stun();
+        _stunBlur.Stun(); 
     }
 
     public override void Clear() {
