@@ -135,10 +135,8 @@ void MoleRoom::OnGoingPhase2() {
 }
 
 void MoleRoom::RenewScoreBoard() {
-	if (_updateCount % 10 != 0)
+	if (_updateCount % 30 != 0)
 		return;
-
-	cout << "¶ì¿ë" << endl;
 
 	S2C_Protocol::S_M_RenewScores pkt;
 	for (auto& point : _points)	pkt.add_scores(point);

@@ -399,6 +399,7 @@ class PacketHandler {
 
 		Managers.ExecuteAtMainThread(() => {
 			Managers.Network.Mole.ResponseSMRenewScores(recvPkt.Scores.ToList());
+			Debug.Log("패킷은 왔다.");
 		});
     }
 }

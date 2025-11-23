@@ -59,8 +59,6 @@ public class UI_MoleScoreBoard : UI_Scene {
         if (scores == null)
             return;
 
-        Debug.Log("¶ì¿ë");
-
         if (scores.Count == 2) {
             _player0Score.text = scores[0].ToString();
             _player1Score.text = scores[1].ToString();

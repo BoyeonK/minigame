@@ -135,6 +135,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SMResponseHitSlot, UnpackPacket<S_M_ResponseHitSlot>);
         _handler.Add((ushort)MsgId.SMResponseHitSlot, PacketHandler.S_M_ResponseHitSlotHandler);
         _msgFactories.Add((ushort)MsgId.SMResponseHitSlot, () => new S_M_ResponseHitSlot());
+
+        _onRecv.Add((ushort)MsgId.SMRenewScores, UnpackPacket<S_M_RenewScores>);
+        _handler.Add((ushort)MsgId.SMRenewScores, PacketHandler.S_M_RenewScoresHandler);
+        _msgFactories.Add((ushort)MsgId.SMRenewScores, () => new S_M_RenewScores());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {
