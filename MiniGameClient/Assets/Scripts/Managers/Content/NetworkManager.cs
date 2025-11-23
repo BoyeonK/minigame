@@ -534,6 +534,7 @@ public class NetworkManager {
             if (scene is MoleScene moleScene) {
                 moleScene.RenewScores(scores);
             }
+            Debug.Log("패킷은 왔다");
         }
     }
 
