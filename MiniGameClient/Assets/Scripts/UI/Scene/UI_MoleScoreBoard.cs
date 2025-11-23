@@ -65,6 +65,16 @@ public class UI_MoleScoreBoard : UI_Scene {
         }
     }
 
+    public void SetPlayerIds(List<string> playerIds) {
+        if (playerIds == null)
+            return;
+
+        if (playerIds.Count == 2) {
+            _player0Id.text = playerIds[0].ToString();
+            _player1Id.text = playerIds[1].ToString();
+        }
+    }
+
     private void Clear() {
         Managers.Input.RemoveKeyListener(KeyCode.Tab, HideScoreBar, InputManager.KeyState.Down);
     }

@@ -230,8 +230,31 @@ class S_M_State final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
+    kIdsFieldNumber = 2,
     kPlayerIdFieldNumber = 1,
   };
+  // repeated string ids = 2;
+  int ids_size() const;
+  private:
+  int _internal_ids_size() const;
+
+  public:
+  void clear_ids() ;
+  const std::string& ids(int index) const;
+  std::string* mutable_ids(int index);
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_ids(int index, Arg_&& value, Args_... args);
+  std::string* add_ids();
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void add_ids(Arg_&& value, Args_... args);
+  const ::google::protobuf::RepeatedPtrField<std::string>& ids() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* mutable_ids();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<std::string>& _internal_ids() const;
+  ::google::protobuf::RepeatedPtrField<std::string>* _internal_mutable_ids();
+
+  public:
   // int32 playerId = 1;
   void clear_playerid() ;
   ::int32_t playerid() const;
@@ -247,8 +270,8 @@ class S_M_State final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 1, 0,
-      0, 2>
+      1, 2, 0,
+      34, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -265,6 +288,7 @@ class S_M_State final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_M_State& from_msg);
+    ::google::protobuf::RepeatedPtrField<std::string> ids_;
     ::int32_t playerid_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -1325,6 +1349,70 @@ inline ::int32_t S_M_State::_internal_playerid() const {
 inline void S_M_State::_internal_set_playerid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.playerid_ = value;
+}
+
+// repeated string ids = 2;
+inline int S_M_State::_internal_ids_size() const {
+  return _internal_ids().size();
+}
+inline int S_M_State::ids_size() const {
+  return _internal_ids_size();
+}
+inline void S_M_State::clear_ids() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.ids_.Clear();
+}
+inline std::string* S_M_State::add_ids() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  std::string* _s = _internal_mutable_ids()->Add();
+  // @@protoc_insertion_point(field_add_mutable:S2C_Protocol.S_M_State.ids)
+  return _s;
+}
+inline const std::string& S_M_State::ids(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_M_State.ids)
+  return _internal_ids().Get(index);
+}
+inline std::string* S_M_State::mutable_ids(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_M_State.ids)
+  return _internal_mutable_ids()->Mutable(index);
+}
+template <typename Arg_, typename... Args_>
+inline void S_M_State::set_ids(int index, Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::AssignToString(
+      *_internal_mutable_ids()->Mutable(index),
+      std::forward<Arg_>(value), args... );
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_M_State.ids)
+}
+template <typename Arg_, typename... Args_>
+inline void S_M_State::add_ids(Arg_&& value, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::google::protobuf::internal::AddToRepeatedPtrField(*_internal_mutable_ids(),
+                               std::forward<Arg_>(value),
+                               args... );
+  // @@protoc_insertion_point(field_add:S2C_Protocol.S_M_State.ids)
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+S_M_State::ids() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:S2C_Protocol.S_M_State.ids)
+  return _internal_ids();
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+S_M_State::mutable_ids() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:S2C_Protocol.S_M_State.ids)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_ids();
+}
+inline const ::google::protobuf::RepeatedPtrField<std::string>&
+S_M_State::_internal_ids() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.ids_;
+}
+inline ::google::protobuf::RepeatedPtrField<std::string>*
+S_M_State::_internal_mutable_ids() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.ids_;
 }
 
 // -------------------------------------------------------------------

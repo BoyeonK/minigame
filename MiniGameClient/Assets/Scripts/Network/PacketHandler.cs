@@ -371,7 +371,7 @@ class PacketHandler {
             return;
 
 		Managers.ExecuteAtMainThread(() => {
-            Managers.Network.Mole.ProcessSMState(recvPkt.PlayerId);
+            Managers.Network.Mole.ProcessSMState(recvPkt.PlayerId, recvPkt.Ids.ToList());
         });
     }
 

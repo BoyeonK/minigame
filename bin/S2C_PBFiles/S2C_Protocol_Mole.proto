@@ -7,6 +7,7 @@ import "S2C_Protocol_Common.proto";
 
 message S_M_State {
     int32 playerId = 1;
+    repeated string ids = 2;
 }
 
 message S_M_Result {

@@ -36,8 +36,8 @@ public class MoleScene : BaseScene {
         _uiMoleScoreBoard = Managers.UI.ShowSceneUI<UI_MoleScoreBoard>();
     }
 
-    public void LoadState(int playerIdx) {
-
+    public void LoadState(int playerIdx, List<string> playerIds) {
+        _uiMoleScoreBoard.SetPlayerIds(playerIds);
     }
 
     public void SetSlotState(int slotIdx, int state) { 

@@ -28,7 +28,8 @@ namespace S2C_Protocol {
 
 inline constexpr S_M_State::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : playerid_{0},
+      : ids_{},
+        playerid_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -197,6 +198,7 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_State, _impl_.playerid_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_State, _impl_.ids_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_Result, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -250,11 +252,11 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::S2C_Protocol::S_M_State)},
-        {9, -1, -1, sizeof(::S2C_Protocol::S_M_Result)},
-        {20, -1, -1, sizeof(::S2C_Protocol::S_M_SetSlotState)},
-        {30, -1, -1, sizeof(::S2C_Protocol::C_M_HitSlot)},
-        {39, -1, -1, sizeof(::S2C_Protocol::S_M_ResponseHitSlot)},
-        {48, -1, -1, sizeof(::S2C_Protocol::S_M_RenewScores)},
+        {10, -1, -1, sizeof(::S2C_Protocol::S_M_Result)},
+        {21, -1, -1, sizeof(::S2C_Protocol::S_M_SetSlotState)},
+        {31, -1, -1, sizeof(::S2C_Protocol::C_M_HitSlot)},
+        {40, -1, -1, sizeof(::S2C_Protocol::S_M_ResponseHitSlot)},
+        {49, -1, -1, sizeof(::S2C_Protocol::S_M_RenewScores)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_M_State_default_instance_._instance,
@@ -267,14 +269,15 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\027S2C_Protocol_Mole.proto\022\014S2C_Protocol\032"
-    "\031S2C_Protocol_Common.proto\"\035\n\tS_M_State\022"
-    "\020\n\010playerId\030\001 \001(\005\";\n\nS_M_Result\022\020\n\010isWin"
-    "ner\030\001 \001(\010\022\013\n\003ids\030\002 \003(\t\022\016\n\006scores\030\003 \003(\005\"2"
-    "\n\020S_M_SetSlotState\022\017\n\007slotIdx\030\001 \001(\005\022\r\n\005s"
-    "tate\030\002 \001(\005\"\036\n\013C_M_HitSlot\022\017\n\007slotIdx\030\001 \001"
-    "(\005\"(\n\023S_M_ResponseHitSlot\022\021\n\tisStunned\030\001"
-    " \001(\010\"!\n\017S_M_RenewScores\022\016\n\006scores\030\001 \003(\005B"
-    "\033\252\002\030Google.Protobuf.Protocolb\006proto3"
+    "\031S2C_Protocol_Common.proto\"*\n\tS_M_State\022"
+    "\020\n\010playerId\030\001 \001(\005\022\013\n\003ids\030\002 \003(\t\";\n\nS_M_Re"
+    "sult\022\020\n\010isWinner\030\001 \001(\010\022\013\n\003ids\030\002 \003(\t\022\016\n\006s"
+    "cores\030\003 \003(\005\"2\n\020S_M_SetSlotState\022\017\n\007slotI"
+    "dx\030\001 \001(\005\022\r\n\005state\030\002 \001(\005\"\036\n\013C_M_HitSlot\022\017"
+    "\n\007slotIdx\030\001 \001(\005\"(\n\023S_M_ResponseHitSlot\022\021"
+    "\n\tisStunned\030\001 \001(\010\"!\n\017S_M_RenewScores\022\016\n\006"
+    "scores\030\001 \003(\005B\033\252\002\030Google.Protobuf.Protoco"
+    "lb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fMole_2eproto_deps[1] =
     {
@@ -284,7 +287,7 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fMole_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fMole_2eproto = {
     false,
     false,
-    356,
+    369,
     descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto,
     "S2C_Protocol_Mole.proto",
     &descriptor_table_S2C_5fProtocol_5fMole_2eproto_once,
@@ -313,15 +316,34 @@ S_M_State::S_M_State(::google::protobuf::Arena* arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_M_State)
 }
+inline PROTOBUF_NDEBUG_INLINE S_M_State::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::S2C_Protocol::S_M_State& from_msg)
+      : ids_{visibility, arena, from.ids_},
+        _cached_size_{0} {}
+
 S_M_State::S_M_State(
-    ::google::protobuf::Arena* arena, const S_M_State& from)
-    : S_M_State(arena) {
-  MergeFrom(from);
+    ::google::protobuf::Arena* arena,
+    const S_M_State& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  S_M_State* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  _impl_.playerid_ = from._impl_.playerid_;
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_M_State)
 }
 inline PROTOBUF_NDEBUG_INLINE S_M_State::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : _cached_size_{0} {}
+      : ids_{visibility, arena},
+        _cached_size_{0} {}
 
 inline void S_M_State::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
@@ -343,8 +365,20 @@ inline void* S_M_State::PlacementNew_(const void*, void* mem,
   return ::new (mem) S_M_State(arena);
 }
 constexpr auto S_M_State::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_M_State),
-                                            alignof(S_M_State));
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(S_M_State, _impl_.ids_) +
+          decltype(S_M_State::_impl_.ids_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+        sizeof(S_M_State), alignof(S_M_State), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&S_M_State::PlacementNew_,
+                                 sizeof(S_M_State),
+                                 alignof(S_M_State));
+  }
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -374,15 +408,15 @@ const ::google::protobuf::internal::ClassData* S_M_State::GetClassData() const {
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_M_State::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 34, 2> S_M_State::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -392,6 +426,9 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_M_State::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_M_State>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
+    // repeated string ids = 2;
+    {::_pbi::TcParser::FastUR1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_State, _impl_.ids_)}},
     // int32 playerId = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_M_State, _impl_.playerid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_State, _impl_.playerid_)}},
@@ -401,9 +438,15 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_M_State::_table_ = {
     // int32 playerId = 1;
     {PROTOBUF_FIELD_OFFSET(S_M_State, _impl_.playerid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // repeated string ids = 2;
+    {PROTOBUF_FIELD_OFFSET(S_M_State, _impl_.ids_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kUtf8String | ::_fl::kRepSString)},
   }},
   // no aux_entries
   {{
+    "\26\0\3\0\0\0\0\0"
+    "S2C_Protocol.S_M_State"
+    "ids"
   }},
 };
 
@@ -414,6 +457,7 @@ PROTOBUF_NOINLINE void S_M_State::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  _impl_.ids_.Clear();
   _impl_.playerid_ = 0;
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -440,6 +484,14 @@ PROTOBUF_NOINLINE void S_M_State::Clear() {
                     stream, this_._internal_playerid(), target);
           }
 
+          // repeated string ids = 2;
+          for (int i = 0, n = this_._internal_ids_size(); i < n; ++i) {
+            const auto& s = this_._internal_ids().Get(i);
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                s.data(), static_cast<int>(s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.S_M_State.ids");
+            target = stream->WriteString(2, s, target);
+          }
+
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
             target =
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -463,6 +515,18 @@ PROTOBUF_NOINLINE void S_M_State::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated string ids = 2;
+            {
+              total_size +=
+                  1 * ::google::protobuf::internal::FromIntSize(this_._internal_ids().size());
+              for (int i = 0, n = this_._internal_ids().size(); i < n; ++i) {
+                total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+                    this_._internal_ids().Get(i));
+              }
+            }
+          }
            {
             // int32 playerId = 1;
             if (this_._internal_playerid() != 0) {
@@ -482,6 +546,7 @@ void S_M_State::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::googl
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  _this->_internal_mutable_ids()->MergeFrom(from._internal_ids());
   if (from._internal_playerid() != 0) {
     _this->_impl_.playerid_ = from._impl_.playerid_;
   }
@@ -499,6 +564,7 @@ void S_M_State::CopyFrom(const S_M_State& from) {
 void S_M_State::InternalSwap(S_M_State* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.ids_.InternalSwap(&other->_impl_.ids_);
         swap(_impl_.playerid_, other->_impl_.playerid_);
 }
 

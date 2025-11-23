@@ -7,6 +7,7 @@ public:
 		_ty = GameType::Mole;
 		_points = vector<int32_t>(_quota, 0);
 		_elos = vector<int32_t>(_quota, 0);
+		_dbids = vector<int32_t>(_quota, 0);
 		_playerIds = vector<string>(_quota);
 		_slotStates = vector<SlotState>(10, SlotState::Yellow);
 		_isStunned = vector<bool>(_quota, false);
@@ -50,6 +51,7 @@ private:
 	int32_t _quota = 1;
 	bool _isUpdateCall = false;
 	vector<string> _playerIds;
+	vector<int32_t> _dbids;
 	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<int> _winners;

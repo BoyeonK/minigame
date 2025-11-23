@@ -484,13 +484,13 @@ public class NetworkManager {
             _netRef = netRef;
         }
 
-        public void ProcessSMState(int playerIdx) {
+        public void ProcessSMState(int playerIdx, List<string> playerIds) {
             BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
             if (scene == null)
                 return;
 
             if (scene is MoleScene moleScene)
-                moleScene.LoadState(playerIdx);
+                moleScene.LoadState(playerIdx, playerIds);
         }
 
         public void ProcessSMSetSlotState(int slotIdx, int state) {
@@ -534,7 +534,6 @@ public class NetworkManager {
             if (scene is MoleScene moleScene) {
                 moleScene.RenewScores(scores);
             }
-            Debug.Log("패킷은 왔다");
         }
     }
 

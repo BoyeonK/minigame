@@ -55,6 +55,7 @@ void MoleRoom::Init2(vector<WatingPlayerData> pdv) {
 		int64_t lastTick = playerSessionRef->GetLastKeepAliveTick();
 		_elos[i] = playerSessionRef->GetElo(int(_ty));
 		_playerIds[i] = playerSessionRef->GetPlayerId();
+		_dbids[i] = playerSessionRef->GetDbid();
 
 		if (now - lastTick > 2000) {
 			canStart = false;
@@ -158,6 +159,11 @@ void MoleRoom::SendGameState(int32_t playerIdx) {
 
 	S2C_Protocol::S_M_State pkt;
 	pkt.set_playerid(playerIdx);
+
+	for (auto& playerId : _playerIds) pkt.add_ids(playerId);
+	//test
+	pkt.add_ids("TestID");
+
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	playerSessionRef->Send(sendBuffer);
 }
