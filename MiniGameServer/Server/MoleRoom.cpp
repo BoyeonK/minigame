@@ -8,7 +8,11 @@ void MoleRoom::ReturnToPool() {
 }
 
 void MoleRoom::Update() {
+	if (!_isUpdateCall)
+		return;
 
+	_updateCount++;
+	RenewScoreBoard();
 }
 
 void MoleRoom::Init(vector<WatingPlayerData> pdv) {
@@ -114,6 +118,7 @@ void MoleRoom::Start() {
 }
 
 void MoleRoom::OnGoingPhase1() {
+	_isUpdateCall = true;
 	PostEventAfter(1000, &MoleRoom::SetSlotState, 1, SlotState::Green);
 	PostEventAfter(2000, &MoleRoom::SetSlotState, 2, SlotState::Green);
 	PostEventAfter(3000, &MoleRoom::SetSlotState, 3, SlotState::Green);
