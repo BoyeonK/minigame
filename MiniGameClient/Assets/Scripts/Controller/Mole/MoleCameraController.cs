@@ -6,8 +6,8 @@ public class MoleCameraController : MonoBehaviour {
 
     private float _stunActionTick = 0.0f;
     private bool _isStun = false;
-    private float _period = 0.5f;
-    private float _max = 0.2f;
+    private float _period = 0.25f;
+    private float _max = 0.1f;
 
     public void Init() {
         gameObject.transform.position = _cameraPos;
