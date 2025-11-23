@@ -392,5 +392,14 @@ class PacketHandler {
 			Managers.Network.Mole.ResponseSMHitSlot(recvPkt.IsStunned);
 		});
     }
+
+	public static void S_M_RenewScoresHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_M_RenewScores recvPkt))
+            return;
+
+		Managers.ExecuteAtMainThread(() => {
+			Managers.Network.Mole.ResponseSMRenewScores(recvPkt.Scores.ToList());
+		});
+    }
 }
 

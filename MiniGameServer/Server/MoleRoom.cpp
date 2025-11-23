@@ -135,6 +135,10 @@ void MoleRoom::RenewScoreBoard() {
 
 	S2C_Protocol::S_M_RenewScores pkt;
 	for (auto& point : _points)	pkt.add_scores(point);
+
+	//test
+	pkt.add_scores(123);
+
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 }

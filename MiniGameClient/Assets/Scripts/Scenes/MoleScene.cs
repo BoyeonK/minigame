@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
@@ -5,7 +6,8 @@ public class MoleScene : BaseScene {
     private MoleGameBoardController _gameBoard;
     private MoleCameraController _cameraController;
     private StunBlur _stunBlur;
-    
+    private UI_MoleScoreBoard _uiMoleScoreBoard;
+
     protected override void Init() {
         base.Init();
         SceneType = Scene.Mole;
@@ -30,6 +32,8 @@ public class MoleScene : BaseScene {
             _stunBlur = stunBlur.GetComponent<StunBlur>();
             _stunBlur.Init();
         }
+
+        _uiMoleScoreBoard = Managers.UI.ShowSceneUI<UI_MoleScoreBoard>();
     }
 
     public void LoadState(int playerIdx) {
@@ -43,6 +47,10 @@ public class MoleScene : BaseScene {
     public void Stun() {
         _cameraController.Stun();
         _stunBlur.Stun(); 
+    }
+
+    public void RenewScores(List<int> scores) {
+        _uiMoleScoreBoard.RenewScores(scores);
     }
 
     public override void Clear() {

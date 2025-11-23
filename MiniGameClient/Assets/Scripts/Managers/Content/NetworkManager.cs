@@ -523,8 +523,17 @@ public class NetworkManager {
                 else {
 
                 }
+            } 
+        }
+
+        public void ResponseSMRenewScores(List<int> scores) {
+            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            if (scene == null)
+                return;
+
+            if (scene is MoleScene moleScene) {
+                moleScene.RenewScores(scores);
             }
-            
         }
     }
 
