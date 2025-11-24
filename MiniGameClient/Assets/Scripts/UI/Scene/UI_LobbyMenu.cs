@@ -41,7 +41,6 @@ public class UI_LobbyMenu : UI_Scene {
 
     public void SetSelectedOpt(int value) {
         _selectedOpt = value;
-        Debug.Log(_selectedOpt);
         if (_rectStartGame == null || 
             _rectLeaderboard == null || 
             _rectMyRecord == null || 

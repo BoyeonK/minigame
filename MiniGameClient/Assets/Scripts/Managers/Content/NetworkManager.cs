@@ -176,7 +176,7 @@ public class NetworkManager {
             }
 
             Managers.ExecuteAtMainThread(() => {
-                BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+                BaseScene scene = Managers.Scene.CurrentScene;
                 if (scene == null)
                     return;
 
@@ -202,6 +202,15 @@ public class NetworkManager {
                 _publicIds = Ids;
                 _publicScores = scores;
             }
+
+            Managers.ExecuteAtMainThread(() => {
+                BaseScene scene = Managers.Scene.CurrentScene;
+                if (scene == null)
+                    return;
+
+                if (scene is LoginScene loginScene)
+                    loginScene.SetPublicRecord();
+            });
         }
 
         public List<string> GetPublicIds() {
@@ -392,7 +401,7 @@ public class NetworkManager {
         }
 
         public void ProcessPState(IMessage packet) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -405,7 +414,7 @@ public class NetworkManager {
         }
 
         public void ResponsePRequestPlayerBarPosition(IMessage recvPkt) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -430,7 +439,7 @@ public class NetworkManager {
         }
 
         public void ProcessSPBullet(UnityGameObject serializedBullet, float moveDirX, float moveDirZ, float speed, int lastColider) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -464,7 +473,7 @@ public class NetworkManager {
         }
 
         public void ResponseSPResult(bool isWinner, List<string> ids, List<int> scores) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -475,7 +484,7 @@ public class NetworkManager {
         }
 
         public void ResponseSPScores(List<int> scores) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -494,7 +503,7 @@ public class NetworkManager {
         }
 
         public void ProcessSMState(int playerIdx, List<string> playerIds) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -503,7 +512,7 @@ public class NetworkManager {
         }
 
         public void ProcessSMSetSlotState(int slotIdx, int state) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -520,7 +529,7 @@ public class NetworkManager {
         }
 
         public void ResponseSMHitSlot(bool isStunned) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -536,7 +545,7 @@ public class NetworkManager {
         }
 
         public void ResponseSMRenewScores(List<int> scores) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
@@ -546,7 +555,7 @@ public class NetworkManager {
         }
 
         public void ResponseSMResult(bool isWinner, List<int> scores) {
-            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 

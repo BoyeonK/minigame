@@ -47,7 +47,6 @@ public class UI_PublicRecord : UI_Scene {
             if (i > 2) break;
             _ids[i].text = ids[i];
         }
-        Debug.Log("123f");
     }
 
     private void Clear() {
