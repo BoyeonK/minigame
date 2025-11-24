@@ -719,7 +719,7 @@ void DUpdateEloCallData::Proceed() {
             }
             Cleaner hDbcCleaner([&]() {
                 GDBManager->ReturnHDbc(hDbc);
-                });
+            });
 
             SQLHSTMT hStmt1 = nullptr;
             Cleaner hStmtCleaner([&]() {
