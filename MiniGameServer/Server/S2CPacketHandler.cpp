@@ -299,6 +299,7 @@ bool Handle_C_RequestMyRecords(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	S2C_Protocol::S_ResponseMyRecords sendPkt = S2CPacketMaker::MakeSResponseMyRecords(playerSessionRef);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(sendPkt);
 	playerSessionRef->Send(sendBuffer);
+	cout << "s전송" << endl;
 	return true;
 }
 
@@ -310,6 +311,7 @@ bool Handle_C_RequestPublicRecords(shared_ptr<PBSession> sessionRef, S2C_Protoco
 	S2C_Protocol::S_ResponsePublicRecords sendPkt = S2CPacketMaker::MakeSResponsePublicRecords();
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(sendPkt);
 	playerSessionRef->Send(sendBuffer);
+	cout << "f전송" << endl;
 	return true;
 }
 

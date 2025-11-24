@@ -27,7 +27,7 @@ public class UI_PersonalRecord : UI_Scene {
         }
         _scores.Sort((a, b) => string.Compare(a.name, b.name));
 
-        Managers.Network.Lobby.TryGetPersonalRecords(); 
+        Managers.Network.Lobby.TryGetPersonalRecords();
     }
 
     public void BindRecord() {
@@ -36,6 +36,7 @@ public class UI_PersonalRecord : UI_Scene {
             if (i > 2) break;
             _scores[i].text = records[i].ToString();
         }
+        Debug.Log("sdf");
     }
 
     private void Clear() {
