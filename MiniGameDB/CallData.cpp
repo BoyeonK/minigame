@@ -13,6 +13,7 @@ void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::Server
         objectPool<DUpdateEloCallData>::alloc(service, cq);
         objectPool<DUpdatePersonalRecordCallData>::alloc(service, cq);
         objectPool<DPublicRecordCallData>::alloc(service, cq);
+        objectPool<DUpdatePublicRecordCallData>::alloc(service, cq);
     }
 }
 
