@@ -31,8 +31,10 @@ public:
 	void OnGoingPhase1();
 	void OnGoingPhase2();
 
-	void CountingPhase() {};
-	void CalculateGameResult() {};
+	void CountingPhase();
+	void CalculateGameResult();
+	void UpdateGameResultToDB();
+	void EndGame();
 
 	void RenewScoreBoard();
 
@@ -48,7 +50,7 @@ public:
 	void SetStun(const int32_t& playerIdx, bool state);
 	
 private:
-	int32_t _quota = 1;
+	int32_t _quota = 2;
 	bool _isUpdateCall = false;
 	vector<string> _playerIds;
 	vector<int32_t> _dbids;

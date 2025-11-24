@@ -97,7 +97,7 @@ private:
 
 class SUpdateEloCall final : public S2D_CallData {
 public:
-	SUpdateEloCall(weak_ptr<PlayerSession> playerSessionRef, int32_t gameId, int32_t elo) : _clientSessionRef(playerSessionRef), _gameId(gameId), _elo(elo) {}
+	SUpdateEloCall(int32_t gameId, int32_t elo) : _gameId(gameId), _elo(elo) {}
 	~SUpdateEloCall() {}
 
 	void StartCall();
@@ -112,7 +112,6 @@ public:
 	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::D2S_ResponseUpdateElo>> response_reader;
 
 private:
-	weak_ptr<PlayerSession> _clientSessionRef;
 	int32_t _gameId = 0;
 	int32_t _elo = 0;
 };

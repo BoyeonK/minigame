@@ -137,17 +137,11 @@ void SPlayerInformationCall::OnFailed() {
 }
 
 void SUpdateEloCall::OnSucceed() {
-	shared_ptr<PlayerSession> playerSessionRef = _clientSessionRef.lock();
-	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
-		return;
-
 	if (!reply.success())
 		return;
 
 	if (_gameId == 0 || _elo == 0)
 		return;
-
-	playerSessionRef->SetElo(_gameId, _elo);
 }
 
 void SUpdateEloCall::OnFailed() {

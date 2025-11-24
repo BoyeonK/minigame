@@ -247,7 +247,7 @@ void PingPongGameRoom::UpdateGameResultToDB() {
 				continue;
 
 			int32_t dbid = playerSessionRef->GetDbid();
-			DBManager->S2D_UpdateElo(playerSessionRef, dbid, int(_ty), calculatedElo);
+			DBManager->S2D_UpdateElo(dbid, int(_ty), calculatedElo);
 		}
 	}
 	else {
