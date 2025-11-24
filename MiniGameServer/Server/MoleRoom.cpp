@@ -280,23 +280,30 @@ void MoleRoom::CalculateGameResult() {
 }
 
 void MoleRoom::UpdateGameResultToDB() {
-	int32_t bestLosersElo = 0;
-	int32_t worstWinnerElo = 3000;
+	UpdateRecords();
+	UpdateElos();
+	PostEvent(&MoleRoom::EndGame);
+}
 
+void MoleRoom::UpdateRecords() {
 	for (int i = 0; i < _quota; i++) {
-		//기록 갱신 요청
-		/*
 		auto playerSessionRef = _playerWRefs[i].lock();
 		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 			continue;
-		
+
 		if (_points[i] > playerSessionRef->GetPersonalRecord(int(_ty))) {
 			int32_t dbid = playerSessionRef->GetDbid();
 			DBManager->S2D_UpdatePersonalRecord(playerSessionRef, dbid, int(_ty), _points[i]);
 			GGameManagers[int(_ty)]->CompareAndRenewPublicRecord(dbid, _points[i]);
 		}
-		*/
+	}
+}
 
+void MoleRoom::UpdateElos() {
+	int32_t bestLosersElo = 0;
+	int32_t worstWinnerElo = 3000;
+
+	for (int i = 0; i < _quota; i++) {
 		bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
 		if (isWinner) {
 			if (worstWinnerElo > _elos[i])
@@ -327,7 +334,6 @@ void MoleRoom::UpdateGameResultToDB() {
 	else {
 		cout << "너무 많은 플레이어가 이탈했거나, 정상적인 진행이 되지 않은 게임" << endl;
 	}
-	PostEvent(&MoleRoom::EndGame);
 }
 
 void MoleRoom::EndGame() {
