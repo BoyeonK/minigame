@@ -159,7 +159,7 @@ public:
 
 	static S2C_Protocol::S_ResponseMyRecords MakeSResponseMyRecords(shared_ptr<PlayerSession> playerSessionRef) {
 		S2C_Protocol::S_ResponseMyRecords pkt;
-		for (int i = 0; i <= 2; i++) {
+		for (int i = 1; i <= 3; i++) {
 			int score = playerSessionRef->GetPersonalRecord(i);
 			cout << i << "번 레코드 " << score << endl;
 			pkt.add_scores(score);
