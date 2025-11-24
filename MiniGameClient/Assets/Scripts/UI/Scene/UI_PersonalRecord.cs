@@ -27,11 +27,14 @@ public class UI_PersonalRecord : UI_Scene {
         }
         _scores.Sort((a, b) => string.Compare(a.name, b.name));
 
-        List<int> scores = Managers.Network.Lobby.GetPersonalRecord();
-        for (int i = 0; i < scores.Count; i++) {
-            if (i >= _scores.Count)
-                break;
-            _scores[i].text = scores[i].ToString();
+        Managers.Network.Lobby.TryGetPersonalRecords(); 
+    }
+
+    public void BindRecord() {
+        List<int> records = Managers.Network.Lobby.GetPersonalRecord();
+        for (int i = 0; i < records.Count; i++) {
+            if (i > 2) break;
+            _scores[i].text = records[i].ToString();
         }
     }
 

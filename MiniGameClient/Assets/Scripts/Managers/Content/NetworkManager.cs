@@ -158,7 +158,7 @@ public class NetworkManager {
             }
         }
 
-        public void TryGetMyRecords() {
+        public void TryGetPersonalRecords() {
             int dbid = _netRef.GetSession().ID;
             if (dbid == 0)
                 return;
@@ -174,6 +174,15 @@ public class NetworkManager {
             lock (_recordLock) {
                 _personalScores = scores;
             }
+
+            Managers.ExecuteAtMainThread(() => {
+                BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+                if (scene == null)
+                    return;
+
+                if (scene is LoginScene loginScene)
+                    loginScene.SetPersonalRecord();
+            });
         }
 
         public void TryGetPublicRecords() {

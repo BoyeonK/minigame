@@ -375,6 +375,14 @@ public class LoginScene : BaseScene {
         Managers.Network.Match.TryMatchMakeCancel();
     }
 
+    public void SetPersonalRecord() {
+        _uiPersonalRecord.BindRecord();
+    }
+
+    public void SetPublicRecord() {
+        _uiPublicRecord.BindRecord();
+    }
+
     public override void Clear() {
         Managers.Input.RemoveKeyListener(KeyCode.UpArrow, UpLobbyOpt, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.DownArrow, DownLobbyOpt, InputManager.KeyState.Up);

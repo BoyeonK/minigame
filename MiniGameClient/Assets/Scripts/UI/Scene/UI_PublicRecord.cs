@@ -31,16 +31,20 @@ public class UI_PublicRecord : UI_Scene {
         _scores.Sort((a, b) => string.Compare(a.name, b.name));
         _ids.Sort((a, b) => string.Compare(a.name, b.name));
 
-        List<int> scores = Managers.Network.Lobby.GetPublicRecord();
+        Managers.Network.Lobby.TryGetPublicRecords();
+    }
+
+    public void BindRecord() {
         List<string> ids = Managers.Network.Lobby.GetPublicIds();
-        for (int i = 0; i < scores.Count; i++) {
-            if (i >= _scores.Count)
-                break;
-            _scores[i].text = scores[i].ToString();
+        List<int> records = Managers.Network.Lobby.GetPublicRecord();
+
+        for (int i = 0; i < records.Count; i++) {
+            if (i > 2) break;
+            _scores[i].text = records[i].ToString();
         }
-        for (int i = 0; i < ids.Count; i++) {
-            if (i >= _ids.Count)
-                break;
+
+        for (int i = 0; i < _ids.Count; i++) {
+            if (i > 2) break;
             _ids[i].text = ids[i];
         }
     }

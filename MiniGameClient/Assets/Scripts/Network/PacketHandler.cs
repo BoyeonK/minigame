@@ -171,8 +171,6 @@ class PacketHandler {
 				else {	
 					ServerSession ss = session as ServerSession;
 					ss.ID = recvPkt.Dbid;
-                    C_RequestPublicRecords publicRecordPkt = PacketMaker.MakeCRequestPublicRecords(recvPkt.Dbid);
-                    Managers.Network.Send(publicRecordPkt);
                     Managers.ExecuteAtMainThread(() => { 
                         Managers.Network.Lobby.LoginCompleted(0);
                     });
