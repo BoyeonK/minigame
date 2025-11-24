@@ -34,6 +34,8 @@ public:
 	void CountingPhase();
 	void CalculateGameResult();
 	void UpdateGameResultToDB();
+	void UpdateRecords();
+	void UpdateElos();
 	void EndGame();
 
 	void RenewScoreBoard();
