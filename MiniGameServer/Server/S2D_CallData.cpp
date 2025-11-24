@@ -179,6 +179,7 @@ void SUpdatePublicRecordCall::OnSucceed() {
 #ifdef _DEBUG
 	if (reply.success()) {
 		cout << "갱신성공" << endl;
+		GGameManagers[_gameId]->RenewPublicRecordFromDB();
 	}
 	else {
 		cout << "모종의 이유로 실패" << endl;

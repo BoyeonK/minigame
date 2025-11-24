@@ -1063,6 +1063,7 @@ void DUpdatePublicRecordCallData::Proceed() {
             SQLINTEGER sDbid = dbid;
             SetScore(hDbc, hStmt2, gameId, sScore, sDbid);
             cout << gameId << "번 게임 기록 " << score << "로 갱신 " << dbid << endl;
+            _reply.set_success(true);
         }
         catch (runtime_error& e) {
             cout << e.what() << endl;
