@@ -36,7 +36,6 @@ public class UI_PersonalRecord : UI_Scene {
             if (i > 2) break;
             _scores[i].text = records[i].ToString();
         }
-        Debug.Log("sdf");
     }
 
     private void Clear() {

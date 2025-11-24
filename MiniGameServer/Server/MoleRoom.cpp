@@ -291,11 +291,11 @@ void MoleRoom::UpdateRecords() {
 		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 			continue;
 
+		int32_t dbid = playerSessionRef->GetDbid();
 		if (_points[i] > playerSessionRef->GetPersonalRecord(int(_ty))) {
-			int32_t dbid = playerSessionRef->GetDbid();
 			DBManager->S2D_UpdatePersonalRecord(playerSessionRef, dbid, int(_ty), _points[i]);
-			GGameManagers[int(_ty)]->CompareAndRenewPublicRecord(dbid, _points[i]);
 		}
+		GGameManagers[int(_ty)]->CompareAndRenewPublicRecord(dbid, _points[i]);
 	}
 }
 
