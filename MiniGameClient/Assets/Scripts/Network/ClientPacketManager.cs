@@ -139,6 +139,10 @@ class PacketManager {
         _onRecv.Add((ushort)MsgId.SMRenewScores, UnpackPacket<S_M_RenewScores>);
         _handler.Add((ushort)MsgId.SMRenewScores, PacketHandler.S_M_RenewScoresHandler);
         _msgFactories.Add((ushort)MsgId.SMRenewScores, () => new S_M_RenewScores());
+
+        _onRecv.Add((ushort)MsgId.SMResult, UnpackPacket<S_M_Result>);
+        _handler.Add((ushort)MsgId.SMResult, PacketHandler.S_M_ResultHandler);
+        _msgFactories.Add((ushort)MsgId.SMResult, () => new S_M_Result());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

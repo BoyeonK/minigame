@@ -129,6 +129,7 @@ void MoleRoom::OnGoingPhase1() {
 	PostEventAfter(7000, &MoleRoom::SetSlotState, 7, SlotState::Green);
 	PostEventAfter(8000, &MoleRoom::SetSlotState, 8, SlotState::Green);
 	PostEventAfter(9000, &MoleRoom::SetSlotState, 9, SlotState::Green);
+	PostEventAfter(13000, &MoleRoom::CountingPhase);
 }
 
 void MoleRoom::OnGoingPhase2() {

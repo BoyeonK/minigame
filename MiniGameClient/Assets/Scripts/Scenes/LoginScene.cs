@@ -47,12 +47,16 @@ public class LoginScene : BaseScene {
         _uiCreateAccountPopup = Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
         _uiLobbyMenu = Managers.UI.ShowSceneUI<UI_LobbyMenu>();
         _uiMatchMakeMenu = Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
+        _uiPersonalRecord = Managers.UI.ShowSceneUI<UI_PersonalRecord>();
+        _uiPublicRecord = Managers.UI.ShowSceneUI<UI_PublicRecord>();
         Managers.UI.DisableUI("UI_StartGame");
         Managers.UI.DisableUI("UI_LoginOrCreateAccount");
         Managers.UI.DisableUI("UI_LoginPopup");
         Managers.UI.DisableUI("UI_CreateAccountPopup");
         Managers.UI.DisableUI("UI_LobbyMenu");
         Managers.UI.DisableUI("UI_MatchMakeMenu");
+        Managers.UI.DisableUI("UI_PersonalRecord");
+        Managers.UI.DisableUI("UI_PublicRecord");
 
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {

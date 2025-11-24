@@ -399,7 +399,15 @@ class PacketHandler {
 
 		Managers.ExecuteAtMainThread(() => {
 			Managers.Network.Mole.ResponseSMRenewScores(recvPkt.Scores.ToList());
-			Debug.Log("패킷은 왔다.");
+		});
+    }
+
+	public static void S_M_ResultHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_M_Result recvPkt))
+            return;
+
+		Managers.ExecuteAtMainThread(() => { 
+			Managers.Network.Mole.ResponseSMResult(recvPkt.IsWinner, recvPkt.Scores.ToList());
 		});
     }
 }

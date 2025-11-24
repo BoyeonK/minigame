@@ -535,6 +535,17 @@ public class NetworkManager {
                 moleScene.RenewScores(scores);
             }
         }
+
+        public void ResponseSMResult(bool isWinner, List<int> scores) {
+            BaseScene scene = Managers.Scene.GetCurrentSceneComponent();
+            if (scene == null)
+                return;
+
+            if (scene is MoleScene moleScene) {
+                _netRef.Match.ResetMatchState();
+                Managers.Scene.EndGame(isWinner, _netRef.Match.GetIngamePlayerIds(), scores);
+            }
+        }
     }
 
     public void TryRequestGameState(int gameId) {
