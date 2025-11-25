@@ -252,33 +252,10 @@ class S_P_Result final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kIdsFieldNumber = 2,
-    kScoresFieldNumber = 3,
+    kScoresFieldNumber = 2,
     kIsWinnerFieldNumber = 1,
   };
-  // repeated string ids = 2;
-  int ids_size() const;
-  private:
-  int _internal_ids_size() const;
-
-  public:
-  void clear_ids() ;
-  const std::string& ids(int index) const;
-  std::string* mutable_ids(int index);
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void set_ids(int index, Arg_&& value, Args_... args);
-  std::string* add_ids();
-  template <typename Arg_ = const std::string&, typename... Args_>
-  void add_ids(Arg_&& value, Args_... args);
-  const ::google::protobuf::RepeatedPtrField<std::string>& ids() const;
-  ::google::protobuf::RepeatedPtrField<std::string>* mutable_ids();
-
-  private:
-  const ::google::protobuf::RepeatedPtrField<std::string>& _internal_ids() const;
-  ::google::protobuf::RepeatedPtrField<std::string>* _internal_mutable_ids();
-
-  public:
-  // repeated int32 scores = 3;
+  // repeated int32 scores = 2;
   int scores_size() const;
   private:
   int _internal_scores_size() const;
@@ -311,8 +288,8 @@ class S_P_Result final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 3, 0,
-      35, 2>
+      1, 2, 0,
+      0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
@@ -329,7 +306,6 @@ class S_P_Result final : public ::google::protobuf::Message
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_P_Result& from_msg);
-    ::google::protobuf::RepeatedPtrField<std::string> ids_;
     ::google::protobuf::RepeatedField<::int32_t> scores_;
     ::google::protobuf::internal::CachedSize _scores_cached_byte_size_;
     bool iswinner_;
@@ -2986,71 +2962,7 @@ inline void S_P_Result::_internal_set_iswinner(bool value) {
   _impl_.iswinner_ = value;
 }
 
-// repeated string ids = 2;
-inline int S_P_Result::_internal_ids_size() const {
-  return _internal_ids().size();
-}
-inline int S_P_Result::ids_size() const {
-  return _internal_ids_size();
-}
-inline void S_P_Result::clear_ids() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.ids_.Clear();
-}
-inline std::string* S_P_Result::add_ids() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  std::string* _s = _internal_mutable_ids()->Add();
-  // @@protoc_insertion_point(field_add_mutable:S2C_Protocol.S_P_Result.ids)
-  return _s;
-}
-inline const std::string& S_P_Result::ids(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_Result.ids)
-  return _internal_ids().Get(index);
-}
-inline std::string* S_P_Result::mutable_ids(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable:S2C_Protocol.S_P_Result.ids)
-  return _internal_mutable_ids()->Mutable(index);
-}
-template <typename Arg_, typename... Args_>
-inline void S_P_Result::set_ids(int index, Arg_&& value, Args_... args) {
-  ::google::protobuf::internal::AssignToString(
-      *_internal_mutable_ids()->Mutable(index),
-      std::forward<Arg_>(value), args... );
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_Result.ids)
-}
-template <typename Arg_, typename... Args_>
-inline void S_P_Result::add_ids(Arg_&& value, Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::google::protobuf::internal::AddToRepeatedPtrField(*_internal_mutable_ids(),
-                               std::forward<Arg_>(value),
-                               args... );
-  // @@protoc_insertion_point(field_add:S2C_Protocol.S_P_Result.ids)
-}
-inline const ::google::protobuf::RepeatedPtrField<std::string>&
-S_P_Result::ids() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:S2C_Protocol.S_P_Result.ids)
-  return _internal_ids();
-}
-inline ::google::protobuf::RepeatedPtrField<std::string>*
-S_P_Result::mutable_ids() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:S2C_Protocol.S_P_Result.ids)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_ids();
-}
-inline const ::google::protobuf::RepeatedPtrField<std::string>&
-S_P_Result::_internal_ids() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.ids_;
-}
-inline ::google::protobuf::RepeatedPtrField<std::string>*
-S_P_Result::_internal_mutable_ids() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.ids_;
-}
-
-// repeated int32 scores = 3;
+// repeated int32 scores = 2;
 inline int S_P_Result::_internal_scores_size() const {
   return _internal_scores().size();
 }

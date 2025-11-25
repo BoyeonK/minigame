@@ -26,18 +26,17 @@ namespace Google.Protobuf.Protocol {
           string.Concat(
             "ChdTMkNfUHJvdG9jb2xfTW9sZS5wcm90bxIMUzJDX1Byb3RvY29sGhlTMkNf",
             "UHJvdG9jb2xfQ29tbW9uLnByb3RvIioKCVNfTV9TdGF0ZRIQCghwbGF5ZXJJ",
-            "ZBgBIAEoBRILCgNpZHMYAiADKAkiOwoKU19NX1Jlc3VsdBIQCghpc1dpbm5l",
-            "chgBIAEoCBILCgNpZHMYAiADKAkSDgoGc2NvcmVzGAMgAygFIjIKEFNfTV9T",
-            "ZXRTbG90U3RhdGUSDwoHc2xvdElkeBgBIAEoBRINCgVzdGF0ZRgCIAEoBSIe",
-            "CgtDX01fSGl0U2xvdBIPCgdzbG90SWR4GAEgASgFIigKE1NfTV9SZXNwb25z",
-            "ZUhpdFNsb3QSEQoJaXNTdHVubmVkGAEgASgIIiEKD1NfTV9SZW5ld1Njb3Jl",
-            "cxIOCgZzY29yZXMYASADKAVCG6oCGEdvb2dsZS5Qcm90b2J1Zi5Qcm90b2Nv",
-            "bGIGcHJvdG8z"));
+            "ZBgBIAEoBRILCgNpZHMYAiADKAkiLgoKU19NX1Jlc3VsdBIQCghpc1dpbm5l",
+            "chgBIAEoCBIOCgZzY29yZXMYAiADKAUiMgoQU19NX1NldFNsb3RTdGF0ZRIP",
+            "CgdzbG90SWR4GAEgASgFEg0KBXN0YXRlGAIgASgFIh4KC0NfTV9IaXRTbG90",
+            "Eg8KB3Nsb3RJZHgYASABKAUiKAoTU19NX1Jlc3BvbnNlSGl0U2xvdBIRCglp",
+            "c1N0dW5uZWQYASABKAgiIQoPU19NX1JlbmV3U2NvcmVzEg4KBnNjb3JlcxgB",
+            "IAMoBUIbqgIYR29vZ2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_State), global::Google.Protobuf.Protocol.S_M_State.Parser, new[]{ "PlayerId", "Ids" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_Result), global::Google.Protobuf.Protocol.S_M_Result.Parser, new[]{ "IsWinner", "Ids", "Scores" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_Result), global::Google.Protobuf.Protocol.S_M_Result.Parser, new[]{ "IsWinner", "Scores" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_SetSlotState), global::Google.Protobuf.Protocol.S_M_SetSlotState.Parser, new[]{ "SlotIdx", "State" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_M_HitSlot), global::Google.Protobuf.Protocol.C_M_HitSlot.Parser, new[]{ "SlotIdx" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_ResponseHitSlot), global::Google.Protobuf.Protocol.S_M_ResponseHitSlot.Parser, new[]{ "IsStunned" }, null, null, null, null),
@@ -308,7 +307,6 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_M_Result(S_M_Result other) : this() {
       isWinner_ = other.isWinner_;
-      ids_ = other.ids_.Clone();
       scores_ = other.scores_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -331,21 +329,10 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
-    /// <summary>Field number for the "ids" field.</summary>
-    public const int IdsFieldNumber = 2;
-    private static readonly pb::FieldCodec<string> _repeated_ids_codec
-        = pb::FieldCodec.ForString(18);
-    private readonly pbc::RepeatedField<string> ids_ = new pbc::RepeatedField<string>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<string> Ids {
-      get { return ids_; }
-    }
-
     /// <summary>Field number for the "scores" field.</summary>
-    public const int ScoresFieldNumber = 3;
+    public const int ScoresFieldNumber = 2;
     private static readonly pb::FieldCodec<int> _repeated_scores_codec
-        = pb::FieldCodec.ForInt32(26);
+        = pb::FieldCodec.ForInt32(18);
     private readonly pbc::RepeatedField<int> scores_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -369,7 +356,6 @@ namespace Google.Protobuf.Protocol {
         return true;
       }
       if (IsWinner != other.IsWinner) return false;
-      if(!ids_.Equals(other.ids_)) return false;
       if(!scores_.Equals(other.scores_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -379,7 +365,6 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (IsWinner != false) hash ^= IsWinner.GetHashCode();
-      hash ^= ids_.GetHashCode();
       hash ^= scores_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -403,7 +388,6 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteBool(IsWinner);
       }
-      ids_.WriteTo(output, _repeated_ids_codec);
       scores_.WriteTo(output, _repeated_scores_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -419,7 +403,6 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteBool(IsWinner);
       }
-      ids_.WriteTo(ref output, _repeated_ids_codec);
       scores_.WriteTo(ref output, _repeated_scores_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -434,7 +417,6 @@ namespace Google.Protobuf.Protocol {
       if (IsWinner != false) {
         size += 1 + 1;
       }
-      size += ids_.CalculateSize(_repeated_ids_codec);
       size += scores_.CalculateSize(_repeated_scores_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -451,7 +433,6 @@ namespace Google.Protobuf.Protocol {
       if (other.IsWinner != false) {
         IsWinner = other.IsWinner;
       }
-      ids_.Add(other.ids_);
       scores_.Add(other.scores_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -476,12 +457,8 @@ namespace Google.Protobuf.Protocol {
             IsWinner = input.ReadBool();
             break;
           }
-          case 18: {
-            ids_.AddEntriesFrom(input, _repeated_ids_codec);
-            break;
-          }
-          case 26:
-          case 24: {
+          case 18:
+          case 16: {
             scores_.AddEntriesFrom(input, _repeated_scores_codec);
             break;
           }
@@ -508,12 +485,8 @@ namespace Google.Protobuf.Protocol {
             IsWinner = input.ReadBool();
             break;
           }
-          case 18: {
-            ids_.AddEntriesFrom(ref input, _repeated_ids_codec);
-            break;
-          }
-          case 26:
-          case 24: {
+          case 18:
+          case 16: {
             scores_.AddEntriesFrom(ref input, _repeated_scores_codec);
             break;
           }

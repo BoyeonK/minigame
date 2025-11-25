@@ -80,8 +80,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr S_M_Result::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : ids_{},
-        scores_{},
+      : scores_{},
         _scores_cached_byte_size_{0},
         iswinner_{false},
         _cached_size_{0} {}
@@ -208,7 +207,6 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_Result, _impl_.iswinner_),
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_Result, _impl_.ids_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_Result, _impl_.scores_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_SetSlotState, _internal_metadata_),
@@ -253,10 +251,10 @@ static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::S2C_Protocol::S_M_State)},
         {10, -1, -1, sizeof(::S2C_Protocol::S_M_Result)},
-        {21, -1, -1, sizeof(::S2C_Protocol::S_M_SetSlotState)},
-        {31, -1, -1, sizeof(::S2C_Protocol::C_M_HitSlot)},
-        {40, -1, -1, sizeof(::S2C_Protocol::S_M_ResponseHitSlot)},
-        {49, -1, -1, sizeof(::S2C_Protocol::S_M_RenewScores)},
+        {20, -1, -1, sizeof(::S2C_Protocol::S_M_SetSlotState)},
+        {30, -1, -1, sizeof(::S2C_Protocol::C_M_HitSlot)},
+        {39, -1, -1, sizeof(::S2C_Protocol::S_M_ResponseHitSlot)},
+        {48, -1, -1, sizeof(::S2C_Protocol::S_M_RenewScores)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_M_State_default_instance_._instance,
@@ -270,14 +268,13 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto[] ABSL_ATTRIB
     protodesc_cold) = {
     "\n\027S2C_Protocol_Mole.proto\022\014S2C_Protocol\032"
     "\031S2C_Protocol_Common.proto\"*\n\tS_M_State\022"
-    "\020\n\010playerId\030\001 \001(\005\022\013\n\003ids\030\002 \003(\t\";\n\nS_M_Re"
-    "sult\022\020\n\010isWinner\030\001 \001(\010\022\013\n\003ids\030\002 \003(\t\022\016\n\006s"
-    "cores\030\003 \003(\005\"2\n\020S_M_SetSlotState\022\017\n\007slotI"
-    "dx\030\001 \001(\005\022\r\n\005state\030\002 \001(\005\"\036\n\013C_M_HitSlot\022\017"
-    "\n\007slotIdx\030\001 \001(\005\"(\n\023S_M_ResponseHitSlot\022\021"
-    "\n\tisStunned\030\001 \001(\010\"!\n\017S_M_RenewScores\022\016\n\006"
-    "scores\030\001 \003(\005B\033\252\002\030Google.Protobuf.Protoco"
-    "lb\006proto3"
+    "\020\n\010playerId\030\001 \001(\005\022\013\n\003ids\030\002 \003(\t\".\n\nS_M_Re"
+    "sult\022\020\n\010isWinner\030\001 \001(\010\022\016\n\006scores\030\002 \003(\005\"2"
+    "\n\020S_M_SetSlotState\022\017\n\007slotIdx\030\001 \001(\005\022\r\n\005s"
+    "tate\030\002 \001(\005\"\036\n\013C_M_HitSlot\022\017\n\007slotIdx\030\001 \001"
+    "(\005\"(\n\023S_M_ResponseHitSlot\022\021\n\tisStunned\030\001"
+    " \001(\010\"!\n\017S_M_RenewScores\022\016\n\006scores\030\001 \003(\005B"
+    "\033\252\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fMole_2eproto_deps[1] =
     {
@@ -287,7 +284,7 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fMole_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fMole_2eproto = {
     false,
     false,
-    369,
+    356,
     descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto,
     "S2C_Protocol_Mole.proto",
     &descriptor_table_S2C_5fProtocol_5fMole_2eproto_once,
@@ -589,8 +586,7 @@ S_M_Result::S_M_Result(::google::protobuf::Arena* arena)
 inline PROTOBUF_NDEBUG_INLINE S_M_Result::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::S2C_Protocol::S_M_Result& from_msg)
-      : ids_{visibility, arena, from.ids_},
-        scores_{visibility, arena, from.scores_},
+      : scores_{visibility, arena, from.scores_},
         _scores_cached_byte_size_{0},
         _cached_size_{0} {}
 
@@ -614,8 +610,7 @@ S_M_Result::S_M_Result(
 inline PROTOBUF_NDEBUG_INLINE S_M_Result::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : ids_{visibility, arena},
-        scores_{visibility, arena},
+      : scores_{visibility, arena},
         _scores_cached_byte_size_{0},
         _cached_size_{0} {}
 
@@ -640,10 +635,6 @@ inline void* S_M_Result::PlacementNew_(const void*, void* mem,
 }
 constexpr auto S_M_Result::InternalNewImpl_() {
   constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.ids_) +
-          decltype(S_M_Result::_impl_.ids_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
       PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.scores_) +
           decltype(S_M_Result::_impl_.scores_)::
               InternalGetArenaOffset(
@@ -686,15 +677,15 @@ const ::google::protobuf::internal::ClassData* S_M_Result::GetClassData() const 
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 35, 2> S_M_Result::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> S_M_Result::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967292,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -704,34 +695,24 @@ const ::_pbi::TcParseTable<2, 3, 0, 35, 2> S_M_Result::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_M_Result>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // repeated int32 scores = 2;
+    {::_pbi::TcParser::FastV32P1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.scores_)}},
     // bool isWinner = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(S_M_Result, _impl_.iswinner_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.iswinner_)}},
-    // repeated string ids = 2;
-    {::_pbi::TcParser::FastUR1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.ids_)}},
-    // repeated int32 scores = 3;
-    {::_pbi::TcParser::FastV32P1,
-     {26, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.scores_)}},
   }}, {{
     65535, 65535
   }}, {{
     // bool isWinner = 1;
     {PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.iswinner_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kBool)},
-    // repeated string ids = 2;
-    {PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.ids_), 0, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kUtf8String | ::_fl::kRepSString)},
-    // repeated int32 scores = 3;
+    // repeated int32 scores = 2;
     {PROTOBUF_FIELD_OFFSET(S_M_Result, _impl_.scores_), 0, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
   }},
   // no aux_entries
   {{
-    "\27\0\3\0\0\0\0\0"
-    "S2C_Protocol.S_M_Result"
-    "ids"
   }},
 };
 
@@ -742,7 +723,6 @@ PROTOBUF_NOINLINE void S_M_Result::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.ids_.Clear();
   _impl_.scores_.Clear();
   _impl_.iswinner_ = false;
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -770,20 +750,12 @@ PROTOBUF_NOINLINE void S_M_Result::Clear() {
                 1, this_._internal_iswinner(), target);
           }
 
-          // repeated string ids = 2;
-          for (int i = 0, n = this_._internal_ids_size(); i < n; ++i) {
-            const auto& s = this_._internal_ids().Get(i);
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                s.data(), static_cast<int>(s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2C_Protocol.S_M_Result.ids");
-            target = stream->WriteString(2, s, target);
-          }
-
-          // repeated int32 scores = 3;
+          // repeated int32 scores = 2;
           {
             int byte_size = this_._impl_._scores_cached_byte_size_.Get();
             if (byte_size > 0) {
               target = stream->WriteInt32Packed(
-                  3, this_._internal_scores(), byte_size, target);
+                  2, this_._internal_scores(), byte_size, target);
             }
           }
 
@@ -812,16 +784,7 @@ PROTOBUF_NOINLINE void S_M_Result::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // repeated string ids = 2;
-            {
-              total_size +=
-                  1 * ::google::protobuf::internal::FromIntSize(this_._internal_ids().size());
-              for (int i = 0, n = this_._internal_ids().size(); i < n; ++i) {
-                total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-                    this_._internal_ids().Get(i));
-              }
-            }
-            // repeated int32 scores = 3;
+            // repeated int32 scores = 2;
             {
               total_size +=
                   ::_pbi::WireFormatLite::Int32SizeWithPackedTagSize(
@@ -847,7 +810,6 @@ void S_M_Result::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goog
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_internal_mutable_ids()->MergeFrom(from._internal_ids());
   _this->_internal_mutable_scores()->MergeFrom(from._internal_scores());
   if (from._internal_iswinner() != 0) {
     _this->_impl_.iswinner_ = from._impl_.iswinner_;
@@ -866,7 +828,6 @@ void S_M_Result::CopyFrom(const S_M_Result& from) {
 void S_M_Result::InternalSwap(S_M_Result* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.ids_.InternalSwap(&other->_impl_.ids_);
   _impl_.scores_.InternalSwap(&other->_impl_.scores_);
         swap(_impl_.iswinner_, other->_impl_.iswinner_);
 }

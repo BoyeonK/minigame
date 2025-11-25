@@ -19,8 +19,7 @@ message S_P_State {
 //그리고, 해당 결과를 DB에 반영하기 이전 단계에서 클라이언트에게 결과를 전송함. (이건 굳이 문제라고 보기는 그렇지만)
 message S_P_Result {
     bool isWinner = 1;
-    repeated string ids = 2;
-    repeated int32 scores = 3;
+    repeated int32 scores = 2;
 }
 
 message S_P_ReadyForStart {
