@@ -90,9 +90,9 @@ public class SceneManagerEx {
         return go.GetComponent<BaseScene>();
     }
 
-    public void EndGame(bool isWinner, List<string> ids, List<int> scores) {
+    public void EndGame(bool isWinner, List<int> scores) {
         _isWinner = isWinner;
-        _playerIds = ids;
+        _playerIds = Managers.Network.Match.GetIngamePlayerIds();
         _scores = scores;
         Managers.Scene.LoadSceneWithLoadingScene(Define.Scene.Login, Define.Scene.GameResult);
     }

@@ -472,14 +472,14 @@ public class NetworkManager {
             }
         }
 
-        public void ResponseSPResult(bool isWinner, List<string> ids, List<int> scores) {
+        public void ResponseSPResult(bool isWinner, List<int> scores) {
             BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
             if (scene is PingPongScene pingPongScene) {
                 _netRef.Match.ResetMatchState();
-                Managers.Scene.EndGame(isWinner, ids, scores);
+                Managers.Scene.EndGame(isWinner, scores);
             }
         }
 
@@ -561,7 +561,7 @@ public class NetworkManager {
 
             if (scene is MoleScene moleScene) {
                 _netRef.Match.ResetMatchState();
-                Managers.Scene.EndGame(isWinner, _netRef.Match.GetIngamePlayerIds(), scores);
+                Managers.Scene.EndGame(isWinner, scores);
             }
         }
     }
