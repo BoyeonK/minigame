@@ -8,6 +8,8 @@ public:
 		_ty = GameType::PingPong;
 		_points = vector<int32_t>(4, 0);
 		_elos = vector<int32_t>(4, 0);
+		_dbids = vector<int32_t>(_quota, 0);
+		_playerIds = vector<string>(_quota);
 	}
 	~PingPongGameRoom() {
 		cout << "PingPong·ë »ç¸Á" << endl;
@@ -28,6 +30,8 @@ public:
 	void CountingPhase();
 	void CalculateGameResult();
 	void UpdateGameResultToDB();
+	void UpdateRecords();
+	void UpdateElos();
 	void EndGame();
 
 	//bool MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt);
@@ -50,15 +54,18 @@ public:
 
 private:
 	int32_t _quota = 4;
-	bool _isUpdateCall = false;
-	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;
-	S2C_Protocol::S_P_RenewScores _renewScoresPkt;
-	S2C_Protocol::S_P_KeepAlive _keepAlivePkt;
-	uint64_t _keepAliveTick = 0;
+	vector<string> _playerIds;
+	vector<int32_t> _dbids;
 	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<int> _winners;
 
+	bool _isUpdateCall = false;
+	uint64_t _keepAliveTick = 0;
+	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;
+	S2C_Protocol::S_P_RenewScores _renewScoresPkt;
+	S2C_Protocol::S_P_KeepAlive _keepAlivePkt;
+	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;
 	float _ex = 6.4f;
 	float _ez = 0;
 	float _wx = -6.4f;

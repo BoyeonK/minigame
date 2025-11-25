@@ -38,15 +38,18 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	cout << "Init2" << endl;
 
 	bool canStart = true;
-	for (auto& playerSessionWRef : _playerWRefs) {
-		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
-		//유효하지 않은 플레이어가 있는 경우, 모두 대기열로 돌려보냄.
+	for (int i = 0; i < _quota; i++) {
+		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
 		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 			canStart = false;
 			break;
 		}
+
 		int64_t now = ::GetTickCount64();
 		int64_t lastTick = playerSessionRef->GetLastKeepAliveTick();
+		_elos[i] = playerSessionRef->GetElo(int(_ty));
+		_playerIds[i] = playerSessionRef->GetPlayerId();
+		_dbids[i] = playerSessionRef->GetDbid();
 
 		//C_KeepAlive Handler함수에 의해서 lastTick이 변화하지 않았다면,
 		//유효하지 않은 플레이어로 간주하고, 모두 대기열로 돌려보냄.
@@ -68,7 +71,6 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
 			if (!PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 				playerSessionRef->SetJoinedRoom(static_pointer_cast<PingPongGameRoom>(shared_from_this()));
-				_elos[i] = playerSessionRef->GetElo(int(_ty));
 				playerSessionRef->SetRoomIdx(i);
 				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 				playerSessionRef->Send(sendBuffer);
@@ -92,6 +94,10 @@ void PingPongGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate
 	}
 	cout << "_preparedPlayer : " << _preparedPlayer << endl;
 	//TODO : 로딩 진행상황 전파
+	_loadingProgressPkt.set_playeridx(playerIdx);
+	_loadingProgressPkt.set_persentage(progressRate);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_loadingProgressPkt);
+	BroadCast(sendBuffer);
 
 	if (_preparedPlayer == _quota) {
 		Start();
@@ -165,23 +171,15 @@ void PingPongGameRoom::CalculateGameResult() {
 	}
 
 	S2C_Protocol::S_P_Result baseResultPkt;
-	string lostConnectionId = u8"탈주자";
 
 	for (int i = 0; i < _quota; i++) {
-		if (auto player = _playerWRefs[i].lock()) {
-			baseResultPkt.add_ids(player->GetPlayerId());
-		}
-		else {
-			baseResultPkt.add_ids(lostConnectionId); 
-		}
 		baseResultPkt.add_scores(_points[i]);
 	}
 
 	for (int i = 0; i < _quota; i++) {
 		auto playerSessionRef = _playerWRefs[i].lock();
-		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 			continue;
-		}
 
 		bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
 
@@ -199,26 +197,30 @@ void PingPongGameRoom::CalculateGameResult() {
 }
 
 void PingPongGameRoom::UpdateGameResultToDB() {
+	UpdateRecords();
+	UpdateElos();
+	PostEvent(&PingPongGameRoom::EndGame);
+}
+
+void PingPongGameRoom::UpdateRecords() {
+	for (int i = 0; i < _quota; i++) {
+		auto playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+
+		int32_t dbid = playerSessionRef->GetDbid();
+		if (_points[i] > playerSessionRef->GetPersonalRecord(int(_ty))) {
+			DBManager->S2D_UpdatePersonalRecord(playerSessionRef, dbid, int(_ty), _points[i]);
+		}
+		GGameManagers[int(_ty)]->CompareAndRenewPublicRecord(dbid, _points[i]);
+	}
+}
+
+void PingPongGameRoom::UpdateElos() {
 	int32_t bestLosersElo = 0;
 	int32_t worstWinnerElo = 3000;
 
-	//4명의 공통승자인 경우 (놀랍게도, 넷이 점수가 같음)
-	//FM대로 하자면 Record갱신은 해 주어야 하지만, 이 경우 모두 게임에서 나간 경우이거나 어뷰징이 의심되므로 결과에 대한 처리를 진행하지 않을 것임.
-	if (_winners.size() == _quota)
-		return;
-
 	for (int i = 0; i < _quota; i++) {
-		auto playerSessionRef = _playerWRefs[i].lock();
-		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
-			continue;
-		}
-
-		if (_points[i] > playerSessionRef->GetPersonalRecord(int(_ty))) {
-			int32_t dbid = playerSessionRef->GetDbid();
-			DBManager->S2D_UpdatePersonalRecord(playerSessionRef, dbid, int(_ty), _points[i]);
-			GGameManagers[int(_ty)]->CompareAndRenewPublicRecord(dbid, _points[i]);
-		}
-
 		bool isWinner = find(_winners.begin(), _winners.end(), i) != _winners.end();
 		if (isWinner) {
 			if (worstWinnerElo > _elos[i])
@@ -242,25 +244,21 @@ void PingPongGameRoom::UpdateGameResultToDB() {
 			if (calculatedElo == -1)
 				continue;
 
-			auto playerSessionRef = _playerWRefs[i].lock();
-			if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
-				continue;
-
-			int32_t dbid = playerSessionRef->GetDbid();
+			int32_t dbid = _dbids[i];
 			DBManager->S2D_UpdateElo(dbid, int(_ty), calculatedElo);
 		}
 	}
 	else {
 		cout << "너무 많은 플레이어가 이탈했거나, 정상적인 진행이 되지 않은 게임" << endl;
 	}
-	cout << "여기까지 오면 일단 계산과정에서 에러는 없음" << endl;
-	PostEvent(&PingPongGameRoom::EndGame);
 }
 
 void PingPongGameRoom::EndGame() {
 	//TODO: 모든 자원을 반환
 	_vecGameObjects.clear();
 	_hmGameObjects.clear();
+	_playerIds.clear();
+	_dbids.clear();
 	_elos.clear();
 	_points.clear();
 	_winners.clear();

@@ -77,7 +77,6 @@ void MoleRoom::Init2(vector<WatingPlayerData> pdv) {
 				playerSessionRef->Send(sendBuffer);
 			}
 		}
-		//30초 뒤에는 강제로 시작해버려
 		PostEventAfter(30000, &MoleRoom::Start);
 	}
 	else {
