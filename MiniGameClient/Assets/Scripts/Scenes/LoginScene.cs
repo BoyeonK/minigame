@@ -25,6 +25,7 @@ public class LoginScene : BaseScene {
     UI_MatchMakeMenu _uiMatchMakeMenu;
     UI_PersonalRecord _uiPersonalRecord;
     UI_PublicRecord _uiPublicRecord;
+    UI_MatchMakeProgress _uiMatchMakeProgress;
 
     private int _loginOpt = 0;
 
@@ -49,6 +50,7 @@ public class LoginScene : BaseScene {
         _uiMatchMakeMenu = Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
         _uiPersonalRecord = Managers.UI.ShowSceneUI<UI_PersonalRecord>();
         _uiPublicRecord = Managers.UI.ShowSceneUI<UI_PublicRecord>();
+        _uiMatchMakeProgress = Managers.UI.ShowPopupUI<UI_MatchMakeProgress>();
         Managers.UI.DisableUI("UI_StartGame");
         Managers.UI.DisableUI("UI_LoginOrCreateAccount");
         Managers.UI.DisableUI("UI_LoginPopup");
@@ -57,6 +59,7 @@ public class LoginScene : BaseScene {
         Managers.UI.DisableUI("UI_MatchMakeMenu");
         Managers.UI.DisableUI("UI_PersonalRecord");
         Managers.UI.DisableUI("UI_PublicRecord");
+        Managers.UI.DisableUI("UI_MatchMakeProgress");
 
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {
@@ -239,6 +242,7 @@ public class LoginScene : BaseScene {
         _matchMakeOpt = 0;
         _stage = Stage.MatchMake;
         Managers.UI.DisableUI("UI_LobbyMenu");
+        Managers.UI.DisableUI("UI_MatchMakeProgress");
         //Managers.UI.ShowSceneUI<>();
 
         Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
@@ -248,8 +252,7 @@ public class LoginScene : BaseScene {
     private void GoToMatchMakeRegisterStage() {
         _stage = Stage.MatchmakeRegister;
         Managers.UI.DisableUI("UI_MatchMakeMenu");
-
-        //Managers.UI.ShowSceneUI<>();
+        Managers.UI.ShowPopupUI<UI_MatchMakeProgress>();
     }
 
     //이 친구는 Network WorkerThread에서 실행됨.
