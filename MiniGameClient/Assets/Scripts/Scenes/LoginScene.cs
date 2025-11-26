@@ -1,5 +1,7 @@
 using Google.Protobuf.Protocol;
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
@@ -33,6 +35,7 @@ public class LoginScene : BaseScene {
     private OptionSelecterController _optionSelecter;
 
     private int _matchMakeOpt = 0;
+    private LobbyScreenRenderer _screenRenderer;
     
     //Scene이 바뀔 때, 이 친구가 대표로 나서서 모든 초기화 작업을 해 줄거임.
     protected override void Init() {
@@ -60,6 +63,16 @@ public class LoginScene : BaseScene {
         Managers.UI.DisableUI("UI_PersonalRecord");
         Managers.UI.DisableUI("UI_PublicRecord");
         Managers.UI.DisableUI("UI_MatchMakeProgress");
+
+        GameObject screen = GameObject.Find("Screen");
+        if (screen != null) {
+            _screenRenderer = screen.GetComponent<LobbyScreenRenderer>();
+            _screenRenderer.Init();
+            _screenRenderer.HideThis();
+        }
+        else {
+            Debug.LogError("로비 스크린 컴포넌트를 찾지못함");
+        }
 
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {
@@ -184,6 +197,7 @@ public class LoginScene : BaseScene {
 
     private void ApplyMatchMakeOpt() {
         if (_stage == Stage.MatchMake) {
+            _screenRenderer.ApplyPicture(_matchMakeOpt);
             _uiMatchMakeMenu.SetSelectedOpt(_matchMakeOpt);
         }
     }
@@ -241,6 +255,7 @@ public class LoginScene : BaseScene {
     private void GoToMatchMakeStage() {
         _matchMakeOpt = 0;
         _stage = Stage.MatchMake;
+        _screenRenderer.ActiveThis();
         Managers.UI.DisableUI("UI_LobbyMenu");
         Managers.UI.DisableUI("UI_MatchMakeProgress");
         //Managers.UI.ShowSceneUI<>();
