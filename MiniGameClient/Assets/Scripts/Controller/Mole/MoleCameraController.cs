@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MoleCameraController : MonoBehaviour {
-    private readonly Vector3 _cameraPos = new(0.0f, 3.5f, -3.6f);
+    private readonly Vector3 _cameraPos = new(0.0f, 5f, -2.7f);
 
     private float _stunActionTick = 0.0f;
     private bool _isStun = false;
