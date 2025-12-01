@@ -6,7 +6,9 @@ class TestGameRoom : public GameRoom {
 public:
 	TestGameRoom() {
 		_ty = GameType::TestGame;
+		_points = vector<int32_t>(_quota, 0);
 		_elos = vector<int32_t>(_quota, 0);
+		_dbids = vector<int32_t>(_quota, 0);
 		_playerIds = vector<string>(_quota);
 	}
 	~TestGameRoom() {
