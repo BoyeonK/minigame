@@ -143,6 +143,8 @@ void TestGameRoom::CalculateGameResult() {
 	S2C_Protocol::S_TestGameResult* pTestGameResult = pkt.mutable_testgameresult();
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
+
+	PostEvent(&TestGameRoom::EndPhase);
 }
 
 void TestGameRoom::UpdateGameResultToDB() {
