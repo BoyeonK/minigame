@@ -48,6 +48,7 @@ void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		int64_t lastTick = playerSessionRef->GetLastKeepAliveTick();
 		_elos[i] = playerSessionRef->GetElo(int(_ty));
 		_playerIds[i] = playerSessionRef->GetPlayerId();
+		_dbids[i] = playerSessionRef->GetDbid();
 
 		if (now - lastTick > 2000) {
 			canStart = false;
@@ -78,13 +79,11 @@ void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 }
 
 void TestGameRoom::Start() {
+	if (_state != GameState::BeforeStart)
+		return;
 	_state = GameState::OnGoing;
-
-	//GameRoom에 있어야할 Object 생성. (따로 함수로 빼는게 나을듯)
-	MakeTestGameBullet(-3.0f, 0.0f, 0.0f);
-	MakeTestGameBullet(3.0f, 0.0f, 0.0f);
-
 	cout << "스타트 함수 실행" << endl;
+
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
@@ -119,45 +118,52 @@ void TestGameRoom::MakeTestGameBulletAndBroadcast(float x, float y, float z) {
 }
 
 void TestGameRoom::Phase1() {
-	PostEvent(&TestGameRoom::MakeTestGameBulletAndBroadcast, -2.0f, 0.0f, 0.0f);
-	PostEventAfter(1000, &TestGameRoom::MakeTestGameBulletAndBroadcast, -1.0f, 0.0f, 0.0f);
-	PostEventAfter(2000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 0.0f, 0.0f, 0.0f);
-	PostEventAfter(3000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 1.0f, 0.0f, 0.0f);
-	PostEventAfter(4000, &TestGameRoom::MakeTestGameBulletAndBroadcast, 2.0f, 0.0f, 0.0f);
-	PostEventAfter(6000, &TestGameRoom::EndPhase);
+	PostEventAfter(60000, &TestGameRoom::CountingPhase);
 }
 
-void TestGameRoom::EndPhase() {
+void TestGameRoom::CountingPhase() {
+	cout << "Calculating" << endl;
 	_state = GameState::Counting;
-	//TestGame에서는 아무 결과도 계산하지 않고, 게임이 끝났다는 정보 외에는 아무른 결과도 알려주지 않음.
-
-	//게임 결과 계산
+	_isUpdateCall = false;
 	CalculateGameResult();
-
-	//해당 결과 통보
-	S2C_Protocol::S_EndGame pkt = S2CPacketMaker::MakeSEndGame();
-	pkt.set_gameid(int(_ty));
-	S2C_Protocol::S_TestGameResult* pTestGameResult = pkt.mutable_testgameresult();
-
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-	BroadCast(sendBuffer);
-
-	//세션 종료
-	ClearRoom();
 }
 
 void TestGameRoom::CalculateGameResult() {
-	
+	for (int i = 0; i < _quota; i++) {
+		auto playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+
+		playerSessionRef->SetJoinedRoom(nullptr);
+		playerSessionRef->SetMatchingState(GameType::None);
+	}
+
+	S2C_Protocol::S_EndGame pkt = S2CPacketMaker::MakeSEndGame();
+	pkt.set_gameid(int(_ty));
+	S2C_Protocol::S_TestGameResult* pTestGameResult = pkt.mutable_testgameresult();
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
 }
 
-void TestGameRoom::ClearRoom() {
-	for (auto& playerWRef : _playerWRefs) {
-		shared_ptr<PlayerSession> playerRef = playerWRef.lock();
-		if (playerRef == nullptr)
-			continue;
-		playerRef->SetJoinedRoom(nullptr);
-		playerRef->SetMatchingState(GameType::None);
-	}
+void TestGameRoom::UpdateGameResultToDB() {
+
+}
+
+void TestGameRoom::UpdateRecords() {
+
+}
+
+void TestGameRoom::UpdateElos() {
+
+}
+
+void TestGameRoom::EndPhase() {
+	_vecGameObjects.clear();
+	_hmGameObjects.clear();
+	_playerIds.clear();
+	_dbids.clear();
+	_elos.clear();
+	_points.clear();
 	_state = GameState::EndGame;
 }
 
@@ -179,8 +185,11 @@ void TestGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
 	if (progressRate == 100) {
 		_preparedPlayer += 1;
 	}
-	cout << "_preparedPlayer : " << _preparedPlayer << endl;
-	//TODO : 로딩 진행상황 전파
+
+	_loadingProgressPkt.set_playeridx(playerIdx);
+	_loadingProgressPkt.set_persentage(progressRate);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_loadingProgressPkt);
+	BroadCast(sendBuffer);
 
 	if (_preparedPlayer == _quota) {
 		Start();

@@ -27,14 +27,22 @@ public:
 	void MakeTestGameBulletAndBroadcast(float x, float y, float z);
 
 	void Phase1();
-	void EndPhase();
+	void CountingPhase();
 	void CalculateGameResult();
-	void ClearRoom();
+	void UpdateGameResultToDB();
+	void UpdateRecords();
+	void UpdateElos();
+	void EndPhase();
 
 	S2C_Protocol::S_TestGameState MakeSTestGameState();
 
 private:
 	int32_t _quota = 1;
+	bool _isUpdateCall = false;
 	vector<string> _playerIds;
+	vector<int32_t> _dbids;
 	vector<int32_t> _elos;
+	vector<int32_t> _points;
+
+	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;
 };
