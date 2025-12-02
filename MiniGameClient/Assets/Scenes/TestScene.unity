@@ -10023,9 +10023,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2013667420803735986, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
-      propertyPath: m_Name
-      value: PlayerCamera
+    - target: {fileID: 3411881214717707459, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411881214717707459, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6467247066662304191, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10070,10 +10074,6 @@ PrefabInstance:
     - target: {fileID: 6597957591836802114, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
       propertyPath: m_Name
       value: TestPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8116183703746437969, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
-      propertyPath: m_Name
-      value: Cam
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -13,12 +13,13 @@ public class TestPlayerController : GameObjectController {
     private bool _a = false;
     private bool _s = false;
     private bool _d = false;
-    private Vector3 _characterFront = new();
-    private Vector3 _accelerationDir = new();
     private const float _accelerationRate = 0.03f;
     private const float _frictionRate = 0.02f;
-    private Vector3 _velocity = new();
     private const float _maxVelocity = 0.015f;
+    private const float _rotationSpeed = 4f;
+    private Vector3 _characterFront = new();
+    private Vector3 _accelerationDir = new();
+    private Vector3 _velocity = new();
 
     public override void Init() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -99,7 +100,7 @@ public class TestPlayerController : GameObjectController {
         //키보드로 인한 가속 방향으로 캐릭터의 정면이 향하도록 부드러운 러프로테이션
         if (_accelerationDir.sqrMagnitude > 0.001f) {
             Quaternion targetRotation = Quaternion.LookRotation(_accelerationDir);
-            _body.transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 1f);
+            _body.transform.rotation = Quaternion.Lerp(_body.transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
         }
     }
 
