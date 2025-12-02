@@ -13,9 +13,10 @@ public class TestPlayerController : GameObjectController {
     private bool _a = false;
     private bool _s = false;
     private bool _d = false;
-    private const float _accelerationRate = 0.03f;
-    private const float _frictionRate = 0.02f;
-    private const float _maxVelocity = 0.015f;
+    private const float _accelerationRate = 0.12f;
+    private const float _floorFriction = 0.06f;
+    private const float _airFrictionRatePerVelocity = 4f;
+    //private const float _maxVelocity = 0.015f;
     private const float _rotationSpeed = 4f;
     private Vector3 _characterFront = new();
     private Vector3 _accelerationDir = new();
@@ -106,13 +107,12 @@ public class TestPlayerController : GameObjectController {
 
     private void CalculateVelocityOnUpdate() {
         _velocity += _accelerationDir * _accelerationRate * Time.deltaTime;
-        if (_velocity.magnitude > _frictionRate * Time.deltaTime)
-            _velocity -= _velocity.normalized * _frictionRate * Time.deltaTime;
+        _velocity -= _velocity * _airFrictionRatePerVelocity * Time.deltaTime;
+
+        if (_velocity.magnitude > _floorFriction * Time.deltaTime)
+            _velocity -= _velocity.normalized * _floorFriction * Time.deltaTime;
         else
             _velocity = Vector3.zero;
-
-        if (_velocity.magnitude > _maxVelocity)
-            _velocity = _velocity.normalized * _maxVelocity;
     }
 
     private void MovePlayerOnUpdate() {
