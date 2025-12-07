@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class TestPlayerController : GameObjectController {
-    GameObject _body;
+    TestPlayerBody _body;
     GameObject _camWrapper;
     Camera _camera;
     private float sensitivity = 1000f; 
@@ -17,7 +17,7 @@ public class TestPlayerController : GameObjectController {
     private const float _floorFriction = 0.06f;
     private const float _airFrictionRatePerVelocity = 4f;
     //private const float _maxVelocity = 0.015f;
-    private const float _rotationSpeed = 4f;
+    
     private Vector3 _characterFront = new();
     private Vector3 _accelerationDir = new();
     private Vector3 _velocity = new();
@@ -28,13 +28,13 @@ public class TestPlayerController : GameObjectController {
 
         Transform bodyTransform = transform.Find("TestPlayerBody");
         if (bodyTransform != null)
-            _body = bodyTransform.gameObject;
+            _body = bodyTransform.GetComponent<TestPlayerBody>();
         Transform camTransform = transform.Find("PlayerCamera");
         if (camTransform != null) {
             _camWrapper = camTransform.gameObject;
             Transform camera = camTransform.Find("Cam");
             if (camera != null)
-                _camera = camera.gameObject.GetComponent<Camera>();
+                _camera = camera.GetComponent<Camera>();
 
             Vector3 currentRotation = _camWrapper.transform.localRotation.eulerAngles;
             xRotation = currentRotation.x;
@@ -60,12 +60,13 @@ public class TestPlayerController : GameObjectController {
     }
 
     private void MoveCamOnUpdate() {
-        if (_camWrapper == null) return;
+        if (_camWrapper == null) 
+            return;
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+        xRotation = Mathf.Clamp(xRotation, -100f, 50f);
 
         yRotation += mouseX;
         _camWrapper.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
@@ -99,10 +100,7 @@ public class TestPlayerController : GameObjectController {
 
     private void LerpRotationOnUpdate() {
         //키보드로 인한 가속 방향으로 캐릭터의 정면이 향하도록 부드러운 러프로테이션
-        if (_accelerationDir.sqrMagnitude > 0.001f) {
-            Quaternion targetRotation = Quaternion.LookRotation(_accelerationDir);
-            _body.transform.rotation = Quaternion.Lerp(_body.transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
-        }
+        _body.RotateToAccelerationDirection(_accelerationDir);
     }
 
     private void CalculateVelocityOnUpdate() {

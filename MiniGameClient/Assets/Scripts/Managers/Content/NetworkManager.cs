@@ -93,6 +93,7 @@ public class NetworkManager {
         Loading.Init(this);
         PingPong.Init(this);
         Mole.Init(this);
+        Marathon.Init(this);
     }
 
     public NetworkLobbyManager Lobby = new NetworkLobbyManager();
@@ -562,6 +563,29 @@ public class NetworkManager {
             if (scene is MoleScene moleScene) {
                 _netRef.Match.ResetMatchState();
                 Managers.Scene.EndGame(isWinner, scores);
+            }
+        }
+    }
+
+    public NetworkMarathonManager Marathon = new NetworkMarathonManager();
+    public class NetworkMarathonManager {
+        private NetworkManager _netRef;
+        private readonly object _collisionHashLock = new object();
+        private HashSet<int> _collidingObjectIdxs = new HashSet<int>();
+
+        public void Init(NetworkManager netRef) {
+            _netRef = netRef;
+        }
+
+        public bool OnCollisionEnter(int objectIdx) {
+            lock (_collisionHashLock) {
+                return _collidingObjectIdxs.Add(objectIdx);
+            }
+        }
+
+        public bool OnCollisionExit(int objectIdx) {
+            lock (_collisionHashLock) {
+                return _collidingObjectIdxs.Remove(objectIdx);
             }
         }
     }

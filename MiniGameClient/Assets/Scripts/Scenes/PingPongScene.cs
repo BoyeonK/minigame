@@ -1,7 +1,6 @@
 using Google.Protobuf.Protocol;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Define;
 
 public class PingPongScene : BaseScene {
