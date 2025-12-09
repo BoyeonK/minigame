@@ -9,6 +9,11 @@ public class TestPlayerController : GameObjectController {
 
     State _prestate = State.Standing;
     State _state = State.Standing;
+    bool _isGrounded = true;
+
+    private LayerMask _groundLayer;
+    private float _groundCheckRadius = 0.3f;
+    private float _groundCheckDistance = 0.5f;
 
     TestPlayerCamera _camera;
     private float _cameraDistance = 5f;
@@ -19,6 +24,7 @@ public class TestPlayerController : GameObjectController {
     private Vector3 _front = new(0f, 0f, 1f);
     private Vector3 _right = new();
     private Vector3 _viewFront = new(0f, 0f, 1f);
+    private Vector3 _offset = new(0f, 0.5f, 0f);
     private bool _w = false;
     private bool _a = false;
     private bool _s = false;
@@ -26,11 +32,11 @@ public class TestPlayerController : GameObjectController {
     private bool _jump = false;
 
     private Rigidbody _rigidBody;
-    private const float _accelerationRate = 6f;
+    private const float _accelerationRate = 5f;
     private const float _horizonFrictionRatePerVelocity = 2f;
-    private const float _gravityAccel = 12f;
-    private const float _jumpSpeed = 5.2f;
-    private const float MAX_VERTICAL_SPEED = 12f;
+    private const float _gravityAccel = 15f;
+    private const float _jumpSpeed = 4.8f;
+    private const float MAX_VERTICAL_SPEED = 9f;
 
     private Vector3 _accelerationDir = new();
 
@@ -44,9 +50,9 @@ public class TestPlayerController : GameObjectController {
         if (_camera != null)
             _camera.Init(transform.gameObject);
 
-        _right = Vector3.Cross(Vector3.up, _front).normalized;
+        _rigidBody = transform.GetComponent<Rigidbody>();
 
-        _rigidBody = GetComponent<Rigidbody>();
+        _right = Vector3.Cross(Vector3.up, _front).normalized;
 
         Managers.Input.AddKeyListener(KeyCode.W, WDown, InputManager.KeyState.Down);
         Managers.Input.AddKeyListener(KeyCode.A, ADown, InputManager.KeyState.Down);
@@ -66,6 +72,8 @@ public class TestPlayerController : GameObjectController {
 
     void FixedUpdate() {
         GetAccelerationDirOnFixedUpdate();
+        CheckGroundStatusOnFixedUpdate();
+        SetStateOnFixedUpdate();
         CalculateVelocityOnFixedUpdate();
         LerpRotationOnUpdate();
     }
@@ -89,14 +97,16 @@ public class TestPlayerController : GameObjectController {
         RaycastHit hitInfo;
         Vector3 cameraPos;
 
-        if (Physics.Raycast(transform.position, -_viewFront, out hitInfo, _cameraDistance))
+        Vector3 startPos = transform.position + _offset;
+        if (Physics.Raycast(startPos, -_viewFront, out hitInfo, _cameraDistance))
             cameraPos = hitInfo.point;
         else
-            cameraPos = transform.position + (-_viewFront * _cameraDistance);
+            cameraPos = startPos + (-_viewFront * _cameraDistance);
 
         if (_camera != null)
             _camera.ChangePositionOnUpdate(cameraPos);
     }
+
     private void GetAccelerationDirOnFixedUpdate() {
         _accelerationDir = Vector3.zero;
         if (_w)
@@ -126,8 +136,25 @@ public class TestPlayerController : GameObjectController {
         }
     }
 
-    private void SetStateOnUpdate() {
+    private void CheckGroundStatusOnFixedUpdate() {
+        Vector3 rayStart = transform.position + _offset;
 
+        RaycastHit hitInfo;
+        bool hasHit = Physics.SphereCast(rayStart, _groundCheckRadius, Vector3.down, out hitInfo, _groundCheckDistance);
+
+        _isGrounded = hasHit;
+
+        Color debugColor = _isGrounded ? Color.green : Color.red;
+        Debug.DrawRay(rayStart, Vector3.down * _groundCheckDistance, debugColor);
+    }
+
+    private void SetStateOnFixedUpdate() {
+        if (!_isGrounded)
+            _state = State.Jumping;
+        else if (_accelerationDir.sqrMagnitude > Vector3.kEpsilon)
+            _state = State.Moving;
+        else
+            _state = State.Standing;
     }
 
     private void PlayAnimationOnUpdate() {
@@ -137,18 +164,31 @@ public class TestPlayerController : GameObjectController {
     private void CalculateVelocityOnFixedUpdate() {
         if (_rigidBody == null) return;
 
+        //키보드 무빙 (수평)
         if (_accelerationDir.sqrMagnitude > 0.001f) {
-            _rigidBody.AddForce(_accelerationDir * _accelerationRate, ForceMode.Acceleration);
+            if (_state == State.Jumping)
+                _rigidBody.AddForce(_accelerationDir * _accelerationRate / 3, ForceMode.Acceleration);
+            else
+                _rigidBody.AddForce(_accelerationDir * _accelerationRate, ForceMode.Acceleration);
         }
-        _rigidBody.AddForce(Vector3.down * _gravityAccel, ForceMode.Acceleration);
+        //중력 (수직)
+        if (_state == State.Jumping) {
+            _rigidBody.AddForce(Vector3.down * _gravityAccel, ForceMode.Acceleration);
+        }
+        else {
+            _rigidBody.AddForce(Vector3.down * 4f, ForceMode.Acceleration);
+        }
 
+        //수평방향 저항
         Vector3 horizontalVelocity = new(_rigidBody.linearVelocity.x, 0f, _rigidBody.linearVelocity.z);
-
         if (horizontalVelocity.sqrMagnitude > 0.001f) {
             _rigidBody.AddForce(-horizontalVelocity * _horizonFrictionRatePerVelocity, ForceMode.Acceleration);
         }
 
+        //중력
         Vector3 currentVelocity = _rigidBody.linearVelocity;
+
+        //점프 시동
         if (_jump) {
             currentVelocity.y = _jumpSpeed;
             _rigidBody.linearVelocity = currentVelocity;
@@ -157,7 +197,7 @@ public class TestPlayerController : GameObjectController {
         else {
             currentVelocity.y = Mathf.Clamp(currentVelocity.y, -MAX_VERTICAL_SPEED, MAX_VERTICAL_SPEED);
             _rigidBody.linearVelocity = currentVelocity;
-        } 
+        }
     }
 
     private void MovePlayerOnUpdate() {
@@ -197,7 +237,8 @@ public class TestPlayerController : GameObjectController {
     }
 
     private void TryJump() {
-        _jump = true;
+        if (_isGrounded)
+            _jump = true;
     }
 
     private void OnDestroy() {
