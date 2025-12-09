@@ -80,3 +80,10 @@ message UnityGameObject {
     XYZ position = 3;
     //XYZ Rotation = 2;
 }
+
+message GameObjectMovementInfo {
+    int32 objectId = 1;
+    XYZ position = 2;
+    XYZ front = 3;
+    XYZ velocity = 4;
+}

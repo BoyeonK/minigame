@@ -12,3 +12,17 @@ message S_TestGameState {
 message S_TestGameResult {
     
 }
+
+message S_R_RequestMovementAndCollision {
+    int32 playerId = 1;
+}
+
+message C_R_ResponseMovementAndCollision {
+    GameObjectMovementInfo movementInfo = 1;
+    repeated int32 objectIds = 2;
+}
+
+message S_R_UpdateMovementAndCollision {
+    repeated GameObjectMovementInfo movementInfos = 1;
+    XYZ collisionNestedForce = 2;
+}
