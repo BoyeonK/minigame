@@ -74,8 +74,8 @@ public class Define {
 
     public enum ObjectType {
         Undefined,
-        TestPlayer,
-        TestOpponent,
+        RacePlayer,
+        RaceOpponent,
         TestGameBullet,
         MyPlayerBar,
         EnemyPlayerBar,

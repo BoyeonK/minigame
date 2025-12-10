@@ -5,8 +5,7 @@ public class TestOpponentController : GameObjectController {
     InteractableCollider _bodyCollider;
 
     public override void Init() {
-        SetObjectId((int)Define.ObjectType.TestOpponent);
-        SetObjectId(12345);
+        SetObjectId((int)Define.ObjectType.RaceOpponent);
 
         Transform bodyTransform = transform.Find("TestOpponentBody");
         if (bodyTransform != null) {

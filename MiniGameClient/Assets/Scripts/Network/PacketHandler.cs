@@ -407,5 +407,30 @@ class PacketHandler {
 			Managers.Network.Mole.ResponseSMResult(recvPkt.IsWinner, recvPkt.Scores.ToList());
 		});
     }
+
+	public static void S_R_ResponseStateHandler(PacketSession session, IMessage packet) {
+		if (!(packet is S_R_ResponseState recvPkt))
+			return;
+
+		int myId = recvPkt.PlayerId;
+		List<UnityGameObject> serializedObjs = recvPkt.Objects.ToList();
+		foreach (UnityGameObject serializedObj in serializedObjs) {
+			if (serializedObj.ObjectId != myId) {
+				serializedObj.ObjectType = (int)ObjectType.RaceOpponent;
+			}
+		}
+
+		Managers.ExecuteAtMainThread(() => {
+			Managers.Network.Race.ResponseSRState(serializedObjs);
+		});
+	}
+
+	public static void S_R_RequestMovementAndCollisionHandler(PacketSession session, IMessage packet) {
+
+    }
+
+    public static void S_R_UpdateMovementAndCollisionHandler(PacketSession session, IMessage packet) {
+
+    }
 }
 

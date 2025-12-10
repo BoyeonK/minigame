@@ -42,7 +42,7 @@ public class TestPlayerController : GameObjectController {
 
     public override void Init() {
         Cursor.lockState = CursorLockMode.Locked;
-        SetObjectId((int)Define.ObjectType.TestPlayer);
+        SetObjectId((int)Define.ObjectType.RacePlayer);
 
         Transform camTransform = transform.Find("PlayerCamera");
         if (camTransform != null)

@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3418898574053372233}
   - component: {fileID: 2852797848589248510}
   m_Layer: 0
-  m_Name: MarathonPlayer
+  m_Name: RacePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

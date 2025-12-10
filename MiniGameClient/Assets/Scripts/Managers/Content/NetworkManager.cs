@@ -93,7 +93,7 @@ public class NetworkManager {
         Loading.Init(this);
         PingPong.Init(this);
         Mole.Init(this);
-        Marathon.Init(this);
+        Race.Init(this);
     }
 
     public NetworkLobbyManager Lobby = new NetworkLobbyManager();
@@ -567,14 +567,27 @@ public class NetworkManager {
         }
     }
 
-    public NetworkMarathonManager Marathon = new NetworkMarathonManager();
-    public class NetworkMarathonManager {
+    public NetworkRaceManager Race = new NetworkRaceManager();
+    public class NetworkRaceManager {
         private NetworkManager _netRef;
         private readonly object _collisionHashLock = new object();
         private HashSet<int> _collidingObjectIdxs = new HashSet<int>();
 
         public void Init(NetworkManager netRef) {
             _netRef = netRef;
+        }
+
+        public void ResponseSRState(List<UnityGameObject> serializedObjs) {
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
+
+            if (scene is RaceScene raceScene) {
+                raceScene.OffTheTempCam();
+                foreach (UnityGameObject obj in serializedObjs) {
+                    Managers.Object.CreateObject(obj);
+                }
+            }
         }
 
         public bool OnCollisionEnter(int objectIdx) {
