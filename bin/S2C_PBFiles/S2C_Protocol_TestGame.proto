@@ -12,6 +12,15 @@ message S_TestGameState {
 message S_TestGameResult {
     
 }
+message C_R_RequestState {
+    int32 playerId = 1;
+}
+
+message S_R_ResponseState {
+    repeated UnityGameObject objects = 1;
+    repeated string playerIds = 2;
+    int32 playerId = 3;
+}
 
 message S_R_RequestMovementAndCollision {
     int32 playerId = 1;

@@ -53,6 +53,9 @@ struct TableStruct_S2C_5fProtocol_5fCommon_2eproto {
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_S2C_5fProtocol_5fCommon_2eproto;
 namespace S2C_Protocol {
+class GameObjectMovementInfo;
+struct GameObjectMovementInfoDefaultTypeInternal;
+extern GameObjectMovementInfoDefaultTypeInternal _GameObjectMovementInfo_default_instance_;
 class UnityGameObject;
 struct UnityGameObjectDefaultTypeInternal;
 extern UnityGameObjectDefaultTypeInternal _UnityGameObject_default_instance_;
@@ -102,6 +105,11 @@ enum MsgId : int {
   S_GAME_SCENE_LOADING_PROGRESS = 32,
   S_TESTGAME_STATE = 100,
   S_TESTGAME_RESULT = 101,
+  C_R_REQUEST_STATE = 102,
+  S_R_RESPONSE_STATE = 103,
+  S_R_REQUEST_MOVEMENT_AND_COLLISION = 104,
+  C_R_RESPONSE_MOVEMENT_AND_COLLISION = 105,
+  S_R_UPDATE_MOVEMENT_AND_COLLISION = 106,
   S_P_STATE = 200,
   S_P_RESULT = 201,
   S_P_READY_FOR_START = 202,
@@ -585,6 +593,248 @@ class UnityGameObject final : public ::google::protobuf::Message
   union { Impl_ _impl_; };
   friend struct ::TableStruct_S2C_5fProtocol_5fCommon_2eproto;
 };
+// -------------------------------------------------------------------
+
+class GameObjectMovementInfo final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.GameObjectMovementInfo) */ {
+ public:
+  inline GameObjectMovementInfo() : GameObjectMovementInfo(nullptr) {}
+  ~GameObjectMovementInfo() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(GameObjectMovementInfo* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(GameObjectMovementInfo));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR GameObjectMovementInfo(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline GameObjectMovementInfo(const GameObjectMovementInfo& from) : GameObjectMovementInfo(nullptr, from) {}
+  inline GameObjectMovementInfo(GameObjectMovementInfo&& from) noexcept
+      : GameObjectMovementInfo(nullptr, std::move(from)) {}
+  inline GameObjectMovementInfo& operator=(const GameObjectMovementInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GameObjectMovementInfo& operator=(GameObjectMovementInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const GameObjectMovementInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const GameObjectMovementInfo* internal_default_instance() {
+    return reinterpret_cast<const GameObjectMovementInfo*>(
+        &_GameObjectMovementInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 2;
+  friend void swap(GameObjectMovementInfo& a, GameObjectMovementInfo& b) { a.Swap(&b); }
+  inline void Swap(GameObjectMovementInfo* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GameObjectMovementInfo* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  GameObjectMovementInfo* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<GameObjectMovementInfo>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const GameObjectMovementInfo& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const GameObjectMovementInfo& from) { GameObjectMovementInfo::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(GameObjectMovementInfo* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.GameObjectMovementInfo"; }
+
+ protected:
+  explicit GameObjectMovementInfo(::google::protobuf::Arena* arena);
+  GameObjectMovementInfo(::google::protobuf::Arena* arena, const GameObjectMovementInfo& from);
+  GameObjectMovementInfo(::google::protobuf::Arena* arena, GameObjectMovementInfo&& from) noexcept
+      : GameObjectMovementInfo(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPositionFieldNumber = 2,
+    kFrontFieldNumber = 3,
+    kVelocityFieldNumber = 4,
+    kObjectIdFieldNumber = 1,
+  };
+  // .S2C_Protocol.XYZ position = 2;
+  bool has_position() const;
+  void clear_position() ;
+  const ::S2C_Protocol::XYZ& position() const;
+  PROTOBUF_NODISCARD ::S2C_Protocol::XYZ* release_position();
+  ::S2C_Protocol::XYZ* mutable_position();
+  void set_allocated_position(::S2C_Protocol::XYZ* value);
+  void unsafe_arena_set_allocated_position(::S2C_Protocol::XYZ* value);
+  ::S2C_Protocol::XYZ* unsafe_arena_release_position();
+
+  private:
+  const ::S2C_Protocol::XYZ& _internal_position() const;
+  ::S2C_Protocol::XYZ* _internal_mutable_position();
+
+  public:
+  // .S2C_Protocol.XYZ front = 3;
+  bool has_front() const;
+  void clear_front() ;
+  const ::S2C_Protocol::XYZ& front() const;
+  PROTOBUF_NODISCARD ::S2C_Protocol::XYZ* release_front();
+  ::S2C_Protocol::XYZ* mutable_front();
+  void set_allocated_front(::S2C_Protocol::XYZ* value);
+  void unsafe_arena_set_allocated_front(::S2C_Protocol::XYZ* value);
+  ::S2C_Protocol::XYZ* unsafe_arena_release_front();
+
+  private:
+  const ::S2C_Protocol::XYZ& _internal_front() const;
+  ::S2C_Protocol::XYZ* _internal_mutable_front();
+
+  public:
+  // .S2C_Protocol.XYZ velocity = 4;
+  bool has_velocity() const;
+  void clear_velocity() ;
+  const ::S2C_Protocol::XYZ& velocity() const;
+  PROTOBUF_NODISCARD ::S2C_Protocol::XYZ* release_velocity();
+  ::S2C_Protocol::XYZ* mutable_velocity();
+  void set_allocated_velocity(::S2C_Protocol::XYZ* value);
+  void unsafe_arena_set_allocated_velocity(::S2C_Protocol::XYZ* value);
+  ::S2C_Protocol::XYZ* unsafe_arena_release_velocity();
+
+  private:
+  const ::S2C_Protocol::XYZ& _internal_velocity() const;
+  ::S2C_Protocol::XYZ* _internal_mutable_velocity();
+
+  public:
+  // int32 objectId = 1;
+  void clear_objectid() ;
+  ::int32_t objectid() const;
+  void set_objectid(::int32_t value);
+
+  private:
+  ::int32_t _internal_objectid() const;
+  void _internal_set_objectid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.GameObjectMovementInfo)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 4, 3,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const GameObjectMovementInfo& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::S2C_Protocol::XYZ* position_;
+    ::S2C_Protocol::XYZ* front_;
+    ::S2C_Protocol::XYZ* velocity_;
+    ::int32_t objectid_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_S2C_5fProtocol_5fCommon_2eproto;
+};
 
 // ===================================================================
 
@@ -810,6 +1060,320 @@ inline void UnityGameObject::set_allocated_position(::S2C_Protocol::XYZ* value) 
 
   _impl_.position_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
   // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.UnityGameObject.position)
+}
+
+// -------------------------------------------------------------------
+
+// GameObjectMovementInfo
+
+// int32 objectId = 1;
+inline void GameObjectMovementInfo::clear_objectid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.objectid_ = 0;
+}
+inline ::int32_t GameObjectMovementInfo::objectid() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.GameObjectMovementInfo.objectId)
+  return _internal_objectid();
+}
+inline void GameObjectMovementInfo::set_objectid(::int32_t value) {
+  _internal_set_objectid(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.GameObjectMovementInfo.objectId)
+}
+inline ::int32_t GameObjectMovementInfo::_internal_objectid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.objectid_;
+}
+inline void GameObjectMovementInfo::_internal_set_objectid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.objectid_ = value;
+}
+
+// .S2C_Protocol.XYZ position = 2;
+inline bool GameObjectMovementInfo::has_position() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.position_ != nullptr);
+  return value;
+}
+inline void GameObjectMovementInfo::clear_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.position_ != nullptr) _impl_.position_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::S2C_Protocol::XYZ& GameObjectMovementInfo::_internal_position() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::S2C_Protocol::XYZ* p = _impl_.position_;
+  return p != nullptr ? *p : reinterpret_cast<const ::S2C_Protocol::XYZ&>(::S2C_Protocol::_XYZ_default_instance_);
+}
+inline const ::S2C_Protocol::XYZ& GameObjectMovementInfo::position() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.GameObjectMovementInfo.position)
+  return _internal_position();
+}
+inline void GameObjectMovementInfo::unsafe_arena_set_allocated_position(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.position_);
+  }
+  _impl_.position_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.GameObjectMovementInfo.position)
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::release_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::S2C_Protocol::XYZ* released = _impl_.position_;
+  _impl_.position_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::unsafe_arena_release_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.GameObjectMovementInfo.position)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::S2C_Protocol::XYZ* temp = _impl_.position_;
+  _impl_.position_ = nullptr;
+  return temp;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::_internal_mutable_position() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.position_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::XYZ>(GetArena());
+    _impl_.position_ = reinterpret_cast<::S2C_Protocol::XYZ*>(p);
+  }
+  return _impl_.position_;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::mutable_position() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  ::S2C_Protocol::XYZ* _msg = _internal_mutable_position();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.GameObjectMovementInfo.position)
+  return _msg;
+}
+inline void GameObjectMovementInfo::set_allocated_position(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete (_impl_.position_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.position_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.GameObjectMovementInfo.position)
+}
+
+// .S2C_Protocol.XYZ front = 3;
+inline bool GameObjectMovementInfo::has_front() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.front_ != nullptr);
+  return value;
+}
+inline void GameObjectMovementInfo::clear_front() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.front_ != nullptr) _impl_.front_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline const ::S2C_Protocol::XYZ& GameObjectMovementInfo::_internal_front() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::S2C_Protocol::XYZ* p = _impl_.front_;
+  return p != nullptr ? *p : reinterpret_cast<const ::S2C_Protocol::XYZ&>(::S2C_Protocol::_XYZ_default_instance_);
+}
+inline const ::S2C_Protocol::XYZ& GameObjectMovementInfo::front() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.GameObjectMovementInfo.front)
+  return _internal_front();
+}
+inline void GameObjectMovementInfo::unsafe_arena_set_allocated_front(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.front_);
+  }
+  _impl_.front_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.GameObjectMovementInfo.front)
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::release_front() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::S2C_Protocol::XYZ* released = _impl_.front_;
+  _impl_.front_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::unsafe_arena_release_front() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.GameObjectMovementInfo.front)
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::S2C_Protocol::XYZ* temp = _impl_.front_;
+  _impl_.front_ = nullptr;
+  return temp;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::_internal_mutable_front() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.front_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::XYZ>(GetArena());
+    _impl_.front_ = reinterpret_cast<::S2C_Protocol::XYZ*>(p);
+  }
+  return _impl_.front_;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::mutable_front() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  ::S2C_Protocol::XYZ* _msg = _internal_mutable_front();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.GameObjectMovementInfo.front)
+  return _msg;
+}
+inline void GameObjectMovementInfo::set_allocated_front(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete (_impl_.front_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+
+  _impl_.front_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.GameObjectMovementInfo.front)
+}
+
+// .S2C_Protocol.XYZ velocity = 4;
+inline bool GameObjectMovementInfo::has_velocity() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.velocity_ != nullptr);
+  return value;
+}
+inline void GameObjectMovementInfo::clear_velocity() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.velocity_ != nullptr) _impl_.velocity_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline const ::S2C_Protocol::XYZ& GameObjectMovementInfo::_internal_velocity() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::S2C_Protocol::XYZ* p = _impl_.velocity_;
+  return p != nullptr ? *p : reinterpret_cast<const ::S2C_Protocol::XYZ&>(::S2C_Protocol::_XYZ_default_instance_);
+}
+inline const ::S2C_Protocol::XYZ& GameObjectMovementInfo::velocity() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.GameObjectMovementInfo.velocity)
+  return _internal_velocity();
+}
+inline void GameObjectMovementInfo::unsafe_arena_set_allocated_velocity(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.velocity_);
+  }
+  _impl_.velocity_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:S2C_Protocol.GameObjectMovementInfo.velocity)
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::release_velocity() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::S2C_Protocol::XYZ* released = _impl_.velocity_;
+  _impl_.velocity_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::unsafe_arena_release_velocity() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:S2C_Protocol.GameObjectMovementInfo.velocity)
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::S2C_Protocol::XYZ* temp = _impl_.velocity_;
+  _impl_.velocity_ = nullptr;
+  return temp;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::_internal_mutable_velocity() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.velocity_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::S2C_Protocol::XYZ>(GetArena());
+    _impl_.velocity_ = reinterpret_cast<::S2C_Protocol::XYZ*>(p);
+  }
+  return _impl_.velocity_;
+}
+inline ::S2C_Protocol::XYZ* GameObjectMovementInfo::mutable_velocity() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000004u;
+  ::S2C_Protocol::XYZ* _msg = _internal_mutable_velocity();
+  // @@protoc_insertion_point(field_mutable:S2C_Protocol.GameObjectMovementInfo.velocity)
+  return _msg;
+}
+inline void GameObjectMovementInfo::set_allocated_velocity(::S2C_Protocol::XYZ* value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete (_impl_.velocity_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = (value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+
+  _impl_.velocity_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
+  // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.GameObjectMovementInfo.velocity)
 }
 
 #ifdef __GNUC__

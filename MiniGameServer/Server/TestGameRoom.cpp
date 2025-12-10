@@ -103,6 +103,8 @@ void TestGameRoom::SendGameState(int32_t playerIdx) {
 	playerSessionRef->Send(sendBuffer);
 }
 
+
+
 shared_ptr<TestGameBullet> TestGameRoom::MakeTestGameBullet(float x, float y, float z) {
 	shared_ptr<TestGameBullet> bulletRef = TestGameBullet::NewTestGameBullet(x, y, z);
 	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
@@ -119,6 +121,19 @@ void TestGameRoom::MakeTestGameBulletAndBroadcast(float x, float y, float z) {
 
 void TestGameRoom::Phase1() {
 	PostEventAfter(60000, &TestGameRoom::CountingPhase);
+}
+
+void TestGameRoom::ResponseCRState(int32_t playerIdx) {
+	if (playerIdx > (_quota - 1) or playerIdx < 0)
+		return;
+
+	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return;
+
+	S2C_Protocol::S_TestGameState pkt = MakeSTestGameState();
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	playerSessionRef->Send(sendBuffer);
 }
 
 void TestGameRoom::CountingPhase() {
