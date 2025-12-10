@@ -1,10 +1,11 @@
 #include "pch.h"
-#include "TestGameRoom.h"
+#include "RaceRoom.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
 #include "TestGameBullet.h"
+#include "RacePlayer.h"
 
-void TestGameRoom::Init(vector<WatingPlayerData> pdv) {
+void RaceRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
 	cout << "TestGame 룸 생성" << endl;
 
@@ -23,7 +24,7 @@ void TestGameRoom::Init(vector<WatingPlayerData> pdv) {
 
 	if (ready) {
 		//1초 후, (Ping이 1초가 넘는것은, 이상하다.) 모든 패킷으로부터 응답을 받았다면 시작
-		PostEventAfter(1000, &TestGameRoom::Init2, move(pdv));
+		PostEventAfter(1000, &RaceRoom::Init2, move(pdv));
 	}
 	else {
 		//유효하지 않은 세션이 있었을 경우, 모두 대기열로 돌려보냄.
@@ -33,7 +34,7 @@ void TestGameRoom::Init(vector<WatingPlayerData> pdv) {
 	}
 }
 
-void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
+void RaceRoom::Init2(vector<WatingPlayerData> pdv) {
 	cout << "Init2" << endl;
 
 	bool canStart = true;
@@ -64,7 +65,7 @@ void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 			shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
 			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty), _playerIds);
 			if (!PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
-				playerSessionRef->SetJoinedRoom(static_pointer_cast<TestGameRoom>(shared_from_this()));
+				playerSessionRef->SetJoinedRoom(static_pointer_cast<RaceRoom>(shared_from_this()));
 				playerSessionRef->SetRoomIdx(i);
 				shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 				playerSessionRef->Send(sendBuffer);
@@ -78,52 +79,25 @@ void TestGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	}
 }
 
-void TestGameRoom::Start() {
+void RaceRoom::Start() {
 	if (_state != GameState::BeforeStart)
 		return;
 	_state = GameState::OnGoing;
 	cout << "스타트 함수 실행" << endl;
 
+	for (int i = 0; i < _quota; i++) {
+		shared_ptr<RacePlayer> runnerRef = { objectPool<RacePlayer>::alloc(-3 + 2 * i, 0, 0), objectPool<RacePlayer>::dealloc };
+		runnerRef->SetObjectId(GenerateUniqueGameObjectId());
+		RegisterGameObject(runnerRef);
+	}
+
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
-	PostEventAfter(3000, &TestGameRoom::Phase1);
+	PostEventAfter(3000, &RaceRoom::Countdown);
 }
 
-void TestGameRoom::SendGameState(int32_t playerIdx) {
-	if (playerIdx > (_quota - 1))
-		return;
-
-	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
-	if (playerSessionRef == nullptr)
-		return;
-
-	S2C_Protocol::S_TestGameState pkt = MakeSTestGameState();
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-	playerSessionRef->Send(sendBuffer);
-}
-
-
-
-shared_ptr<TestGameBullet> TestGameRoom::MakeTestGameBullet(float x, float y, float z) {
-	shared_ptr<TestGameBullet> bulletRef = TestGameBullet::NewTestGameBullet(x, y, z);
-	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
-	RegisterGameObject(bulletRef);
-	return bulletRef;
-}
-
-void TestGameRoom::MakeTestGameBulletAndBroadcast(float x, float y, float z) {
-	shared_ptr<TestGameBullet> TGBRef = MakeTestGameBullet(x, y, z);
-	uint64_t now = GetTickCount64();
-	cout << now << endl;
-	BroadCastSpawn(TGBRef);
-}
-
-void TestGameRoom::Phase1() {
-	PostEventAfter(60000, &TestGameRoom::CountingPhase);
-}
-
-void TestGameRoom::ResponseCRState(int32_t playerIdx) {
+void RaceRoom::SendGameState(int32_t playerIdx) {
 	if (playerIdx > (_quota - 1) or playerIdx < 0)
 		return;
 
@@ -131,19 +105,34 @@ void TestGameRoom::ResponseCRState(int32_t playerIdx) {
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
 
-	S2C_Protocol::S_TestGameState pkt = MakeSTestGameState();
+	S2C_Protocol::S_R_ResponseState pkt = MakeSRResponseState(playerIdx);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	playerSessionRef->Send(sendBuffer);
+	_loadedPlayers[playerIdx] = true;
 }
 
-void TestGameRoom::CountingPhase() {
+void RaceRoom::Countdown() {
+	_isUpdateCall = true;
+	PostEventAfter(3000, &RaceRoom::RaceStart);
+}
+
+void RaceRoom::BroadCastCountdownPacket(int32_t count) {
+
+}
+
+void RaceRoom::RaceStart() {
+
+	PostEventAfter(60000, &RaceRoom::CountingPhase);
+}
+
+void RaceRoom::CountingPhase() {
 	cout << "Calculating" << endl;
 	_state = GameState::Counting;
 	_isUpdateCall = false;
 	CalculateGameResult();
 }
 
-void TestGameRoom::CalculateGameResult() {
+void RaceRoom::CalculateGameResult() {
 	for (int i = 0; i < _quota; i++) {
 		auto playerSessionRef = _playerWRefs[i].lock();
 		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
@@ -159,22 +148,22 @@ void TestGameRoom::CalculateGameResult() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 
-	PostEvent(&TestGameRoom::EndPhase);
+	PostEvent(&RaceRoom::EndPhase);
 }
 
-void TestGameRoom::UpdateGameResultToDB() {
-
-}
-
-void TestGameRoom::UpdateRecords() {
+void RaceRoom::UpdateGameResultToDB() {
 
 }
 
-void TestGameRoom::UpdateElos() {
+void RaceRoom::UpdateRecords() {
 
 }
 
-void TestGameRoom::EndPhase() {
+void RaceRoom::UpdateElos() {
+
+}
+
+void RaceRoom::EndPhase() {
 	_vecGameObjects.clear();
 	_hmGameObjects.clear();
 	_playerIds.clear();
@@ -184,19 +173,24 @@ void TestGameRoom::EndPhase() {
 	_state = GameState::EndGame;
 }
 
-S2C_Protocol::S_TestGameState TestGameRoom::MakeSTestGameState() {
-	S2C_Protocol::S_TestGameState pkt;
+S2C_Protocol::S_R_ResponseState RaceRoom::MakeSRResponseState(int32_t playerIdx) {
+	S2C_Protocol::S_R_ResponseState pkt;
+	pkt.set_playerid(playerIdx);
 	for (auto& goRef : _vecGameObjects) {
-		goRef->SerializeObject(pkt.add_objects());
+		goRef->SerializeObject();
 	}
 	return pkt;
 }
 
-void TestGameRoom::ReturnToPool() {
-	objectPool<TestGameRoom>::dealloc(this);
+void RaceRoom::ReturnToPool() {
+	objectPool<RaceRoom>::dealloc(this);
 }
 
-void TestGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
+void RaceRoom::Update() {
+
+}
+
+void RaceRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
 	cout << "업데이트 프로그레스 바" << endl;
 	cout << "_quota : " << _quota << endl;
 	if (progressRate == 100) {

@@ -7,7 +7,7 @@ public class Define {
         Lobby,
         TestLoadingScene,
         LoadingScene1,
-        TestGame,
+        Race,
         PingPong,
         Mole,
         GameResult,
@@ -36,7 +36,7 @@ public class Define {
 
     public enum GameType {
         None,
-        TestMatch,
+        Race,
         PingPong,
         Mole,
         Undefined,
@@ -46,7 +46,7 @@ public class Define {
     public static GameType IntToGameType(int type) {
         switch (type) {
             case 0: return GameType.None;
-            case 1: return GameType.TestMatch;
+            case 1: return GameType.Race;
             case 2: return GameType.PingPong;
             case 3: return GameType.Mole;
             case 5: return GameType.InProcess;
@@ -56,7 +56,7 @@ public class Define {
 
     public static Scene IntToGameScene(int gameId) {
         switch (gameId) {
-            case 1: return Scene.TestGame;
+            case 1: return Scene.Race;
             case 2: return Scene.PingPong;
             case 3: return Scene.Mole;
             default: return Scene.Undefined;

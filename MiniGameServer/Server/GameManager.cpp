@@ -2,7 +2,7 @@
 #include "GameManager.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
-#include "TestGameRoom.h"
+#include "RaceRoom.h"
 
 int32_t GameManager::GetPublicRecord() {
 	lock_guard<mutex> lock(_recordLock);

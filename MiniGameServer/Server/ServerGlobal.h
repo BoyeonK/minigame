@@ -4,7 +4,7 @@
 #include "DBClientImpl.h"
 #include "S2CServerServiceImpl.h"
 #include "GameManager.h"
-#include "TestGameManager.h"
+#include "RaceManager.h"
 #include "PingPongManager.h"
 #include "MoleManager.h"
 
@@ -12,7 +12,7 @@ extern class CryptoManager* GCryptoManager;
 extern class DBClientImpl* DBManager;
 extern class shared_ptr<S2CServerServiceImpl> GServerService;
 extern map<int32_t, shared_ptr<GameManager>> GGameManagers;
-extern TestGameManager* pTestGameManager;
+extern RaceManager* pTestGameManager;
 extern PingPongManager* pPingPongManager;
 extern MoleManager* pMoleManager;
 

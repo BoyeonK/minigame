@@ -2,7 +2,7 @@
 #include "ServerGlobal.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
-#include "TestGameManager.h"
+#include "RaceManager.h"
 #include "PingPongManager.h"
 #include "MoleManager.h"
 
@@ -10,7 +10,7 @@ CryptoManager* GCryptoManager = nullptr;
 DBClientImpl* DBManager = nullptr;
 shared_ptr<S2CServerServiceImpl> GServerService = nullptr;
 map<int32_t, shared_ptr<GameManager>> GGameManagers;
-TestGameManager* pTestGameManager;
+RaceManager* pTestGameManager;
 PingPongManager* pPingPongManager;
 MoleManager* pMoleManager;
 
@@ -21,8 +21,8 @@ public:
 	ServerGlobal() {
 		GCryptoManager = new CryptoManager();
 
-		shared_ptr<TestGameManager> TMManager = make_shared<TestGameManager>();
-		GGameManagers[int(GameType::TestGame)] = TMManager;
+		shared_ptr<RaceManager> TMManager = make_shared<RaceManager>();
+		GGameManagers[int(GameType::Race)] = TMManager;
 		pTestGameManager = TMManager.get();
 
 		shared_ptr<PingPongManager> PPManager = make_shared<PingPongManager>();

@@ -12,14 +12,10 @@ message S_TestGameState {
 message S_TestGameResult {
     
 }
-message C_R_RequestState {
-    int32 playerId = 1;
-}
 
 message S_R_ResponseState {
-    repeated UnityGameObject objects = 1;
-    repeated string playerIds = 2;
-    int32 playerId = 3;
+    int32 playerId = 1;
+    repeated UnityGameObject objects = 2;
 }
 
 message S_R_RequestMovementAndCollision {
@@ -32,6 +28,14 @@ message C_R_ResponseMovementAndCollision {
 }
 
 message S_R_UpdateMovementAndCollision {
-    repeated GameObjectMovementInfo movementInfos = 1;
-    XYZ collisionNestedForce = 2;
+    XYZ collisionNestedForce = 1;
+    repeated GameObjectMovementInfo movementInfos = 2;
+}
+
+message S_R_SetReadyCommand {
+    int32 countdown = 1;
+}
+
+message S_R_StartCommand {
+
 }

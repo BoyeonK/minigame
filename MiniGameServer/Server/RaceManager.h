@@ -1,9 +1,9 @@
 #pragma once
 #include "GameManager.h"
 
-class TestGameManager : public GameManager {
+class RaceManager : public GameManager {
 public:
-	TestGameManager() : _ty(GameType::TestGame), _quota(1), _matchQueue(_ty, _quota) {
+	RaceManager() : _ty(GameType::Race), _quota(1), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
@@ -21,7 +21,7 @@ public:
 	void StartGame() {}
 
 private:
-	GameType _ty = GameType::TestGame;
+	GameType _ty = GameType::Race;
 	int32_t _quota;
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;

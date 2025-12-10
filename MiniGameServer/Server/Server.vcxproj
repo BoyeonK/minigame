@@ -181,6 +181,7 @@
     <ClInclude Include="PingPongGameBullet.h" />
     <ClInclude Include="PingPongGameRoom.h" />
     <ClInclude Include="PingPongManager.h" />
+    <ClInclude Include="RacePlayer.h" />
     <ClInclude Include="S2C_Protocol_Common.pb.h" />
     <ClInclude Include="S2C_Protocol_Danmaku.pb.h" />
     <ClInclude Include="S2C_Protocol_Ingame.pb.h" />
@@ -201,8 +202,8 @@
     <ClInclude Include="S2CPacketMaker.h" />
     <ClInclude Include="S2CServerServiceImpl.h" />
     <ClInclude Include="TestGameBullet.h" />
-    <ClInclude Include="TestGameManager.h" />
-    <ClInclude Include="TestGameRoom.h" />
+    <ClInclude Include="RaceManager.h" />
+    <ClInclude Include="RaceRoom.h" />
     <ClInclude Include="UnityGameObject.h" />
     <ClInclude Include="WatingPlayerData.h" />
     <ClInclude Include="XYZ.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="PingPongGameBullet.cpp" />
     <ClCompile Include="PingPongGameRoom.cpp" />
     <ClCompile Include="PingPongManager.cpp" />
+    <ClCompile Include="RacePlayer.cpp" />
     <ClCompile Include="S2C_Protocol_Common.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -269,8 +271,8 @@
     <ClCompile Include="S2CPacketMaker.cpp" />
     <ClCompile Include="S2CServerServiceImpl.cpp" />
     <ClCompile Include="TestGameBullet.cpp" />
-    <ClCompile Include="TestGameManager.cpp" />
-    <ClCompile Include="TestGameRoom.cpp" />
+    <ClCompile Include="RaceManager.cpp" />
+    <ClCompile Include="RaceRoom.cpp" />
     <ClCompile Include="UnityGameObject.cpp" />
     <ClCompile Include="WatingPlayerData.cpp" />
     <ClCompile Include="XYZ.cpp" />

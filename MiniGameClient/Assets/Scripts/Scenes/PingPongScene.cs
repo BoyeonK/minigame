@@ -21,7 +21,7 @@ public class PingPongScene : BaseScene {
         base.Init();
 
         //SceneManager에 비 동기적으로 로딩하는데 사용된 자원들 초기화
-        SceneType = Scene.TestGame;
+        SceneType = Scene.PingPong;
         Managers.Scene.ResetLoadSceneOp();
         
         //Mouse위치를 추적해줄 RaycastPlane을 참조.

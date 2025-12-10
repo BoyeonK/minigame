@@ -28,12 +28,6 @@
     <Filter Include="S2C\GameObjects\Common">
       <UniqueIdentifier>{7bb8e11b-3383-4b95-a006-606b6c52a7d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="S2C\GameObjects\TestGame">
-      <UniqueIdentifier>{0621b292-4c2c-4906-945a-70d323295b17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="S2C\GameObjects\TestGame\UnityGameObjects">
-      <UniqueIdentifier>{d09a1666-85af-424b-9c51-0caf4daacc0f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="S2C\GameObjects\PingPong">
       <UniqueIdentifier>{7dc1381c-7dd6-4c78-a877-50464f5fc6df}</UniqueIdentifier>
     </Filter>
@@ -45,6 +39,12 @@
     </Filter>
     <Filter Include="S2C\GameObjects\Mole\UnityGameObjects">
       <UniqueIdentifier>{cca82558-8260-407d-9b70-95b278884672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="S2C\GameObjects\Race">
+      <UniqueIdentifier>{0621b292-4c2c-4906-945a-70d323295b17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="S2C\GameObjects\Race\UnityGameObjects">
+      <UniqueIdentifier>{d09a1666-85af-424b-9c51-0caf4daacc0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,13 +115,13 @@
       <Filter>S2C\GameObjects\Common</Filter>
     </ClInclude>
     <ClInclude Include="TestGameBullet.h">
-      <Filter>S2C\GameObjects\TestGame\UnityGameObjects</Filter>
+      <Filter>S2C\GameObjects\Race\UnityGameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="TestGameRoom.h">
-      <Filter>S2C\GameObjects\TestGame</Filter>
+    <ClInclude Include="RaceRoom.h">
+      <Filter>S2C\GameObjects\Race</Filter>
     </ClInclude>
-    <ClInclude Include="TestGameManager.h">
-      <Filter>S2C\GameObjects\TestGame</Filter>
+    <ClInclude Include="RaceManager.h">
+      <Filter>S2C\GameObjects\Race</Filter>
     </ClInclude>
     <ClInclude Include="PingPongManager.h">
       <Filter>S2C\GameObjects\PingPong</Filter>
@@ -152,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="MoleRoom.h">
       <Filter>S2C\GameObjects\Mole</Filter>
+    </ClInclude>
+    <ClInclude Include="RacePlayer.h">
+      <Filter>S2C\GameObjects\Race\UnityGameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -225,13 +228,13 @@
       <Filter>S2C\GameObjects\Common</Filter>
     </ClCompile>
     <ClCompile Include="TestGameBullet.cpp">
-      <Filter>S2C\GameObjects\TestGame\UnityGameObjects</Filter>
+      <Filter>S2C\GameObjects\Race\UnityGameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="TestGameRoom.cpp">
-      <Filter>S2C\GameObjects\TestGame</Filter>
+    <ClCompile Include="RaceRoom.cpp">
+      <Filter>S2C\GameObjects\Race</Filter>
     </ClCompile>
-    <ClCompile Include="TestGameManager.cpp">
-      <Filter>S2C\GameObjects\TestGame</Filter>
+    <ClCompile Include="RaceManager.cpp">
+      <Filter>S2C\GameObjects\Race</Filter>
     </ClCompile>
     <ClCompile Include="PingPongManager.cpp">
       <Filter>S2C\GameObjects\PingPong</Filter>
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="MoleManager.cpp">
       <Filter>S2C\GameObjects\Mole</Filter>
+    </ClCompile>
+    <ClCompile Include="RacePlayer.cpp">
+      <Filter>S2C\GameObjects\Race\UnityGameObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

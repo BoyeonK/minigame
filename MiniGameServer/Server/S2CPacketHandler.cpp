@@ -201,7 +201,7 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	GameType expected = GameType::None;
 	GameType desired = IntToGameType(pkt.gameid());
 	if (desired == GameType::Undefined) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"구라 패킷 보내지마라");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"구라 패킷");
 	}
 
 	WatingPlayerData pd;
@@ -384,4 +384,8 @@ bool Handle_C_M_HitSlot(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_M_HitS
 
 	roomRef->PostEvent(&MoleRoom::HitSlot, playerSessionRef->GetRoomIdx(), pkt.slotidx());
 	return true;
+}
+
+bool Handle_C_R_ResponseMovementAndCollision(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_R_ResponseMovementAndCollision& pkt) {
+	return false;
 }

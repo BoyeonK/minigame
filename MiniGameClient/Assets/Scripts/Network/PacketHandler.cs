@@ -302,8 +302,7 @@ class PacketHandler {
 		S_EndGame recvPkt = packet as S_EndGame;
 		GameType gameType = IntToGameType(recvPkt.GameId);
 		switch (gameType) {
-			case (GameType.TestMatch):
-				Managers.ExecuteAtMainThread(() => { Managers.Network.ResponseTestGameEnd(); });
+			case (GameType.Race):
 				break;
 			default:
 				break;

@@ -2,7 +2,7 @@
 
 enum class GameType {
 	None,
-	TestGame,
+	Race,
 	PingPong,
 	Mole,
 	Undefined,
@@ -12,6 +12,8 @@ GameType IntToGameType(int32_t num);
 
 enum class GameObjectType {
 	undefined,
+	RacePlayer,
+	RaceOpponent,
 	TestGameBullet,
 	MyPlayerBar,
 	EnemyPlayerBar,

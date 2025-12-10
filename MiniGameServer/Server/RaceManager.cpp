@@ -1,25 +1,25 @@
 #include "pch.h"
-#include "TestGameManager.h"
+#include "RaceManager.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
-#include "TestGameRoom.h"
+#include "RaceRoom.h"
 
-void TestGameManager::Push(WatingPlayerData pd) {
+void RaceManager::Push(WatingPlayerData pd) {
 	_matchQueue.Push(move(pd));
 }
 
-void TestGameManager::Push(vector<WatingPlayerData> pdv) {
+void RaceManager::Push(vector<WatingPlayerData> pdv) {
 	_matchQueue.Push(move(pdv));
 }
 
-void TestGameManager::RenewMatchQueue() {
+void RaceManager::RenewMatchQueue() {
 	if (::GetTickCount64() - _lastRenewMatchQueueTick > 3000) {
 		_lastRenewMatchQueueTick = ::GetTickCount64();
 		_matchQueue.FlushTempQueueAndSort();
 	}
 }
 
-void TestGameManager::MatchMake() {
+void RaceManager::MatchMake() {
 	vector<vector<WatingPlayerData>> pdvv = _matchQueue.SearchMatchGroups();
 	for (auto& pdv : pdvv) {
 		bool isReady = true;
@@ -30,7 +30,7 @@ void TestGameManager::MatchMake() {
 				isReady = false;
 				_excluded[i] = true;
 			}
-			else if (playerSessionRef->GetMatchingState() != GameType::TestGame) {
+			else if (playerSessionRef->GetMatchingState() != GameType::Race) {
 				isReady = false;
 				_excluded[i] = true;
 
@@ -53,22 +53,22 @@ void TestGameManager::MatchMake() {
 	}
 }
 
-void TestGameManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
-	shared_ptr<TestGameRoom> newRoomRef = { objectPool<TestGameRoom>::alloc(), objectPool<TestGameRoom>::dealloc };
+void RaceManager::MakeRoom(vector<WatingPlayerData>&& pdv) {
+	shared_ptr<RaceRoom> newRoomRef = { objectPool<RaceRoom>::alloc(), objectPool<RaceRoom>::dealloc };
 	newRoomRef->SetRoomId(_nxtRoomId.fetch_add(1));
 	AddRoom(newRoomRef);
-	newRoomRef->PostEvent(&TestGameRoom::Init, move(pdv));
+	newRoomRef->PostEvent(&RaceRoom::Init, move(pdv));
 }
 
-bool TestGameManager::RenewPublicRecordFromDB() {
+bool RaceManager::RenewPublicRecordFromDB() {
 	return DBManager->S2D_PublicRecord(int(_ty));
 }
 
-bool TestGameManager::CompareAndRenewPublicRecord(int32_t dbid, int32_t score) {
+bool RaceManager::CompareAndRenewPublicRecord(int32_t dbid, int32_t score) {
 	return false;
 }
 
-void TestGameManager::Update() {
+void RaceManager::Update() {
 	uint64_t now = ::GetTickCount64();
 	if (now - _lastUpdateRoomTick < _updateTickPeriod)
 		return;

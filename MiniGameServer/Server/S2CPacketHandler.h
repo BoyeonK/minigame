@@ -46,6 +46,12 @@ enum : uint16_t {
 
 	PKT_S_TESTGAME_STATE = 100,
 	PKT_S_TESTGAME_RESULT = 101,
+	PKT_S_R_RESPONSE_STATE = 102,
+	PKT_S_R_REQUEST_MOVEMENT_AND_COLLISION = 103,
+	PKT_C_R_RESPONSE_MOVEMENT_AND_COLLISION = 104,
+	PKT_S_R_UPDATE_MOVEMENT_AND_COLLISION = 105,
+	PKT_S_R_SET_READY_COMMAND = 106,
+	PKT_S_R_START_COMMAND = 107,
 
 	PKT_S_P_STATE = 200,
 	PKT_S_P_RESULT = 201,
@@ -86,6 +92,9 @@ bool Handle_C_RequestGameState(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 bool Handle_C_RequestMyRecords(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestMyRecords& pkt);
 bool Handle_C_RequestPublicRecords(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_RequestPublicRecords& pkt);
 
+	//Race
+bool Handle_C_R_ResponseMovementAndCollision(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_R_ResponseMovementAndCollision& pkt);
+
 	//PingPong
 bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponsePlayerBarPosition& pkt);
 bool Handle_C_P_CollisionBar(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_CollisionBar& pkt);
@@ -115,6 +124,9 @@ public:
 		GPacketHandler[PKT_C_REQUEST_MY_RECORDS] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_RequestMyRecords>(Handle_C_RequestMyRecords, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_REQUEST_PUBLIC_RECORDS] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_RequestPublicRecords>(Handle_C_RequestPublicRecords, sessionRef, buffer, len); };
 
+			//Race
+		GPacketHandler[PKT_C_R_RESPONSE_MOVEMENT_AND_COLLISION] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_R_ResponseMovementAndCollision>(Handle_C_R_ResponseMovementAndCollision, sessionRef, buffer, len); };
+
 			//PingPong
 		GPacketHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_P_COLLISION_BAR] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_CollisionBar>(Handle_C_P_CollisionBar, sessionRef, buffer, len); };
@@ -138,6 +150,9 @@ public:
 		PlaintextHandler[PKT_C_REQUEST_MY_RECORDS] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_RequestMyRecords>(Handle_C_RequestMyRecords, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_REQUEST_PUBLIC_RECORDS] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_RequestPublicRecords>(Handle_C_RequestPublicRecords, sessionRef, plaintext); };
 
+			//Race
+		PlaintextHandler[PKT_C_R_RESPONSE_MOVEMENT_AND_COLLISION] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_R_ResponseMovementAndCollision>(Handle_C_R_ResponseMovementAndCollision, sessionRef, plaintext); };
+
 			//PingPong
 		PlaintextHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_P_COLLISION_BAR] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_CollisionBar>(Handle_C_P_CollisionBar, sessionRef, plaintext); };
@@ -145,7 +160,7 @@ public:
 		PlaintextHandler[PKT_C_P_RESPONSE_KEEP_ALIVE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponseKeepAlive>(Handle_C_P_ResponseKeepAlive, sessionRef, plaintext); };
 	
 			//Mole
-		PlaintextHandler[PKT_C_M_HIT_SLOT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_M_HitSlot>(Handle_C_M_HitSlot, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_M_HIT_SLOT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_M_HitSlot>(Handle_C_M_HitSlot, sessionRef, plaintext); };	
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
@@ -209,10 +224,20 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_EndGame& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_END_GAME, AESKey); }
 #pragma endregion
 
-#pragma region TestGame
+#pragma region Race
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseState& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_STATE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_RequestMovementAndCollision& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_REQUEST_MOVEMENT_AND_COLLISION); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_UpdateMovementAndCollision& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_UPDATE_MOVEMENT_AND_COLLISION); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_SetReadyCommand& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_SET_READY_COMMAND); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_StartCommand& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_START_COMMAND); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_STATE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_RequestMovementAndCollision& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_REQUEST_MOVEMENT_AND_COLLISION, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_UpdateMovementAndCollision& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_UPDATE_MOVEMENT_AND_COLLISION, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_SetReadyCommand& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_SET_READY_COMMAND, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_StartCommand& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_START_COMMAND, AESKey); }
 #pragma endregion
 
 #pragma region PingPong

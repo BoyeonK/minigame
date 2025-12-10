@@ -603,14 +603,7 @@ public class NetworkManager {
 			Managers.Object.CreateObject(uObj);
 		}
     }
-
-    public void ResponseTestGameEnd() {
-        Match.ResetMatchState();
-        OnTestGameEndAct?.Invoke();
-    }
     #endregion
-
-   
 
     public void Update() {
 
@@ -620,8 +613,6 @@ public class NetworkManager {
     //FM대로하면, private로 선언하고 구독 및 구취하는 함수를 public으로 열어야 함.
     public Action OnConnectedAct;
 	public Action OnConnectedFailedAct;
-	public Action OnTestGameEndAct;
-    public Action OnPingPongEndAct;
 #endregion
 
 }
