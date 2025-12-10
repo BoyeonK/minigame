@@ -177,7 +177,7 @@ S2C_Protocol::S_R_ResponseState RaceRoom::MakeSRResponseState(int32_t playerIdx)
 	S2C_Protocol::S_R_ResponseState pkt;
 	pkt.set_playerid(playerIdx);
 	for (auto& goRef : _vecGameObjects) {
-		goRef->SerializeObject();
+		goRef->SerializeObject(pkt.add_objects());
 	}
 	return pkt;
 }

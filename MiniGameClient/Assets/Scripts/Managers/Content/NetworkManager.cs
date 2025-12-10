@@ -585,6 +585,7 @@ public class NetworkManager {
             if (scene is RaceScene raceScene) {
                 raceScene.OffTheTempCam();
                 foreach (UnityGameObject obj in serializedObjs) {
+                    Debug.Log("¶ì¿¡À×");
                     Managers.Object.CreateObject(obj);
                 }
             }

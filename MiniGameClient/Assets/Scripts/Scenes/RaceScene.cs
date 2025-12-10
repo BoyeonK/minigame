@@ -9,7 +9,7 @@ public class RaceScene : BaseScene {
         SceneType = Scene.Race;
         Managers.Scene.ResetLoadSceneOp();
         Debug.Log("RaceScene");
-        GameObject _tempCam = GameObject.Find("TempCamera");
+        _tempCam = GameObject.Find("TempCamera");
         Managers.Network.TryRequestGameState((int)GameType.Race);
     }
 
