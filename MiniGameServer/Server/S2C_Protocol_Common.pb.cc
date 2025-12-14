@@ -86,7 +86,8 @@ inline constexpr GameObjectMovementInfo::Impl_::Impl_(
         position_{nullptr},
         front_{nullptr},
         velocity_{nullptr},
-        objectid_{0} {}
+        objectid_{0},
+        state_{0} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR GameObjectMovementInfo::GameObjectMovementInfo(::_pbi::ConstantInitialized)
@@ -151,17 +152,19 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::GameObjectMovementInfo, _impl_.position_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::GameObjectMovementInfo, _impl_.front_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::GameObjectMovementInfo, _impl_.velocity_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::GameObjectMovementInfo, _impl_.state_),
         ~0u,
         0,
         1,
         2,
+        ~0u,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::S2C_Protocol::XYZ)},
         {11, 22, -1, sizeof(::S2C_Protocol::UnityGameObject)},
-        {25, 37, -1, sizeof(::S2C_Protocol::GameObjectMovementInfo)},
+        {25, 38, -1, sizeof(::S2C_Protocol::GameObjectMovementInfo)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_XYZ_default_instance_._instance,
@@ -174,56 +177,56 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto[] ABSL_ATTR
     "l\"&\n\003XYZ\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\t\n\001z\030\003 \001("
     "\002\"\\\n\017UnityGameObject\022\020\n\010objectId\030\001 \001(\005\022\022"
     "\n\nobjectType\030\002 \001(\005\022#\n\010position\030\003 \001(\0132\021.S"
-    "2C_Protocol.XYZ\"\226\001\n\026GameObjectMovementIn"
+    "2C_Protocol.XYZ\"\245\001\n\026GameObjectMovementIn"
     "fo\022\020\n\010objectId\030\001 \001(\005\022#\n\010position\030\002 \001(\0132\021"
     ".S2C_Protocol.XYZ\022 \n\005front\030\003 \001(\0132\021.S2C_P"
     "rotocol.XYZ\022#\n\010velocity\030\004 \001(\0132\021.S2C_Prot"
-    "ocol.XYZ*\371\013\n\005MsgId\022\r\n\tS_WELCOME\020\000\022\r\n\tC_W"
-    "ELCOME\020\001\022\026\n\022S_WELCOME_RESPONSE\020\002\022\017\n\013S_EN"
-    "CRYPTED\020\003\022\017\n\013C_ENCRYPTED\020\004\022\013\n\007C_LOGIN\020\005\022"
-    "\013\n\007S_LOGIN\020\006\022\024\n\020C_CREATE_ACCOUNT\020\007\022\024\n\020S_"
-    "CREATE_ACCOUNT\020\010\022\014\n\010C_LOGOUT\020\t\022\014\n\010S_LOGO"
-    "UT\020\n\022\027\n\023C_MATCHMAKE_REQUEST\020\013\022\027\n\023S_MATCH"
-    "MAKE_REQUEST\020\014\022\026\n\022C_MATCHMAKE_CANCEL\020\r\022\026"
-    "\n\022S_MATCHMAKE_CANCEL\020\016\022\032\n\026S_MATCHMAKE_KE"
-    "EP_ALIVE\020\017\022\032\n\026C_MATCHMAKE_KEEP_ALIVE\020\020\022\024"
-    "\n\020S_REDO_MATCHMAKE\020\021\022\031\n\025S_EXCLUDED_FROM_"
-    "MATCH\020\022\022\031\n\025S_MATCHMAKE_COMPLETED\020\023\022!\n\035C_"
-    "GAME_SCENE_LOADING_PROGRESS\020\024\022\022\n\016S_GAME_"
-    "STARTED\020\025\022\030\n\024C_REQUEST_GAME_STATE\020\026\022\034\n\030S"
-    "_DELTA_GAME_OBJECT_SOFT\020\027\022\034\n\030S_DELTA_GAM"
-    "E_OBJECT_HARD\020\030\022\027\n\023S_SPAWN_GAME_OBJECT\020\031"
-    "\022\031\n\025S_DESPAWN_GAME_OBJECT\020\032\022\016\n\nS_END_GAM"
-    "E\020\033\022\030\n\024C_REQUEST_MY_RECORDS\020\034\022\031\n\025S_RESPO"
-    "NSE_MY_RECORDS\020\035\022\034\n\030C_REQUEST_PUBLIC_REC"
-    "ORDS\020\036\022\035\n\031S_RESPONSE_PUBLIC_RECORDS\020\037\022!\n"
-    "\035S_GAME_SCENE_LOADING_PROGRESS\020 \022\024\n\020S_TE"
-    "STGAME_STATE\020d\022\025\n\021S_TESTGAME_RESULT\020e\022\026\n"
-    "\022S_R_RESPONSE_STATE\020f\022&\n\"S_R_REQUEST_MOV"
-    "EMENT_AND_COLLISION\020g\022\'\n#C_R_RESPONSE_MO"
-    "VEMENT_AND_COLLISION\020h\022%\n!S_R_UPDATE_MOV"
-    "EMENT_AND_COLLISION\020i\022\031\n\025S_R_SET_READY_C"
-    "OMMAND\020j\022\025\n\021S_R_START_COMMAND\020k\022\016\n\tS_P_S"
-    "TATE\020\310\001\022\017\n\nS_P_RESULT\020\311\001\022\030\n\023S_P_READY_FO"
-    "R_START\020\312\001\022$\n\037S_P_REQUEST_PLAYER_BAR_POS"
-    "ITION\020\313\001\022%\n C_P_RESPONSE_PLAYER_BAR_POSI"
-    "TION\020\314\001\022#\n\036S_P_CHANGE_PLAYER_BAR_POSITIO"
-    "N\020\315\001\022\017\n\nS_P_BULLET\020\316\001\022\020\n\013S_P_BULLETS\020\317\001\022"
-    "\026\n\021C_P_COLLISION_BAR\020\320\001\022\034\n\027C_P_COLLISION"
-    "_GOAL_LINE\020\321\001\022\025\n\020S_P_RENEW_SCORES\020\322\001\022\023\n\016"
-    "S_P_KEEP_ALIVE\020\323\001\022\034\n\027C_P_RESPONSE_KEEP_A"
-    "LIVE\020\324\001\022\024\n\017S_DANMAKU_STATE\020\254\002\022\025\n\020S_DANMA"
-    "KU_RESULT\020\255\002\022\016\n\tS_M_STATE\020\220\003\022\017\n\nS_M_RESU"
-    "LT\020\221\003\022\027\n\022S_M_SET_SLOT_STATE\020\222\003\022\021\n\014C_M_HI"
-    "T_SLOT\020\223\003\022\032\n\025S_M_RESPONSE_HIT_SLOT\020\224\003\022\025\n"
-    "\020S_M_RENEW_SCORES\020\225\003B\033\252\002\030Google.Protobuf"
-    ".Protocolb\006proto3"
+    "ocol.XYZ\022\r\n\005state\030\005 \001(\005*\371\013\n\005MsgId\022\r\n\tS_W"
+    "ELCOME\020\000\022\r\n\tC_WELCOME\020\001\022\026\n\022S_WELCOME_RES"
+    "PONSE\020\002\022\017\n\013S_ENCRYPTED\020\003\022\017\n\013C_ENCRYPTED\020"
+    "\004\022\013\n\007C_LOGIN\020\005\022\013\n\007S_LOGIN\020\006\022\024\n\020C_CREATE_"
+    "ACCOUNT\020\007\022\024\n\020S_CREATE_ACCOUNT\020\010\022\014\n\010C_LOG"
+    "OUT\020\t\022\014\n\010S_LOGOUT\020\n\022\027\n\023C_MATCHMAKE_REQUE"
+    "ST\020\013\022\027\n\023S_MATCHMAKE_REQUEST\020\014\022\026\n\022C_MATCH"
+    "MAKE_CANCEL\020\r\022\026\n\022S_MATCHMAKE_CANCEL\020\016\022\032\n"
+    "\026S_MATCHMAKE_KEEP_ALIVE\020\017\022\032\n\026C_MATCHMAKE"
+    "_KEEP_ALIVE\020\020\022\024\n\020S_REDO_MATCHMAKE\020\021\022\031\n\025S"
+    "_EXCLUDED_FROM_MATCH\020\022\022\031\n\025S_MATCHMAKE_CO"
+    "MPLETED\020\023\022!\n\035C_GAME_SCENE_LOADING_PROGRE"
+    "SS\020\024\022\022\n\016S_GAME_STARTED\020\025\022\030\n\024C_REQUEST_GA"
+    "ME_STATE\020\026\022\034\n\030S_DELTA_GAME_OBJECT_SOFT\020\027"
+    "\022\034\n\030S_DELTA_GAME_OBJECT_HARD\020\030\022\027\n\023S_SPAW"
+    "N_GAME_OBJECT\020\031\022\031\n\025S_DESPAWN_GAME_OBJECT"
+    "\020\032\022\016\n\nS_END_GAME\020\033\022\030\n\024C_REQUEST_MY_RECOR"
+    "DS\020\034\022\031\n\025S_RESPONSE_MY_RECORDS\020\035\022\034\n\030C_REQ"
+    "UEST_PUBLIC_RECORDS\020\036\022\035\n\031S_RESPONSE_PUBL"
+    "IC_RECORDS\020\037\022!\n\035S_GAME_SCENE_LOADING_PRO"
+    "GRESS\020 \022\024\n\020S_TESTGAME_STATE\020d\022\025\n\021S_TESTG"
+    "AME_RESULT\020e\022\026\n\022S_R_RESPONSE_STATE\020f\022&\n\""
+    "S_R_REQUEST_MOVEMENT_AND_COLLISION\020g\022\'\n#"
+    "C_R_RESPONSE_MOVEMENT_AND_COLLISION\020h\022%\n"
+    "!S_R_UPDATE_MOVEMENT_AND_COLLISION\020i\022\031\n\025"
+    "S_R_SET_READY_COMMAND\020j\022\025\n\021S_R_START_COM"
+    "MAND\020k\022\016\n\tS_P_STATE\020\310\001\022\017\n\nS_P_RESULT\020\311\001\022"
+    "\030\n\023S_P_READY_FOR_START\020\312\001\022$\n\037S_P_REQUEST"
+    "_PLAYER_BAR_POSITION\020\313\001\022%\n C_P_RESPONSE_"
+    "PLAYER_BAR_POSITION\020\314\001\022#\n\036S_P_CHANGE_PLA"
+    "YER_BAR_POSITION\020\315\001\022\017\n\nS_P_BULLET\020\316\001\022\020\n\013"
+    "S_P_BULLETS\020\317\001\022\026\n\021C_P_COLLISION_BAR\020\320\001\022\034"
+    "\n\027C_P_COLLISION_GOAL_LINE\020\321\001\022\025\n\020S_P_RENE"
+    "W_SCORES\020\322\001\022\023\n\016S_P_KEEP_ALIVE\020\323\001\022\034\n\027C_P_"
+    "RESPONSE_KEEP_ALIVE\020\324\001\022\024\n\017S_DANMAKU_STAT"
+    "E\020\254\002\022\025\n\020S_DANMAKU_RESULT\020\255\002\022\016\n\tS_M_STATE"
+    "\020\220\003\022\017\n\nS_M_RESULT\020\221\003\022\027\n\022S_M_SET_SLOT_STA"
+    "TE\020\222\003\022\021\n\014C_M_HIT_SLOT\020\223\003\022\032\n\025S_M_RESPONSE"
+    "_HIT_SLOT\020\224\003\022\025\n\020S_M_RENEW_SCORES\020\225\003B\033\252\002\030"
+    "Google.Protobuf.Protocolb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fCommon_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fCommon_2eproto = {
     false,
     false,
-    1897,
+    1912,
     descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto,
     "S2C_Protocol_Common.proto",
     &descriptor_table_S2C_5fProtocol_5fCommon_2eproto_once,
@@ -870,7 +873,13 @@ GameObjectMovementInfo::GameObjectMovementInfo(
   _impl_.velocity_ = (cached_has_bits & 0x00000004u) ? ::google::protobuf::Message::CopyConstruct<::S2C_Protocol::XYZ>(
                               arena, *from._impl_.velocity_)
                         : nullptr;
-  _impl_.objectid_ = from._impl_.objectid_;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, objectid_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, objectid_),
+           offsetof(Impl_, state_) -
+               offsetof(Impl_, objectid_) +
+               sizeof(Impl_::state_));
 
   // @@protoc_insertion_point(copy_constructor:S2C_Protocol.GameObjectMovementInfo)
 }
@@ -884,9 +893,9 @@ inline void GameObjectMovementInfo::SharedCtor(::_pb::Arena* arena) {
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, position_),
            0,
-           offsetof(Impl_, objectid_) -
+           offsetof(Impl_, state_) -
                offsetof(Impl_, position_) +
-               sizeof(Impl_::objectid_));
+               sizeof(Impl_::state_));
 }
 GameObjectMovementInfo::~GameObjectMovementInfo() {
   // @@protoc_insertion_point(destructor:S2C_Protocol.GameObjectMovementInfo)
@@ -938,15 +947,15 @@ const ::google::protobuf::internal::ClassData* GameObjectMovementInfo::GetClassD
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 3, 0, 2> GameObjectMovementInfo::_table_ = {
+const ::_pbi::TcParseTable<3, 5, 3, 0, 2> GameObjectMovementInfo::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_._has_bits_),
     0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
+    5, 56,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
+    4294967264,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
+    5,  // num_field_entries
     3,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
@@ -956,9 +965,7 @@ const ::_pbi::TcParseTable<2, 4, 3, 0, 2> GameObjectMovementInfo::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::GameObjectMovementInfo>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // .S2C_Protocol.XYZ velocity = 4;
-    {::_pbi::TcParser::FastMtS1,
-     {34, 2, 2, PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.velocity_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // int32 objectId = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(GameObjectMovementInfo, _impl_.objectid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.objectid_)}},
@@ -968,6 +975,14 @@ const ::_pbi::TcParseTable<2, 4, 3, 0, 2> GameObjectMovementInfo::_table_ = {
     // .S2C_Protocol.XYZ front = 3;
     {::_pbi::TcParser::FastMtS1,
      {26, 1, 1, PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.front_)}},
+    // .S2C_Protocol.XYZ velocity = 4;
+    {::_pbi::TcParser::FastMtS1,
+     {34, 2, 2, PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.velocity_)}},
+    // int32 state = 5;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(GameObjectMovementInfo, _impl_.state_), 63>(),
+     {40, 63, 0, PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.state_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
   }}, {{
@@ -983,6 +998,9 @@ const ::_pbi::TcParseTable<2, 4, 3, 0, 2> GameObjectMovementInfo::_table_ = {
     // .S2C_Protocol.XYZ velocity = 4;
     {PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.velocity_), _Internal::kHasBitsOffset + 2, 2,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int32 state = 5;
+    {PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.state_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }}, {{
     {::_pbi::TcParser::GetTable<::S2C_Protocol::XYZ>()},
     {::_pbi::TcParser::GetTable<::S2C_Protocol::XYZ>()},
@@ -1013,7 +1031,9 @@ PROTOBUF_NOINLINE void GameObjectMovementInfo::Clear() {
       _impl_.velocity_->Clear();
     }
   }
-  _impl_.objectid_ = 0;
+  ::memset(&_impl_.objectid_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.state_) -
+      reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.state_));
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -1060,6 +1080,13 @@ PROTOBUF_NOINLINE void GameObjectMovementInfo::Clear() {
             target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
                 4, *this_._impl_.velocity_, this_._impl_.velocity_->GetCachedSize(), target,
                 stream);
+          }
+
+          // int32 state = 5;
+          if (this_._internal_state() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<5>(
+                    stream, this_._internal_state(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1110,6 +1137,11 @@ PROTOBUF_NOINLINE void GameObjectMovementInfo::Clear() {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_objectid());
             }
+            // int32 state = 5;
+            if (this_._internal_state() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_state());
+            }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
@@ -1157,6 +1189,9 @@ void GameObjectMovementInfo::MergeImpl(::google::protobuf::MessageLite& to_msg, 
   if (from._internal_objectid() != 0) {
     _this->_impl_.objectid_ = from._impl_.objectid_;
   }
+  if (from._internal_state() != 0) {
+    _this->_impl_.state_ = from._impl_.state_;
+  }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1174,8 +1209,8 @@ void GameObjectMovementInfo::InternalSwap(GameObjectMovementInfo* PROTOBUF_RESTR
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.objectid_)
-      + sizeof(GameObjectMovementInfo::_impl_.objectid_)
+      PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.state_)
+      + sizeof(GameObjectMovementInfo::_impl_.state_)
       - PROTOBUF_FIELD_OFFSET(GameObjectMovementInfo, _impl_.position_)>(
           reinterpret_cast<char*>(&_impl_.position_),
           reinterpret_cast<char*>(&other->_impl_.position_));

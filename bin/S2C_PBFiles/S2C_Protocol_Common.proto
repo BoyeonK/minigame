@@ -92,4 +92,5 @@ message GameObjectMovementInfo {
     XYZ position = 2;
     XYZ front = 3;
     XYZ velocity = 4;
+    int32 state = 5;
 }

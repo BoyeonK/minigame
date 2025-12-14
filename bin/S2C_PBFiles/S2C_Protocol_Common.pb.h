@@ -746,6 +746,7 @@ class GameObjectMovementInfo final : public ::google::protobuf::Message
     kFrontFieldNumber = 3,
     kVelocityFieldNumber = 4,
     kObjectIdFieldNumber = 1,
+    kStateFieldNumber = 5,
   };
   // .S2C_Protocol.XYZ position = 2;
   bool has_position() const;
@@ -802,12 +803,22 @@ class GameObjectMovementInfo final : public ::google::protobuf::Message
   void _internal_set_objectid(::int32_t value);
 
   public:
+  // int32 state = 5;
+  void clear_state() ;
+  ::int32_t state() const;
+  void set_state(::int32_t value);
+
+  private:
+  ::int32_t _internal_state() const;
+  void _internal_set_state(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:S2C_Protocol.GameObjectMovementInfo)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      2, 4, 3,
+      3, 5, 3,
       0, 2>
       _table_;
 
@@ -831,6 +842,7 @@ class GameObjectMovementInfo final : public ::google::protobuf::Message
     ::S2C_Protocol::XYZ* front_;
     ::S2C_Protocol::XYZ* velocity_;
     ::int32_t objectid_;
+    ::int32_t state_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1375,6 +1387,28 @@ inline void GameObjectMovementInfo::set_allocated_velocity(::S2C_Protocol::XYZ* 
 
   _impl_.velocity_ = reinterpret_cast<::S2C_Protocol::XYZ*>(value);
   // @@protoc_insertion_point(field_set_allocated:S2C_Protocol.GameObjectMovementInfo.velocity)
+}
+
+// int32 state = 5;
+inline void GameObjectMovementInfo::clear_state() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.state_ = 0;
+}
+inline ::int32_t GameObjectMovementInfo::state() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.GameObjectMovementInfo.state)
+  return _internal_state();
+}
+inline void GameObjectMovementInfo::set_state(::int32_t value) {
+  _internal_set_state(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.GameObjectMovementInfo.state)
+}
+inline ::int32_t GameObjectMovementInfo::_internal_state() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.state_;
+}
+inline void GameObjectMovementInfo::_internal_set_state(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.state_ = value;
 }
 
 #ifdef __GNUC__

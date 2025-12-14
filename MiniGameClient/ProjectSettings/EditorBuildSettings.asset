@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadingScenes/TestLoadingScene.unity
     guid: 4795dbecbca21a34685eb94e13ad30a5
   - enabled: 1
-    path: Assets/Scenes/TestGame.unity
+    path: Assets/Scenes/Race.unity
     guid: 3e0f2bf86feb5ea4a90643188485b925
   - enabled: 1
     path: Assets/Scenes/PingPong.unity

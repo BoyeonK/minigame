@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TestPlayerController : GameObjectController {
+public class RacePlayerController : GameObjectController {
     enum State {
         Standing,
         Moving,
@@ -67,7 +67,6 @@ public class TestPlayerController : GameObjectController {
 
     void Update() {
         ProcessMouseMoveOnUpdate();
-        
     }
 
     void FixedUpdate() {
