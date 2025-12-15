@@ -27,7 +27,7 @@ public class TestScene : BaseScene {
     private void Update() {
         if (Time.time - lasttick > 0.1f) {
             lasttick = Time.time;
-            NextTick();
+            //NextTick();
         }
     }
 
@@ -50,6 +50,6 @@ public class TestScene : BaseScene {
 
         Vector3 front = new(x, 0, z);
 
-        _controller.SetMovementInfo(position, front, velocity);
+        //_controller.SetMovementInfo(position, front, velocity);
     }
 }

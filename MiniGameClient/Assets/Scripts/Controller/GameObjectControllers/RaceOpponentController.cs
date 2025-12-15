@@ -27,7 +27,7 @@ public class RaceOpponentController : GameObjectController {
         
     }
 
-    public void SetMovementInfo(Vector3 position, Vector3 front, Vector3 velocity) {
+    public void SetMovementInfo(Vector3 position, Vector3 front, Vector3 velocity, int state) {
         SetPositionVector(position, velocity);
         _body.SetFrontVector(front);
     }

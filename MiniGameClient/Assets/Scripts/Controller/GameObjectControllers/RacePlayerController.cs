@@ -40,6 +40,14 @@ public class RacePlayerController : GameObjectController {
 
     private Vector3 _accelerationDir = new();
 
+    private Vector3 _collisionVector = new();
+    private float _collisionPeriod = 0f;
+    private Vector3 GetCollisionVector() {
+        if (_collisionPeriod > Time.time)
+            return Vector3.zero;
+        return _collisionVector;
+    }
+
     public override void Init() {
         Cursor.lockState = CursorLockMode.Locked;
         SetObjectId((int)Define.ObjectType.RacePlayer);
@@ -170,6 +178,7 @@ public class RacePlayerController : GameObjectController {
             else
                 _rigidBody.AddForce(_accelerationDir * _accelerationRate, ForceMode.Acceleration);
         }
+
         //중력 (수직)
         if (_state == State.Jumping) {
             _rigidBody.AddForce(Vector3.down * _gravityAccel, ForceMode.Acceleration);
@@ -177,6 +186,9 @@ public class RacePlayerController : GameObjectController {
         else {
             _rigidBody.AddForce(Vector3.down * 4f, ForceMode.Acceleration);
         }
+
+        //충돌에 의한 힘
+        _rigidBody.AddForce(GetCollisionVector(), ForceMode.Acceleration);
 
         //수평방향 저항
         Vector3 horizontalVelocity = new(_rigidBody.linearVelocity.x, 0f, _rigidBody.linearVelocity.z);
@@ -197,6 +209,11 @@ public class RacePlayerController : GameObjectController {
             currentVelocity.y = Mathf.Clamp(currentVelocity.y, -MAX_VERTICAL_SPEED, MAX_VERTICAL_SPEED);
             _rigidBody.linearVelocity = currentVelocity;
         }
+    }
+
+    public void ApplyCollisionForceVector(Vector3 nestedForce) {
+        _collisionVector = nestedForce;
+        _collisionPeriod = Time.time + 0.1f;
     }
 
     private void MovePlayerOnUpdate() {
