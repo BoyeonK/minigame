@@ -398,6 +398,6 @@ bool Handle_C_R_ResponseMovementAndCollision(shared_ptr<PBSession> sessionRef, S
 	if (playerSessionRef->GetRoomIdx() >= 2 || playerSessionRef->GetRoomIdx() < 0)
 		return false;
 
-	roomRef->PostEvent(&RaceRoom::HandleResponseMovementAndCollision);
+	roomRef->PostEvent(&RaceRoom::HandleResponseMovementAndCollision, pkt, playerSessionRef->GetRoomIdx());
 	return true;
 }

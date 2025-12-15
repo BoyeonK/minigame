@@ -153,8 +153,16 @@ void RaceRoom::BroadCastMovementAndCollision() {
 	}
 }
 
-void RaceRoom::HandleResponseMovementAndCollision() {
+void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMovementAndCollision& pkt, int32_t playerIdx) {
+	vector<int32_t> collisionObjIds(pkt.objectids_size());
+	for (int i = 0; i < pkt.objectids_size(); i++)
+		collisionObjIds[i] = pkt.objectids().Get(i);
 
+	//FM대로 하면, position이 정당한 움직임인지 변위 체크 필요할듯.
+	_positions[playerIdx].DeserializeFrom(pkt.movementinfo().position());
+	_fronts[playerIdx].DeserializeFrom(pkt.movementinfo().front());
+	_velocitys[playerIdx].DeserializeFrom(pkt.movementinfo().velocity());
+	_states[playerIdx] = pkt.movementinfo().state();
 }
 
 void RaceRoom::RaceStart() {

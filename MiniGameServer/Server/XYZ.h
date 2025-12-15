@@ -7,8 +7,35 @@ struct XYZ {
     float Magnitude() const;
     S2C_Protocol::XYZ Serialize() const;
     void Serialize(S2C_Protocol::XYZ* pXYZ) const;
+    void DeserializeFrom(const S2C_Protocol::XYZ& XYZ);
     void Normalize();
 	XYZ Normalized() const;
+
+	XYZ operator+(const XYZ& other) const {
+		return XYZ(x + other.x, y + other.y, z + other.z);
+	}
+
+	XYZ operator-(const XYZ& other) const {
+		return XYZ(x - other.x, y - other.y, z - other.z);
+	}
+
+	XYZ& operator+=(const XYZ& other) {
+		x += other.x;
+		y += other.y;
+		z += other.z;
+		return *this;
+	}
+
+	XYZ& operator-=(const XYZ& other) {
+		x -= other.x;
+		y -= other.y;
+		z -= other.z;
+		return *this;
+	}
+
+	XYZ operator-() const {
+		return XYZ(-x, -y, -z);
+	}
 
     XYZ operator*(float scalar) const {
         return XYZ(x * scalar, y * scalar, z * scalar);

@@ -28,6 +28,12 @@ void XYZ::Serialize(S2C_Protocol::XYZ* pXYZ) const {
     pXYZ->set_z(z);
 }
 
+void XYZ::DeserializeFrom(const S2C_Protocol::XYZ& XYZ) {
+    x = XYZ.x();
+    y = XYZ.y();
+    z = XYZ.z();
+}
+
 void XYZ::Normalize() {
     float mag = Magnitude();
     if (mag > 0) { // 0으로 나누는 것을 방지

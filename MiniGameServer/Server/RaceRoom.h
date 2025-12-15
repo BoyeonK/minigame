@@ -10,6 +10,7 @@ public:
 		_elos = vector<int32_t>(_quota, 0);
 		_dbids = vector<int32_t>(_quota, 0);
 		_playerIds = vector<string>(_quota);
+		_positions = vector<XYZ>(_quota);
 		_velocitys = vector<XYZ>(_quota);
 		_fronts = vector<XYZ>(_quota);
 		_nestedForces = vector<XYZ>(_quota);
@@ -35,7 +36,7 @@ public:
 	void Countdown();
 	void BroadCastCountdownPacket(int32_t count);
 	void BroadCastMovementAndCollision();
-	void HandleResponseMovementAndCollision();
+	void HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMovementAndCollision& pkt, int32_t playerIdx);
 	void RaceStart();
 	void CountingPhase();
 	void CalculateGameResult();
@@ -54,6 +55,7 @@ private:
 	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<bool> _loadedPlayers;
+	vector<XYZ> _positions;
 	vector<XYZ> _velocitys;
 	vector<XYZ> _fronts;
 	vector<XYZ> _nestedForces;
