@@ -426,8 +426,14 @@ class PacketHandler {
 	}
 
 	public static void S_R_MovementAndCollisionHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_R_MovementAndCollision recvPkt))
+            return;
 
+		Vector3 nestedForce = new Vector3();
+		List<GameObjectMovementInfo> movementInfos = recvPkt.MovementInfos.ToList();
+        Managers.ExecuteAtMainThread(() => {
+			Managers.Network.Race.ResponseMovementAndCollision(nestedForce, movementInfos);
+        });
     }
-
 }
 

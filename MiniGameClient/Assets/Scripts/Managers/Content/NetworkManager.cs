@@ -591,6 +591,17 @@ public class NetworkManager {
             }
         }
 
+        public void ResponseMovementAndCollision(Vector3 nestedForce, List<GameObjectMovementInfo> movementInfos) {
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
+
+            if (scene is RaceScene raceScene) {
+                raceScene.UpdateMovementAndCollision(nestedForce, movementInfos);
+                _netRef.Send(raceScene.SerializeMyMovementStateAndCollision());
+            }
+        }
+
         public bool OnCollisionEnter(int objectIdx) {
             lock (_collisionHashLock) {
                 return _collidingObjectIdxs.Add(objectIdx);

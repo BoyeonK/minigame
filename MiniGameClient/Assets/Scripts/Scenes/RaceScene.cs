@@ -1,3 +1,5 @@
+using Google.Protobuf.Protocol;
+using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
@@ -15,6 +17,15 @@ public class RaceScene : BaseScene {
 
     public void OffTheTempCam() {
         _tempCam.SetActive(false);
+    }
+
+    public void UpdateMovementAndCollision(Vector3 nestedForce, List<GameObjectMovementInfo> movementInfos) {
+
+    }
+
+    public GameObjectMovementInfo SerializeMyMovementStateAndCollision() {
+        GameObjectMovementInfo serializedInfo = new();
+        return serializedInfo;
     }
 
     public override void Clear() {
