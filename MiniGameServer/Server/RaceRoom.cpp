@@ -153,7 +153,7 @@ void RaceRoom::BroadCastMovementAndCollision() {
 	}
 }
 
-void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMovementAndCollision& pkt, int32_t playerIdx) {
+void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMovementAndCollision pkt, int32_t playerIdx) {
 	vector<int32_t> collisionObjIds(pkt.objectids_size());
 	for (int i = 0; i < pkt.objectids_size(); i++)
 		collisionObjIds[i] = pkt.objectids().Get(i);

@@ -36,7 +36,7 @@ public:
 	void Countdown();
 	void BroadCastCountdownPacket(int32_t count);
 	void BroadCastMovementAndCollision();
-	void HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMovementAndCollision& pkt, int32_t playerIdx);
+	void HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMovementAndCollision pkt, int32_t playerIdx);
 	void RaceStart();
 	void CountingPhase();
 	void CalculateGameResult();
