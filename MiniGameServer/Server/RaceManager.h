@@ -3,7 +3,7 @@
 
 class RaceManager : public GameManager {
 public:
-	RaceManager() : _ty(GameType::Race), _quota(1), _matchQueue(_ty, _quota) {
+	RaceManager() : _ty(GameType::Race), _quota(2), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
@@ -26,5 +26,5 @@ private:
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;
 	uint64_t _lastRenewMatchQueueTick = 0;
-	uint64_t _updateTickPeriod = 66;
+	uint64_t _updateTickPeriod = 100;
 };

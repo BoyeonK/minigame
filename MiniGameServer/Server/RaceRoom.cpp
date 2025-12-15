@@ -91,6 +91,9 @@ void RaceRoom::Start() {
 		RegisterGameObject(runnerRef);
 	}
 
+	for (int i = 0; i < _quota; i++)
+		_movementAndCollisions[i].set_playerid(i);
+
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
@@ -113,15 +116,48 @@ void RaceRoom::SendGameState(int32_t playerIdx) {
 
 void RaceRoom::Countdown() {
 	_isUpdateCall = true;
+	BroadCastCountdownPacket(3);
+	PostEventAfter(1000, &RaceRoom::BroadCastCountdownPacket, 2);
+	PostEventAfter(2000, &RaceRoom::BroadCastCountdownPacket, 1);
 	PostEventAfter(3000, &RaceRoom::RaceStart);
 }
 
 void RaceRoom::BroadCastCountdownPacket(int32_t count) {
+	S2C_Protocol::S_R_SetReadyCommand pkt;
+	pkt.set_countdown(count);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+}
+
+void RaceRoom::BroadCastMovementAndCollision() {
+	_tempMACpkt.clear_movementinfos();
+	for (int i = 0; i < _quota; i++) {
+		_tempMACpkt.add_movementinfos()->CopyFrom(_movementInfos[1]);
+	}
+	
+	for (int i = 0; i < _quota; i++) {
+		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+
+		_movementAndCollisions[i].mutable_collisionnestedforce()->CopyFrom(_nestedForces[i].Serialize());
+		_movementAndCollisions[i].mutable_movementinfos()->CopyFrom(_tempMACpkt.movementinfos());
+
+		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_movementAndCollisions[i]);
+		playerSessionRef->Send(sendBuffer);
+	}
+
+	for (int i = 0; i < _quota; i++) {
+		_movementAndCollisions[i].clear_movementinfos();
+		_movementAndCollisions[i].clear_collisionnestedforce();
+	}
+}
+
+void RaceRoom::HandleResponseMovementAndCollision() {
 
 }
 
 void RaceRoom::RaceStart() {
-
 	PostEventAfter(60000, &RaceRoom::CountingPhase);
 }
 
@@ -187,7 +223,11 @@ void RaceRoom::ReturnToPool() {
 }
 
 void RaceRoom::Update() {
+	if (!_isUpdateCall)
+		return;
 
+	_updateCount++;
+	BroadCastMovementAndCollision();
 }
 
 void RaceRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {

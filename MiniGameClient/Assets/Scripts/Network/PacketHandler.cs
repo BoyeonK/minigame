@@ -425,12 +425,9 @@ class PacketHandler {
 		});
 	}
 
-	public static void S_R_RequestMovementAndCollisionHandler(PacketSession session, IMessage packet) {
+	public static void S_R_MovementAndCollisionHandler(PacketSession session, IMessage packet) {
 
     }
 
-    public static void S_R_UpdateMovementAndCollisionHandler(PacketSession session, IMessage packet) {
-
-    }
 }
 

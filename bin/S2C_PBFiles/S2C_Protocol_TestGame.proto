@@ -18,18 +18,15 @@ message S_R_ResponseState {
     repeated UnityGameObject objects = 2;
 }
 
-message S_R_RequestMovementAndCollision {
+message S_R_MovementAndCollision {
     int32 playerId = 1;
+    XYZ collisionNestedForce = 2;
+    repeated GameObjectMovementInfo movementInfos = 3;
 }
 
 message C_R_ResponseMovementAndCollision {
     GameObjectMovementInfo movementInfo = 1;
     repeated int32 objectIds = 2;
-}
-
-message S_R_UpdateMovementAndCollision {
-    XYZ collisionNestedForce = 1;
-    repeated GameObjectMovementInfo movementInfos = 2;
 }
 
 message S_R_SetReadyCommand {

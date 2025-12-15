@@ -29,25 +29,23 @@ namespace Google.Protobuf.Protocol {
             "LgoHb2JqZWN0cxgBIAMoCzIdLlMyQ19Qcm90b2NvbC5Vbml0eUdhbWVPYmpl",
             "Y3QiEgoQU19UZXN0R2FtZVJlc3VsdCJVChFTX1JfUmVzcG9uc2VTdGF0ZRIQ",
             "CghwbGF5ZXJJZBgBIAEoBRIuCgdvYmplY3RzGAIgAygLMh0uUzJDX1Byb3Rv",
-            "Y29sLlVuaXR5R2FtZU9iamVjdCIzCh9TX1JfUmVxdWVzdE1vdmVtZW50QW5k",
-            "Q29sbGlzaW9uEhAKCHBsYXllcklkGAEgASgFInEKIENfUl9SZXNwb25zZU1v",
-            "dmVtZW50QW5kQ29sbGlzaW9uEjoKDG1vdmVtZW50SW5mbxgBIAEoCzIkLlMy",
-            "Q19Qcm90b2NvbC5HYW1lT2JqZWN0TW92ZW1lbnRJbmZvEhEKCW9iamVjdElk",
-            "cxgCIAMoBSKOAQoeU19SX1VwZGF0ZU1vdmVtZW50QW5kQ29sbGlzaW9uEi8K",
-            "FGNvbGxpc2lvbk5lc3RlZEZvcmNlGAEgASgLMhEuUzJDX1Byb3RvY29sLlhZ",
-            "WhI7Cg1tb3ZlbWVudEluZm9zGAIgAygLMiQuUzJDX1Byb3RvY29sLkdhbWVP",
-            "YmplY3RNb3ZlbWVudEluZm8iKAoTU19SX1NldFJlYWR5Q29tbWFuZBIRCglj",
-            "b3VudGRvd24YASABKAUiEgoQU19SX1N0YXJ0Q29tbWFuZEIbqgIYR29vZ2xl",
-            "LlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
+            "Y29sLlVuaXR5R2FtZU9iamVjdCKaAQoYU19SX01vdmVtZW50QW5kQ29sbGlz",
+            "aW9uEhAKCHBsYXllcklkGAEgASgFEi8KFGNvbGxpc2lvbk5lc3RlZEZvcmNl",
+            "GAIgASgLMhEuUzJDX1Byb3RvY29sLlhZWhI7Cg1tb3ZlbWVudEluZm9zGAMg",
+            "AygLMiQuUzJDX1Byb3RvY29sLkdhbWVPYmplY3RNb3ZlbWVudEluZm8icQog",
+            "Q19SX1Jlc3BvbnNlTW92ZW1lbnRBbmRDb2xsaXNpb24SOgoMbW92ZW1lbnRJ",
+            "bmZvGAEgASgLMiQuUzJDX1Byb3RvY29sLkdhbWVPYmplY3RNb3ZlbWVudElu",
+            "Zm8SEQoJb2JqZWN0SWRzGAIgAygFIigKE1NfUl9TZXRSZWFkeUNvbW1hbmQS",
+            "EQoJY291bnRkb3duGAEgASgFIhIKEFNfUl9TdGFydENvbW1hbmRCG6oCGEdv",
+            "b2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_TestGameState), global::Google.Protobuf.Protocol.S_TestGameState.Parser, new[]{ "Objects" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_TestGameResult), global::Google.Protobuf.Protocol.S_TestGameResult.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_R_ResponseState), global::Google.Protobuf.Protocol.S_R_ResponseState.Parser, new[]{ "PlayerId", "Objects" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_R_RequestMovementAndCollision), global::Google.Protobuf.Protocol.S_R_RequestMovementAndCollision.Parser, new[]{ "PlayerId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_R_MovementAndCollision), global::Google.Protobuf.Protocol.S_R_MovementAndCollision.Parser, new[]{ "PlayerId", "CollisionNestedForce", "MovementInfos" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_R_ResponseMovementAndCollision), global::Google.Protobuf.Protocol.C_R_ResponseMovementAndCollision.Parser, new[]{ "MovementInfo", "ObjectIds" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_R_UpdateMovementAndCollision), global::Google.Protobuf.Protocol.S_R_UpdateMovementAndCollision.Parser, new[]{ "CollisionNestedForce", "MovementInfos" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_R_SetReadyCommand), global::Google.Protobuf.Protocol.S_R_SetReadyCommand.Parser, new[]{ "Countdown" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_R_StartCommand), global::Google.Protobuf.Protocol.S_R_StartCommand.Parser, null, null, null, null, null)
           }));
@@ -629,16 +627,16 @@ namespace Google.Protobuf.Protocol {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class S_R_RequestMovementAndCollision : pb::IMessage<S_R_RequestMovementAndCollision>
+  public sealed partial class S_R_MovementAndCollision : pb::IMessage<S_R_MovementAndCollision>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<S_R_RequestMovementAndCollision> _parser = new pb::MessageParser<S_R_RequestMovementAndCollision>(() => new S_R_RequestMovementAndCollision());
+    private static readonly pb::MessageParser<S_R_MovementAndCollision> _parser = new pb::MessageParser<S_R_MovementAndCollision>(() => new S_R_MovementAndCollision());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<S_R_RequestMovementAndCollision> Parser { get { return _parser; } }
+    public static pb::MessageParser<S_R_MovementAndCollision> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -654,7 +652,7 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_R_RequestMovementAndCollision() {
+    public S_R_MovementAndCollision() {
       OnConstruction();
     }
 
@@ -662,15 +660,17 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_R_RequestMovementAndCollision(S_R_RequestMovementAndCollision other) : this() {
+    public S_R_MovementAndCollision(S_R_MovementAndCollision other) : this() {
       playerId_ = other.playerId_;
+      collisionNestedForce_ = other.collisionNestedForce_ != null ? other.collisionNestedForce_.Clone() : null;
+      movementInfos_ = other.movementInfos_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_R_RequestMovementAndCollision Clone() {
-      return new S_R_RequestMovementAndCollision(this);
+    public S_R_MovementAndCollision Clone() {
+      return new S_R_MovementAndCollision(this);
     }
 
     /// <summary>Field number for the "playerId" field.</summary>
@@ -685,15 +685,38 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "collisionNestedForce" field.</summary>
+    public const int CollisionNestedForceFieldNumber = 2;
+    private global::Google.Protobuf.Protocol.XYZ collisionNestedForce_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as S_R_RequestMovementAndCollision);
+    public global::Google.Protobuf.Protocol.XYZ CollisionNestedForce {
+      get { return collisionNestedForce_; }
+      set {
+        collisionNestedForce_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "movementInfos" field.</summary>
+    public const int MovementInfosFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::Google.Protobuf.Protocol.GameObjectMovementInfo> _repeated_movementInfos_codec
+        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.Protocol.GameObjectMovementInfo.Parser);
+    private readonly pbc::RepeatedField<global::Google.Protobuf.Protocol.GameObjectMovementInfo> movementInfos_ = new pbc::RepeatedField<global::Google.Protobuf.Protocol.GameObjectMovementInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Google.Protobuf.Protocol.GameObjectMovementInfo> MovementInfos {
+      get { return movementInfos_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(S_R_RequestMovementAndCollision other) {
+    public override bool Equals(object other) {
+      return Equals(other as S_R_MovementAndCollision);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(S_R_MovementAndCollision other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -701,6 +724,8 @@ namespace Google.Protobuf.Protocol {
         return true;
       }
       if (PlayerId != other.PlayerId) return false;
+      if (!object.Equals(CollisionNestedForce, other.CollisionNestedForce)) return false;
+      if(!movementInfos_.Equals(other.movementInfos_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -709,6 +734,8 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (PlayerId != 0) hash ^= PlayerId.GetHashCode();
+      if (collisionNestedForce_ != null) hash ^= CollisionNestedForce.GetHashCode();
+      hash ^= movementInfos_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -731,6 +758,11 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(PlayerId);
       }
+      if (collisionNestedForce_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(CollisionNestedForce);
+      }
+      movementInfos_.WriteTo(output, _repeated_movementInfos_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -745,6 +777,11 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(PlayerId);
       }
+      if (collisionNestedForce_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(CollisionNestedForce);
+      }
+      movementInfos_.WriteTo(ref output, _repeated_movementInfos_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -758,6 +795,10 @@ namespace Google.Protobuf.Protocol {
       if (PlayerId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerId);
       }
+      if (collisionNestedForce_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CollisionNestedForce);
+      }
+      size += movementInfos_.CalculateSize(_repeated_movementInfos_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -766,13 +807,20 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(S_R_RequestMovementAndCollision other) {
+    public void MergeFrom(S_R_MovementAndCollision other) {
       if (other == null) {
         return;
       }
       if (other.PlayerId != 0) {
         PlayerId = other.PlayerId;
       }
+      if (other.collisionNestedForce_ != null) {
+        if (collisionNestedForce_ == null) {
+          CollisionNestedForce = new global::Google.Protobuf.Protocol.XYZ();
+        }
+        CollisionNestedForce.MergeFrom(other.CollisionNestedForce);
+      }
+      movementInfos_.Add(other.movementInfos_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -796,6 +844,17 @@ namespace Google.Protobuf.Protocol {
             PlayerId = input.ReadInt32();
             break;
           }
+          case 18: {
+            if (collisionNestedForce_ == null) {
+              CollisionNestedForce = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(CollisionNestedForce);
+            break;
+          }
+          case 26: {
+            movementInfos_.AddEntriesFrom(input, _repeated_movementInfos_codec);
+            break;
+          }
         }
       }
     #endif
@@ -817,6 +876,17 @@ namespace Google.Protobuf.Protocol {
             break;
           case 8: {
             PlayerId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            if (collisionNestedForce_ == null) {
+              CollisionNestedForce = new global::Google.Protobuf.Protocol.XYZ();
+            }
+            input.ReadMessage(CollisionNestedForce);
+            break;
+          }
+          case 26: {
+            movementInfos_.AddEntriesFrom(ref input, _repeated_movementInfos_codec);
             break;
           }
         }
@@ -1062,239 +1132,6 @@ namespace Google.Protobuf.Protocol {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class S_R_UpdateMovementAndCollision : pb::IMessage<S_R_UpdateMovementAndCollision>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<S_R_UpdateMovementAndCollision> _parser = new pb::MessageParser<S_R_UpdateMovementAndCollision>(() => new S_R_UpdateMovementAndCollision());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<S_R_UpdateMovementAndCollision> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolTestGameReflection.Descriptor.MessageTypes[5]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_R_UpdateMovementAndCollision() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_R_UpdateMovementAndCollision(S_R_UpdateMovementAndCollision other) : this() {
-      collisionNestedForce_ = other.collisionNestedForce_ != null ? other.collisionNestedForce_.Clone() : null;
-      movementInfos_ = other.movementInfos_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public S_R_UpdateMovementAndCollision Clone() {
-      return new S_R_UpdateMovementAndCollision(this);
-    }
-
-    /// <summary>Field number for the "collisionNestedForce" field.</summary>
-    public const int CollisionNestedForceFieldNumber = 1;
-    private global::Google.Protobuf.Protocol.XYZ collisionNestedForce_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.Protocol.XYZ CollisionNestedForce {
-      get { return collisionNestedForce_; }
-      set {
-        collisionNestedForce_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "movementInfos" field.</summary>
-    public const int MovementInfosFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::Google.Protobuf.Protocol.GameObjectMovementInfo> _repeated_movementInfos_codec
-        = pb::FieldCodec.ForMessage(18, global::Google.Protobuf.Protocol.GameObjectMovementInfo.Parser);
-    private readonly pbc::RepeatedField<global::Google.Protobuf.Protocol.GameObjectMovementInfo> movementInfos_ = new pbc::RepeatedField<global::Google.Protobuf.Protocol.GameObjectMovementInfo>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::Google.Protobuf.Protocol.GameObjectMovementInfo> MovementInfos {
-      get { return movementInfos_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as S_R_UpdateMovementAndCollision);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(S_R_UpdateMovementAndCollision other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(CollisionNestedForce, other.CollisionNestedForce)) return false;
-      if(!movementInfos_.Equals(other.movementInfos_)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (collisionNestedForce_ != null) hash ^= CollisionNestedForce.GetHashCode();
-      hash ^= movementInfos_.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (collisionNestedForce_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(CollisionNestedForce);
-      }
-      movementInfos_.WriteTo(output, _repeated_movementInfos_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (collisionNestedForce_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(CollisionNestedForce);
-      }
-      movementInfos_.WriteTo(ref output, _repeated_movementInfos_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (collisionNestedForce_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CollisionNestedForce);
-      }
-      size += movementInfos_.CalculateSize(_repeated_movementInfos_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(S_R_UpdateMovementAndCollision other) {
-      if (other == null) {
-        return;
-      }
-      if (other.collisionNestedForce_ != null) {
-        if (collisionNestedForce_ == null) {
-          CollisionNestedForce = new global::Google.Protobuf.Protocol.XYZ();
-        }
-        CollisionNestedForce.MergeFrom(other.CollisionNestedForce);
-      }
-      movementInfos_.Add(other.movementInfos_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (collisionNestedForce_ == null) {
-              CollisionNestedForce = new global::Google.Protobuf.Protocol.XYZ();
-            }
-            input.ReadMessage(CollisionNestedForce);
-            break;
-          }
-          case 18: {
-            movementInfos_.AddEntriesFrom(input, _repeated_movementInfos_codec);
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            if (collisionNestedForce_ == null) {
-              CollisionNestedForce = new global::Google.Protobuf.Protocol.XYZ();
-            }
-            input.ReadMessage(CollisionNestedForce);
-            break;
-          }
-          case 18: {
-            movementInfos_.AddEntriesFrom(ref input, _repeated_movementInfos_codec);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class S_R_SetReadyCommand : pb::IMessage<S_R_SetReadyCommand>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1309,7 +1146,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolTestGameReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolTestGameReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1507,7 +1344,7 @@ namespace Google.Protobuf.Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.S2CProtocolTestGameReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Google.Protobuf.Protocol.S2CProtocolTestGameReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

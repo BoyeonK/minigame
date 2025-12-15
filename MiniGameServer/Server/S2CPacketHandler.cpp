@@ -5,6 +5,7 @@
 #include "GameRoom.h"
 #include "PingPongGameRoom.h"
 #include "MoleRoom.h"
+#include "RaceRoom.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
@@ -387,5 +388,16 @@ bool Handle_C_M_HitSlot(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_M_HitS
 }
 
 bool Handle_C_R_ResponseMovementAndCollision(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_R_ResponseMovementAndCollision& pkt) {
-	return false;
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
+	shared_ptr<RaceRoom> roomRef = dynamic_pointer_cast<RaceRoom>(playerSessionRef->GetJoinedRoom());
+	if (roomRef == nullptr)
+		return false;
+	if (playerSessionRef->GetRoomIdx() >= 2 || playerSessionRef->GetRoomIdx() < 0)
+		return false;
+
+	roomRef->PostEvent(&RaceRoom::HandleResponseMovementAndCollision);
+	return true;
 }

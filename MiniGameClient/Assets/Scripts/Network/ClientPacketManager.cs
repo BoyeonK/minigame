@@ -148,13 +148,9 @@ class PacketManager {
         _handler.Add((ushort)MsgId.SRResponseState, PacketHandler.S_R_ResponseStateHandler);
         _msgFactories.Add((ushort)MsgId.SRResponseState, () => new S_R_ResponseState());
 
-        _onRecv.Add((ushort)MsgId.SRRequestMovementAndCollision, UnpackPacket<S_R_RequestMovementAndCollision>);
-        _handler.Add((ushort)MsgId.SRRequestMovementAndCollision, PacketHandler.S_R_RequestMovementAndCollisionHandler);
-        _msgFactories.Add((ushort)MsgId.SRRequestMovementAndCollision, () => new S_R_RequestMovementAndCollision());
-
-        _onRecv.Add((ushort)MsgId.SRUpdateMovementAndCollision, UnpackPacket<S_R_UpdateMovementAndCollision>);
-        _handler.Add((ushort)MsgId.SRUpdateMovementAndCollision, PacketHandler.S_R_UpdateMovementAndCollisionHandler);
-        _msgFactories.Add((ushort)MsgId.SRUpdateMovementAndCollision, () => new S_R_UpdateMovementAndCollision());
+        _onRecv.Add((ushort)MsgId.SRMovementAndCollision, UnpackPacket<S_R_MovementAndCollision>);
+        _handler.Add((ushort)MsgId.SRMovementAndCollision, PacketHandler.S_R_MovementAndCollisionHandler);
+        _msgFactories.Add((ushort)MsgId.SRMovementAndCollision, () => new S_R_MovementAndCollision());
     }
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer) {

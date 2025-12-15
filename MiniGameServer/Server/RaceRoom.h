@@ -11,7 +11,12 @@ public:
 		_dbids = vector<int32_t>(_quota, 0);
 		_playerIds = vector<string>(_quota);
 		_velocitys = vector<XYZ>(_quota);
+		_fronts = vector<XYZ>(_quota);
+		_nestedForces = vector<XYZ>(_quota);
+		_states = vector<int32_t>(_quota);
 		_loadedPlayers = vector<bool>(_quota, false);
+		_movementInfos = vector<S2C_Protocol::GameObjectMovementInfo>(_quota);
+		_movementAndCollisions = vector<S2C_Protocol::S_R_MovementAndCollision>(_quota);
 	}
 	~RaceRoom() {
 		cout << "·ë »ç¸Á" << endl;
@@ -29,6 +34,8 @@ public:
 
 	void Countdown();
 	void BroadCastCountdownPacket(int32_t count);
+	void BroadCastMovementAndCollision();
+	void HandleResponseMovementAndCollision();
 	void RaceStart();
 	void CountingPhase();
 	void CalculateGameResult();
@@ -40,7 +47,7 @@ public:
 	S2C_Protocol::S_R_ResponseState MakeSRResponseState(int32_t playerIdx);
 
 private:
-	int32_t _quota = 1;
+	int32_t _quota = 2;
 	bool _isUpdateCall = false;
 	vector<string> _playerIds;
 	vector<int32_t> _dbids;
@@ -48,6 +55,12 @@ private:
 	vector<int32_t> _points;
 	vector<bool> _loadedPlayers;
 	vector<XYZ> _velocitys;
+	vector<XYZ> _fronts;
+	vector<XYZ> _nestedForces;
+	vector<int32_t> _states;
 
 	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;
+	S2C_Protocol::S_R_MovementAndCollision _tempMACpkt;
+	vector<S2C_Protocol::S_R_MovementAndCollision> _movementAndCollisions;
+	vector<S2C_Protocol::GameObjectMovementInfo> _movementInfos;
 };
