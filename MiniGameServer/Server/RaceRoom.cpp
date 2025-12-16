@@ -132,7 +132,7 @@ void RaceRoom::BroadCastCountdownPacket(int32_t count) {
 void RaceRoom::BroadCastMovementAndCollision() {
 	_tempMACpkt.clear_movementinfos();
 	for (int i = 0; i < _quota; i++) {
-		_tempMACpkt.add_movementinfos()->CopyFrom(_movementInfos[1]);
+		_tempMACpkt.add_movementinfos()->CopyFrom(_movementInfos[i]);
 	}
 	
 	for (int i = 0; i < _quota; i++) {

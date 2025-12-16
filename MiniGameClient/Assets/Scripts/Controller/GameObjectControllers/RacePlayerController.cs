@@ -184,8 +184,7 @@ public class RacePlayerController : GameObjectController {
             _rigidBody.AddForce(Vector3.down * _gravityAccel, ForceMode.Acceleration);
         }
         else {
-            //Test
-            //_rigidBody.AddForce(Vector3.down * 4f, ForceMode.Acceleration);
+            _rigidBody.AddForce(Vector3.down * 4f, ForceMode.Acceleration);
         }
 
         //충돌에 의한 힘
