@@ -349,7 +349,7 @@ bool Handle_C_P_CollisionGoalLine(shared_ptr<PBSession> sessionRef, S2C_Protocol
 	
 	if (roomRef == nullptr)
 		return false;
-	if (playerSessionRef->GetRoomIdx() >= 4 || playerSessionRef->GetRoomIdx() < 0)
+	if (playerSessionRef->GetRoomIdx() >= GGameManagers[2]->GetQuota() || playerSessionRef->GetRoomIdx() < 0)
 		return false;
 
 	roomRef->PostEvent(&PingPongGameRoom::Handle_CollisionGoalLine, playerSessionRef->GetRoomIdx(), pkt.point());
@@ -380,7 +380,7 @@ bool Handle_C_M_HitSlot(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_M_HitS
 	shared_ptr<MoleRoom> roomRef = dynamic_pointer_cast<MoleRoom>(playerSessionRef->GetJoinedRoom());
 	if (roomRef == nullptr)
 		return false;
-	if (playerSessionRef->GetRoomIdx() >= 1 || playerSessionRef->GetRoomIdx() < 0)
+	if (playerSessionRef->GetRoomIdx() >= GGameManagers[3]->GetQuota() || playerSessionRef->GetRoomIdx() < 0)
 		return false;
 
 	roomRef->PostEvent(&MoleRoom::HitSlot, playerSessionRef->GetRoomIdx(), pkt.slotidx());
@@ -395,7 +395,7 @@ bool Handle_C_R_ResponseMovementAndCollision(shared_ptr<PBSession> sessionRef, S
 	shared_ptr<RaceRoom> roomRef = dynamic_pointer_cast<RaceRoom>(playerSessionRef->GetJoinedRoom());
 	if (roomRef == nullptr)
 		return false;
-	if (playerSessionRef->GetRoomIdx() >= 2 || playerSessionRef->GetRoomIdx() < 0)
+	if (playerSessionRef->GetRoomIdx() >= GGameManagers[1]->GetQuota() || playerSessionRef->GetRoomIdx() < 0)
 		return false;
 
 	S2C_Protocol::C_R_ResponseMovementAndCollision p = pkt;

@@ -48,7 +48,7 @@ public:
 	S2C_Protocol::S_R_ResponseState MakeSRResponseState(int32_t playerIdx);
 
 private:
-	int32_t _quota = 2;
+	int32_t _quota = 1;
 	bool _isUpdateCall = false;
 	vector<string> _playerIds;
 	vector<int32_t> _dbids;

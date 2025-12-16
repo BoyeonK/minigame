@@ -20,6 +20,7 @@ public:
 	bool RenewPublicRecordFromDB() override;
 	bool CompareAndRenewPublicRecord(int32_t dbid, int32_t score) override;
 	bool TrySetPublicRecord() override { return true; };
+	int32_t GetQuota() override { return _quota; }
 
 	void Update() override;
 

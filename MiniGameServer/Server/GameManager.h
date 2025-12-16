@@ -18,6 +18,7 @@ public:
 	virtual bool RenewPublicRecordFromDB() = 0;
 	virtual bool CompareAndRenewPublicRecord(int32_t dbid, int32_t score) = 0;
 	virtual bool TrySetPublicRecord() = 0;
+	virtual int32_t GetQuota() = 0;
 
 	void AddRoom(shared_ptr<GameRoom> room);
 	void RemoveInvalidRoom();

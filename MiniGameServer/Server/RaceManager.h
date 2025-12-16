@@ -3,7 +3,7 @@
 
 class RaceManager : public GameManager {
 public:
-	RaceManager() : _ty(GameType::Race), _quota(2), _matchQueue(_ty, _quota) {
+	RaceManager() : _ty(GameType::Race), _quota(1), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
@@ -15,6 +15,7 @@ public:
 	bool RenewPublicRecordFromDB() override;
 	bool CompareAndRenewPublicRecord(int32_t dbid, int32_t score) override;
 	bool TrySetPublicRecord() override { return true; };
+	int32_t GetQuota() override { return _quota; }
 
 	void Update() override;
 
