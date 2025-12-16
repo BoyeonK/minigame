@@ -588,8 +588,10 @@ public class NetworkManager {
                     GameObject obj = Managers.Object.CreateObject(uObj);
                     if (uObj.ObjectType == (int)Define.ObjectType.RacePlayer)
                         raceScene.RegisterMyController(obj);
+                    /*
                     else if (uObj.ObjectType == (int)Define.ObjectType.RaceOpponent)
                         raceScene.RegisterOppoController(uObj.ObjectId, obj);
+                    */
                 }
             }
         }
