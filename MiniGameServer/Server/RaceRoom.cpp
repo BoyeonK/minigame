@@ -115,7 +115,7 @@ void RaceRoom::SendGameState(int32_t playerIdx) {
 }
 
 void RaceRoom::Countdown() {
-	//_isUpdateCall = true;
+	_isUpdateCall = true;
 	BroadCastCountdownPacket(3);
 	PostEventAfter(1000, &RaceRoom::BroadCastCountdownPacket, 2);
 	PostEventAfter(2000, &RaceRoom::BroadCastCountdownPacket, 1);
