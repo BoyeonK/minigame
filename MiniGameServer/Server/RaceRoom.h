@@ -10,9 +10,6 @@ public:
 		_elos = vector<int32_t>(_quota, 0);
 		_dbids = vector<int32_t>(_quota, 0);
 		_playerIds = vector<string>(_quota);
-		_positions = vector<XYZ>(_quota);
-		_velocitys = vector<XYZ>(_quota);
-		_fronts = vector<XYZ>(_quota);
 		_nestedForces = vector<XYZ>(_quota);
 		_states = vector<int32_t>(_quota);
 		_loadedPlayers = vector<bool>(_quota, false);
@@ -55,9 +52,6 @@ private:
 	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<bool> _loadedPlayers;
-	vector<XYZ> _positions;
-	vector<XYZ> _velocitys;
-	vector<XYZ> _fronts;
 	vector<XYZ> _nestedForces;
 	vector<int32_t> _states;
 

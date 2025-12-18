@@ -6,7 +6,7 @@ using static Define;
 public class RaceScene : BaseScene {
     private GameObject _tempCam;
     private RacePlayerController _myController;
-    private Dictionary<int, RaceOpponentController> _opponentControllers;
+    private Dictionary<int, RaceOpponentController> _opponentControllers = new();
 
     protected override void Init() {
         base.Init();
@@ -41,6 +41,8 @@ public class RaceScene : BaseScene {
         foreach (GameObjectMovementInfo movementInfo in movementInfos) {
             RaceOpponentController oppo;
             _opponentControllers.TryGetValue(movementInfo.ObjectId, out oppo);
+            Debug.Log(movementInfo.Position.X);
+            /*
             Vector3 pos = new(movementInfo.Position.X, movementInfo.Position.Y, movementInfo.Position.Z);
             Vector3 front = new(movementInfo.Front.X, movementInfo.Front.Y, movementInfo.Front.Z);
             Vector3 velocity = new(movementInfo.Velocity.X, movementInfo.Velocity.Y, movementInfo.Velocity.Z);
@@ -48,6 +50,7 @@ public class RaceScene : BaseScene {
             if (oppo != null) {
                 oppo.SetMovementInfo(pos, front, velocity, state);
             }
+            */
         }
     }
 

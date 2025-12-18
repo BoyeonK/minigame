@@ -91,8 +91,27 @@ void RaceRoom::Start() {
 		RegisterGameObject(runnerRef);
 	}
 
-	for (int i = 0; i < _quota; i++)
+	S2C_Protocol::XYZ front;
+	front.set_x(0); front.set_y(0); front.set_z(1);
+	S2C_Protocol::XYZ position;
+	position.set_y(0); position.set_z(0);
+	S2C_Protocol::XYZ velocity;
+	velocity.set_x(0); velocity.set_y(0); velocity.set_z(1);
+
+	S2C_Protocol::XYZ nestedForce;
+	nestedForce.set_x(0); nestedForce.set_y(0); nestedForce.set_z(0);
+	
+	for (int i = 0; i < _quota; i++) {
 		_movementAndCollisions[i].set_playerid(i);
+		_movementAndCollisions[i].mutable_collisionnestedforce()->CopyFrom(nestedForce);
+
+		_movementInfos[i].set_objectid(i);
+		_movementInfos[i].mutable_front()->CopyFrom(front);
+		position.set_x(-3 + 2 * i);
+		_movementInfos[i].mutable_position()->CopyFrom(position);
+		_movementInfos[i].mutable_velocity()->CopyFrom(velocity);
+		_movementInfos[i].set_state(0);
+	}
 
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
@@ -159,10 +178,14 @@ void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMove
 		collisionObjIds[i] = pkt.objectids().Get(i);
 
 	//FM대로 하면, position이 정당한 움직임인지 변위 체크 필요할듯.
-	_positions[playerIdx].DeserializeFrom(pkt.movementinfo().position());
-	_fronts[playerIdx].DeserializeFrom(pkt.movementinfo().front());
-	_velocitys[playerIdx].DeserializeFrom(pkt.movementinfo().velocity());
-	_states[playerIdx] = pkt.movementinfo().state();
+	/* 아래의 요소를 현재의 요소와 비교하여 부정행위인지 확인
+	pkt.movementinfo().position();
+	pkt.movementinfo().front();
+	pkt.movementinfo().velocity();
+	pkt.movementinfo().state();
+	*/
+
+	_movementInfos[playerIdx] = pkt.movementinfo();
 }
 
 void RaceRoom::RaceStart() {

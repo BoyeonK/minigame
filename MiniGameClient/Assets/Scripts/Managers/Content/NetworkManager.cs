@@ -602,8 +602,13 @@ public class NetworkManager {
                 return;
 
             if (scene is RaceScene raceScene) {
-                raceScene.UpdateMovementAndCollision(nestedForce, movementInfos);
-                _netRef.Send(raceScene.SerializeMyMovementStateAndCollision());
+                if (movementInfos.Count > 0) {
+                    raceScene.UpdateMovementAndCollision(nestedForce, movementInfos);
+                    //_netRef.Send(raceScene.SerializeMyMovementStateAndCollision());
+                }
+                else {
+                    Debug.Log("NO");
+                }
             }
         }
 
