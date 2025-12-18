@@ -34,20 +34,15 @@ public class RaceScene : BaseScene {
         }
     }
 
-    public void UpdateMovementAndCollision(Vector3 nestedForce, List<GameObjectMovementInfo> movementInfos) {
+    public void UpdateCollision(Vector3 nestedForce) {
         _myController.ApplyCollisionForceVector(nestedForce);
+    }
 
-        //movementInfos를 읽어서 다른 플레이어 피상 위치 변경하기
-        foreach (GameObjectMovementInfo movementInfo in movementInfos) {
-            RaceOpponentController oppo;
-            _opponentControllers.TryGetValue(movementInfo.ObjectId, out oppo);
-            Vector3 pos = new(movementInfo.Position.X, movementInfo.Position.Y, movementInfo.Position.Z);
-            Vector3 front = new(movementInfo.Front.X, movementInfo.Front.Y, movementInfo.Front.Z);
-            Vector3 velocity = new(movementInfo.Velocity.X, movementInfo.Velocity.Y, movementInfo.Velocity.Z);
-            int state = movementInfo.State;
-            if (oppo != null) {
-                oppo.SetMovementInfo(pos, front, velocity, state);
-            }
+    public void UpdateMovement(int objectId, Vector3 pos, Vector3 front, Vector3 vel, int state) {
+        RaceOpponentController oppo;
+        _opponentControllers.TryGetValue(objectId, out oppo);
+        if (oppo != null) {
+            oppo.SetMovementInfo(pos, front, vel, state);
         }
     }
 

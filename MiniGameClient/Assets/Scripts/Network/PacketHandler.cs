@@ -429,11 +429,37 @@ class PacketHandler {
         if (!(packet is S_R_MovementAndCollision recvPkt))
             return;
 
-		Vector3 nestedForce = new Vector3();
-		List<GameObjectMovementInfo> movementInfos = recvPkt.MovementInfos.ToList();
-        Managers.ExecuteAtMainThread(() => {
-			Managers.Network.Race.ResponseMovementAndCollision(nestedForce, movementInfos);
+		Vector3 nestedForce = new() {
+			x = recvPkt.CollisionNestedForce.X,
+            y = recvPkt.CollisionNestedForce.Y,
+            z = recvPkt.CollisionNestedForce.Z,
+        };
+		Managers.ExecuteAtMainThread(() => {
+            Managers.Network.Race.ResponseCollision(nestedForce);
         });
+
+		List<GameObjectMovementInfo> movementInfos = recvPkt.MovementInfos.ToList();
+		movementInfos.ForEach(movementInfo => {
+			Vector3 pos = new() {
+				x = movementInfo.Position.X,
+				y = movementInfo.Position.Y,
+				z = movementInfo.Position.Z,
+			};
+            Vector3 front = new() {
+                x = movementInfo.Front.X,
+                y = movementInfo.Front.Y,
+                z = movementInfo.Front.Z,
+            };
+            Vector3 vel = new() {
+                x = movementInfo.Velocity.X,
+                y = movementInfo.Velocity.Y,
+                z = movementInfo.Velocity.Z,
+            };
+
+            Managers.ExecuteAtMainThread(() => {
+                Managers.Network.Race.ResponseMovement(movementInfo.ObjectId, pos, front, vel, movementInfo.State);
+            });
+		});
     }
 }
 
