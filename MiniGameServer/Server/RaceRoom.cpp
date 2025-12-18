@@ -167,8 +167,8 @@ void RaceRoom::BroadCastMovementAndCollision() {
 	}
 
 	for (int i = 0; i < _quota; i++) {
-		_movementAndCollisions[i].clear_movementinfos();
 		_movementAndCollisions[i].clear_collisionnestedforce();
+		_nestedForces[i] = _zeroXYZ;
 	}
 }
 

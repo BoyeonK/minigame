@@ -53,8 +53,7 @@ public class RaceScene : BaseScene {
 
     public GameObjectMovementInfo SerializeMyMovementStateAndCollision() {
         //TODO: 내 유닛의 움직임을 직렬화하기
-        GameObjectMovementInfo serializedInfo = new();
-        return serializedInfo;
+        return _myController.SerializeMyMovementInfo();
     }
 
     public override void Clear() {

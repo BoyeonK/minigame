@@ -55,6 +55,7 @@ private:
 	vector<XYZ> _nestedForces;
 	vector<int32_t> _states;
 
+	XYZ _zeroXYZ;
 	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;
 	S2C_Protocol::S_R_MovementAndCollision _tempMACpkt;
 	vector<S2C_Protocol::S_R_MovementAndCollision> _movementAndCollisions;

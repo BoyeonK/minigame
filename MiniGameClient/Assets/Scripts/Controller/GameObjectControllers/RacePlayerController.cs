@@ -1,3 +1,4 @@
+using Google.Protobuf.Protocol;
 using UnityEngine;
 
 public class RacePlayerController : GameObjectController {
@@ -213,6 +214,36 @@ public class RacePlayerController : GameObjectController {
     public void ApplyCollisionForceVector(Vector3 nestedForce) {
         _collisionVector = nestedForce;
         _collisionPeriod = Time.time + 0.1f;
+    }
+
+    public GameObjectMovementInfo SerializeMyMovementInfo() {
+        Vector3 rvel = _rigidBody.linearVelocity;
+
+        XYZ pos = new() {
+            X = transform.position.x,
+            Y = transform.position.y,
+            Z = transform.position.z,
+        };
+
+        XYZ front = new() {
+            X = _front.x,
+            Y = _front.y,
+            Z = _front.z,
+        };
+
+        XYZ vel = new() {
+            X = rvel.x,
+            Y = rvel.y,
+            Z = rvel.z,
+        };
+
+        GameObjectMovementInfo serializedInfo = new() {
+            Position = pos,
+            Front = front,
+            Velocity = vel,
+            State = (int)_state,
+        };
+        return serializedInfo;
     }
 
     private void MovePlayerOnUpdate() {

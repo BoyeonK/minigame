@@ -588,10 +588,10 @@ public class NetworkManager {
                     GameObject obj = Managers.Object.CreateObject(uObj);
                     if (uObj.ObjectType == (int)Define.ObjectType.RacePlayer)
                         raceScene.RegisterMyController(obj);
-                    /*
-                    else if (uObj.ObjectType == (int)Define.ObjectType.RaceOpponent)
+                    else if (uObj.ObjectType == (int)Define.ObjectType.RaceOpponent) {
                         raceScene.RegisterOppoController(uObj.ObjectId, obj);
-                    */
+                        Debug.Log($"{obj.transform.position.x}, {obj.transform.position.y}, {obj.transform.position.z}");
+                    }   
                 }
             }
         }
@@ -604,10 +604,7 @@ public class NetworkManager {
             if (scene is RaceScene raceScene) {
                 if (movementInfos.Count > 0) {
                     raceScene.UpdateMovementAndCollision(nestedForce, movementInfos);
-                    //_netRef.Send(raceScene.SerializeMyMovementStateAndCollision());
-                }
-                else {
-                    Debug.Log("NO");
+                    _netRef.Send(raceScene.SerializeMyMovementStateAndCollision());
                 }
             }
         }
