@@ -3,7 +3,7 @@
 
 class RaceManager : public GameManager {
 public:
-	RaceManager() : _ty(GameType::Race), _quota(1), _matchQueue(_ty, _quota) {
+	RaceManager() : _ty(GameType::Race), _quota(2), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 	}
 
