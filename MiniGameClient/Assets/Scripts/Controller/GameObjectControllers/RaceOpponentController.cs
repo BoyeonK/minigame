@@ -18,13 +18,13 @@ public class RaceOpponentController : GameObjectController {
     public override void Init() {
         SetObjectId((int)Define.ObjectType.RaceOpponent);
         _realPosition = transform.position;
-        GameObject go = GameObject.Find("OpponentBody");
+        
+        Transform go = transform.Find("OpponentBody");
         if (go != null) {
             _body = go.GetComponent<RaceOpponentSuperficialBody>();
             if (_body != null)
                 _body.Init(_objectId, _realPosition);
-        }
-        
+        }  
     }
 
     public void SetMovementInfo(Vector3 position, Vector3 front, Vector3 velocity, int state) {

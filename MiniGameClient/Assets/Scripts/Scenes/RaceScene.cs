@@ -41,8 +41,13 @@ public class RaceScene : BaseScene {
     public void UpdateMovement(int objectId, Vector3 pos, Vector3 front, Vector3 vel, int state) {
         RaceOpponentController oppo;
         _opponentControllers.TryGetValue(objectId, out oppo);
+
         if (oppo != null) {
             oppo.SetMovementInfo(pos, front, vel, state);
+            Debug.Log($"oppo : {objectId}");
+        }
+        else {
+            Debug.Log($"oppo is null, there's no objID : { objectId }");
         }
     }
 

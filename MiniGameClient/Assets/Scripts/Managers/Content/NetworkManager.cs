@@ -2,6 +2,7 @@ using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using NUnit.Framework;
 using Org.BouncyCastle.Bcpg;
+using Org.BouncyCastle.Utilities;
 using ServerCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ using System.Net;
 using System.Threading;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using static Define;
 
 public class NetworkManager {
@@ -586,11 +586,12 @@ public class NetworkManager {
                 raceScene.OffTheTempCam();
                 foreach (UnityGameObject uObj in serializedObjs) {
                     GameObject obj = Managers.Object.CreateObject(uObj);
-                    if (uObj.ObjectType == (int)Define.ObjectType.RacePlayer)
+                    if (uObj.ObjectType == (int)Define.ObjectType.RacePlayer) {
                         raceScene.RegisterMyController(obj);
+                    }
                     else if (uObj.ObjectType == (int)Define.ObjectType.RaceOpponent) {
                         raceScene.RegisterOppoController(uObj.ObjectId, obj);
-                        Debug.Log($"{obj.transform.position.x}, {obj.transform.position.y}, {obj.transform.position.z}");
+                        Debug.Log($"{obj.transform.position.x}, {obj.transform.position.y}, {obj.transform.position.z}, objId is {uObj.ObjectId}");
                     }   
                 }
             }
@@ -613,6 +614,21 @@ public class NetworkManager {
 
             if (scene is RaceScene raceScene) {
                 raceScene.UpdateMovement(objectId, pos, front, vel, state);
+                Debug.Log("ResponseMovement by NetworkManager");
+            }
+        }
+
+        public void SendMyMovementAndCollision() {
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
+
+            if (scene is RaceScene raceScene) {
+                GameObjectMovementInfo myMovementInfo = raceScene.SerializeMyMovementStateAndCollision();
+                C_R_ResponseMovementAndCollision pkt = new() {
+                    MovementInfo = myMovementInfo,
+                };
+                _netRef.Send(pkt);
             }
         }
 
@@ -655,3 +671,4 @@ public class NetworkManager {
 #endregion
 
 }
+

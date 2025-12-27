@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using Org.BouncyCastle.Bcpg;
+using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Encodings;
@@ -429,37 +430,62 @@ class PacketHandler {
         if (!(packet is S_R_MovementAndCollision recvPkt))
             return;
 
-		Vector3 nestedForce = new() {
-			x = recvPkt.CollisionNestedForce.X,
-            y = recvPkt.CollisionNestedForce.Y,
-            z = recvPkt.CollisionNestedForce.Z,
-        };
-		Managers.ExecuteAtMainThread(() => {
-            Managers.Network.Race.ResponseCollision(nestedForce);
-        });
+		ResponseCollision_Internal(recvPkt.CollisionNestedForce.X, recvPkt.CollisionNestedForce.Y, recvPkt.CollisionNestedForce.Z);
 
 		List<GameObjectMovementInfo> movementInfos = recvPkt.MovementInfos.ToList();
-		movementInfos.ForEach(movementInfo => {
-			Vector3 pos = new() {
-				x = movementInfo.Position.X,
-				y = movementInfo.Position.Y,
-				z = movementInfo.Position.Z,
-			};
-            Vector3 front = new() {
-                x = movementInfo.Front.X,
-                y = movementInfo.Front.Y,
-                z = movementInfo.Front.Z,
-            };
-            Vector3 vel = new() {
-                x = movementInfo.Velocity.X,
-                y = movementInfo.Velocity.Y,
-                z = movementInfo.Velocity.Z,
-            };
+		int c = recvPkt.MovementInfos.Count;
+        Managers.ExecuteAtMainThread(() => {
+            Debug.Log($"count = {c}");
+        });
 
-            Managers.ExecuteAtMainThread(() => {
-                Managers.Network.Race.ResponseMovement(movementInfo.ObjectId, pos, front, vel, movementInfo.State);
-            });
+        movementInfos.ForEach(movementInfo => { ResponseMovement_Internal(movementInfo); });
+
+        SendMyMovementAndCollision_Internal();
+
+		Managers.ExecuteAtMainThread(() => {
+			Debug.Log("Get SRM");
 		});
     }
+
+	private static void ResponseCollision_Internal(float X, float Y, float Z) {
+        Vector3 nestedForce = new() {
+            x = X,
+            y = Y,
+            z = Z,
+        };
+
+        Managers.ExecuteAtMainThread(() => {
+            Managers.Network.Race.ResponseCollision(nestedForce);
+        });
+    }
+
+	private static void ResponseMovement_Internal(GameObjectMovementInfo movementInfo) {
+        Vector3 pos = new() {
+            x = movementInfo.Position.X,
+            y = movementInfo.Position.Y,
+            z = movementInfo.Position.Z,
+        };
+        Vector3 front = new() {
+            x = movementInfo.Front.X,
+            y = movementInfo.Front.Y,
+            z = movementInfo.Front.Z,
+        };
+        Vector3 vel = new() {
+            x = movementInfo.Velocity.X,
+            y = movementInfo.Velocity.Y,
+            z = movementInfo.Velocity.Z,
+        };
+
+        Managers.ExecuteAtMainThread(() => {
+            Managers.Network.Race.ResponseMovement(movementInfo.ObjectId, pos, front, vel, movementInfo.State);
+        });
+    }
+
+
+	private static void SendMyMovementAndCollision_Internal() {
+		Managers.ExecuteAtMainThread(() => { 
+			Managers.Network.Race.SendMyMovementAndCollision();
+		});
+	}
 }
 
