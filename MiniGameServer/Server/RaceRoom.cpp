@@ -191,6 +191,7 @@ void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMove
 	*/
 
 	_movementInfos[playerIdx] = pkt.movementinfo();
+	_movementInfos[playerIdx].set_objectid(playerIdx);
 }
 
 void RaceRoom::RaceStart() {
