@@ -27,5 +27,5 @@ private:
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;
 	uint64_t _lastRenewMatchQueueTick = 0;
-	uint64_t _updateTickPeriod = 1000;
+	uint64_t _updateTickPeriod = 100;
 };
