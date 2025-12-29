@@ -153,11 +153,6 @@ void RaceRoom::BroadCastMovementAndCollision() {
 	for (int i = 0; i < _quota; i++) {
 		_tempMACpkt.add_movementinfos()->CopyFrom(_movementInfos[i]);
 	}
-	
-	for (int i = 0; i < _quota; i++) {
-		cout << "objId : " << _tempMACpkt.movementinfos(i).objectid() << ", " << _tempMACpkt.movementinfos(i).position().x() << ", " << _tempMACpkt.movementinfos(i).position().y() << ", " << _tempMACpkt.movementinfos(i).position().z() << endl;
-	}
-	
 
 	for (int i = 0; i < _quota; i++) {
 		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
