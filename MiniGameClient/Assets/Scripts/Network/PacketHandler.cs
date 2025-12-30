@@ -434,9 +434,6 @@ class PacketHandler {
 
 		List<GameObjectMovementInfo> movementInfos = recvPkt.MovementInfos.ToList();
 		int c = recvPkt.MovementInfos.Count;
-        Managers.ExecuteAtMainThread(() => {
-            Debug.Log($"count = {c}");
-        });
 
         movementInfos.ForEach(movementInfo => { ResponseMovement_Internal(movementInfo); });
 
