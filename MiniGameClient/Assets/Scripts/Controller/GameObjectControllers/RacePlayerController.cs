@@ -49,6 +49,9 @@ public class RacePlayerController : GameObjectController {
         return _collisionVector;
     }
 
+    Animator _animator;
+    private bool _isStanding = true;
+
     public override void Init() {
         Cursor.lockState = CursorLockMode.Locked;
         SetObjectId((int)Define.ObjectType.RacePlayer);
@@ -62,6 +65,11 @@ public class RacePlayerController : GameObjectController {
         _rigidBody = transform.GetComponent<Rigidbody>();
 
         _right = Vector3.Cross(Vector3.up, _front).normalized;
+
+        Transform unityChan = transform.Find("SDUnityChan");
+        if (unityChan != null) {
+            _animator = unityChan.GetComponent<Animator>();
+        }
 
         Managers.Input.AddKeyListener(KeyCode.W, WDown, InputManager.KeyState.Down);
         Managers.Input.AddKeyListener(KeyCode.A, ADown, InputManager.KeyState.Down);
@@ -84,6 +92,7 @@ public class RacePlayerController : GameObjectController {
         SetStateOnFixedUpdate();
         CalculateVelocityOnFixedUpdate();
         LerpRotationOnUpdate();
+        PlayAnimationOnFixedUpdate();
     }
 
     private void ProcessMouseMoveOnUpdate() {
@@ -126,10 +135,14 @@ public class RacePlayerController : GameObjectController {
         if (_a)
             _accelerationDir -= _right;
 
-        if (_accelerationDir.sqrMagnitude > Vector3.kEpsilon)
+        if (_accelerationDir.sqrMagnitude > Vector3.kEpsilon) {
             _accelerationDir = _accelerationDir.normalized;
-        else
+            _isStanding = false;
+        }
+        else {
             _accelerationDir = Vector3.zero;
+            _isStanding = true;
+        }    
     }
 
     private void LerpRotationOnUpdate() {
@@ -165,7 +178,26 @@ public class RacePlayerController : GameObjectController {
             _state = State.Standing;
     }
 
-    private void PlayAnimationOnUpdate() {
+    private void PlayAnimationOnFixedUpdate() {
+        if (_animator == null) return;
+        _animator.SetBool("StandOrRun", _isStanding);
+
+        if (_prestate != _state && _state == State.Jumping) {
+            _animator.SetTrigger("JumpStart");
+        }
+
+        if (_state == State.Jumping) {
+            if (_rigidBody.linearVelocity.y > 0f)
+                _animator.SetBool("IsJumpingUp", true);
+            else
+                _animator.SetBool("IsJumpingUp", false);
+        }
+
+        if (_isGrounded && _prestate == State.Jumping) {
+            _animator.SetTrigger("Land");
+            _animator.SetBool("IsJumpingUp", true);
+        }
+
         _prestate = _state;
     }
 

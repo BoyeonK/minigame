@@ -14,12 +14,11 @@ public class RaceOpponentController : GameObjectController {
     private Vector3 _velocity = Vector3.zero;
     private Vector3 _realPosition = new();
     
-
     public override void Init() {
         SetObjectId((int)Define.ObjectType.RaceOpponent);
         _realPosition = transform.position;
         
-        Transform go = transform.Find("OpponentBody");
+        Transform go = transform.Find("SDUnityChan");
         if (go != null) {
             _body = go.GetComponent<RaceOpponentSuperficialBody>();
             if (_body != null)
