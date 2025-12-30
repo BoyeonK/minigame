@@ -42,13 +42,8 @@ public class RaceScene : BaseScene {
         RaceOpponentController oppo;
         _opponentControllers.TryGetValue(objectId, out oppo);
 
-        if (oppo != null) {
+        if (oppo != null)
             oppo.SetMovementInfo(pos, front, vel, state);
-            Debug.Log($"oppo : {objectId}");
-        }
-        else {
-            Debug.Log($"oppo is null, there's no objID : { objectId }");
-        }
     }
 
     public GameObjectMovementInfo SerializeMyMovementStateAndCollision() {

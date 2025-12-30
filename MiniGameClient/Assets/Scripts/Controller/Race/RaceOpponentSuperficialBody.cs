@@ -9,10 +9,17 @@ public class RaceOpponentSuperficialBody : MonoBehaviour {
     private float _serverUpdateTick = 0.1f;
     private float _teleportDistance = 3f;
     private Vector3 _moveVelocityForSmoothDamp;
+    private Animator _animator;
+    private int _state = 0;
+    private int _prestate = 0;
+    private bool _wasJumpingUpState = true;
 
     public void Init(int objectIdx, Vector3 pos) {
         _objectIdx = objectIdx;
         _superficialPosition = pos;
+        _animator = GetComponent<Animator>();
+
+        _animator.SetBool("IsJumpingUp", true);
     }
 
     public int GetObjectIdx() { 
@@ -59,7 +66,29 @@ public class RaceOpponentSuperficialBody : MonoBehaviour {
             _serverUpdateTick
         );
 
+        bool isJumpingUpNow = _superficialPosition.y < realPosition.y;
+        if (_wasJumpingUpState != isJumpingUpNow) {
+            _animator.SetBool("IsJumpingUp", isJumpingUpNow);
+            _wasJumpingUpState = isJumpingUpNow;
+        }
         transform.position = _superficialPosition;
+    }
+
+    public void SetState(int state) {
+        _state = state;
+        if (_prestate != _state) {
+            UpdateAnimatorState();
+            _prestate = _state;
+        }
+    }
+
+    private void UpdateAnimatorState() {
+        if (_animator == null)
+            return;
+        if (_prestate == 2) {
+            _animator.SetTrigger("IsntJumping");
+        }
+        _animator.SetInteger("State", _state);
     }
 }
 
