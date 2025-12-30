@@ -26,6 +26,7 @@ public class RacePlayerController : GameObjectController {
     private Vector3 _right = new();
     private Vector3 _viewFront = new(0f, 0f, 1f);
     private Vector3 _offset = new(0f, 0.5f, 0f);
+    private Vector3 _charactersFront = new(0f, 0f, 1f);
     private bool _w = false;
     private bool _a = false;
     private bool _s = false;
@@ -154,6 +155,8 @@ public class RacePlayerController : GameObjectController {
                 targetRotation,              
                 4 * Time.deltaTime
             );
+
+            _charactersFront = transform.forward;
         }
     }
 
@@ -258,9 +261,9 @@ public class RacePlayerController : GameObjectController {
         };
 
         XYZ front = new() {
-            X = _front.x,
-            Y = _front.y,
-            Z = _front.z,
+            X = _charactersFront.x,
+            Y = _charactersFront.y,
+            Z = _charactersFront.z,
         };
 
         XYZ vel = new() {
