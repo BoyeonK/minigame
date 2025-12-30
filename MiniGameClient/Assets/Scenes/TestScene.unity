@@ -9880,29 +9880,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 150903138446949362, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220188860463491769, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1565894545633221627, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6ccb248f13c57a3449b79cf3f0c1a692, type: 2}
     - target: {fileID: 2831648532662093357, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
       propertyPath: m_Name
       value: RacePlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 2852797848589248510, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 5192879837240171323, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
-      propertyPath: m_Name
-      value: SDUnityChan
       objectReference: {fileID: 0}
     - target: {fileID: 8225458307047929239, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9944,8 +9924,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4958948501537184221, guid: 1a3f28a7cc61e6645b6c3423257c7d46, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
