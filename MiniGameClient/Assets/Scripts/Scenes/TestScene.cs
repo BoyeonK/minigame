@@ -4,14 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class TestScene : BaseScene {
-    RaceOpponentController _controller;
+    //RaceOpponentController _controller;
     float lasttick = 0f;
     int asdf = 0;
 
     protected override void Init() {
         base.Init();
         SceneType = Define.Scene.Login;
-
+        /*
         UnityGameObject obj = new UnityGameObject();
         XYZ position = new XYZ();
         obj.ObjectId = 0;
@@ -22,6 +22,7 @@ public class TestScene : BaseScene {
         obj.Position = position;
         GameObject oppo = Managers.Object.CreateObject(obj);
         _controller = oppo.GetComponent<RaceOpponentController>();
+        */
     }
 
     private void Update() {

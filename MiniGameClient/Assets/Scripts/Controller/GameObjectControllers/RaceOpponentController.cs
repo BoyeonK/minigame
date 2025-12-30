@@ -21,8 +21,9 @@ public class RaceOpponentController : GameObjectController {
         Transform go = transform.Find("SDUnityChan");
         if (go != null) {
             _body = go.GetComponent<RaceOpponentSuperficialBody>();
-            if (_body != null)
+            if (_body != null) {
                 _body.Init(_objectId, _realPosition);
+            }
         }  
     }
 
