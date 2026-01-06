@@ -2,7 +2,6 @@
 #include "RaceRoom.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
-#include "TestGameBullet.h"
 #include "RacePlayer.h"
 
 void RaceRoom::Init(vector<WatingPlayerData> pdv) {
