@@ -54,6 +54,12 @@ struct TableStruct_S2C_5fProtocol_5fTestGame_2eproto {
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_S2C_5fProtocol_5fTestGame_2eproto;
 namespace S2C_Protocol {
+class C_R_ArriveInNextLine;
+struct C_R_ArriveInNextLineDefaultTypeInternal;
+extern C_R_ArriveInNextLineDefaultTypeInternal _C_R_ArriveInNextLine_default_instance_;
+class C_R_FallDown;
+struct C_R_FallDownDefaultTypeInternal;
+extern C_R_FallDownDefaultTypeInternal _C_R_FallDown_default_instance_;
 class C_R_ResponseMovementAndCollision;
 struct C_R_ResponseMovementAndCollisionDefaultTypeInternal;
 extern C_R_ResponseMovementAndCollisionDefaultTypeInternal _C_R_ResponseMovementAndCollision_default_instance_;
@@ -69,6 +75,9 @@ extern S_R_SetReadyCommandDefaultTypeInternal _S_R_SetReadyCommand_default_insta
 class S_R_StartCommand;
 struct S_R_StartCommandDefaultTypeInternal;
 extern S_R_StartCommandDefaultTypeInternal _S_R_StartCommand_default_instance_;
+class S_R_TriggerObstacle;
+struct S_R_TriggerObstacleDefaultTypeInternal;
+extern S_R_TriggerObstacleDefaultTypeInternal _S_R_TriggerObstacle_default_instance_;
 class S_TestGameResult;
 struct S_TestGameResultDefaultTypeInternal;
 extern S_TestGameResultDefaultTypeInternal _S_TestGameResult_default_instance_;
@@ -229,6 +238,208 @@ class S_TestGameResult final : public ::google::protobuf::internal::ZeroFieldsBa
                           const S_TestGameResult& from_msg);
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
+  friend struct ::TableStruct_S2C_5fProtocol_5fTestGame_2eproto;
+};
+// -------------------------------------------------------------------
+
+class S_R_TriggerObstacle final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.S_R_TriggerObstacle) */ {
+ public:
+  inline S_R_TriggerObstacle() : S_R_TriggerObstacle(nullptr) {}
+  ~S_R_TriggerObstacle() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(S_R_TriggerObstacle* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(S_R_TriggerObstacle));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR S_R_TriggerObstacle(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline S_R_TriggerObstacle(const S_R_TriggerObstacle& from) : S_R_TriggerObstacle(nullptr, from) {}
+  inline S_R_TriggerObstacle(S_R_TriggerObstacle&& from) noexcept
+      : S_R_TriggerObstacle(nullptr, std::move(from)) {}
+  inline S_R_TriggerObstacle& operator=(const S_R_TriggerObstacle& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_R_TriggerObstacle& operator=(S_R_TriggerObstacle&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_R_TriggerObstacle& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_R_TriggerObstacle* internal_default_instance() {
+    return reinterpret_cast<const S_R_TriggerObstacle*>(
+        &_S_R_TriggerObstacle_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 7;
+  friend void swap(S_R_TriggerObstacle& a, S_R_TriggerObstacle& b) { a.Swap(&b); }
+  inline void Swap(S_R_TriggerObstacle* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_R_TriggerObstacle* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_R_TriggerObstacle* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<S_R_TriggerObstacle>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const S_R_TriggerObstacle& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const S_R_TriggerObstacle& from) { S_R_TriggerObstacle::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(S_R_TriggerObstacle* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.S_R_TriggerObstacle"; }
+
+ protected:
+  explicit S_R_TriggerObstacle(::google::protobuf::Arena* arena);
+  S_R_TriggerObstacle(::google::protobuf::Arena* arena, const S_R_TriggerObstacle& from);
+  S_R_TriggerObstacle(::google::protobuf::Arena* arena, S_R_TriggerObstacle&& from) noexcept
+      : S_R_TriggerObstacle(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kObstacleIdFieldNumber = 1,
+    kTriggerIdFieldNumber = 2,
+  };
+  // int32 obstacleId = 1;
+  void clear_obstacleid() ;
+  ::int32_t obstacleid() const;
+  void set_obstacleid(::int32_t value);
+
+  private:
+  ::int32_t _internal_obstacleid() const;
+  void _internal_set_obstacleid(::int32_t value);
+
+  public:
+  // int32 triggerId = 2;
+  void clear_triggerid() ;
+  ::int32_t triggerid() const;
+  void set_triggerid(::int32_t value);
+
+  private:
+  ::int32_t _internal_triggerid() const;
+  void _internal_set_triggerid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.S_R_TriggerObstacle)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const S_R_TriggerObstacle& from_msg);
+    ::int32_t obstacleid_;
+    ::int32_t triggerid_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_S2C_5fProtocol_5fTestGame_2eproto;
 };
 // -------------------------------------------------------------------
@@ -560,6 +771,341 @@ class S_R_SetReadyCommand final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_R_SetReadyCommand& from_msg);
     ::int32_t countdown_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_S2C_5fProtocol_5fTestGame_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_R_FallDown final : public ::google::protobuf::internal::ZeroFieldsBase
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.C_R_FallDown) */ {
+ public:
+  inline C_R_FallDown() : C_R_FallDown(nullptr) {}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(C_R_FallDown* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(C_R_FallDown));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR C_R_FallDown(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline C_R_FallDown(const C_R_FallDown& from) : C_R_FallDown(nullptr, from) {}
+  inline C_R_FallDown(C_R_FallDown&& from) noexcept
+      : C_R_FallDown(nullptr, std::move(from)) {}
+  inline C_R_FallDown& operator=(const C_R_FallDown& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_R_FallDown& operator=(C_R_FallDown&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_R_FallDown& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_R_FallDown* internal_default_instance() {
+    return reinterpret_cast<const C_R_FallDown*>(
+        &_C_R_FallDown_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 8;
+  friend void swap(C_R_FallDown& a, C_R_FallDown& b) { a.Swap(&b); }
+  inline void Swap(C_R_FallDown* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_R_FallDown* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_R_FallDown* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<C_R_FallDown>(arena);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const C_R_FallDown& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const C_R_FallDown& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.C_R_FallDown"; }
+
+ protected:
+  explicit C_R_FallDown(::google::protobuf::Arena* arena);
+  C_R_FallDown(::google::protobuf::Arena* arena, const C_R_FallDown& from);
+  C_R_FallDown(::google::protobuf::Arena* arena, C_R_FallDown&& from) noexcept
+      : C_R_FallDown(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.C_R_FallDown)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 0, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const C_R_FallDown& from_msg);
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  friend struct ::TableStruct_S2C_5fProtocol_5fTestGame_2eproto;
+};
+// -------------------------------------------------------------------
+
+class C_R_ArriveInNextLine final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:S2C_Protocol.C_R_ArriveInNextLine) */ {
+ public:
+  inline C_R_ArriveInNextLine() : C_R_ArriveInNextLine(nullptr) {}
+  ~C_R_ArriveInNextLine() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(C_R_ArriveInNextLine* msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(C_R_ArriveInNextLine));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR C_R_ArriveInNextLine(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline C_R_ArriveInNextLine(const C_R_ArriveInNextLine& from) : C_R_ArriveInNextLine(nullptr, from) {}
+  inline C_R_ArriveInNextLine(C_R_ArriveInNextLine&& from) noexcept
+      : C_R_ArriveInNextLine(nullptr, std::move(from)) {}
+  inline C_R_ArriveInNextLine& operator=(const C_R_ArriveInNextLine& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline C_R_ArriveInNextLine& operator=(C_R_ArriveInNextLine&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const C_R_ArriveInNextLine& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const C_R_ArriveInNextLine* internal_default_instance() {
+    return reinterpret_cast<const C_R_ArriveInNextLine*>(
+        &_C_R_ArriveInNextLine_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 9;
+  friend void swap(C_R_ArriveInNextLine& a, C_R_ArriveInNextLine& b) { a.Swap(&b); }
+  inline void Swap(C_R_ArriveInNextLine* other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(C_R_ArriveInNextLine* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  C_R_ArriveInNextLine* New(::google::protobuf::Arena* arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<C_R_ArriveInNextLine>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const C_R_ArriveInNextLine& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const C_R_ArriveInNextLine& from) { C_R_ArriveInNextLine::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(C_R_ArriveInNextLine* other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(
+      ::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "S2C_Protocol.C_R_ArriveInNextLine"; }
+
+ protected:
+  explicit C_R_ArriveInNextLine(::google::protobuf::Arena* arena);
+  C_R_ArriveInNextLine(::google::protobuf::Arena* arena, const C_R_ArriveInNextLine& from);
+  C_R_ArriveInNextLine(::google::protobuf::Arena* arena, C_R_ArriveInNextLine&& from) noexcept
+      : C_R_ArriveInNextLine(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static void* PlacementNew_(const void*, void* mem,
+                             ::google::protobuf::Arena* arena);
+  static constexpr auto InternalNewImpl_();
+  static const ::google::protobuf::internal::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kLineIdFieldNumber = 1,
+  };
+  // int32 lineId = 1;
+  void clear_lineid() ;
+  ::int32_t lineid() const;
+  void set_lineid(::int32_t value);
+
+  private:
+  ::int32_t _internal_lineid() const;
+  void _internal_set_lineid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:S2C_Protocol.C_R_ArriveInNextLine)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      0, 1, 0,
+      0, 2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const C_R_ArriveInNextLine& from_msg);
+    ::int32_t lineid_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1884,6 +2430,84 @@ inline void S_R_SetReadyCommand::_internal_set_countdown(::int32_t value) {
 // -------------------------------------------------------------------
 
 // S_R_StartCommand
+
+// -------------------------------------------------------------------
+
+// S_R_TriggerObstacle
+
+// int32 obstacleId = 1;
+inline void S_R_TriggerObstacle::clear_obstacleid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.obstacleid_ = 0;
+}
+inline ::int32_t S_R_TriggerObstacle::obstacleid() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_R_TriggerObstacle.obstacleId)
+  return _internal_obstacleid();
+}
+inline void S_R_TriggerObstacle::set_obstacleid(::int32_t value) {
+  _internal_set_obstacleid(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_R_TriggerObstacle.obstacleId)
+}
+inline ::int32_t S_R_TriggerObstacle::_internal_obstacleid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.obstacleid_;
+}
+inline void S_R_TriggerObstacle::_internal_set_obstacleid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.obstacleid_ = value;
+}
+
+// int32 triggerId = 2;
+inline void S_R_TriggerObstacle::clear_triggerid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.triggerid_ = 0;
+}
+inline ::int32_t S_R_TriggerObstacle::triggerid() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_R_TriggerObstacle.triggerId)
+  return _internal_triggerid();
+}
+inline void S_R_TriggerObstacle::set_triggerid(::int32_t value) {
+  _internal_set_triggerid(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_R_TriggerObstacle.triggerId)
+}
+inline ::int32_t S_R_TriggerObstacle::_internal_triggerid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.triggerid_;
+}
+inline void S_R_TriggerObstacle::_internal_set_triggerid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.triggerid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// C_R_FallDown
+
+// -------------------------------------------------------------------
+
+// C_R_ArriveInNextLine
+
+// int32 lineId = 1;
+inline void C_R_ArriveInNextLine::clear_lineid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.lineid_ = 0;
+}
+inline ::int32_t C_R_ArriveInNextLine::lineid() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.C_R_ArriveInNextLine.lineId)
+  return _internal_lineid();
+}
+inline void C_R_ArriveInNextLine::set_lineid(::int32_t value) {
+  _internal_set_lineid(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.C_R_ArriveInNextLine.lineId)
+}
+inline ::int32_t C_R_ArriveInNextLine::_internal_lineid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.lineid_;
+}
+inline void C_R_ArriveInNextLine::_internal_set_lineid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.lineid_ = value;
+}
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop

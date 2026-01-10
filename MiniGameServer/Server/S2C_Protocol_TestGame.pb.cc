@@ -43,6 +43,32 @@ struct S_TestGameResultDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_TestGameResultDefaultTypeInternal _S_TestGameResult_default_instance_;
+
+inline constexpr S_R_TriggerObstacle::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : obstacleid_{0},
+        triggerid_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_R_TriggerObstacle::S_R_TriggerObstacle(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_R_TriggerObstacleDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_R_TriggerObstacleDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_R_TriggerObstacleDefaultTypeInternal() {}
+  union {
+    S_R_TriggerObstacle _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_R_TriggerObstacleDefaultTypeInternal _S_R_TriggerObstacle_default_instance_;
               template <typename>
 PROTOBUF_CONSTEXPR S_R_StartCommand::S_R_StartCommand(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -86,6 +112,49 @@ struct S_R_SetReadyCommandDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_R_SetReadyCommandDefaultTypeInternal _S_R_SetReadyCommand_default_instance_;
+              template <typename>
+PROTOBUF_CONSTEXPR C_R_FallDown::C_R_FallDown(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase() {
+}
+#endif  // PROTOBUF_CUSTOM_VTABLE
+struct C_R_FallDownDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_R_FallDownDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_R_FallDownDefaultTypeInternal() {}
+  union {
+    C_R_FallDown _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_R_FallDownDefaultTypeInternal _C_R_FallDown_default_instance_;
+
+inline constexpr C_R_ArriveInNextLine::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : lineid_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR C_R_ArriveInNextLine::C_R_ArriveInNextLine(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct C_R_ArriveInNextLineDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR C_R_ArriveInNextLineDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~C_R_ArriveInNextLineDefaultTypeInternal() {}
+  union {
+    C_R_ArriveInNextLine _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C_R_ArriveInNextLineDefaultTypeInternal _C_R_ArriveInNextLine_default_instance_;
 
 inline constexpr S_TestGameState::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -269,6 +338,33 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_R_TriggerObstacle, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_R_TriggerObstacle, _impl_.obstacleid_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_R_TriggerObstacle, _impl_.triggerid_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_R_FallDown, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_R_ArriveInNextLine, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_R_ArriveInNextLine, _impl_.lineid_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -280,6 +376,9 @@ static const ::_pbi::MigrationSchema
         {41, 51, -1, sizeof(::S2C_Protocol::C_R_ResponseMovementAndCollision)},
         {53, -1, -1, sizeof(::S2C_Protocol::S_R_SetReadyCommand)},
         {62, -1, -1, sizeof(::S2C_Protocol::S_R_StartCommand)},
+        {70, -1, -1, sizeof(::S2C_Protocol::S_R_TriggerObstacle)},
+        {80, -1, -1, sizeof(::S2C_Protocol::C_R_FallDown)},
+        {88, -1, -1, sizeof(::S2C_Protocol::C_R_ArriveInNextLine)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_TestGameState_default_instance_._instance,
@@ -289,6 +388,9 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_C_R_ResponseMovementAndCollision_default_instance_._instance,
     &::S2C_Protocol::_S_R_SetReadyCommand_default_instance_._instance,
     &::S2C_Protocol::_S_R_StartCommand_default_instance_._instance,
+    &::S2C_Protocol::_S_R_TriggerObstacle_default_instance_._instance,
+    &::S2C_Protocol::_C_R_FallDown_default_instance_._instance,
+    &::S2C_Protocol::_C_R_ArriveInNextLine_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2C_5fProtocol_5fTestGame_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -306,8 +408,11 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fTestGame_2eproto[] ABSL_AT
     "\014movementInfo\030\001 \001(\0132$.S2C_Protocol.GameO"
     "bjectMovementInfo\022\021\n\tobjectIds\030\002 \003(\005\"(\n\023"
     "S_R_SetReadyCommand\022\021\n\tcountdown\030\001 \001(\005\"\022"
-    "\n\020S_R_StartCommandB\033\252\002\030Google.Protobuf.P"
-    "rotocolb\006proto3"
+    "\n\020S_R_StartCommand\"<\n\023S_R_TriggerObstacl"
+    "e\022\022\n\nobstacleId\030\001 \001(\005\022\021\n\ttriggerId\030\002 \001(\005"
+    "\"\016\n\014C_R_FallDown\"&\n\024C_R_ArriveInNextLine"
+    "\022\016\n\006lineId\030\001 \001(\005B\033\252\002\030Google.Protobuf.Pro"
+    "tocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fTestGame_2eproto_deps[1] =
     {
@@ -317,13 +422,13 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fTestGame_2eproto_once
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fTestGame_2eproto = {
     false,
     false,
-    615,
+    733,
     descriptor_table_protodef_S2C_5fProtocol_5fTestGame_2eproto,
     "S2C_Protocol_TestGame.proto",
     &descriptor_table_S2C_5fProtocol_5fTestGame_2eproto_once,
     descriptor_table_S2C_5fProtocol_5fTestGame_2eproto_deps,
     1,
-    7,
+    10,
     schemas,
     file_default_instances,
     TableStruct_S2C_5fProtocol_5fTestGame_2eproto::offsets,
@@ -1902,6 +2007,557 @@ const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_R_StartCommand::_table_ = {
 
 ::google::protobuf::Metadata S_R_StartCommand::GetMetadata() const {
   return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_R_TriggerObstacle::_Internal {
+ public:
+};
+
+S_R_TriggerObstacle::S_R_TriggerObstacle(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_R_TriggerObstacle)
+}
+S_R_TriggerObstacle::S_R_TriggerObstacle(
+    ::google::protobuf::Arena* arena, const S_R_TriggerObstacle& from)
+    : S_R_TriggerObstacle(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S_R_TriggerObstacle::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S_R_TriggerObstacle::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, obstacleid_),
+           0,
+           offsetof(Impl_, triggerid_) -
+               offsetof(Impl_, obstacleid_) +
+               sizeof(Impl_::triggerid_));
+}
+S_R_TriggerObstacle::~S_R_TriggerObstacle() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_R_TriggerObstacle)
+  SharedDtor(*this);
+}
+inline void S_R_TriggerObstacle::SharedDtor(MessageLite& self) {
+  S_R_TriggerObstacle& this_ = static_cast<S_R_TriggerObstacle&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* S_R_TriggerObstacle::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_R_TriggerObstacle(arena);
+}
+constexpr auto S_R_TriggerObstacle::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_R_TriggerObstacle),
+                                            alignof(S_R_TriggerObstacle));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_R_TriggerObstacle::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_R_TriggerObstacle_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_R_TriggerObstacle::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_R_TriggerObstacle>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_R_TriggerObstacle::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_R_TriggerObstacle>(), &S_R_TriggerObstacle::ByteSizeLong,
+            &S_R_TriggerObstacle::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_R_TriggerObstacle, _impl_._cached_size_),
+        false,
+    },
+    &S_R_TriggerObstacle::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fTestGame_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_R_TriggerObstacle::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> S_R_TriggerObstacle::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_R_TriggerObstacle>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 triggerId = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_R_TriggerObstacle, _impl_.triggerid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S_R_TriggerObstacle, _impl_.triggerid_)}},
+    // int32 obstacleId = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_R_TriggerObstacle, _impl_.obstacleid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_R_TriggerObstacle, _impl_.obstacleid_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 obstacleId = 1;
+    {PROTOBUF_FIELD_OFFSET(S_R_TriggerObstacle, _impl_.obstacleid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 triggerId = 2;
+    {PROTOBUF_FIELD_OFFSET(S_R_TriggerObstacle, _impl_.triggerid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S_R_TriggerObstacle::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_R_TriggerObstacle)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.obstacleid_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.triggerid_) -
+      reinterpret_cast<char*>(&_impl_.obstacleid_)) + sizeof(_impl_.triggerid_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_R_TriggerObstacle::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_R_TriggerObstacle& this_ = static_cast<const S_R_TriggerObstacle&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_R_TriggerObstacle::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_R_TriggerObstacle& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_R_TriggerObstacle)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 obstacleId = 1;
+          if (this_._internal_obstacleid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_obstacleid(), target);
+          }
+
+          // int32 triggerId = 2;
+          if (this_._internal_triggerid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_triggerid(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_R_TriggerObstacle)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_R_TriggerObstacle::ByteSizeLong(const MessageLite& base) {
+          const S_R_TriggerObstacle& this_ = static_cast<const S_R_TriggerObstacle&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_R_TriggerObstacle::ByteSizeLong() const {
+          const S_R_TriggerObstacle& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_R_TriggerObstacle)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 obstacleId = 1;
+            if (this_._internal_obstacleid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_obstacleid());
+            }
+            // int32 triggerId = 2;
+            if (this_._internal_triggerid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_triggerid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_R_TriggerObstacle::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_R_TriggerObstacle*>(&to_msg);
+  auto& from = static_cast<const S_R_TriggerObstacle&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_R_TriggerObstacle)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_obstacleid() != 0) {
+    _this->_impl_.obstacleid_ = from._impl_.obstacleid_;
+  }
+  if (from._internal_triggerid() != 0) {
+    _this->_impl_.triggerid_ = from._impl_.triggerid_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_R_TriggerObstacle::CopyFrom(const S_R_TriggerObstacle& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_R_TriggerObstacle)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_R_TriggerObstacle::InternalSwap(S_R_TriggerObstacle* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_R_TriggerObstacle, _impl_.triggerid_)
+      + sizeof(S_R_TriggerObstacle::_impl_.triggerid_)
+      - PROTOBUF_FIELD_OFFSET(S_R_TriggerObstacle, _impl_.obstacleid_)>(
+          reinterpret_cast<char*>(&_impl_.obstacleid_),
+          reinterpret_cast<char*>(&other->_impl_.obstacleid_));
+}
+
+::google::protobuf::Metadata S_R_TriggerObstacle::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class C_R_FallDown::_Internal {
+ public:
+};
+
+C_R_FallDown::C_R_FallDown(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.C_R_FallDown)
+}
+C_R_FallDown::C_R_FallDown(
+    ::google::protobuf::Arena* arena,
+    const C_R_FallDown& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  C_R_FallDown* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+
+  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.C_R_FallDown)
+}
+
+inline void* C_R_FallDown::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) C_R_FallDown(arena);
+}
+constexpr auto C_R_FallDown::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(C_R_FallDown),
+                                            alignof(C_R_FallDown));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull C_R_FallDown::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_C_R_FallDown_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &C_R_FallDown::MergeImpl,
+        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<C_R_FallDown>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &C_R_FallDown::SharedDtor,
+        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<C_R_FallDown>(), &C_R_FallDown::ByteSizeLong,
+            &C_R_FallDown::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(C_R_FallDown, _impl_._cached_size_),
+        false,
+    },
+    &C_R_FallDown::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fTestGame_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* C_R_FallDown::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 0, 0, 0, 2> C_R_FallDown::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    0, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967295,  // skipmap
+    offsetof(decltype(_table_), field_names),  // no field_entries
+    0,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::C_R_FallDown>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }},
+  // no field_entries, or aux_entries
+  {{
+  }},
+};
+
+
+
+
+
+
+
+
+::google::protobuf::Metadata C_R_FallDown::GetMetadata() const {
+  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class C_R_ArriveInNextLine::_Internal {
+ public:
+};
+
+C_R_ArriveInNextLine::C_R_ArriveInNextLine(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.C_R_ArriveInNextLine)
+}
+C_R_ArriveInNextLine::C_R_ArriveInNextLine(
+    ::google::protobuf::Arena* arena, const C_R_ArriveInNextLine& from)
+    : C_R_ArriveInNextLine(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE C_R_ArriveInNextLine::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void C_R_ArriveInNextLine::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.lineid_ = {};
+}
+C_R_ArriveInNextLine::~C_R_ArriveInNextLine() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.C_R_ArriveInNextLine)
+  SharedDtor(*this);
+}
+inline void C_R_ArriveInNextLine::SharedDtor(MessageLite& self) {
+  C_R_ArriveInNextLine& this_ = static_cast<C_R_ArriveInNextLine&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* C_R_ArriveInNextLine::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) C_R_ArriveInNextLine(arena);
+}
+constexpr auto C_R_ArriveInNextLine::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(C_R_ArriveInNextLine),
+                                            alignof(C_R_ArriveInNextLine));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull C_R_ArriveInNextLine::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_C_R_ArriveInNextLine_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &C_R_ArriveInNextLine::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<C_R_ArriveInNextLine>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &C_R_ArriveInNextLine::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<C_R_ArriveInNextLine>(), &C_R_ArriveInNextLine::ByteSizeLong,
+            &C_R_ArriveInNextLine::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(C_R_ArriveInNextLine, _impl_._cached_size_),
+        false,
+    },
+    &C_R_ArriveInNextLine::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fTestGame_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* C_R_ArriveInNextLine::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> C_R_ArriveInNextLine::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::C_R_ArriveInNextLine>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 lineId = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(C_R_ArriveInNextLine, _impl_.lineid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(C_R_ArriveInNextLine, _impl_.lineid_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 lineId = 1;
+    {PROTOBUF_FIELD_OFFSET(C_R_ArriveInNextLine, _impl_.lineid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void C_R_ArriveInNextLine::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.C_R_ArriveInNextLine)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.lineid_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* C_R_ArriveInNextLine::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const C_R_ArriveInNextLine& this_ = static_cast<const C_R_ArriveInNextLine&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* C_R_ArriveInNextLine::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const C_R_ArriveInNextLine& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.C_R_ArriveInNextLine)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 lineId = 1;
+          if (this_._internal_lineid() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_lineid(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.C_R_ArriveInNextLine)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t C_R_ArriveInNextLine::ByteSizeLong(const MessageLite& base) {
+          const C_R_ArriveInNextLine& this_ = static_cast<const C_R_ArriveInNextLine&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t C_R_ArriveInNextLine::ByteSizeLong() const {
+          const C_R_ArriveInNextLine& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.C_R_ArriveInNextLine)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // int32 lineId = 1;
+            if (this_._internal_lineid() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_lineid());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void C_R_ArriveInNextLine::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<C_R_ArriveInNextLine*>(&to_msg);
+  auto& from = static_cast<const C_R_ArriveInNextLine&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.C_R_ArriveInNextLine)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_lineid() != 0) {
+    _this->_impl_.lineid_ = from._impl_.lineid_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void C_R_ArriveInNextLine::CopyFrom(const C_R_ArriveInNextLine& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.C_R_ArriveInNextLine)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void C_R_ArriveInNextLine::InternalSwap(C_R_ArriveInNextLine* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.lineid_, other->_impl_.lineid_);
+}
+
+::google::protobuf::Metadata C_R_ArriveInNextLine::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace S2C_Protocol

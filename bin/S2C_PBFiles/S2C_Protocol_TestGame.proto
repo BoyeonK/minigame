@@ -36,3 +36,17 @@ message S_R_SetReadyCommand {
 message S_R_StartCommand {
 
 }
+
+message S_R_TriggerObstacle {
+    int32 obstacleId = 1;
+    int32 triggerId = 2;
+}
+
+message C_R_FallDown {
+
+}
+
+message C_R_ArriveInNextLine {
+    int32 lineId = 1;
+}
+
