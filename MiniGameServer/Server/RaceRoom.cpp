@@ -85,7 +85,7 @@ void RaceRoom::Start() {
 	cout << "스타트 함수 실행" << endl;
 
 	for (int i = 0; i < 4; i++) {
-		shared_ptr<RacePlayer> runnerRef = { objectPool<RacePlayer>::alloc(-3 + 2 * i, 0, 0), objectPool<RacePlayer>::dealloc };
+		shared_ptr<RacePlayer> runnerRef = { objectPool<RacePlayer>::alloc(0, 0, -3 + 2 * i), objectPool<RacePlayer>::dealloc };
 		runnerRef->SetObjectId(GenerateUniqueGameObjectId());
 		RegisterGameObject(runnerRef);
 	}
