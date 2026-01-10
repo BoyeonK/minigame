@@ -34,11 +34,12 @@ public class RacePlayerController : GameObjectController {
     private bool _jump = false;
 
     private Rigidbody _rigidBody;
-    private const float _accelerationRate = 5f;
+    private const float _accelerationRate = 6f;
     private const float _horizonFrictionRatePerVelocity = 2f;
     private const float _gravityAccel = 15f;
     private const float _jumpSpeed = 4.8f;
     private const float MAX_VERTICAL_SPEED = 9f;
+    private const float MAX_HORIZONTAL_SPEED = 4f;
 
     private Vector3 _accelerationDir = new();
 
@@ -226,24 +227,32 @@ public class RacePlayerController : GameObjectController {
         //충돌에 의한 힘
         _rigidBody.AddForce(GetCollisionVector(), ForceMode.Acceleration);
 
+        /*
         //수평방향 저항
         Vector3 horizontalVelocity = new(_rigidBody.linearVelocity.x, 0f, _rigidBody.linearVelocity.z);
         if (horizontalVelocity.sqrMagnitude > 0.001f) {
             _rigidBody.AddForce(-horizontalVelocity * _horizonFrictionRatePerVelocity, ForceMode.Acceleration);
         }
+        */
 
         Vector3 currentVelocity = _rigidBody.linearVelocity;
 
         //점프 시동
         if (_jump) {
             currentVelocity.y = _jumpSpeed;
-            _rigidBody.linearVelocity = currentVelocity;
             _jump = false;
         }
         else {
             currentVelocity.y = Mathf.Clamp(currentVelocity.y, -MAX_VERTICAL_SPEED, MAX_VERTICAL_SPEED);
-            _rigidBody.linearVelocity = currentVelocity;
         }
+
+        Vector3 horizontalVelocity = new(_rigidBody.linearVelocity.x, 0f, _rigidBody.linearVelocity.z);
+        if (horizontalVelocity.sqrMagnitude > MAX_HORIZONTAL_SPEED * MAX_HORIZONTAL_SPEED) {
+            horizontalVelocity = horizontalVelocity.normalized * MAX_HORIZONTAL_SPEED;
+            currentVelocity = new Vector3(horizontalVelocity.x, currentVelocity.y, horizontalVelocity.z);
+        }
+
+        _rigidBody.linearVelocity = currentVelocity;
     }
 
     public void ApplyCollisionForceVector(Vector3 nestedForce) {
