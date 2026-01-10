@@ -632,6 +632,16 @@ public class NetworkManager {
             }
         }
 
+        public void ResponseSRTriggerObstacle(int obstacleId, int triggerId) { 
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
+
+            if (scene is RaceScene raceScene) {
+                raceScene.OperateObstacle(obstacleId, triggerId);
+            }
+        }
+
         public bool OnCollisionEnter(int objectIdx) {
             lock (_collisionHashLock) {
                 return _collidingObjectIdxs.Add(objectIdx);

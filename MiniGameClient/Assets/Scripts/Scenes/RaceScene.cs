@@ -7,6 +7,7 @@ public class RaceScene : BaseScene {
     private GameObject _tempCam;
     private RacePlayerController _myController;
     private Dictionary<int, RaceOpponentController> _opponentControllers = new();
+    private List<HammerController> _hammerControllers = new();
 
     protected override void Init() {
         base.Init();
@@ -14,6 +15,33 @@ public class RaceScene : BaseScene {
         Managers.Scene.ResetLoadSceneOp();
         Debug.Log("RaceScene");
         _tempCam = GameObject.Find("TempCamera");
+
+        GameObject LHammerObj1 = GameObject.Find("LeftHammer1");
+        GameObject LHammerObj2 = GameObject.Find("LeftHammer2");
+        GameObject RHammerObj1 = GameObject.Find("RightHammer1");
+        GameObject RHammerObj2 = GameObject.Find("RightHammer2");
+
+        if (LHammerObj1 != null) {
+            HammerController hammer = LHammerObj1.GetComponent<HammerController>();
+            if (hammer != null)
+                _hammerControllers.Add(hammer);
+        }
+        if (LHammerObj2 != null) {
+            HammerController hammer = LHammerObj2.GetComponent<HammerController>();
+            if (hammer != null)
+                _hammerControllers.Add(hammer);
+        }
+        if (RHammerObj1 != null) {
+            HammerController hammer = RHammerObj1.GetComponent<HammerController>();
+            if (hammer != null)
+                _hammerControllers.Add(hammer);
+        }
+        if (RHammerObj2 != null) {
+            HammerController hammer = RHammerObj2.GetComponent<HammerController>();
+            if (hammer != null)
+                _hammerControllers.Add(hammer);
+        }
+
         Managers.Network.TryRequestGameState((int)GameType.Race);
     }
 
@@ -47,8 +75,17 @@ public class RaceScene : BaseScene {
     }
 
     public GameObjectMovementInfo SerializeMyMovementStateAndCollision() {
-        //TODO: 내 유닛의 움직임을 직렬화하기
         return _myController.SerializeMyMovementInfo();
+    }
+
+    public void OperateObstacle(int obstacleId, int triggerId) {
+        if (obstacleId < 0 || obstacleId >= _hammerControllers.Count)
+            return;
+        
+        if (triggerId == 0)
+            _hammerControllers[obstacleId].SwingToLeft();
+        else if (triggerId == 1)
+            _hammerControllers[obstacleId].SwingToRight();
     }
 
     public override void Clear() {

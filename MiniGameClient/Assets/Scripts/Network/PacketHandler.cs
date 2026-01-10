@@ -484,5 +484,14 @@ class PacketHandler {
 			Managers.Network.Race.SendMyMovementAndCollision();
 		});
 	}
+
+    public static void S_R_TriggerObstacleHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_R_TriggerObstacle recvPkt))
+            return;
+
+		Managers.ExecuteAtMainThread(() => {
+			Managers.Network.Race.ResponseSRTriggerObstacle(recvPkt.ObstacleId, recvPkt.TriggerId);
+        });
+    }
 }
 

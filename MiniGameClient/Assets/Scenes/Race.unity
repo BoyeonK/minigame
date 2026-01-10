@@ -457,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4126558664060421715, guid: 43c1a2de0e91dd940bd0da24dbd617a8, type: 3}
       propertyPath: m_Name
-      value: Hammer2
+      value: LeftHammer2
       objectReference: {fileID: 0}
     - target: {fileID: 4470313329726635172, guid: 43c1a2de0e91dd940bd0da24dbd617a8, type: 3}
       propertyPath: m_LocalScale.z
@@ -4287,7 +4287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4126558664060421715, guid: 43c1a2de0e91dd940bd0da24dbd617a8, type: 3}
       propertyPath: m_Name
-      value: Hammer1 (1)
+      value: RightHammer2
       objectReference: {fileID: 0}
     - target: {fileID: 4470313329726635172, guid: 43c1a2de0e91dd940bd0da24dbd617a8, type: 3}
       propertyPath: m_LocalScale.z
@@ -5447,7 +5447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4126558664060421715, guid: 43c1a2de0e91dd940bd0da24dbd617a8, type: 3}
       propertyPath: m_Name
-      value: Hammer2 (1)
+      value: LeftHammer1
       objectReference: {fileID: 0}
     - target: {fileID: 4470313329726635172, guid: 43c1a2de0e91dd940bd0da24dbd617a8, type: 3}
       propertyPath: m_LocalScale.z
@@ -5500,8 +5500,8 @@ Transform:
   - {fileID: 458784409}
   - {fileID: 7022790372509914928}
   - {fileID: 1029166063}
-  - {fileID: 45945972}
   - {fileID: 1323286952}
+  - {fileID: 45945972}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1393999116
@@ -8877,7 +8877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4126558664060421715, guid: 43c1a2de0e91dd940bd0da24dbd617a8, type: 3}
       propertyPath: m_Name
-      value: Hammer1
+      value: RightHammer1
       objectReference: {fileID: 0}
     - target: {fileID: 4470313329726635172, guid: 43c1a2de0e91dd940bd0da24dbd617a8, type: 3}
       propertyPath: m_LocalScale.z

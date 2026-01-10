@@ -16,14 +16,13 @@ public class HammerController : MonoBehaviour {
     }
 
     public void SwingToLeft() {
-        if (currentSwingCoroutine != null) {
+        if (currentSwingCoroutine != null)
             StopCoroutine(currentSwingCoroutine);
-        }
 
         currentSwingCoroutine = StartCoroutine(RotateOverTime(new Vector3(-45f, 0f, 0f), 2f));
     }
 
-    private void SwingToRight() {
+    public void SwingToRight() {
         if (currentSwingCoroutine != null)
             StopCoroutine(currentSwingCoroutine);
 
