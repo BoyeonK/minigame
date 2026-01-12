@@ -20,7 +20,10 @@ public:
 
 	void SetRoomId(int32_t roomId);
 	int32_t GetRoomId() const;
+
 	virtual void Update() = 0;
+	uint64_t _lastTimeUpdateCalledTick = 0;
+
 	virtual void Init(vector<WatingPlayerData> pdv) = 0;
 	GameState GetState() const;
 	virtual void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) = 0;
@@ -34,6 +37,7 @@ public:
 	int32_t CalculateEloW(int32_t winnerElo, int32_t opponentElo);
 	int32_t CalculateEloL(int32_t loserElo, int32_t opponentElo);
 
+
 protected:
 	int32_t _roomId = 0;
 	int32_t _nxtObjectId = 0;
@@ -42,7 +46,7 @@ protected:
 	GameState _state = GameState::BeforeInit;
 	int32_t _preparedPlayer = 0;
 	uint64_t _updateCount = 0;
-
+	
 	//Update문에서의 순회용
 	vector<shared_ptr<UnityGameObject>> _vecGameObjects;
 	//objectId를 통한 접근용

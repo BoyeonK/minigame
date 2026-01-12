@@ -21,13 +21,29 @@ void GameManager::SetPublicRecord(string playerId, int32_t record) {
 }
 
 void GameManager::AddRoom(shared_ptr<GameRoom> room) {
-	unique_lock<shared_mutex> lock(_roomsLock);
-	_rooms.push_back(room);
+	unique_lock<mutex> lock(_roomsToBeAddedLock);
+	_roomsToBeAdded.push_back(room);
+}
+
+void GameManager::AddRoomsFromPendingVector() {
+	vector<shared_ptr<GameRoom>> roomsToBeAddedCopy;
+
+	{
+		unique_lock<mutex> lock(_roomsToBeAddedLock);
+		roomsToBeAddedCopy = move(_roomsToBeAdded);
+	}
+
+	{
+		unique_lock<mutex> lock(_roomsLock);
+		for (auto& roomRef : roomsToBeAddedCopy)
+			_rooms.push_back(roomRef);
+		_roomCount = _rooms.size();
+	}
 }
 
 void GameManager::RemoveInvalidRoom() {
-	if (::GetTickCount64() - _lastRemoveRoomTick > 5000) {
-		unique_lock<shared_mutex> lock(_roomsLock);
+	if (::GetTickCount64() - _lastRemoveRoomTick > _removeRoomTickPeriod) {
+		unique_lock<mutex> lock(_roomsLock);
 		_lastRemoveRoomTick = ::GetTickCount64();
 		auto new_end = remove_if(_rooms.begin(), _rooms.end(),
 			[](const shared_ptr<GameRoom>& gameRoomRef) {
@@ -38,5 +54,6 @@ void GameManager::RemoveInvalidRoom() {
 			cout << "Invalid Room Cleared" << endl;
 
 		_rooms.erase(new_end, _rooms.end());
+		_roomCount = _rooms.size();
 	}
 }

@@ -21,15 +21,23 @@ public:
 	virtual int32_t GetQuota() = 0;
 
 	void AddRoom(shared_ptr<GameRoom> room);
+	void AddRoomsFromPendingVector();
 	void RemoveInvalidRoom();
 
 protected:
 	mutex _recordLock;
 	atomic<int32_t> _nxtRoomId = 0;
 	uint64_t _lastRemoveRoomTick = 0;
+	uint64_t _removeRoomTickPeriod = 5000;
 	uint64_t _lastUpdateRoomTick = 0;
+
+	mutex _roomsLock;
 	vector<shared_ptr<GameRoom>> _rooms;
-	shared_mutex _roomsLock;
+	int32_t _roomCount = 0;
+	
+	mutex _roomsToBeAddedLock;
+	vector<shared_ptr<GameRoom>> _roomsToBeAdded;
+	
 	atomic<int32_t> _publicRecord = 0;
 	string _publicRecorder;
 };

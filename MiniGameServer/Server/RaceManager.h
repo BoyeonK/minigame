@@ -28,4 +28,6 @@ private:
 	vector<bool> _excluded;
 	uint64_t _lastRenewMatchQueueTick = 0;
 	uint64_t _updateTickPeriod = 100;
+	uint64_t _pendingRoomsVectorAddTickPeriod = 1000;
+	uint64_t _lastPendingRoomsVectorAddTick = 0;
 };
