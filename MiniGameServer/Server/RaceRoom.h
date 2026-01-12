@@ -11,6 +11,7 @@ public:
 		_playerIds = vector<string>(_quota);
 		_nestedForces = vector<XYZ>(_quota);
 		_states = vector<int32_t>(_quota);
+		_stages = vector<int32_t>(_quota, 0);
 		_loadedPlayers = vector<bool>(_quota, false);
 		_movementInfos = vector<S2C_Protocol::GameObjectMovementInfo>(_quota);
 		_movementAndCollisions = vector<S2C_Protocol::S_R_MovementAndCollision>(_quota);
@@ -33,6 +34,8 @@ public:
 	void BroadCastCountdownPacket(int32_t count);
 	void BroadCastMovementAndCollision();
 	void HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMovementAndCollision pkt, int32_t playerIdx);
+	void HandleArriveInNextLine(int32_t playerIdx, int32_t lineId);
+	void HandleFallDown(int32_t playerIdx);
 	void RaceStart();
 	void OperateObstacle(int32_t obstacleId, int32_t operateId);
 	void OperateObstacles();
@@ -55,6 +58,7 @@ private:
 	vector<bool> _loadedPlayers;
 	vector<XYZ> _nestedForces;
 	vector<int32_t> _states;
+	vector<int32_t> _stages;
 
 	XYZ _zeroXYZ;
 	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;

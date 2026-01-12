@@ -187,7 +187,7 @@
     <ClInclude Include="S2C_Protocol_Ingame.pb.h" />
     <ClInclude Include="S2C_Protocol_Mole.pb.h" />
     <ClInclude Include="S2C_Protocol_PingPong.pb.h" />
-    <ClInclude Include="S2C_Protocol_TestGame.pb.h" />
+    <ClInclude Include="S2C_Protocol_Race.pb.h" />
     <ClInclude Include="S2DPacketMaker.h" />
     <ClInclude Include="S2D_CallData.h" />
     <ClInclude Include="DBClientImpl.h" />
@@ -240,9 +240,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="S2C_Protocol_TestGame.pb.cc">
+    <ClCompile Include="S2C_Protocol_Race.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="S2DPacketMaker.cpp" />
     <ClCompile Include="S2D_CallData.cpp" />

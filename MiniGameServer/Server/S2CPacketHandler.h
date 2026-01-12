@@ -55,7 +55,9 @@ enum : uint16_t {
 	PKT_S_R_TRIGGER_OBSTACLE = 108,
 	PKT_C_R_FALL_DOWN = 109,
 	PKT_C_R_ARRIVE_IN_NEXT_LINE = 110,
-
+	PKT_S_R_RESPONSE_FALL_DOWN = 111,
+	PKT_S_R_RESPONSE_ARRIVE_IN_NEXT_LINE = 112,
+	
 	PKT_S_P_STATE = 200,
 	PKT_S_P_RESULT = 201,
 	PKT_S_P_READY_FOR_START = 202,
@@ -97,6 +99,8 @@ bool Handle_C_RequestPublicRecords(shared_ptr<PBSession> sessionRef, S2C_Protoco
 
 	//Race
 bool Handle_C_R_ResponseMovementAndCollision(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_R_ResponseMovementAndCollision& pkt);
+bool Handle_C_R_FallDown(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_R_FallDown& pkt);
+bool Handle_C_R_ArriveInNextLine(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_R_ArriveInNextLine& pkt);
 
 	//PingPong
 bool Handle_C_P_ResponsePlayerBarPosition(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_P_ResponsePlayerBarPosition& pkt);
@@ -155,6 +159,8 @@ public:
 
 			//Race
 		PlaintextHandler[PKT_C_R_RESPONSE_MOVEMENT_AND_COLLISION] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_R_ResponseMovementAndCollision>(Handle_C_R_ResponseMovementAndCollision, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_R_FALL_DOWN] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_R_FallDown>(Handle_C_R_FallDown, sessionRef, plaintext); };
+		PlaintextHandler[PKT_C_R_ARRIVE_IN_NEXT_LINE] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_R_ArriveInNextLine>(Handle_C_R_ArriveInNextLine, sessionRef, plaintext); };
 
 			//PingPong
 		PlaintextHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, plaintext); };
@@ -235,6 +241,8 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_SetReadyCommand& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_SET_READY_COMMAND); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_StartCommand& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_START_COMMAND); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_TriggerObstacle& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_TRIGGER_OBSTACLE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseFallDown& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_FALL_DOWN); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseArriveInNextLine& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_ARRIVE_IN_NEXT_LINE); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_STATE, AESKey); }
@@ -243,6 +251,8 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_SetReadyCommand& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_SET_READY_COMMAND, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_StartCommand& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_START_COMMAND, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_TriggerObstacle& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_TRIGGER_OBSTACLE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseFallDown& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_FALL_DOWN, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseArriveInNextLine& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_ARRIVE_IN_NEXT_LINE, AESKey); }
 #pragma endregion
 
 #pragma region PingPong

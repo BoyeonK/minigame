@@ -642,6 +642,30 @@ public class NetworkManager {
             }
         }
 
+        public void FallDown() {
+            C_R_FallDown pkt = new() { };
+            _netRef.Send(pkt);
+        }
+
+        public void ResponseFallDown(Vector3 pos) {
+
+        }
+
+        public void ArrivedInLine(int lineId) {
+            C_R_ArriveInNextLine pkt = new() { LineId = lineId, };
+            _netRef.Send(pkt);
+        }
+
+        public void ResponseArriveInNextLine(int lineId) {
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
+
+            if (scene is RaceScene raceScene) {
+                raceScene.ConfirmArrivedLine(lineId);
+            }
+        }
+
         public bool OnCollisionEnter(int objectIdx) {
             lock (_collisionHashLock) {
                 return _collidingObjectIdxs.Add(objectIdx);

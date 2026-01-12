@@ -1,4 +1,5 @@
 using Google.Protobuf.Protocol;
+using System;
 using UnityEngine;
 
 public class RacePlayerController : GameObjectController {
@@ -288,6 +289,30 @@ public class RacePlayerController : GameObjectController {
             State = (int)_state,
         };
         return serializedInfo;
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        int objectiveLayer = LayerMask.NameToLayer("ObjectiveLine");
+        int boundaryLayer = LayerMask.NameToLayer("BoundaryLine");
+
+        if (collision.gameObject.layer == objectiveLayer) {
+            ObjectiveLineController olc = collision.gameObject.GetComponent<ObjectiveLineController>();
+            if (olc != null) {
+                olc.ArrivedInLine();
+            }      
+        }
+        else if (collision.gameObject.layer == boundaryLayer) {
+            Managers.Network.Race.FallDown();
+        }
+    }
+
+    public void ForceMovePlayer(Vector3 pos) {
+        transform.position = pos;
+
+        if (_rigidBody != null) {
+            _rigidBody.linearVelocity = Vector3.zero;
+            _rigidBody.angularVelocity = Vector3.zero;
+        }
     }
 
     private void MovePlayerOnUpdate() {

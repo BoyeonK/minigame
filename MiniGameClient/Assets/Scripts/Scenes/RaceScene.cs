@@ -1,4 +1,5 @@
 using Google.Protobuf.Protocol;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
@@ -8,6 +9,8 @@ public class RaceScene : BaseScene {
     private RacePlayerController _myController;
     private Dictionary<int, RaceOpponentController> _opponentControllers = new();
     private List<HammerController> _hammerControllers = new();
+    private List<ObjectiveLineController> _objectiveLineControllers = new();
+    private int _arrivedLineCount = 0;
 
     protected override void Init() {
         base.Init();
@@ -40,6 +43,31 @@ public class RaceScene : BaseScene {
             HammerController hammer = RHammerObj2.GetComponent<HammerController>();
             if (hammer != null)
                 _hammerControllers.Add(hammer);
+        }
+
+        GameObject objLine1 = GameObject.Find("ObjectiveLine1");
+        GameObject objLine2 = GameObject.Find("ObjectiveLine2");
+        GameObject objLine3 = GameObject.Find("ObjectiveLine3");
+        if (objLine1 != null) {
+            ObjectiveLineController objLineController1 = objLine1.GetComponent<ObjectiveLineController>();
+            if (objLineController1 != null) {
+                objLineController1.Init(ArrivedFirstLine);
+                _objectiveLineControllers.Add(objLineController1);
+            }
+        }
+        if (objLine2 != null) {
+            ObjectiveLineController objLineController2 = objLine2.GetComponent<ObjectiveLineController>();
+            if (objLineController2 != null) {
+                objLineController2.Init(ArrivedSecondLine);
+                _objectiveLineControllers.Add(objLineController2);
+            }
+        }
+        if (objLine3 != null) {
+            ObjectiveLineController objLineController3 = objLine3.GetComponent<ObjectiveLineController>();
+            if (objLineController3 != null) {
+                objLineController3.Init(ArrivedFinishLine);
+                _objectiveLineControllers.Add(objLineController3);
+            }   
         }
 
         Managers.Network.TryRequestGameState((int)GameType.Race);
@@ -86,6 +114,35 @@ public class RaceScene : BaseScene {
             _hammerControllers[obstacleId].SwingToLeft();
         else if (triggerId == 1)
             _hammerControllers[obstacleId].SwingToRight();
+    }
+
+    public void ArrivedFirstLine() { 
+        if (_arrivedLineCount != 0)
+            return;
+
+        Managers.Network.Race.ArrivedInLine(1);
+    }
+
+    public void ArrivedSecondLine() {
+        if (_arrivedLineCount != 1)
+            return;
+
+        Managers.Network.Race.ArrivedInLine(2);
+    }
+
+    public void ArrivedFinishLine() {
+        if (_arrivedLineCount != 2)
+            return;
+
+        Managers.Network.Race.ArrivedInLine(3);
+    }
+
+    public void ForceMovePlayer(Vector3 pos) {
+        _myController.ForceMovePlayer(pos);
+    }
+
+    public void ConfirmArrivedLine(int lineId) {
+        _arrivedLineCount = lineId;
     }
 
     public override void Clear() {

@@ -24,22 +24,22 @@ namespace Google.Protobuf.Protocol {
     static S2CProtocolIngameReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChlTMkNfUHJvdG9jb2xfSW5nYW1lLnByb3RvEgxTMkNfUHJvdG9jb2waG1My",
-            "Q19Qcm90b2NvbF9UZXN0R2FtZS5wcm90bxobUzJDX1Byb3RvY29sX1BpbmdQ",
-            "b25nLnByb3RvGhpTMkNfUHJvdG9jb2xfRGFubWFrdS5wcm90bxoZUzJDX1By",
-            "b3RvY29sX0NvbW1vbi5wcm90bxoXUzJDX1Byb3RvY29sX01vbGUucHJvdG8i",
-            "JAoSQ19SZXF1ZXN0R2FtZVN0YXRlEg4KBmdhbWVJZBgBIAEoBSJGChVTX0Rl",
-            "bHRhR2FtZU9iamVjdFNvZnQSLQoGb2JqZWN0GAEgASgLMh0uUzJDX1Byb3Rv",
-            "Y29sLlVuaXR5R2FtZU9iamVjdCJGChVTX0RlbHRhR2FtZU9iamVjdEhhcmQS",
-            "LQoGb2JqZWN0GAEgASgLMh0uUzJDX1Byb3RvY29sLlVuaXR5R2FtZU9iamVj",
-            "dCJCChFTX1NwYXduR2FtZU9iamVjdBItCgZvYmplY3QYASABKAsyHS5TMkNf",
-            "UHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0IkQKE1NfRGVzcGF3bkdhbWVPYmpl",
-            "Y3QSLQoGb2JqZWN0GAEgASgLMh0uUzJDX1Byb3RvY29sLlVuaXR5R2FtZU9i",
-            "amVjdCJTCglTX0VuZEdhbWUSDgoGZ2FtZUlkGAEgASgFEjYKDnRlc3RHYW1l",
-            "UmVzdWx0GAIgASgLMh4uUzJDX1Byb3RvY29sLlNfVGVzdEdhbWVSZXN1bHRC",
-            "G6oCGEdvb2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "ChlTMkNfUHJvdG9jb2xfSW5nYW1lLnByb3RvEgxTMkNfUHJvdG9jb2waF1My",
+            "Q19Qcm90b2NvbF9SYWNlLnByb3RvGhtTMkNfUHJvdG9jb2xfUGluZ1Bvbmcu",
+            "cHJvdG8aGlMyQ19Qcm90b2NvbF9EYW5tYWt1LnByb3RvGhlTMkNfUHJvdG9j",
+            "b2xfQ29tbW9uLnByb3RvGhdTMkNfUHJvdG9jb2xfTW9sZS5wcm90byIkChJD",
+            "X1JlcXVlc3RHYW1lU3RhdGUSDgoGZ2FtZUlkGAEgASgFIkYKFVNfRGVsdGFH",
+            "YW1lT2JqZWN0U29mdBItCgZvYmplY3QYASABKAsyHS5TMkNfUHJvdG9jb2wu",
+            "VW5pdHlHYW1lT2JqZWN0IkYKFVNfRGVsdGFHYW1lT2JqZWN0SGFyZBItCgZv",
+            "YmplY3QYASABKAsyHS5TMkNfUHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0IkIK",
+            "EVNfU3Bhd25HYW1lT2JqZWN0Ei0KBm9iamVjdBgBIAEoCzIdLlMyQ19Qcm90",
+            "b2NvbC5Vbml0eUdhbWVPYmplY3QiRAoTU19EZXNwYXduR2FtZU9iamVjdBIt",
+            "CgZvYmplY3QYASABKAsyHS5TMkNfUHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0",
+            "IlMKCVNfRW5kR2FtZRIOCgZnYW1lSWQYASABKAUSNgoOdGVzdEdhbWVSZXN1",
+            "bHQYAiABKAsyHi5TMkNfUHJvdG9jb2wuU19UZXN0R2FtZVJlc3VsdEIbqgIY",
+            "R29vZ2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolTestGameReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolPingPongReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolDanmakuReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolMoleReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolRaceReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolPingPongReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolDanmakuReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolMoleReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_RequestGameState), global::Google.Protobuf.Protocol.C_RequestGameState.Parser, new[]{ "GameId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DeltaGameObjectSoft), global::Google.Protobuf.Protocol.S_DeltaGameObjectSoft.Parser, new[]{ "Object" }, null, null, null, null),

@@ -402,3 +402,33 @@ bool Handle_C_R_ResponseMovementAndCollision(shared_ptr<PBSession> sessionRef, S
 	roomRef->PostEvent(&RaceRoom::HandleResponseMovementAndCollision, move(p), playerSessionRef->GetRoomIdx());
 	return true;
 }
+
+bool Handle_C_R_FallDown(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_R_FallDown& pkt) {
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
+	shared_ptr<RaceRoom> roomRef = dynamic_pointer_cast<RaceRoom>(playerSessionRef->GetJoinedRoom());
+	if (roomRef == nullptr)
+		return false;
+	if (playerSessionRef->GetRoomIdx() >= GGameManagers[1]->GetQuota() || playerSessionRef->GetRoomIdx() < 0)
+		return false;
+
+	roomRef->PostEvent(&RaceRoom::HandleFallDown, playerSessionRef->GetRoomIdx());
+	return true;
+}
+
+bool Handle_C_R_ArriveInNextLine(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_R_ArriveInNextLine& pkt) {
+	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return false;
+
+	shared_ptr<RaceRoom> roomRef = dynamic_pointer_cast<RaceRoom>(playerSessionRef->GetJoinedRoom());
+	if (roomRef == nullptr)
+		return false;
+	if (playerSessionRef->GetRoomIdx() >= GGameManagers[1]->GetQuota() || playerSessionRef->GetRoomIdx() < 0)
+		return false;
+
+	roomRef->PostEvent(&RaceRoom::HandleArriveInNextLine, playerSessionRef->GetRoomIdx(), pkt.lineid());
+	return true;
+}

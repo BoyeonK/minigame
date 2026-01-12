@@ -493,5 +493,28 @@ class PacketHandler {
 			Managers.Network.Race.ResponseSRTriggerObstacle(recvPkt.ObstacleId, recvPkt.TriggerId);
         });
     }
+
+    public static void S_R_ResponseFallDownHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_R_ResponseFallDown recvPkt))
+            return;
+		Vector3 pos = new() {
+			x = recvPkt.Position.X,
+			y = recvPkt.Position.Y,
+			z = recvPkt.Position.Z,
+		};
+
+        Managers.ExecuteAtMainThread(() => {
+			Managers.Network.Race.ResponseFallDown(pos);
+		});
+    }
+
+    public static void S_R_ResponseArriveInNextLineHandler(PacketSession session, IMessage packet) {
+        if (!(packet is S_R_ResponseArriveInNextLine recvPkt))
+            return;
+
+        Managers.ExecuteAtMainThread(() => {
+            Managers.Network.Race.ResponseArriveInNextLine(recvPkt.LineId);
+        });
+    }
 }
 

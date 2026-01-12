@@ -188,6 +188,47 @@ void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMove
 	_movementInfos[playerIdx].set_objectid(playerIdx);
 }
 
+void RaceRoom::HandleArriveInNextLine(int32_t playerIdx, int32_t lineId) {
+	if (lineId > _stages[playerIdx] and lineId <= 3) {
+		_stages[playerIdx] = lineId;
+		if (lineId == 3) {
+			//TODO: µµÂø
+		}
+	}
+}
+
+void RaceRoom::HandleFallDown(int32_t playerIdx) {
+	int32_t lineId = _stages[playerIdx];
+
+	S2C_Protocol::S_R_ResponseFallDown pkt;
+	S2C_Protocol::XYZ* position = pkt.mutable_position();
+	if (lineId == 0) {
+		position->set_x(0);
+		position->set_y(2);
+		position->set_z(0);
+	}
+	else if (lineId == 1) {
+		position->set_x(30);
+		position->set_y(2);
+		position->set_z(0);
+	}
+	else if (lineId == 2) {
+		position->set_x(52);
+		position->set_y(5.75);
+		position->set_z(0);
+	}
+
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	if (sendBuffer == nullptr)
+		return;
+
+	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
+	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+		return;
+
+	playerSessionRef->Send(sendBuffer);
+}
+
 void RaceRoom::RaceStart() {
 	PostEventAfter(60000, &RaceRoom::CountingPhase);
 }

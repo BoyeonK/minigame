@@ -3,7 +3,7 @@ syntax = "proto3";
 package S2C_Protocol;
 option csharp_namespace = "Google.Protobuf.Protocol";
 
-import "S2C_Protocol_TestGame.proto";
+import "S2C_Protocol_Race.proto";
 import "S2C_Protocol_PingPong.proto";
 import "S2C_Protocol_Danmaku.proto";
 import "S2C_Protocol_Common.proto";

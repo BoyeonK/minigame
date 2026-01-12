@@ -138,9 +138,6 @@
     <ClInclude Include="S2C_Protocol_PingPong.pb.h">
       <Filter>S2C\Network\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="S2C_Protocol_TestGame.pb.h">
-      <Filter>S2C\Network\Protocol</Filter>
-    </ClInclude>
     <ClInclude Include="PingPongGameBullet.h">
       <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
     </ClInclude>
@@ -155,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="RacePlayer.h">
       <Filter>S2C\GameObjects\Race\UnityGameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="S2C_Protocol_Race.pb.h">
+      <Filter>S2C\Network\Protocol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,9 +251,6 @@
     <ClCompile Include="S2C_Protocol_PingPong.pb.cc">
       <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="S2C_Protocol_TestGame.pb.cc">
-      <Filter>S2C\Network\Protocol</Filter>
-    </ClCompile>
     <ClCompile Include="PingPongGameBullet.cpp">
       <Filter>S2C\GameObjects\PingPong\UnityGameObjects</Filter>
     </ClCompile>
@@ -268,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="RacePlayer.cpp">
       <Filter>S2C\GameObjects\Race\UnityGameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="S2C_Protocol_Race.pb.cc">
+      <Filter>S2C\Network\Protocol</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
