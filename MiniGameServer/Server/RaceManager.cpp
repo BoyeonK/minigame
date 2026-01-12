@@ -74,6 +74,11 @@ void RaceManager::Update() {
 		return;
 	_lastUpdateRoomTick = now;
 
+	if (now - _lastPendingRoomsVectorAddTick > _pendingRoomsVectorAddTickPeriod) {
+		_lastPendingRoomsVectorAddTick = now;
+		AddRoomsFromPendingVector();
+	}
+
 	{
 		lock_guard<mutex> lock(_roomsLock);
 		for (auto& roomRef : _rooms) {
