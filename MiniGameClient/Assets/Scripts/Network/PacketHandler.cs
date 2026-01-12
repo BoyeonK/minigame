@@ -438,10 +438,6 @@ class PacketHandler {
         movementInfos.ForEach(movementInfo => { ResponseMovement_Internal(movementInfo); });
 
         SendMyMovementAndCollision_Internal();
-
-		Managers.ExecuteAtMainThread(() => {
-			Debug.Log("Get SRM");
-		});
     }
 
 	private static void ResponseCollision_Internal(float X, float Y, float Z) {

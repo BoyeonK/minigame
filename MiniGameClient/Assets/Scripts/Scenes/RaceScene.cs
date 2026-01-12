@@ -121,6 +121,7 @@ public class RaceScene : BaseScene {
             return;
 
         Managers.Network.Race.ArrivedInLine(1);
+        Debug.Log("ArrivedFirstLine");
     }
 
     public void ArrivedSecondLine() {
@@ -128,6 +129,7 @@ public class RaceScene : BaseScene {
             return;
 
         Managers.Network.Race.ArrivedInLine(2);
+        Debug.Log("ArrivedSecondLine");
     }
 
     public void ArrivedFinishLine() {

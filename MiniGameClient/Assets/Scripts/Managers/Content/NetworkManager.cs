@@ -648,7 +648,13 @@ public class NetworkManager {
         }
 
         public void ResponseFallDown(Vector3 pos) {
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
 
+            if (scene is RaceScene raceScene) {
+                raceScene.ForceMovePlayer(pos);
+            }
         }
 
         public void ArrivedInLine(int lineId) {

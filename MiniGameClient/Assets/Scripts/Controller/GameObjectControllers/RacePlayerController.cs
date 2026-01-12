@@ -303,6 +303,7 @@ public class RacePlayerController : GameObjectController {
         }
         else if (collision.gameObject.layer == boundaryLayer) {
             Managers.Network.Race.FallDown();
+            Debug.Log("Fall");
         }
     }
 

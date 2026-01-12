@@ -133,6 +133,8 @@ public:
 
 			//Race
 		GPacketHandler[PKT_C_R_RESPONSE_MOVEMENT_AND_COLLISION] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_R_ResponseMovementAndCollision>(Handle_C_R_ResponseMovementAndCollision, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_R_FALL_DOWN] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_R_FallDown>(Handle_C_R_FallDown, sessionRef, buffer, len); };
+		GPacketHandler[PKT_C_R_ARRIVE_IN_NEXT_LINE] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_R_ArriveInNextLine>(Handle_C_R_ArriveInNextLine, sessionRef, buffer, len); };
 
 			//PingPong
 		GPacketHandler[PKT_C_P_RESPONSE_PLAYER_BAR_POSITION] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_P_ResponsePlayerBarPosition>(Handle_C_P_ResponsePlayerBarPosition, sessionRef, buffer, len); };
