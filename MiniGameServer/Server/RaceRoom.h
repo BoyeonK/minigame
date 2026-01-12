@@ -34,6 +34,8 @@ public:
 	void BroadCastMovementAndCollision();
 	void HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMovementAndCollision pkt, int32_t playerIdx);
 	void RaceStart();
+	void OperateObstacle(int32_t obstacleId, int32_t operateId);
+	void OperateObstacles();
 	void CountingPhase();
 	void CalculateGameResult();
 	void UpdateGameResultToDB();

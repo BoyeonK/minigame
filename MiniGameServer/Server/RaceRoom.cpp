@@ -192,6 +192,33 @@ void RaceRoom::RaceStart() {
 	PostEventAfter(60000, &RaceRoom::CountingPhase);
 }
 
+void RaceRoom::OperateObstacle(int32_t obstacleId, int32_t operateId) {
+	S2C_Protocol::S_R_TriggerObstacle pkt;
+	pkt.set_obstacleid(obstacleId);
+	pkt.set_triggerid(operateId);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
+}
+
+void RaceRoom::OperateObstacles() {
+	if (_updateCount == 0) {
+		OperateObstacle(0, 0);
+		OperateObstacle(1, 1);
+	}
+	else if (_updateCount == 25) {
+		OperateObstacle(2, 0);
+		OperateObstacle(3, 1);
+	}
+	else if (_updateCount == 50) {
+		OperateObstacle(0, 1);
+		OperateObstacle(1, 0);
+	}
+	else if (_updateCount == 75) {
+		OperateObstacle(2, 1);
+		OperateObstacle(3, 0);
+	}
+}
+
 void RaceRoom::CountingPhase() {
 	cout << "Calculating" << endl;
 	_state = GameState::Counting;
@@ -258,6 +285,10 @@ void RaceRoom::Update() {
 		return;
 
 	_updateCount++;
+	if (_updateCount >= 100)
+		_updateCount = 0;
+
+	OperateObstacles();
 	BroadCastMovementAndCollision();
 }
 

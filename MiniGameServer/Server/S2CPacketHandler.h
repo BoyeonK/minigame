@@ -234,6 +234,7 @@ public:
 	//static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_UpdateMovementAndCollision& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_UPDATE_MOVEMENT_AND_COLLISION); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_SetReadyCommand& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_SET_READY_COMMAND); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_StartCommand& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_START_COMMAND); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_TriggerObstacle& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_TRIGGER_OBSTACLE); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_STATE, AESKey); }
@@ -241,6 +242,7 @@ public:
 	//static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_UpdateMovementAndCollision& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_UPDATE_MOVEMENT_AND_COLLISION, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_SetReadyCommand& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_SET_READY_COMMAND, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_StartCommand& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_START_COMMAND, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_TriggerObstacle& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_TRIGGER_OBSTACLE, AESKey); }
 #pragma endregion
 
 #pragma region PingPong

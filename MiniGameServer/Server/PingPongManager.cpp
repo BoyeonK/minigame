@@ -80,7 +80,7 @@ void PingPongManager::Update() {
 	_lastUpdateRoomTick = now;
 
 	{
-		lock_guard<shared_mutex> lock(_roomsLock);
+		lock_guard<mutex> lock(_roomsLock);
 		for (auto& roomRef : _rooms) {
 			roomRef->PostEvent(&GameRoom::Update);
 		}
