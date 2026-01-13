@@ -137,7 +137,7 @@ void RaceRoom::Countdown() {
 	BroadCastCountdownPacket(3);
 	PostEventAfter(1000, &RaceRoom::BroadCastCountdownPacket, 2);
 	PostEventAfter(2000, &RaceRoom::BroadCastCountdownPacket, 1);
-	PostEventAfter(3000, &RaceRoom::BroadCastCountdownPacket, 0);
+	PostEventAfter(3000, &RaceRoom::RaceStart);
 }
 
 void RaceRoom::BroadCastCountdownPacket(int32_t count) {
@@ -189,7 +189,7 @@ void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMove
 }
 
 void RaceRoom::HandleArriveInNextLine(int32_t playerIdx, int32_t lineId) {
-	if (lineId > _stages[playerIdx] and lineId <= 3) {
+	if (lineId == (_stages[playerIdx] + 1) and lineId <= 3) {
 		_stages[playerIdx] = lineId;
 
 		S2C_Protocol::S_R_ResponseArriveInNextLine pkt;
@@ -203,7 +203,7 @@ void RaceRoom::HandleArriveInNextLine(int32_t playerIdx, int32_t lineId) {
 		playerSessionRef->Send(sendBuffer);
 
 		if (lineId == 3) {
-			//TODO: 도착
+			WinnerDecided(playerIdx);
 		}
 	}
 }
@@ -211,7 +211,6 @@ void RaceRoom::HandleArriveInNextLine(int32_t playerIdx, int32_t lineId) {
 void RaceRoom::HandleFallDown(int32_t playerIdx) {
 	int32_t lineId = _stages[playerIdx];
 
-	cout << "Player " << playerIdx << " 가 라인 " << lineId << "에서 떨어졌습니다." << endl;
 	S2C_Protocol::S_R_ResponseFallDown pkt;
 	S2C_Protocol::XYZ* position = pkt.mutable_position();
 	if (lineId == 0) {
@@ -242,7 +241,8 @@ void RaceRoom::HandleFallDown(int32_t playerIdx) {
 }
 
 void RaceRoom::RaceStart() {
-	PostEventAfter(60000, &RaceRoom::CountingPhase);
+	BroadCastCountdownPacket(0);
+	PostEventAfter(120000, &RaceRoom::WinnerDecided, -1);
 }
 
 void RaceRoom::OperateObstacle(int32_t obstacleId, int32_t operateId) {
@@ -270,6 +270,10 @@ void RaceRoom::OperateObstacles() {
 		OperateObstacle(2, 1);
 		OperateObstacle(3, 0);
 	}
+}
+
+void RaceRoom::WinnerDecided(int32_t winnerIdx) {
+	CountingPhase();
 }
 
 void RaceRoom::CountingPhase() {
@@ -317,6 +321,12 @@ void RaceRoom::EndPhase() {
 	_dbids.clear();
 	_elos.clear();
 	_points.clear();
+	_nestedForces.clear();
+	_states.clear();
+	_stages.clear();
+	_loadedPlayers.clear();
+	_movementInfos.clear();
+	_movementAndCollisions.clear();
 	_state = GameState::EndGame;
 }
 

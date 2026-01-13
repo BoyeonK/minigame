@@ -39,6 +39,7 @@ public:
 	void RaceStart();
 	void OperateObstacle(int32_t obstacleId, int32_t operateId);
 	void OperateObstacles();
+	void WinnerDecided(int32_t winnerIdx);
 	void CountingPhase();
 	void CalculateGameResult();
 	void UpdateGameResultToDB();
