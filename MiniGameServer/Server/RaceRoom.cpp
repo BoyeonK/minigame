@@ -191,6 +191,7 @@ void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMove
 void RaceRoom::HandleArriveInNextLine(int32_t playerIdx, int32_t lineId) {
 	if (lineId > _stages[playerIdx] and lineId <= 3) {
 		_stages[playerIdx] = lineId;
+		cout << "Player " << playerIdx << " 가 라인 " << lineId << "에 도착했습니다." << endl;
 		if (lineId == 3) {
 			//TODO: 도착
 		}
@@ -200,6 +201,7 @@ void RaceRoom::HandleArriveInNextLine(int32_t playerIdx, int32_t lineId) {
 void RaceRoom::HandleFallDown(int32_t playerIdx) {
 	int32_t lineId = _stages[playerIdx];
 
+	cout << "Player " << playerIdx << " 가 라인 " << lineId << "에서 떨어졌습니다." << endl;
 	S2C_Protocol::S_R_ResponseFallDown pkt;
 	S2C_Protocol::XYZ* position = pkt.mutable_position();
 	if (lineId == 0) {
