@@ -9,8 +9,8 @@ public class GameResultTextUI : MonoBehaviour {
     List<TextMeshProUGUI> _scores = new List<TextMeshProUGUI>();
     TextMeshProUGUI _isWinner;
 
-    private void Start() {
-        Transform isWinnerTransform = transform.Find("isWinner");
+    public void Init() {
+        Transform isWinnerTransform = transform.Find("IsWinner");
         if (isWinnerTransform != null) {
             _isWinner = isWinnerTransform.GetComponent<TextMeshProUGUI>();
         }
@@ -66,7 +66,8 @@ public class GameResultTextUI : MonoBehaviour {
     }
 
     public void SetResultWinnerIdx() {
-        _isWinner.text = "";
+        if (_isWinner != null)
+            _isWinner.text = "";
 
         int pSize = Managers.Scene._playerIds.Count;
         if (pSize == 0 || pSize > 4)

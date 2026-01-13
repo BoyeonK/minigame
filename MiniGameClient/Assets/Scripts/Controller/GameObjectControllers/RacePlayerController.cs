@@ -367,5 +367,7 @@ public class RacePlayerController : GameObjectController {
         Managers.Input.RemoveKeyListener(KeyCode.A, AUp, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.S, SUp, InputManager.KeyState.Up);
         Managers.Input.RemoveKeyListener(KeyCode.D, DUp, InputManager.KeyState.Up);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

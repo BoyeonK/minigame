@@ -11,6 +11,8 @@ public class GameResultScene : BaseScene {
         GameObject textUI = GameObject.Find("GameResultTextUI");
         if (textUI != null) {
             _textUI = textUI.GetComponent<GameResultTextUI>();
+            if (_textUI != null)
+                _textUI.Init();
         }
     }
 
