@@ -481,6 +481,15 @@ class PacketHandler {
 		});
 	}
 
+	public static void S_R_SetReadyCommandHandler(PacketSession session, IMessage packet) {
+		if (!(packet is S_R_SetReadyCommand recvPkt))
+			return;
+
+		Managers.ExecuteAtMainThread(() => {
+			Managers.Network.Race.SetReadyCommandHandler(recvPkt.Countdown);
+        });
+	}
+
     public static void S_R_TriggerObstacleHandler(PacketSession session, IMessage packet) {
         if (!(packet is S_R_TriggerObstacle recvPkt))
             return;

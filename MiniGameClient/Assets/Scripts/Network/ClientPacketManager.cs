@@ -152,6 +152,10 @@ class PacketManager {
         _handler.Add((ushort)MsgId.SRMovementAndCollision, PacketHandler.S_R_MovementAndCollisionHandler);
         _msgFactories.Add((ushort)MsgId.SRMovementAndCollision, () => new S_R_MovementAndCollision());
 
+        _onRecv.Add((ushort)MsgId.SRSetReadyCommand, UnpackPacket<S_R_SetReadyCommand>);
+        _handler.Add((ushort)MsgId.SRSetReadyCommand, PacketHandler.S_R_SetReadyCommandHandler);
+        _msgFactories.Add((ushort)MsgId.SRSetReadyCommand, () => new S_R_SetReadyCommand());
+
         _onRecv.Add((ushort)MsgId.SRTriggerObstacle, UnpackPacket<S_R_TriggerObstacle>);
         _handler.Add((ushort)MsgId.SRTriggerObstacle, PacketHandler.S_R_TriggerObstacleHandler);
         _msgFactories.Add((ushort)MsgId.SRTriggerObstacle, () => new S_R_TriggerObstacle());

@@ -115,7 +115,7 @@ void RaceRoom::Start() {
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
-	PostEventAfter(3000, &RaceRoom::Countdown);
+	PostEventAfter(4000, &RaceRoom::Countdown);
 }
 
 void RaceRoom::SendGameState(int32_t playerIdx) {
@@ -137,7 +137,7 @@ void RaceRoom::Countdown() {
 	BroadCastCountdownPacket(3);
 	PostEventAfter(1000, &RaceRoom::BroadCastCountdownPacket, 2);
 	PostEventAfter(2000, &RaceRoom::BroadCastCountdownPacket, 1);
-	PostEventAfter(3000, &RaceRoom::RaceStart);
+	PostEventAfter(3000, &RaceRoom::BroadCastCountdownPacket, 0);
 }
 
 void RaceRoom::BroadCastCountdownPacket(int32_t count) {

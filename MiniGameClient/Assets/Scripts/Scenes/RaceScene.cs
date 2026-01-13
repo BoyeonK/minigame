@@ -8,6 +8,7 @@ public class RaceScene : BaseScene {
     private GameObject _tempCam;
     private RacePlayerController _myController;
     private Dictionary<int, RaceOpponentController> _opponentControllers = new();
+    private GameObject _startBlock;
     private List<HammerController> _hammerControllers = new();
     private List<ObjectiveLineController> _objectiveLineControllers = new();
     private int _arrivedLineCount = 0;
@@ -18,6 +19,7 @@ public class RaceScene : BaseScene {
         Managers.Scene.ResetLoadSceneOp();
         Debug.Log("RaceScene");
         _tempCam = GameObject.Find("TempCamera");
+        _startBlock = GameObject.Find("StartBlock");
 
         GameObject LHammerObj1 = GameObject.Find("LeftHammer1");
         GameObject LHammerObj2 = GameObject.Find("LeftHammer2");
@@ -77,6 +79,20 @@ public class RaceScene : BaseScene {
         _tempCam.SetActive(false);
     }
 
+    public void CountdownBeforeStart(int count) {
+        if (count == 0) {
+            _startBlock.SetActive(false);
+            ShowCountDownUIEffect("Go");
+        }
+        else {
+            ShowCountDownUIEffect(count.ToString());
+        }     
+    }
+
+    private void ShowCountDownUIEffect(string msg) {
+        Debug.Log($"{msg}...");
+    }
+
     public void RegisterMyController(GameObject obj) {
         if (obj != null)
             _myController = obj.GetComponent<RacePlayerController>();
@@ -121,16 +137,13 @@ public class RaceScene : BaseScene {
             return;
 
         Managers.Network.Race.ArrivedInLine(1);
-        Debug.Log("ArrivedFirstLine");
     }
 
     public void ArrivedSecondLine() {
-        Debug.Log("실행은 되니?");
         if (_arrivedLineCount != 1)
             return;
 
         Managers.Network.Race.ArrivedInLine(2);
-        Debug.Log("ArrivedSecondLine");
     }
 
     public void ArrivedFinishLine() {

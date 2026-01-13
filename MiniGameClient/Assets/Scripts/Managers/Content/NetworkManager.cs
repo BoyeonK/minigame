@@ -683,6 +683,16 @@ public class NetworkManager {
                 return _collidingObjectIdxs.Remove(objectIdx);
             }
         }
+
+        public void SetReadyCommandHandler(int countdown) {
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
+
+            if (scene is RaceScene raceScene) {
+                raceScene.CountdownBeforeStart(countdown);
+            }
+        }
     }
 
     public void TryRequestGameState(int gameId) {
