@@ -60,6 +60,9 @@ private:
 	vector<XYZ> _nestedForces;
 	vector<int32_t> _states;
 	vector<int32_t> _stages;
+	int32_t _winnerIdx = -1;
+	uint64_t _raceStartTick = 0;
+	uint64_t _raceEndTick = 0;
 
 	XYZ _zeroXYZ;
 	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;

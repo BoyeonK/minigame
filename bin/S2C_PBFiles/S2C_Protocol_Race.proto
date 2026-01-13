@@ -9,8 +9,9 @@ message S_TestGameState {
     repeated UnityGameObject objects = 1;
 }
 
-message S_TestGameResult {
-    
+message S_R_Result {
+    bool isWinner = 1;
+    int32 winnerIdx = 2;
 }
 
 message S_R_ResponseState {

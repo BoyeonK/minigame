@@ -35,9 +35,8 @@ namespace Google.Protobuf.Protocol {
             "EVNfU3Bhd25HYW1lT2JqZWN0Ei0KBm9iamVjdBgBIAEoCzIdLlMyQ19Qcm90",
             "b2NvbC5Vbml0eUdhbWVPYmplY3QiRAoTU19EZXNwYXduR2FtZU9iamVjdBIt",
             "CgZvYmplY3QYASABKAsyHS5TMkNfUHJvdG9jb2wuVW5pdHlHYW1lT2JqZWN0",
-            "IlMKCVNfRW5kR2FtZRIOCgZnYW1lSWQYASABKAUSNgoOdGVzdEdhbWVSZXN1",
-            "bHQYAiABKAsyHi5TMkNfUHJvdG9jb2wuU19UZXN0R2FtZVJlc3VsdEIbqgIY",
-            "R29vZ2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
+            "IhsKCVNfRW5kR2FtZRIOCgZnYW1lSWQYASABKAVCG6oCGEdvb2dsZS5Qcm90",
+            "b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolRaceReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolPingPongReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolDanmakuReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, global::Google.Protobuf.Protocol.S2CProtocolMoleReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -46,7 +45,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DeltaGameObjectHard), global::Google.Protobuf.Protocol.S_DeltaGameObjectHard.Parser, new[]{ "Object" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_SpawnGameObject), global::Google.Protobuf.Protocol.S_SpawnGameObject.Parser, new[]{ "Object" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_DespawnGameObject), global::Google.Protobuf.Protocol.S_DespawnGameObject.Parser, new[]{ "Object" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EndGame), global::Google.Protobuf.Protocol.S_EndGame.Parser, new[]{ "GameId", "TestGameResult" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EndGame), global::Google.Protobuf.Protocol.S_EndGame.Parser, new[]{ "GameId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1122,7 +1121,6 @@ namespace Google.Protobuf.Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_EndGame(S_EndGame other) : this() {
       gameId_ = other.gameId_;
-      testGameResult_ = other.testGameResult_ != null ? other.testGameResult_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1144,18 +1142,6 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
-    /// <summary>Field number for the "testGameResult" field.</summary>
-    public const int TestGameResultFieldNumber = 2;
-    private global::Google.Protobuf.Protocol.S_TestGameResult testGameResult_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.Protocol.S_TestGameResult TestGameResult {
-      get { return testGameResult_; }
-      set {
-        testGameResult_ = value;
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1172,7 +1158,6 @@ namespace Google.Protobuf.Protocol {
         return true;
       }
       if (GameId != other.GameId) return false;
-      if (!object.Equals(TestGameResult, other.TestGameResult)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1181,7 +1166,6 @@ namespace Google.Protobuf.Protocol {
     public override int GetHashCode() {
       int hash = 1;
       if (GameId != 0) hash ^= GameId.GetHashCode();
-      if (testGameResult_ != null) hash ^= TestGameResult.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1204,10 +1188,6 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(GameId);
       }
-      if (testGameResult_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(TestGameResult);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1222,10 +1202,6 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(8);
         output.WriteInt32(GameId);
       }
-      if (testGameResult_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(TestGameResult);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1238,9 +1214,6 @@ namespace Google.Protobuf.Protocol {
       int size = 0;
       if (GameId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(GameId);
-      }
-      if (testGameResult_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TestGameResult);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1256,12 +1229,6 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.GameId != 0) {
         GameId = other.GameId;
-      }
-      if (other.testGameResult_ != null) {
-        if (testGameResult_ == null) {
-          TestGameResult = new global::Google.Protobuf.Protocol.S_TestGameResult();
-        }
-        TestGameResult.MergeFrom(other.TestGameResult);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1286,13 +1253,6 @@ namespace Google.Protobuf.Protocol {
             GameId = input.ReadInt32();
             break;
           }
-          case 18: {
-            if (testGameResult_ == null) {
-              TestGameResult = new global::Google.Protobuf.Protocol.S_TestGameResult();
-            }
-            input.ReadMessage(TestGameResult);
-            break;
-          }
         }
       }
     #endif
@@ -1314,13 +1274,6 @@ namespace Google.Protobuf.Protocol {
             break;
           case 8: {
             GameId = input.ReadInt32();
-            break;
-          }
-          case 18: {
-            if (testGameResult_ == null) {
-              TestGameResult = new global::Google.Protobuf.Protocol.S_TestGameResult();
-            }
-            input.ReadMessage(TestGameResult);
             break;
           }
         }

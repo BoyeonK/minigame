@@ -37,7 +37,6 @@ public:
 	int32_t CalculateEloW(int32_t winnerElo, int32_t opponentElo);
 	int32_t CalculateEloL(int32_t loserElo, int32_t opponentElo);
 
-
 protected:
 	int32_t _roomId = 0;
 	int32_t _nxtObjectId = 0;

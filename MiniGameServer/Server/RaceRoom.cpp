@@ -242,6 +242,7 @@ void RaceRoom::HandleFallDown(int32_t playerIdx) {
 
 void RaceRoom::RaceStart() {
 	BroadCastCountdownPacket(0);
+	_raceStartTick = GetTickCount64();
 	PostEventAfter(120000, &RaceRoom::WinnerDecided, -1);
 }
 
@@ -273,45 +274,103 @@ void RaceRoom::OperateObstacles() {
 }
 
 void RaceRoom::WinnerDecided(int32_t winnerIdx) {
+	if (_state != GameState::OnGoing)
+		return;
+
+	_raceEndTick = GetTickCount64();
+	_winnerIdx = winnerIdx;
+
+	_state = GameState::Counting;
 	CountingPhase();
 }
 
 void RaceRoom::CountingPhase() {
 	cout << "Calculating" << endl;
-	_state = GameState::Counting;
 	_isUpdateCall = false;
 	CalculateGameResult();
 }
 
 void RaceRoom::CalculateGameResult() {
+	int32_t point = (120000 - (_raceEndTick - _raceStartTick)) / 100;
+
+	if (_winnerIdx != -1)
+		_points[_winnerIdx] = point >= 0 ? point : 0;
+
 	for (int i = 0; i < _quota; i++) {
 		auto playerSessionRef = _playerWRefs[i].lock();
 		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 			continue;
 
+		S2C_Protocol::S_R_Result pkt;
+
+		if (i == _winnerIdx)
+			pkt.set_iswinner(true);
+		else
+			pkt.set_iswinner(false);
+		pkt.set_winneridx(_winnerIdx);
+
+		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+		playerSessionRef->Send(sendBuffer);
+
 		playerSessionRef->SetJoinedRoom(nullptr);
 		playerSessionRef->SetMatchingState(GameType::None);
 	}
 
-	S2C_Protocol::S_EndGame pkt = S2CPacketMaker::MakeSEndGame();
-	pkt.set_gameid(int(_ty));
-	S2C_Protocol::S_TestGameResult* pTestGameResult = pkt.mutable_testgameresult();
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-	BroadCast(sendBuffer);
-
-	PostEvent(&RaceRoom::EndPhase);
+	PostEvent(&RaceRoom::UpdateGameResultToDB);
 }
 
 void RaceRoom::UpdateGameResultToDB() {
-
+	UpdateRecords();
+	UpdateElos();
+	PostEvent(&RaceRoom::EndPhase);
 }
 
 void RaceRoom::UpdateRecords() {
+	for (int i = 0; i < _quota; i++) {
+		auto playerSessionRef = _playerWRefs[i].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
 
+		int32_t dbid = playerSessionRef->GetDbid();
+		if (_points[i] > playerSessionRef->GetPersonalRecord(int(_ty))) {
+			DBManager->S2D_UpdatePersonalRecord(playerSessionRef, dbid, int(_ty), _points[i]);
+		}
+		GGameManagers[int(_ty)]->CompareAndRenewPublicRecord(dbid, _points[i]);
+	}
 }
 
 void RaceRoom::UpdateElos() {
+	if (_winnerIdx == -1)
+		return;
 
+	int32_t bestLosersElo = 0;
+	int32_t winnerElo = _elos[_winnerIdx];
+
+	for (int i = 0; i < _quota; i++) {
+		if (i == _winnerIdx)
+			continue;
+		if (_elos[i] > bestLosersElo)
+			bestLosersElo = _elos[i];
+	}
+
+	if (bestLosersElo != 0) {
+		for (int i = 0; i < _quota; i++) {
+			int32_t calculatedElo = -1;
+			if (i == _winnerIdx)
+				calculatedElo = CalculateEloW(_elos[i], bestLosersElo);
+			else
+				calculatedElo = CalculateEloL(_elos[i], _elos[_winnerIdx]);
+
+			if (calculatedElo == -1)
+				continue;
+
+			int32_t dbid = _dbids[i];
+			DBManager->S2D_UpdateElo(dbid, int(_ty), calculatedElo);
+		}
+	}
+	else {
+		cout << "너무 많은 플레이어가 이탈했거나, 정상적인 진행이 되지 않은 게임" << endl;
+	}
 }
 
 void RaceRoom::EndPhase() {

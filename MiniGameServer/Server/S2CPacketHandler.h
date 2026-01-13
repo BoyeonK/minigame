@@ -45,7 +45,7 @@ enum : uint16_t {
 	PKT_S_GAME_SCENE_LOADING_PROGRESS = 32,
 
 	PKT_S_TESTGAME_STATE = 100,
-	PKT_S_TESTGAME_RESULT = 101,
+	PKT_S_R_RESULT = 101,
 	PKT_S_R_RESPONSE_STATE = 102,
 	PKT_S_R_MOVEMENT_AND_COLLISION = 103,
 	PKT_C_R_RESPONSE_MOVEMENT_AND_COLLISION = 104,
@@ -237,6 +237,7 @@ public:
 
 #pragma region Race
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_Result& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_RESULT); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseState& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_STATE); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_MovementAndCollision& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_MOVEMENT_AND_COLLISION); }
 	//static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_UpdateMovementAndCollision& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_UPDATE_MOVEMENT_AND_COLLISION); }
@@ -247,6 +248,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseArriveInNextLine& pkt) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_ARRIVE_IN_NEXT_LINE); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_TestGameState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_TESTGAME_STATE, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_Result& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_RESULT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_ResponseState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_RESPONSE_STATE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_MovementAndCollision& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_MOVEMENT_AND_COLLISION, AESKey); }
 	//static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_R_UpdateMovementAndCollision& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_R_UPDATE_MOVEMENT_AND_COLLISION, AESKey); }

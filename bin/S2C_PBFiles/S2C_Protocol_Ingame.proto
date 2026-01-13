@@ -34,5 +34,4 @@ message S_DespawnGameObject {
 
 message S_EndGame {
     int32 gameId = 1;
-    S_TestGameResult testGameResult = 2;
 }

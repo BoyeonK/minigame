@@ -25,24 +25,6 @@ namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
 namespace S2C_Protocol {
-              template <typename>
-PROTOBUF_CONSTEXPR S_TestGameResult::S_TestGameResult(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(_class_data_.base()){}
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase() {
-}
-#endif  // PROTOBUF_CUSTOM_VTABLE
-struct S_TestGameResultDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR S_TestGameResultDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~S_TestGameResultDefaultTypeInternal() {}
-  union {
-    S_TestGameResult _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_TestGameResultDefaultTypeInternal _S_TestGameResult_default_instance_;
 
 inline constexpr S_R_TriggerObstacle::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -112,6 +94,32 @@ struct S_R_SetReadyCommandDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_R_SetReadyCommandDefaultTypeInternal _S_R_SetReadyCommand_default_instance_;
+
+inline constexpr S_R_Result::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : iswinner_{false},
+        winneridx_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_R_Result::S_R_Result(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_R_ResultDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_R_ResultDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_R_ResultDefaultTypeInternal() {}
+  union {
+    S_R_Result _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_R_ResultDefaultTypeInternal _S_R_Result_default_instance_;
 
 inline constexpr S_R_ResponseArriveInNextLine::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -328,13 +336,15 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_TestGameState, _impl_.objects_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_TestGameResult, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_R_Result, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_R_Result, _impl_.iswinner_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_R_Result, _impl_.winneridx_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_R_ResponseState, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -439,21 +449,21 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::S2C_Protocol::S_TestGameState)},
-        {9, -1, -1, sizeof(::S2C_Protocol::S_TestGameResult)},
-        {17, -1, -1, sizeof(::S2C_Protocol::S_R_ResponseState)},
-        {27, 38, -1, sizeof(::S2C_Protocol::S_R_MovementAndCollision)},
-        {41, 51, -1, sizeof(::S2C_Protocol::C_R_ResponseMovementAndCollision)},
-        {53, -1, -1, sizeof(::S2C_Protocol::S_R_SetReadyCommand)},
-        {62, -1, -1, sizeof(::S2C_Protocol::S_R_StartCommand)},
-        {70, -1, -1, sizeof(::S2C_Protocol::S_R_TriggerObstacle)},
-        {80, -1, -1, sizeof(::S2C_Protocol::C_R_FallDown)},
-        {88, 97, -1, sizeof(::S2C_Protocol::S_R_ResponseFallDown)},
-        {98, -1, -1, sizeof(::S2C_Protocol::C_R_ArriveInNextLine)},
-        {107, -1, -1, sizeof(::S2C_Protocol::S_R_ResponseArriveInNextLine)},
+        {9, -1, -1, sizeof(::S2C_Protocol::S_R_Result)},
+        {19, -1, -1, sizeof(::S2C_Protocol::S_R_ResponseState)},
+        {29, 40, -1, sizeof(::S2C_Protocol::S_R_MovementAndCollision)},
+        {43, 53, -1, sizeof(::S2C_Protocol::C_R_ResponseMovementAndCollision)},
+        {55, -1, -1, sizeof(::S2C_Protocol::S_R_SetReadyCommand)},
+        {64, -1, -1, sizeof(::S2C_Protocol::S_R_StartCommand)},
+        {72, -1, -1, sizeof(::S2C_Protocol::S_R_TriggerObstacle)},
+        {82, -1, -1, sizeof(::S2C_Protocol::C_R_FallDown)},
+        {90, 99, -1, sizeof(::S2C_Protocol::S_R_ResponseFallDown)},
+        {100, -1, -1, sizeof(::S2C_Protocol::C_R_ArriveInNextLine)},
+        {109, -1, -1, sizeof(::S2C_Protocol::S_R_ResponseArriveInNextLine)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_TestGameState_default_instance_._instance,
-    &::S2C_Protocol::_S_TestGameResult_default_instance_._instance,
+    &::S2C_Protocol::_S_R_Result_default_instance_._instance,
     &::S2C_Protocol::_S_R_ResponseState_default_instance_._instance,
     &::S2C_Protocol::_S_R_MovementAndCollision_default_instance_._instance,
     &::S2C_Protocol::_C_R_ResponseMovementAndCollision_default_instance_._instance,
@@ -470,24 +480,25 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fRace_2eproto[] ABSL_ATTRIB
     "\n\027S2C_Protocol_Race.proto\022\014S2C_Protocol\032"
     "\031S2C_Protocol_Common.proto\"A\n\017S_TestGame"
     "State\022.\n\007objects\030\001 \003(\0132\035.S2C_Protocol.Un"
-    "ityGameObject\"\022\n\020S_TestGameResult\"U\n\021S_R"
-    "_ResponseState\022\020\n\010playerId\030\001 \001(\005\022.\n\007obje"
-    "cts\030\002 \003(\0132\035.S2C_Protocol.UnityGameObject"
-    "\"\232\001\n\030S_R_MovementAndCollision\022\020\n\010playerI"
-    "d\030\001 \001(\005\022/\n\024collisionNestedForce\030\002 \001(\0132\021."
-    "S2C_Protocol.XYZ\022;\n\rmovementInfos\030\003 \003(\0132"
-    "$.S2C_Protocol.GameObjectMovementInfo\"q\n"
-    " C_R_ResponseMovementAndCollision\022:\n\014mov"
-    "ementInfo\030\001 \001(\0132$.S2C_Protocol.GameObjec"
-    "tMovementInfo\022\021\n\tobjectIds\030\002 \003(\005\"(\n\023S_R_"
-    "SetReadyCommand\022\021\n\tcountdown\030\001 \001(\005\"\022\n\020S_"
-    "R_StartCommand\"<\n\023S_R_TriggerObstacle\022\022\n"
-    "\nobstacleId\030\001 \001(\005\022\021\n\ttriggerId\030\002 \001(\005\"\016\n\014"
-    "C_R_FallDown\";\n\024S_R_ResponseFallDown\022#\n\010"
-    "position\030\001 \001(\0132\021.S2C_Protocol.XYZ\"&\n\024C_R"
-    "_ArriveInNextLine\022\016\n\006lineId\030\001 \001(\005\".\n\034S_R"
-    "_ResponseArriveInNextLine\022\016\n\006lineId\030\001 \001("
-    "\005B\033\252\002\030Google.Protobuf.Protocolb\006proto3"
+    "ityGameObject\"1\n\nS_R_Result\022\020\n\010isWinner\030"
+    "\001 \001(\010\022\021\n\twinnerIdx\030\002 \001(\005\"U\n\021S_R_Response"
+    "State\022\020\n\010playerId\030\001 \001(\005\022.\n\007objects\030\002 \003(\013"
+    "2\035.S2C_Protocol.UnityGameObject\"\232\001\n\030S_R_"
+    "MovementAndCollision\022\020\n\010playerId\030\001 \001(\005\022/"
+    "\n\024collisionNestedForce\030\002 \001(\0132\021.S2C_Proto"
+    "col.XYZ\022;\n\rmovementInfos\030\003 \003(\0132$.S2C_Pro"
+    "tocol.GameObjectMovementInfo\"q\n C_R_Resp"
+    "onseMovementAndCollision\022:\n\014movementInfo"
+    "\030\001 \001(\0132$.S2C_Protocol.GameObjectMovement"
+    "Info\022\021\n\tobjectIds\030\002 \003(\005\"(\n\023S_R_SetReadyC"
+    "ommand\022\021\n\tcountdown\030\001 \001(\005\"\022\n\020S_R_StartCo"
+    "mmand\"<\n\023S_R_TriggerObstacle\022\022\n\nobstacle"
+    "Id\030\001 \001(\005\022\021\n\ttriggerId\030\002 \001(\005\"\016\n\014C_R_FallD"
+    "own\";\n\024S_R_ResponseFallDown\022#\n\010position\030"
+    "\001 \001(\0132\021.S2C_Protocol.XYZ\"&\n\024C_R_ArriveIn"
+    "NextLine\022\016\n\006lineId\030\001 \001(\005\".\n\034S_R_Response"
+    "ArriveInNextLine\022\016\n\006lineId\030\001 \001(\005B\033\252\002\030Goo"
+    "gle.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fRace_2eproto_deps[1] =
     {
@@ -497,7 +508,7 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fRace_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fRace_2eproto = {
     false,
     false,
-    838,
+    869,
     descriptor_table_protodef_S2C_5fProtocol_5fRace_2eproto,
     "S2C_Protocol_Race.proto",
     &descriptor_table_S2C_5fProtocol_5fRace_2eproto_once,
@@ -759,106 +770,243 @@ void S_TestGameState::InternalSwap(S_TestGameState* PROTOBUF_RESTRICT other) {
 }
 // ===================================================================
 
-class S_TestGameResult::_Internal {
+class S_R_Result::_Internal {
  public:
 };
 
-S_TestGameResult::S_TestGameResult(::google::protobuf::Arena* arena)
+S_R_Result::S_R_Result(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_TestGameResult)
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_R_Result)
 }
-S_TestGameResult::S_TestGameResult(
-    ::google::protobuf::Arena* arena,
-    const S_TestGameResult& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  S_TestGameResult* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
+S_R_Result::S_R_Result(
+    ::google::protobuf::Arena* arena, const S_R_Result& from)
+    : S_R_Result(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S_R_Result::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
 
-  // @@protoc_insertion_point(copy_constructor:S2C_Protocol.S_TestGameResult)
+inline void S_R_Result::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, iswinner_),
+           0,
+           offsetof(Impl_, winneridx_) -
+               offsetof(Impl_, iswinner_) +
+               sizeof(Impl_::winneridx_));
+}
+S_R_Result::~S_R_Result() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_R_Result)
+  SharedDtor(*this);
+}
+inline void S_R_Result::SharedDtor(MessageLite& self) {
+  S_R_Result& this_ = static_cast<S_R_Result&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
 }
 
-inline void* S_TestGameResult::PlacementNew_(const void*, void* mem,
+inline void* S_R_Result::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) S_TestGameResult(arena);
+  return ::new (mem) S_R_Result(arena);
 }
-constexpr auto S_TestGameResult::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_TestGameResult),
-                                            alignof(S_TestGameResult));
+constexpr auto S_R_Result::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_R_Result),
+                                            alignof(S_R_Result));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull S_TestGameResult::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull S_R_Result::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_S_TestGameResult_default_instance_._instance,
+        &_S_R_Result_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &S_TestGameResult::MergeImpl,
-        ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<S_TestGameResult>(),
+        &S_R_Result::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_R_Result>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &S_TestGameResult::SharedDtor,
-        ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<S_TestGameResult>(), &S_TestGameResult::ByteSizeLong,
-            &S_TestGameResult::_InternalSerialize,
+        &S_R_Result::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_R_Result>(), &S_R_Result::ByteSizeLong,
+            &S_R_Result::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(S_TestGameResult, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(S_R_Result, _impl_._cached_size_),
         false,
     },
-    &S_TestGameResult::kDescriptorMethods,
+    &S_R_Result::kDescriptorMethods,
     &descriptor_table_S2C_5fProtocol_5fRace_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* S_TestGameResult::GetClassData() const {
+const ::google::protobuf::internal::ClassData* S_R_Result::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 0, 0, 0, 2> S_TestGameResult::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> S_R_Result::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    0, 0,  // max_field_number, fast_idx_mask
+    2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967295,  // skipmap
-    offsetof(decltype(_table_), field_names),  // no field_entries
-    0,  // num_field_entries
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_TestGameResult>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_R_Result>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
+    // int32 winnerIdx = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_R_Result, _impl_.winneridx_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S_R_Result, _impl_.winneridx_)}},
+    // bool isWinner = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(S_R_Result, _impl_.iswinner_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_R_Result, _impl_.iswinner_)}},
   }}, {{
     65535, 65535
+  }}, {{
+    // bool isWinner = 1;
+    {PROTOBUF_FIELD_OFFSET(S_R_Result, _impl_.iswinner_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+    // int32 winnerIdx = 2;
+    {PROTOBUF_FIELD_OFFSET(S_R_Result, _impl_.winneridx_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
-  // no field_entries, or aux_entries
+  // no aux_entries
   {{
   }},
 };
 
+PROTOBUF_NOINLINE void S_R_Result::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_R_Result)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.iswinner_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.winneridx_) -
+      reinterpret_cast<char*>(&_impl_.iswinner_)) + sizeof(_impl_.winneridx_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_R_Result::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_R_Result& this_ = static_cast<const S_R_Result&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_R_Result::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_R_Result& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_R_Result)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool isWinner = 1;
+          if (this_._internal_iswinner() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_iswinner(), target);
+          }
+
+          // int32 winnerIdx = 2;
+          if (this_._internal_winneridx() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_winneridx(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_R_Result)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_R_Result::ByteSizeLong(const MessageLite& base) {
+          const S_R_Result& this_ = static_cast<const S_R_Result&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_R_Result::ByteSizeLong() const {
+          const S_R_Result& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_R_Result)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // bool isWinner = 1;
+            if (this_._internal_iswinner() != 0) {
+              total_size += 2;
+            }
+            // int32 winnerIdx = 2;
+            if (this_._internal_winneridx() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_winneridx());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_R_Result::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_R_Result*>(&to_msg);
+  auto& from = static_cast<const S_R_Result&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_R_Result)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_iswinner() != 0) {
+    _this->_impl_.iswinner_ = from._impl_.iswinner_;
+  }
+  if (from._internal_winneridx() != 0) {
+    _this->_impl_.winneridx_ = from._impl_.winneridx_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_R_Result::CopyFrom(const S_R_Result& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_R_Result)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
 
 
+void S_R_Result::InternalSwap(S_R_Result* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(S_R_Result, _impl_.winneridx_)
+      + sizeof(S_R_Result::_impl_.winneridx_)
+      - PROTOBUF_FIELD_OFFSET(S_R_Result, _impl_.iswinner_)>(
+          reinterpret_cast<char*>(&_impl_.iswinner_),
+          reinterpret_cast<char*>(&other->_impl_.iswinner_));
+}
 
-
-
-
-
-::google::protobuf::Metadata S_TestGameResult::GetMetadata() const {
-  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
+::google::protobuf::Metadata S_R_Result::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
