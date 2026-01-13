@@ -191,7 +191,17 @@ void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMove
 void RaceRoom::HandleArriveInNextLine(int32_t playerIdx, int32_t lineId) {
 	if (lineId > _stages[playerIdx] and lineId <= 3) {
 		_stages[playerIdx] = lineId;
-		cout << "Player " << playerIdx << " 가 라인 " << lineId << "에 도착했습니다." << endl;
+
+		S2C_Protocol::S_R_ResponseArriveInNextLine pkt;
+		pkt.set_lineid(lineId);
+		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+
+		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			return;
+
+		playerSessionRef->Send(sendBuffer);
+
 		if (lineId == 3) {
 			//TODO: 도착
 		}

@@ -125,6 +125,7 @@ public class RaceScene : BaseScene {
     }
 
     public void ArrivedSecondLine() {
+        Debug.Log("실행은 되니?");
         if (_arrivedLineCount != 1)
             return;
 
@@ -144,6 +145,7 @@ public class RaceScene : BaseScene {
     }
 
     public void ConfirmArrivedLine(int lineId) {
+        Debug.Log($"ConfirmArrivedLine: {lineId}");
         _arrivedLineCount = lineId;
     }
 
