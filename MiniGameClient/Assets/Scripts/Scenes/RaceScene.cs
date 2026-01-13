@@ -162,6 +162,12 @@ public class RaceScene : BaseScene {
         _arrivedLineCount = lineId;
     }
 
+    public void EndGame(bool isWinner, int winnerIdx) { 
+        //TODO: 3ÃÊ Scene Á¤Áö.
+        Managers.Network.Match.ResetMatchState();
+        Managers.Scene.EndGame(isWinner, winnerIdx);
+    }
+
     public override void Clear() {
         
     }

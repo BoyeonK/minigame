@@ -21,6 +21,8 @@ public class SceneManagerEx {
     private float _progress = 0.0f;
 
     public bool _isWinner = false;
+    public bool _isScoreResult = true;
+    public int _winnerIdx = -1;
     public List<string> _playerIds = new List<string>();
     public List<int> _scores = new List<int>();
 
@@ -92,8 +94,17 @@ public class SceneManagerEx {
 
     public void EndGame(bool isWinner, List<int> scores) {
         _isWinner = isWinner;
+        _isScoreResult = true;
         _playerIds = Managers.Network.Match.GetIngamePlayerIds();
         _scores = scores;
+        Managers.Scene.LoadSceneWithLoadingScene(Define.Scene.Login, Define.Scene.GameResult);
+    }
+
+    public void EndGame(bool isWinner, int winnerIdx) {
+        _isWinner = isWinner;
+        _isScoreResult = false;
+        _winnerIdx = winnerIdx;
+        _playerIds = Managers.Network.Match.GetIngamePlayerIds();
         Managers.Scene.LoadSceneWithLoadingScene(Define.Scene.Login, Define.Scene.GameResult);
     }
 

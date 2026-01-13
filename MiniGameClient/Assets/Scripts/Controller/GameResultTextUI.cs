@@ -33,7 +33,7 @@ public class GameResultTextUI : MonoBehaviour {
         }
     }
 
-    public void SetResult() {
+    public void SetResultScore() {
         if (_isWinner != null) {
             if (Managers.Scene._isWinner) {
                 _isWinner.text = "½Â¸®";
@@ -61,6 +61,27 @@ public class GameResultTextUI : MonoBehaviour {
             _scores[i].text = Managers.Scene._scores[i].ToString();
         }
         for (int i = sSize; i < 4; i++) {
+            _scores[i].text = "";
+        }
+    }
+
+    public void SetResultWinnerIdx() {
+        _isWinner.text = "";
+
+        int pSize = Managers.Scene._playerIds.Count;
+        if (pSize == 0 || pSize > 4)
+            return;
+
+        for (int i = 0; i < pSize; i++) {
+            _playerIds[i].text = Managers.Scene._playerIds[i];
+        }
+        for (int i = pSize; i < 4; i++) {
+            _playerIds[i].text = "";
+        }
+        for (int i = 0; i < pSize; i++) {
+            _scores[i].text = (Managers.Scene._winnerIdx == i) ? "½Â¸®" : "ÆÐ¹è";
+        }
+        for (int i = pSize; i < 4; i++) {
             _scores[i].text = "";
         }
     }

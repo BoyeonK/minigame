@@ -17,7 +17,11 @@ public class GameResultScene : BaseScene {
     private void Start() {
         Debug.Log("게임 결과창 스타트함수");
         Managers.Scene.LoadSceneAsync();
-        _textUI.SetResult();
+
+        if (Managers.Scene._isScoreResult)
+            _textUI.SetResultScore();
+        else
+            _textUI.SetResultWinnerIdx();
     }
 
     private void Update() {

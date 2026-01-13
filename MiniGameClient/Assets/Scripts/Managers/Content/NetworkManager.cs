@@ -693,6 +693,16 @@ public class NetworkManager {
                 raceScene.CountdownBeforeStart(countdown);
             }
         }
+
+        public void ResponseSRResult(bool isWinner, int winnerIdx) {
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
+
+            if (scene is RaceScene raceScene) {
+                raceScene.EndGame(isWinner, winnerIdx);
+            }
+        }
     }
 
     public void TryRequestGameState(int gameId) {

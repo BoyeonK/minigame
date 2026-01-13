@@ -521,5 +521,12 @@ class PacketHandler {
             Managers.Network.Race.ResponseArriveInNextLine(recvPkt.LineId);
         });
     }
+
+	public static void S_R_ResultHandler(PacketSession session, IMessage packet) {
+		if (!(packet is S_R_Result recvPkt))
+			return;
+
+        Managers.ExecuteAtMainThread(() => { Managers.Network.Race.ResponseSRResult(recvPkt.IsWinner, recvPkt.WinnerIdx); });
+    }
 }
 
