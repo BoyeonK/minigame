@@ -1,17 +1,19 @@
 using Google.Protobuf.Protocol;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
 public class RaceScene : BaseScene {
-    private GameObject _tempCam;
-    private RacePlayerController _myController;
-    private Dictionary<int, RaceOpponentController> _opponentControllers = new();
-    private GameObject _startBlock;
-    private List<HammerController> _hammerControllers = new();
-    private List<ObjectiveLineController> _objectiveLineControllers = new();
-    private int _arrivedLineCount = 0;
+    UI_Race_EndGame _uiEndGame;
+    GameObject _tempCam;
+    RacePlayerController _myController;
+    Dictionary<int, RaceOpponentController> _opponentControllers = new();
+    GameObject _startBlock;
+    List<HammerController> _hammerControllers = new();
+    List<ObjectiveLineController> _objectiveLineControllers = new();
+    int _arrivedLineCount = 0;
 
     protected override void Init() {
         base.Init();
@@ -71,6 +73,9 @@ public class RaceScene : BaseScene {
                 _objectiveLineControllers.Add(objLineController3);
             }   
         }
+
+        _uiEndGame = Managers.UI.ShowSceneUI<UI_Race_EndGame>();
+        Managers.UI.DisableUI("UI_Race_EndGame");
 
         Managers.Network.TryRequestGameState((int)GameType.Race);
     }
@@ -162,8 +167,19 @@ public class RaceScene : BaseScene {
         _arrivedLineCount = lineId;
     }
 
-    public void EndGame(bool isWinner, int winnerIdx) { 
-        //TODO: 3ÃÊ Scene Á¤Áö.
+    public void EndGame(bool isWinner, int winnerIdx) {
+        Managers.UI.ShowSceneUI<UI_Race_EndGame>();
+
+        StartCoroutine(EndGameRoutine(isWinner, winnerIdx));
+    }
+
+    private IEnumerator EndGameRoutine(bool isWinner, int winnerIdx) {
+        Time.timeScale = 0f;
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        Time.timeScale = 1f;
+
         Managers.Network.Match.ResetMatchState();
         Managers.Scene.EndGame(isWinner, winnerIdx);
     }
