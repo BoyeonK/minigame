@@ -7,6 +7,7 @@ using static Define;
 
 public class RaceScene : BaseScene {
     UI_Race_EndGame _uiEndGame;
+    UI_PrintMessage _uiPrintMessage;
     GameObject _tempCam;
     RacePlayerController _myController;
     Dictionary<int, RaceOpponentController> _opponentControllers = new();
@@ -74,8 +75,8 @@ public class RaceScene : BaseScene {
             }   
         }
 
-        _uiEndGame = Managers.UI.ShowSceneUI<UI_Race_EndGame>();
-        Managers.UI.DisableUI("UI_Race_EndGame");
+        _uiEndGame = Managers.UI.CacheSceneUI<UI_Race_EndGame>();
+        _uiPrintMessage = Managers.UI.CacheSceneUI<UI_PrintMessage>();
 
         Managers.Network.TryRequestGameState((int)GameType.Race);
     }
@@ -87,15 +88,19 @@ public class RaceScene : BaseScene {
     public void CountdownBeforeStart(int count) {
         if (count == 0) {
             _startBlock.SetActive(false);
-            ShowCountDownUIEffect("Go");
+            _uiPrintMessage.SetTextTop("Go!");
+            _uiPrintMessage.SetTextColorTop(255, 0, 0, 255);
+            StartCoroutine(CountdownClearRoutine(0.5f));
         }
         else {
-            ShowCountDownUIEffect(count.ToString());
+            Managers.UI.ShowSceneUI<UI_PrintMessage>();
+            _uiPrintMessage.SetTextTop(count.ToString());
         }     
     }
 
-    private void ShowCountDownUIEffect(string msg) {
-        Debug.Log($"{msg}...");
+    private IEnumerator CountdownClearRoutine(float delay) {
+        yield return new WaitForSeconds(delay);
+        Managers.UI.DisableUI("UI_PrintMessage");
     }
 
     public void RegisterMyController(GameObject obj) {

@@ -109,6 +109,18 @@ public class UIManager {
         }
     }
 
+    public T CacheSceneUI<T>() where T : UI_Scene {
+        T sceneUI = ShowSceneUI<T>();
+        DisableUI(typeof(T).Name);
+        return sceneUI;
+    }
+
+    public T CachePopupUI<T>() where T : UI_Popup {
+        T popupUI = ShowPopupUI<T>();
+        DisableUI(typeof(T).Name);
+        return popupUI;
+    }
+
     public void Clear() {
         //캐시를 비우고, sortOrder를 정상화.
         foreach (var pair in _uiCache) {

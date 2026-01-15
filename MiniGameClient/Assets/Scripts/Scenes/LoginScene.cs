@@ -45,24 +45,15 @@ public class LoginScene : BaseScene {
         Managers.Scene.ResetLoadSceneOp();
 
         //사용할 UI를 미리 메모리에 올려둔다.
-        _uiStartGame = Managers.UI.ShowSceneUI<UI_StartGame>();
-        _uiLoginOrCreateAccount = Managers.UI.ShowSceneUI<UI_LoginOrCreateAccount>();
-        _uiLoginPopup = Managers.UI.ShowPopupUI<UI_LoginPopup>();
-        _uiCreateAccountPopup = Managers.UI.ShowPopupUI<UI_CreateAccountPopup>();
-        _uiLobbyMenu = Managers.UI.ShowSceneUI<UI_LobbyMenu>();
-        _uiMatchMakeMenu = Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
-        _uiPersonalRecord = Managers.UI.ShowSceneUI<UI_PersonalRecord>();
-        _uiPublicRecord = Managers.UI.ShowSceneUI<UI_PublicRecord>();
-        _uiMatchMakeProgress = Managers.UI.ShowPopupUI<UI_MatchMakeProgress>();
-        Managers.UI.DisableUI("UI_StartGame");
-        Managers.UI.DisableUI("UI_LoginOrCreateAccount");
-        Managers.UI.DisableUI("UI_LoginPopup");
-        Managers.UI.DisableUI("UI_CreateAccountPopup");
-        Managers.UI.DisableUI("UI_LobbyMenu");
-        Managers.UI.DisableUI("UI_MatchMakeMenu");
-        Managers.UI.DisableUI("UI_PersonalRecord");
-        Managers.UI.DisableUI("UI_PublicRecord");
-        Managers.UI.DisableUI("UI_MatchMakeProgress");
+        _uiStartGame = Managers.UI.CacheSceneUI<UI_StartGame>();
+        _uiLoginOrCreateAccount = Managers.UI.CacheSceneUI<UI_LoginOrCreateAccount>();
+        _uiLoginPopup = Managers.UI.CachePopupUI<UI_LoginPopup>();
+        _uiCreateAccountPopup = Managers.UI.CachePopupUI<UI_CreateAccountPopup>();
+        _uiLobbyMenu = Managers.UI.CacheSceneUI<UI_LobbyMenu>();
+        _uiMatchMakeMenu = Managers.UI.CacheSceneUI<UI_MatchMakeMenu>();
+        _uiPersonalRecord = Managers.UI.CacheSceneUI<UI_PersonalRecord>();
+        _uiPublicRecord = Managers.UI.CacheSceneUI<UI_PublicRecord>();
+        _uiMatchMakeProgress = Managers.UI.CachePopupUI<UI_MatchMakeProgress>();
 
         GameObject screen = GameObject.Find("Screen");
         if (screen != null) {
