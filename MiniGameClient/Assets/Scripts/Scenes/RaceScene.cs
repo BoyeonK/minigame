@@ -13,6 +13,7 @@ public class RaceScene : BaseScene {
     Dictionary<int, RaceOpponentController> _opponentControllers = new();
     GameObject _startBlock;
     List<HammerController> _hammerControllers = new();
+    List<BridgeController> _bridgeControllers = new();
     List<ObjectiveLineController> _objectiveLineControllers = new();
     int _arrivedLineCount = 0;
 
@@ -24,30 +25,59 @@ public class RaceScene : BaseScene {
         _tempCam = GameObject.Find("TempCamera");
         _startBlock = GameObject.Find("StartBlock");
 
-        GameObject LHammerObj1 = GameObject.Find("LeftHammer1");
-        GameObject LHammerObj2 = GameObject.Find("LeftHammer2");
-        GameObject RHammerObj1 = GameObject.Find("RightHammer1");
-        GameObject RHammerObj2 = GameObject.Find("RightHammer2");
+        GameObject secondLineObj = GameObject.Find("SecondLine");
+        if (secondLineObj != null) {
+            Transform lh1Trans = secondLineObj.transform.Find("LeftHammer1");
+            HammerController hammer1 = lh1Trans.GetComponent<HammerController>();
+            if (hammer1 != null)
+                _hammerControllers.Add(hammer1);
 
-        if (LHammerObj1 != null) {
-            HammerController hammer = LHammerObj1.GetComponent<HammerController>();
-            if (hammer != null)
-                _hammerControllers.Add(hammer);
+            Transform lh2Trans = secondLineObj.transform.Find("LeftHammer2");
+            HammerController hammer2 = lh1Trans.GetComponent<HammerController>();
+            if (hammer2 != null)
+                _hammerControllers.Add(hammer1);
+
+            Transform rh1Trans = secondLineObj.transform.Find("RightHammer1");
+            HammerController hammer3 = lh1Trans.GetComponent<HammerController>();
+            if (hammer3 != null)
+                _hammerControllers.Add(hammer1);
+
+            Transform rh2Trans = secondLineObj.transform.Find("RightHammer2");
+            HammerController hammer4 = lh1Trans.GetComponent<HammerController>();
+            if (hammer4 != null)
+                _hammerControllers.Add(hammer1);
         }
-        if (LHammerObj2 != null) {
-            HammerController hammer = LHammerObj2.GetComponent<HammerController>();
-            if (hammer != null)
-                _hammerControllers.Add(hammer);
-        }
-        if (RHammerObj1 != null) {
-            HammerController hammer = RHammerObj1.GetComponent<HammerController>();
-            if (hammer != null)
-                _hammerControllers.Add(hammer);
-        }
-        if (RHammerObj2 != null) {
-            HammerController hammer = RHammerObj2.GetComponent<HammerController>();
-            if (hammer != null)
-                _hammerControllers.Add(hammer);
+
+        GameObject fourthLineObj = GameObject.Find("FourthLine");
+        if (fourthLineObj != null) {
+            Transform br1Trans = fourthLineObj.transform.Find("Bridge1");
+            BridgeController bridge1 = br1Trans.GetComponent<BridgeController>();
+            if (bridge1 != null) {
+                bridge1.Init();
+                _bridgeControllers.Add(bridge1);
+            }
+                
+
+            Transform br2Trans = fourthLineObj.transform.Find("Bridge2");
+            BridgeController bridge2 = br2Trans.GetComponent<BridgeController>();
+            if (bridge2 != null) {
+                bridge2.Init();
+                _bridgeControllers.Add(bridge2);
+            }
+
+            Transform br3Trans = fourthLineObj.transform.Find("Bridge3");
+            BridgeController bridge3 = br3Trans.GetComponent<BridgeController>();
+            if (bridge3 != null) {
+                bridge3.Init();
+                _bridgeControllers.Add(bridge3);
+            }
+
+            Transform br4Trans = fourthLineObj.transform.Find("Bridge4");
+            BridgeController bridge4 = br4Trans.GetComponent<BridgeController>();
+            if (bridge4 != null) {
+                bridge4.Init();
+                _bridgeControllers.Add(bridge4);
+            }
         }
 
         GameObject objLine1 = GameObject.Find("ObjectiveLine1");
