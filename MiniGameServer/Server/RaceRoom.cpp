@@ -255,21 +255,12 @@ void RaceRoom::OperateObstacle(int32_t obstacleId, int32_t operateId) {
 }
 
 void RaceRoom::OperateObstacles() {
+	_updateCount = (_updateCount + 1) % 80;
 	if (_updateCount == 0) {
 		OperateObstacle(0, 0);
-		OperateObstacle(1, 1);
 	}
-	else if (_updateCount == 25) {
-		OperateObstacle(2, 0);
-		OperateObstacle(3, 1);
-	}
-	else if (_updateCount == 50) {
+	else if (_updateCount == 40) {
 		OperateObstacle(0, 1);
-		OperateObstacle(1, 0);
-	}
-	else if (_updateCount == 75) {
-		OperateObstacle(2, 1);
-		OperateObstacle(3, 0);
 	}
 }
 
@@ -405,10 +396,6 @@ void RaceRoom::ReturnToPool() {
 void RaceRoom::Update() {
 	if (!_isUpdateCall)
 		return;
-
-	_updateCount++;
-	if (_updateCount >= 100)
-		_updateCount = 0;
 
 	OperateObstacles();
 	BroadCastMovementAndCollision();

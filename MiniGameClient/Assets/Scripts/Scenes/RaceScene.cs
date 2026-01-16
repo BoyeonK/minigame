@@ -163,13 +163,35 @@ public class RaceScene : BaseScene {
     }
 
     public void OperateObstacle(int obstacleId, int triggerId) {
-        if (obstacleId < 0 || obstacleId >= _hammerControllers.Count)
-            return;
-        
-        if (triggerId == 0)
-            _hammerControllers[obstacleId].SwingToLeft();
-        else if (triggerId == 1)
-            _hammerControllers[obstacleId].SwingToRight();
+        if (obstacleId == 0) {
+            if (_hammerControllers.Count != 4)
+                return;
+
+            if (triggerId == 0) {
+                _hammerControllers[0].SwingToLeft();
+                _hammerControllers[1].SwingToRight();
+                _hammerControllers[2].SwingToRight();
+                _hammerControllers[3].SwingToLeft();
+            }
+            else if (triggerId == 1) {
+                _hammerControllers[0].SwingToRight();
+                _hammerControllers[1].SwingToLeft();
+                _hammerControllers[2].SwingToLeft();
+                _hammerControllers[3].SwingToRight();
+            }
+        }
+        else if (obstacleId == 1) {
+            if (_bridgeControllers.Count != 4)
+                return;
+            for (int i = 0; i < 4; i++) {
+                bool isActive = (triggerId & (1 << i)) != 0;
+
+                if (isActive)
+                    _bridgeControllers[i].EnableBridgeCollider();
+                else
+                    _bridgeControllers[i].DisableBridgeColliderAfterSecond(2f);
+            }
+        }
     }
 
     public void ArrivedFirstLine() { 
