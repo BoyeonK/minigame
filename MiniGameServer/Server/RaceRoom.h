@@ -69,4 +69,6 @@ private:
 	S2C_Protocol::S_R_MovementAndCollision _tempMACpkt;
 	vector<S2C_Protocol::S_R_MovementAndCollision> _movementAndCollisions;
 	vector<S2C_Protocol::GameObjectMovementInfo> _movementInfos;
+
+	static constexpr int candidates[] = { 3, 5, 6, 9, 10, 12 };
 };

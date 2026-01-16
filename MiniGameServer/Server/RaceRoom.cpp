@@ -257,10 +257,14 @@ void RaceRoom::OperateObstacle(int32_t obstacleId, int32_t operateId) {
 void RaceRoom::OperateObstacles() {
 	_updateCount = (_updateCount + 1) % 80;
 	if (_updateCount == 0) {
+		int idx = rand() % 6;
 		OperateObstacle(0, 0);
+		OperateObstacle(1, candidates[idx]);
 	}
 	else if (_updateCount == 40) {
+		int idx = rand() % 6;
 		OperateObstacle(0, 1);
+		OperateObstacle(1, candidates[idx]);
 	}
 }
 
