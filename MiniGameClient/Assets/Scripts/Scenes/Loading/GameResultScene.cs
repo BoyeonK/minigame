@@ -21,7 +21,7 @@ public class GameResultScene : BaseScene {
                 _textUI.Init();
         }
 
-        GameObject sceneChangeBtn = GameObject.Find("SceneChangeButton");
+        GameObject sceneChangeBtn = GameObject.Find("SceneChangeBtn");
         if (sceneChangeBtn != null) {
             _sceneChangeBtn = sceneChangeBtn.GetComponent<Button>();
             if (_sceneChangeBtn != null) {
@@ -47,13 +47,19 @@ public class GameResultScene : BaseScene {
 
     private void Update() {
         if (!_isLoaded) {
+            Debug.Log("로딩중 업데이트 함수");
             float progress = Managers.Scene.GetLoadingProgressRate();
             if (progress > 0.8999f) {
+                Debug.Log("로딩 완료");
                 _isLoaded = true;
-                if (_buttonText != null)
+                if (_buttonText != null) {
                     _buttonText.text = "로비로 이동";
-                if (_sceneChangeBtn != null)
+                }
+                    
+                if (_sceneChangeBtn != null) {
                     _sceneChangeBtn.interactable = true;
+                }
+                    
             }
         }
     }
