@@ -130,16 +130,28 @@ void MoleRoom::CountdownBeforeStart(int32_t count) {
 void MoleRoom::OnGoingPhase1() {
 	_isUpdateCall = true;
 	CountdownBeforeStart(0);
-	PostEventAfter(1000, &MoleRoom::SetSlotState, 1, SlotState::Green);
-	PostEventAfter(2000, &MoleRoom::SetSlotState, 2, SlotState::Red);
-	PostEventAfter(3000, &MoleRoom::SetSlotState, 3, SlotState::Green);
-	PostEventAfter(4000, &MoleRoom::SetSlotState, 4, SlotState::Red);
-	PostEventAfter(5000, &MoleRoom::SetSlotState, 5, SlotState::Green);
-	PostEventAfter(6000, &MoleRoom::SetSlotState, 6, SlotState::Red);
-	PostEventAfter(7000, &MoleRoom::SetSlotState, 7, SlotState::Green);
-	PostEventAfter(8000, &MoleRoom::SetSlotState, 8, SlotState::Red);
-	PostEventAfter(9000, &MoleRoom::SetSlotState, 9, SlotState::Green);
-	PostEventAfter(13000, &MoleRoom::CountingPhase);
+
+	int delay = 0;
+
+	for (int i = 1; i <= MAX_WAVE; i++) {
+		int32_t isRedExcluded = rand() % 3;
+		int32_t gSlot = rand() % SLOT_COUNT + 1;
+
+		int32_t randDelay = rand() % MAX_RAND_DELAY;
+		int32_t baseDelay = START_DELAY - i * DELAY_DECREMENT + randDelay;
+		delay += baseDelay;
+
+		if (isRedExcluded != 0)
+			PostEventAfter(delay, &MoleRoom::SetSlotState, move(gSlot), SlotState::Green);
+		else {
+			int32_t rSlot = rand() % SLOT_COUNT + 1;
+			while (gSlot == rSlot)
+				rSlot = rand() % SLOT_COUNT + 1;
+			PostEventAfter(delay, &MoleRoom::SetSlotState, move(gSlot), SlotState::Green);
+			PostEventAfter(delay, &MoleRoom::SetSlotState, move(rSlot), SlotState::Red);
+		}
+	}
+	PostEventAfter(delay + 2000, &MoleRoom::CountingPhase);
 }
 
 void MoleRoom::OnGoingPhase2() {

@@ -28,6 +28,7 @@ public:
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
 	
 	void Start();
+	void CountdownBeforeStart(int32_t count);
 	void OnGoingPhase1();
 	void OnGoingPhase2();
 
@@ -61,6 +62,12 @@ private:
 	vector<int> _winners;
 	vector<SlotState> _slotStates;
 	vector<bool> _isStunned;
+
+	static constexpr int MAX_WAVE = 15;
+	static constexpr int SLOT_COUNT = 9;
+	static constexpr int START_DELAY = 1200;
+	static constexpr int DELAY_DECREMENT = 20;
+	static constexpr int MAX_RAND_DELAY = 30;
 
 	void HitRed(const int32_t& playerIdx, const int32_t& slotNum);
 	void HitYellow(const int32_t& playerIdx);
