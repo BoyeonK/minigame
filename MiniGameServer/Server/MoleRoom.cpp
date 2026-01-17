@@ -114,11 +114,22 @@ void MoleRoom::Start() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 
+	PostEventAfter(2000, &MoleRoom::CountdownBeforeStart, 3);
+	PostEventAfter(3000, &MoleRoom::CountdownBeforeStart, 2);
+	PostEventAfter(4000, &MoleRoom::CountdownBeforeStart, 1);
 	PostEventAfter(5000, &MoleRoom::OnGoingPhase1);
+}
+
+void MoleRoom::CountdownBeforeStart(int32_t count) {
+	S2C_Protocol::S_M_ReadyForStart pkt;
+	pkt.set_countdown(count);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
 }
 
 void MoleRoom::OnGoingPhase1() {
 	_isUpdateCall = true;
+	CountdownBeforeStart(0);
 	PostEventAfter(1000, &MoleRoom::SetSlotState, 1, SlotState::Green);
 	PostEventAfter(2000, &MoleRoom::SetSlotState, 2, SlotState::Red);
 	PostEventAfter(3000, &MoleRoom::SetSlotState, 3, SlotState::Green);
