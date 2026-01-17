@@ -156,6 +156,31 @@ struct S_M_RenewScoresDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_M_RenewScoresDefaultTypeInternal _S_M_RenewScores_default_instance_;
 
+inline constexpr S_M_ReadyForStart::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : countdown_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR S_M_ReadyForStart::S_M_ReadyForStart(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct S_M_ReadyForStartDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_M_ReadyForStartDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_M_ReadyForStartDefaultTypeInternal() {}
+  union {
+    S_M_ReadyForStart _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_M_ReadyForStartDefaultTypeInternal _S_M_ReadyForStart_default_instance_;
+
 inline constexpr C_M_HitSlot::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : slotidx_{0},
@@ -245,6 +270,15 @@ const ::uint32_t
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_RenewScores, _impl_.scores_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_ReadyForStart, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_ReadyForStart, _impl_.countdown_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -255,6 +289,7 @@ static const ::_pbi::MigrationSchema
         {30, -1, -1, sizeof(::S2C_Protocol::C_M_HitSlot)},
         {39, -1, -1, sizeof(::S2C_Protocol::S_M_ResponseHitSlot)},
         {48, -1, -1, sizeof(::S2C_Protocol::S_M_RenewScores)},
+        {57, -1, -1, sizeof(::S2C_Protocol::S_M_ReadyForStart)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_M_State_default_instance_._instance,
@@ -263,6 +298,7 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_C_M_HitSlot_default_instance_._instance,
     &::S2C_Protocol::_S_M_ResponseHitSlot_default_instance_._instance,
     &::S2C_Protocol::_S_M_RenewScores_default_instance_._instance,
+    &::S2C_Protocol::_S_M_ReadyForStart_default_instance_._instance,
 };
 const char descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -273,7 +309,8 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto[] ABSL_ATTRIB
     "\n\020S_M_SetSlotState\022\017\n\007slotIdx\030\001 \001(\005\022\r\n\005s"
     "tate\030\002 \001(\005\"\036\n\013C_M_HitSlot\022\017\n\007slotIdx\030\001 \001"
     "(\005\"(\n\023S_M_ResponseHitSlot\022\021\n\tisStunned\030\001"
-    " \001(\010\"!\n\017S_M_RenewScores\022\016\n\006scores\030\001 \003(\005B"
+    " \001(\010\"!\n\017S_M_RenewScores\022\016\n\006scores\030\001 \003(\005\""
+    "&\n\021S_M_ReadyForStart\022\021\n\tcountdown\030\001 \001(\005B"
     "\033\252\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fMole_2eproto_deps[1] =
@@ -284,13 +321,13 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fMole_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fMole_2eproto = {
     false,
     false,
-    356,
+    396,
     descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto,
     "S2C_Protocol_Mole.proto",
     &descriptor_table_S2C_5fProtocol_5fMole_2eproto_once,
     descriptor_table_S2C_5fProtocol_5fMole_2eproto_deps,
     1,
-    6,
+    7,
     schemas,
     file_default_instances,
     TableStruct_S2C_5fProtocol_5fMole_2eproto::offsets,
@@ -1728,6 +1765,213 @@ void S_M_RenewScores::InternalSwap(S_M_RenewScores* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata S_M_RenewScores::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class S_M_ReadyForStart::_Internal {
+ public:
+};
+
+S_M_ReadyForStart::S_M_ReadyForStart(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:S2C_Protocol.S_M_ReadyForStart)
+}
+S_M_ReadyForStart::S_M_ReadyForStart(
+    ::google::protobuf::Arena* arena, const S_M_ReadyForStart& from)
+    : S_M_ReadyForStart(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE S_M_ReadyForStart::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void S_M_ReadyForStart::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.countdown_ = {};
+}
+S_M_ReadyForStart::~S_M_ReadyForStart() {
+  // @@protoc_insertion_point(destructor:S2C_Protocol.S_M_ReadyForStart)
+  SharedDtor(*this);
+}
+inline void S_M_ReadyForStart::SharedDtor(MessageLite& self) {
+  S_M_ReadyForStart& this_ = static_cast<S_M_ReadyForStart&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* S_M_ReadyForStart::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) S_M_ReadyForStart(arena);
+}
+constexpr auto S_M_ReadyForStart::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(S_M_ReadyForStart),
+                                            alignof(S_M_ReadyForStart));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull S_M_ReadyForStart::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_S_M_ReadyForStart_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &S_M_ReadyForStart::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<S_M_ReadyForStart>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &S_M_ReadyForStart::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<S_M_ReadyForStart>(), &S_M_ReadyForStart::ByteSizeLong,
+            &S_M_ReadyForStart::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(S_M_ReadyForStart, _impl_._cached_size_),
+        false,
+    },
+    &S_M_ReadyForStart::kDescriptorMethods,
+    &descriptor_table_S2C_5fProtocol_5fMole_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* S_M_ReadyForStart::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> S_M_ReadyForStart::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::S2C_Protocol::S_M_ReadyForStart>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 countdown = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_M_ReadyForStart, _impl_.countdown_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_ReadyForStart, _impl_.countdown_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 countdown = 1;
+    {PROTOBUF_FIELD_OFFSET(S_M_ReadyForStart, _impl_.countdown_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void S_M_ReadyForStart::Clear() {
+// @@protoc_insertion_point(message_clear_start:S2C_Protocol.S_M_ReadyForStart)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.countdown_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* S_M_ReadyForStart::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const S_M_ReadyForStart& this_ = static_cast<const S_M_ReadyForStart&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* S_M_ReadyForStart::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const S_M_ReadyForStart& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:S2C_Protocol.S_M_ReadyForStart)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 countdown = 1;
+          if (this_._internal_countdown() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_countdown(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:S2C_Protocol.S_M_ReadyForStart)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t S_M_ReadyForStart::ByteSizeLong(const MessageLite& base) {
+          const S_M_ReadyForStart& this_ = static_cast<const S_M_ReadyForStart&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t S_M_ReadyForStart::ByteSizeLong() const {
+          const S_M_ReadyForStart& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:S2C_Protocol.S_M_ReadyForStart)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // int32 countdown = 1;
+            if (this_._internal_countdown() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_countdown());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void S_M_ReadyForStart::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<S_M_ReadyForStart*>(&to_msg);
+  auto& from = static_cast<const S_M_ReadyForStart&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:S2C_Protocol.S_M_ReadyForStart)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_countdown() != 0) {
+    _this->_impl_.countdown_ = from._impl_.countdown_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_M_ReadyForStart::CopyFrom(const S_M_ReadyForStart& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:S2C_Protocol.S_M_ReadyForStart)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void S_M_ReadyForStart::InternalSwap(S_M_ReadyForStart* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.countdown_, other->_impl_.countdown_);
+}
+
+::google::protobuf::Metadata S_M_ReadyForStart::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

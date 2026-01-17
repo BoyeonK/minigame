@@ -81,6 +81,7 @@ enum : uint16_t {
 	PKT_C_M_HIT_SLOT = 403,
 	PKT_S_M_RESPONSE_HIT_SLOT = 404,
 	PKT_S_M_RENEW_SCORES = 405,
+	PKT_S_M_READY_FOR_START = 406,
 };
 
 bool Handle_Invalid(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len);
@@ -293,12 +294,14 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_SetSlotState& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_SET_SLOT_STATE); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_ResponseHitSlot& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_RESPONSE_HIT_SLOT); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_RenewScores& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_RENEW_SCORES); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_ReadyForStart& pkt) { return MakeSendBufferRef(pkt, PKT_S_M_READY_FOR_START); }
 
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_State& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_STATE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_Result& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_RESULT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_SetSlotState& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_SET_SLOT_STATE, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_ResponseHitSlot& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_RESPONSE_HIT_SLOT, AESKey); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_RenewScores& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_RENEW_SCORES, AESKey); }
+	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_M_ReadyForStart& pkt, const vector<unsigned char>& AESKey) { return MakeSendBufferRef(pkt, PKT_S_M_READY_FOR_START, AESKey); }
 #pragma endregion
 
 private:

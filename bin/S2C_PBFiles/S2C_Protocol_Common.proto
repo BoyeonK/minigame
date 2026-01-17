@@ -75,6 +75,7 @@ enum MsgId {
     C_M_HIT_SLOT = 403;
     S_M_RESPONSE_HIT_SLOT = 404;
     S_M_RENEW_SCORES = 405;
+    S_M_READY_FOR_START = 406;
 }
 
 message XYZ {

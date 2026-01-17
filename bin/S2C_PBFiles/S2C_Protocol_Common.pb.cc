@@ -181,7 +181,7 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto[] ABSL_ATTR
     "fo\022\020\n\010objectId\030\001 \001(\005\022#\n\010position\030\002 \001(\0132\021"
     ".S2C_Protocol.XYZ\022 \n\005front\030\003 \001(\0132\021.S2C_P"
     "rotocol.XYZ\022#\n\010velocity\030\004 \001(\0132\021.S2C_Prot"
-    "ocol.XYZ\022\r\n\005state\030\005 \001(\005*\317\014\n\005MsgId\022\r\n\tS_W"
+    "ocol.XYZ\022\r\n\005state\030\005 \001(\005*\351\014\n\005MsgId\022\r\n\tS_W"
     "ELCOME\020\000\022\r\n\tC_WELCOME\020\001\022\026\n\022S_WELCOME_RES"
     "PONSE\020\002\022\017\n\013S_ENCRYPTED\020\003\022\017\n\013C_ENCRYPTED\020"
     "\004\022\013\n\007C_LOGIN\020\005\022\013\n\007S_LOGIN\020\006\022\024\n\020C_CREATE_"
@@ -222,13 +222,14 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto[] ABSL_ATTR
     "_STATE\020\220\003\022\017\n\nS_M_RESULT\020\221\003\022\027\n\022S_M_SET_SL"
     "OT_STATE\020\222\003\022\021\n\014C_M_HIT_SLOT\020\223\003\022\032\n\025S_M_RE"
     "SPONSE_HIT_SLOT\020\224\003\022\025\n\020S_M_RENEW_SCORES\020\225"
-    "\003B\033\252\002\030Google.Protobuf.Protocolb\006proto3"
+    "\003\022\030\n\023S_M_READY_FOR_START\020\226\003B\033\252\002\030Google.P"
+    "rotobuf.Protocolb\006proto3"
 };
 static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fCommon_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fCommon_2eproto = {
     false,
     false,
-    1998,
+    2024,
     descriptor_table_protodef_S2C_5fProtocol_5fCommon_2eproto,
     "S2C_Protocol_Common.proto",
     &descriptor_table_S2C_5fProtocol_5fCommon_2eproto_once,
@@ -247,7 +248,7 @@ const ::google::protobuf::EnumDescriptor* MsgId_descriptor() {
   return file_level_enum_descriptors_S2C_5fProtocol_5fCommon_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t MsgId_internal_data_[] = {
-    2162688u, 384u, 0u, 0u, 65272u, 0u, 0u, 1048448u, 0u, 0u, 6144u, 0u, 0u, 2064384u, };
+    2162688u, 384u, 0u, 0u, 65272u, 0u, 0u, 1048448u, 0u, 0u, 6144u, 0u, 0u, 4161536u, };
 bool MsgId_IsValid(int value) {
   return ::_pbi::ValidateEnum(value, MsgId_internal_data_);
 }

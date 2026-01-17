@@ -20,7 +20,6 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
-#include "google/protobuf/generated_message_bases.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
@@ -790,10 +789,11 @@ class S_P_RenewScores final : public ::google::protobuf::Message
 };
 // -------------------------------------------------------------------
 
-class S_P_ReadyForStart final : public ::google::protobuf::internal::ZeroFieldsBase
+class S_P_ReadyForStart final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:S2C_Protocol.S_P_ReadyForStart) */ {
  public:
   inline S_P_ReadyForStart() : S_P_ReadyForStart(nullptr) {}
+  ~S_P_ReadyForStart() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
   void operator delete(S_P_ReadyForStart* msg, std::destroying_delete_t) {
@@ -867,21 +867,49 @@ class S_P_ReadyForStart final : public ::google::protobuf::internal::ZeroFieldsB
   // implements Message ----------------------------------------------
 
   S_P_ReadyForStart* New(::google::protobuf::Arena* arena = nullptr) const {
-    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<S_P_ReadyForStart>(arena);
+    return ::google::protobuf::Message::DefaultConstruct<S_P_ReadyForStart>(arena);
   }
-  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const S_P_ReadyForStart& from) {
-    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
-  }
-  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const S_P_ReadyForStart& from) {
-    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
-  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const S_P_ReadyForStart& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const S_P_ReadyForStart& from) { S_P_ReadyForStart::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
   public:
   bool IsInitialized() const {
     return true;
   }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(S_P_ReadyForStart* other);
  private:
   template <typename T>
   friend ::absl::string_view(
@@ -906,12 +934,25 @@ class S_P_ReadyForStart final : public ::google::protobuf::internal::ZeroFieldsB
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
+  enum : int {
+    kCountdownFieldNumber = 1,
+  };
+  // int32 countdown = 1;
+  void clear_countdown() ;
+  ::int32_t countdown() const;
+  void set_countdown(::int32_t value);
+
+  private:
+  ::int32_t _internal_countdown() const;
+  void _internal_set_countdown(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:S2C_Protocol.S_P_ReadyForStart)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 0, 0,
+      0, 1, 0,
       0, 2>
       _table_;
 
@@ -929,8 +970,11 @@ class S_P_ReadyForStart final : public ::google::protobuf::internal::ZeroFieldsB
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const S_P_ReadyForStart& from_msg);
+    ::int32_t countdown_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_S2C_5fProtocol_5fPingPong_2eproto;
 };
 // -------------------------------------------------------------------
@@ -3010,6 +3054,28 @@ inline ::google::protobuf::RepeatedField<::int32_t>* S_P_Result::_internal_mutab
 // -------------------------------------------------------------------
 
 // S_P_ReadyForStart
+
+// int32 countdown = 1;
+inline void S_P_ReadyForStart::clear_countdown() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.countdown_ = 0;
+}
+inline ::int32_t S_P_ReadyForStart::countdown() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_ReadyForStart.countdown)
+  return _internal_countdown();
+}
+inline void S_P_ReadyForStart::set_countdown(::int32_t value) {
+  _internal_set_countdown(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_ReadyForStart.countdown)
+}
+inline ::int32_t S_P_ReadyForStart::_internal_countdown() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.countdown_;
+}
+inline void S_P_ReadyForStart::_internal_set_countdown(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.countdown_ = value;
+}
 
 // -------------------------------------------------------------------
 

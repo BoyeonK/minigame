@@ -23,7 +23,7 @@ message S_P_Result {
 }
 
 message S_P_ReadyForStart {
-
+    int32 countdown = 1;
 }
 
 //repeated를 사용했으면 어땠을까?

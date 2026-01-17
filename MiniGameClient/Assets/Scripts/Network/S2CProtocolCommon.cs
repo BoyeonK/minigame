@@ -31,7 +31,7 @@ namespace Google.Protobuf.Protocol {
             "R2FtZU9iamVjdE1vdmVtZW50SW5mbxIQCghvYmplY3RJZBgBIAEoBRIjCghw",
             "b3NpdGlvbhgCIAEoCzIRLlMyQ19Qcm90b2NvbC5YWVoSIAoFZnJvbnQYAyAB",
             "KAsyES5TMkNfUHJvdG9jb2wuWFlaEiMKCHZlbG9jaXR5GAQgASgLMhEuUzJD",
-            "X1Byb3RvY29sLlhZWhINCgVzdGF0ZRgFIAEoBSrPDAoFTXNnSWQSDQoJU19X",
+            "X1Byb3RvY29sLlhZWhINCgVzdGF0ZRgFIAEoBSrpDAoFTXNnSWQSDQoJU19X",
             "RUxDT01FEAASDQoJQ19XRUxDT01FEAESFgoSU19XRUxDT01FX1JFU1BPTlNF",
             "EAISDwoLU19FTkNSWVBURUQQAxIPCgtDX0VOQ1JZUFRFRBAEEgsKB0NfTE9H",
             "SU4QBRILCgdTX0xPR0lOEAYSFAoQQ19DUkVBVEVfQUNDT1VOVBAHEhQKEFNf",
@@ -67,8 +67,8 @@ namespace Google.Protobuf.Protocol {
             "VV9TVEFURRCsAhIVChBTX0RBTk1BS1VfUkVTVUxUEK0CEg4KCVNfTV9TVEFU",
             "RRCQAxIPCgpTX01fUkVTVUxUEJEDEhcKElNfTV9TRVRfU0xPVF9TVEFURRCS",
             "AxIRCgxDX01fSElUX1NMT1QQkwMSGgoVU19NX1JFU1BPTlNFX0hJVF9TTE9U",
-            "EJQDEhUKEFNfTV9SRU5FV19TQ09SRVMQlQNCG6oCGEdvb2dsZS5Qcm90b2J1",
-            "Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "EJQDEhUKEFNfTV9SRU5FV19TQ09SRVMQlQMSGAoTU19NX1JFQURZX0ZPUl9T",
+            "VEFSVBCWA0IbqgIYR29vZ2xlLlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -151,6 +151,7 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("C_M_HIT_SLOT")] CMHitSlot = 403,
     [pbr::OriginalName("S_M_RESPONSE_HIT_SLOT")] SMResponseHitSlot = 404,
     [pbr::OriginalName("S_M_RENEW_SCORES")] SMRenewScores = 405,
+    [pbr::OriginalName("S_M_READY_FOR_START")] SMReadyForStart = 406,
   }
 
   #endregion
