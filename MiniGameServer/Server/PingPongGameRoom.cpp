@@ -114,12 +114,23 @@ void PingPongGameRoom::Start() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 
+	PostEventAfter(2000, &PingPongGameRoom::CountdownBeforeStart, 3);
+	PostEventAfter(3000, &PingPongGameRoom::CountdownBeforeStart, 2);
+	PostEventAfter(4000, &PingPongGameRoom::CountdownBeforeStart, 1);
 	PostEventAfter(5000, &PingPongGameRoom::OnGoingPhase1);
+}
+
+void PingPongGameRoom::CountdownBeforeStart(int32_t countdown) {
+	S2C_Protocol::S_P_ReadyForStart pkt;
+	pkt.set_countdown(countdown);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
 }
 
 void PingPongGameRoom::OnGoingPhase1() {
 	cout << "OnGoingPhase1, 테스트를 위하여 2, 3페이즈를 건너뜀" << endl;
 	_isUpdateCall = true;
+	CountdownBeforeStart(0);
 	vector<int> selectedNums(10);
 	uniform_int_distribution<int> dis(0, 5);
 	for (int i = 0; i <= 9; i++) {

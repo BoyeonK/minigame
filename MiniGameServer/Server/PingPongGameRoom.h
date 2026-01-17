@@ -24,6 +24,7 @@ public:
 	void UpdateProgressBar(int32_t playerIdx, int32_t progressRate) override;
 
 	void Start();
+	void CountdownBeforeStart(int32_t countdown);
 	void OnGoingPhase1();
 	void OnGoingPhase2();
 	void OnGoingPhase3();
