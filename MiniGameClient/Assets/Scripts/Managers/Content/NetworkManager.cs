@@ -414,7 +414,7 @@ public class NetworkManager {
             }
         }
 
-        public void ResponsePRequestPlayerBarPosition(IMessage recvPkt) {
+        public void ResponseSPRequestPlayerBarPosition(IMessage recvPkt) {
             BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
@@ -479,8 +479,7 @@ public class NetworkManager {
                 return;
 
             if (scene is PingPongScene pingPongScene) {
-                _netRef.Match.ResetMatchState();
-                Managers.Scene.EndGame(isWinner, scores);
+                pingPongScene.EndGame(isWinner, scores);
             }
         }
 
@@ -561,8 +560,7 @@ public class NetworkManager {
                 return;
 
             if (scene is MoleScene moleScene) {
-                _netRef.Match.ResetMatchState();
-                Managers.Scene.EndGame(isWinner, scores);
+                moleScene.EndGame(isWinner, scores);
             }
         }
     }

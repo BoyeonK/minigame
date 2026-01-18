@@ -1,12 +1,14 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
 public class MoleScene : BaseScene {
-    private MoleGameBoardController _gameBoard;
-    private MoleCameraController _cameraController;
-    private StunBlur _stunBlur;
-    private UI_MoleScoreBoard _uiMoleScoreBoard;
+    MoleGameBoardController _gameBoard;
+    MoleCameraController _cameraController;
+    StunBlur _stunBlur;
+    UI_MoleScoreBoard _uiMoleScoreBoard;
+    //UI_Mole_EndGame _uiEndGame;
 
     protected override void Init() {
         base.Init();
@@ -34,6 +36,7 @@ public class MoleScene : BaseScene {
         }
 
         _uiMoleScoreBoard = Managers.UI.ShowSceneUI<UI_MoleScoreBoard>();
+        //_uiEndGame = Managers.UI.CacheSceneUI<UI_Mole_EndGame>();
     }
 
     public void LoadState(int playerIdx, List<string> playerIds) {
@@ -51,6 +54,22 @@ public class MoleScene : BaseScene {
 
     public void RenewScores(List<int> scores) {
         _uiMoleScoreBoard.RenewScores(scores);
+    }
+
+    public void EndGame(bool isWinner, List<int> scores) {
+        //Managers.UI.ShowSceneUI<UI_Mole_EndGame>();
+        StartCoroutine(EndGameRoutine(isWinner, scores));
+    }
+
+    private IEnumerator EndGameRoutine(bool isWinner, List<int> scores) {
+        Time.timeScale = 0f;
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        Time.timeScale = 1f;
+
+        Managers.Network.Match.ResetMatchState();
+        Managers.Scene.EndGame(isWinner, scores);
     }
 
     public override void Clear() {

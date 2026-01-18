@@ -18,10 +18,8 @@ using System.Security.Cryptography;
 using UnityEngine;
 using static Define;
 
-//아래의 Handler함수들은 customHandler를 통해서 main thread에서 '모두' 실행되는 구조이므로
-//UnityEngine의 메서드들을 사용하여 작성해도 무방하다.
-//다만, 게임이 요구하는 스펙이 커질 경우, 즉 일부 로직을 멀티스레드로 실행할 필요성이 생긴다면
-//구조를 조금 바꿀 필요가 있다.
+//아래의 함수는 worker thread에서 호출됨에 유의.
+//UI 갱신이나 게임 오브젝트 조작이 필요하면, Managers.ExecuteAtMainThread()를 통해 메인 스레드에서 실행되도록 위임해야 함.
 class PacketHandler {
 	public static void S_WelcomeHandler(PacketSession session, IMessage packet) {
 		S_Welcome sWelcomePacket = packet as S_Welcome;
@@ -318,7 +316,7 @@ class PacketHandler {
 	}
 
 	public static void S_P_RequestPlayerBarPositionHandler(PacketSession session, IMessage packet) {
-		Managers.ExecuteAtMainThread(() => { Managers.Network.PingPong.ResponsePRequestPlayerBarPosition(packet); });
+		Managers.ExecuteAtMainThread(() => { Managers.Network.PingPong.ResponseSPRequestPlayerBarPosition(packet); });
 	}
 
     public static void S_P_BulletHandler(PacketSession session, IMessage packet) {

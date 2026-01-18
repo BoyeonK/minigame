@@ -1,4 +1,5 @@
 using Google.Protobuf.Protocol;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
@@ -15,6 +16,7 @@ public class PingPongScene : BaseScene {
 
     PingPongCameraController _pingPongCameraController;
     UI_PingPongScoreBoard _PingPongScoreBoard;
+    UI_PingPong_EndGame _uiEndGame;
 
     protected override void Init() {
         //Base - EventSystem등록.
@@ -54,6 +56,7 @@ public class PingPongScene : BaseScene {
         if (scoreBoard != null) {
             _PingPongScoreBoard = scoreBoard.GetComponent<UI_PingPongScoreBoard>();
         }
+        _uiEndGame = Managers.UI.CacheSceneUI<UI_PingPong_EndGame>();
 
         //CameraController참조
         GameObject cam = GameObject.Find("TopViewCamera");
@@ -178,8 +181,21 @@ public class PingPongScene : BaseScene {
         }
     }
 
-    public void EndGame(bool isWinner, List<string> ids, List<int> scores) {
-        
+    public void EndGame(bool isWinner, List<int> scores) {
+        Managers.UI.ShowSceneUI<UI_PingPong_EndGame>();
+
+        StartCoroutine(EndGameRoutine(isWinner, scores));
+    }
+
+    private IEnumerator EndGameRoutine(bool isWinner, List<int> scores) {
+        Time.timeScale = 0f;
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        Time.timeScale = 1f;
+
+        Managers.Network.Match.ResetMatchState();
+        Managers.Scene.EndGame(isWinner, scores);
     }
 
     public override void Clear() {
