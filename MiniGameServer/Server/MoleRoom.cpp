@@ -247,6 +247,12 @@ void MoleRoom::SetSlotState(int32_t slotIdx, SlotState state) {
 	if (_slotStates[slotIdx] == state)
 		return;
 
+	if (state == Red && _slotStates[slotIdx] == Green)
+		return;
+
+	if (state == Green && _slotStates[slotIdx] == Red)
+		return;
+
 	_slotStates[slotIdx] = state;
 	_setSlotStatePkt.set_slotidx(slotIdx);
 	_setSlotStatePkt.set_state(int(state));

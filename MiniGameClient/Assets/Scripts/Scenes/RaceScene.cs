@@ -33,17 +33,17 @@ public class RaceScene : BaseScene {
                 _hammerControllers.Add(hammer1);
 
             Transform lh2Trans = secondLineObj.transform.Find("LeftHammer2");
-            HammerController hammer2 = lh1Trans.GetComponent<HammerController>();
+            HammerController hammer2 = lh2Trans.GetComponent<HammerController>();
             if (hammer2 != null)
                 _hammerControllers.Add(hammer2);
 
             Transform rh1Trans = secondLineObj.transform.Find("RightHammer1");
-            HammerController hammer3 = lh1Trans.GetComponent<HammerController>();
+            HammerController hammer3 = rh1Trans.GetComponent<HammerController>();
             if (hammer3 != null)
                 _hammerControllers.Add(hammer3);
 
             Transform rh2Trans = secondLineObj.transform.Find("RightHammer2");
-            HammerController hammer4 = lh1Trans.GetComponent<HammerController>();
+            HammerController hammer4 = rh2Trans.GetComponent<HammerController>();
             if (hammer4 != null)
                 _hammerControllers.Add(hammer4);
         }
