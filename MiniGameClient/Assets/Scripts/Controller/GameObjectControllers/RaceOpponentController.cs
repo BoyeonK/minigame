@@ -6,10 +6,10 @@ public class RaceOpponentController : GameObjectController {
         Moving,
         Jumping,
     }
-
+    /*
     State _prestate = State.Standing;
     State _state = State.Standing;
-    
+    */
     private RaceOpponentSuperficialBody _body;
     private Vector3 _velocity = Vector3.zero;
     private Vector3 _realPosition = new();

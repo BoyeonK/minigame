@@ -10,6 +10,7 @@ public class BridgeController : MonoBehaviour {
     float _flickerTick = 0.3f;
     float _flickerTimer = 0f;
     bool _isFlickering = false;
+    bool _isCollidable = false;
     bool _isRenderOnFlicker = true;
 
     public void Init() {
@@ -60,13 +61,18 @@ public class BridgeController : MonoBehaviour {
     }
 
     void EnableCollider() {
-        if (_bridgeColliderObject != null)
+        if (_bridgeColliderObject != null) {
             _bridgeColliderObject.SetActive(true);
+            _isCollidable = true;
+        }
+            
     }
 
     void DisableCollider() {
-        if (_bridgeColliderObject != null)
+        if (_bridgeColliderObject != null) {
             _bridgeColliderObject.SetActive(false);
+            _isCollidable = false;
+        }
     }
 
     public void DisableBridgeColliderAfterSecond(float second) {
@@ -87,11 +93,13 @@ public class BridgeController : MonoBehaviour {
     }
 
     private IEnumerator DisableSequenceRoutine(float delaySecond) {
-        TurnOnFlicker();
-        yield return new WaitForSeconds(delaySecond);
-        TurnOffFlicker(false);
-        HideRenderer();
-        DisableCollider();
+        if( _isCollidable) {
+            TurnOnFlicker();
+            yield return new WaitForSeconds(delaySecond);
+            TurnOffFlicker(false);
+            HideRenderer();
+            DisableCollider();
+        }
         _currentDisableCoroutine = null;
     }
 
