@@ -159,7 +159,7 @@ void MoleRoom::OnGoingPhase2() {
 }
 
 void MoleRoom::RenewScoreBoard() {
-	if (_updateCount % 30 != 0)
+	if (_updateCount % 10 != 0)
 		return;
 
 	S2C_Protocol::S_M_RenewScores pkt;
@@ -217,7 +217,9 @@ void MoleRoom::HitRed(const int32_t& playerIdx, const int32_t& slotNum) {
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
 
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_succeedResponse);
+	SetStun(playerIdx, true);
+	PostEventAfter(1000, &MoleRoom::SetStun, playerIdx, false);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_failedResponse);
 	playerSessionRef->Send(sendBuffer);
 }
 
