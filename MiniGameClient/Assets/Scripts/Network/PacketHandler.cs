@@ -371,7 +371,16 @@ class PacketHandler {
         });
     }
 
-	public static void S_M_SetSlotStateHandler(PacketSession session, IMessage packet) {
+	public static void S_M_ReadyForStartHandler(PacketSession session, IMessage packet) {
+		if (!(packet is S_M_ReadyForStart recvPkt))
+			return;
+
+		Managers.ExecuteAtMainThread(() => {
+			Managers.Network.Mole.ResponseSMReadyForStart(recvPkt.Countdown);
+        });
+	}
+
+    public static void S_M_SetSlotStateHandler(PacketSession session, IMessage packet) {
         if (!(packet is S_M_SetSlotState recvPkt))
             return;
 

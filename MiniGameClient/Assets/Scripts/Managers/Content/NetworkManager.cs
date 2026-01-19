@@ -563,6 +563,16 @@ public class NetworkManager {
                 moleScene.EndGame(isWinner, scores);
             }
         }
+
+        public void ResponseSMReadyForStart(int countdown) {
+            BaseScene scene = Managers.Scene.CurrentScene;
+            if (scene == null)
+                return;
+
+            if (scene is MoleScene moleScene) {
+                moleScene.CountdownBeforeStart(countdown);
+            }
+        }
     }
 
     public NetworkRaceManager Race = new NetworkRaceManager();

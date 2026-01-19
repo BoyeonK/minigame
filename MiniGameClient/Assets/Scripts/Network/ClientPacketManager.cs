@@ -144,6 +144,10 @@ class PacketManager {
         _handler.Add((ushort)MsgId.SMResult, PacketHandler.S_M_ResultHandler);
         _msgFactories.Add((ushort)MsgId.SMResult, () => new S_M_Result());
 
+        _onRecv.Add((ushort)MsgId.SMReadyForStart, UnpackPacket<S_M_ReadyForStart>);
+        _handler.Add((ushort)MsgId.SMReadyForStart, PacketHandler.S_M_ReadyForStartHandler);
+        _msgFactories.Add((ushort)MsgId.SMReadyForStart, () => new S_M_ReadyForStart());
+
         _onRecv.Add((ushort)MsgId.SRResponseState, UnpackPacket<S_R_ResponseState>);
         _handler.Add((ushort)MsgId.SRResponseState, PacketHandler.S_R_ResponseStateHandler);
         _msgFactories.Add((ushort)MsgId.SRResponseState, () => new S_R_ResponseState());

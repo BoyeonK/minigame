@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,8 @@ public class MoleScene : BaseScene {
     MoleCameraController _cameraController;
     StunBlur _stunBlur;
     UI_MoleScoreBoard _uiMoleScoreBoard;
-    //UI_Mole_EndGame _uiEndGame;
+    UI_Mole_EndGame _uiEndGame;
+    UI_PrintMessage _uiPrintMessage;
 
     protected override void Init() {
         base.Init();
@@ -36,7 +38,8 @@ public class MoleScene : BaseScene {
         }
 
         _uiMoleScoreBoard = Managers.UI.ShowSceneUI<UI_MoleScoreBoard>();
-        //_uiEndGame = Managers.UI.CacheSceneUI<UI_Mole_EndGame>();
+        _uiEndGame = Managers.UI.CacheSceneUI<UI_Mole_EndGame>();
+        _uiPrintMessage = Managers.UI.CacheSceneUI<UI_PrintMessage>();
     }
 
     public void LoadState(int playerIdx, List<string> playerIds) {
@@ -57,7 +60,7 @@ public class MoleScene : BaseScene {
     }
 
     public void EndGame(bool isWinner, List<int> scores) {
-        //Managers.UI.ShowSceneUI<UI_Mole_EndGame>();
+        Managers.UI.ShowSceneUI<UI_Mole_EndGame>();
         StartCoroutine(EndGameRoutine(isWinner, scores));
     }
 
@@ -70,6 +73,23 @@ public class MoleScene : BaseScene {
 
         Managers.Network.Match.ResetMatchState();
         Managers.Scene.EndGame(isWinner, scores);
+    }
+
+    public void CountdownBeforeStart(int countdown) {
+        if (countdown == 0) {
+            _uiPrintMessage.SetTextTop("Ω√¿€!");
+            _uiPrintMessage.SetTextColorTop(255, 0, 0, 255);
+            StartCoroutine(CountdownClearRoutine(0.5f));
+        }
+        else {
+            Managers.UI.ShowSceneUI<UI_PrintMessage>();
+            _uiPrintMessage.SetTextTop(countdown.ToString());
+        }
+    }
+
+    private IEnumerator CountdownClearRoutine(float delay) {
+        yield return new WaitForSeconds(delay);
+        Managers.UI.DisableUI("UI_PrintMessage");
     }
 
     public override void Clear() {

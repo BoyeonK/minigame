@@ -186,10 +186,12 @@ public class RaceScene : BaseScene {
             for (int i = 0; i < 4; i++) {
                 bool isActive = (triggerId & (1 << i)) != 0;
 
-                if (isActive)
+                if (isActive) {
                     _bridgeControllers[i].EnableBridgeCollider();
-                else
+                }  
+                else {
                     _bridgeControllers[i].DisableBridgeColliderAfterSecond(2f);
+                }   
             }
         }
     }
