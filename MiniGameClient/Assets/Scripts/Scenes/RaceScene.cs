@@ -35,17 +35,17 @@ public class RaceScene : BaseScene {
             Transform lh2Trans = secondLineObj.transform.Find("LeftHammer2");
             HammerController hammer2 = lh1Trans.GetComponent<HammerController>();
             if (hammer2 != null)
-                _hammerControllers.Add(hammer1);
+                _hammerControllers.Add(hammer2);
 
             Transform rh1Trans = secondLineObj.transform.Find("RightHammer1");
             HammerController hammer3 = lh1Trans.GetComponent<HammerController>();
             if (hammer3 != null)
-                _hammerControllers.Add(hammer1);
+                _hammerControllers.Add(hammer3);
 
             Transform rh2Trans = secondLineObj.transform.Find("RightHammer2");
             HammerController hammer4 = lh1Trans.GetComponent<HammerController>();
             if (hammer4 != null)
-                _hammerControllers.Add(hammer1);
+                _hammerControllers.Add(hammer4);
         }
 
         GameObject fourthLineObj = GameObject.Find("FourthLine");
