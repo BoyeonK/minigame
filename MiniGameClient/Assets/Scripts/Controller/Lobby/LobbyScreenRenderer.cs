@@ -5,15 +5,12 @@ using UnityEngine;
 public class LobbyScreenRenderer : MonoBehaviour {
     private List<Texture2D> _gamePreviewImage = new();
     private Renderer _renderer;
-    private Shader _shader;
     
     public void Init() {
         Texture2D[] loadedTextures = Resources.LoadAll<Texture2D>("Images");
         _gamePreviewImage.AddRange(loadedTextures);
         _renderer = GetComponent<Renderer>();
-
-        Shader unlitShader = Shader.Find("Universal Render Pipeline/Unlit");
-        _renderer.material.shader = unlitShader;
+        ApplyPicture(0);
     }
 
     public void HideThis() {

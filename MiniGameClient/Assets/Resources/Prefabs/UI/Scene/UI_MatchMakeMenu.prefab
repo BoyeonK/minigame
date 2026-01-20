@@ -140,7 +140,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 250, y: -40}
-  m_SizeDelta: {x: 60, y: 30}
+  m_SizeDelta: {x: 140, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5802402997905458084
 CanvasRenderer:
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD0C4\uB9C9"
+  m_text: "\uD638\uBC15\uCABC\uAC1C\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
   m_sharedMaterial: {fileID: 4699948967198077151, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
@@ -208,6 +208,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -357,6 +358,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -468,7 +470,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD14C\uC2A4\uD2B8\uB9E4\uCE58"
+  m_text: "\uB2EC\uB9AC\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
   m_sharedMaterial: {fileID: 4699948967198077151, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
@@ -506,6 +508,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
