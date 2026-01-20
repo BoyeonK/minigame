@@ -13,6 +13,7 @@ public:
 		_isStunned = vector<bool>(_quota, false);
 		_failedResponse.set_isstunned(true);
 		_succeedResponse.set_isstunned(false);
+		_renewScoresPkt.mutable_scores()->Reserve(_quota);
 	}
 
 	~MoleRoom() {
@@ -75,6 +76,7 @@ private:
 	void SetSlotState(int32_t slotIdx, SlotState state);
 	S2C_Protocol::S_M_ResponseHitSlot _failedResponse;
 	S2C_Protocol::S_M_ResponseHitSlot _succeedResponse;
+	S2C_Protocol::S_M_RenewScores _renewScoresPkt;
 	S2C_Protocol::S_M_SetSlotState _setSlotStatePkt;
 	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;
 };

@@ -11,7 +11,6 @@ void MoleRoom::Update() {
 	if (!_isUpdateCall)
 		return;
 
-	_updateCount++;
 	RenewScoreBoard();
 }
 
@@ -159,13 +158,13 @@ void MoleRoom::OnGoingPhase2() {
 }
 
 void MoleRoom::RenewScoreBoard() {
-	if (_updateCount % 10 != 0)
-		return;
+	_renewScoresPkt.Clear();
 
-	S2C_Protocol::S_M_RenewScores pkt;
-	for (auto& point : _points)	pkt.add_scores(point);
+	for (auto& point : _points) {
+		_renewScoresPkt.add_scores(point);
+	}
 
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_renewScoresPkt);
 	BroadCast(sendBuffer);
 }
 
