@@ -6,7 +6,7 @@ public class SlotController : MonoBehaviour {
     GameObject _yellow, _crops;
     GameObject _apple, _banana, _watermelon, _pumpkin;
     GameObject _pTextObj;
-    TextMeshProUGUI _pText;
+    TextMeshPro _pText;
     Coroutine _textAnimRoutine;
     Vector3 _localPos = new Vector3(0.0f, 0.3333333f, 0.0f);
     Vector3 _finalPos = new Vector3(0.0f, 0.6666666f, 0.0f);
@@ -41,7 +41,7 @@ public class SlotController : MonoBehaviour {
         if (pText != null) {
             _pTextObj = pText.gameObject;
             _pTextObj.SetActive(false);
-            _pText = pText.GetComponent<TextMeshProUGUI>();
+            _pText = pText.GetComponent<TextMeshPro>();
         }
             
         _key = key;
