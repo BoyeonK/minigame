@@ -31,6 +31,9 @@ public class Managers : MonoBehaviour {
     SoundManager _sound = new SoundManager();
     public static SoundManager Sound { get { return Instance._sound; } }
 
+    SettingManager _setting = new SettingManager();
+    public static SettingManager Setting { get { return Instance._setting; } }
+
     private static Queue<Action> _jobQueue = new Queue<Action>();
     private static List<Action> _actions = new List<Action>();
     private static readonly object _lock = new object();
@@ -51,7 +54,7 @@ public class Managers : MonoBehaviour {
         Instance._pool.Init();
         Instance._sound.Init();
         Instance._ui.Init();
-        Debug.Log("Manager Initiate");
+        Instance._setting.Init();
     }
 
     // Update is called once per frame
@@ -81,7 +84,6 @@ public class Managers : MonoBehaviour {
             }
             DontDestroyOnLoad(go);
             Instance = go.GetComponent<Managers>();
-            Debug.Log("Manager Initiated by Init");
         }  
     }
 

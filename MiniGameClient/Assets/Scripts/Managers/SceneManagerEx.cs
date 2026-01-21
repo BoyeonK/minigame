@@ -64,7 +64,6 @@ public class SceneManagerEx {
         if (_loadingState != LoadingState.Loading || _nextScene == Define.Scene.Undefined)
             return;
 
-        Debug.Log("매니져 클래스에서 비 동기적 로딩 시작");
         _asyncLoadSceneOp = SceneManager.LoadSceneAsync(GetSceneName(_nextScene));
         _asyncLoadSceneOp.allowSceneActivation = false;
     }

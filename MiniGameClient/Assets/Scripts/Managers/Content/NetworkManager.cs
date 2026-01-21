@@ -115,7 +115,6 @@ public class NetworkManager {
             }
 
             if (_netRef.IsConnected() && !(_netRef.IsLogined())) {
-                Debug.Log("로그인 시도");
                 C_Encrypted pkt = PacketMaker.MakeCLogin(_netRef.GetSession(), id, password);
                 _netRef.Send(pkt);
             }
@@ -124,7 +123,6 @@ public class NetworkManager {
         //지금은 직접 0으로 밀고 결과를 통보하지만,
         //일관성을 위해서 서버 주도적으로 바꿀 필요가 있음.
         public void TryLogout() {
-            Debug.Log("로그아웃 시도");
             C_Encrypted pkt = PacketMaker.MakeCLogout(_netRef.GetSession());
             Managers.Network.Send(pkt);
             Managers.Network.GetSession().ID = 0;
@@ -138,7 +136,6 @@ public class NetworkManager {
             }
 
             if (Managers.Network.IsConnected() && !(Managers.Network.IsLogined())) {
-                Debug.Log("계정생성 시도");
                 C_Encrypted pkt = PacketMaker.MakeCCreateAccount(_netRef.GetSession(), id, pw);
                 Managers.Network.Send(pkt);
             }
@@ -278,7 +275,6 @@ public class NetworkManager {
             }
             //TODO : 현재 매칭중이라는 것을 UI로 표시하고, 매칭 취소버튼을 UI로 제공
             Managers.ExecuteAtMainThread(() => {
-                Debug.Log($"{gameId}번 게임 매칭 대기열 진입");
                 OnMatchmakeRequestSucceedAct.Invoke();
             });
         }
@@ -310,7 +306,6 @@ public class NetworkManager {
         }
 
         public void ProcessMatchMakeCancel(int gameId) {
-            Debug.Log("받은게 있기는 하다.");
             lock (_matchGameTypeLock) {
                 _isMatchRequesting = 0;
                 if (_matchGameType != IntToGameType(gameId)) {
@@ -451,18 +446,14 @@ public class NetworkManager {
                 goBullet = Managers.Object.FindByObjectId(serializedBullet.ObjectId);
                 if (goBullet == null) {
                     goBullet = Managers.Object.CreateObject(serializedBullet);
-                    if (goBullet == null) {
-                        Debug.LogError($"[ProcessSPBullet] 오브젝트 생성 실패: ObjectId={serializedBullet.ObjectId}");
+                    if (goBullet == null)
                         return;
-                    }
                 }
 
                 bulletController = goBullet.GetComponent<PingPongBulletController>();
 
-                if (bulletController == null) {
-                    Debug.LogError($"[ProcessSPBullet] BulletController를 찾을 수 없습니다! GameObject: {goBullet.name}, ObjectId: {serializedBullet.ObjectId}");
+                if (bulletController == null)
                     return;
-                }
 
                 Vector3 moveDir = new Vector3(moveDirX, 0, moveDirZ);
                 Vector3 position = new Vector3(serializedBullet.Position.X, 0.2f, serializedBullet.Position.Z);
@@ -594,13 +585,10 @@ public class NetworkManager {
                 raceScene.OffTheTempCam();
                 foreach (UnityGameObject uObj in serializedObjs) {
                     GameObject obj = Managers.Object.CreateObject(uObj);
-                    if (uObj.ObjectType == (int)Define.ObjectType.RacePlayer) {
+                    if (uObj.ObjectType == (int)Define.ObjectType.RacePlayer)
                         raceScene.RegisterMyController(obj);
-                    }
-                    else if (uObj.ObjectType == (int)Define.ObjectType.RaceOpponent) {
-                        raceScene.RegisterOppoController(uObj.ObjectId, obj);
-                        Debug.Log($"{obj.transform.position.x}, {obj.transform.position.y}, {obj.transform.position.z}, objId is {uObj.ObjectId}");
-                    }   
+                    else if (uObj.ObjectType == (int)Define.ObjectType.RaceOpponent)
+                        raceScene.RegisterOppoController(uObj.ObjectId, obj);  
                 }
             }
         }
@@ -622,7 +610,6 @@ public class NetworkManager {
 
             if (scene is RaceScene raceScene) {
                 raceScene.UpdateMovement(objectId, pos, front, vel, state);
-                Debug.Log("ResponseMovement by NetworkManager");
             }
         }
 

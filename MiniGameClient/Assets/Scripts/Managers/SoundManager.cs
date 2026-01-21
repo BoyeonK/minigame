@@ -7,13 +7,12 @@ public class SoundManager {
 
     public void Init() {
         GameObject root = GameObject.Find("@Sound");
-        if(root == null) {
+        if (root == null) {
             root = new GameObject { name = "@Sound" };
-            //Scene을 이동해도 사라지지 않음.
             Object.DontDestroyOnLoad(root);
 
             string[] soundnames = System.Enum.GetNames(typeof(Define.Sound));
-            for(int i=0; i<soundnames.Length-1; i++) {
+            for (int i=0; i<soundnames.Length-1; i++) {
                 GameObject go = new GameObject { name = soundnames[i] };
                 _audioSources[i] = go.AddComponent<AudioSource>();
                 go.transform.parent = root.transform;
@@ -33,7 +32,7 @@ public class SoundManager {
             return;
 
         if (type == Define.Sound.Bgm) {
-            AudioSource audioSource = _audioSources[(int)Define.Sound.Effect];
+            AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
             if (audioSource.isPlaying)
                 audioSource.Stop();
             audioSource.pitch = pitch;
@@ -47,14 +46,14 @@ public class SoundManager {
     }
 
     public void Clear() {
-        foreach(AudioSource audioSource in _audioSources) {
+        foreach (AudioSource audioSource in _audioSources) {
             audioSource.clip = null;
             audioSource.Stop();
         }
         _audioClips.Clear();
     }
 
-    AudioClip GetOrAddAudioClip(string path, Define.Sound type = Define.Sound.Effect) {
+    public AudioClip GetOrAddAudioClip(string path, Define.Sound type = Define.Sound.Effect) {
         if (path.Contains("Sounds/") == false)
             path = $"Sounds/{path}";
         AudioClip audioClip = null;
@@ -68,8 +67,12 @@ public class SoundManager {
                 _audioClips.Add(path, audioClip);
             }
         }
-        if (audioClip == null)
-            Debug.Log($"AudioClip Missing : {path}");
+
         return audioClip;
+    }
+
+    public void SetVolume(float volume, Define.Sound type) {
+        if (_audioSources[(int)type] != null)
+            _audioSources[(int)type].volume = volume;
     }
 }

@@ -28,7 +28,6 @@ public class UIManager {
             name = typeof(T).Name;
 
         if (_uiCache.TryGetValue(name, out GameObject ext)) {
-            Debug.Log($"이미 존재하는 UI를 활성화합니다: {name}");
             ext.SetActive(true);
             return ext.GetComponent<T>();
         }
@@ -38,7 +37,6 @@ public class UIManager {
 
         Init();
         go.transform.SetParent(_root.transform);
-        Debug.Log($"{name}에 저장");
 
         Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -60,7 +58,6 @@ public class UIManager {
             name = typeof(T).Name;
 
         if (_uiCache.TryGetValue(name, out GameObject ext)) {
-            Debug.Log($"이미 존재하는 UI를 활성화합니다: {name}");
             ext.SetActive(true);
             return ext.GetComponent<T>();
         }
@@ -87,26 +84,17 @@ public class UIManager {
         //딕셔너리 컨테이너에서, uiName에 해당하는 object의 포인터를 꺼낸다.
         //그리고 Active값을 변경
         if (_uiCache.TryGetValue(uiName, out GameObject uiObj)) {
-            if (uiObj != null) {
+            if (uiObj != null)
                 uiObj.SetActive(false);
-            } else  {
+            else 
                 _uiCache.Remove(uiName);
-                Debug.LogWarning($"{uiName} 참조가 캐시에 남아있었지만, 오브젝트는 이미 파괴되었습니다. 캐시에서 제거합니다.");
-            }
-        }
-        else {
-            Debug.LogWarning($"{uiName}에 해당하는 UI가 캐시에 없음");
         }
     }
 
     //이미 존재하면서, SetActive(false)인 UI를 enable
     public void EnableUI(string uiName) {
-        if (_uiCache.TryGetValue(uiName, out GameObject uiObj)) {
+        if (_uiCache.TryGetValue(uiName, out GameObject uiObj))
             uiObj.SetActive(true);
-        }
-        else {
-            Debug.LogWarning($"{uiName}에 해당하는 UI가 캐시에 없음");
-        }
     }
 
     public T CacheSceneUI<T>() where T : UI_Scene {
