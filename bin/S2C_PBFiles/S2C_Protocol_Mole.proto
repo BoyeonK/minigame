@@ -18,6 +18,8 @@ message S_M_Result {
 message S_M_SetSlotState {
     int32 slotIdx = 1;
     int32 state = 2;
+    int32 slotController = 3;
+    int32 point = 4;
 }
 
 message C_M_HitSlot {

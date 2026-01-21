@@ -385,7 +385,7 @@ class PacketHandler {
             return;
 
 		Managers.ExecuteAtMainThread(() => {
-            Managers.Network.Mole.ProcessSMSetSlotState(recvPkt.SlotIdx, recvPkt.State);
+            Managers.Network.Mole.ProcessSMSetSlotState(recvPkt.SlotIdx, recvPkt.State, recvPkt.SlotController, recvPkt.Point);
         });
     }
 

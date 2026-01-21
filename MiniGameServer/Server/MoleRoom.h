@@ -73,11 +73,10 @@ private:
 	void HitRed(const int32_t& playerIdx, const int32_t& slotNum);
 	void HitYellow(const int32_t& playerIdx);
 	void HitGreen(const int32_t& playerIdx, const int32_t& slotNum);
-	void SetSlotState(int32_t slotIdx, SlotState state);
+	void SetSlotState(int32_t slotIdx, SlotState state, int32_t slotController = -1, int32_t point = 0);
 	S2C_Protocol::S_M_ResponseHitSlot _failedResponse;
 	S2C_Protocol::S_M_ResponseHitSlot _succeedResponse;
 	S2C_Protocol::S_M_RenewScores _renewScoresPkt;
-	S2C_Protocol::S_M_SetSlotState _setSlotStatePkt;
 	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;
 };
 

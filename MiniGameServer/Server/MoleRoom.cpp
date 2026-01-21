@@ -141,13 +141,13 @@ void MoleRoom::OnGoingPhase1() {
 		delay += baseDelay;
 
 		if (isRedExcluded != 0)
-			PostEventAfter(delay, &MoleRoom::SetSlotState, move(gSlot), SlotState::Green);
+			PostEventAfter(delay, &MoleRoom::SetSlotState, move(gSlot), SlotState::Green, -1, 0);
 		else {
 			int32_t rSlot = rand() % SLOT_COUNT + 1;
 			while (gSlot == rSlot)
 				rSlot = rand() % SLOT_COUNT + 1;
-			PostEventAfter(delay, &MoleRoom::SetSlotState, move(gSlot), SlotState::Green);
-			PostEventAfter(delay, &MoleRoom::SetSlotState, move(rSlot), SlotState::Red);
+			PostEventAfter(delay, &MoleRoom::SetSlotState, move(gSlot), SlotState::Green, -1, 0);
+			PostEventAfter(delay, &MoleRoom::SetSlotState, move(rSlot), SlotState::Red, -1, 0);
 		}
 	}
 	PostEventAfter(delay + 2000, &MoleRoom::CountingPhase);
@@ -211,7 +211,7 @@ void MoleRoom::SetStun(const int32_t& playerIdx, bool state) {
 
 void MoleRoom::HitRed(const int32_t& playerIdx, const int32_t& slotNum) {
 	_points[playerIdx] = _points[playerIdx] - 15;
-	SetSlotState(slotNum, SlotState::Yellow);
+	SetSlotState(slotNum, SlotState::Yellow, playerIdx, -15);
 	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
@@ -235,7 +235,7 @@ void MoleRoom::HitYellow(const int32_t& playerIdx) {
 
 void MoleRoom::HitGreen(const int32_t& playerIdx, const int32_t& slotNum) {
 	_points[playerIdx] = _points[playerIdx] + 10;
-	SetSlotState(slotNum, SlotState::Yellow);
+	SetSlotState(slotNum, SlotState::Yellow, playerIdx, 10);
 	shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[playerIdx].lock();
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return;
@@ -244,7 +244,7 @@ void MoleRoom::HitGreen(const int32_t& playerIdx, const int32_t& slotNum) {
 	playerSessionRef->Send(sendBuffer);
 }
 
-void MoleRoom::SetSlotState(int32_t slotIdx, SlotState state) {
+void MoleRoom::SetSlotState(int32_t slotIdx, SlotState state, int32_t slotController, int32_t point) {
 	if (_slotStates[slotIdx] == state)
 		return;
 
@@ -255,10 +255,14 @@ void MoleRoom::SetSlotState(int32_t slotIdx, SlotState state) {
 		return;
 
 	_slotStates[slotIdx] = state;
-	_setSlotStatePkt.set_slotidx(slotIdx);
-	_setSlotStatePkt.set_state(int(state));
 
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_setSlotStatePkt);
+	S2C_Protocol::S_M_SetSlotState setSlotStatePkt;
+	setSlotStatePkt.set_slotidx(slotIdx);
+	setSlotStatePkt.set_state(int(state));
+	setSlotStatePkt.set_slotcontroller(slotController);
+	setSlotStatePkt.set_point(point);
+
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(setSlotStatePkt);
 	BroadCast(sendBuffer);
 }
 

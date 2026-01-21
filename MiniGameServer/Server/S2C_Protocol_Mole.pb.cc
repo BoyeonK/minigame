@@ -56,6 +56,8 @@ inline constexpr S_M_SetSlotState::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : slotidx_{0},
         state_{0},
+        slotcontroller_{0},
+        point_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -243,6 +245,8 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_SetSlotState, _impl_.slotidx_),
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_SetSlotState, _impl_.state_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_SetSlotState, _impl_.slotcontroller_),
+        PROTOBUF_FIELD_OFFSET(::S2C_Protocol::S_M_SetSlotState, _impl_.point_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::S2C_Protocol::C_M_HitSlot, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -286,10 +290,10 @@ static const ::_pbi::MigrationSchema
         {0, -1, -1, sizeof(::S2C_Protocol::S_M_State)},
         {10, -1, -1, sizeof(::S2C_Protocol::S_M_Result)},
         {20, -1, -1, sizeof(::S2C_Protocol::S_M_SetSlotState)},
-        {30, -1, -1, sizeof(::S2C_Protocol::C_M_HitSlot)},
-        {39, -1, -1, sizeof(::S2C_Protocol::S_M_ResponseHitSlot)},
-        {48, -1, -1, sizeof(::S2C_Protocol::S_M_RenewScores)},
-        {57, -1, -1, sizeof(::S2C_Protocol::S_M_ReadyForStart)},
+        {32, -1, -1, sizeof(::S2C_Protocol::C_M_HitSlot)},
+        {41, -1, -1, sizeof(::S2C_Protocol::S_M_ResponseHitSlot)},
+        {50, -1, -1, sizeof(::S2C_Protocol::S_M_RenewScores)},
+        {59, -1, -1, sizeof(::S2C_Protocol::S_M_ReadyForStart)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::S2C_Protocol::_S_M_State_default_instance_._instance,
@@ -305,13 +309,14 @@ const char descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto[] ABSL_ATTRIB
     "\n\027S2C_Protocol_Mole.proto\022\014S2C_Protocol\032"
     "\031S2C_Protocol_Common.proto\"*\n\tS_M_State\022"
     "\020\n\010playerId\030\001 \001(\005\022\013\n\003ids\030\002 \003(\t\".\n\nS_M_Re"
-    "sult\022\020\n\010isWinner\030\001 \001(\010\022\016\n\006scores\030\002 \003(\005\"2"
+    "sult\022\020\n\010isWinner\030\001 \001(\010\022\016\n\006scores\030\002 \003(\005\"Y"
     "\n\020S_M_SetSlotState\022\017\n\007slotIdx\030\001 \001(\005\022\r\n\005s"
-    "tate\030\002 \001(\005\"\036\n\013C_M_HitSlot\022\017\n\007slotIdx\030\001 \001"
-    "(\005\"(\n\023S_M_ResponseHitSlot\022\021\n\tisStunned\030\001"
-    " \001(\010\"!\n\017S_M_RenewScores\022\016\n\006scores\030\001 \003(\005\""
-    "&\n\021S_M_ReadyForStart\022\021\n\tcountdown\030\001 \001(\005B"
-    "\033\252\002\030Google.Protobuf.Protocolb\006proto3"
+    "tate\030\002 \001(\005\022\026\n\016slotController\030\003 \001(\005\022\r\n\005po"
+    "int\030\004 \001(\005\"\036\n\013C_M_HitSlot\022\017\n\007slotIdx\030\001 \001("
+    "\005\"(\n\023S_M_ResponseHitSlot\022\021\n\tisStunned\030\001 "
+    "\001(\010\"!\n\017S_M_RenewScores\022\016\n\006scores\030\001 \003(\005\"&"
+    "\n\021S_M_ReadyForStart\022\021\n\tcountdown\030\001 \001(\005B\033"
+    "\252\002\030Google.Protobuf.Protocolb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_S2C_5fProtocol_5fMole_2eproto_deps[1] =
     {
@@ -321,7 +326,7 @@ static ::absl::once_flag descriptor_table_S2C_5fProtocol_5fMole_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_S2C_5fProtocol_5fMole_2eproto = {
     false,
     false,
-    396,
+    435,
     descriptor_table_protodef_S2C_5fProtocol_5fMole_2eproto,
     "S2C_Protocol_Mole.proto",
     &descriptor_table_S2C_5fProtocol_5fMole_2eproto_once,
@@ -902,9 +907,9 @@ inline void S_M_SetSlotState::SharedCtor(::_pb::Arena* arena) {
   ::memset(reinterpret_cast<char *>(&_impl_) +
                offsetof(Impl_, slotidx_),
            0,
-           offsetof(Impl_, state_) -
+           offsetof(Impl_, point_) -
                offsetof(Impl_, slotidx_) +
-               sizeof(Impl_::state_));
+               sizeof(Impl_::point_));
 }
 S_M_SetSlotState::~S_M_SetSlotState() {
   // @@protoc_insertion_point(destructor:S2C_Protocol.S_M_SetSlotState)
@@ -953,15 +958,15 @@ const ::google::protobuf::internal::ClassData* S_M_SetSlotState::GetClassData() 
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 0, 2> S_M_SetSlotState::_table_ = {
+const ::_pbi::TcParseTable<2, 4, 0, 0, 2> S_M_SetSlotState::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967280,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    4,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -971,12 +976,18 @@ const ::_pbi::TcParseTable<1, 2, 0, 0, 2> S_M_SetSlotState::_table_ = {
     ::_pbi::TcParser::GetTable<::S2C_Protocol::S_M_SetSlotState>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 state = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_M_SetSlotState, _impl_.state_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.state_)}},
+    // int32 point = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_M_SetSlotState, _impl_.point_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.point_)}},
     // int32 slotIdx = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_M_SetSlotState, _impl_.slotidx_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.slotidx_)}},
+    // int32 state = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_M_SetSlotState, _impl_.state_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.state_)}},
+    // int32 slotController = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(S_M_SetSlotState, _impl_.slotcontroller_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.slotcontroller_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -985,6 +996,12 @@ const ::_pbi::TcParseTable<1, 2, 0, 0, 2> S_M_SetSlotState::_table_ = {
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // int32 state = 2;
     {PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.state_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 slotController = 3;
+    {PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.slotcontroller_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 point = 4;
+    {PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.point_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
@@ -1000,8 +1017,8 @@ PROTOBUF_NOINLINE void S_M_SetSlotState::Clear() {
   (void) cached_has_bits;
 
   ::memset(&_impl_.slotidx_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.state_) -
-      reinterpret_cast<char*>(&_impl_.slotidx_)) + sizeof(_impl_.state_));
+      reinterpret_cast<char*>(&_impl_.point_) -
+      reinterpret_cast<char*>(&_impl_.slotidx_)) + sizeof(_impl_.point_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -1032,6 +1049,20 @@ PROTOBUF_NOINLINE void S_M_SetSlotState::Clear() {
             target = ::google::protobuf::internal::WireFormatLite::
                 WriteInt32ToArrayWithField<2>(
                     stream, this_._internal_state(), target);
+          }
+
+          // int32 slotController = 3;
+          if (this_._internal_slotcontroller() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<3>(
+                    stream, this_._internal_slotcontroller(), target);
+          }
+
+          // int32 point = 4;
+          if (this_._internal_point() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<4>(
+                    stream, this_._internal_point(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1069,6 +1100,16 @@ PROTOBUF_NOINLINE void S_M_SetSlotState::Clear() {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_state());
             }
+            // int32 slotController = 3;
+            if (this_._internal_slotcontroller() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_slotcontroller());
+            }
+            // int32 point = 4;
+            if (this_._internal_point() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_point());
+            }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
@@ -1088,6 +1129,12 @@ void S_M_SetSlotState::MergeImpl(::google::protobuf::MessageLite& to_msg, const 
   if (from._internal_state() != 0) {
     _this->_impl_.state_ = from._impl_.state_;
   }
+  if (from._internal_slotcontroller() != 0) {
+    _this->_impl_.slotcontroller_ = from._impl_.slotcontroller_;
+  }
+  if (from._internal_point() != 0) {
+    _this->_impl_.point_ = from._impl_.point_;
+  }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1103,8 +1150,8 @@ void S_M_SetSlotState::InternalSwap(S_M_SetSlotState* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.state_)
-      + sizeof(S_M_SetSlotState::_impl_.state_)
+      PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.point_)
+      + sizeof(S_M_SetSlotState::_impl_.point_)
       - PROTOBUF_FIELD_OFFSET(S_M_SetSlotState, _impl_.slotidx_)>(
           reinterpret_cast<char*>(&_impl_.slotidx_),
           reinterpret_cast<char*>(&other->_impl_.slotidx_));

@@ -449,6 +449,8 @@ class S_M_SetSlotState final : public ::google::protobuf::Message
   enum : int {
     kSlotIdxFieldNumber = 1,
     kStateFieldNumber = 2,
+    kSlotControllerFieldNumber = 3,
+    kPointFieldNumber = 4,
   };
   // int32 slotIdx = 1;
   void clear_slotidx() ;
@@ -470,12 +472,32 @@ class S_M_SetSlotState final : public ::google::protobuf::Message
   void _internal_set_state(::int32_t value);
 
   public:
+  // int32 slotController = 3;
+  void clear_slotcontroller() ;
+  ::int32_t slotcontroller() const;
+  void set_slotcontroller(::int32_t value);
+
+  private:
+  ::int32_t _internal_slotcontroller() const;
+  void _internal_set_slotcontroller(::int32_t value);
+
+  public:
+  // int32 point = 4;
+  void clear_point() ;
+  ::int32_t point() const;
+  void set_point(::int32_t value);
+
+  private:
+  ::int32_t _internal_point() const;
+  void _internal_set_point(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:S2C_Protocol.S_M_SetSlotState)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 0,
+      2, 4, 0,
       0, 2>
       _table_;
 
@@ -495,6 +517,8 @@ class S_M_SetSlotState final : public ::google::protobuf::Message
                           const S_M_SetSlotState& from_msg);
     ::int32_t slotidx_;
     ::int32_t state_;
+    ::int32_t slotcontroller_;
+    ::int32_t point_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -1701,6 +1725,50 @@ inline ::int32_t S_M_SetSlotState::_internal_state() const {
 inline void S_M_SetSlotState::_internal_set_state(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.state_ = value;
+}
+
+// int32 slotController = 3;
+inline void S_M_SetSlotState::clear_slotcontroller() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.slotcontroller_ = 0;
+}
+inline ::int32_t S_M_SetSlotState::slotcontroller() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_M_SetSlotState.slotController)
+  return _internal_slotcontroller();
+}
+inline void S_M_SetSlotState::set_slotcontroller(::int32_t value) {
+  _internal_set_slotcontroller(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_M_SetSlotState.slotController)
+}
+inline ::int32_t S_M_SetSlotState::_internal_slotcontroller() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.slotcontroller_;
+}
+inline void S_M_SetSlotState::_internal_set_slotcontroller(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.slotcontroller_ = value;
+}
+
+// int32 point = 4;
+inline void S_M_SetSlotState::clear_point() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.point_ = 0;
+}
+inline ::int32_t S_M_SetSlotState::point() const {
+  // @@protoc_insertion_point(field_get:S2C_Protocol.S_M_SetSlotState.point)
+  return _internal_point();
+}
+inline void S_M_SetSlotState::set_point(::int32_t value) {
+  _internal_set_point(value);
+  // @@protoc_insertion_point(field_set:S2C_Protocol.S_M_SetSlotState.point)
+}
+inline ::int32_t S_M_SetSlotState::_internal_point() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.point_;
+}
+inline void S_M_SetSlotState::_internal_set_point(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.point_ = value;
 }
 
 // -------------------------------------------------------------------

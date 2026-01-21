@@ -1,15 +1,20 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class SlotController : MonoBehaviour {
-    private GameObject _yellow, _crops;
-    private GameObject _apple, _banana, _watermelon, _pumpkin;
-    private Vector3 _localPos = new Vector3(0.0f, 0.3333333f, 0.0f);
-    private Vector3 _finalPos = new Vector3(0.0f, 0.6666666f, 0.0f);
-    private float _moveStartTime;
-    private const float MOVE_DURATION = 0.5f;
-    private GameObject _movingObject = null;
-    private KeyCode _key;
-    private int _index = 0;
+    GameObject _yellow, _crops;
+    GameObject _apple, _banana, _watermelon, _pumpkin;
+    GameObject _pTextObj;
+    TextMeshProUGUI _pText;
+    Coroutine _textAnimRoutine;
+    Vector3 _localPos = new Vector3(0.0f, 0.3333333f, 0.0f);
+    Vector3 _finalPos = new Vector3(0.0f, 0.6666666f, 0.0f);
+    float _moveStartTime;
+    const float MOVE_DURATION = 0.5f;
+    GameObject _movingObject = null;
+    KeyCode _key;
+    int _index = 0;
 
     public void Init(KeyCode key, int index) {
         Transform yellow = transform.Find("Yellow");
@@ -31,6 +36,12 @@ public class SlotController : MonoBehaviour {
             Transform pumpkin = crops.Find("Pumpkin");
             if (pumpkin != null)
                 _pumpkin = pumpkin.gameObject;
+        }
+        Transform pText = transform.Find("PText");
+        if (pText != null) {
+            _pTextObj = pText.gameObject;
+            _pTextObj.SetActive(false);
+            _pText = pText.GetComponent<TextMeshProUGUI>();
         }
             
         _key = key;
@@ -131,6 +142,46 @@ public class SlotController : MonoBehaviour {
             float angle = 90 * Time.deltaTime;
             _crops.transform.Rotate(Vector3.up, angle, Space.Self);
         }
+    }
+
+    public void ShowPText(int point, bool isMine) {
+        if (_textAnimRoutine != null)
+            StopCoroutine(_textAnimRoutine);
+        _textAnimRoutine = StartCoroutine(ShowPTextRoutine(point, isMine));
+    }
+
+    IEnumerator ShowPTextRoutine(int point, bool isMine) {
+        _pTextObj.SetActive(true);
+
+        Color32 col;
+        if (isMine)
+            col = new Color32(255, 0, 0, 255);
+        else
+            col = new Color32(0, 0, 255, 255);
+
+        if (point >= 0)
+            _pText.text = "+" + point.ToString();
+        else
+            _pText.text = point.ToString();
+
+        Vector3 startPos = new Vector3(0.0f, 1.4f, 0.0f);
+        Vector3 endPos = new Vector3(0.0f, 1.7f, 0.0f);
+
+        float duration = 0.5f;
+        float startTime = Time.time;
+        while (true) {
+            float elapsed = Time.time - startTime;
+            float t = elapsed / duration;
+            if (t < 1.0f) {
+                _pTextObj.transform.localPosition = Vector3.Lerp(startPos, endPos, t);
+                _pText.color = Color32.Lerp(col, new Color32(col.r, col.g, col.b, 120), t);
+                yield return null;
+            }
+            else
+                break;
+        }
+        _pTextObj.SetActive(false);
+        _textAnimRoutine = null;
     }
 
     void Update() {

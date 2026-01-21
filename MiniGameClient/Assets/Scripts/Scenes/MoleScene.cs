@@ -11,6 +11,7 @@ public class MoleScene : BaseScene {
     UI_MoleScoreBoard _uiMoleScoreBoard;
     UI_Mole_EndGame _uiEndGame;
     UI_PrintMessage _uiPrintMessage;
+    int _myPlayerIdx = -1;
 
     protected override void Init() {
         base.Init();
@@ -43,11 +44,18 @@ public class MoleScene : BaseScene {
     }
 
     public void LoadState(int playerIdx, List<string> playerIds) {
+        _myPlayerIdx = playerIdx;
         _uiMoleScoreBoard.SetPlayerIds(playerIds);
     }
 
-    public void SetSlotState(int slotIdx, int state) { 
+    public void SetSlotState(int slotIdx, int state, int slotColtrollerIdx, int point) {
         _gameBoard.SetSlotState(slotIdx, state);
+        if (slotColtrollerIdx == _myPlayerIdx) {
+            _gameBoard.ShowPointText(slotIdx, point, true);
+        } 
+        else if (slotColtrollerIdx != -1) {
+            _gameBoard.ShowPointText(slotIdx, point, false);
+        }
     }
 
     public void Stun() {

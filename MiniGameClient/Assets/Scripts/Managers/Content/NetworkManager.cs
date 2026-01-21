@@ -511,13 +511,13 @@ public class NetworkManager {
                 moleScene.LoadState(playerIdx, playerIds);
         }
 
-        public void ProcessSMSetSlotState(int slotIdx, int state) {
+        public void ProcessSMSetSlotState(int slotIdx, int state, int slotControllerIdx, int point) {
             BaseScene scene = Managers.Scene.CurrentScene;
             if (scene == null)
                 return;
 
             if (scene is MoleScene moleScene)
-                moleScene.SetSlotState(slotIdx, state);
+                moleScene.SetSlotState(slotIdx, state, slotControllerIdx, point);
         }
 
         public void TryHitSlot(int slotNum, float tick) {

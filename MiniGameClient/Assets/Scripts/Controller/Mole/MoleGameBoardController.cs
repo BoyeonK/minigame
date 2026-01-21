@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,13 @@ public class MoleGameBoardController : MonoBehaviour {
             return;
 
         _slots[slotIdx].SetState(state);
+    }
+
+    public void ShowPointText(int slotIdx, int point, bool isMine) {
+        if (slotIdx < 0 || slotIdx > 9)
+            return;
+
+        _slots[slotIdx].ShowPText(point, isMine);
     }
 
     void Clear() {

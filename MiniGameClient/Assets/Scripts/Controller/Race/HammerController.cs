@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class HammerController : MonoBehaviour {
-    private Coroutine currentSwingCoroutine;
+    private Coroutine _swingCoroutine;
 
     void Start() {
 
@@ -13,17 +13,17 @@ public class HammerController : MonoBehaviour {
     }
 
     public void SwingToLeft() {
-        if (currentSwingCoroutine != null)
-            StopCoroutine(currentSwingCoroutine);
+        if (_swingCoroutine != null)
+            StopCoroutine(_swingCoroutine);
 
-        currentSwingCoroutine = StartCoroutine(RotateOverTime(new Vector3(-45f, 0f, 0f), 2f));
+        _swingCoroutine = StartCoroutine(RotateOverTime(new Vector3(-45f, 0f, 0f), 2f));
     }
 
     public void SwingToRight() {
-        if (currentSwingCoroutine != null)
-            StopCoroutine(currentSwingCoroutine);
+        if (_swingCoroutine != null)
+            StopCoroutine(_swingCoroutine);
 
-        currentSwingCoroutine = StartCoroutine(RotateOverTime(new Vector3(45f, 0f, 0f), 2f));
+        _swingCoroutine = StartCoroutine(RotateOverTime(new Vector3(45f, 0f, 0f), 2f));
     }
 
     private IEnumerator RotateOverTime(Vector3 targetEulerAngles, float duration) {
@@ -40,6 +40,6 @@ public class HammerController : MonoBehaviour {
         }
 
         transform.rotation = targetRotation;
-        currentSwingCoroutine = null;
+        _swingCoroutine = null;
     }
 }

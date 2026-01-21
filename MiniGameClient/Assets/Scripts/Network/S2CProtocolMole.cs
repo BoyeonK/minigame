@@ -27,18 +27,19 @@ namespace Google.Protobuf.Protocol {
             "ChdTMkNfUHJvdG9jb2xfTW9sZS5wcm90bxIMUzJDX1Byb3RvY29sGhlTMkNf",
             "UHJvdG9jb2xfQ29tbW9uLnByb3RvIioKCVNfTV9TdGF0ZRIQCghwbGF5ZXJJ",
             "ZBgBIAEoBRILCgNpZHMYAiADKAkiLgoKU19NX1Jlc3VsdBIQCghpc1dpbm5l",
-            "chgBIAEoCBIOCgZzY29yZXMYAiADKAUiMgoQU19NX1NldFNsb3RTdGF0ZRIP",
-            "CgdzbG90SWR4GAEgASgFEg0KBXN0YXRlGAIgASgFIh4KC0NfTV9IaXRTbG90",
-            "Eg8KB3Nsb3RJZHgYASABKAUiKAoTU19NX1Jlc3BvbnNlSGl0U2xvdBIRCglp",
-            "c1N0dW5uZWQYASABKAgiIQoPU19NX1JlbmV3U2NvcmVzEg4KBnNjb3JlcxgB",
-            "IAMoBSImChFTX01fUmVhZHlGb3JTdGFydBIRCgljb3VudGRvd24YASABKAVC",
-            "G6oCGEdvb2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "chgBIAEoCBIOCgZzY29yZXMYAiADKAUiWQoQU19NX1NldFNsb3RTdGF0ZRIP",
+            "CgdzbG90SWR4GAEgASgFEg0KBXN0YXRlGAIgASgFEhYKDnNsb3RDb250cm9s",
+            "bGVyGAMgASgFEg0KBXBvaW50GAQgASgFIh4KC0NfTV9IaXRTbG90Eg8KB3Ns",
+            "b3RJZHgYASABKAUiKAoTU19NX1Jlc3BvbnNlSGl0U2xvdBIRCglpc1N0dW5u",
+            "ZWQYASABKAgiIQoPU19NX1JlbmV3U2NvcmVzEg4KBnNjb3JlcxgBIAMoBSIm",
+            "ChFTX01fUmVhZHlGb3JTdGFydBIRCgljb3VudGRvd24YASABKAVCG6oCGEdv",
+            "b2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.Protocol.S2CProtocolCommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_State), global::Google.Protobuf.Protocol.S_M_State.Parser, new[]{ "PlayerId", "Ids" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_Result), global::Google.Protobuf.Protocol.S_M_Result.Parser, new[]{ "IsWinner", "Scores" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_SetSlotState), global::Google.Protobuf.Protocol.S_M_SetSlotState.Parser, new[]{ "SlotIdx", "State" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_SetSlotState), global::Google.Protobuf.Protocol.S_M_SetSlotState.Parser, new[]{ "SlotIdx", "State", "SlotController", "Point" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_M_HitSlot), global::Google.Protobuf.Protocol.C_M_HitSlot.Parser, new[]{ "SlotIdx" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_ResponseHitSlot), global::Google.Protobuf.Protocol.S_M_ResponseHitSlot.Parser, new[]{ "IsStunned" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_M_RenewScores), global::Google.Protobuf.Protocol.S_M_RenewScores.Parser, new[]{ "Scores" }, null, null, null, null),
@@ -536,6 +537,8 @@ namespace Google.Protobuf.Protocol {
     public S_M_SetSlotState(S_M_SetSlotState other) : this() {
       slotIdx_ = other.slotIdx_;
       state_ = other.state_;
+      slotController_ = other.slotController_;
+      point_ = other.point_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -569,6 +572,30 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
+    /// <summary>Field number for the "slotController" field.</summary>
+    public const int SlotControllerFieldNumber = 3;
+    private int slotController_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int SlotController {
+      get { return slotController_; }
+      set {
+        slotController_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "point" field.</summary>
+    public const int PointFieldNumber = 4;
+    private int point_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Point {
+      get { return point_; }
+      set {
+        point_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -586,6 +613,8 @@ namespace Google.Protobuf.Protocol {
       }
       if (SlotIdx != other.SlotIdx) return false;
       if (State != other.State) return false;
+      if (SlotController != other.SlotController) return false;
+      if (Point != other.Point) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -595,6 +624,8 @@ namespace Google.Protobuf.Protocol {
       int hash = 1;
       if (SlotIdx != 0) hash ^= SlotIdx.GetHashCode();
       if (State != 0) hash ^= State.GetHashCode();
+      if (SlotController != 0) hash ^= SlotController.GetHashCode();
+      if (Point != 0) hash ^= Point.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -621,6 +652,14 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(16);
         output.WriteInt32(State);
       }
+      if (SlotController != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SlotController);
+      }
+      if (Point != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Point);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -639,6 +678,14 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(16);
         output.WriteInt32(State);
       }
+      if (SlotController != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SlotController);
+      }
+      if (Point != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Point);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -654,6 +701,12 @@ namespace Google.Protobuf.Protocol {
       }
       if (State != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(State);
+      }
+      if (SlotController != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SlotController);
+      }
+      if (Point != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Point);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -672,6 +725,12 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.State != 0) {
         State = other.State;
+      }
+      if (other.SlotController != 0) {
+        SlotController = other.SlotController;
+      }
+      if (other.Point != 0) {
+        Point = other.Point;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -700,6 +759,14 @@ namespace Google.Protobuf.Protocol {
             State = input.ReadInt32();
             break;
           }
+          case 24: {
+            SlotController = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Point = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -725,6 +792,14 @@ namespace Google.Protobuf.Protocol {
           }
           case 16: {
             State = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            SlotController = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Point = input.ReadInt32();
             break;
           }
         }
