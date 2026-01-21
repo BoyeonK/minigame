@@ -13,6 +13,7 @@ env/
 
 # 음원 파일 무시
 [Ss]ounds/
+[Aa]udio/
 
 # Unity 에셋 스토어 관련 파일 무시
 TinyRPGTown/
