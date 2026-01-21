@@ -41,8 +41,10 @@ public class UI_ErrorConfirmOrCancel : UI_Popup {
         _errorText.text = errorDetail;
         _confirmButton.onClick.RemoveAllListeners();
         _cancelButton.onClick.RemoveAllListeners();
+        _confirmAct += PlaySwipeClip;
         _confirmAct += confirmOnClickEvent;
         _confirmAct += DestroyThis;
+        _cancelAct += PlaySwipeClip;
         _cancelAct += cancelOnClickEvent;
         _cancelAct += DestroyThis;
         _confirmButton.onClick.AddListener(() => {
@@ -51,6 +53,10 @@ public class UI_ErrorConfirmOrCancel : UI_Popup {
         _cancelButton.onClick.AddListener(() => {
             _cancelAct?.Invoke();
         });
+    }
+
+    private void PlaySwipeClip() {
+        Managers.Sound.Play("swipe");
     }
 
     private void Update() {

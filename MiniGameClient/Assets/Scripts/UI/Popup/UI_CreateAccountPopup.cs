@@ -64,6 +64,7 @@ public class UI_CreateAccountPopup : UI_Popup {
     private void TryCreateAccount() {
         //TODO : 패스워드확인이랑 패스워드랑 일치하는지 선제적으로 확인
         //다르면 에러 메세지 출력
+        Managers.Sound.Play("button");
         string id = "", pw = "", pwc = "";
         if (_idField != null && _pwField != null && _pwConfirmField != null) {
             id = _idField.text;

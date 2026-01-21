@@ -55,22 +55,23 @@ public class LoginScene : BaseScene {
         _uiPublicRecord = Managers.UI.CacheSceneUI<UI_PublicRecord>();
         _uiMatchMakeProgress = Managers.UI.CachePopupUI<UI_MatchMakeProgress>();
 
+        //오디오 설정
+        Managers.Setting.ApplyPreviousSceneSetting();
+        Managers.Sound.GetOrAddAudioClip("button");
+        Managers.Sound.GetOrAddAudioClip("select");
+        Managers.Sound.GetOrAddAudioClip("swipe");
+        Managers.Sound.Play("LobbyScene", Define.Sound.Bgm);
+        
         GameObject screen = GameObject.Find("Screen");
         if (screen != null) {
             _screenRenderer = screen.GetComponent<LobbyScreenRenderer>();
             _screenRenderer.Init();
             _screenRenderer.HideThis();
         }
-        else {
-            Debug.LogError("로비 스크린 컴포넌트를 찾지못함");
-        }
 
         GameObject go = GameObject.Find("OptionSelecter");
         if (go != null) {
             _optionSelecter = go.GetComponent<OptionSelecterController>();
-        }
-        else {
-            Debug.LogError("OptionSelecter가 Scene에 없습니다링");
         }
 
         Managers.Input.AddKeyListener(KeyCode.UpArrow, UpLobbyOpt, InputManager.KeyState.Up);
@@ -157,6 +158,7 @@ public class LoginScene : BaseScene {
 
     private void ApplyLobbyOpt() {
         if (_stage == Stage.Lobby) {
+            Managers.Sound.Play("select");
             _optionSelecter.SetOpt(_lobbyOpt);
             _uiLobbyMenu.SetSelectedOpt(_lobbyOpt);
         }
@@ -188,6 +190,7 @@ public class LoginScene : BaseScene {
 
     private void ApplyMatchMakeOpt() {
         if (_stage == Stage.MatchMake) {
+            Managers.Sound.Play("select");
             _screenRenderer.ApplyPicture(_matchMakeOpt);
             _uiMatchMakeMenu.SetSelectedOpt(_matchMakeOpt);
         }
@@ -195,6 +198,7 @@ public class LoginScene : BaseScene {
 
     public void StartMatchMake() {
         if (_stage == Stage.MatchMake) {
+            Managers.Sound.Play("button");
             Managers.Network.Match.TryMatchMake(Define.IntToGameType(_matchMakeOpt + 1));
         }
     }
@@ -408,6 +412,5 @@ public class LoginScene : BaseScene {
         Managers.Network.Match.OnMatchmakeRequestSucceedAct -= MatchmakeRequestSucceed;
         Managers.Network.Match.OnMatchmakeCancelSucceedAct -= MatchmakeCancelSucceed;
         Managers.Network.Match.OnResponseKeepAliveAct -= MatchCompletedReadyToChangeScene;
-        Debug.Log("Login Scene Cleared");
     }
 }

@@ -95,6 +95,7 @@ public class UI_StartGame : UI_Scene {
 
     private void TryConnectToServer() {
         if (!(Managers.Network.IsConnected())) {
+            Managers.Sound.Play("button");
             Managers.Network.TryConnectToServer();
             OnConnecting();
         }

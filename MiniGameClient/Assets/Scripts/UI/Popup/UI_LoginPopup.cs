@@ -57,13 +57,11 @@ public class UI_LoginPopup : UI_Popup {
     private void TryLogin() {
         string id = "", password = "";
         if (_idField != null && _pwField != null) {
-            Debug.Log($"ID: {_idField.text}");
-            Debug.Log($"Password: {_pwField.text}");
             id = _idField.text;
             password = _pwField.text;
         }
         else { return; }
-
+        Managers.Sound.Play("button");
         Managers.Network.Lobby.TryLogin(id, password);
     }
 

@@ -33,7 +33,6 @@ public class UI_MatchMakeMenu : UI_Scene {
 
     public void SetSelectedOpt(int value) {
         _selectedOpt = value;
-        Debug.Log(_selectedOpt);
         if (_rectPingpong == null ||
             _rectDanmaku == null ||
             _rectVampireSurvival == null)
