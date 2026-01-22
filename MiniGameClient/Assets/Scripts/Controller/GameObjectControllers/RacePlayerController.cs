@@ -13,39 +13,42 @@ public class RacePlayerController : GameObjectController {
     State _state = State.Standing;
     bool _isGrounded = true;
 
-    private LayerMask _groundLayer;
-    private float _groundCheckRadius = 0.3f;
-    private float _groundCheckDistance = 0.5f;
+    LayerMask _groundLayer;
+    float _groundCheckRadius = 0.3f;
+    float _groundCheckDistance = 0.5f;
 
     TestPlayerCamera _camera;
-    private float _cameraDistance = 5f;
-    private float sensitivity = 1000f; 
-    private float xRotation = 0f;
-    private float yRotation = 0f;
+    float _cameraDistance = 5f;
+    float sensitivity = 1000f; 
+    float xRotation = 0f;
+    float yRotation = 0f;
 
-    private Vector3 _front = new(0f, 0f, 1f);
-    private Vector3 _right = new();
-    private Vector3 _viewFront = new(0f, 0f, 1f);
-    private Vector3 _offset = new(0f, 0.5f, 0f);
-    private Vector3 _charactersFront = new(0f, 0f, 1f);
-    private bool _w = false;
-    private bool _a = false;
-    private bool _s = false;
-    private bool _d = false;
-    private bool _jump = false;
+    float _stepTimer = 0f;
+    const float STEP_TIMER_INTERVAL = 0.4f;
 
-    private Rigidbody _rigidBody;
-    private const float _accelerationRate = 6f;
-    private const float _horizonFrictionRatePerVelocity = 2f;
-    private const float _gravityAccel = 15f;
-    private const float _jumpSpeed = 4.8f;
-    private const float MAX_VERTICAL_SPEED = 9f;
-    private const float MAX_HORIZONTAL_SPEED = 4f;
+    Vector3 _front = new(0f, 0f, 1f);
+    Vector3 _right = new();
+    Vector3 _viewFront = new(0f, 0f, 1f);
+    Vector3 _offset = new(0f, 0.5f, 0f);
+    Vector3 _charactersFront = new(0f, 0f, 1f);
+    bool _w = false;
+    bool _a = false;
+    bool _s = false;
+    bool _d = false;
+    bool _jump = false;
 
-    private Vector3 _accelerationDir = new();
+    Rigidbody _rigidBody;
+    const float _accelerationRate = 6f;
+    const float _horizonFrictionRatePerVelocity = 2f;
+    const float _gravityAccel = 15f;
+    const float _jumpSpeed = 4.8f;
+    const float MAX_VERTICAL_SPEED = 9f;
+    const float MAX_HORIZONTAL_SPEED = 4f;
 
-    private Vector3 _collisionVector = new();
-    private float _collisionPeriod = 0f;
+    Vector3 _accelerationDir = new();
+
+    Vector3 _collisionVector = new();
+    float _collisionPeriod = 0f;
     private Vector3 GetCollisionVector() {
         if (_collisionPeriod > Time.time)
             return Vector3.zero;
@@ -53,7 +56,7 @@ public class RacePlayerController : GameObjectController {
     }
 
     Animator _animator;
-    private bool _isStanding = true;
+    bool _isStanding = true;
 
     public override void Init() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -189,6 +192,7 @@ public class RacePlayerController : GameObjectController {
 
         if (_prestate != _state && _state == State.Jumping) {
             _animator.SetTrigger("JumpStart");
+            PlayJumpSFX();
         }
 
         if (_state == State.Jumping) {
@@ -201,6 +205,17 @@ public class RacePlayerController : GameObjectController {
         if (_isGrounded && _prestate == State.Jumping) {
             _animator.SetTrigger("Land");
             _animator.SetBool("IsJumpingUp", true);
+        }
+
+        if (_isGrounded && _state == State.Moving) {
+            _stepTimer -= Time.fixedDeltaTime;
+            if (_stepTimer <= 0f) {
+                PlayStepSFX();
+                _stepTimer = STEP_TIMER_INTERVAL;
+            }
+        }
+        else {
+            _stepTimer = 0f;
         }
 
         _prestate = _state;
@@ -316,8 +331,14 @@ public class RacePlayerController : GameObjectController {
         }
     }
 
-    private void MovePlayerOnUpdate() {
-        
+    private void PlayStepSFX() {
+        int rand = UnityEngine.Random.Range(0, 5);
+        Managers.Sound.Play($"footstep{rand}");
+    }
+
+    private void PlayJumpSFX() {
+        int rand = UnityEngine.Random.Range(0, 2);
+        Managers.Sound.Play($"jump{rand}");
     }
 
     private void WDown() {

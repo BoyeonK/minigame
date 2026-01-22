@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class SlotController : MonoBehaviour {
     const float MOVE_DURATION = 0.5f;
     GameObject _movingObject = null;
     KeyCode _key;
+    int _state = 1;
     int _index = 0;
 
     public void Init(KeyCode key, int index) {
@@ -76,7 +78,13 @@ public class SlotController : MonoBehaviour {
         }
     }
 
+    void PlaySFX() {
+        int randomIdx = UnityEngine.Random.Range(0, 4);
+        Managers.Sound.Play($"MoleGetPoint{randomIdx}");
+    }
+
     public void SetRed() {
+        _state = 0;
         CropsRed();
         _yellow.SetActive(false);
         _pumpkin.SetActive(false);
@@ -105,12 +113,15 @@ public class SlotController : MonoBehaviour {
     }
 
     public void SetYellow() {
+        _state = 1;
+        if (_state != 1) PlaySFX();
         CropsNotRed();
         _yellow.SetActive(true);
         _pumpkin.SetActive(false);
     }
 
     public void SetGreen() {
+        _state = 2;
         CropsNotRed();
         _yellow.SetActive(false);
         _pumpkin.SetActive(true);

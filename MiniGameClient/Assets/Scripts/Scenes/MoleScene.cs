@@ -41,6 +41,15 @@ public class MoleScene : BaseScene {
         _uiMoleScoreBoard = Managers.UI.ShowSceneUI<UI_MoleScoreBoard>();
         _uiEndGame = Managers.UI.CacheSceneUI<UI_Mole_EndGame>();
         _uiPrintMessage = Managers.UI.CacheSceneUI<UI_PrintMessage>();
+
+        Managers.Setting.ApplyPreviousSceneSetting();
+        Managers.Sound.GetOrAddAudioClip("MoleSetPoint0");
+        Managers.Sound.GetOrAddAudioClip("MoleSetPoint1");
+        Managers.Sound.GetOrAddAudioClip("MoleSetPoint2");
+        Managers.Sound.GetOrAddAudioClip("MoleSetPoint3");
+        Managers.Sound.GetOrAddAudioClip("MoleStunned");
+        Managers.Sound.GetOrAddAudioClip("gameEnd");
+        Managers.Sound.Play("MoleScene", Define.Sound.Bgm);
     }
 
     public void LoadState(int playerIdx, List<string> playerIds) {
@@ -59,6 +68,7 @@ public class MoleScene : BaseScene {
     }
 
     public void Stun() {
+        Managers.Sound.Play("MoleStunned");
         _cameraController.Stun();
         _stunBlur.Stun(); 
     }
@@ -69,6 +79,7 @@ public class MoleScene : BaseScene {
 
     public void EndGame(bool isWinner, List<int> scores) {
         Managers.UI.ShowSceneUI<UI_Mole_EndGame>();
+        Managers.Sound.Play("gameEnd");
         StartCoroutine(EndGameRoutine(isWinner, scores));
     }
 

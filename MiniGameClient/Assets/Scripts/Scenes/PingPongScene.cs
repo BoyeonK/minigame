@@ -64,6 +64,14 @@ public class PingPongScene : BaseScene {
             _pingPongCameraController = cam.GetComponent<PingPongCameraController>();
         }
 
+        Managers.Setting.ApplyPreviousSceneSetting();
+        Managers.Sound.GetOrAddAudioClip("PingPongImpact0");
+        Managers.Sound.GetOrAddAudioClip("PingPongImpact1");
+        Managers.Sound.GetOrAddAudioClip("PingPongImpact2");
+        Managers.Sound.GetOrAddAudioClip("PingPongImpact3");
+        Managers.Sound.GetOrAddAudioClip("gameEnd");
+        Managers.Sound.Play("PingPongScene", Define.Sound.Bgm);
+
         //서버에게 Scene에 로딩이 완료되었음을 통지. Game정보를 요청
         Managers.Network.TryRequestGameState((int)GameType.PingPong);
     }
@@ -183,6 +191,7 @@ public class PingPongScene : BaseScene {
 
     public void EndGame(bool isWinner, List<int> scores) {
         Managers.UI.ShowSceneUI<UI_PingPong_EndGame>();
+        Managers.Sound.Play("gameEnd");
 
         StartCoroutine(EndGameRoutine(isWinner, scores));
     }

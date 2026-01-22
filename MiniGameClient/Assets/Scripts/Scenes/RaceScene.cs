@@ -108,6 +108,17 @@ public class RaceScene : BaseScene {
         _uiEndGame = Managers.UI.CacheSceneUI<UI_Race_EndGame>();
         _uiPrintMessage = Managers.UI.CacheSceneUI<UI_PrintMessage>();
 
+        Managers.Setting.ApplyPreviousSceneSetting();
+        Managers.Sound.GetOrAddAudioClip("footstep0");
+        Managers.Sound.GetOrAddAudioClip("footstep1");
+        Managers.Sound.GetOrAddAudioClip("footstep2");
+        Managers.Sound.GetOrAddAudioClip("footstep3");
+        Managers.Sound.GetOrAddAudioClip("footstep4");
+        Managers.Sound.GetOrAddAudioClip("jump0");
+        Managers.Sound.GetOrAddAudioClip("jump1");
+        Managers.Sound.GetOrAddAudioClip("gameEnd");
+        Managers.Sound.Play("RaceScene", Define.Sound.Bgm);
+
         Managers.Network.TryRequestGameState((int)GameType.Race);
     }
 
