@@ -8,7 +8,6 @@ Session::Session() : _RecvBuffer(BUFFER_SIZE) {
 }
 
 Session::~Session() {
-	cout << "Session Closed" << endl;
 	SocketUtils::Close(_socketHandle);
 }
 
@@ -176,15 +175,12 @@ void Session::ProcessConnect() {
 void Session::ProcessDisconnect() {
 	OnDisconnected();
 	GetService()->ReleaseSession(GetSessionRef());
-	cout << _DCT._OwnerRef.use_count() << " <- 이게 1이어야 함" << endl;
 	_DCT._OwnerRef = nullptr;
 }
 
 void Session::ProcessRecv(int32_t numOfBytes) {
 	_RT._OwnerRef = nullptr;
 	if (numOfBytes == 0) {
-		//연결이 끊겼을 때 0byte Recv가 들어온다.
-		cout << "0byte Recv!!" << endl;
 		Disconnect();
 		return;
 	}
@@ -210,7 +206,7 @@ void Session::ProcessSend(CPTask* pCPTask, int32_t numOfBytes) {
 	pST->_sendBufferRefs.clear();
 	objectPool<SendTask>::dealloc(pST);
 	if (numOfBytes == 0) {
-		cout << "0bytes sent?" << endl;
+
 	}
 	OnSend(numOfBytes);
 

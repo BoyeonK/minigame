@@ -16,9 +16,7 @@ public:
 		_renewScoresPkt.mutable_scores()->Reserve(_quota);
 	}
 
-	~MoleRoom() {
-		cout << "MoleRoom »ç¸Á" << endl;
-	}
+	~MoleRoom() { }
 
 	void ReturnToPool();
 	void Update() override;

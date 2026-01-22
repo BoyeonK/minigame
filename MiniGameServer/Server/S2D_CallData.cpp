@@ -17,13 +17,10 @@ void HelloCall::OnFailed() {
 #endif
 
 void SLoginCall::OnSucceed() {
-	cout << "DB서버에 로그인 요청에 대한 응답을 받음" << endl;
-
 	if (this->reply.has_dbid()) {
 		CorrectI(this->reply.dbid());
 	}
 	else {
-		cout << "없는 아이디" << endl;
 		IncorrectI(this->reply.incorrect_id());
 	}
 	//TODO: 0을받은경우, S_Login 패킷에 err를 담아서 클라에 전송.
@@ -73,14 +70,11 @@ void SLoginCall::IncorrectI(bool incorrect_id) {
 }
 
 void SCreateAccountCall::OnSucceed() {
-	cout << "DB서버에 계정 생성 요청의 응답을 받음" << endl;
 	if (reply.success()) {
 		CreateComplete();
-		cout << "계정 생성 요청 성공." << endl;
 	}
 	else {
 		CreateFailed();
-		cout << "계정 생성 요청 실패." << endl;
 	}
 }
 
@@ -125,7 +119,6 @@ void SPlayerInformationCall::OnSucceed() {
 	for (int i = 0; i < reply.personalrecords_size(); i++) {
 		playerSessionRef->SetPersonalRecord(i + 1, reply.personalrecords(i));
 	}
-	cout << "DB로부터 player의 정보를 가져와서 session에 채움" << endl;
 
 	S2C_Protocol::S_ResponseMyRecords pkt = S2CPacketMaker::MakeSResponseMyRecords(playerSessionRef);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
@@ -168,7 +161,6 @@ void SUpdatePersonalRecordCall::OnFailed() {
 
 void SPublicRecordCall::OnSucceed() {
 	GGameManagers[_gameId]->SetPublicRecord(reply.playerid(), reply.publicrecord());
-	cout << _gameId << "번 레코드 " << reply.playerid() << "의 점수 " << reply.publicrecord() << endl;
 }
 
 void SPublicRecordCall::OnFailed() {
@@ -178,7 +170,6 @@ void SPublicRecordCall::OnFailed() {
 void SUpdatePublicRecordCall::OnSucceed() {
 #ifdef _DEBUG
 	if (reply.success()) {
-		cout << "갱신성공" << endl;
 		GGameManagers[_gameId]->RenewPublicRecordFromDB();
 	}
 	else {

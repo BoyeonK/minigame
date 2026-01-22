@@ -16,7 +16,6 @@ void MoleRoom::Update() {
 
 void MoleRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
-	cout << "Mole 룸 생성" << endl;
 
 	for (auto& pd : pdv) {
 		shared_ptr<PlayerSession> playerSessionRef = pd.playerSessionWRef.lock();
@@ -40,8 +39,6 @@ void MoleRoom::Init(vector<WatingPlayerData> pdv) {
 }
 
 void MoleRoom::Init2(vector<WatingPlayerData> pdv) {
-	cout << "Init2" << endl;
-
 	bool canStart = true;
 	for (int i = 0; i < _quota; i++) {
 		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
@@ -79,19 +76,15 @@ void MoleRoom::Init2(vector<WatingPlayerData> pdv) {
 		PostEventAfter(30000, &MoleRoom::Start);
 	}
 	else {
-		cout << "게임 시작 불가능." << endl;
 		GGameManagers[int(_ty)]->Push(pdv);
 		_state = GameState::EndGame;
 	}
 }
 
 void MoleRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
-	cout << "업데이트 프로그레스 바" << endl;
-	cout << "_quota : " << _quota << endl;
 	if (progressRate == 100) {
 		_preparedPlayer += 1;
 	}
-	cout << "_preparedPlayer : " << _preparedPlayer << endl;
 
 	_loadingProgressPkt.set_playeridx(playerIdx);
 	_loadingProgressPkt.set_persentage(progressRate);
@@ -108,7 +101,6 @@ void MoleRoom::Start() {
 		return;
 	_state = GameState::OnGoing;
 
-	cout << "스타트 함수 실행" << endl;
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
@@ -267,7 +259,6 @@ void MoleRoom::SetSlotState(int32_t slotIdx, SlotState state, int32_t slotContro
 }
 
 void MoleRoom::CountingPhase() {
-	cout << "Calculating" << endl;
 	_state = GameState::Counting;
 	_isUpdateCall = false;
 	CalculateGameResult();
@@ -363,9 +354,6 @@ void MoleRoom::UpdateElos() {
 			int32_t dbid = _dbids[i];
 			DBManager->S2D_UpdateElo(dbid, int(_ty), calculatedElo);
 		}
-	}
-	else {
-		cout << "너무 많은 플레이어가 이탈했거나, 정상적인 진행이 되지 않은 게임" << endl;
 	}
 }
 

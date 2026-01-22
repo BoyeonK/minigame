@@ -13,7 +13,6 @@ public:
 		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
 		vector<unsigned char> iv, ciphertext, tag;
 		if (!(GCryptoManager->Encrypt(AESKey, plaintext, (int32_t)pktId, iv, ciphertext, tag))) {
-			cout << "복호화 실패" << endl;
 			return pkt;
 		}
 		pkt.set_iv(iv.data(), iv.size());
@@ -161,7 +160,6 @@ public:
 		S2C_Protocol::S_ResponseMyRecords pkt;
 		for (int i = 1; i <= 3; i++) {
 			int score = playerSessionRef->GetPersonalRecord(i);
-			cout << i << "번 레코드 " << score << endl;
 			pkt.add_scores(score);
 		}
 		

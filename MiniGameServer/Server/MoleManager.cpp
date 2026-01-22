@@ -68,7 +68,6 @@ bool MoleManager::CompareAndRenewPublicRecord(int32_t dbid, int32_t score) {
 	if (score < _publicRecord)
 		return false;
 
-	cout << "Mole 최고 기록 갱신 요청 " << dbid << "의 최고 기록 " << score << endl;
 	DBManager->S2D_UpdatePublicRecord(int(_ty), dbid, score);
 	return true;
 }

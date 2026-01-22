@@ -16,9 +16,7 @@ public:
 		_movementInfos = vector<S2C_Protocol::GameObjectMovementInfo>(_quota);
 		_movementAndCollisions = vector<S2C_Protocol::S_R_MovementAndCollision>(_quota);
 	}
-	~RaceRoom() {
-		cout << "·ë »ç¸Á" << endl;
-	}
+	~RaceRoom() { }
 
 	void ReturnToPool();
 	void Update() override;

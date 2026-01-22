@@ -71,7 +71,6 @@ bool ClientService::StartConnect() {
 	for (uint32_t i = 0; i < sessionCount; i++) {
 		shared_ptr<Session> sessionRef = CreateSessionRef();
 		if (sessionRef->Connect() == false) {
-			cout << "¾Ó´ë" << endl;
 			return false;
 		}
 	}

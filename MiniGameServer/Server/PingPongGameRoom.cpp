@@ -7,7 +7,6 @@
 
 void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
-	cout << "PingPong 룸 생성" << endl;
 
 	for (auto& pd : pdv) {
 		shared_ptr<PlayerSession> playerSessionRef = pd.playerSessionWRef.lock();
@@ -35,8 +34,6 @@ void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {
 }
 
 void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
-	cout << "Init2" << endl;
-
 	bool canStart = true;
 	for (int i = 0; i < _quota; i++) {
 		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
@@ -80,19 +77,13 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		PostEventAfter(30000, &PingPongGameRoom::Start);
 	}
 	else {
-		cout << "게임 시작 불가능." << endl;
 		GGameManagers[int(_ty)]->Push(pdv);
 		_state = GameState::EndGame;
 	}
 }
 
 void PingPongGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
-	cout << "업데이트 프로그레스 바" << endl;
-	cout << "_quota : " << _quota << endl;
-	if (progressRate == 100) {
-		_preparedPlayer += 1;
-	}
-	cout << "_preparedPlayer : " << _preparedPlayer << endl;
+	if (progressRate == 100) { _preparedPlayer += 1; }
 	//TODO : 로딩 진행상황 전파
 	_loadingProgressPkt.set_playeridx(playerIdx);
 	_loadingProgressPkt.set_persentage(progressRate);
@@ -109,7 +100,6 @@ void PingPongGameRoom::Start() {
 		return;
 	_state = GameState::OnGoing;
 
-	cout << "스타트 함수 실행" << endl;
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
@@ -128,7 +118,6 @@ void PingPongGameRoom::CountdownBeforeStart(int32_t countdown) {
 }
 
 void PingPongGameRoom::OnGoingPhase1() {
-	cout << "OnGoingPhase1, 테스트를 위하여 2, 3페이즈를 건너뜀" << endl;
 	_isUpdateCall = true;
 	CountdownBeforeStart(0);
 	vector<int> selectedNums(10);
@@ -141,7 +130,6 @@ void PingPongGameRoom::OnGoingPhase1() {
 }
 
 void PingPongGameRoom::OnGoingPhase2() {
-	cout << "OnGoingPhase2" << endl;
 	vector<int> selectedNums(10);
 	uniform_int_distribution<int> dis(0, 5);
 
@@ -158,11 +146,9 @@ void PingPongGameRoom::OnGoingPhase2() {
 }
 
 void PingPongGameRoom::OnGoingPhase3() {
-	cout << "OnGoingPhase3" << endl;
 }
 
 void PingPongGameRoom::CountingPhase() {
-	cout << "Calculating" << endl;
 	_state = GameState::Counting;
 	_isUpdateCall = false;
 	CalculateGameResult();
@@ -258,9 +244,6 @@ void PingPongGameRoom::UpdateElos() {
 			int32_t dbid = _dbids[i];
 			DBManager->S2D_UpdateElo(dbid, int(_ty), calculatedElo);
 		}
-	}
-	else {
-		cout << "너무 많은 플레이어가 이탈했거나, 정상적인 진행이 되지 않은 게임" << endl;
 	}
 }
 
@@ -446,8 +429,6 @@ void PingPongGameRoom::Handle_CollisionBar(float px, float pz, float speed, int3
 bool PingPongGameRoom::IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef, float px, float pz, float speed, int32_t playerIdx) {
 	if (bulletRef->_lastColider == playerIdx)
 		return false;
-
-	cout << bulletRef->GetObjectId() << endl;
 
 	uint64_t now = ::GetTickCount64();
 	if (bulletRef->_updatedTick > now)

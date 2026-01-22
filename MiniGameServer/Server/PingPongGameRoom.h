@@ -11,9 +11,7 @@ public:
 		_dbids = vector<int32_t>(_quota, 0);
 		_playerIds = vector<string>(_quota);
 	}
-	~PingPongGameRoom() {
-		cout << "PingPong·ë »ç¸Á" << endl;
-	}
+	~PingPongGameRoom() { }
 
 	void ReturnToPool();
 	void Update() override;

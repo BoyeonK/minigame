@@ -45,13 +45,11 @@ void GameManager::RemoveInvalidRoom() {
 	if (::GetTickCount64() - _lastRemoveRoomTick > _removeRoomTickPeriod) {
 		unique_lock<mutex> lock(_roomsLock);
 		_lastRemoveRoomTick = ::GetTickCount64();
-		auto new_end = remove_if(_rooms.begin(), _rooms.end(),
-			[](const shared_ptr<GameRoom>& gameRoomRef) {
-				return (gameRoomRef->GetState() == GameRoom::GameState::EndGame);
-			});
-
-		if (new_end != _rooms.end())
-			cout << "Invalid Room Cleared" << endl;
+		auto new_end = remove_if(
+			_rooms.begin(), 
+			_rooms.end(),
+			[](const shared_ptr<GameRoom>& gameRoomRef) { return (gameRoomRef->GetState() == GameRoom::GameState::EndGame); }
+		);
 
 		_rooms.erase(new_end, _rooms.end());
 		_roomCount = _rooms.size();

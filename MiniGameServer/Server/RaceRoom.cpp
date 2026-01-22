@@ -6,8 +6,6 @@
 
 void RaceRoom::Init(vector<WatingPlayerData> pdv) {
 	bool ready = true;
-	cout << "TestGame 룸 생성" << endl;
-
 	for (auto& pd : pdv) {
 		shared_ptr<PlayerSession> playerSessionRef = pd.playerSessionWRef.lock();
 		_playerWRefs.push_back(pd.playerSessionWRef);
@@ -34,8 +32,6 @@ void RaceRoom::Init(vector<WatingPlayerData> pdv) {
 }
 
 void RaceRoom::Init2(vector<WatingPlayerData> pdv) {
-	cout << "Init2" << endl;
-
 	bool canStart = true;
 	for (int i = 0; i < _quota; i++) {
 		shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
@@ -72,7 +68,6 @@ void RaceRoom::Init2(vector<WatingPlayerData> pdv) {
 		}
 	}
 	else {
-		cout << "게임 시작 불가능." << endl;
 		GGameManagers[int(_ty)]->Push(pdv);
 		_state = GameState::EndGame;
 	}
@@ -82,7 +77,6 @@ void RaceRoom::Start() {
 	if (_state != GameState::BeforeStart)
 		return;
 	_state = GameState::OnGoing;
-	cout << "스타트 함수 실행" << endl;
 
 	for (int i = 0; i < 4; i++) {
 		shared_ptr<RacePlayer> runnerRef = { objectPool<RacePlayer>::alloc(0, 0, -3 + 2 * i), objectPool<RacePlayer>::dealloc };
@@ -280,7 +274,6 @@ void RaceRoom::WinnerDecided(int32_t winnerIdx) {
 }
 
 void RaceRoom::CountingPhase() {
-	cout << "Calculating" << endl;
 	_isUpdateCall = false;
 	CalculateGameResult();
 }
@@ -363,9 +356,6 @@ void RaceRoom::UpdateElos() {
 			DBManager->S2D_UpdateElo(dbid, int(_ty), calculatedElo);
 		}
 	}
-	else {
-		cout << "너무 많은 플레이어가 이탈했거나, 정상적인 진행이 되지 않은 게임" << endl;
-	}
 }
 
 void RaceRoom::EndPhase() {
@@ -406,8 +396,6 @@ void RaceRoom::Update() {
 }
 
 void RaceRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
-	cout << "업데이트 프로그레스 바" << endl;
-	cout << "_quota : " << _quota << endl;
 	if (progressRate == 100) {
 		_preparedPlayer += 1;
 	}

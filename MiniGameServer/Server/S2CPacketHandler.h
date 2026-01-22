@@ -179,7 +179,6 @@ public:
 		//TODO: Session에 허락된 범주의 pktId의 핸들러만 실행하기.
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
 		if (header->_id > sessionRef->GetSecureLevel()) {
-			cout << "보안 레벨에 맞지 않는 패킷. " << endl;
 			return false;
 		}
 
@@ -347,7 +346,6 @@ private:
 		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
 		vector<unsigned char> iv, ciphertext, tag;
 		if (!(GCryptoManager->Encrypt(AESKey, plaintext, (int32_t)pktId, iv, ciphertext, tag))) {
-			cout << "복호화 실패" << endl;
 			return nullptr;
 		}
 		S2C_Protocol::S_Encrypted sendPkt;

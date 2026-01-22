@@ -37,55 +37,43 @@ bool Handle_C_Encrypted(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 	unique_ptr<EVP_CIPHER_CTX, decltype(ctx_deleter)> ctx(EVP_CIPHER_CTX_new(), ctx_deleter);
 
 	if (!ctx) {
-		std::cerr << "Error: EVP_CIPHER_CTX_new failed." << std::endl;
 		return false;
 	}
 
 	if (EVP_DecryptInit_ex(ctx.get(), EVP_aes_256_gcm(), NULL, NULL, NULL) != 1) {
-		std::cerr << "Error: EVP_DecryptInit_ex (cipher) failed." << std::endl;
 		return false;
 	}
 
 	if (EVP_CIPHER_CTX_ctrl(ctx.get(), EVP_CTRL_GCM_SET_IVLEN, iv_str.length(), NULL) != 1) {
-		std::cerr << "Error: EVP_CIPHER_CTX_ctrl (IV length) failed." << std::endl;
 		return false;
 	}
 
 	if (EVP_DecryptInit_ex(ctx.get(), NULL, NULL, aesKey.data(), (const unsigned char*)iv_str.c_str()) != 1) {
-		std::cerr << "Error: EVP_DecryptInit_ex (key, IV) failed." << std::endl;
 		return false;
 	}
 
 	int len = 0;
 	if (EVP_DecryptUpdate(ctx.get(), NULL, &len, aad.data(), aad.size()) != 1) {
-		std::cerr << "Error: EVP_DecryptUpdate (AAD) failed." << std::endl;
 		return false;
 	}
 
 	std::vector<unsigned char> plaintext(ciphertext_str.length());
 	if (EVP_DecryptUpdate(ctx.get(), plaintext.data(), &len, (const unsigned char*)ciphertext_str.c_str(), ciphertext_str.length()) != 1) {
-		std::cerr << "Error: EVP_DecryptUpdate (ciphertext) failed." << std::endl;
 		return false;
 	}
 	int plaintext_len = len;
 
 	if (EVP_CIPHER_CTX_ctrl(ctx.get(), EVP_CTRL_GCM_SET_TAG, tag_str.length(), (void*)tag_str.c_str()) != 1) {
-		std::cerr << "Error: EVP_CIPHER_CTX_ctrl (set tag) failed." << std::endl;
 		return false;
 	}
 
 	if (EVP_DecryptFinal_ex(ctx.get(), plaintext.data() + len, &len) != 1) {
-		std::cerr << "Error: EVP_DecryptFinal_ex failed. Tag verification failed." << std::endl;
-		// 인증 실패는 매우 중요한 보안 이벤트입니다. 로그를 남기는 것이 좋습니다.
 		return false;
 	}
 	plaintext_len += len;
 	plaintext.resize(plaintext_len);
-	
-	cout << "plaintext 추출" << endl;
 
 	if (msgId > sessionRef->GetSecureLevel()) {
-		cout << "보안 레벨에 맞지 않는 패킷. " << endl;
 		return false;
 	}
 
@@ -96,7 +84,6 @@ bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 	shared_ptr<PlayerSession> playerSessionRef = dynamic_pointer_cast<PlayerSession>(sessionRef);
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
-	cout << "C_Welcome 패킷을 받았다." << endl;
 
 	string encryptedStr = recvPkt.aeskey();
 	vector<unsigned char> encryptedKey(encryptedStr.begin(), encryptedStr.end());
@@ -104,7 +91,6 @@ bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 
 	if (AESKey.empty()) {
 		//TODO : 정상적인 AESKey를 확보하지 못했을 경우 예외처리
-		cout << "AES Key 복호화 실패!" << endl;
 		playerSessionRef->Disconnect();
 		return false;
 	}
@@ -125,8 +111,6 @@ bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 	}
 	playerSessionRef->Send(sendBuffer);
 	playerSessionRef->SetSecureLevel(8);
-
-	cout << "S_WelcomeResponse 전송" << endl;
 
 	return true;
 }
@@ -187,8 +171,6 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 		return false;
 
 	auto it = GGameManagers.find(pkt.gameid());
-
-	cout << "gameId = " << pkt.gameid() << endl;
 
 	if (it == GGameManagers.end()) {
 		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"해당 Manager가 준비되지 않음");
