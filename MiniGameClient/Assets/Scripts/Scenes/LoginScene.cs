@@ -12,6 +12,7 @@ public class LoginScene : BaseScene {
         Lobby,
         PersonalRecord,
         PublicRecord,
+        Setting,
         MatchMake,
         MatchmakeRegister,
     }
@@ -28,6 +29,7 @@ public class LoginScene : BaseScene {
     UI_PersonalRecord _uiPersonalRecord;
     UI_PublicRecord _uiPublicRecord;
     UI_MatchMakeProgress _uiMatchMakeProgress;
+    UI_SettingPopup _uiSettingPopup;
 
     private int _loginOpt = 0;
 
@@ -54,6 +56,9 @@ public class LoginScene : BaseScene {
         _uiPersonalRecord = Managers.UI.CacheSceneUI<UI_PersonalRecord>();
         _uiPublicRecord = Managers.UI.CacheSceneUI<UI_PublicRecord>();
         _uiMatchMakeProgress = Managers.UI.CachePopupUI<UI_MatchMakeProgress>();
+        _uiSettingPopup = Managers.UI.CachePopupUI<UI_SettingPopup>();
+        _uiSettingPopup.AddListenerToConfirmBtn(() => { GoToLobbyStage(); });
+        _uiSettingPopup.AddListenerToCancelBtn(() => { GoToLobbyStage(); });
 
         //오디오 설정
         Managers.Setting.ApplyPreviousSceneSetting();
@@ -243,7 +248,8 @@ public class LoginScene : BaseScene {
         Managers.UI.DisableUI("UI_LoginPopup");
         Managers.UI.DisableUI("UI_LoginOrCreateAccount");
         Managers.UI.DisableUI("UI_MatchMakeMenu");
-        
+        Managers.UI.DisableUI("UI_SettingPopup");
+
         Managers.UI.ShowSceneUI<UI_LobbyMenu>();
     }
 
@@ -331,8 +337,11 @@ public class LoginScene : BaseScene {
     }
 
     public void SelectOption() {
-        Managers.UI.ShowErrorUIOnlyConfirm("준비중입니다.");
+        _stage = Stage.Setting;
+        Managers.UI.DisableUI("UI_LobbyMenu");
+        Managers.UI.ShowPopupUI<UI_SettingPopup>();
     }
+
     public void SelectQuit() {
         QuitApplicationUI();
     }
@@ -365,6 +374,9 @@ public class LoginScene : BaseScene {
                 GoToLobbyStage();
                 break;
             case Stage.PersonalRecord:
+                GoToLobbyStage();
+                break;
+            case Stage.Setting:
                 GoToLobbyStage();
                 break;
             case Stage.MatchMake:
