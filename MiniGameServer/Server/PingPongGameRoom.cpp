@@ -104,10 +104,14 @@ void PingPongGameRoom::Start() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 
-	PostEventAfter(2000, &PingPongGameRoom::CountdownBeforeStart, 3);
-	PostEventAfter(3000, &PingPongGameRoom::CountdownBeforeStart, 2);
-	PostEventAfter(4000, &PingPongGameRoom::CountdownBeforeStart, 1);
-	PostEventAfter(5000, &PingPongGameRoom::OnGoingPhase1);
+#ifdef _DEBUG
+	cout << "[PingPongGameRoom] Game Started. RoomId : " << _roomId << endl;
+#endif
+
+	PostEventAfter(4000, &PingPongGameRoom::CountdownBeforeStart, 3);
+	PostEventAfter(5000, &PingPongGameRoom::CountdownBeforeStart, 2);
+	PostEventAfter(6000, &PingPongGameRoom::CountdownBeforeStart, 1);
+	PostEventAfter(7000, &PingPongGameRoom::OnGoingPhase1);
 }
 
 void PingPongGameRoom::CountdownBeforeStart(int32_t countdown) {

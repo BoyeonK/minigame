@@ -6,6 +6,14 @@ class PlayerSession;
 
 class GameRoom : public Actor {
 public:
+	GameRoom() {
+		_nxtObjectId = 0;
+		_updateCount = 0;
+		_preparedPlayer = 0;
+		_nxtObjectId = 0;
+		_state = GameState::BeforeInit;
+	}
+
 	//BeforeInit : Room이 최초 생성된 경우.
 	//BeforeStart : Player의 로딩 및 KeepAlive여부 재확인
 	//OnGoing : 게임이 진행중인 경우. (여기서 더 세분화 될 수도 있음)

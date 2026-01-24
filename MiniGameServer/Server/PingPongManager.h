@@ -52,5 +52,7 @@ private:
 	vector<bool> _excluded;
 	uint64_t _lastRenewMatchQueueTick = 0;
 	uint64_t _updateTickPeriod = 100;
-	float _toleranceRate = 0.3;
+	const float _toleranceRate = 0.3;
+	uint64_t _pendingRoomsVectorAddTickPeriod = 1000;
+	uint64_t _lastPendingRoomsVectorAddTick = 0;
 };

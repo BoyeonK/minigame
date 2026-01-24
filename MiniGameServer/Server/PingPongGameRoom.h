@@ -10,6 +10,7 @@ public:
 		_elos = vector<int32_t>(4, 0);
 		_dbids = vector<int32_t>(_quota, 0);
 		_playerIds = vector<string>(_quota);
+		
 	}
 	~PingPongGameRoom() { }
 
