@@ -124,32 +124,8 @@ void PingPongGameRoom::CountdownBeforeStart(int32_t countdown) {
 void PingPongGameRoom::OnGoingPhase1() {
 	_isUpdateCall = true;
 	CountdownBeforeStart(0);
-	vector<int> selectedNums(10);
-	uniform_int_distribution<int> dis(0, 5);
-	for (int i = 0; i <= 9; i++) {
-		const S2C_Protocol::S_P_Bullets bullets = pPingPongManager->easyPatterns[dis(LRanGen)];
-		PostEventAfter(2000 * i, &PingPongGameRoom::MakeBulletsFromPatternMap, bullets);
-	}
-	PostEventAfter(26000, &PingPongGameRoom::CountingPhase);
-}
 
-void PingPongGameRoom::OnGoingPhase2() {
-	vector<int> selectedNums(10);
-	uniform_int_distribution<int> dis(0, 5);
-
-	for (int i = 1; i <= 5; i++) {
-		const S2C_Protocol::S_P_Bullets bullets = pPingPongManager->easyPatterns[dis(LRanGen)];
-		PostEventAfter(4000 * i - 2000, &PingPongGameRoom::MakeBulletsFromPatternMap, bullets);
-	}
-
-	for (int i = 1; i <= 5; i++) {
-		const S2C_Protocol::S_P_Bullets bullets = pPingPongManager->mediumPatterns[dis(LRanGen)];
-		PostEventAfter(4000 * i, &PingPongGameRoom::MakeBulletsFromPatternMap, bullets);
-	}
-	PostEventAfter(26000, &PingPongGameRoom::OnGoingPhase3);
-}
-
-void PingPongGameRoom::OnGoingPhase3() {
+	PostEventAfter(10000, &PingPongGameRoom::CountingPhase);
 }
 
 void PingPongGameRoom::CountingPhase() {
@@ -260,94 +236,8 @@ void PingPongGameRoom::EndGame() {
 	_elos.clear();
 	_points.clear();
 	_winners.clear();
+	_bulletsPkt.Clear();
 	_state = GameState::EndGame;
-}
-
-/*
-bool PingPongGameRoom::MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt) {
-	//1. Bullet의 생성.
-	shared_ptr<PingPongGameBullet> bulletRef = nullptr;
-	switch (bulletType) {
-	case 0: {
-		shared_ptr<PingPongGameBulletRed> redBullet = PingPongGameBulletRed::NewTestGameBullet(px, 0.2f, pz);
-		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(redBullet);
-		break;
-	}
-	case 1: {
-		shared_ptr<PingPongGameBulletBlue> blueBullet = PingPongGameBulletBlue::NewTestGameBullet(px, 0.2f, pz);
-		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(blueBullet);
-		break;
-	}
-	case 2: {
-		shared_ptr<PingPongGameBulletPupple> puppleBullet = PingPongGameBulletPupple::NewTestGameBullet(px, 0.2f, pz);
-		bulletRef = dynamic_pointer_cast<PingPongGameBullet>(puppleBullet);
-		break;
-	}
-	default:
-		return false;
-		break;
-	}
-
-	if (bulletRef == nullptr)
-		return false;
-
-	bulletRef->SetObjectId(GenerateUniqueGameObjectId());
-	bulletRef->SetVector(px, pz, sx, sz, speed);
-	bulletRef->UpdateTick(::GetTickCount64());
-	RegisterGameObject(bulletRef);
-
-	//2. 해당 Bullet의 생성을 Bullet의 정보를 담아 직렬화
-	S2C_Protocol::UnityGameObject* bullet_ptr = outPkt.mutable_bullet();
-	bullet_ptr->set_objectid(bulletRef->GetObjectId());
-	bullet_ptr->set_objecttype(bulletRef->GetObjectTypeInteger());
-	S2C_Protocol::XYZ* pos_ptr = bullet_ptr->mutable_position();
-	pos_ptr->set_x(px);
-	pos_ptr->set_y(0.2f);
-	pos_ptr->set_z(pz);
-
-	S2C_Protocol::XYZ* moveDir_ptr = outPkt.mutable_movedir();
-	moveDir_ptr->set_x(sx);
-	moveDir_ptr->set_z(sz);
-
-	outPkt.set_speed(speed);
-	outPkt.set_lastcollider(-1);
-
-	return true;
-}
-
-void PingPongGameRoom::MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed) {
-	S2C_Protocol::S_P_Bullet pkt;
-	if (!MakeSerializedBullet(bulletType, px, pz, sx, sz, speed, pkt))
-		return;
-	
-	//TODO : 유효한 패킷인지에 대한 검사 필요
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-	BroadCast(sendBuffer);
-}
-
-void PingPongGameRoom::MakeBullets(initializer_list<S2C_Protocol::S_P_Bullet> serializedBullets) {
-	S2C_Protocol::S_P_Bullets pkt;
-	pkt.mutable_bullets()->Reserve(serializedBullets.size());
-
-	for (const auto& bullet : serializedBullets) {
-		pkt.add_bullets()->CopyFrom(bullet);
-	}
-
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-	BroadCast(sendBuffer);
-}
-*/
-
-void PingPongGameRoom::MakeBulletsFromPatternMap(const S2C_Protocol::S_P_Bullets& serializedBullets) {
-	S2C_Protocol::S_P_Bullets copyPkt = serializedBullets;
-	int size = copyPkt.bullets_size();
-	for (int i = 0; i < size; i++) {
-		S2C_Protocol::S_P_Bullet* pBullet = copyPkt.mutable_bullets(i);
-		SpawnAndInitializeBullet(pBullet);
-	}
-
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(copyPkt);
-	BroadCast(sendBuffer);
 }
 
 bool PingPongGameRoom::SpawnAndInitializeBullet(S2C_Protocol::S_P_Bullet* pSerializedBullet) {

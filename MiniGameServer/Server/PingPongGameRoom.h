@@ -9,8 +9,9 @@ public:
 		_points = vector<int32_t>(4, 0);
 		_elos = vector<int32_t>(4, 0);
 		_dbids = vector<int32_t>(_quota, 0);
+		//_bulletsPkt.reserve
 		_playerIds = vector<string>(_quota);
-		
+		_nxtObjectId = 0;
 	}
 	~PingPongGameRoom() { }
 
@@ -25,8 +26,6 @@ public:
 	void Start();
 	void CountdownBeforeStart(int32_t countdown);
 	void OnGoingPhase1();
-	void OnGoingPhase2();
-	void OnGoingPhase3();
 	void CountingPhase();
 	void CalculateGameResult();
 	void UpdateGameResultToDB();
@@ -34,10 +33,6 @@ public:
 	void UpdateElos();
 	void EndGame();
 
-	//bool MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt);
-	//void MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed);
-	//void MakeBullets(initializer_list<S2C_Protocol::S_P_Bullet> serializedBullets);
-	void MakeBulletsFromPatternMap(const S2C_Protocol::S_P_Bullets& serializedBullets);
 	bool SpawnAndInitializeBullet(S2C_Protocol::S_P_Bullet* pSerializedBullet);
 
 	void Handle_CollisionBar(float px, float pz, float speed, int32_t objectId, int32_t playerIdx);
@@ -66,6 +61,7 @@ private:
 	S2C_Protocol::S_P_RenewScores _renewScoresPkt;
 	S2C_Protocol::S_P_KeepAlive _keepAlivePkt;
 	S2C_Protocol::S_GameSceneLoadingProgress _loadingProgressPkt;
+	S2C_Protocol::S_P_Bullets _bulletsPkt;
 	float _ex = 6.4f;
 	float _ez = 0;
 	float _wx = -6.4f;
