@@ -11,7 +11,7 @@ public:
 		_dbids = vector<int32_t>(_quota, 0);
 		//_bulletsPkt.reserve
 		_playerIds = vector<string>(_quota);
-		_nxtObjectId = 0;
+		_nxtObjectId = 4;
 	}
 	~PingPongGameRoom() { }
 
