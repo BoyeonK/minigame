@@ -10864,7 +10864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1939527615
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12259,7 +12259,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD328\uC2A4 \uB7EC\uB108\n\uD328\uC2A4 \uB7EC\uB108"
+  m_text: "\uBC29\uD5A5\uD0A4\uC640 space\uB85C \uCE90\uB9AD\uD130\uB97C \uC870\uC791\uD569\uB2C8\uB2E4.\n\uACB0\uC2B9\uC810\uC5D0
+    \uBA3C\uC800 \uB3C4\uCC29\uD558\uBA74 \uC2B9\uB9AC\uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 928fe03c38b96774d9f5b3df434f98b3, type: 2}
   m_sharedMaterial: {fileID: 1957686468480200807, guid: 928fe03c38b96774d9f5b3df434f98b3, type: 2}
@@ -12286,8 +12287,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5
-  m_fontSizeBase: 5
+  m_fontSize: 4
+  m_fontSizeBase: 4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13027,8 +13028,8 @@ SceneRoots:
   - {fileID: 1775025942}
   - {fileID: 2134707488}
   - {fileID: 2011986846}
-  - {fileID: 1939527618}
   - {fileID: 1409300659}
   - {fileID: 472684048}
   - {fileID: 1186484390}
   - {fileID: 420309470}
+  - {fileID: 1939527618}

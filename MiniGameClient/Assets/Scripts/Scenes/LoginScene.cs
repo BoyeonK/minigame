@@ -212,13 +212,13 @@ public class LoginScene : BaseScene {
     private void SetExplanationText(int opt) {
         switch (opt) {
             case 0:
-                _gameExplanationText.text = "패스 러너\n패스 러너";
+                _gameExplanationText.text = "방향키와 space로 캐릭터를 조작합니다.\n결승점에 먼저 도착하면 승리합니다.";
                 break;
             case 1:
-                _gameExplanationText.text = "핑퐁\n핑퐁";
+                _gameExplanationText.text = "마우스로 막대를 조작합니다.\n나의 게이트에 공이 들어오지 않도록 막으세요.";
                 break;
             case 2:
-                _gameExplanationText.text = "쪼개기\n쪼개기";
+                _gameExplanationText.text = "넘버패드 1~9까지의 번호를 눌러 조작합니다.\n호박을 다른사람보다 빨리 채취해세요.\r\n다른 작물을 채취할 경우 감점됩니다!";
                 break;
             default:
                 _gameExplanationText.text = "";
