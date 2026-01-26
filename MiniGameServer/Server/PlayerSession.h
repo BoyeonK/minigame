@@ -11,7 +11,8 @@ public:
 		Lobby = 2,
 		Race = 3,
 		PingPong = 4,
-		Mole = 5
+		Mole = 5,
+		MAX = 6,
 	};
 
 	PlayerSession() {

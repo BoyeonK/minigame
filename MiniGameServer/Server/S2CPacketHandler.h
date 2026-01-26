@@ -175,13 +175,13 @@ public:
 			//Mole
 		PlaintextHandler[PKT_C_M_HIT_SLOT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_M_HitSlot>(Handle_C_M_HitSlot, sessionRef, plaintext); };	
 	
-		GAllowedPacketIdsPerSecureLevel.resize(6);
-		GAllowedPacketIdsPerSecureLevel[0] = vector<bool>(UINT16_MAX, false);
-		GAllowedPacketIdsPerSecureLevel[1] = vector<bool>(UINT16_MAX, false);
-		GAllowedPacketIdsPerSecureLevel[2] = vector<bool>(UINT16_MAX, false);
-		GAllowedPacketIdsPerSecureLevel[3] = vector<bool>(UINT16_MAX, false);
-		GAllowedPacketIdsPerSecureLevel[4] = vector<bool>(UINT16_MAX, false);
-		GAllowedPacketIdsPerSecureLevel[5] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel.resize(int(PlayerSession::SessionState::MAX));
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::BeforeHandShake)] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::BeforeLogin)] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::Lobby)] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::Race)] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::PingPong)] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::Mole)] = vector<bool>(UINT16_MAX, false);
 
 		for (int i = 0; i <= 5; i++) {
 			for(int j = 3; j <= 4; j++) {
@@ -190,28 +190,31 @@ public:
 		}
 
 		for (int i = 0; i <= 2; i++) {
-			GAllowedPacketIdsPerSecureLevel[0][i] = true;
+			GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::BeforeHandShake)][i] = true;
 		}
 
 		for (int i = 5; i <= 8; i++) {
-			GAllowedPacketIdsPerSecureLevel[1][i] = true;
+			GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::BeforeLogin)][i] = true;
 		}
 
 		for (int i = 9; i <= 32; i++) {
-			GAllowedPacketIdsPerSecureLevel[2][i] = true;
+			GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::Lobby)][i] = true;
 		}
 
 		for (int i = 100; i <= 112; i++) {
-			GAllowedPacketIdsPerSecureLevel[3][i] = true;
+			GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::Race)][i] = true;
 		}
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::Race)][22] = true;
 
 		for (int i = 200; i <= 212; i++) {
-			GAllowedPacketIdsPerSecureLevel[4][i] = true;
+			GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::PingPong)][i] = true;
 		}
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::PingPong)][22] = true;
 
 		for (int i = 400; i <= 406; i++) {
-			GAllowedPacketIdsPerSecureLevel[5][i] = true;
+			GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::Mole)][i] = true;
 		}
+		GAllowedPacketIdsPerSecureLevel[int(PlayerSession::SessionState::Mole)][22] = true;
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
