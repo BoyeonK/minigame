@@ -9,6 +9,7 @@
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
+vector<vector<bool>> GAllowedPacketIdsPerSecureLevel;
 
 bool Handle_Invalid(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
 #ifdef _DEBUG
@@ -73,7 +74,7 @@ bool Handle_C_Encrypted(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 	plaintext_len += len;
 	plaintext.resize(plaintext_len);
 
-	if (msgId > sessionRef->GetSecureLevel()) {
+	if (GAllowedPacketIdsPerSecureLevel[sessionRef->GetSessionState()][msgId] == false) {
 		return false;
 	}
 
@@ -110,7 +111,7 @@ bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 		return false;
 	}
 	playerSessionRef->Send(sendBuffer);
-	playerSessionRef->SetSecureLevel(8);
+	playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::BeforeLogin));
 
 	return true;
 }
@@ -137,7 +138,7 @@ bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& p
 	bool isSucceed = false;
 	if (pkt.dbid() == playerSessionRef->GetDbid()) {
 		playerSessionRef->SetDbid(0);
-		playerSessionRef->SetSecureLevel(8);
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::BeforeLogin));
 		S2C_Protocol::S_Logout pkt = S2CPacketMaker::MakeSLogout(true);
 		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
 		playerSessionRef->Send(sendBufferRef);
@@ -149,7 +150,7 @@ bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& p
 			//로그인한 유저가 '다른 유저'의 dbid를 사용하려고 하고 있다.
 		}
 		playerSessionRef->SetDbid(0);
-		playerSessionRef->SetSecureLevel(8);
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::BeforeLogin));
 
 		S2C_Protocol::S_Logout responsePkt = S2CPacketMaker::MakeSLogout(false);
 		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(responsePkt);

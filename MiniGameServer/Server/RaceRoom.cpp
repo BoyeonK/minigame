@@ -109,6 +109,14 @@ void RaceRoom::Start() {
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
+
+	for (auto& playerSessionWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Race));
+	}
+
 	PostEventAfter(4000, &RaceRoom::Countdown);
 }
 
@@ -302,6 +310,7 @@ void RaceRoom::CalculateGameResult() {
 
 		playerSessionRef->SetJoinedRoom(nullptr);
 		playerSessionRef->SetMatchingState(GameType::None);
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Lobby));
 	}
 
 	PostEvent(&RaceRoom::UpdateGameResultToDB);

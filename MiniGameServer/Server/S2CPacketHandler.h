@@ -6,6 +6,7 @@ using PacketHandlerFunc = function<bool(shared_ptr<PBSession>, unsigned char*, i
 using PlaintextHandlerFunc = function<bool(shared_ptr<PBSession>, vector<unsigned char>&)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 extern PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
+extern vector<vector<bool>> GAllowedPacketIdsPerSecureLevel;
 
 //name convention : 서버에서 보내는(클라가 받는) S_
 //					클라에서 보내는(서버가 받는) C_
@@ -173,14 +174,51 @@ public:
 	
 			//Mole
 		PlaintextHandler[PKT_C_M_HIT_SLOT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_M_HitSlot>(Handle_C_M_HitSlot, sessionRef, plaintext); };	
+	
+		GAllowedPacketIdsPerSecureLevel.resize(6);
+		GAllowedPacketIdsPerSecureLevel[0] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[1] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[2] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[3] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[4] = vector<bool>(UINT16_MAX, false);
+		GAllowedPacketIdsPerSecureLevel[5] = vector<bool>(UINT16_MAX, false);
+
+		for (int i = 0; i <= 5; i++) {
+			for(int j = 3; j <= 4; j++) {
+				GAllowedPacketIdsPerSecureLevel[i][j] = true;
+			}
+		}
+
+		for (int i = 0; i <= 2; i++) {
+			GAllowedPacketIdsPerSecureLevel[0][i] = true;
+		}
+
+		for (int i = 5; i <= 8; i++) {
+			GAllowedPacketIdsPerSecureLevel[1][i] = true;
+		}
+
+		for (int i = 9; i <= 32; i++) {
+			GAllowedPacketIdsPerSecureLevel[2][i] = true;
+		}
+
+		for (int i = 100; i <= 112; i++) {
+			GAllowedPacketIdsPerSecureLevel[3][i] = true;
+		}
+
+		for (int i = 200; i <= 212; i++) {
+			GAllowedPacketIdsPerSecureLevel[4][i] = true;
+		}
+
+		for (int i = 400; i <= 406; i++) {
+			GAllowedPacketIdsPerSecureLevel[5][i] = true;
+		}
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
 		//TODO: Session에 허락된 범주의 pktId의 핸들러만 실행하기.
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
-		if (header->_id > sessionRef->GetSecureLevel()) {
+		if (GAllowedPacketIdsPerSecureLevel[sessionRef->GetSessionState()][header->_id] == false)
 			return false;
-		}
 
 		return GPacketHandler[header->_id](sessionRef, buffer, len);
 	}

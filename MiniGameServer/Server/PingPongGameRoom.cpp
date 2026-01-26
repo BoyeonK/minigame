@@ -105,6 +105,12 @@ void PingPongGameRoom::Start() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 	PoolBullets();
+	for (auto& playerSessionWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::PingPong));
+	}
 
 #ifdef _DEBUG
 	cout << "[PingPongGameRoom] Game Started. RoomId : " << _roomId << endl;
@@ -300,6 +306,7 @@ void PingPongGameRoom::CalculateGameResult() {
 
 		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(playerResultPkt);
 		playerSessionRef->Send(sendBuffer);
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Lobby));
 	}
 
 	PostEvent(&PingPongGameRoom::UpdateGameResultToDB);

@@ -104,6 +104,12 @@ void MoleRoom::Start() {
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
+	for (auto& playerSessionWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Mole));
+	}
 
 	PostEventAfter(2000, &MoleRoom::CountdownBeforeStart, 3);
 	PostEventAfter(3000, &MoleRoom::CountdownBeforeStart, 2);
@@ -298,6 +304,7 @@ void MoleRoom::CalculateGameResult() {
 
 		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(playerResultPkt);
 		playerSessionRef->Send(sendBuffer);
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Lobby));
 	}
 
 	PostEvent(&MoleRoom::UpdateGameResultToDB);

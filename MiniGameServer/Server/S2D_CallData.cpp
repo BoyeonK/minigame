@@ -23,8 +23,6 @@ void SLoginCall::OnSucceed() {
 	else {
 		IncorrectI(this->reply.incorrect_id());
 	}
-	//TODO: 0을받은경우, S_Login 패킷에 err를 담아서 클라에 전송.
-	//0 이외를 받은 경우, 해당 dbid를 클라이언트에게 '암호화해서' 전송
 }
 
 void SLoginCall::OnFailed() {
@@ -46,11 +44,8 @@ void SLoginCall::CorrectI(int32_t dbid) {
 		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt, playerSessionRef->GetAESKey());
 		playerSessionRef->SetDbid(dbid);
 		//해당 session에서 처리할 최대 msgId를 10000으로 설정 (사실상, 이제 모든 패킷에 대한 요청을 거절하지 않겠다는 뜻)
-		playerSessionRef->SetSecureLevel(10000);
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Lobby));
 		playerSessionRef->Send(sendBufferRef);
-
-		//방금 로그인한 세션에 Elo를 최신화
-		//DBManager->S2D_RenewElos(playerSessionRef, dbid);
 
 		//Elo뿐만이 아니라 여러 정보를 가져옴
 		DBManager->S2D_PlayerInfomation(playerSessionRef, dbid);

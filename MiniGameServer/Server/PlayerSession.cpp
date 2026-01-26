@@ -46,10 +46,6 @@ vector<unsigned char> PlayerSession::GetAESKey() {
 	return _AESKey;
 }
 
-void PlayerSession::SetSecureLevel(int32_t lv) {
-	_secureLevel = lv;
-}
-
 void PlayerSession::SetDbid(int32_t dbid) {
 	_dbid = dbid;
 }

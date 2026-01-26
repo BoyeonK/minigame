@@ -5,9 +5,19 @@ class GameRoom;
 
 class PlayerSession : public PBSession {
 public:
+	enum class SessionState : int32_t {
+		BeforeHandShake = 0,       
+		BeforeLogin = 1,
+		Lobby = 2,
+		Race = 3,
+		PingPong = 4,
+		Mole = 5
+	};
+
 	PlayerSession() {
 		_elos = vector<int32_t>(4, 1200);
 		_personalRecords = vector<int32_t>(4, 0);
+		_sessionState = int32_t(SessionState::BeforeHandShake);
 	}
 
 	//TODO:
@@ -19,8 +29,6 @@ public:
 	void SetAESKey(vector<unsigned char>&& AESKey);
 	void SetAESKey(vector<unsigned char>& AESKey);
 	vector<unsigned char> GetAESKey();
-
-	void SetSecureLevel(int32_t lv);
 
 	void SetDbid(int32_t dbid);
 	int32_t GetDbid() const { return _dbid; }

@@ -249,6 +249,10 @@ int32_t PBSession::OnRecv(unsigned char* buffer, int32_t len) {
 	return processLen;
 }
 
-int32_t PBSession::GetSecureLevel() {
-	return _secureLevel;
+int32_t PBSession::GetSessionState() {
+	return _sessionState;
+}
+
+void PBSession::SetSessionState(int32_t state) {
+	_sessionState = state;
 }
