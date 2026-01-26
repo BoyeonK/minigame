@@ -3,6 +3,8 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
+using Unity.Animations.SpringBones.GameObjectExtensions;
 using UnityEngine;
 
 public class LoginScene : BaseScene {
@@ -17,7 +19,7 @@ public class LoginScene : BaseScene {
         MatchmakeRegister,
     }
 
-    private Stage _stage = Stage.Connect;
+    Stage _stage = Stage.Connect;
 
     UI_StartGame _uiStartGame;
 
@@ -31,13 +33,14 @@ public class LoginScene : BaseScene {
     UI_MatchMakeProgress _uiMatchMakeProgress;
     UI_SettingPopup _uiSettingPopup;
 
-    private int _loginOpt = 0;
+    int _loginOpt = 0;
 
-    private int _lobbyOpt = 0;
-    private OptionSelecterController _optionSelecter;
+    int _lobbyOpt = 0;
+    OptionSelecterController _optionSelecter;
 
-    private int _matchMakeOpt = 0;
-    private LobbyScreenRenderer _screenRenderer;
+    int _matchMakeOpt = 0;
+    LobbyScreenRenderer _screenRenderer;
+    TextMeshPro _gameExplanationText;
     
     //Scene이 바뀔 때, 이 친구가 대표로 나서서 모든 초기화 작업을 해 줄거임.
     protected override void Init() {
@@ -67,11 +70,19 @@ public class LoginScene : BaseScene {
         Managers.Sound.GetOrAddAudioClip("swipe");
         Managers.Sound.Play("LobbyScene", Define.Sound.Bgm);
         
-        GameObject screen = GameObject.Find("Screen");
+        Transform screen = transform.Find("Screen");
         if (screen != null) {
             _screenRenderer = screen.GetComponent<LobbyScreenRenderer>();
-            _screenRenderer.Init();
-            _screenRenderer.HideThis();
+            if (_screenRenderer != null) {
+                _screenRenderer.Init();
+                _screenRenderer.HideThis();
+            }
+
+            Transform gameExplanationTrans = screen.Find("GameExplanation");
+            if (gameExplanationTrans != null) {
+                _gameExplanationText = gameExplanationTrans.GetComponent<TextMeshPro>();
+                _gameExplanationText.text = "";
+            }
         }
 
         GameObject go = GameObject.Find("OptionSelecter");
@@ -198,6 +209,24 @@ public class LoginScene : BaseScene {
             Managers.Sound.Play("select");
             _screenRenderer.ApplyPicture(_matchMakeOpt);
             _uiMatchMakeMenu.SetSelectedOpt(_matchMakeOpt);
+            SetExplanationText(_matchMakeOpt);
+        }
+    }
+
+    private void SetExplanationText(int opt) {
+        switch (opt) {
+            case 0:
+                _gameExplanationText.text = "패스 러너\n패스 러너";
+                break;
+            case 1:
+                _gameExplanationText.text = "핑퐁\n핑퐁";
+                break;
+            case 2:
+                _gameExplanationText.text = "쪼개기\n쪼개기";
+                break;
+            default:
+                _gameExplanationText.text = "";
+                break;
         }
     }
 
