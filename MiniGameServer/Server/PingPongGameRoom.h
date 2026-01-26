@@ -9,9 +9,13 @@ public:
 		_points = vector<int32_t>(4, 0);
 		_elos = vector<int32_t>(4, 0);
 		_dbids = vector<int32_t>(_quota, 0);
-		//_bulletsPkt.reserve
 		_playerIds = vector<string>(_quota);
 		_nxtObjectId = 4;
+		_spawnedBulletCount = 0;
+		_bulletsPkt.mutable_bullets()->Reserve(4);
+		for (int i = 0; i < 4; i++) {
+			_bulletsPkt.add_bullets();
+		}
 	}
 	~PingPongGameRoom() { }
 
@@ -25,7 +29,12 @@ public:
 
 	void Start();
 	void CountdownBeforeStart(int32_t countdown);
+	void PoolBullets();
+	void TestingSpawnBullets(int32_t bulletType, float px, float pz, float degree, float speed);
 	void OnGoingPhase1();
+	void SpawnBullets();
+	bool MakeSerializedBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed, S2C_Protocol::S_P_Bullet& outPkt);
+	void MakeBullet(int32_t bulletType, float px, float pz, float sx, float sz, float speed);
 	void CountingPhase();
 	void CalculateGameResult();
 	void UpdateGameResultToDB();
@@ -49,12 +58,13 @@ public:
 
 private:
 	int32_t _quota = 4;
+	int32_t _spawnedBulletCount = 0;
 	vector<string> _playerIds;
 	vector<int32_t> _dbids;
 	vector<int32_t> _elos;
 	vector<int32_t> _points;
 	vector<int> _winners;
-
+	
 	bool _isUpdateCall = false;
 	uint64_t _keepAliveTick = 0;
 	S2C_Protocol::S_P_RequestPlayerBarPosition _requestPlayerBarPosPkt;

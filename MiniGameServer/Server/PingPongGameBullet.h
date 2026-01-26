@@ -5,6 +5,7 @@ class PingPongGameBullet : public UnityGameObject {
 public:
 	void SetVector(float px, float pz, float sx, float sz, float speed);
 	void UpdateTick(uint64_t tick);
+	S2C_Protocol::S_P_Bullet SerializeBullet() const;
 	void Update() override;
 
 	int32_t _lastColider = -1;

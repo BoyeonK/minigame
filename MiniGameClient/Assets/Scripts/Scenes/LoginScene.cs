@@ -70,7 +70,7 @@ public class LoginScene : BaseScene {
         Managers.Sound.GetOrAddAudioClip("swipe");
         Managers.Sound.Play("LobbyScene", Define.Sound.Bgm);
         
-        Transform screen = transform.Find("Screen");
+        GameObject screen = GameObject.Find("Screen");
         if (screen != null) {
             _screenRenderer = screen.GetComponent<LobbyScreenRenderer>();
             if (_screenRenderer != null) {
@@ -78,11 +78,7 @@ public class LoginScene : BaseScene {
                 _screenRenderer.HideThis();
             }
 
-            Transform gameExplanationTrans = screen.Find("GameExplanation");
-            if (gameExplanationTrans != null) {
-                _gameExplanationText = gameExplanationTrans.GetComponent<TextMeshPro>();
-                _gameExplanationText.text = "";
-            }
+            screen.FindChildByName("GameExplanation")?.TryGetComponent<TextMeshPro>(out _gameExplanationText);
         }
 
         GameObject go = GameObject.Find("OptionSelecter");
