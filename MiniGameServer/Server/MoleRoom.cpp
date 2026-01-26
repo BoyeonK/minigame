@@ -101,15 +101,16 @@ void MoleRoom::Start() {
 		return;
 	_state = GameState::OnGoing;
 
-	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
-	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
-	BroadCast(sendBuffer);
 	for (auto& playerSessionWRef : _playerWRefs) {
 		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
 		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 			continue;
 		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Mole));
 	}
+
+	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
+	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+	BroadCast(sendBuffer);
 
 	PostEventAfter(2000, &MoleRoom::CountdownBeforeStart, 3);
 	PostEventAfter(3000, &MoleRoom::CountdownBeforeStart, 2);

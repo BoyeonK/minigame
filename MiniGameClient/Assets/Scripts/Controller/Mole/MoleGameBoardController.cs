@@ -37,7 +37,8 @@ public class MoleGameBoardController : MonoBehaviour {
         if (slotIdx < 0 || slotIdx > 9)
             return;
 
-        _slots[slotIdx].ShowPText(point, isMine);
+        if (point != 0)
+            _slots[slotIdx].ShowPText(point, isMine);
     }
 
     void Clear() {

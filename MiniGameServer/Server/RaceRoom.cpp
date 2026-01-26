@@ -106,6 +106,13 @@ void RaceRoom::Start() {
 		_movementInfos[i].set_state(0);
 	}
 
+	for (auto& playerSessionWRef : _playerWRefs) {
+		shared_ptr<PlayerSession> playerSessionRef = playerSessionWRef.lock();
+		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
+			continue;
+		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Race));
+	}
+
 	S2C_Protocol::S_GameStarted pkt = S2CPacketMaker::MakeSGameStarted(int(_ty));
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
