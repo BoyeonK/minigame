@@ -420,8 +420,6 @@ class PacketHandler {
 		if (!(packet is S_R_ResponseState recvPkt))
 			return;
 
-		Debug.Log("S_R_ResponseStateHandler 호출됨");
-
         int myId = recvPkt.PlayerId;
 		List<UnityGameObject> serializedObjs = recvPkt.Objects.ToList();
 		foreach (UnityGameObject serializedObj in serializedObjs) {

@@ -1,10 +1,18 @@
 #pragma once
 #include "GameManager.h"
+#include "RaceRoom.h"
 
 class RaceManager : public GameManager {
 public:
 	RaceManager() : _ty(GameType::Race), _quota(2), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
+
+		vector<shared_ptr<RaceRoom>> _dummyRooms;
+		for (int i = 0; i < 100; i++) {
+			shared_ptr<RaceRoom> room = { objectPool<RaceRoom>::alloc(), objectPool<RaceRoom>::dealloc };
+			_dummyRooms.push_back(room);
+		}
+		_dummyRooms.clear();
 	}
 
 	void Push(WatingPlayerData pd) override;

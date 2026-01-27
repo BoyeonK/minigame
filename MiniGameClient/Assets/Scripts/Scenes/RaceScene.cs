@@ -21,7 +21,6 @@ public class RaceScene : BaseScene {
         base.Init();
         SceneType = Scene.Race;
         Managers.Scene.ResetLoadSceneOp();
-        Debug.Log("RaceScene");
         _tempCam = GameObject.Find("TempCamera");
         _startBlock = GameObject.Find("StartBlock");
 
@@ -233,7 +232,6 @@ public class RaceScene : BaseScene {
     }
 
     public void ConfirmArrivedLine(int lineId) {
-        Debug.Log($"ConfirmArrivedLine: {lineId}");
         _arrivedLineCount = lineId;
     }
 

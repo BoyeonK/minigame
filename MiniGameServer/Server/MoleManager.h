@@ -1,10 +1,17 @@
 #pragma once
 #include "GameManager.h"
+#include "MoleRoom.h"
 
 class MoleManager : public GameManager {
 public:
 	MoleManager() : _ty(GameType::Mole), _quota(2), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
+		vector<shared_ptr<MoleRoom>> _dummyRooms;
+		for (int i = 0; i < 100; i++) {
+			shared_ptr<MoleRoom> room = { objectPool<MoleRoom>::alloc(), objectPool<MoleRoom>::dealloc };
+			_dummyRooms.push_back(room);
+		}
+		_dummyRooms.clear();
 	}
 
 	void Push(WatingPlayerData pd) override;

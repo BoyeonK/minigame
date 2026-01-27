@@ -1,5 +1,6 @@
 #pragma once
 #include "GameManager.h"
+#include "PingPongGameRoom.h"
 #include <cmath>
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -9,6 +10,27 @@ class PingPongManager : public GameManager {
 public:
 	PingPongManager() : _ty(GameType::PingPong), _quota(4), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
+
+		vector<shared_ptr<PingPongGameRoom>> _dummyRooms;
+		vector<shared_ptr<PingPongGameBullet>> _dummyBullets;
+		for (int i = 0; i < 100; i++) {
+			shared_ptr<PingPongGameRoom> room = { objectPool<PingPongGameRoom>::alloc(), objectPool<PingPongGameRoom>::dealloc };
+			_dummyRooms.push_back(room);
+		}
+		for (int i = 0; i < 3333; i++) {
+			shared_ptr<PingPongGameBulletRed> bullet = { objectPool<PingPongGameBulletRed>::alloc(), objectPool<PingPongGameBulletRed>::dealloc };
+			_dummyBullets.push_back(bullet);
+		}
+		for (int i = 0; i < 3333; i++) {
+			shared_ptr<PingPongGameBulletBlue> bullet = { objectPool<PingPongGameBulletBlue>::alloc(), objectPool<PingPongGameBulletBlue>::dealloc };
+			_dummyBullets.push_back(bullet);
+		}
+		for (int i = 0; i < 3333; i++) {
+			shared_ptr<PingPongGameBulletPupple> bullet = { objectPool<PingPongGameBulletPupple>::alloc(), objectPool<PingPongGameBulletPupple>::dealloc };
+			_dummyBullets.push_back(bullet);
+		}
+		_dummyRooms.clear();
+		_dummyBullets.clear();
 	}
 
 	void Push(WatingPlayerData pd) override;

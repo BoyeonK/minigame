@@ -57,7 +57,6 @@ public class SlotController : MonoBehaviour {
     }
 
     private void OnKeyAction() {
-        Debug.Log(_index);
         float tick = Time.time;
         Managers.Network.Mole.TryHitSlot(_index, tick);
     }
