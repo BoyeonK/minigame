@@ -7,7 +7,9 @@ int main() {
 	S2CPacketHandler::Init();
 
 	//DB서버와의 연결 진행
-	DBManager = new DBClientImpl(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
+	grpc::SslCredentialsOptions ssl_opts;
+	auto channel = grpc::CreateChannel(GEnvLoader->GetEnvVar("GRPC_SERVER_ADDRESS"), grpc::SslCredentials(ssl_opts));
+	DBManager = new DBClientImpl(channel);
 #ifdef _DEBUG
 	DBManager->HelloAsync();
 #endif
