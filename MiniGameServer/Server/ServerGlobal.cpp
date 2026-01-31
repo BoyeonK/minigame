@@ -304,27 +304,46 @@ bool CryptoManager::Encrypt(
 }
 
 EnvLoader::EnvLoader() {
-	std::cout << "Dir : " << filesystem::current_path() << endl;
-
-    ifstream envFile(".env");
-    if (!envFile.is_open()) {
-		cerr << "Failed to open .env file" << endl;
-        return;
-    }
+	ifstream envFile(".env");
+	if (!envFile.is_open()) {
+		return;
+	}
 
 	string line;
 	while (getline(envFile, line)) {
+		//주석 제거
+		size_t commentPos = line.find('#');
+		if (commentPos != string::npos) {
+			line = line.substr(0, commentPos);
+		}
+
+		//등호(=) 기준으로 키랑 밸류 구분
 		size_t delimiterPos = line.find('=');
 		if (delimiterPos != string::npos) {
 			string fileKey = line.substr(0, delimiterPos);
 			string fileValue = line.substr(delimiterPos + 1);
 
-			//윈도우 개행문자(\r) 제거
-			if (!fileValue.empty() && fileValue.back() == '\r') {
+			//앞뒤 딱 정상적인 글자 아닌거 쳐냄
+			while (!fileKey.empty() && (fileKey.back() == ' ' || fileKey.back() == '\t')) {
+				fileKey.pop_back();
+			}
+			size_t keyStart = fileKey.find_first_not_of(" \t");
+			if (keyStart != string::npos && keyStart > 0) {
+				fileKey = fileKey.substr(keyStart);
+			}
+
+			while (!fileValue.empty() && (fileValue.back() == '\r' || fileValue.back() == ' ' || fileValue.back() == '\t')) {
 				fileValue.pop_back();
 			}
 
-			_envMap[fileKey] = fileValue;
+			size_t valStart = fileValue.find_first_not_of(" \t");
+			if (valStart != string::npos && valStart > 0) {
+				fileValue = fileValue.substr(valStart);
+			}
+
+			if (!fileKey.empty()) {
+				_envMap[fileKey] = fileValue;
+			}
 		}
 	}
 }

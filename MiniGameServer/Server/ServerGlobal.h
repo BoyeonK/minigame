@@ -57,7 +57,7 @@ public:
 		if (it != _envMap.end())
 			return it->second;
 
-		return ""; // 없으면 빈 문자열 반환
+		return "";
 	}
 
 private:
