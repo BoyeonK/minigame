@@ -304,6 +304,8 @@ bool CryptoManager::Encrypt(
 }
 
 EnvLoader::EnvLoader() {
+	std::cout << "Dir : " << filesystem::current_path() << endl;
+
     ifstream envFile(".env");
     if (!envFile.is_open()) {
 		cerr << "Failed to open .env file" << endl;
