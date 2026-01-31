@@ -26,7 +26,8 @@ void SLoginCall::OnSucceed() {
 }
 
 void SLoginCall::OnFailed() {
-	//TODO: 뭔가 해야될거 같은데 당장 생각이 안나네
+	cerr << "Client: RPC failed with code " << this->status.error_code() << " and message : "
+		<< this->status.error_message() << endl;
 }
 
 void SLoginCall::CorrectI(int32_t dbid) {
@@ -74,7 +75,8 @@ void SCreateAccountCall::OnSucceed() {
 }
 
 void SCreateAccountCall::OnFailed() {
-	//TODO: 뭔가 해야될거 같은데 당장 생각이 안나네
+	cerr << "Client: RPC failed with code " << this->status.error_code() << " and message : "
+		<< this->status.error_message() << endl;
 }
 
 void SCreateAccountCall::CreateComplete() {
@@ -121,7 +123,8 @@ void SPlayerInformationCall::OnSucceed() {
 }
 
 void SPlayerInformationCall::OnFailed() {
-
+	cerr << "Client: RPC failed with code " << this->status.error_code() << " and message : "
+		<< this->status.error_message() << endl;
 }
 
 void SUpdateEloCall::OnSucceed() {
@@ -159,7 +162,8 @@ void SPublicRecordCall::OnSucceed() {
 }
 
 void SPublicRecordCall::OnFailed() {
-
+	cerr << "Client: RPC failed with code " << this->status.error_code() << " and message : "
+		<< this->status.error_message() << endl;
 }
 
 void SUpdatePublicRecordCall::OnSucceed() {
@@ -174,5 +178,6 @@ void SUpdatePublicRecordCall::OnSucceed() {
 }
 
 void SUpdatePublicRecordCall::OnFailed() {
-
+	cerr << "Client: RPC failed with code " << this->status.error_code() << " and message : "
+		<< this->status.error_message() << endl;
 }

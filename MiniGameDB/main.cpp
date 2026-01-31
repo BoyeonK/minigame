@@ -6,8 +6,23 @@ int main() {
     shared_ptr<GreeterServiceImpl> DBService = make_shared<GreeterServiceImpl>();
     string server_address("127.0.0.1:50051");
     grpc::ServerBuilder builder;
-    builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
-    builder.RegisterService(DBService.get()); // 비동기 서비스 등록
+
+    grpc::SslServerCredentialsOptions ssl_opts;
+    ssl_opts.pem_key_cert_pairs.push_back({
+    R"(-----BEGIN RSA PRIVATE KEY-----
+...
+-----END RSA PRIVATE KEY-----)",
+R"(-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----)"
+        });
+
+    builder.AddListeningPort(
+        "127.0.0.1:50051",
+        grpc::SslServerCredentials(ssl_opts)
+    );
+
+    builder.RegisterService(DBService.get());
 
     unique_ptr<grpc::ServerCompletionQueue> completionQueue(builder.AddCompletionQueue());
     DBService->setCompletionQueue(move(completionQueue));

@@ -29,7 +29,7 @@ int main() {
 	});
 
 	for (auto& gameManager : GGameManagers) {
-		gameManager.second->RenewPublicRecordFromDB();
+		//gameManager.second->RenewPublicRecordFromDB();
 	}
 
 	//기타 잡무 담당 worker thread.
