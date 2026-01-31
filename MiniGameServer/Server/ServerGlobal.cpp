@@ -5,10 +5,17 @@
 #include "RaceManager.h"
 #include "PingPongManager.h"
 #include "MoleManager.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <cstdlib>
+
 
 CryptoManager* GCryptoManager = nullptr;
 DBClientImpl* DBManager = nullptr;
 shared_ptr<S2CServerServiceImpl> GServerService = nullptr;
+EnvLoader* GEnvLoader;
 map<int32_t, shared_ptr<GameManager>> GGameManagers;
 RaceManager* pTestGameManager;
 PingPongManager* pPingPongManager;
@@ -32,7 +39,10 @@ public:
 		shared_ptr<MoleManager> MManager = make_shared<MoleManager>();
 		GGameManagers[int(GameType::Mole)] = MManager;
 		pMoleManager = MManager.get();
+
+		GEnvLoader = new EnvLoader();
 	}
+
 	~ServerGlobal() {
 		delete GCryptoManager;
 		if (DBManager)
@@ -293,3 +303,30 @@ bool CryptoManager::Encrypt(
 	return true;
 }
 
+EnvLoader::EnvLoader() {
+    ifstream envFile(".env");
+    if (!envFile.is_open()) {
+		cerr << "Failed to open .env file" << endl;
+        return;
+    }
+
+	string line;
+	while (getline(envFile, line)) {
+		size_t delimiterPos = line.find('=');
+		if (delimiterPos != string::npos) {
+			string fileKey = line.substr(0, delimiterPos);
+			string fileValue = line.substr(delimiterPos + 1);
+
+			//윈도우 개행문자(\r) 제거
+			if (!fileValue.empty() && fileValue.back() == '\r') {
+				fileValue.pop_back();
+			}
+
+			_envMap[fileKey] = fileValue;
+		}
+	}
+}
+
+EnvLoader::~EnvLoader() {
+	_envMap.clear();
+}
