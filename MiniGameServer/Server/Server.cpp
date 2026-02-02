@@ -7,13 +7,15 @@ int main() {
 	//Game Client와의 프로토콜을 정의한 PacketHandler 초기화.
 	S2CPacketHandler::Init();
 
-	string root_cert = GEnvManager->ReadFile("certname");
+	string root_cert = GEnvManager->ReadFile(
+		GEnvManager->GetEnv("certname"));
 
 	grpc::SslCredentialsOptions ssl_opts;
 	ssl_opts.pem_root_certs = root_cert;
 
 	grpc::ChannelArguments args;
-	args.SetSslTargetNameOverride(GEnvManager->ReadFile("CNname"));
+	args.SetSslTargetNameOverride(GEnvManager->ReadFile(
+		GEnvManager->GetEnv("CNname")));
 
 	auto channel = grpc::CreateCustomChannel(
 		"localhost:50051",
@@ -44,7 +46,7 @@ int main() {
 	});
 
 	for (auto& gameManager : GGameManagers) {
-		//gameManager.second->RenewPublicRecordFromDB();
+		gameManager.second->RenewPublicRecordFromDB();
 	}
 
 	//기타 잡무 담당 worker thread.
