@@ -81,12 +81,14 @@ class PacketHandler {
 			return;
 		}
 
-		C_Welcome cWelcomePacket = PacketMaker.MakeCWelcome(encryptedKey, "직선조명을 없애보았더니 씬의 분위기가 마치 후즈앳더도어처럼 되어버렸다.");
+		C_Welcome cWelcomePacket = PacketMaker.MakeCWelcome(encryptedKey, "AES키 검증용 문자열. FM대로면 아마 암호학적으로 안전한 문자열이 들어가야 함.");
 		Managers.Network.Send(cWelcomePacket);
 	}
 
     public static void S_WelcomeResponseHandler(PacketSession session, IMessage packet) {
 		S_WelcomeResponse recvPkt = packet as S_WelcomeResponse;
+		//TODO : 원래는 보낸 메세지랑 받는 메세지가 같은지 확인하는 로직이 있어야 함.
+		//없어도 서버는 뻗지 않는다.
 		string recvMessage = recvPkt.Message;
 #if UNITY_EDITOR
         Managers.ExecuteAtMainThread(() => {

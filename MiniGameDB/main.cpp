@@ -24,7 +24,7 @@ int main() {
     string server_cert = ReadFile("server.crt");
 
     if (server_key.empty() || server_cert.empty()) {
-        cerr << "Error: server.key or server.crt not found!" << endl;
+        cerr << "인증서 파일 없음 종료 ㅅㄱㅂ" << endl;
         return -1;
     }
 
