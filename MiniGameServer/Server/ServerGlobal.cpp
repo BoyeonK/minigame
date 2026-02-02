@@ -5,10 +5,14 @@
 #include "RaceManager.h"
 #include "PingPongManager.h"
 #include "MoleManager.h"
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 CryptoManager* GCryptoManager = nullptr;
 DBClientImpl* DBManager = nullptr;
 shared_ptr<S2CServerServiceImpl> GServerService = nullptr;
+EnvManager* GEnvManager;
 map<int32_t, shared_ptr<GameManager>> GGameManagers;
 RaceManager* pTestGameManager;
 PingPongManager* pPingPongManager;
@@ -32,6 +36,8 @@ public:
 		shared_ptr<MoleManager> MManager = make_shared<MoleManager>();
 		GGameManagers[int(GameType::Mole)] = MManager;
 		pMoleManager = MManager.get();
+
+		GEnvManager = new EnvManager();
 	}
 	~ServerGlobal() {
 		delete GCryptoManager;
@@ -40,6 +46,7 @@ public:
 		if (GServerService)
 			GServerService = nullptr;
 		GGameManagers.clear();
+		delete GEnvManager;
 	}
 } GServerGlobal;
 
@@ -293,3 +300,54 @@ bool CryptoManager::Encrypt(
 	return true;
 }
 
+EnvManager::EnvManager() {
+	ifstream file(".env");
+
+	if (!file.is_open())
+		return;
+
+	string line;
+	while (getline(file, line)) {
+		if (line.empty() || line[0] == '#') continue;
+
+		size_t delimiterPos = line.find('=');
+		if (delimiterPos == string::npos) continue; // '='가 없으면 무시
+
+		string key = line.substr(0, delimiterPos);
+		string value = line.substr(delimiterPos + 1);
+
+		//공백 제거
+		key = Trim(key);
+		value = Trim(value);
+
+		_envMap[key] = value;
+	}
+	file.close();
+}
+
+string EnvManager::Trim(const string& str) {
+	size_t first = str.find_first_not_of(" \t\r\n");
+	if (string::npos == first) 
+		return "";
+
+	size_t last = str.find_last_not_of(" \t\r\n");
+	return str.substr(first, (last - first + 1));
+}
+
+string EnvManager::GetEnv(const string& key) {
+	if (_envMap.find(key) != _envMap.end())
+		return _envMap[key];
+
+	return "";
+}
+
+string EnvManager::ReadFile(const string& filename) {
+	ifstream file(filename);
+	if (!file.is_open()) {
+		cerr << "Failed to open file: " << filename << endl;
+		return "";
+	}
+	stringstream buffer;
+	buffer << file.rdbuf();
+	return buffer.str();
+}

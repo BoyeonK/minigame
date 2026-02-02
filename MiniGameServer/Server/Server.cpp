@@ -2,32 +2,18 @@
 #include "S2CPacketHandler.h"
 #include "ServerGlobal.h"
 #include <grpcpp/grpcpp.h>
-#include <fstream>
-#include <sstream>
-
-std::string ReadFile(const std::string& filename) {
-	std::ifstream file(filename);
-	if (!file.is_open()) {
-		std::cerr << "Failed to open file: " << filename << std::endl;
-		return "";
-	}
-	std::stringstream buffer;
-	buffer << file.rdbuf();
-	return buffer.str();
-}
 
 int main() {
 	//Game Client와의 프로토콜을 정의한 PacketHandler 초기화.
 	S2CPacketHandler::Init();
 
-	//TODO : 파일 이름과 CN 환경 변수로 가리기. 이미 커밋 올려서 소용없나?
-	std::string root_cert = ReadFile("ca.crt");
+	string root_cert = GEnvManager->ReadFile("certname");
 
 	grpc::SslCredentialsOptions ssl_opts;
 	ssl_opts.pem_root_certs = root_cert;
 
 	grpc::ChannelArguments args;
-	args.SetSslTargetNameOverride("KbyMiniCN");
+	args.SetSslTargetNameOverride("CNname");
 
 	auto channel = grpc::CreateCustomChannel(
 		"localhost:50051",

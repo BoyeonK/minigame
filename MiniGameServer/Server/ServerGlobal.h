@@ -11,6 +11,7 @@
 extern class CryptoManager* GCryptoManager;
 extern class DBClientImpl* DBManager;
 extern class shared_ptr<S2CServerServiceImpl> GServerService;
+extern class EnvManager* GEnvManager;
 extern map<int32_t, shared_ptr<GameManager>> GGameManagers;
 extern RaceManager* pTestGameManager;
 extern PingPongManager* pPingPongManager;
@@ -44,4 +45,17 @@ private:
 	//나중에 수요가 생기면 추가하는 걸로 하고 넘어간다.
 	atomic<uint32_t> _inPool;
 	atomic<uint32_t> _outPool;
+};
+
+class EnvManager {
+public:
+	EnvManager();
+	~EnvManager() {};
+
+	string Trim(const string& str);
+	string GetEnv(const string& key);
+	string ReadFile(const string& filename);
+
+private:
+	unordered_map<string, string> _envMap;
 };
