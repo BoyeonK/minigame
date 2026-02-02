@@ -338,6 +338,7 @@ string EnvManager::GetEnv(const string& key) {
 	if (_envMap.find(key) != _envMap.end())
 		return _envMap[key];
 
+	cout << "Environment variable not found: " << key << endl;
 	return "";
 }
 

@@ -7,15 +7,15 @@ int main() {
 	//Game Client와의 프로토콜을 정의한 PacketHandler 초기화.
 	S2CPacketHandler::Init();
 
-	string root_cert = GEnvManager->ReadFile(
-		GEnvManager->GetEnv("certname"));
+	string certPath = GEnvManager->GetEnv("certname");
+	string root_cert = GEnvManager->ReadFile(certPath);
 
 	grpc::SslCredentialsOptions ssl_opts;
 	ssl_opts.pem_root_certs = root_cert;
 
 	grpc::ChannelArguments args;
-	args.SetSslTargetNameOverride(GEnvManager->ReadFile(
-		GEnvManager->GetEnv("CNname")));
+	string targetName = GEnvManager->GetEnv("CNname");
+	args.SetSslTargetNameOverride(targetName);
 
 	auto channel = grpc::CreateCustomChannel(
 		"localhost:50051",
