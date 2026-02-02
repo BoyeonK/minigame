@@ -1,19 +1,49 @@
 ﻿#include "pch.h"
 #include "S2CPacketHandler.h"
 #include "ServerGlobal.h"
+#include <grpcpp/grpcpp.h>
+#include <fstream>
+#include <sstream>
+
+std::string ReadFile(const std::string& filename) {
+	std::ifstream file(filename);
+	if (!file.is_open()) {
+		std::cerr << "Failed to open file: " << filename << std::endl;
+		return "";
+	}
+	std::stringstream buffer;
+	buffer << file.rdbuf();
+	return buffer.str();
+}
 
 int main() {
 	//Game Client와의 프로토콜을 정의한 PacketHandler 초기화.
 	S2CPacketHandler::Init();
 
-	/*
-
 	//DB서버와의 연결 진행
-	DBManager = new DBClientImpl(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
+	//DBManager = new DBClientImpl(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
+
+	std::string root_cert = ReadFile("ca.crt");
+
+	grpc::SslCredentialsOptions ssl_opts;
+	ssl_opts.pem_root_certs = root_cert;
+
+	// 2. SSL 타겟 이름 강제 설정 (CN 일치시키기)
+	// 아까 확인한 CN이 "localhost"라면 여기에 "localhost" 입력
+	grpc::ChannelArguments args;
+	args.SetSslTargetNameOverride("KbyMiniCN");
+
+	// 3. 보안 채널 생성 (CreateChannel -> CreateCustomChannel로 변경)
+	// 로컬 테스트 중이므로 IP는 "localhost" 또는 "127.0.0.1" 사용
+	auto channel = grpc::CreateCustomChannel(
+		"localhost:50051",
+		grpc::SslCredentials(ssl_opts),
+		args
+	);
+
 #ifdef _DEBUG
 	DBManager->HelloAsync();
 #endif
-	*/
 
 	//Client와의 연결을 담당할 서비스 객체 생성 및 Listen시작.
 	GServerService = make_shared<S2CServerServiceImpl>(make_shared<CPCore>(), NetAddress(L"0.0.0.0", 7777), 100);
@@ -30,11 +60,9 @@ int main() {
 		}
 	});
 
-	/*
 	for (auto& gameManager : GGameManagers) {
-		gameManager.second->RenewPublicRecordFromDB();
+		//gameManager.second->RenewPublicRecordFromDB();
 	}
-	*/
 
 	//기타 잡무 담당 worker thread.
 	for (int i = 0; i < 5; i++) {
@@ -42,7 +70,7 @@ int main() {
 			while (true) {
 				LEndTickCount = ::GetTickCount64() + 64;
 				ThreadManager::DoGlobalQueueWork();
-				//DBManager->AsyncCompleteRpc();
+				DBManager->AsyncCompleteRpc();
 				GServerService->GetCPCoreRef()->Dispatch(10);
 			}
 		});
@@ -61,7 +89,7 @@ int main() {
 		}
 	});
 
-	cout << "Server is running..." << endl;
+	std::cout << "Server is running..." << endl;
 
 	GThreadManager->Join();
 }
