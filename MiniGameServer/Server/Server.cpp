@@ -13,7 +13,7 @@ int main() {
 	ssl_opts.pem_root_certs = root_cert;
 
 	grpc::ChannelArguments args;
-	args.SetSslTargetNameOverride("CNname");
+	args.SetSslTargetNameOverride(GEnvManager->ReadFile("CNname"));
 
 	auto channel = grpc::CreateCustomChannel(
 		"localhost:50051",
