@@ -41,6 +41,8 @@ int main() {
 		args
 	);
 
+	DBManager = new DBClientImpl(channel);
+
 #ifdef _DEBUG
 	DBManager->HelloAsync();
 #endif
