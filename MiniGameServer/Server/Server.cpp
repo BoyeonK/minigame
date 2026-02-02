@@ -20,27 +20,22 @@ int main() {
 	//Game Client와의 프로토콜을 정의한 PacketHandler 초기화.
 	S2CPacketHandler::Init();
 
-	//DB서버와의 연결 진행
-	//DBManager = new DBClientImpl(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
-
+	//TODO : 파일 이름과 CN 환경 변수로 가리기. 이미 커밋 올려서 소용없나?
 	std::string root_cert = ReadFile("ca.crt");
 
 	grpc::SslCredentialsOptions ssl_opts;
 	ssl_opts.pem_root_certs = root_cert;
 
-	// 2. SSL 타겟 이름 강제 설정 (CN 일치시키기)
-	// 아까 확인한 CN이 "localhost"라면 여기에 "localhost" 입력
 	grpc::ChannelArguments args;
 	args.SetSslTargetNameOverride("KbyMiniCN");
 
-	// 3. 보안 채널 생성 (CreateChannel -> CreateCustomChannel로 변경)
-	// 로컬 테스트 중이므로 IP는 "localhost" 또는 "127.0.0.1" 사용
 	auto channel = grpc::CreateCustomChannel(
 		"localhost:50051",
 		grpc::SslCredentials(ssl_opts),
 		args
 	);
 
+	//DB서버와의 연결 진행
 	DBManager = new DBClientImpl(channel);
 
 #ifdef _DEBUG
