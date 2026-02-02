@@ -52,3 +52,8 @@ Thumbs.db
 
 # 환경변수 무시
 .env
+
+# 인증서 관련 파일 무시
+*.crt
+*.csr
+*.key

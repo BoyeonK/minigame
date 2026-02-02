@@ -242,6 +242,7 @@
     </ClCompile>
     <ClCompile Include="S2C_Protocol_Race.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="S2DPacketMaker.cpp" />
     <ClCompile Include="S2D_CallData.cpp" />
