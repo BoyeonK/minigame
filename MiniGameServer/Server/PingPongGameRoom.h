@@ -52,7 +52,7 @@ public:
 	void RequestPlayerBarPosition();
 	void ResponsePlayerBarPosition(int32_t playerIdx, float x, float z);
 	void RenewScoreBoard();
-	void BroadCastKeepAlive();
+	//void BroadCastKeepAlive();
 
 	void SendGameState(int32_t playerIdx) override;
 

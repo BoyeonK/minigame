@@ -567,7 +567,7 @@ void PingPongGameRoom::RenewScoreBoard() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 }
-
+/*
 void PingPongGameRoom::BroadCastKeepAlive() {
 	if (_updateCount % 30 != 0)
 		return;
@@ -584,6 +584,7 @@ void PingPongGameRoom::BroadCastKeepAlive() {
 		playerSessionRef->Send(sendBuffer);
 	}
 }
+*/
 
 void PingPongGameRoom::SendGameState(int32_t playerIdx) {
 	if (playerIdx > (_quota - 1))
@@ -611,5 +612,5 @@ void PingPongGameRoom::Update() {
 	_updateCount++;
 	RenewScoreBoard();
 	RequestPlayerBarPosition();
-	BroadCastKeepAlive();
+	//BroadCastKeepAlive();
 }
