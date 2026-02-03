@@ -134,13 +134,15 @@ void PingPongGameRoom::PoolBullets() {
 	uniform_int_distribution<int> typeDist(0, 2);
 	uniform_real_distribution<float> posDist(-1.0f, 1.0f);
 	uniform_real_distribution<float> degreeDist(5.0f, 35.0f);
+	uniform_int_distribution<int> isDegreeMinusDist(0, 1);
 	uniform_real_distribution<float> speedDist(1.0f, 1.5f);
 
 	for (int i = 0; i < 17; i++) {
 		int32_t bType = typeDist(LRanGen);
 		float px = posDist(LRanGen);
 		float pz = posDist(LRanGen);
-		float degree = degreeDist(LRanGen);
+		int isDegreeMinus = isDegreeMinusDist(LRanGen);
+		float degree = (isDegreeMinus == 1) ? -degreeDist(LRanGen) : degreeDist(LRanGen);
 		float speed = speedDist(LRanGen);
 
 		TestingSpawnBullets(bType, px, pz, degree, speed);
@@ -527,10 +529,6 @@ void PingPongGameRoom::RequestPlayerBarPosition() {
 	_requestPlayerBarPosPkt.set_ez(_ez);
 	_requestPlayerBarPosPkt.set_wx(_wx);
 	_requestPlayerBarPosPkt.set_wz(_wz);
-	_requestPlayerBarPosPkt.set_sx(_sx);
-	_requestPlayerBarPosPkt.set_sz(_sz);
-	_requestPlayerBarPosPkt.set_nx(_nx);
-	_requestPlayerBarPosPkt.set_nz(_nz);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_requestPlayerBarPosPkt);
 	BroadCast(sendBuffer);
 }
@@ -544,14 +542,6 @@ void PingPongGameRoom::ResponsePlayerBarPosition(int32_t playerIdx, float x, flo
 	case(1):
 		_wx = x;
 		_wz = z;
-		break;
-	case(2):
-		_sx = x;
-		_sz = z;
-		break;
-	case(3):
-		_nx = x;
-		_nz = z;
 		break;
 	default:
 		break;
@@ -567,7 +557,7 @@ void PingPongGameRoom::RenewScoreBoard() {
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 	BroadCast(sendBuffer);
 }
-/*
+
 void PingPongGameRoom::BroadCastKeepAlive() {
 	if (_updateCount % 30 != 0)
 		return;
@@ -584,7 +574,7 @@ void PingPongGameRoom::BroadCastKeepAlive() {
 		playerSessionRef->Send(sendBuffer);
 	}
 }
-*/
+
 
 void PingPongGameRoom::SendGameState(int32_t playerIdx) {
 	if (playerIdx > (_quota - 1))
@@ -612,5 +602,5 @@ void PingPongGameRoom::Update() {
 	_updateCount++;
 	RenewScoreBoard();
 	RequestPlayerBarPosition();
-	//BroadCastKeepAlive();
+	BroadCastKeepAlive();
 }

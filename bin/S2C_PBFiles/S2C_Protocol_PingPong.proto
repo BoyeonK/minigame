@@ -32,10 +32,6 @@ message S_P_RequestPlayerBarPosition {
     float ez = 2;
     float wx = 3;
     float wz = 4;
-    float sx = 5;
-    float sz = 6;
-    float nx = 7;
-    float nz = 8;
 }
 
 message C_P_ResponsePlayerBarPosition {

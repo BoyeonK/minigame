@@ -8,12 +8,8 @@ public class UI_PingPongScoreBoard : UI_Scene {
     enum Texts {
         Player1Score,
         Player2Score,
-        Player3Score,
-        Player4Score,
         Player1Id,
         Player2Id,
-        Player3Id,
-        Player4Id,
     }
 
     PingPongScene _pingPongScene;
@@ -23,12 +19,8 @@ public class UI_PingPongScoreBoard : UI_Scene {
 
     private TextMeshProUGUI _player1Score;
     private TextMeshProUGUI _player2Score;
-    private TextMeshProUGUI _player3Score;
-    private TextMeshProUGUI _player4Score;
     private TextMeshProUGUI _player1Id;
     private TextMeshProUGUI _player2Id;
-    private TextMeshProUGUI _player3Id;
-    private TextMeshProUGUI _player4Id;
 
     private void OnEnable() {
         Init();
@@ -49,12 +41,8 @@ public class UI_PingPongScoreBoard : UI_Scene {
         Bind<TextMeshProUGUI>(typeof(Texts));
         _player1Id = Get<TextMeshProUGUI>((int)Texts.Player1Id);
         _player2Id = Get<TextMeshProUGUI>((int)Texts.Player2Id);
-        _player3Id = Get<TextMeshProUGUI>((int)Texts.Player3Id);
-        _player4Id = Get<TextMeshProUGUI>((int)Texts.Player4Id);
         _player1Score = Get<TextMeshProUGUI>((int)Texts.Player1Score);
         _player2Score = Get<TextMeshProUGUI>((int)Texts.Player2Score);
-        _player3Score = Get<TextMeshProUGUI>((int)Texts.Player3Score);
-        _player4Score = Get<TextMeshProUGUI>((int)Texts.Player4Score);
         _canvasGroup = GetComponent<CanvasGroup>();
         if (_canvasGroup == null) {
             _canvasGroup = gameObject.AddComponent<CanvasGroup>();
@@ -71,11 +59,9 @@ public class UI_PingPongScoreBoard : UI_Scene {
         if (scores == null)
             return;
 
-        if (scores.Count == 4) {
+        if (scores.Count == 2) {
             _player1Score.text = scores[0].ToString();
             _player2Score.text = scores[1].ToString();
-            _player3Score.text = scores[2].ToString();
-            _player4Score.text = scores[3].ToString();
         }
     }
 

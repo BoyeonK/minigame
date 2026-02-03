@@ -466,10 +466,6 @@ class S_P_RequestPlayerBarPosition final : public ::google::protobuf::Message
     kEzFieldNumber = 2,
     kWxFieldNumber = 3,
     kWzFieldNumber = 4,
-    kSxFieldNumber = 5,
-    kSzFieldNumber = 6,
-    kNxFieldNumber = 7,
-    kNzFieldNumber = 8,
   };
   // float ex = 1;
   void clear_ex() ;
@@ -511,52 +507,12 @@ class S_P_RequestPlayerBarPosition final : public ::google::protobuf::Message
   void _internal_set_wz(float value);
 
   public:
-  // float sx = 5;
-  void clear_sx() ;
-  float sx() const;
-  void set_sx(float value);
-
-  private:
-  float _internal_sx() const;
-  void _internal_set_sx(float value);
-
-  public:
-  // float sz = 6;
-  void clear_sz() ;
-  float sz() const;
-  void set_sz(float value);
-
-  private:
-  float _internal_sz() const;
-  void _internal_set_sz(float value);
-
-  public:
-  // float nx = 7;
-  void clear_nx() ;
-  float nx() const;
-  void set_nx(float value);
-
-  private:
-  float _internal_nx() const;
-  void _internal_set_nx(float value);
-
-  public:
-  // float nz = 8;
-  void clear_nz() ;
-  float nz() const;
-  void set_nz(float value);
-
-  private:
-  float _internal_nz() const;
-  void _internal_set_nz(float value);
-
-  public:
   // @@protoc_insertion_point(class_scope:S2C_Protocol.S_P_RequestPlayerBarPosition)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      3, 8, 0,
+      2, 4, 0,
       0, 2>
       _table_;
 
@@ -578,10 +534,6 @@ class S_P_RequestPlayerBarPosition final : public ::google::protobuf::Message
     float ez_;
     float wx_;
     float wz_;
-    float sx_;
-    float sz_;
-    float nx_;
-    float nz_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -3167,94 +3119,6 @@ inline float S_P_RequestPlayerBarPosition::_internal_wz() const {
 inline void S_P_RequestPlayerBarPosition::_internal_set_wz(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.wz_ = value;
-}
-
-// float sx = 5;
-inline void S_P_RequestPlayerBarPosition::clear_sx() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.sx_ = 0;
-}
-inline float S_P_RequestPlayerBarPosition::sx() const {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.sx)
-  return _internal_sx();
-}
-inline void S_P_RequestPlayerBarPosition::set_sx(float value) {
-  _internal_set_sx(value);
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_RequestPlayerBarPosition.sx)
-}
-inline float S_P_RequestPlayerBarPosition::_internal_sx() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.sx_;
-}
-inline void S_P_RequestPlayerBarPosition::_internal_set_sx(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.sx_ = value;
-}
-
-// float sz = 6;
-inline void S_P_RequestPlayerBarPosition::clear_sz() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.sz_ = 0;
-}
-inline float S_P_RequestPlayerBarPosition::sz() const {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.sz)
-  return _internal_sz();
-}
-inline void S_P_RequestPlayerBarPosition::set_sz(float value) {
-  _internal_set_sz(value);
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_RequestPlayerBarPosition.sz)
-}
-inline float S_P_RequestPlayerBarPosition::_internal_sz() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.sz_;
-}
-inline void S_P_RequestPlayerBarPosition::_internal_set_sz(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.sz_ = value;
-}
-
-// float nx = 7;
-inline void S_P_RequestPlayerBarPosition::clear_nx() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.nx_ = 0;
-}
-inline float S_P_RequestPlayerBarPosition::nx() const {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.nx)
-  return _internal_nx();
-}
-inline void S_P_RequestPlayerBarPosition::set_nx(float value) {
-  _internal_set_nx(value);
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_RequestPlayerBarPosition.nx)
-}
-inline float S_P_RequestPlayerBarPosition::_internal_nx() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.nx_;
-}
-inline void S_P_RequestPlayerBarPosition::_internal_set_nx(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.nx_ = value;
-}
-
-// float nz = 8;
-inline void S_P_RequestPlayerBarPosition::clear_nz() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.nz_ = 0;
-}
-inline float S_P_RequestPlayerBarPosition::nz() const {
-  // @@protoc_insertion_point(field_get:S2C_Protocol.S_P_RequestPlayerBarPosition.nz)
-  return _internal_nz();
-}
-inline void S_P_RequestPlayerBarPosition::set_nz(float value) {
-  _internal_set_nz(value);
-  // @@protoc_insertion_point(field_set:S2C_Protocol.S_P_RequestPlayerBarPosition.nz)
-}
-inline float S_P_RequestPlayerBarPosition::_internal_nz() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.nz_;
-}
-inline void S_P_RequestPlayerBarPosition::_internal_set_nz(float value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.nz_ = value;
 }
 
 // -------------------------------------------------------------------

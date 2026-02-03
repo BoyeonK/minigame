@@ -6,11 +6,11 @@ class PingPongGameRoom : public GameRoom {
 public:
 	PingPongGameRoom() {
 		_ty = GameType::PingPong;
-		_points = vector<int32_t>(4, 0);
-		_elos = vector<int32_t>(4, 0);
+		_points = vector<int32_t>(_quota, 0);
+		_elos = vector<int32_t>(_quota, 0);
 		_dbids = vector<int32_t>(_quota, 0);
 		_playerIds = vector<string>(_quota);
-		_nxtObjectId = 4;
+		_nxtObjectId = 2;
 		_spawnedBulletCount = 0;
 		_bulletsPkt.mutable_bullets()->Reserve(4);
 		for (int i = 0; i < 4; i++) {
@@ -52,12 +52,12 @@ public:
 	void RequestPlayerBarPosition();
 	void ResponsePlayerBarPosition(int32_t playerIdx, float x, float z);
 	void RenewScoreBoard();
-	//void BroadCastKeepAlive();
+	void BroadCastKeepAlive();
 
 	void SendGameState(int32_t playerIdx) override;
 
 private:
-	int32_t _quota = 4;
+	int32_t _quota = 2;
 	int32_t _spawnedBulletCount = 0;
 	vector<string> _playerIds;
 	vector<int32_t> _dbids;
@@ -76,8 +76,4 @@ private:
 	float _ez = 0;
 	float _wx = -6.4f;
 	float _wz = 0;
-	float _sx = 0;
-	float _sz = -6.4f;
-	float _nx = 0;
-	float _nz = 6.4f;
 };

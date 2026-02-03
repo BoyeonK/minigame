@@ -8,7 +8,7 @@
 
 class PingPongManager : public GameManager {
 public:
-	PingPongManager() : _ty(GameType::PingPong), _quota(4), _matchQueue(_ty, _quota) {
+	PingPongManager() : _ty(GameType::PingPong), _quota(2), _matchQueue(_ty, _quota) {
 		_excluded = vector<bool>(_quota);
 
 		vector<shared_ptr<PingPongGameRoom>> _dummyRooms;
@@ -60,7 +60,7 @@ public:
 
 private:
 	GameType _ty = GameType::PingPong;
-	int32_t _quota = 4;
+	int32_t _quota = 2;
 	MatchQueue _matchQueue;
 	vector<bool> _excluded;
 	uint64_t _lastRenewMatchQueueTick = 0;

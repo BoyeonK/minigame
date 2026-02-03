@@ -11,8 +11,6 @@ public class PingPongScene : BaseScene {
     MyPlayerBarController _myPlayerBar;
     EnemyPlayerBarController _eastPlayerBar;
     EnemyPlayerBarController _westPlayerBar;
-    EnemyPlayerBarController _southPlayerBar;
-    EnemyPlayerBarController _northPlayerBar;
 
     PingPongCameraController _pingPongCameraController;
     UI_PingPongScoreBoard _PingPongScoreBoard;
@@ -38,19 +36,11 @@ public class PingPongScene : BaseScene {
         //적 Bar를 참조.
         GameObject goEastPlayerBar = GameObject.Find("EPlayerBar");
         GameObject goWestPlayerBar = GameObject.Find("WPlayerBar");
-        GameObject goSouthPlayerBar = GameObject.Find("SPlayerBar");
-        GameObject goNorthPlayerBar = GameObject.Find("NPlayerBar");
         if (goEastPlayerBar != null) {
             _eastPlayerBar = goEastPlayerBar.GetComponent<EnemyPlayerBarController>();
         }
         if (goWestPlayerBar != null) {
             _westPlayerBar = goWestPlayerBar.GetComponent<EnemyPlayerBarController>();
-        }
-        if (goSouthPlayerBar != null) {
-            _southPlayerBar = goSouthPlayerBar.GetComponent<EnemyPlayerBarController>();
-        }
-        if (goNorthPlayerBar != null) {
-            _northPlayerBar = goNorthPlayerBar.GetComponent<EnemyPlayerBarController>();
         }
         GameObject scoreBoard = GameObject.Find("UI_PingPongScoreBoard");
         if (scoreBoard != null) {
@@ -116,20 +106,6 @@ public class PingPongScene : BaseScene {
                     goalLine = GameObject.Find("WestGoalLine");
 
                     break;
-                case 2:
-                    playerBar.transform.position = new Vector3(0f, 0.2f, -6.4f);
-
-                    disableBar = GameObject.Find("SPlayerBar");
-                    goalLine = GameObject.Find("SouthGoalLine");
-
-                    break;
-                case 3:
-                    playerBar.transform.position = new Vector3(0f, 0.2f, 6.4f);
-
-                    disableBar = GameObject.Find("NPlayerBar");
-                    goalLine = GameObject.Find("NorthGoalLine");
-
-                    break;
                 default:
                     break;
             }
@@ -169,12 +145,6 @@ public class PingPongScene : BaseScene {
         }
         if (_playerIdx != 1) {
             _westPlayerBar.NewSetPosition(positionPkt.Wx, positionPkt.Wz);
-        }
-        if (_playerIdx != 2) {
-            _southPlayerBar.NewSetPosition(positionPkt.Sx, positionPkt.Sz);
-        }
-        if (_playerIdx != 3) {
-            _northPlayerBar.NewSetPosition(positionPkt.Nx, positionPkt.Nz);
         }
     }
 

@@ -24,7 +24,7 @@ public class RacePlayerController : GameObjectController {
     float yRotation = 0f;
 
     float _stepTimer = 0f;
-    const float STEP_TIMER_INTERVAL = 0.4f;
+    const float STEP_TIMER_INTERVAL = 0.25f;
 
     Vector3 _front = new(0f, 0f, 1f);
     Vector3 _right = new();
