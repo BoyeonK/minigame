@@ -4,7 +4,6 @@
 #include "S2CPacketHandler.h"
 #include "S2C_Protocol.pb.h"
 
-#ifdef _DEBUG
 void HelloCall::OnSucceed() {
 	cout << "Client: Received reply from server: "
 		<< this->reply.message() << endl;
@@ -14,7 +13,6 @@ void HelloCall::OnFailed() {
 	cerr << "Client: RPC failed with code " << this->status.error_code() << " and message "
 		<< this->status.error_message() << endl;
 }
-#endif
 
 void SLoginCall::OnSucceed() {
 	if (this->reply.has_dbid()) {

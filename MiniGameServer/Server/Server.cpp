@@ -26,9 +26,7 @@ int main() {
 	//DB서버와의 연결 진행
 	DBManager = new DBClientImpl(channel);
 
-#ifdef _DEBUG
 	DBManager->HelloAsync();
-#endif
 
 	//Client와의 연결을 담당할 서비스 객체 생성 및 Listen시작.
 	GServerService = make_shared<S2CServerServiceImpl>(make_shared<CPCore>(), NetAddress(L"0.0.0.0", 7777), 100);

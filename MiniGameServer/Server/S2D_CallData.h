@@ -15,7 +15,6 @@ public:
 	grpc::Status status;
 };
 
-#ifdef _DEBUG
 class HelloCall final : public S2D_CallData {
 public:
 	~HelloCall() { }
@@ -29,7 +28,6 @@ public:
 	S2D_Protocol::HelloReply reply;
 	std::unique_ptr<grpc::ClientAsyncResponseReader<S2D_Protocol::HelloReply>> response_reader;
 };
-#endif
 
 class SLoginCall final : public S2D_CallData {
 public:

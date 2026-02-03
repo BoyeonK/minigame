@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "DBClientImpl.h"
 
-#ifdef _DEBUG
 void DBClientImpl::HelloAsync() {
     HelloCall* call = objectPool<HelloCall>::alloc();
     string HandShake("HandShake!");
@@ -17,7 +16,6 @@ void DBClientImpl::HelloAsync() {
     // 3. 응답을 기다리며 CompletionQueue에 태그를 등록
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
 }
-#endif
 
 bool DBClientImpl::S2D_Login(shared_ptr<PBSession> sessionRef, string id, string password) {
     SLoginCall* call = objectPool<SLoginCall>::alloc(sessionRef);
