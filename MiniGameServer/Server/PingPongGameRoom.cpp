@@ -580,8 +580,7 @@ void PingPongGameRoom::BroadCastKeepAlive() {
 		if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 			continue;
 
-		S2C_Protocol::S_Encrypted pkt = S2CPacketMaker::MakeSEncrypted(_keepAlivePkt, PKT_S_P_KEEP_ALIVE, playerSessionRef->GetAESKey());
-		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
+		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_keepAlivePkt);
 		playerSessionRef->Send(sendBuffer);
 	}
 }
