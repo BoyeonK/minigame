@@ -185,9 +185,37 @@ void PingPongGameRoom::OnGoingPhase1() {
 	_isUpdateCall = true;
 	CountdownBeforeStart(0);
 
-	SpawnBullets();
-	PostEventAfter(5000, &PingPongGameRoom::SpawnBullets);
-	PostEventAfter(10000, &PingPongGameRoom::CountingPhase);
+	int32_t _accTimer = 0;
+	uniform_int_distribution<int> delayDist(0, 50);
+
+	for (int i = 0; i < 4; i++) {
+		int32_t randInt = delayDist(LRanGen);
+		_accTimer += 1500 + randInt;
+		PostEventAfter(_accTimer, &PingPongGameRoom::SpawnBullets);
+		if (i == 3) {
+			PostEventAfter(_accTimer, &PingPongGameRoom::SpawnBullets);
+		}
+	}
+	
+	for (int i = 0; i < 4; i++) {
+		int32_t randInt = delayDist(LRanGen);
+		_accTimer += 1250 + randInt;
+		PostEventAfter(_accTimer, &PingPongGameRoom::SpawnBullets);
+		if ((i % 2) == 1) {
+			PostEventAfter(_accTimer, &PingPongGameRoom::SpawnBullets);
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+		int32_t randInt = delayDist(LRanGen);
+		_accTimer += 1000 + randInt;
+		PostEventAfter(_accTimer, &PingPongGameRoom::SpawnBullets);
+		if ((i % 2) == 1) {
+			PostEventAfter(_accTimer, &PingPongGameRoom::SpawnBullets);
+		}
+	}
+
+	PostEventAfter(_accTimer + 3000, &PingPongGameRoom::CountingPhase);
 }
 
 void PingPongGameRoom::SpawnBullets() {
