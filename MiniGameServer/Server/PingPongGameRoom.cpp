@@ -66,7 +66,7 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 
 		for (int i = 0; i < _quota; i++) {
 			shared_ptr<PlayerSession> playerSessionRef = _playerWRefs[i].lock();
-			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty));
+			S2C_Protocol::S_MatchmakeCompleted pkt = S2CPacketMaker::MakeSMatchmakeCompleted(int(_ty), _playerIds);
 			if (!PlayerSession::IsInvalidPlayerSession(playerSessionRef)) {
 				playerSessionRef->SetJoinedRoom(static_pointer_cast<PingPongGameRoom>(shared_from_this()));
 				playerSessionRef->SetRoomIdx(i);

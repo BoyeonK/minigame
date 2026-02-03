@@ -66,8 +66,8 @@ public class Define {
     public static int Quota(int gameId) {
         switch (gameId) {
             case 1: return 2;
-            case 2: return 4;
-            case 3: return 1;
+            case 2: return 2;
+            case 3: return 2;
             default: return 0;
         }
     }
