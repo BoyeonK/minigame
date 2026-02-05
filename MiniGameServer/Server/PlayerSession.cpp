@@ -30,6 +30,13 @@ void PlayerSession::OnRecvPacket(unsigned char* buffer, int32_t len) {
 	S2CPacketHandler::HandlePacket(static_pointer_cast<PBSession>(shared_from_this()), buffer, len);
 }
 
+void PlayerSession::UnAuthorizedPacketReceived() {
+	int32_t prevValue = _suspiciousStack.fetch_add(1);
+
+	if (prevValue + 1 == 5)
+		Disconnect();
+}
+
 EVP_PKEY* PlayerSession::GetRSAKey() {
 	return _RSAKey;
 }

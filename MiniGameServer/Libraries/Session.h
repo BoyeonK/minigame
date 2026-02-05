@@ -85,6 +85,7 @@ public:
 
 	int32_t GetSessionState();
 	void SetSessionState(int32_t state);
+	virtual void UnAuthorizedPacketReceived() = 0;
 
 protected:
 	virtual int32_t OnRecv(unsigned char* buffer, int32_t len) sealed;

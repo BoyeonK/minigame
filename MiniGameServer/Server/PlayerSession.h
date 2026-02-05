@@ -25,6 +25,7 @@ public:
 	void OnConnected();
 	void OnDisconnected();
 	void OnRecvPacket(unsigned char* buffer, int32_t len) override;
+	void UnAuthorizedPacketReceived() override;
 
 	EVP_PKEY* GetRSAKey();
 	void SetAESKey(vector<unsigned char>&& AESKey);
@@ -78,4 +79,5 @@ private:
 	weak_ptr<GameRoom> _joinedRoomWRef;
 	atomic<int64_t> _lastKeepAliveTick = 0;
 	atomic<int32_t> _roomIdx;
+	atomic<int32_t> _suspiciousStack = 0;
 };

@@ -51,9 +51,6 @@ public:
 } GServerGlobal;
 
 CryptoManager::CryptoManager() {
-	//최초, 메인스레드에서 1번 실행 될 것이기 때문에
-	//생성자 안에서만큼은 multi thread환경을 고려하지 않고 작성됨.
-
 #ifdef _DEBUG
 	cout << "Initiating CryptoManager...." << endl;
 #endif
