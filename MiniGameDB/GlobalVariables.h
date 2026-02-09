@@ -76,15 +76,14 @@ private:
 
 class Cleaner {
 public:
-    //암시적 형 변환을 때려막는다. 가끔 ㄹㅇ 병신크리가 뜰수있다.
-    explicit Cleaner(std::function<void()> cleanup_func)
+    //암시적 형 변환을 때려막는다.
+    explicit Cleaner(function<void()> cleanup_func)
         : m_cleanup_function(cleanup_func) {
     }
 
     ~Cleaner() {
-        if (!m_dismissed) {
+        if (!m_dismissed)
             m_cleanup_function();
-        }
     }
 
     void dismiss() {
@@ -96,6 +95,6 @@ public:
     Cleaner& operator=(const Cleaner&) = delete;
 
 private:
-    std::function<void()> m_cleanup_function;
+    function<void()> m_cleanup_function;
     bool m_dismissed = false;
 };

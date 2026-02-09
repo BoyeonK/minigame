@@ -69,7 +69,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
     _selectedChecks = vector<bool>(_searchQueue.size());
     _selectedPlayerIdxs.clear();
 
-    //3. 0번째 index에 대한 분산 계산, 조건에 맞으면 pq에 push
+	//3. 0번째 index부터 _quota번째 플레이어까지의 분산 계산.
     for (int i = 0; i < _quota; i++) {
         newElo = _searchQueue[i].elo;
         sum += newElo;
@@ -82,7 +82,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
         _pq.push(Deviset(devi, 0));
     }
 
-    //4. 이후의 분산 계산 및 조건에 맞으면 pq에 push
+    //4. 이후의 분산 계산 및 조건에 맞으면 pq에 push.
     for (int i = 1; i <= mxmidx; i++) {
         oldElo = _searchQueue[i - 1].elo;
         newElo = _searchQueue[i + _quota].elo;
@@ -118,7 +118,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
         }
     }
 
-    //6. _selectedPlayerIdxs 를 바탕으로 매치 그룹들을 나열.
+	//6. _selectedPlayerIdxs 를 바탕으로 매칭을 진행할 플레이어 그룹의 조합(matchGruops)을 채움.
     for (auto& idx : _selectedPlayerIdxs) {
         vector<WatingPlayerData> matchGroup;
         matchGroup.reserve(_quota);
@@ -128,7 +128,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
         matchGruops.push_back(move(matchGroup));
     }
 
-    //7. group으로 묶여서 매칭이 시작된 플레이어들을 Queue에서 제외
+	//7. matchGruops에 포함된 플레이어들을 _searchQueue에서 제거하고 matchGroups 리턴.
     int it_idx = 0;
     auto new_end = std::remove_if(_searchQueue.begin(), _searchQueue.end(),
         [this, &it_idx](const WatingPlayerData& player) mutable {

@@ -240,14 +240,10 @@ void DCreateAccountCallData::Proceed() {
         _service->RequestCreateAccountRequest(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
     }
     else if (_status == PROCESS) {
-        // 새로운 CallData를 CompletionQueue에 등록.
         DCreateAccountCallData* newCallData = objectPool<DCreateAccountCallData>::alloc(_service, _completionQueueRef);
-        //TODO: 해당 아이디, 패스워드로 계정생성 시도.
-        //성공한경우 D2S_CreateAccount에 true담아 전송.
-        //실패한경우 false 담아 전송.
 
         string id = _request.id();
-        string password = _request.password();      
+        string password = _request.password();
         
         try {
             SQLHDBC hDbc = GDBManager->PopHDbc();
@@ -279,22 +275,18 @@ void DCreateAccountCallData::Proceed() {
             }
             attr = true;
 
-            //중앙 테이블인 Players row INSERT
+			//중앙 테이블인 Players row INSERT, 이게 실패하면 아이디 중복이므로 실패 응답 보내줘야햠
             CreatePlayersTable(hDbc, hStmt2, id, isSuccess);
 
-            //INSERT에 성공한 경우.
             if (isSuccess) {
-                //해당 테이블의 dbid를 가져옴.
                 SQLINTEGER dbid = -1;
+
                 ReadDbidFromPlayersTable(hDbc, hStmt3, id, dbid);
 
-                //dbid로서 Accounts row INSERT
                 CreateAccountsTable(hDbc, hStmt4, password, dbid);
 
-                //dbid로서 Elos row INSERT
                 CreateElosTable(hDbc, hStmt5, dbid);
 
-                //dbid로서 PersonalRecords row INSERT
                 CreatePersonalRecordsTable(hDbc, hStmt6, dbid);
 
                 ret = SQLEndTran(SQL_HANDLE_DBC, hDbc, SQL_COMMIT);
@@ -308,9 +300,9 @@ void DCreateAccountCallData::Proceed() {
                 _reply.set_success(false);
             }
 
+			//트랜잭션 커밋. 실패시 롤백.
             SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_ON, SQL_IS_UINTEGER);
             if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-                //hDbc가 null인 경우, pool에 반환되지 않게 동작하므로
                 hDbc = nullptr;
                 throw runtime_error("Failed to hDbc Auto Commit Setting");
             }
@@ -322,7 +314,6 @@ void DCreateAccountCallData::Proceed() {
         _status = FINISH;
         _responder.Finish(_reply, grpc::Status::OK, this);
     }
-    // 마지막 단계: RPC가 완료됨 CallData를 Pool에 반환
     else {
 #ifdef _DEBUG
         cout << "Server: CreateAccount Request sequence complete!" << endl;
