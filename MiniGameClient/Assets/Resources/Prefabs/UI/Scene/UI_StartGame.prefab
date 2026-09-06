@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: 'Enter '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
-  m_sharedMaterial: {fileID: 4699948967198077151, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
+  m_sharedMaterial: {fileID: 6845288139329486270, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_text: To Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
-  m_sharedMaterial: {fileID: 4699948967198077151, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
+  m_sharedMaterial: {fileID: 6845288139329486270, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_text: "\uBBF8\uB2C8\uAC8C\uC784 \uD30C\uD2F0\uB8F8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
-  m_sharedMaterial: {fileID: -4219098522723081126, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
+  m_sharedMaterial: {fileID: -6801001732266559692, guid: df7bf39162abb814db1d1ffc68082f44, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_text: Connecting Server....
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
-  m_sharedMaterial: {fileID: 4699948967198077151, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
+  m_sharedMaterial: {fileID: 6845288139329486270, guid: 38d8bd7db4e38694d9e9a6384eb4726a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
