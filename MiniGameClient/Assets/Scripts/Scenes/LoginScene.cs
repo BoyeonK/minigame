@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
-using Unity.Animations.SpringBones.GameObjectExtensions;
+//using Unity.Animations.SpringBones.GameObjectExtensions; // package lost; extension replaced below
 using UnityEngine;
 
 public class LoginScene : BaseScene {
@@ -78,7 +78,15 @@ public class LoginScene : BaseScene {
                 _screenRenderer.HideThis();
             }
 
-            screen.FindChildByName("GameExplanation")?.TryGetComponent<TextMeshPro>(out _gameExplanationText);
+            // SpringBone FindChildByName extension is gone with its package.
+            // includeInactive must be true: GameExplanation is inactive in the scene,
+            // and HideThis() above deactivates the Screen object itself.
+            foreach (TextMeshPro tmp in screen.GetComponentsInChildren<TextMeshPro>(true)) {
+                if (tmp.name == "GameExplanation") {
+                    _gameExplanationText = tmp;
+                    break;
+                }
+            }
         }
 
         GameObject go = GameObject.Find("OptionSelecter");
