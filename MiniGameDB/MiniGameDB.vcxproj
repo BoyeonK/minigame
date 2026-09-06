@@ -131,6 +131,10 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <!-- /sdl은 C4996을 에러로 승격시킨다. grpc 헤더가 abseil에서 deprecated된
+           MutexLock(Mutex*) 생성자를 쓰고 있어서 서드파티 코드 때문에 빌드가 깨진다.
+           AdditionalOptions는 /sdl 뒤에 붙으므로 여기서 다시 경고(레벨3)로 되돌린다. -->
+      <AdditionalOptions>/w34996 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +153,8 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <!-- Debug|x64 쪽과 동일한 이유. -->
+      <AdditionalOptions>/w34996 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

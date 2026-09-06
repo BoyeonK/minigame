@@ -19,6 +19,7 @@
 #include <grpcpp/server_context.h>
 #include <grpcpp/impl/service_type.h>
 #include <grpcpp/support/sync_stream.h>
+#include <grpcpp/ports_def.inc>
 namespace S2D_Protocol {
 
 static const char* S2D_Service_method_names[] = {
@@ -377,4 +378,5 @@ S2D_Service::Service::~Service() {
 
 
 }  // namespace S2D_Protocol
+#include <grpcpp/ports_undef.inc>
 
