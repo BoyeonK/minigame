@@ -80,3 +80,6 @@ GitIgnores.cs
 *.crt
 *.csr
 *.key
+
+# 포트폴리오 및 README.md 작성용 임시파일. 나중에 지움.
+docs/portfolio_brainstorming.md
