@@ -218,13 +218,13 @@ bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_
 	GameType expected = IntToGameType(pkt.gameid());
 	GameType desired = GameType::None;
 	if (expected == GameType::Undefined) {
-		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), "유효한 gameId가 아님");
+		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), u8"유효한 gameId가 아님");
 	}
 		
 	//현재 gameId의 매칭을 취소 시도.
 	if (!playerSessionRef->TryChangeMatchingState(expected, desired)) {
 		//매치 완료가 선행된 경우와 동기화 문제인 경우로 쪼개야 함.
-		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), "매치 완료된 큐가 있거나, 동기화 문제");
+		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), u8"매치 완료된 큐가 있거나, 동기화 문제");
 	}
 
 	return Handle_C_MatchmakeCancelInternal(playerSessionRef, true, pkt.gameid(), "");
