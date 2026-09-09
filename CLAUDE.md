@@ -21,8 +21,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | 파일 | 내용 |
 |---|---|
-| `README.md` | 프로젝트 소개와 설계 의도. 각 디렉토리로 들어가는 입구 |
-| `progress.md` | 완료된 작업 로그, TODO, 알려진 이슈 |
+| `README.md` | 프로젝트 소개와 설계 의도. **사용자가 명시적으로 요청하지 않는 한 수정하지 말 것** |
+| `progress.md` | 완료된 작업 로그, TODO, 알려진 이슈. **사용자의 명시적 요청 또는 `checkprogress-commit` 스킬로만 갱신할 것** |
 | `docs/` | 아키텍처 다이어그램, 이전 README |
 
 ## 빌드 및 실행

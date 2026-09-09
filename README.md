@@ -69,30 +69,11 @@ Game Server가 SQL Server에 직접 접근하지 않고 별도의 DB Gateway를 
 
 실시간 Game Logic을 처리하는 Worker Thread가 DB I/O를 직접 수행하거나 응답을 기다리지 않도록 Game Server와 DB 영역을 분리했습니다.
 
-### 저장소 구성
-
-위 다이어그램의 각 구성 요소는 저장소에서 다음 디렉터리에 대응합니다. 각 디렉터리의 `CLAUDE.md`에 해당 컴포넌트의 내부 구조, 빌드 방법, 주의사항을 정리해두었습니다.
-
-| 디렉터리 | 다이어그램상 위치 | 상세 문서 | 주요 진입점 |
-|---|---|---|---|
-| [`MiniGameServer/`](MiniGameServer) | Game Server | [CLAUDE.md](MiniGameServer/CLAUDE.md) | `Server/Server.cpp` (`main`, Thread 구성) |
-| ├ `Libraries/` | Network Core | ↑ | `CompletionPortCore.cpp`, `Session.cpp`, `Actor.cpp` |
-| └ `Server/` | Game Logic | ↑ | `S2CPacketHandler.h`, `GameRoom.cpp` |
-| [`MiniGameDB/`](MiniGameDB) | DB Gateway | [CLAUDE.md](MiniGameDB/CLAUDE.md) | `main.cpp`, `CallData.cpp`, `schema.sql` |
-| [`MiniGameClient/`](MiniGameClient) | Client | [CLAUDE.md](MiniGameClient/CLAUDE.md) | `Assets/Scripts/Managers/Managers.cs` |
-| [`bin/`](bin) | Protocol | [루트 CLAUDE.md](CLAUDE.md#프로토콜-코드-생성--가장-중요한-작업-흐름) | `S2C_PBFiles/*.proto`, `S2D_PBFiles/*.proto` |
-
-`bin/`은 빌드 디렉터리가 아니라 **Protocol 코드 생성이 이루어지는 곳**입니다. Server / DB / Client에 있는 생성 파일은 모두 여기서 만들어 복사한 사본이며, `.proto`에는 Handshake와 Login Transaction의 설계 근거를 주석으로 남겨두었습니다.
-
-전체 개발 규칙과 작업 로그는 [`CLAUDE.md`](CLAUDE.md)와 [`progress.md`](progress.md)에 있습니다.
-
 ---
 
 ## 5. Engineering Highlights
 
 ### 5-1. IOCP 기반 Networking
-
-> 코드: [`MiniGameServer/Libraries/`](MiniGameServer/Libraries) — `CompletionPortCore.*`, `Session.*`, `Listener.*`, `Service.*`, `RecvBuffer.*`, `SendBuffer.*`, `objectPool.h`
 
 Windows 환경에서 Overlapped I/O와 IOCP를 기반으로 한 비동기 Network 구조를 학습하고 프로젝트에 적용했습니다.
 
@@ -122,8 +103,6 @@ Packet
 ---
 
 ### 5-2. Actor Event Processing
-
-> 코드: [`MiniGameServer/Libraries/`](MiniGameServer/Libraries) — `Actor.*`, `ActorEvent.*`, `ActorEventScheduler.*`, `GlobalActorQueue.*` / 적용: `Server/GameRoom.*`
 
 여러 객체를 Multi-thread 환경에서 처리하기 위해 Actor 기반 Event Processing 구조를 학습하고 프로젝트에 적용했습니다.
 
@@ -155,8 +134,6 @@ Actor Logic
 
 ### 5-3. Async DB Gateway
 
-> 코드: 요청 측 [`MiniGameServer/Server/`](MiniGameServer/Server) — `DBClientImpl.*`, `S2D_CallData.*` / 처리 측 [`MiniGameDB/`](MiniGameDB) — `DBServiceImpl.*`, `CallData.*`, `GlobalVariables.*`
-
 로그인, Player Record 저장 등의 DB 작업을 Game Server에서 직접 수행할 경우 Blocking DB I/O가 실시간 Game Logic 처리에 영향을 줄 수 있다고 판단했습니다.
 
 따라서 DB 접근을 별도의 C++ DB Gateway로 분리했습니다.
@@ -184,8 +161,6 @@ DB 작업 과정에서는 RAII 기반 Guard를 사용해 Handle 반환이나 Tra
 ---
 
 ### 5-4. Session Security
-
-> 코드: [`MiniGameServer/Server/`](MiniGameServer/Server) — `ServerGlobal.*`(`CryptoManager`), `S2CPacketHandler.*`, `PlayerSession.*` / 클라이언트 [`Assets/Scripts/Network/`](MiniGameClient/Assets/Scripts/Network)
 
 #### RSA → AES-256-GCM Handshake
 
@@ -267,8 +242,6 @@ Race PingPong 호박쪼개기
 
 ### 5-5. Matchmaking
 
-> 코드: [`MiniGameServer/Server/`](MiniGameServer/Server) — `MatchQueue.*`, `GameManager.*`, `Deviset.*`, `WatingPlayerData.*`
-
 Player의 Elo를 기준으로 비슷한 수준의 Player를 우선적으로 찾는 Matchmaking을 구현했습니다.
 
 Matchmaking 입력과 실제 탐색 Queue를 분리하여 새로운 요청의 입력과 Match 후보 탐색 과정이 직접 경쟁하는 상황을 줄이도록 구성했습니다.
@@ -299,8 +272,6 @@ Matchmaking 중 Player가 Connection을 유지하지 못한 경우 남은 Player
 ---
 
 ### 5-6. Game Synchronization
-
-> 코드: Server [`MiniGameServer/Server/`](MiniGameServer/Server) — `RaceRoom.*`, `PingPongGameRoom.*`, `MoleRoom.*`, `UnityGameObject.*` / Client [`Assets/Scripts/Scenes/`](MiniGameClient/Assets/Scripts/Scenes), [`Assets/Scripts/Controller/`](MiniGameClient/Assets/Scripts/Controller)
 
 각 MiniGame은 Game State의 변화 방식과 Network 요구사항이 다르기 때문에 동일한 Synchronization 방식을 일괄적으로 적용하지 않았습니다.
 
@@ -350,9 +321,6 @@ Server가 Slot State를 관리하고 Client가 발생시킨 Hit Event를 전달�
 ---
 
 ## 6. Unity Client
-
-> 코드: [`MiniGameClient/Assets/Scripts/`](MiniGameClient/Assets/Scripts) — `Managers/Managers.cs`, `Managers/Content/NetworkManager.cs`, `Network/`, `Scenes/`
-> 상세: [`MiniGameClient/CLAUDE.md`](MiniGameClient/CLAUDE.md)
 
 Unity / C#으로 Lobby와 3종 MiniGame의 Client를 구현했습니다.
 
