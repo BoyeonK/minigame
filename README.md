@@ -40,11 +40,11 @@
 
 ## 2. 데모
 
-> 플레이 영상 링크
+> [YouTube에서 플레이 영상 보기](https://www.youtube.com/watch?v=T7g7xGlRrK4)
 
-| Race | PingPong | 호박쪼개기 |
-|---|---|---|
-| Screenshot / GIF | Screenshot / GIF | Screenshot / GIF |
+| 최초 화면 | 로비 화면 | 패스 러너(인게임) | 호박 쪼개기(인게임) |
+|---|---|---|---|
+| ![최초 화면](docs/images/minigame_gamestart.jpg) | ![최초 화면](docs/images/minigame_lobby_record.jpg) | ![최초 화면](docs/images/minigame_runner.png) | ![최초 화면](docs/images/minigame_pumpkin.png) |
 
 ---
 
