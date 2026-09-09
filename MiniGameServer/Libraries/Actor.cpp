@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "GlobalActorQueue.h"
 
 void Actor::Push(shared_ptr<ActorEvent> event, bool isPostOnly) {
@@ -9,15 +9,15 @@ void Actor::Push(shared_ptr<ActorEvent> event, bool isPostOnly) {
 			Execute();
 		}
 		else {
-			//ÀÌ ÀÛ¾÷À» ½ÇÇàÇÏ´Â Thread´Â ÀÌ¹Ì ¾î¶² Actor¿¡ ´ëÇÑ Ã³¸®ÁßÀÌ´Ù.
-			//È¤Àº ÀÇµµÀûÀ¸·Î ½ÇÇàÇÏÁö¾Ê°í GlobalQueue¿¡ PushÇÏ´Â°ÍÀ» ¸ñÇ¥·Î Çß´Ù.
+			//ì´ ì‘ì—…ì„ ì‹¤í–‰í•˜ëŠ” ThreadëŠ” ì´ë¯¸ ì–´ë–¤ Actorì— ëŒ€í•œ ì²˜ë¦¬ì¤‘ì´ë‹¤.
+			//í˜¹ì€ ì˜ë„ì ìœ¼ë¡œ ì‹¤í–‰í•˜ì§€ì•Šê³  GlobalQueueì— Pushí•˜ëŠ”ê²ƒì„ ëª©í‘œë¡œ í–ˆë‹¤.
 			GActorQueue->Push(shared_from_this());
 		}
 	}
 }
 
 void Actor::Execute() {
-	//ÀÌ Actor¸¦ ExecuteÁßÀÎ thread´Â ´Ù¸¥ ActorÀÇ ÀÛ¾÷À» ½ÇÇàÇÏÁö ¾Ê°Ú´Ù´Â °áÀÇ?
+	//ì´ Actorë¥¼ Executeì¤‘ì¸ threadëŠ” ë‹¤ë¥¸ Actorì˜ ì‘ì—…ì„ ì‹¤í–‰í•˜ì§€ ì•Šê² ë‹¤ëŠ” ê²°ì˜?
 	bool expected = false;
 	if (_isExecuting.compare_exchange_strong(expected, true)) {
 		GActorQueue->Push(shared_from_this());
@@ -32,7 +32,7 @@ void Actor::Execute() {
 			events[i]->Execute();
 		}
 		if (_eventCount.fetch_sub(jobCount) == jobCount) {
-			//ÇØ´ç ActorÀÇ ¸ğµç ÀÛ¾÷À» ³¡¸¶Ä§
+			//í•´ë‹¹ Actorì˜ ëª¨ë“  ì‘ì—…ì„ ëë§ˆì¹¨
 			LCurrentActor = nullptr;
 			_isExecuting = false;
 			return;

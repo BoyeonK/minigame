@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "MatchQueue.h"
 
 void MatchQueue::Push(WatingPlayerData newPlayer){
@@ -25,7 +25,7 @@ void MatchQueue::FlushTempQueueAndSort() {
     }
 
 #ifdef _DEBUG
-    cout << "Âğ ´ë±â¿­¿¡ ¹«¾ğ°¡ ÁøÀÔ" << endl;
+    cout << "ì° ëŒ€ê¸°ì—´ì— ë¬´ì–¸ê°€ ì§„ì…" << endl;
 #endif
 
     {
@@ -57,19 +57,19 @@ void MatchQueue::RemoveInvalidPlayer() {
 vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
     vector<vector<WatingPlayerData>> matchGruops;
 
-    //1. À¯È¿ÇÏÁö ¾ÊÀº ±×·ì Á¦°Å
+    //1. ìœ íš¨í•˜ì§€ ì•Šì€ ê·¸ë£¹ ì œê±°
     RemoveInvalidPlayer();
     int32_t mxmidx = _searchQueue.size() - _quota;
     if (mxmidx < 0)
         return matchGruops;
 
-    //2. º¯¼ö ÃÊ±âÈ­
+    //2. ë³€ìˆ˜ ì´ˆê¸°í™”
     long long sum = 0, sqsum = 0, newElo = 0, oldElo = 0;
     double var = 0, devi = 0, mean = 0;
     _selectedChecks = vector<bool>(_searchQueue.size());
     _selectedPlayerIdxs.clear();
 
-	//3. 0¹øÂ° indexºÎÅÍ _quota¹øÂ° ÇÃ·¹ÀÌ¾î±îÁöÀÇ ºĞ»ê °è»ê.
+	//3. 0ë²ˆì§¸ indexë¶€í„° _quotaë²ˆì§¸ í”Œë ˆì´ì–´ê¹Œì§€ì˜ ë¶„ì‚° ê³„ì‚°.
     for (int i = 0; i < _quota; i++) {
         newElo = _searchQueue[i].elo;
         sum += newElo;
@@ -82,7 +82,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
         _pq.push(Deviset(devi, 0));
     }
 
-    //4. ÀÌÈÄÀÇ ºĞ»ê °è»ê ¹× Á¶°Ç¿¡ ¸ÂÀ¸¸é pq¿¡ push.
+    //4. ì´í›„ì˜ ë¶„ì‚° ê³„ì‚° ë° ì¡°ê±´ì— ë§ìœ¼ë©´ pqì— push.
     for (int i = 1; i <= mxmidx; i++) {
         oldElo = _searchQueue[i - 1].elo;
         newElo = _searchQueue[i + _quota].elo;
@@ -96,7 +96,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
         }
     }
 
-    //5. ºĞ»êÀÌ _allowDevi ÀÌÇÏÀÎ Á¶ÇÕ Áß¿¡, °ãÄ¡´Â ÀÎ¿øÀÌ ¾øµµ·Ï idx¸¦ ¼±ÅÃ.
+    //5. ë¶„ì‚°ì´ _allowDevi ì´í•˜ì¸ ì¡°í•© ì¤‘ì—, ê²¹ì¹˜ëŠ” ì¸ì›ì´ ì—†ë„ë¡ idxë¥¼ ì„ íƒ.
     while (!_pq.empty()) {
         Deviset Ds = _pq.top();
         _pq.pop();
@@ -118,7 +118,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
         }
     }
 
-	//6. _selectedPlayerIdxs ¸¦ ¹ÙÅÁÀ¸·Î ¸ÅÄªÀ» ÁøÇàÇÒ ÇÃ·¹ÀÌ¾î ±×·ìÀÇ Á¶ÇÕ(matchGruops)À» Ã¤¿ò.
+	//6. _selectedPlayerIdxs ë¥¼ ë°”íƒ•ìœ¼ë¡œ ë§¤ì¹­ì„ ì§„í–‰í•  í”Œë ˆì´ì–´ ê·¸ë£¹ì˜ ì¡°í•©(matchGruops)ì„ ì±„ì›€.
     for (auto& idx : _selectedPlayerIdxs) {
         vector<WatingPlayerData> matchGroup;
         matchGroup.reserve(_quota);
@@ -128,7 +128,7 @@ vector<vector<WatingPlayerData>> MatchQueue::SearchMatchGroups() {
         matchGruops.push_back(move(matchGroup));
     }
 
-	//7. matchGruops¿¡ Æ÷ÇÔµÈ ÇÃ·¹ÀÌ¾îµéÀ» _searchQueue¿¡¼­ Á¦°ÅÇÏ°í matchGroups ¸®ÅÏ.
+	//7. matchGruopsì— í¬í•¨ëœ í”Œë ˆì´ì–´ë“¤ì„ _searchQueueì—ì„œ ì œê±°í•˜ê³  matchGroups ë¦¬í„´.
     int it_idx = 0;
     auto new_end = std::remove_if(_searchQueue.begin(), _searchQueue.end(),
         [this, &it_idx](const WatingPlayerData& player) mutable {

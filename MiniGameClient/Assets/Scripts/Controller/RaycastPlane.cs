@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class RaycastPlane : MonoBehaviour {
-    private LayerMask raycastPlaneLayer; // "RaycastPlane" ·¹ÀÌ¾î¸¸ ¼±ÅÃÇÏµµ·Ï Inspector¿¡¼­ ¼³Á¤
+    private LayerMask raycastPlaneLayer; // "RaycastPlane" ë ˆì´ì–´ë§Œ ì„ íƒí•˜ë„ë¡ Inspectorì—ì„œ ì„¤ì •
     private const string LAYER_NAME = "RaycastPlanesLayer";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         int layerIdx = LayerMask.NameToLayer(LAYER_NAME);
         if (layerIdx == -1) {
-            Debug.Log("Raycast¿¡ »ç¿ëÇÒ Layer¸¦ Ã£Áö ¸øÇÏ¿´½À´Ï´Ù.");
+            Debug.Log("Raycastì— ì‚¬ìš©í•  Layerë¥¼ ì°¾ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.");
             return;
         }
         raycastPlaneLayer = 1 << layerIdx;

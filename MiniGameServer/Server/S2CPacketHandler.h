@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "S2C_Protocol.pb.h"
 #include "ServerGlobal.h"
 
@@ -8,8 +8,8 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 extern PlaintextHandlerFunc PlaintextHandler[UINT16_MAX];
 extern vector<vector<bool>> GAllowedPacketIdsPerSecureLevel;
 
-//name convention : ¼­¹ö¿¡¼­ º¸³»´Â(Å¬¶ó°¡ ¹Ş´Â) S_
-//					Å¬¶ó¿¡¼­ º¸³»´Â(¼­¹ö°¡ ¹Ş´Â) C_
+//name convention : ì„œë²„ì—ì„œ ë³´ë‚´ëŠ”(í´ë¼ê°€ ë°›ëŠ”) S_
+//					í´ë¼ì—ì„œ ë³´ë‚´ëŠ”(ì„œë²„ê°€ ë°›ëŠ”) C_
 enum : uint16_t {
 	PKT_S_WELCOME = 0,
 	PKT_C_WELCOME = 1,
@@ -119,7 +119,7 @@ public:
 		for (int32_t i = 0; i < UINT16_MAX; i++)
 			GPacketHandler[i] = Handle_Invalid;
 		
-		//Å¬¶óÀÌ¾ğÆ®·ÎºÎÅÍ ¹ŞÀº ¹ÙÀÌ³Ê¸®¿¡¼­ Çì´õ¸¦ Á¦¿ÜÇÑ ³ª¸ÓÁö ºÎºĞÀ» ¾Ë¸ÂÀº protobufÅ¸ÀÔÀ¸·Î Ä³½ºÆÃÇÏ°í, ¾Ë¸Â´Â ÇÚµé·¯ ÇÔ¼ö¸¦ È£Ãâ.
+		//í´ë¼ì´ì–¸íŠ¸ë¡œë¶€í„° ë°›ì€ ë°”ì´ë„ˆë¦¬ì—ì„œ í—¤ë”ë¥¼ ì œì™¸í•œ ë‚˜ë¨¸ì§€ ë¶€ë¶„ì„ ì•Œë§ì€ protobufíƒ€ì…ìœ¼ë¡œ ìºìŠ¤íŒ…í•˜ê³ , ì•Œë§ëŠ” í•¸ë“¤ëŸ¬ í•¨ìˆ˜ë¥¼ í˜¸ì¶œ.
 		GPacketHandler[PKT_C_ENCRYPTED] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Encrypted>(Handle_C_Encrypted, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Welcome>(Handle_C_Welcome, sessionRef, buffer, len); };
 		GPacketHandler[PKT_C_LOGIN] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_Login>(Handle_C_Login, sessionRef, buffer, len); };
@@ -147,8 +147,8 @@ public:
 			//Mole
 		GPacketHandler[PKT_C_M_HIT_SLOT] = [](shared_ptr<PBSession>sessionRef, unsigned char* buffer, int32_t len) { return HandlePacket<S2C_Protocol::C_M_HitSlot>(Handle_C_M_HitSlot, sessionRef, buffer, len); };
 
-		//C_Encrypted¸¦ º¹È£È­ÇÏ¿© ¾òÀº ¹ÙÀÌ³Ê¸®¸¦ ¾Ë¸ÂÀº protobufÅ¸ÀÔÀ¸·Î Ä³½ºÆÃÇÏ°í, ¾Ë¸ÂÀº ÇÚµé·¯ ÇÔ¼ö¸¦ È£Ãâ.
-		//¾ÏÈ£È­ ÇÏÁö ¾ÊÀ» ÆĞÅ¶¿¡ ´ëÇØ¼­ PlaintextHandlerÀÇ ³»¿ëÀ» Ã¤¿ï ÇÊ¿ä´Â ¾øÁö¸¸, ÇØ¼­ ³ª»Ü°Ç ¾øÀ¸´Ï±î.
+		//C_Encryptedë¥¼ ë³µí˜¸í™”í•˜ì—¬ ì–»ì€ ë°”ì´ë„ˆë¦¬ë¥¼ ì•Œë§ì€ protobufíƒ€ì…ìœ¼ë¡œ ìºìŠ¤íŒ…í•˜ê³ , ì•Œë§ì€ í•¸ë“¤ëŸ¬ í•¨ìˆ˜ë¥¼ í˜¸ì¶œ.
+		//ì•”í˜¸í™” í•˜ì§€ ì•Šì„ íŒ¨í‚·ì— ëŒ€í•´ì„œ PlaintextHandlerì˜ ë‚´ìš©ì„ ì±„ìš¸ í•„ìš”ëŠ” ì—†ì§€ë§Œ, í•´ì„œ ë‚˜ì ê±´ ì—†ìœ¼ë‹ˆê¹Œ.
 		PlaintextHandler[PKT_C_WELCOME] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Welcome>(Handle_C_Welcome, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_LOGIN] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_Login>(Handle_C_Login, sessionRef, plaintext); };
 		PlaintextHandler[PKT_C_CREATE_ACCOUNT] = [](shared_ptr<PBSession> sessionRef, vector<unsigned char>& plaintext) { return HandlePlaintext<S2C_Protocol::C_CreateAccount>(Handle_C_CreateAccount, sessionRef, plaintext); };
@@ -218,7 +218,7 @@ public:
 	}
 
 	static bool HandlePacket(shared_ptr<PBSession> sessionRef, unsigned char* buffer, int32_t len) {
-		//TODO: Session¿¡ Çã¶ôµÈ ¹üÁÖÀÇ pktIdÀÇ ÇÚµé·¯¸¸ ½ÇÇàÇÏ±â.
+		//TODO: Sessionì— í—ˆë½ëœ ë²”ì£¼ì˜ pktIdì˜ í•¸ë“¤ëŸ¬ë§Œ ì‹¤í–‰í•˜ê¸°.
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
 		if (GAllowedPacketIdsPerSecureLevel[sessionRef->GetSessionState()][header->_id] == false) {
 
@@ -228,7 +228,7 @@ public:
 		return GPacketHandler[header->_id](sessionRef, buffer, len);
 	}
 
-	//¸¸µé¾îÁø Protobuf¸¦ SendBufferChunk¿¡ ·ÎµåÇÏ°í SendBuffer¸¦ ÇÒ´ç¹ŞÀ» ÇÔ¼öµé.
+	//ë§Œë“¤ì–´ì§„ Protobufë¥¼ SendBufferChunkì— ë¡œë“œí•˜ê³  SendBufferë¥¼ í• ë‹¹ë°›ì„ í•¨ìˆ˜ë“¤.
 #pragma region Lobby
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Encrypted& pkt) { return MakeSendBufferRef(pkt, PKT_S_ENCRYPTED); }
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const S2C_Protocol::S_Welcome& pkt) { return MakeSendBufferRef(pkt, PKT_S_WELCOME); }
@@ -363,8 +363,8 @@ private:
 		return func(sessionRef, pkt);
 	}
 
-	//PB·Î Á÷·ÄÈ­µÈ ÆĞÅ¶À» Local SendBufferChunk¿¡ ·ÎµåÇÏ°í
-	//ÇØ´ç SendBuffer¸¦ Return
+	//PBë¡œ ì§ë ¬í™”ëœ íŒ¨í‚·ì„ Local SendBufferChunkì— ë¡œë“œí•˜ê³ 
+	//í•´ë‹¹ SendBufferë¥¼ Return
 	template<typename PBType>
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const PBType& pkt, uint16_t pktId) {
 		uint16_t dataSize = static_cast<uint16_t>(pkt.ByteSizeLong());
@@ -380,11 +380,11 @@ private:
 		return sendBufferRef;
 	}
 
-	//PB·Î Á÷·ÄÈ­µÈ ÆĞÅ¶À» AESÅ°¸¦ ÀÌ¿ëÇÏ¿© ¾ÏÈ£È­, SendBufferChunk¿¡ ·ÎµåÇÏ°í ÇØ´ç SendBuffer¸¦ Return
+	//PBë¡œ ì§ë ¬í™”ëœ íŒ¨í‚·ì„ AESí‚¤ë¥¼ ì´ìš©í•˜ì—¬ ì•”í˜¸í™”, SendBufferChunkì— ë¡œë“œí•˜ê³  í•´ë‹¹ SendBufferë¥¼ Return
 	template<typename PBType>
 	static shared_ptr<SendBuffer> MakeSendBufferRef(const PBType& pkt, uint16_t pktId, const vector<unsigned char>& AESKey) {
-		//C#ÀÌ¾ú´Ù¸é pkt°¡ where IMessageÀÎÁö È®ÀÎÇØ¼­ SerializeAsString() ¸Ş¼­µå¸¦ °¡Áö°í ÀÖ´ÂÁö 
-		//È®ÀÎÇÏ°í ¾ÈÀüÇÏ°Ô ÀÛµ¿½ÃÄ×À» ÅÙµ¥..
+		//C#ì´ì—ˆë‹¤ë©´ pktê°€ where IMessageì¸ì§€ í™•ì¸í•´ì„œ SerializeAsString() ë©”ì„œë“œë¥¼ ê°€ì§€ê³  ìˆëŠ”ì§€ 
+		//í™•ì¸í•˜ê³  ì•ˆì „í•˜ê²Œ ì‘ë™ì‹œì¼°ì„ í…ë°..
 		string serializedStr = pkt.SerializeAsString();
 		vector<unsigned char> plaintext(serializedStr.begin(), serializedStr.end());
 		vector<unsigned char> iv, ciphertext, tag;

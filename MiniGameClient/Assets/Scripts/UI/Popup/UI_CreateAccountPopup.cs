@@ -1,4 +1,4 @@
-using Google.Protobuf.Protocol;
+ï»¿using Google.Protobuf.Protocol;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,8 +15,8 @@ public class UI_CreateAccountPopup : UI_Popup {
         CreateAccountButton
     }
 
-    //ÀÌ Ä£±¸µéÀº Æ÷ÀÎÅÍÀÌ´Ù. °¡Áö°í ÀÖ¾îµµ ¸Ş¸ğ¸®ÀûÀ¸·Î ¼ÕÇØ Á¶±İ º¸´Â Á¤µµ.
-    //C++Ã³·³ »ı°¢ÇØ¼­, ÇØ´ç °´Ã¼¸¦ ÇÏ³ª ´õ µé°íÀÖ´Â °³³äÀÌ ¾Æ´Ï´Ù.
+    //ì´ ì¹œêµ¬ë“¤ì€ í¬ì¸í„°ì´ë‹¤. ê°€ì§€ê³  ìˆì–´ë„ ë©”ëª¨ë¦¬ì ìœ¼ë¡œ ì†í•´ ì¡°ê¸ˆ ë³´ëŠ” ì •ë„.
+    //C++ì²˜ëŸ¼ ìƒê°í•´ì„œ, í•´ë‹¹ ê°ì²´ë¥¼ í•˜ë‚˜ ë” ë“¤ê³ ìˆëŠ” ê°œë…ì´ ì•„ë‹ˆë‹¤.
     private Button _createAccountButton;
     private TMP_InputField _idField;
     private TMP_InputField _pwField;
@@ -62,8 +62,8 @@ public class UI_CreateAccountPopup : UI_Popup {
     }
 
     private void TryCreateAccount() {
-        //TODO : ÆĞ½º¿öµåÈ®ÀÎÀÌ¶û ÆĞ½º¿öµå¶û ÀÏÄ¡ÇÏ´ÂÁö ¼±Á¦ÀûÀ¸·Î È®ÀÎ
-        //´Ù¸£¸é ¿¡·¯ ¸Ş¼¼Áö Ãâ·Â
+        //TODO : íŒ¨ìŠ¤ì›Œë“œí™•ì¸ì´ë‘ íŒ¨ìŠ¤ì›Œë“œë‘ ì¼ì¹˜í•˜ëŠ”ì§€ ì„ ì œì ìœ¼ë¡œ í™•ì¸
+        //ë‹¤ë¥´ë©´ ì—ëŸ¬ ë©”ì„¸ì§€ ì¶œë ¥
         Managers.Sound.Play("button");
         string id = "", pw = "", pwc = "";
         if (_idField != null && _pwField != null && _pwConfirmField != null) {

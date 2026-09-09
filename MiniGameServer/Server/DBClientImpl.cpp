@@ -1,19 +1,19 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "DBClientImpl.h"
 
 void DBClientImpl::HelloAsync() {
     HelloCall* call = objectPool<HelloCall>::alloc();
     string HandShake("HandShake!");
 
-    // 1. ¿äÃ» ¸Þ½ÃÁö °´Ã¼¸¦ ¸ÕÀú »ý¼ºÇÏ°í µ¥ÀÌÅÍ¸¦ ¼³Á¤
+    // 1. ìš”ì²­ ë©”ì‹œì§€ ê°ì²´ë¥¼ ë¨¼ì € ìƒì„±í•˜ê³  ë°ì´í„°ë¥¼ ì„¤ì •
     S2D_Protocol::HelloRequest request;
     request.set_name(HandShake);
 
-    // 2. ÁØºñµÈ ¿äÃ» °´Ã¼¸¦ PrepareAsyncSayHello ÇÔ¼ö¿¡ Àü´Þ
+    // 2. ì¤€ë¹„ëœ ìš”ì²­ ê°ì²´ë¥¼ PrepareAsyncSayHello í•¨ìˆ˜ì— ì „ë‹¬
     call->response_reader = _stub->PrepareAsyncSayHello(&call->context, request, _cqRef.get());
     call->response_reader->StartCall();
 
-    // 3. ÀÀ´äÀ» ±â´Ù¸®¸ç CompletionQueue¿¡ ÅÂ±×¸¦ µî·Ï
+    // 3. ì‘ë‹µì„ ê¸°ë‹¤ë¦¬ë©° CompletionQueueì— íƒœê·¸ë¥¼ ë“±ë¡
     call->response_reader->Finish(&call->reply, &call->status, (void*)call);
 }
 
@@ -21,7 +21,7 @@ bool DBClientImpl::S2D_Login(shared_ptr<PBSession> sessionRef, string id, string
     SLoginCall* call = objectPool<SLoginCall>::alloc(sessionRef);
     S2D_Protocol::S2D_Login request = S2DPacketMaker::Make_S2D_Login(id, password);
 
-    //CallÀ» Ã³¸®ÇÏ´Â ÀÌ ¼¼ ÁÙÀº, FM´ë·ÎÇÏ¸é CallDataÀÇ ¸â¹ö ÇÔ¼ö·Î¼­ Ä¸½¶È­ÇØ¾ßÇÔ.
+    //Callì„ ì²˜ë¦¬í•˜ëŠ” ì´ ì„¸ ì¤„ì€, FMëŒ€ë¡œí•˜ë©´ CallDataì˜ ë©¤ë²„ í•¨ìˆ˜ë¡œì„œ ìº¡ìŠí™”í•´ì•¼í•¨.
     call->response_reader = _stub->PrepareAsyncLoginRequest(&call->context, request, _cqRef.get());
     call->response_reader->StartCall();
 

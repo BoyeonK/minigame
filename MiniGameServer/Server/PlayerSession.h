@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "GameType.h"
 
 class GameRoom;
@@ -71,7 +71,7 @@ private:
 	int32_t _gameVersion = 0;
 	string _playerId;
 	atomic<int32_t> _dbid = 0;
-	//FM´ë·Î¸é elo¸¦ ´Ù·ê ¶§ mutex¸¦ »ç¿ëÇØ¾ß ÇÔ.
+	//FMëŒ€ë¡œë©´ eloë¥¼ ë‹¤ë£° ë•Œ mutexë¥¼ ì‚¬ìš©í•´ì•¼ í•¨.
 	vector<int32_t> _elos;
 	vector<int32_t> _personalRecords;
 

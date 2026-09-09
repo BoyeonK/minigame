@@ -1,4 +1,4 @@
-using Google.Protobuf.Protocol;
+ï»¿using Google.Protobuf.Protocol;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -42,14 +42,14 @@ public class LoginScene : BaseScene {
     LobbyScreenRenderer _screenRenderer;
     TextMeshPro _gameExplanationText;
     
-    //SceneÀÌ ¹Ù²ğ ¶§, ÀÌ Ä£±¸°¡ ´ëÇ¥·Î ³ª¼­¼­ ¸ğµç ÃÊ±âÈ­ ÀÛ¾÷À» ÇØ ÁÙ°ÅÀÓ.
+    //Sceneì´ ë°”ë€” ë•Œ, ì´ ì¹œêµ¬ê°€ ëŒ€í‘œë¡œ ë‚˜ì„œì„œ ëª¨ë“  ì´ˆê¸°í™” ì‘ì—…ì„ í•´ ì¤„ê±°ì„.
     protected override void Init() {
         base.Init();
         Screen.SetResolution(848, 477, false);
         SceneType = Define.Scene.Login;
         Managers.Scene.ResetLoadSceneOp();
 
-        //»ç¿ëÇÒ UI¸¦ ¹Ì¸® ¸Ş¸ğ¸®¿¡ ¿Ã·ÁµĞ´Ù.
+        //ì‚¬ìš©í•  UIë¥¼ ë¯¸ë¦¬ ë©”ëª¨ë¦¬ì— ì˜¬ë ¤ë‘”ë‹¤.
         _uiStartGame = Managers.UI.CacheSceneUI<UI_StartGame>();
         _uiLoginOrCreateAccount = Managers.UI.CacheSceneUI<UI_LoginOrCreateAccount>();
         _uiLoginPopup = Managers.UI.CachePopupUI<UI_LoginPopup>();
@@ -63,7 +63,7 @@ public class LoginScene : BaseScene {
         _uiSettingPopup.AddListenerToConfirmBtn(() => { GoToLobbyStage(); });
         _uiSettingPopup.AddListenerToCancelBtn(() => { GoToLobbyStage(); });
 
-        //¿Àµğ¿À ¼³Á¤
+        //ì˜¤ë””ì˜¤ ì„¤ì •
         Managers.Setting.ApplyPreviousSceneSetting();
         Managers.Sound.GetOrAddAudioClip("button");
         Managers.Sound.GetOrAddAudioClip("select");
@@ -219,13 +219,13 @@ public class LoginScene : BaseScene {
     private void SetExplanationText(int opt) {
         switch (opt) {
             case 0:
-                _gameExplanationText.text = "¹æÇâÅ°¿Í space·Î Ä³¸¯ÅÍ¸¦ Á¶ÀÛÇÕ´Ï´Ù.\n°á½ÂÁ¡¿¡ ¸ÕÀú µµÂøÇÏ¸é ½Â¸®ÇÕ´Ï´Ù.";
+                _gameExplanationText.text = "ë°©í–¥í‚¤ì™€ spaceë¡œ ìºë¦­í„°ë¥¼ ì¡°ì‘í•©ë‹ˆë‹¤.\nê²°ìŠ¹ì ì— ë¨¼ì € ë„ì°©í•˜ë©´ ìŠ¹ë¦¬í•©ë‹ˆë‹¤.";
                 break;
             case 1:
-                _gameExplanationText.text = "¸¶¿ì½º·Î ¸·´ë¸¦ Á¶ÀÛÇÕ´Ï´Ù.\n³ªÀÇ °ÔÀÌÆ®¿¡ °øÀÌ µé¾î¿ÀÁö ¾Êµµ·Ï ¸·À¸¼¼¿ä.";
+                _gameExplanationText.text = "ë§ˆìš°ìŠ¤ë¡œ ë§‰ëŒ€ë¥¼ ì¡°ì‘í•©ë‹ˆë‹¤.\në‚˜ì˜ ê²Œì´íŠ¸ì— ê³µì´ ë“¤ì–´ì˜¤ì§€ ì•Šë„ë¡ ë§‰ìœ¼ì„¸ìš”.";
                 break;
             case 2:
-                _gameExplanationText.text = "³Ñ¹öÆĞµå 1~9±îÁöÀÇ ¹øÈ£¸¦ ´­·¯ Á¶ÀÛÇÕ´Ï´Ù.\nÈ£¹ÚÀ» ´Ù¸¥»ç¶÷º¸´Ù »¡¸® Ã¤ÃëÇØ¼¼¿ä.\r\n´Ù¸¥ ÀÛ¹°À» Ã¤ÃëÇÒ °æ¿ì °¨Á¡µË´Ï´Ù!";
+                _gameExplanationText.text = "ë„˜ë²„íŒ¨ë“œ 1~9ê¹Œì§€ì˜ ë²ˆí˜¸ë¥¼ ëˆŒëŸ¬ ì¡°ì‘í•©ë‹ˆë‹¤.\ní˜¸ë°•ì„ ë‹¤ë¥¸ì‚¬ëŒë³´ë‹¤ ë¹¨ë¦¬ ì±„ì·¨í•´ì„¸ìš”.\r\në‹¤ë¥¸ ì‘ë¬¼ì„ ì±„ì·¨í•  ê²½ìš° ê°ì ë©ë‹ˆë‹¤!";
                 break;
             default:
                 _gameExplanationText.text = "";
@@ -296,22 +296,22 @@ public class LoginScene : BaseScene {
         Managers.UI.ShowSceneUI<UI_MatchMakeMenu>();
     }
 
-    //ÀÌ Ä£±¸´Â Network WorkerThread¿¡¼­ ½ÇÇàµÊ.
+    //ì´ ì¹œêµ¬ëŠ” Network WorkerThreadì—ì„œ ì‹¤í–‰ë¨.
     private void GoToMatchMakeRegisterStage() {
         _stage = Stage.MatchmakeRegister;
         Managers.UI.DisableUI("UI_MatchMakeMenu");
         Managers.UI.ShowPopupUI<UI_MatchMakeProgress>();
     }
 
-    //ÀÌ Ä£±¸´Â Network WorkerThread¿¡¼­ ½ÇÇàµÊ.
+    //ì´ ì¹œêµ¬ëŠ” Network WorkerThreadì—ì„œ ì‹¤í–‰ë¨.
     private void GoToMatchMakeStageViaCancel() {
         GoToMatchMakeStage();
     }
 
-    //ÀÌ Ä£±¸´Â Network WorkerThread¿¡¼­ ½ÇÇàµÊ.
+    //ì´ ì¹œêµ¬ëŠ” Network WorkerThreadì—ì„œ ì‹¤í–‰ë¨.
     private void ConnectToServerFailed() {
         Managers.ExecuteAtMainThread(() => {
-            Managers.UI.ShowErrorUIOnlyConfirm("¼­¹ö¿ÍÀÇ ¿¬°á¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+            Managers.UI.ShowErrorUIOnlyConfirm("ì„œë²„ì™€ì˜ ì—°ê²°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
         });
     }
 
@@ -330,11 +330,11 @@ public class LoginScene : BaseScene {
     }
 
     public void WrongId() {
-        Managers.UI.ShowErrorUIOnlyConfirm("¾ø´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+        Managers.UI.ShowErrorUIOnlyConfirm("ì—†ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
     }
 
     public void WrongPassword() {
-        Managers.UI.ShowErrorUIOnlyConfirm("ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+        Managers.UI.ShowErrorUIOnlyConfirm("ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.");
     }
 
     public void SelectStartGame() {
@@ -342,18 +342,18 @@ public class LoginScene : BaseScene {
     }
 
     public void MatchmakeRequestSucceed() {
-        //TODO : ÇöÀç ÀÌ ÇÔ¼ö¸¦ ¹Ş´Â »óÈ²ÀÌ ¹İµå½Ã MatchmakeStage¶ó´Â °¡Á¤ÀÌ ±ò·ÁÀÖÀ½.
+        //TODO : í˜„ì¬ ì´ í•¨ìˆ˜ë¥¼ ë°›ëŠ” ìƒí™©ì´ ë°˜ë“œì‹œ MatchmakeStageë¼ëŠ” ê°€ì •ì´ ê¹”ë ¤ìˆìŒ.
         GoToMatchMakeRegisterStage();
     }
 
     public void MatchmakeCancelSucceed() {
-        //TODO : ÇöÀç ÀÌ ÇÔ¼ö¸¦ ¹Ş´Â »óÈ²ÀÌ ¹İµå½Ã MatchmakeRegisterStage¶ó´Â °¡Á¤ÀÌ
-        //¾î´ÀÁ¤µµ ±ò·ÁÀÖÀ½. ¸ÅÄ¡ ÁøÇàÁßÀÇ °æ¿ì ´Ù¸¥ stage·Î ÀüÈ¯ÇÒ ¼ö ¾øµµ·Ï ÇØ¾ßÇÔ.
+        //TODO : í˜„ì¬ ì´ í•¨ìˆ˜ë¥¼ ë°›ëŠ” ìƒí™©ì´ ë°˜ë“œì‹œ MatchmakeRegisterStageë¼ëŠ” ê°€ì •ì´
+        //ì–´ëŠì •ë„ ê¹”ë ¤ìˆìŒ. ë§¤ì¹˜ ì§„í–‰ì¤‘ì˜ ê²½ìš° ë‹¤ë¥¸ stageë¡œ ì „í™˜í•  ìˆ˜ ì—†ë„ë¡ í•´ì•¼í•¨.
         GoToMatchMakeStageViaCancel();
     }
 
     public void MatchCompletedReadyToChangeScene() {
-        //Managers.UI.ShowErrorUIOnlyConfirm("¸ÅÄ¡¸ŞÀÌÅ· ¿Ï·áµÊ");
+        //Managers.UI.ShowErrorUIOnlyConfirm("ë§¤ì¹˜ë©”ì´í‚¹ ì™„ë£Œë¨");
     }
 
     public void SelectLeaderboard() {
@@ -379,7 +379,7 @@ public class LoginScene : BaseScene {
     }
 
     private void QuitApplicationUI() {
-        Managers.UI.ShowErrorUIConfirmOrCancel("°ÔÀÓÀ» Á¾·áÇÏ½Ã°Ú½À´Ï±î?", () => {
+        Managers.UI.ShowErrorUIConfirmOrCancel("ê²Œì„ì„ ì¢…ë£Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?", () => {
             Managers.Network.TryDisconnect();
             Managers.ExecuteAtMainThread(() => {
                 Application.Quit();
@@ -400,7 +400,7 @@ public class LoginScene : BaseScene {
                 Managers.Network.TryDisconnect();
                 break;
             case Stage.Lobby:
-                Managers.UI.ShowErrorUIConfirmOrCancel("·Î±×¾Æ¿ô ÇÏ½Ã°Ú½À´Ï±î?", Logout);
+                Managers.UI.ShowErrorUIConfirmOrCancel("ë¡œê·¸ì•„ì›ƒ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?", Logout);
                 break;
             case Stage.PublicRecord:
                 GoToLobbyStage();
@@ -415,7 +415,7 @@ public class LoginScene : BaseScene {
                 GoToLobbyStage();
                 break;
             case Stage.MatchmakeRegister:
-                Managers.UI.ShowErrorUIConfirmOrCancel("ÇöÀç ¸ÅÄ¡¸¦ Ãë¼ÒÇÏ½Ã°Ú½À´Ï±î?", MatchmakeCancel);
+                Managers.UI.ShowErrorUIConfirmOrCancel("í˜„ì¬ ë§¤ì¹˜ë¥¼ ì·¨ì†Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?", MatchmakeCancel);
                 break;
             default:
                 break;

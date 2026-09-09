@@ -1,8 +1,8 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Session.h"
 #include "SocketUtils.h"
 
-//recvBuffer¿Í sendBuffer´Â ÀÌÈÄ¿¡ »õ·Î¿î class·Î¼­ ¸¸µé¾î ÁÙ °ÍÀÓ.
+//recvBufferì™€ sendBufferëŠ” ì´í›„ì— ìƒˆë¡œìš´ classë¡œì„œ ë§Œë“¤ì–´ ì¤„ ê²ƒì„.
 Session::Session() : _RecvBuffer(BUFFER_SIZE) {
 	_socketHandle = SocketUtils::CreateSocket();
 }
@@ -18,8 +18,8 @@ void Session::Send(shared_ptr<SendBuffer> sendBufferRef) {
 	{
 		WRITE_RWLOCK;
 		_sendBufferRefQueue.push(sendBufferRef);
-		//exchange´Â ÀÎÀÚÀÇ °ªÀ¸·Î atomicº¯¼ö¸¦ ¹Ù²Ù¸é¼­
-		//¿ø·¡ÀÇ °ªÀ» ¸®ÅÏÇÑ´Ù.
+		//exchangeëŠ” ì¸ìì˜ ê°’ìœ¼ë¡œ atomicë³€ìˆ˜ë¥¼ ë°”ê¾¸ë©´ì„œ
+		//ì›ë˜ì˜ ê°’ì„ ë¦¬í„´í•œë‹¤.
 		if (_sendRegistered.exchange(true) == false)
 			registerSend = true;
 	}
@@ -32,7 +32,7 @@ bool Session::Connect() {
 }
 
 void Session::Disconnect() {
-	//ÀÌ¹Ì ¿¬°áÀÌ µÇ¾î ÀÖÁö ¾ÊÀº °æ¿ì
+	//ì´ë¯¸ ì—°ê²°ì´ ë˜ì–´ ìˆì§€ ì•Šì€ ê²½ìš°
 	if (_connected.exchange(false) == false)
 		return;
 	RegisterDisconnect();
@@ -65,7 +65,7 @@ bool Session::RegisterConnect() {
 	if (isConnected()) 
 		return false;
 		
-	//¼ÒÀ¯ÇÑ service°´Ã¼°¡ client¿ëÀÎÁö È®ÀÎ
+	//ì†Œìœ í•œ serviceê°ì²´ê°€ clientìš©ì¸ì§€ í™•ì¸
 
 	if (SocketUtils::SetReuseAddress(_socketHandle, true) == false)
 		return false;
@@ -82,7 +82,7 @@ bool Session::RegisterConnect() {
 		int errorCode = ::WSAGetLastError();
 		if (errorCode != WSA_IO_PENDING) {
 #ifdef _DEBUG
-			cout << "ConnectExÇÔ¼ö ½ÇÇà ¿¡·¯" << endl;
+			cout << "ConnectExí•¨ìˆ˜ ì‹¤í–‰ ì—ëŸ¬" << endl;
 #endif
 			_CT._OwnerRef = nullptr;
 			return false;
@@ -186,14 +186,14 @@ void Session::ProcessRecv(int32_t numOfBytes) {
 	}
 
 	if (_RecvBuffer.OnWrite(numOfBytes) == false) {
-		//overflow ¹ß»ı
+		//overflow ë°œìƒ
 		return;
 	}
 
 	int32_t dataSize = _RecvBuffer.DataSize();
 	int32_t processLen = OnRecv(_RecvBuffer.ReadPos(), dataSize);
 	if (processLen < 0 || dataSize < processLen||_RecvBuffer.OnRead(processLen) == false) {
-		//overflow ¹ß»ı
+		//overflow ë°œìƒ
 		return;
 	}
 	_RecvBuffer.Clean();
@@ -226,11 +226,11 @@ void Session::HandleError(int32_t errorCode) {
 }
 
 int32_t PBSession::OnRecv(unsigned char* buffer, int32_t len) {
-	//1. ¹öÆÛ 1°³µµ Á¦´ë·Î Àü¼Û ¾È µÇ¾úÀ» ¼ö ÀÖÀ½.
-		//1_1. Çì´õÁ¶Â÷µµ Àü¼ÛµÉ ¿©Áö°¡ ¾ø´Â ¹ÙÀÌÆ®
-		//1_2. ¸øÇØµµ Çì´õ´Â Àü¼Û µÉ ¿©Áö°¡ ÀÖ´Ù.
-	//2. ¹öÆÛ 1°³´Â ÀÏ´Ü Á¦´ë·Î Àü¼ÛµÊ
-	//3. ´Ù¼öÀÇ ¹öÆÛ°¡ ÇÑ¹ø¿¡ Àü¼ÛµÇ¾úÀ» °¡´É¼º ÀÖÀ½ (¹öÆÛ 1°³Ã³¸®ÇÏ°í 1¹øºÎÅÍ ´Ù½Ã½ÃÀÛ)
+	//1. ë²„í¼ 1ê°œë„ ì œëŒ€ë¡œ ì „ì†¡ ì•ˆ ë˜ì—ˆì„ ìˆ˜ ìˆìŒ.
+		//1_1. í—¤ë”ì¡°ì°¨ë„ ì „ì†¡ë  ì—¬ì§€ê°€ ì—†ëŠ” ë°”ì´íŠ¸
+		//1_2. ëª»í•´ë„ í—¤ë”ëŠ” ì „ì†¡ ë  ì—¬ì§€ê°€ ìˆë‹¤.
+	//2. ë²„í¼ 1ê°œëŠ” ì¼ë‹¨ ì œëŒ€ë¡œ ì „ì†¡ë¨
+	//3. ë‹¤ìˆ˜ì˜ ë²„í¼ê°€ í•œë²ˆì— ì „ì†¡ë˜ì—ˆì„ ê°€ëŠ¥ì„± ìˆìŒ (ë²„í¼ 1ê°œì²˜ë¦¬í•˜ê³  1ë²ˆë¶€í„° ë‹¤ì‹œì‹œì‘)
 	int32_t processLen = 0;
 	while (true) {
 		int32_t dataSize = len - processLen;

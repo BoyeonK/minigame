@@ -1,76 +1,76 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 using System.IO;
 
 public class CustomBuildScript
 {
     // 1. MenuItem: Tools/Run Multiplayer/4 Players
-    [MenuItem("Tools/Run Muitiplayer/4 Players")] // ¿ÀÅ¸: "Muitiplayer" -> "Multiplayer"
+    [MenuItem("Tools/Run Muitiplayer/4 Players")] // ì˜¤íƒ€: "Muitiplayer" -> "Multiplayer"
     static void PerformWin64Build4()
     {
         PerformWin64Build(4);
     }
 
-    // 2. PerformWin64Build ÇÔ¼ö
+    // 2. PerformWin64Build í•¨ìˆ˜
     static void PerformWin64Build(int playerCount)
     {
-        // ºôµå Å¸°Ù ±×·ì ÀüÈ¯
-        // BuildTarget.StandaloneWindows´Â 32ºñÆ®/64ºñÆ® ¸ğµÎ Æ÷ÇÔÇÏÁö¸¸, BuildTarget.StandaloneWindows64·Î ¸í½ÃÇÏ´Â °ÍÀÌ ÁÁ½À´Ï´Ù.
-        // ÀÌ¹Ì ¾Æ·¡ BuildPlayer¿¡¼­ StandaloneWindows64¸¦ ÁöÁ¤ÇÏ°í ÀÖÀ¸¹Ç·Î, ÀÌ ¶óÀÎ ÀÚÃ¼´Â ¾ø¾îµµ ÀÛµ¿ÇÒ ¼ö ÀÖ½À´Ï´Ù.
-        // ÇÏÁö¸¸ Æ¯Á¤ ÇÃ·§ÆûÀ¸·Î ÀüÈ¯ÇÏ´Â ½À°üÀº ÁÁ½À´Ï´Ù.
+        // ë¹Œë“œ íƒ€ê²Ÿ ê·¸ë£¹ ì „í™˜
+        // BuildTarget.StandaloneWindowsëŠ” 32ë¹„íŠ¸/64ë¹„íŠ¸ ëª¨ë‘ í¬í•¨í•˜ì§€ë§Œ, BuildTarget.StandaloneWindows64ë¡œ ëª…ì‹œí•˜ëŠ” ê²ƒì´ ì¢‹ìŠµë‹ˆë‹¤.
+        // ì´ë¯¸ ì•„ë˜ BuildPlayerì—ì„œ StandaloneWindows64ë¥¼ ì§€ì •í•˜ê³  ìˆìœ¼ë¯€ë¡œ, ì´ ë¼ì¸ ìì²´ëŠ” ì—†ì–´ë„ ì‘ë™í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+        // í•˜ì§€ë§Œ íŠ¹ì • í”Œë«í¼ìœ¼ë¡œ ì „í™˜í•˜ëŠ” ìŠµê´€ì€ ì¢‹ìŠµë‹ˆë‹¤.
         EditorUserBuildSettings.SwitchActiveBuildTarget(
             BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64); // BuildTarget.StandaloneWindows -> BuildTarget.StandaloneWindows64
 
         string projectName = GetProjectName();
-        string baseBuildPath = "Builds/Win64/"; // ¸ğµç Å¬¶óÀÌ¾ğÆ® ºôµåÀÇ »óÀ§ Æú´õ
+        string baseBuildPath = "Builds/Win64/"; // ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ ë¹Œë“œì˜ ìƒìœ„ í´ë”
 
         for (int i = 0; i < playerCount; i++)
         {
-            // °¢ Å¬¶óÀÌ¾ğÆ®ÀÇ ºôµå °æ·Î ¼³Á¤
-            // Path.CombineÀ» »ç¿ëÇÏ¿© OSº° °æ·Î ±¸ºĞÀÚ¸¦ Ã³¸®ÇÏ´Â °ÍÀÌ ¾ÈÀüÇÏ°í ÁÁ½À´Ï´Ù.
-            string clientFolderName = $"{projectName}{i.ToString()}"; // ¿¹: MyGame0, MyGame1
+            // ê° í´ë¼ì´ì–¸íŠ¸ì˜ ë¹Œë“œ ê²½ë¡œ ì„¤ì •
+            // Path.Combineì„ ì‚¬ìš©í•˜ì—¬ OSë³„ ê²½ë¡œ êµ¬ë¶„ìë¥¼ ì²˜ë¦¬í•˜ëŠ” ê²ƒì´ ì•ˆì „í•˜ê³  ì¢‹ìŠµë‹ˆë‹¤.
+            string clientFolderName = $"{projectName}{i.ToString()}"; // ì˜ˆ: MyGame0, MyGame1
             string specificBuildPath = Path.Combine(baseBuildPath, clientFolderName);
             string executablePath = Path.Combine(specificBuildPath, $"{projectName}{i.ToString()}.exe");
 
-            // ºôµå Æú´õ°¡ ¾øÀ¸¸é »ı¼º (ÇÊ¼öÀûÀÌÁö´Â ¾ÊÁö¸¸, È®½Ç¼ºÀ» À§ÇØ ÁÁÀ½)
+            // ë¹Œë“œ í´ë”ê°€ ì—†ìœ¼ë©´ ìƒì„± (í•„ìˆ˜ì ì´ì§€ëŠ” ì•Šì§€ë§Œ, í™•ì‹¤ì„±ì„ ìœ„í•´ ì¢‹ìŒ)
             if (!Directory.Exists(specificBuildPath))
             {
                 Directory.CreateDirectory(specificBuildPath);
             }
 
-            Debug.Log($"ºôµå ½ÃÀÛ: {executablePath}");
+            Debug.Log($"ë¹Œë“œ ì‹œì‘: {executablePath}");
 
             BuildPipeline.BuildPlayer(GetScenePaths(),
                                      executablePath,
-                                     BuildTarget.StandaloneWindows64, // BuildTargetGroup°ú ÀÏÄ¡
-                                     BuildOptions.AutoRunPlayer // BuildOptions.NoneÀ¸·Î º¯°æ °í·Á
+                                     BuildTarget.StandaloneWindows64, // BuildTargetGroupê³¼ ì¼ì¹˜
+                                     BuildOptions.AutoRunPlayer // BuildOptions.Noneìœ¼ë¡œ ë³€ê²½ ê³ ë ¤
                                     );
-            Debug.Log($"ºôµå ¿Ï·á: {executablePath}");
+            Debug.Log($"ë¹Œë“œ ì™„ë£Œ: {executablePath}");
         }
-        Debug.Log("¸ğµç Å¬¶óÀÌ¾ğÆ® ºôµå°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù!");
-        EditorUtility.RevealInFinder(baseBuildPath); // ºôµå ¿Ï·á ÈÄ ºôµå Æú´õ ¿­±â
+        Debug.Log("ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ ë¹Œë“œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤!");
+        EditorUtility.RevealInFinder(baseBuildPath); // ë¹Œë“œ ì™„ë£Œ í›„ ë¹Œë“œ í´ë” ì—´ê¸°
     }
 
-    // 3. GetProjectName ÇÔ¼ö
+    // 3. GetProjectName í•¨ìˆ˜
     static string GetProjectName()
     {
-        // Application.dataPath´Â Assets Æú´õÀÇ °æ·ÎÀÔ´Ï´Ù.
-        // ¿¹¸¦ µé¾î "C:/UnityProjects/MyGame/Assets"
-        // Split('/') ÇÏ¸é {"C:", "UnityProjects", "MyGame", "Assets"}
-        // s[s.Length - 2]´Â "MyGame"À» ¹İÈ¯ÇÕ´Ï´Ù. Á¤È®ÇÑ ÇÁ·ÎÁ§Æ® ÀÌ¸§ ÃßÃâ ¹æ½ÄÀÔ´Ï´Ù.
+        // Application.dataPathëŠ” Assets í´ë”ì˜ ê²½ë¡œì…ë‹ˆë‹¤.
+        // ì˜ˆë¥¼ ë“¤ì–´ "C:/UnityProjects/MyGame/Assets"
+        // Split('/') í•˜ë©´ {"C:", "UnityProjects", "MyGame", "Assets"}
+        // s[s.Length - 2]ëŠ” "MyGame"ì„ ë°˜í™˜í•©ë‹ˆë‹¤. ì •í™•í•œ í”„ë¡œì íŠ¸ ì´ë¦„ ì¶”ì¶œ ë°©ì‹ì…ë‹ˆë‹¤.
         string[] s = Application.dataPath.Split('/');
         return s[s.Length - 2];
     }
 
-    // 4. GetScenePaths ÇÔ¼ö
+    // 4. GetScenePaths í•¨ìˆ˜
     static string[] GetScenePaths()
     {
-        // Build Settings¿¡ ÀÖ´Â È°¼ºÈ­µÈ ¾À¸¸ °¡Á®¿À´Â °ÍÀÌ ´õ ¾ÈÀüÇÕ´Ï´Ù.
+        // Build Settingsì— ìˆëŠ” í™œì„±í™”ëœ ì”¬ë§Œ ê°€ì ¸ì˜¤ëŠ” ê²ƒì´ ë” ì•ˆì „í•©ë‹ˆë‹¤.
         var scenePaths = new System.Collections.Generic.List<string>();
         foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
         {
             if (scene.enabled)
-            { // È°¼ºÈ­µÈ ¾À¸¸ Æ÷ÇÔ
+            { // í™œì„±í™”ëœ ì”¬ë§Œ í¬í•¨
                 scenePaths.Add(scene.path);
             }
         }

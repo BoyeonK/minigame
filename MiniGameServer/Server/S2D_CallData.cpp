@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "S2D_CallData.h"
 #include "S2CPacketMaker.h"
 #include "S2CPacketHandler.h"
@@ -24,28 +24,28 @@ void SLoginCall::OnSucceed() {
 }
 
 void SLoginCall::OnFailed() {
-	//TODO: ¹º°¡ ÇØ¾ßµÉ°Å °°Àºµ¥ ´çÀå »ı°¢ÀÌ ¾È³ª³×
+	//TODO: ë­”ê°€ í•´ì•¼ë ê±° ê°™ì€ë° ë‹¹ì¥ ìƒê°ì´ ì•ˆë‚˜ë„¤
 }
 
 void SLoginCall::CorrectI(int32_t dbid) {
 	S2C_Protocol::S_Login pkt = S2CPacketMaker::MakeSLogin(dbid);
 	shared_ptr<PlayerSession> playerSessionRef = static_pointer_cast<PlayerSession>(_clientSessionRef.lock());
-	//dbid = 0ÀÎ°æ¿ì (·Î±×ÀÎ ½ÇÆĞ)
-	//S_LoginÆĞÅ¶À» ±×³É Àü¼Û.
+	//dbid = 0ì¸ê²½ìš° (ë¡œê·¸ì¸ ì‹¤íŒ¨)
+	//S_LoginíŒ¨í‚·ì„ ê·¸ëƒ¥ ì „ì†¡.
 	if (dbid == 0) {
 		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
 		playerSessionRef->Send(sendBufferRef);
 	}
-	//dbid = 0ÀÌ ¾Æ´Ñ °æ¿ì (·Î±×ÀÎ ¼º°ø)
-	//S_LoginÆĞÅ¶À» sessionÀÇ ¾ÏÈ£È­ Å°·Î ¾ÏÈ£È­ÇÏ¿© Àü¼Û.
+	//dbid = 0ì´ ì•„ë‹Œ ê²½ìš° (ë¡œê·¸ì¸ ì„±ê³µ)
+	//S_LoginíŒ¨í‚·ì„ sessionì˜ ì•”í˜¸í™” í‚¤ë¡œ ì•”í˜¸í™”í•˜ì—¬ ì „ì†¡.
 	else {
 		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt, playerSessionRef->GetAESKey());
 		playerSessionRef->SetDbid(dbid);
-		//ÇØ´ç session¿¡¼­ Ã³¸®ÇÒ ÃÖ´ë msgId¸¦ 10000À¸·Î ¼³Á¤ (»ç½Ç»ó, ÀÌÁ¦ ¸ğµç ÆĞÅ¶¿¡ ´ëÇÑ ¿äÃ»À» °ÅÀıÇÏÁö ¾Ê°Ú´Ù´Â ¶æ)
+		//í•´ë‹¹ sessionì—ì„œ ì²˜ë¦¬í•  ìµœëŒ€ msgIdë¥¼ 10000ìœ¼ë¡œ ì„¤ì • (ì‚¬ì‹¤ìƒ, ì´ì œ ëª¨ë“  íŒ¨í‚·ì— ëŒ€í•œ ìš”ì²­ì„ ê±°ì ˆí•˜ì§€ ì•Šê² ë‹¤ëŠ” ëœ»)
 		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::Lobby));
 		playerSessionRef->Send(sendBufferRef);
 
-		//Elo»Ó¸¸ÀÌ ¾Æ´Ï¶ó ¿©·¯ Á¤º¸¸¦ °¡Á®¿È
+		//Eloë¿ë§Œì´ ì•„ë‹ˆë¼ ì—¬ëŸ¬ ì •ë³´ë¥¼ ê°€ì ¸ì˜´
 		DBManager->S2D_PlayerInfomation(playerSessionRef, dbid);
 	}
 }
@@ -57,7 +57,7 @@ void SLoginCall::IncorrectI(bool incorrect_id) {
 		return;
 	}
 
-	//·Î±×ÀÎ ½ÇÆĞ (¾ø´Â ¾ÆÀÌµğ)
+	//ë¡œê·¸ì¸ ì‹¤íŒ¨ (ì—†ëŠ” ì•„ì´ë””)
 	shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
 	sessionRef->Send(sendBufferRef);
 }
@@ -72,7 +72,7 @@ void SCreateAccountCall::OnSucceed() {
 }
 
 void SCreateAccountCall::OnFailed() {
-	//TODO: ¹º°¡ ÇØ¾ßµÉ°Å °°Àºµ¥ ´çÀå »ı°¢ÀÌ ¾È³ª³×
+	//TODO: ë­”ê°€ í•´ì•¼ë ê±° ê°™ì€ë° ë‹¹ì¥ ìƒê°ì´ ì•ˆë‚˜ë„¤
 }
 
 void SCreateAccountCall::CreateComplete() {
@@ -166,7 +166,7 @@ void SUpdatePublicRecordCall::OnSucceed() {
 		GGameManagers[_gameId]->RenewPublicRecordFromDB();
 	}
 	else {
-		cout << "¸ğÁ¾ÀÇ ÀÌÀ¯·Î ½ÇÆĞ" << endl;
+		cout << "ëª¨ì¢…ì˜ ì´ìœ ë¡œ ì‹¤íŒ¨" << endl;
 	}
 #endif
 }

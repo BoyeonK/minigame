@@ -1,12 +1,12 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-//ÀÌ °´Ã¼°¡ »ç¿ëÇÏ´Â ¸ğµç ÇÔ¼ö´Â, À¯´ÏÆ¼ÀÇ ¸Ş¼­µå¸¦ »ç¿ëÇØ¾ß ÇÏ¹Ç·Î ¸ŞÀÎ½º·¹µå¿¡¼­ ½ÇÇà¸¸À» ÀüÁ¦·Î ¸¸µé¾îÁ³À½.
-//µ¿±âÈ­ ±â¹ıÀ» »ç¿ëÇÏÁö ¾ÊÀ» ¿¹Á¤.
+//ì´ ê°ì²´ê°€ ì‚¬ìš©í•˜ëŠ” ëª¨ë“  í•¨ìˆ˜ëŠ”, ìœ ë‹ˆí‹°ì˜ ë©”ì„œë“œë¥¼ ì‚¬ìš©í•´ì•¼ í•˜ë¯€ë¡œ ë©”ì¸ìŠ¤ë ˆë“œì—ì„œ ì‹¤í–‰ë§Œì„ ì „ì œë¡œ ë§Œë“¤ì–´ì¡ŒìŒ.
+//ë™ê¸°í™” ê¸°ë²•ì„ ì‚¬ìš©í•˜ì§€ ì•Šì„ ì˜ˆì •.
 public class SceneManagerEx {
     private enum LoadingState {
         None,
@@ -77,7 +77,7 @@ public class SceneManagerEx {
         _asyncLoadSceneOp.allowSceneActivation = true;
     }
 
-    //LoadingSceneÀÌ ¾Æ´Ñ SceneÀÇ ÃÊ±âÈ­ °úÁ¤¿¡¼­ È£ÃâÇØ¾ßÇÔ.
+    //LoadingSceneì´ ì•„ë‹Œ Sceneì˜ ì´ˆê¸°í™” ê³¼ì •ì—ì„œ í˜¸ì¶œí•´ì•¼í•¨.
     public void ResetLoadSceneOp() {
         _asyncLoadSceneOp = null;
         _loadingState = LoadingState.None;

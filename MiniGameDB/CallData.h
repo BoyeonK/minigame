@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "DBServiceImpl.h"
 
 void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::ServerCompletionQueue* cq);
@@ -12,7 +12,7 @@ public:
     virtual void ReturnToPool() = 0;
 
 protected:
-    // ¸ğµç CallData °´Ã¼°¡ °øÅëÀûÀ¸·Î »ç¿ëÇÏ´Â ¸â¹ö º¯¼ö
+    // ëª¨ë“  CallData ê°ì²´ê°€ ê³µí†µì ìœ¼ë¡œ ì‚¬ìš©í•˜ëŠ” ë©¤ë²„ ë³€ìˆ˜
     S2D_Protocol::S2D_Service::AsyncService* _service;
     grpc::ServerCompletionQueue* _completionQueueRef;
     grpc::ServerContext _ctx;

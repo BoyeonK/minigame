@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "PingPongGameRoom.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
@@ -16,19 +16,19 @@ void PingPongGameRoom::Init(vector<WatingPlayerData> pdv) {
 			ready = false;
 			break;
 		}
-		//°¢ Session¿¡ KeepAliveÆĞÅ¶À» BroadCast.
+		//ê° Sessionì— KeepAliveíŒ¨í‚·ì„ BroadCast.
 		S2C_Protocol::S_MatchmakeKeepAlive pkt = S2CPacketMaker::MakeSMatchmakeKeepAlive(int(_ty));
 		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 		playerSessionRef->Send(sendBuffer);
 	}
 
 	if (ready) {
-		//1ÃÊ ÈÄ, (PingÀÌ 1ÃÊ°¡ ³Ñ´Â°ÍÀº, ÀÌ»óÇÏ´Ù.) ¸ğµç ÆĞÅ¶À¸·ÎºÎÅÍ ÀÀ´äÀ» ¹Ş¾Ò´Ù¸é ½ÃÀÛ
+		//1ì´ˆ í›„, (Pingì´ 1ì´ˆê°€ ë„˜ëŠ”ê²ƒì€, ì´ìƒí•˜ë‹¤.) ëª¨ë“  íŒ¨í‚·ìœ¼ë¡œë¶€í„° ì‘ë‹µì„ ë°›ì•˜ë‹¤ë©´ ì‹œì‘
 		PostEventAfter(1000, &PingPongGameRoom::Init2, move(pdv));
 	}
 	else {
-		//À¯È¿ÇÏÁö ¾ÊÀº ¼¼¼ÇÀÌ ÀÖ¾úÀ» °æ¿ì, ¸ğµÎ ´ë±â¿­·Î µ¹·Áº¸³¿.
-		//´ë±â¿­Àº ÁÖ±âÀûÀ¸·Î À¯È¿ÇÏÁö ¾ÊÀº PlayerData¸¦ °Å¸£µµ·Ï ¼³°èµÇ¾îÀÖÀ½.
+		//ìœ íš¨í•˜ì§€ ì•Šì€ ì„¸ì…˜ì´ ìˆì—ˆì„ ê²½ìš°, ëª¨ë‘ ëŒ€ê¸°ì—´ë¡œ ëŒë ¤ë³´ëƒ„.
+		//ëŒ€ê¸°ì—´ì€ ì£¼ê¸°ì ìœ¼ë¡œ ìœ íš¨í•˜ì§€ ì•Šì€ PlayerDataë¥¼ ê±°ë¥´ë„ë¡ ì„¤ê³„ë˜ì–´ìˆìŒ.
 		GGameManagers[int(_ty)]->Push(move(pdv));
 		_state = GameState::EndGame;
 	}
@@ -49,8 +49,8 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 		_playerIds[i] = playerSessionRef->GetPlayerId();
 		_dbids[i] = playerSessionRef->GetDbid();
 
-		//C_KeepAlive HandlerÇÔ¼ö¿¡ ÀÇÇØ¼­ lastTickÀÌ º¯È­ÇÏÁö ¾Ê¾Ò´Ù¸é,
-		//À¯È¿ÇÏÁö ¾ÊÀº ÇÃ·¹ÀÌ¾î·Î °£ÁÖÇÏ°í, ¸ğµÎ ´ë±â¿­·Î µ¹·Áº¸³¿.
+		//C_KeepAlive Handlerí•¨ìˆ˜ì— ì˜í•´ì„œ lastTickì´ ë³€í™”í•˜ì§€ ì•Šì•˜ë‹¤ë©´,
+		//ìœ íš¨í•˜ì§€ ì•Šì€ í”Œë ˆì´ì–´ë¡œ ê°„ì£¼í•˜ê³ , ëª¨ë‘ ëŒ€ê¸°ì—´ë¡œ ëŒë ¤ë³´ëƒ„.
 		if (now - lastTick > 2000) {
 			canStart = false;
 			break;
@@ -58,9 +58,9 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 	}
 
 	if (canStart) {
-		//ÀÌÁ¦´Â Á¤¸» °ÔÀÓÀ» ÁøÇàÇÒ °ÍÀÓ.
-		//Áö±İºÎÅÍ ¿¬°á»óÅÂ°¡ ÁÁÁö ¾ÊÀ¸¸é ÇÃ·¹ÀÌ¾î Ã¥ÀÓÀ¸·Î °£ÁÖ.
-		//ÇÃ·¹ÀÌ¾îÀÇ °ÔÀÓÁ¾·á µîÀÇ ÀÌÀ¯·Î ¼¼¼ÇÀÌ À¯È¿ÇÏÁö ¾Ê´õ¶óµµ, ÁøÇà °¡´ÉÇÑ ¹æ½ÄÀ¸·Î ÄÚµå¸¦ ÀÛ¼ºÇØ¾ß ÇÔ.
+		//ì´ì œëŠ” ì •ë§ ê²Œì„ì„ ì§„í–‰í•  ê²ƒì„.
+		//ì§€ê¸ˆë¶€í„° ì—°ê²°ìƒíƒœê°€ ì¢‹ì§€ ì•Šìœ¼ë©´ í”Œë ˆì´ì–´ ì±…ì„ìœ¼ë¡œ ê°„ì£¼.
+		//í”Œë ˆì´ì–´ì˜ ê²Œì„ì¢…ë£Œ ë“±ì˜ ì´ìœ ë¡œ ì„¸ì…˜ì´ ìœ íš¨í•˜ì§€ ì•Šë”ë¼ë„, ì§„í–‰ ê°€ëŠ¥í•œ ë°©ì‹ìœ¼ë¡œ ì½”ë“œë¥¼ ì‘ì„±í•´ì•¼ í•¨.
 		_state = GameState::BeforeStart;
 		_preparedPlayer = 0;
 
@@ -74,7 +74,7 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 				playerSessionRef->Send(sendBuffer);
 			}
 		}
-		//30ÃÊ µÚ¿¡´Â °­Á¦·Î ½ÃÀÛÇØ¹ö·Á
+		//30ì´ˆ ë’¤ì—ëŠ” ê°•ì œë¡œ ì‹œì‘í•´ë²„ë ¤
 		PostEventAfter(30000, &PingPongGameRoom::Start);
 	}
 	else {
@@ -85,7 +85,7 @@ void PingPongGameRoom::Init2(vector<WatingPlayerData> pdv) {
 
 void PingPongGameRoom::UpdateProgressBar(int32_t playerIdx, int32_t progressRate) {
 	if (progressRate == 100) { _preparedPlayer += 1; }
-	//TODO : ·Îµù ÁøÇà»óÈ² ÀüÆÄ
+	//TODO : ë¡œë”© ì§„í–‰ìƒí™© ì „íŒŒ
 	_loadingProgressPkt.set_playeridx(playerIdx);
 	_loadingProgressPkt.set_persentage(progressRate);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(_loadingProgressPkt);
@@ -398,7 +398,7 @@ void PingPongGameRoom::UpdateElos() {
 }
 
 void PingPongGameRoom::EndGame() {
-	//TODO: ¸ğµç ÀÚ¿øÀ» ¹İÈ¯
+	//TODO: ëª¨ë“  ìì›ì„ ë°˜í™˜
 	_vecGameObjects.clear();
 	_hmGameObjects.clear();
 	_playerIds.clear();
@@ -464,7 +464,7 @@ void PingPongGameRoom::Handle_CollisionBar(float px, float pz, float speed, int3
 		return;
 	
 	if (IsVaildCollision(bulletRef, px, pz, speed, playerIdx)) {
-		//TODO : À¯È¿ÇÑ °æ¿ì, lastCollider¼öÁ¤. speedvector¼öÁ¤, position¼öÁ¤, ÆĞÅ¶ Àü¼Û.
+		//TODO : ìœ íš¨í•œ ê²½ìš°, lastColliderìˆ˜ì •. speedvectorìˆ˜ì •, positionìˆ˜ì •, íŒ¨í‚· ì „ì†¡.
 		bulletRef->_posX = px;
 		bulletRef->_posZ = pz;
 		if (playerIdx < 2)
@@ -502,7 +502,7 @@ bool PingPongGameRoom::IsVaildCollision(shared_ptr<PingPongGameBullet> bulletRef
 	float deltaX = (deltaT * bulletRef->_moveDirX * speed) / 1000;
 	float deltaZ = (deltaT * bulletRef->_moveDirZ * speed) / 1000;
 	
-	//¿ø·¡ deltaPos´Â Â÷ÇÕÀÌ ¾Æ´Ï¶ó Á¦°öÇÕÀ» »ç¿ëÇØ¾ß ÇÏÁö¸¸ ¼º´ÉÀ» À§ÇØ ÃÖ´ë ·çÆ®2¹èÀÇ ¿ÀÂ÷¸¦ °¨¾ÈÇÏ°í ÀÌ´ë·Î »ç¿ë.
+	//ì›ë˜ deltaPosëŠ” ì°¨í•©ì´ ì•„ë‹ˆë¼ ì œê³±í•©ì„ ì‚¬ìš©í•´ì•¼ í•˜ì§€ë§Œ ì„±ëŠ¥ì„ ìœ„í•´ ìµœëŒ€ ë£¨íŠ¸2ë°°ì˜ ì˜¤ì°¨ë¥¼ ê°ì•ˆí•˜ê³  ì´ëŒ€ë¡œ ì‚¬ìš©.
 	float deltaPos = abs(bulletRef->_posX + deltaX - px) + abs(bulletRef->_posZ + deltaZ - pz);
 	float toler = pPingPongManager->GetToleranceRate();
 
@@ -517,10 +517,10 @@ void PingPongGameRoom::Handle_CollisionGoalLine(int32_t playerIdx, int32_t point
 }
 
 void PingPongGameRoom::Handle_Response_KeepAlive(int32_t playerIdx) {
-	//TODO: ¹ŞÀº tick°ú Áö±İ tickÀ» ºñ±³. ÀÏÄ¡ÇÒ °æ¿ì, ÇØ´ç tick¿¡ ´ëÇØ¼­ Á¡¼ö¸¦ ¹Ş¾Ò´ÂÁö È®ÀÎ.
-		//¹ŞÁö ¾Ê¾ÒÀ» °æ¿ì, Á¡¼ö Ãß°¡. ¹Ş¾ÒÀ» °æ¿ì, ÆĞÅ¶ Á¶ÀÛ¹üÀÏ °¡´É¼º
-	//ÇØ´ç PlayerTickÀÌ ÀÏÁ¤ ±â°£µ¿¾È updateµÇÁö ¾Ê´Â °æ¿ì, À¯È¿ÇÏÁö ¾ÊÀº ¿¬°á·Î °£ÁÖÇØ¼­ ³»º¸³»´Â ±â´É Ãß°¡µµ °í·ÁÇÏ´ÂÁß.
-		//ÀÏ´ÜÀº ½ÃÇè¿ëÀ¸·Î ¹Ş´ÂÁ·Á· Á¡¼ö¸¦ Ãß°¡ÇØÁÖ±â¸¸ ÇÑ´Ù.
+	//TODO: ë°›ì€ tickê³¼ ì§€ê¸ˆ tickì„ ë¹„êµ. ì¼ì¹˜í•  ê²½ìš°, í•´ë‹¹ tickì— ëŒ€í•´ì„œ ì ìˆ˜ë¥¼ ë°›ì•˜ëŠ”ì§€ í™•ì¸.
+		//ë°›ì§€ ì•Šì•˜ì„ ê²½ìš°, ì ìˆ˜ ì¶”ê°€. ë°›ì•˜ì„ ê²½ìš°, íŒ¨í‚· ì¡°ì‘ë²”ì¼ ê°€ëŠ¥ì„±
+	//í•´ë‹¹ PlayerTickì´ ì¼ì • ê¸°ê°„ë™ì•ˆ updateë˜ì§€ ì•ŠëŠ” ê²½ìš°, ìœ íš¨í•˜ì§€ ì•Šì€ ì—°ê²°ë¡œ ê°„ì£¼í•´ì„œ ë‚´ë³´ë‚´ëŠ” ê¸°ëŠ¥ ì¶”ê°€ë„ ê³ ë ¤í•˜ëŠ”ì¤‘.
+		//ì¼ë‹¨ì€ ì‹œí—˜ìš©ìœ¼ë¡œ ë°›ëŠ”ì¡±ì¡± ì ìˆ˜ë¥¼ ì¶”ê°€í•´ì£¼ê¸°ë§Œ í•œë‹¤.
 	_points[playerIdx] = _points[playerIdx] + 10;
 }
 
@@ -584,7 +584,7 @@ void PingPongGameRoom::SendGameState(int32_t playerIdx) {
 	if (playerSessionRef == nullptr)
 		return;
 
-	//0:µ¿ 1:¼­ 2:³² 3:ºÏ
+	//0:ë™ 1:ì„œ 2:ë‚¨ 3:ë¶
 	S2C_Protocol::S_P_State pkt;
 	pkt.set_playerid(playerIdx);
 	shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);

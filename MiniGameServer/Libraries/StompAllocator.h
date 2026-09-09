@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class StompAllocator {
 	enum {
@@ -13,22 +13,22 @@ public:
 template<class _Ty>
 class STLAllocator {
 public:
-	//1. ¿ä¼ÒÀÇ Å¸ÀÔ
+	//1. ìš”ì†Œì˜ íƒ€ì…
 	using value_type = _Ty;
 
-	//2. »ı¼ºÀÚ
+	//2. ìƒì„±ì
 	STLAllocator() {}
 
 	template<class Other>
 	STLAllocator(const STLAllocator<Other>&) {}
 
-	//3. Data¹è¿­À» ÇÒ´çÇÒ ¹æ¹ı
+	//3. Dataë°°ì—´ì„ í• ë‹¹í•  ë°©ë²•
 	_Ty* allocate(size_t count) {
 		const uint32_t size = static_cast<uint32_t>(count * sizeof(_Ty));
 		return static_cast<_Ty*>(StompAllocator::Alloc(size));
 	}
 
-	//4. ÇØÁ¦ÇÒ ¹æ¹ı
+	//4. í•´ì œí•  ë°©ë²•
 	void deallocate(_Ty* ptr, size_t count) {
 		StompAllocator::Release(ptr);
 	}

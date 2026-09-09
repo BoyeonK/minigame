@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include "WatingPlayerData.h"
 #include "MatchQueue.h"
 
 class GameManager {
 public:
-	//TODO : psv¾È¿¡ ¸ğµç Ä£±¸µéÀÌ À¯È¿ÇÑ Ä£±¸µéÀÎÁö È®ÀÎ.
-	//À¯È¿ÇÏ¸é ÇØ´ç vector·Î¼­ MakeRoomÀ» ½ÇÇà.
+	//TODO : psvì•ˆì— ëª¨ë“  ì¹œêµ¬ë“¤ì´ ìœ íš¨í•œ ì¹œêµ¬ë“¤ì¸ì§€ í™•ì¸.
+	//ìœ íš¨í•˜ë©´ í•´ë‹¹ vectorë¡œì„œ MakeRoomì„ ì‹¤í–‰.
 	virtual void Push(WatingPlayerData pd) = 0;
 	virtual void Push(vector<WatingPlayerData> pdv) = 0;
 	virtual void RenewMatchQueue() = 0;

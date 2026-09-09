@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <array>
 
 class SendBuffer;
@@ -17,14 +17,14 @@ public:
 	bool IsOpen() { return _isOpen; };
 	unsigned char* Index() { return &_buffer[_usedSize]; }
 
-	//std::array<_ty>.size()°¡ int64¸¦ ¹İÈ¯ÇÏ±â ¶§¹®¿¡
-	//Çüº¯È¯À» ÇØÁÖÁö ¾Ê´Â´Ù¸é µ¥ÀÌÅÍ ¼Õ½ÇÀ» ¾ß±âÇÒ ¼ö ÀÖ´Ù.
+	//std::array<_ty>.size()ê°€ int64ë¥¼ ë°˜í™˜í•˜ê¸° ë•Œë¬¸ì—
+	//í˜•ë³€í™˜ì„ í•´ì£¼ì§€ ì•ŠëŠ”ë‹¤ë©´ ë°ì´í„° ì†ì‹¤ì„ ì•¼ê¸°í•  ìˆ˜ ìˆë‹¤.
 	uint32_t FreeSize() { return static_cast<uint32_t>(_buffer.size() - _usedSize); }
 
 private:
 	array<unsigned char, SEND_BUFFER_CHUNK_SIZE> _buffer = {};
-	//SendBufferChunk´Â TLS·Î »ç¿ëÇÒ °ÍÀÌ±â ¶§¹®¿¡ thread-safe
-	//atomicÀ¸·Î ¸¸µé¾î ÁÙ ÇÊ¿ä°¡ ¾ø´Ù.
+	//SendBufferChunkëŠ” TLSë¡œ ì‚¬ìš©í•  ê²ƒì´ê¸° ë•Œë¬¸ì— thread-safe
+	//atomicìœ¼ë¡œ ë§Œë“¤ì–´ ì¤„ í•„ìš”ê°€ ì—†ë‹¤.
 	bool _isOpen;
 	uint32_t _usedSize;
 };
@@ -42,7 +42,7 @@ class SendBuffer {
 public:
 	SendBuffer() { }
 	~SendBuffer() { }
-	//³ª´Â SendBuffer¸¦ poolÀ» ÅëÇØ °ü¸®ÁßÀÌ´Ù. Àç»ç¿ë½Ã ÃÊ±âÈ­ ÇÔ¼ö
+	//ë‚˜ëŠ” SendBufferë¥¼ poolì„ í†µí•´ ê´€ë¦¬ì¤‘ì´ë‹¤. ì¬ì‚¬ìš©ì‹œ ì´ˆê¸°í™” í•¨ìˆ˜
 	void Init(shared_ptr<SendBufferChunk> chunkRef, unsigned char* index, uint32_t allocSize);
 
 	unsigned char* Buffer() { return _index; }
@@ -54,9 +54,9 @@ private:
 	shared_ptr<SendBufferChunk> _chunkRef;
 	unsigned char* _index = nullptr;
 
-	//Ã³À½ SendBuffer¸¦ »ı¼ºÇÏ¸é¼­, ¾²°Ú´Ù°í ¼±¾ğÇÑ °ª (³Î³ÎÇÏ°Ô ºÎ¸¦ ¼ö ÀÖ´Ù.)
+	//ì²˜ìŒ SendBufferë¥¼ ìƒì„±í•˜ë©´ì„œ, ì“°ê² ë‹¤ê³  ì„ ì–¸í•œ ê°’ (ë„ë„í•˜ê²Œ ë¶€ë¥¼ ìˆ˜ ìˆë‹¤.)
 	uint32_t _allocSize = 0;
 
-	//½ÇÁ¦ µ¤¾î¾´ °ª
+	//ì‹¤ì œ ë®ì–´ì“´ ê°’
 	uint32_t _writeSize = 0;
 };

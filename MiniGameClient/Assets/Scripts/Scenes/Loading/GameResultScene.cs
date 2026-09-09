@@ -1,4 +1,4 @@
-using TMPro;
+Ôªøusing TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,14 +29,14 @@ public class GameResultScene : BaseScene {
                 _buttonText = _sceneChangeBtn.GetComponentInChildren<TextMeshProUGUI>();
 
                 if (_buttonText != null) 
-                    _buttonText.text = "∑Œµ˘¡ﬂ...";
+                    _buttonText.text = "Î°úÎî©Ï§ë...";
                 _sceneChangeBtn.interactable = false;
             }
         }
     }
 
     private void Start() {
-        Debug.Log("∞‘¿” ∞·∞˙√¢ Ω∫≈∏∆Æ«‘ºˆ");
+        Debug.Log("Í≤åÏûÑ Í≤∞Í≥ºÏ∞Ω Ïä§ÌÉÄÌä∏Ìï®Ïàò");
         Managers.Scene.LoadSceneAsync();
 
         if (Managers.Scene._isScoreResult)
@@ -47,13 +47,13 @@ public class GameResultScene : BaseScene {
 
     private void Update() {
         if (!_isLoaded) {
-            Debug.Log("∑Œµ˘¡ﬂ æ˜µ•¿Ã∆Æ «‘ºˆ");
+            Debug.Log("Î°úÎî©Ï§ë ÏóÖÎç∞Ïù¥Ìä∏ Ìï®Ïàò");
             float progress = Managers.Scene.GetLoadingProgressRate();
             if (progress > 0.8999f) {
-                Debug.Log("∑Œµ˘ øœ∑·");
+                Debug.Log("Î°úÎî© ÏôÑÎ£å");
                 _isLoaded = true;
                 if (_buttonText != null) {
-                    _buttonText.text = "∑Œ∫Ò∑Œ ¿Ãµø";
+                    _buttonText.text = "Î°úÎπÑÎ°ú Ïù¥Îèô";
                 }
                     
                 if (_sceneChangeBtn != null) {

@@ -1,0 +1,48 @@
+# 개행 정책
+#
+# 저장소(blob)에는 항상 LF로 정규화해서 저장하고, 손으로 편집하는 소스는
+# 워킹트리에서 CRLF로 체크아웃한다. 이렇게 두면 각자의 core.autocrlf 설정과
+# 무관하게 결과가 같아진다. 이 파일이 없던 동안에는 core.autocrlf=true에만
+# 의존하고 있었고, 그 탓에 LoginScene.cs처럼 CRLF와 LF가 한 파일 안에 섞인
+# 파일이 생겼다.
+#
+# 생성 파일(*.pb.*, S2CProtocol*.cs)에 별도 예외를 두지 않는 이유:
+# blob이 이미 전부 LF라서, protoc가 LF로 내보내도 정규화 결과가 같아
+# 재생성 시 diff가 발생하지 않는다.
+
+* text=auto
+
+# 손으로 편집하는 소스 — 워킹트리 CRLF 고정
+*.cpp             text eol=crlf
+*.cc              text eol=crlf
+*.h               text eol=crlf
+*.hpp             text eol=crlf
+*.cs              text eol=crlf
+*.proto           text eol=crlf
+*.bat             text eol=crlf
+*.sln             text eol=crlf
+*.slnx            text eol=crlf
+*.vcxproj         text eol=crlf
+*.vcxproj.filters text eol=crlf
+*.props           text eol=crlf
+
+# 바이너리 — 개행 변환 금지
+*.dll  binary
+*.pdb  binary
+*.exe  binary
+*.lib  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.psd  binary
+*.tga  binary
+*.fbx  binary
+*.blend binary
+*.ttf  binary
+*.otf  binary
+*.mp3  binary
+*.wav  binary
+*.ogg  binary
+*.aiff binary
+*.unitypackage binary

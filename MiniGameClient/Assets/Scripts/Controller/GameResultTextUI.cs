@@ -1,4 +1,4 @@
-using NUnit.Framework;
+ï»¿using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
@@ -36,10 +36,10 @@ public class GameResultTextUI : MonoBehaviour {
     public void SetResultScore() {
         if (_isWinner != null) {
             if (Managers.Scene._isWinner) {
-                _isWinner.text = "½Â¸®";
+                _isWinner.text = "ìŠ¹ë¦¬";
             }
             else {
-                _isWinner.text = "ÆÐ¹è";
+                _isWinner.text = "íŒ¨ë°°";
             }
         }
 
@@ -80,7 +80,7 @@ public class GameResultTextUI : MonoBehaviour {
             _playerIds[i].text = "";
         }
         for (int i = 0; i < pSize; i++) {
-            _scores[i].text = (Managers.Scene._winnerIdx == i) ? "½Â¸®" : "ÆÐ¹è";
+            _scores[i].text = (Managers.Scene._winnerIdx == i) ? "ìŠ¹ë¦¬" : "íŒ¨ë°°";
         }
         for (int i = pSize; i < 4; i++) {
             _scores[i].text = "";

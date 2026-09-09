@@ -1,4 +1,4 @@
-using Google.Protobuf.Protocol;
+ï»¿using Google.Protobuf.Protocol;
 using UnityEngine;
 
 
@@ -31,8 +31,8 @@ public class PingPongBulletRedController : PingPongBulletController {
             Speed = _speed
         };
 
-        //TODO : ¿Ø¸¸ÇÏ¸é ÀÌ ºÎºĞÀº Network ManagerÂÊÀ¸·Î ÀÌ°üÇÏ´Â°Ô À¯Áöº¸¼ö °üÁ¡¿¡¼­ ÁÁÀ½.
-        //ÀÏ´Ü Å×½ºÆ®ÄÚµåÀÌ¹Ç·Î Á÷Á¢ È£Ãâ.
+        //TODO : ì™ ë§Œí•˜ë©´ ì´ ë¶€ë¶„ì€ Network Managerìª½ìœ¼ë¡œ ì´ê´€í•˜ëŠ”ê²Œ ìœ ì§€ë³´ìˆ˜ ê´€ì ì—ì„œ ì¢‹ìŒ.
+        //ì¼ë‹¨ í…ŒìŠ¤íŠ¸ì½”ë“œì´ë¯€ë¡œ ì§ì ‘ í˜¸ì¶œ.
         Managers.Network.Send(pkt);
     }
 

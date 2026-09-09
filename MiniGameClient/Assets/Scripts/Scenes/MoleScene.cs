@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -95,7 +95,7 @@ public class MoleScene : BaseScene {
 
     public void CountdownBeforeStart(int countdown) {
         if (countdown == 0) {
-            _uiPrintMessage.SetTextTop("½ÃÀÛ!");
+            _uiPrintMessage.SetTextTop("ì‹œìž‘!");
             _uiPrintMessage.SetTextColorTop(255, 0, 0, 255);
             StartCoroutine(CountdownClearRoutine(0.5f));
         }

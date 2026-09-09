@@ -1,4 +1,4 @@
-using Google.Protobuf;
+ï»¿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using ServerCore;
 using System;
@@ -18,12 +18,12 @@ class PacketManager {
 	Dictionary<ushort, Action<PacketSession, IMessage>> _handler = new Dictionary<ushort, Action<PacketSession, IMessage>>();
 	Dictionary<ushort, Func<IMessage>> _msgFactories = new Dictionary<ushort, Func<IMessage>>();
 	
-	//PacketManager ÃÊ±âÈ­ ½Ã, °¢ ÆĞÅ¶À» ´Ù·ê µ¨¸®°ÔÀÌÆ®µéÀ» ÃÊ±âÈ­ÇØÁØ´Ù.
-	//_onRecv´Â ¼­¹ö·ÎºÎÅÍ ¹ŞÀº ¹ÙÀÌ³Ê¸®¿¡¼­ ÃßÃâÇÑ ÆĞÅ¶ Çì´õÀÇ msgId¸¦ Åä´ë·Î
-	// ¹ÙÀÌ³Ê¸®¸¦ Çì´õ¿Í protobufºÎºĞÀ¸·Î ³ª´©°í, protobufºÎºĞÀ» ¾Ë¸Â°Ô Ä³½ºÆÃÇÑ´Ù.
-	//_handler´Â Ä³½ºÆÃµÈ protobuf³»¿ë¿¡ µû¶ó È£ÃâÇÒ handlerÇÔ¼öÀÇ ÁıÇÕÀÌ´Ù.
-	//_msgFactories´Â SEncrypted¸¦ ÅëÇØ º¹È£È­µÈ ¹ÙÀÌ³Ê¸®¸¦ ¾Ë¸ÂÀº protobuf·Î parseÇÏ±â À§ÇÑ
-	//factoryÇÔ¼öÀÌ´Ù.
+	//PacketManager ì´ˆê¸°í™” ì‹œ, ê° íŒ¨í‚·ì„ ë‹¤ë£° ë¸ë¦¬ê²Œì´íŠ¸ë“¤ì„ ì´ˆê¸°í™”í•´ì¤€ë‹¤.
+	//_onRecvëŠ” ì„œë²„ë¡œë¶€í„° ë°›ì€ ë°”ì´ë„ˆë¦¬ì—ì„œ ì¶”ì¶œí•œ íŒ¨í‚· í—¤ë”ì˜ msgIdë¥¼ í† ëŒ€ë¡œ
+	// ë°”ì´ë„ˆë¦¬ë¥¼ í—¤ë”ì™€ protobufë¶€ë¶„ìœ¼ë¡œ ë‚˜ëˆ„ê³ , protobufë¶€ë¶„ì„ ì•Œë§ê²Œ ìºìŠ¤íŒ…í•œë‹¤.
+	//_handlerëŠ” ìºìŠ¤íŒ…ëœ protobufë‚´ìš©ì— ë”°ë¼ í˜¸ì¶œí•  handlerí•¨ìˆ˜ì˜ ì§‘í•©ì´ë‹¤.
+	//_msgFactoriesëŠ” SEncryptedë¥¼ í†µí•´ ë³µí˜¸í™”ëœ ë°”ì´ë„ˆë¦¬ë¥¼ ì•Œë§ì€ protobufë¡œ parseí•˜ê¸° ìœ„í•œ
+	//factoryí•¨ìˆ˜ì´ë‹¤.
 	public void Register() {
 		_onRecv.Add((ushort)MsgId.SEncrypted, UnpackPacket<S_Encrypted>);
 		_handler.Add((ushort)MsgId.SEncrypted, PacketHandler.S_EncryptedHandler);
@@ -194,14 +194,14 @@ class PacketManager {
 		T pkt = new T();
 		pkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
 
-		// ¹æ¹ı1. ¸ğµç ÇÚµé·¯ ÇÔ¼ö¸¦ ¸ŞÀÎ½º·¹µå¿¡¼­ ½ÇÇàµÇµµ·Ï À¯µµ.
-		// ÀÌ·± Çª½¬ÁşÀ» ³»°¡ ÇÒ ¸®°¡ ¾øÁö ¤»¤»¤»
+		// ë°©ë²•1. ëª¨ë“  í•¸ë“¤ëŸ¬ í•¨ìˆ˜ë¥¼ ë©”ì¸ìŠ¤ë ˆë“œì—ì„œ ì‹¤í–‰ë˜ë„ë¡ ìœ ë„.
+		// ì´ëŸ° í‘¸ì‰¬ì§“ì„ ë‚´ê°€ í•  ë¦¬ê°€ ì—†ì§€ ã…‹ã…‹ã…‹
 		//CustomHandler.Invoke(session, pkt, id);
 
-		// ¹æ¹ı2. ¹ŞÀº Áï½Ã ±× ½º·¹µå¿¡¼­ ÇÚµé·¯ ÇÔ¼ö ½ÇÇà
-		// ÀÌ ÇÚµé·¯¿¡ ¿µÇâÀ» ¹Ş´Â ¸ğµç object´Â ÀÌÁ¦ ¸ÖÆ¼½º·¹µå¸¦ °í·ÁÇØ¼­ ¼³°èµÇ¾î¾ßÇÔ.
-		// ¸ŞÀÎ½º·¹µå¿¡¼­¸¸ Á¤»ó µ¿ÀÛÀ» º¸ÀåÇÏ´Â ¸Ş¼­µå´Â µû·Î ¸ŞÀÎ½º·¹µå¿¡¼­ µ¿ÀÛÇÏµµ·Ï
-		// ¼³°è ÇØ ÁÖ¾î¾ßÇÔ.
+		// ë°©ë²•2. ë°›ì€ ì¦‰ì‹œ ê·¸ ìŠ¤ë ˆë“œì—ì„œ í•¸ë“¤ëŸ¬ í•¨ìˆ˜ ì‹¤í–‰
+		// ì´ í•¸ë“¤ëŸ¬ì— ì˜í–¥ì„ ë°›ëŠ” ëª¨ë“  objectëŠ” ì´ì œ ë©€í‹°ìŠ¤ë ˆë“œë¥¼ ê³ ë ¤í•´ì„œ ì„¤ê³„ë˜ì–´ì•¼í•¨.
+		// ë©”ì¸ìŠ¤ë ˆë“œì—ì„œë§Œ ì •ìƒ ë™ì‘ì„ ë³´ì¥í•˜ëŠ” ë©”ì„œë“œëŠ” ë”°ë¡œ ë©”ì¸ìŠ¤ë ˆë“œì—ì„œ ë™ì‘í•˜ë„ë¡
+		// ì„¤ê³„ í•´ ì£¼ì–´ì•¼í•¨.
 		Action<PacketSession, IMessage> act = GetPacketHandler(id);
 		act?.Invoke(session, pkt);
 	}
@@ -214,7 +214,7 @@ class PacketManager {
 	}
 
 	public bool ByteToIMessage(PacketSession session, byte[] plaintext, ushort msgId) {
-		//À¯È¿¼º°Ë»ç X. ³ªÁß¿¡ À¯È¿¼º °Ë»ç ·ÎÁ÷ ÇÊ¿ä.
+		//ìœ íš¨ì„±ê²€ì‚¬ X. ë‚˜ì¤‘ì— ìœ íš¨ì„± ê²€ì‚¬ ë¡œì§ í•„ìš”.
 		if (_msgFactories.TryGetValue(msgId, out Func<IMessage> factory)) {
 			IMessage pkt = factory.Invoke();
 			pkt.MergeFrom(plaintext);

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager {
@@ -71,8 +71,8 @@ public class PoolManager {
 
     public void Push(Poolable poolable) {
         string name = poolable.gameObject.name;
-        //Script¸¦ ÀÌ¿ëÇÏÁö ¾Ê´Â ¹æ¹ıÀ¸·Î »ı¼ºµÈ °æ¿ì
-        //ex) ¿¡µğÅÍ »ó¿¡¼­ µå·¡±× ¾Ø µå·ÓÀ¸·Î ¸¸µé¾îÁø Ä£±¸
+        //Scriptë¥¼ ì´ìš©í•˜ì§€ ì•ŠëŠ” ë°©ë²•ìœ¼ë¡œ ìƒì„±ëœ ê²½ìš°
+        //ex) ì—ë””í„° ìƒì—ì„œ ë“œë˜ê·¸ ì•¤ ë“œë¡­ìœ¼ë¡œ ë§Œë“¤ì–´ì§„ ì¹œêµ¬
         if (_pool.ContainsKey(name) == false) {
             GameObject.Destroy(poolable.gameObject);
             return;

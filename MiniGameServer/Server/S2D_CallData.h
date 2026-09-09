@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 #include "PlayerSession.h"
 
 class S2D_CallData {
 public:
 	virtual ~S2D_CallData() { }
 
-	//gRPC callÀÌ ¼º°øÇßÀ» °æ¿ì ÀÛµ¿ÇÒ ÇÔ¼ö
+	//gRPC callì´ ì„±ê³µí–ˆì„ ê²½ìš° ì‘ë™í•  í•¨ìˆ˜
 	virtual void OnSucceed() = 0;
-	//½ÇÆĞÇßÀ» °æ¿ì
+	//ì‹¤íŒ¨í–ˆì„ ê²½ìš°
 	virtual void OnFailed() = 0;
 	virtual void ReturnToPool() = 0;
 

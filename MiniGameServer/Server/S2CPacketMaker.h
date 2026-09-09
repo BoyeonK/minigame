@@ -1,8 +1,12 @@
-#pragma once
+﻿#pragma once
 #include "S2C_Protocol.pb.h"
 #include "ServerGlobal.h"
 #include "UnityGameObject.h"
 
+// set_err 등 protobuf string 필드에 한글을 넣을 때는 호출부에서 u8"..." 로 쓸 것.
+// 소스는 UTF-8이지만 실행 문자셋은 ANSI라, 일반 리터럴은 CP949 바이트로 변환되어
+// proto3 string(UTF-8 이어야 함)에 실린다. C# 클라이언트는 UTF-8로 디코드하므로
+// 그대로 두면 사용자에게 깨진 글자가 보인다.
 class S2CPacketMaker {
 public:
 	template<typename PBType>

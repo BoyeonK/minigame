@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <queue>
 
 extern class DBManager* GDBManager;
@@ -15,13 +15,13 @@ public:
     static const int hash_size = 32;
     static const int pbkdf2_iter = 10000;
 
-    //ÃÊ±âÈ­ ½Ã, È¯°æº¯¼ö ¼¼ÆÃ ÇÔ¼ö.
+    //ì´ˆê¸°í™” ì‹œ, í™˜ê²½ë³€ìˆ˜ ì„¸íŒ… í•¨ìˆ˜.
     void SetEnv();
     
-    //¿¡·¯ ÇÚµé¸µ ÇÔ¼ö.
+    //ì—ëŸ¬ í•¸ë“¤ë§ í•¨ìˆ˜.
     bool CheckReturn(SQLRETURN ret, SQLSMALLINT handleType, SQLHANDLE handle);
 
-    //¹®ÀÚ¿­ ÀÎÄÚµù ÇÔ¼öµé
+    //ë¬¸ìì—´ ì¸ì½”ë”© í•¨ìˆ˜ë“¤
     wstring a2wsRef(const string& in_cp949);
     wstring s2wsRef(const string& in_u8s);
     wstring v2wsRef(const vector<unsigned char>& in_binary);
@@ -30,13 +30,13 @@ public:
     string ws2sRef(const wstring& in_u16ws);
     //string ws2aRef
 
-    //È¯°æº¯¼ö poolingÇÔ¼ö.
+    //í™˜ê²½ë³€ìˆ˜ poolingí•¨ìˆ˜.
     SQLHENV GetHEnv() { return _hEnv; }
     SQLHDBC ConnectNewHDbc();
     SQLHDBC PopHDbc();
     void ReturnHDbc(SQLHDBC hDbc);
 
-    //ÀÚÁÖ ¾²´Â Ä£±¸µé ÇÔ¼ö·Î ¹­À½.
+    //ìì£¼ ì“°ëŠ” ì¹œêµ¬ë“¤ í•¨ìˆ˜ë¡œ ë¬¶ìŒ.
     void PrepareQ(SQLHSTMT& hStmt, const wstring& query);
     void BindPInt(SQLHSTMT& hStmt, const int& param, const int val);
     void BindPWchar(SQLHSTMT& hStmt, const int& param, const wstring& ws);
@@ -46,7 +46,7 @@ private:
 	SQLHENV _hEnv;
     queue<SQLHDBC> _hDbcQ;
 
-    //»ı¼ºÀÚ¿¡¼­ CRUD Å×½ºÆ®¸¦ À§ÇØ »ç¿ëÇÒ ÇÔ¼öµé
+    //ìƒì„±ìì—ì„œ CRUD í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•´ ì‚¬ìš©í•  í•¨ìˆ˜ë“¤
     void InitialC();
     void InitialR();
     void InitialU();
@@ -62,7 +62,7 @@ public:
 
     static void InitTLS();
     static void DestroyTLS() { };
-    //ÀÌÈÄ¿¡ JobQueue°¡ ÇÊ¿äÇÑ ½ÃÁ¡ÀÌ ¿À¸é ±×¶§ Ãß°¡ÇÏ´Â °É·Î.
+    //ì´í›„ì— JobQueueê°€ í•„ìš”í•œ ì‹œì ì´ ì˜¤ë©´ ê·¸ë•Œ ì¶”ê°€í•˜ëŠ” ê±¸ë¡œ.
     //static void DoGlobalQueueWork();
     //static void DoTimerQueueDistribution();
 
@@ -76,7 +76,7 @@ private:
 
 class Cleaner {
 public:
-    //¾Ï½ÃÀû Çü º¯È¯À» ¶§·Á¸·´Â´Ù.
+    //ì•”ì‹œì  í˜• ë³€í™˜ì„ ë•Œë ¤ë§‰ëŠ”ë‹¤.
     explicit Cleaner(function<void()> cleanup_func)
         : m_cleanup_function(cleanup_func) {
     }
@@ -90,7 +90,7 @@ public:
         m_dismissed = true;
     }
 
-    // º¹»ç »ı¼ºÀÚ ¹× ´ëÀÔ ¿¬»êÀÚ ±İÁö
+    // ë³µì‚¬ ìƒì„±ì ë° ëŒ€ì… ì—°ì‚°ì ê¸ˆì§€
     Cleaner(const Cleaner&) = delete;
     Cleaner& operator=(const Cleaner&) = delete;
 

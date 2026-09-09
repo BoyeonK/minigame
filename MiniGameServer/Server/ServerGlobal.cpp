@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "ServerGlobal.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
@@ -18,8 +18,8 @@ RaceManager* pTestGameManager;
 PingPongManager* pPingPongManager;
 MoleManager* pMoleManager;
 
-//Áö±İÀº Àü¿ª °´Ã¼·Î ¼±¾ğµÈ raw pointer¸¦ µé°í ¼Ò¸êÀÚ¿¡¼­ »ç¶óÁö°Ô ÇÏ°íÀÖÁö¸¸,
-//º°µµÀÇ ¼Ò¸êÀÚ ·ÎÁ÷ ¾øÀÌ, ¸â¹ö º¯¼ö·Î ½º¸¶Æ® Æ÷ÀÎÅÍ¸¦ µé°í ÀÖ¾îµµ µÉµí?
+//ì§€ê¸ˆì€ ì „ì—­ ê°ì²´ë¡œ ì„ ì–¸ëœ raw pointerë¥¼ ë“¤ê³  ì†Œë©¸ìì—ì„œ ì‚¬ë¼ì§€ê²Œ í•˜ê³ ìˆì§€ë§Œ,
+//ë³„ë„ì˜ ì†Œë©¸ì ë¡œì§ ì—†ì´, ë©¤ë²„ ë³€ìˆ˜ë¡œ ìŠ¤ë§ˆíŠ¸ í¬ì¸í„°ë¥¼ ë“¤ê³  ìˆì–´ë„ ë ë“¯?
 class ServerGlobal {
 public:
 	ServerGlobal() {
@@ -58,24 +58,24 @@ CryptoManager::CryptoManager() {
 		EVP_PKEY* pkey = nullptr;
 		EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
 		if (!ctx) {
-			cout << i << "¹øÂ° ctx »ı¼º ¿À·ù" << endl;
+			cout << i << "ë²ˆì§¸ ctx ìƒì„± ì˜¤ë¥˜" << endl;
 			continue;
 		}
 
 		if (EVP_PKEY_keygen_init(ctx) <= 0) {
-			cout << i << "¹øÂ° keygen init ¿À·ù" << endl;
+			cout << i << "ë²ˆì§¸ keygen init ì˜¤ë¥˜" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
 
 		if (EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, 2048) <= 0) {
-			cout << i << "¹øÂ° key size set ¿À·ù" << endl;
+			cout << i << "ë²ˆì§¸ key size set ì˜¤ë¥˜" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
 
 		if (EVP_PKEY_keygen(ctx, &pkey) <= 0) {
-			cout << i << "¹øÂ° pkey »ı¼º ¿À·ù" << endl;
+			cout << i << "ë²ˆì§¸ pkey ìƒì„± ì˜¤ë¥˜" << endl;
 			EVP_PKEY_CTX_free(ctx);
 			continue;
 		}
@@ -91,8 +91,8 @@ CryptoManager::CryptoManager() {
 }
 
 CryptoManager::~CryptoManager() {
-	//TODO : »ç¿ëµÇ°í ÀÖ´Â ¸ğµç RSA Key¸¦ È¸¼öÇÏ°í ³ª¼­ ½ÇÇàµÇ¾î¾ß ÇÔ.
-	//µû¶ó¼­ _outPoolÀÌ 0ÀÎÁö È®ÀÎÇÏ´Â ·ÎÁ÷À» Ãß°¡ÇÒ ¿¹Á¤.
+	//TODO : ì‚¬ìš©ë˜ê³  ìˆëŠ” ëª¨ë“  RSA Keyë¥¼ íšŒìˆ˜í•˜ê³  ë‚˜ì„œ ì‹¤í–‰ë˜ì–´ì•¼ í•¨.
+	//ë”°ë¼ì„œ _outPoolì´ 0ì¸ì§€ í™•ì¸í•˜ëŠ” ë¡œì§ì„ ì¶”ê°€í•  ì˜ˆì •.
 
 	WRITE_RWLOCK;
 	
@@ -120,24 +120,24 @@ EVP_PKEY* CryptoManager::PopKey() {
 	
 	EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
 	if (!ctx) {
-		cout << "ctx »ı¼º ¿À·ù" << endl;
+		cout << "ctx ìƒì„± ì˜¤ë¥˜" << endl;
 		return nullptr;
 	}
 
 	if (EVP_PKEY_keygen_init(ctx) <= 0) {
-		cout << "Keygen init ¿À·ù" << endl;
+		cout << "Keygen init ì˜¤ë¥˜" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
 
 	if (EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, 2048) <= 0) {
-		cout << "Key size set ¿À·ù" << endl;
+		cout << "Key size set ì˜¤ë¥˜" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
 
 	if (EVP_PKEY_keygen(ctx, &key) <= 0) {
-		cout << "Key »ı¼º ¿À·ù" << endl;
+		cout << "Key ìƒì„± ì˜¤ë¥˜" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return nullptr;
 	}
@@ -147,10 +147,10 @@ EVP_PKEY* CryptoManager::PopKey() {
 	return key;
 }
 
-//ÀÌ·² ÁÙ ¾Ë¾ÒÀ¸¸é Ã³À½ºÎÅÍ _keyQueue¸¦ unique_ptrÀ» ´Ù·ç´Â Å¥·Î¼­ ¸¸µé °É ±×·¨´Ù.
+//ì´ëŸ´ ì¤„ ì•Œì•˜ìœ¼ë©´ ì²˜ìŒë¶€í„° _keyQueueë¥¼ unique_ptrì„ ë‹¤ë£¨ëŠ” íë¡œì„œ ë§Œë“¤ ê±¸ ê·¸ë¬ë‹¤.
 bool CryptoManager::ReturnKey(EVP_PKEY*& key) {
 	if (!key) {
-		cout << "??µµ´ëÃ¼ ¹» ¸®ÅÏÇÑ°ÅÁö??" << endl;
+		cout << "??ë„ëŒ€ì²´ ë­˜ ë¦¬í„´í•œê±°ì§€??" << endl;
 		return false;
 	}
 	{
@@ -169,13 +169,13 @@ vector<unsigned char> CryptoManager::ExtractPublicKey(EVP_PKEY* key) {
 	if (!key)
 		return publicKey;
 
-	//±æÀÌ ÃßÃâ, ¹× vector¿¡ ±æÀÌ ¼³Á¤
+	//ê¸¸ì´ ì¶”ì¶œ, ë° vectorì— ê¸¸ì´ ì„¤ì •
 	int len = i2d_PUBKEY(key, nullptr);
 	if (len <= 0)
 		return publicKey;
 	publicKey.resize(len);
 
-	//vectorÀÇ µ¥ÀÌÅÍ °ø°£¿¡ public key¸¦ »ğÀÔ
+	//vectorì˜ ë°ì´í„° ê³µê°„ì— public keyë¥¼ ì‚½ì…
 	unsigned char* ptr = publicKey.data();
 	if (i2d_PUBKEY(key, &ptr) <= 0)
 		publicKey.clear();
@@ -197,9 +197,9 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 		return {};
 	}
 
-	// ¾Æ·¡ ÁÖ¼® ÄÚµå´Â Å¬¶óÀÌ¾ğÆ®¿¡¼­ BouncyCastle ¶óÀÌºê·¯¸®¸¦ »ç¿ëÇÏ¿© ¾ÏÈ£È­ ÇÏ´Âµ¥ »ç¿ëÇÑ ÄÚµå (Unity C#)
-	// ÆĞµù OAEP + MGF1 + SHA-256
-	// ¾ÏÈ£È­ ¹æ½Ä RSAES-OAEP (SHA-256 ±â¹İ)
+	// ì•„ë˜ ì£¼ì„ ì½”ë“œëŠ” í´ë¼ì´ì–¸íŠ¸ì—ì„œ BouncyCastle ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ì‚¬ìš©í•˜ì—¬ ì•”í˜¸í™” í•˜ëŠ”ë° ì‚¬ìš©í•œ ì½”ë“œ (Unity C#)
+	// íŒ¨ë”© OAEP + MGF1 + SHA-256
+	// ì•”í˜¸í™” ë°©ì‹ RSAES-OAEP (SHA-256 ê¸°ë°˜)
 
 	/*
 	var encryptEngine = new OaepEncoding(new RsaEngine(), new Sha256Digest());
@@ -207,17 +207,17 @@ vector<unsigned char> CryptoManager::Decrypt(EVP_PKEY* privateKey, const vector<
 	encryptedKey = encryptEngine.ProcessBlock(aesKey, 0, aesKey.Length);
 	*/
 
-	// RSA_PADDING - Å¬¶óÀÌ¾ğÆ®°¡ ¾î¶² ¹æ½ÄÀ¸·Î ¾ÏÈ£È­Çß´ÂÁö¿Í ÀÏÄ¡ÇØ¾ß ÇÔ
+	// RSA_PADDING - í´ë¼ì´ì–¸íŠ¸ê°€ ì–´ë–¤ ë°©ì‹ìœ¼ë¡œ ì•”í˜¸í™”í–ˆëŠ”ì§€ì™€ ì¼ì¹˜í•´ì•¼ í•¨
 	if (EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING) <= 0) {
 		cout << "Failed to set padding" << endl;
 		EVP_PKEY_CTX_free(ctx);
 		return {};
 	}
 
-	// RSA-OAEP-SHA256¹æ½ÄÀ» »ç¿ëÇßÀ¸¹Ç·Î, ¾Æ·¡ ÄÚµå°¡ ¹İµå½Ã ÇÊ¿ä.
+	// RSA-OAEP-SHA256ë°©ì‹ì„ ì‚¬ìš©í–ˆìœ¼ë¯€ë¡œ, ì•„ë˜ ì½”ë“œê°€ ë°˜ë“œì‹œ í•„ìš”.
 	EVP_PKEY_CTX_set_rsa_oaep_md(ctx, EVP_sha256());
 
-	// º¹È£È­ °á°ú ±æÀÌ È®ÀÎ
+	// ë³µí˜¸í™” ê²°ê³¼ ê¸¸ì´ í™•ì¸
 	size_t outLen = 0;
 	if (EVP_PKEY_decrypt(ctx, nullptr, &outLen, encrypted.data(), encrypted.size()) <= 0) {
 		cout << "EVP_PKEY_decrypt (length) failed" << endl;
@@ -250,7 +250,7 @@ bool CryptoManager::Encrypt(
 	EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
 	if (!ctx) return false;
 
-	iv.resize(12); // GCM ±ÇÀå IV Å©±â
+	iv.resize(12); // GCM ê¶Œì¥ IV í¬ê¸°
 	if (RAND_bytes(iv.data(), iv.size()) != 1) {
 		EVP_CIPHER_CTX_free(ctx);
 		return false;
@@ -308,12 +308,12 @@ EnvManager::EnvManager() {
 		if (line.empty() || line[0] == '#') continue;
 
 		size_t delimiterPos = line.find('=');
-		if (delimiterPos == string::npos) continue; // '='°¡ ¾øÀ¸¸é ¹«½Ã
+		if (delimiterPos == string::npos) continue; // '='ê°€ ì—†ìœ¼ë©´ ë¬´ì‹œ
 
 		string key = line.substr(0, delimiterPos);
 		string value = line.substr(delimiterPos + 1);
 
-		//°ø¹é Á¦°Å
+		//ê³µë°± ì œê±°
 		key = Trim(key);
 		value = Trim(value);
 

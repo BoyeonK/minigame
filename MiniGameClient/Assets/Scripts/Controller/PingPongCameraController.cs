@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PingPongCameraController : MonoBehaviour {
     int _playerIdx = -1;
@@ -11,7 +11,7 @@ public class PingPongCameraController : MonoBehaviour {
     private bool _isOnTransition = false;
 
     public void SetPlayerIdx(int playerIdx) {
-        Debug.Log("ÀÛµ¿Àº ÇØ¿ä");
+        Debug.Log("ì‘ë™ì€ í•´ìš”");
         _playerIdx = playerIdx;
         switch (_playerIdx) {
             case 0:
@@ -76,7 +76,7 @@ public class PingPongCameraController : MonoBehaviour {
 
         if (t >= 1.0f) {
             _isOnTransition = false;
-            Debug.Log("Ä«¸Ş¶ó ÀÌµ¿ ÀüÈ¯ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+            Debug.Log("ì¹´ë©”ë¼ ì´ë™ ì „í™˜ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
             transform.position = _Epos;
 
             DisableMySideWall();

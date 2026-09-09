@@ -1,4 +1,4 @@
-using Google.Protobuf;
+ï»¿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using NUnit.Framework;
 using Org.BouncyCastle.Bcpg;
@@ -48,7 +48,7 @@ public class NetworkManager {
     }
 
     public void TryConnectToServer() {
-        //ÀÌ¹Ì ¿¬°áµÇÀÖÁöµµ ¾ÊÀ¸¸é¼­, ÇöÀç ¿¬°á ÇÔ¼ö°¡ ÀÛµ¿ÁßÀÌ ¾Æ´Ñ °æ¿ì.
+        //ì´ë¯¸ ì—°ê²°ë˜ìˆì§€ë„ ì•Šìœ¼ë©´ì„œ, í˜„ì¬ ì—°ê²° í•¨ìˆ˜ê°€ ì‘ë™ì¤‘ì´ ì•„ë‹Œ ê²½ìš°.
         if (_isConnected == true || Interlocked.CompareExchange(ref _isTryingConnect, 1, 0) != 0) {
             return;
         }
@@ -57,7 +57,7 @@ public class NetworkManager {
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
 
-        //ÀÌ°É ³ªÁß¿¡ UI·Î ¹Ş¾Æ¾ß°ÚÀ½.
+        //ì´ê±¸ ë‚˜ì¤‘ì— UIë¡œ ë°›ì•„ì•¼ê² ìŒ.
         //IPAddress ipAddr = IPAddress.Parse(GitIgnores.sAddr);
         IPAddress ipAddr = IPAddress.Loopback;
 
@@ -71,14 +71,14 @@ public class NetworkManager {
         connector.Connect(endPoint, () => { return _session; }, 1);
     }
 
-    //ÀÌ ÇÔ¼ö´Â, ÀÏ´Ü ³» ¼³°è»ó ¸ŞÀÎ½º·¹µå¿¡¼­¸¸ È£ÃâÇÒ ¿¹Á¤.
-    //°æÀï»óÅÂ¸¦ °í·ÁÇÏÁö ¾Ê°í ¸¸µë.
-    //TODO : ÀÌ ÇÔ¼ö°¡ ¼­¹öÀÇ KillÀ» ÅëÇØ ½ÇÇàµÉ ¼ö ÀÖÀ½.
+    //ì´ í•¨ìˆ˜ëŠ”, ì¼ë‹¨ ë‚´ ì„¤ê³„ìƒ ë©”ì¸ìŠ¤ë ˆë“œì—ì„œë§Œ í˜¸ì¶œí•  ì˜ˆì •.
+    //ê²½ìŸìƒíƒœë¥¼ ê³ ë ¤í•˜ì§€ ì•Šê³  ë§Œë“¬.
+    //TODO : ì´ í•¨ìˆ˜ê°€ ì„œë²„ì˜ Killì„ í†µí•´ ì‹¤í–‰ë  ìˆ˜ ìˆìŒ.
     public void TryDisconnect() {
         if (_isConnected == true)  {
             _session.Disconnect();
 
-            //¸Å¿ì Å« ±ú´ŞÀ½. È¸°íÇÒ¶§ ¹İµå½Ã Â¤°í ³Ñ¾î°¥ °Í
+            //ë§¤ìš° í° ê¹¨ë‹¬ìŒ. íšŒê³ í• ë•Œ ë°˜ë“œì‹œ ì§šê³  ë„˜ì–´ê°ˆ ê²ƒ
             //
             _session = new ServerSession();
             //
@@ -110,7 +110,7 @@ public class NetworkManager {
 
         public void TryLogin(string id, string password) {
             if (id == "" || password == "") {
-                Managers.UI.ShowErrorUIOnlyConfirm("ÀÔ·Â°ªÀÌ Àß¸øµÇ¾ú½À´Ï´Ù.", () => { });
+                Managers.UI.ShowErrorUIOnlyConfirm("ì…ë ¥ê°’ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.", () => { });
                 return;
             }
 
@@ -120,8 +120,8 @@ public class NetworkManager {
             }
         }
 
-        //Áö±İÀº Á÷Á¢ 0À¸·Î ¹Ğ°í °á°ú¸¦ Åëº¸ÇÏÁö¸¸,
-        //ÀÏ°ü¼ºÀ» À§ÇØ¼­ ¼­¹ö ÁÖµµÀûÀ¸·Î ¹Ù²Ü ÇÊ¿ä°¡ ÀÖÀ½.
+        //ì§€ê¸ˆì€ ì§ì ‘ 0ìœ¼ë¡œ ë°€ê³  ê²°ê³¼ë¥¼ í†µë³´í•˜ì§€ë§Œ,
+        //ì¼ê´€ì„±ì„ ìœ„í•´ì„œ ì„œë²„ ì£¼ë„ì ìœ¼ë¡œ ë°”ê¿€ í•„ìš”ê°€ ìˆìŒ.
         public void TryLogout() {
             C_Encrypted pkt = PacketMaker.MakeCLogout(_netRef.GetSession());
             Managers.Network.Send(pkt);
@@ -131,7 +131,7 @@ public class NetworkManager {
 
         public void TryCreateAccount(string id, string pw, string pwc) {
             if (id == "" || pw == "" || pwc == "" || pw != pwc) {
-                Managers.UI.ShowErrorUIOnlyConfirm("ÀÔ·Â°ªÀÌ Àß¸øµÇ¾ú½À´Ï´Ù.", () => { });
+                Managers.UI.ShowErrorUIOnlyConfirm("ì…ë ¥ê°’ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.", () => { });
                 return;
             }
 
@@ -273,7 +273,7 @@ public class NetworkManager {
                 _matchGameType = IntToGameType(gameId);
                 _isMatchRequesting = 0;
             }
-            //TODO : ÇöÀç ¸ÅÄªÁßÀÌ¶ó´Â °ÍÀ» UI·Î Ç¥½ÃÇÏ°í, ¸ÅÄª Ãë¼Ò¹öÆ°À» UI·Î Á¦°ø
+            //TODO : í˜„ì¬ ë§¤ì¹­ì¤‘ì´ë¼ëŠ” ê²ƒì„ UIë¡œ í‘œì‹œí•˜ê³ , ë§¤ì¹­ ì·¨ì†Œë²„íŠ¼ì„ UIë¡œ ì œê³µ
             Managers.ExecuteAtMainThread(() => {
                 OnMatchmakeRequestSucceedAct.Invoke();
             });
@@ -294,7 +294,7 @@ public class NetworkManager {
                 }
                 if (_matchGameType == GameType.InProcess) {
                     Managers.ExecuteAtMainThread(() => {
-                        Managers.UI.ShowErrorUIOnlyConfirm("Àá½Ã ÈÄ¿¡ ´Ù½Ã ½ÃµµÇØ ÁÖ¼¼¿ä.");
+                        Managers.UI.ShowErrorUIOnlyConfirm("ì ì‹œ í›„ì— ë‹¤ì‹œ ì‹œë„í•´ ì£¼ì„¸ìš”.");
                     });
                     return;
                 }
@@ -309,14 +309,14 @@ public class NetworkManager {
             lock (_matchGameTypeLock) {
                 _isMatchRequesting = 0;
                 if (_matchGameType != IntToGameType(gameId)) {
-                    Managers.ExecuteAtMainThread(() => { Debug.Log($"gameId ºÒÀÏÄ¡ ( {_matchGameType} != {IntToGameType(gameId)} )"); });
+                    Managers.ExecuteAtMainThread(() => { Debug.Log($"gameId ë¶ˆì¼ì¹˜ ( {_matchGameType} != {IntToGameType(gameId)} )"); });
                     return;
                 }
 
                 _matchGameType = GameType.None;
             }
             Managers.ExecuteAtMainThread(() => {
-                Debug.Log($"{gameId}¹ø °ÔÀÓ ¸ÅÄª ´ë±â¿­ Ãë¼Ò");
+                Debug.Log($"{gameId}ë²ˆ ê²Œì„ ë§¤ì¹­ ëŒ€ê¸°ì—´ ì·¨ì†Œ");
                 OnMatchmakeCancelSucceedAct.Invoke();
             });
         }
@@ -325,15 +325,15 @@ public class NetworkManager {
             lock (_matchGameTypeLock) {
                 _isMatchRequesting = 0;
             }
-            Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}¹ø °ÔÀÓ ¸ÅÄª ´ë±â¿­ Ãë¼Ò ½ÇÆĞ"); });
+            Managers.ExecuteAtMainThread(() => { Debug.Log($"{gameId}ë²ˆ ê²Œì„ ë§¤ì¹­ ëŒ€ê¸°ì—´ ì·¨ì†Œ ì‹¤íŒ¨"); });
         }
 
         public void ResponseExcludedFromMatch() {
             Managers.ExecuteAtMainThread(() => { OnExcludedFromMatchAct.Invoke(); });
         }
 
-        //KeepAlive handler°¡ ÀüÇØÁØ id°¡ ÇöÀç »óÅÂ¿Í ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ.
-        //ÀÏÄ¡ÇÑ °æ¿ì, InProcess·Î º¯°æÇÏ°í true¸¦ ¸®ÅÏ
+        //KeepAlive handlerê°€ ì „í•´ì¤€ idê°€ í˜„ì¬ ìƒíƒœì™€ ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸.
+        //ì¼ì¹˜í•œ ê²½ìš°, InProcessë¡œ ë³€ê²½í•˜ê³  trueë¥¼ ë¦¬í„´
         public bool ResponseKeepAlive(int gameId) {
             lock (_matchGameTypeLock) {
                 if ((int)_matchGameType == gameId) {
@@ -346,7 +346,7 @@ public class NetworkManager {
         }
 
         public void ResponseMatchmakeCompleted(int gameId, List<string> playerIds) {
-            //TODO : TestLoadingScene¸»°í ÁøÂ¥ LoadingScene¾²±â È¤Àº gameId¸¶´Ù ´Ù¸¥ GameSceneÁØºñÇÏ±â
+            //TODO : TestLoadingSceneë§ê³  ì§„ì§œ LoadingSceneì“°ê¸° í˜¹ì€ gameIdë§ˆë‹¤ ë‹¤ë¥¸ GameSceneì¤€ë¹„í•˜ê¸°
             _gameId = gameId;
             _ingamePlayerIds = playerIds;
 
@@ -719,8 +719,8 @@ public class NetworkManager {
 
 	}
 
-#region SessionÀÇ Åë½Å °á°ú¸¦ Client¿¡°Ô ³Î¸® ¾Ë¸± µ¨¸®°ÔÀÌÅÍ
-    //FM´ë·ÎÇÏ¸é, private·Î ¼±¾ğÇÏ°í ±¸µ¶ ¹× ±¸ÃëÇÏ´Â ÇÔ¼ö¸¦ publicÀ¸·Î ¿­¾î¾ß ÇÔ.
+#region Sessionì˜ í†µì‹  ê²°ê³¼ë¥¼ Clientì—ê²Œ ë„ë¦¬ ì•Œë¦´ ë¸ë¦¬ê²Œì´í„°
+    //FMëŒ€ë¡œí•˜ë©´, privateë¡œ ì„ ì–¸í•˜ê³  êµ¬ë… ë° êµ¬ì·¨í•˜ëŠ” í•¨ìˆ˜ë¥¼ publicìœ¼ë¡œ ì—´ì–´ì•¼ í•¨.
     public Action OnConnectedAct;
 	public Action OnConnectedFailedAct;
 #endregion

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <unordered_map>
 #include <cstring>
 #include "DBClientImpl.h"
@@ -40,9 +40,9 @@ private:
 	USE_RWLOCK;
 	queue<EVP_PKEY*> _keyQueue;
 
-	//¼ıÀÚ¸¦ ¼¼´Â °Í¿¡ ´õÇØ¼­ unordered setÀ» »ç¿ëÇÏ¿©
-	//»ç¿ë, ºñ»ç¿ëµÈ key¸¦ Á¤È®È÷ ÃßÀûÇÒ ¼öµµ ÀÖÀ½
-	//³ªÁß¿¡ ¼ö¿ä°¡ »ı±â¸é Ãß°¡ÇÏ´Â °É·Î ÇÏ°í ³Ñ¾î°£´Ù.
+	//ìˆ«ìë¥¼ ì„¸ëŠ” ê²ƒì— ë”í•´ì„œ unordered setì„ ì‚¬ìš©í•˜ì—¬
+	//ì‚¬ìš©, ë¹„ì‚¬ìš©ëœ keyë¥¼ ì •í™•íˆ ì¶”ì í•  ìˆ˜ë„ ìˆìŒ
+	//ë‚˜ì¤‘ì— ìˆ˜ìš”ê°€ ìƒê¸°ë©´ ì¶”ê°€í•˜ëŠ” ê±¸ë¡œ í•˜ê³  ë„˜ì–´ê°„ë‹¤.
 	atomic<uint32_t> _inPool;
 	atomic<uint32_t> _outPool;
 };

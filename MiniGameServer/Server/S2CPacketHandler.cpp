@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "S2CPacketHandler.h"
 #include "PlayerSession.h"
 #include "S2CPacketMaker.h"
@@ -23,7 +23,7 @@ bool Handle_C_Encrypted(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Encryp
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
 
-	//TODO : Session¿¡ ÀúÀåµÈ AESKey¸¦ ÅëÇØ¼­ ¿øº» Protobuf·Î º¹±¸ÇÑ ÈÄ, HandlerÇÔ¼ö¸¦ µ¿ÀÛ½ÃÅ²´Ù.
+	//TODO : Sessionì— ì €ì¥ëœ AESKeyë¥¼ í†µí•´ì„œ ì›ë³¸ Protobufë¡œ ë³µêµ¬í•œ í›„, Handlerí•¨ìˆ˜ë¥¼ ë™ì‘ì‹œí‚¨ë‹¤.
 	const string& iv_str = pkt.iv();
 	const string& ciphertext_str = pkt.ciphertext();
 	const string& tag_str = pkt.tag();
@@ -91,7 +91,7 @@ bool Handle_C_Welcome(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Welcome&
 	vector<unsigned char> AESKey = CryptoManager::Decrypt(playerSessionRef->GetRSAKey(), encryptedKey);
 
 	if (AESKey.empty()) {
-		//TODO : Á¤»óÀûÀÎ AESKey¸¦ È®º¸ÇÏÁö ¸øÇßÀ» °æ¿ì ¿¹¿ÜÃ³¸®
+		//TODO : ì •ìƒì ì¸ AESKeyë¥¼ í™•ë³´í•˜ì§€ ëª»í–ˆì„ ê²½ìš° ì˜ˆì™¸ì²˜ë¦¬
 		playerSessionRef->Disconnect();
 		return false;
 	}
@@ -121,7 +121,7 @@ bool Handle_C_Login(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Login& pkt
 	if (PlayerSession::IsInvalidPlayerSession(playerSessionRef))
 		return false;
 
-	//UTF-8ÀÓ¿¡ À¯ÀÇÇÑ´Ù.
+	//UTF-8ì„ì— ìœ ì˜í•œë‹¤.
 	playerSessionRef->SetPlayerId(pkt.id());
 	return DBManager->S2D_Login(sessionRef, pkt.id(), pkt.password());
 }
@@ -144,10 +144,10 @@ bool Handle_C_Logout(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_Logout& p
 		playerSessionRef->Send(sendBufferRef);
 	}
 	else {
-		//ÀÌ Á¶°Ç¹®ÀÌ else·Î ºüÁø ÀÌ »óÈ²Àº ¸Å¿ì ÀÌ»óÇÏ´Ù. 
-		//Æ¯È÷, ¹ŞÀº dbid°¡ 0ÀÌ ¾Æ´Ñ °æ¿ì¶ó¸é º¯Á¶°¡ ½ÉÈ÷ ÀÇ½ÉµÇ´Â »óÈ².
+		//ì´ ì¡°ê±´ë¬¸ì´ elseë¡œ ë¹ ì§„ ì´ ìƒí™©ì€ ë§¤ìš° ì´ìƒí•˜ë‹¤. 
+		//íŠ¹íˆ, ë°›ì€ dbidê°€ 0ì´ ì•„ë‹Œ ê²½ìš°ë¼ë©´ ë³€ì¡°ê°€ ì‹¬íˆ ì˜ì‹¬ë˜ëŠ” ìƒí™©.
 		if (pkt.dbid() != 0) {
-			//·Î±×ÀÎÇÑ À¯Àú°¡ '´Ù¸¥ À¯Àú'ÀÇ dbid¸¦ »ç¿ëÇÏ·Á°í ÇÏ°í ÀÖ´Ù.
+			//ë¡œê·¸ì¸í•œ ìœ ì €ê°€ 'ë‹¤ë¥¸ ìœ ì €'ì˜ dbidë¥¼ ì‚¬ìš©í•˜ë ¤ê³  í•˜ê³  ìˆë‹¤.
 		}
 		playerSessionRef->SetDbid(0);
 		playerSessionRef->SetSessionState(int32_t(PlayerSession::SessionState::BeforeLogin));
@@ -174,23 +174,23 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	auto it = GGameManagers.find(pkt.gameid());
 
 	if (it == GGameManagers.end()) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"ÇØ´ç Manager°¡ ÁØºñµÇÁö ¾ÊÀ½");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"í•´ë‹¹ Managerê°€ ì¤€ë¹„ë˜ì§€ ì•ŠìŒ");
 	}
 		
 	int32_t elo = playerSessionRef->GetElo(pkt.gameid());
 	if (elo == 0) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"eloÁ¤º¸¸¦ ºÒ·¯¿À´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù.");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"eloì •ë³´ë¥¼ ë¶ˆëŸ¬ì˜¤ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 	}
 		
 	GameType expected = GameType::None;
 	GameType desired = IntToGameType(pkt.gameid());
 	if (desired == GameType::Undefined) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"±¸¶ó ÆĞÅ¶");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"êµ¬ë¼ íŒ¨í‚·");
 	}
 
 	WatingPlayerData pd;
 	if (!playerSessionRef->TryChangeMatchingState(expected, desired)) {
-		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"µ¿±âÈ­ ¹®Á¦ ¹ß»ı. ÀçÁ¢¼ÓÀ» ±ÇÀåÇÕ´Ï´Ù.");
+		return Handle_C_MatchmakeRequestInternal(playerSessionRef, false, pkt.gameid(), u8"ë™ê¸°í™” ë¬¸ì œ ë°œìƒ. ì¬ì ‘ì†ì„ ê¶Œì¥í•©ë‹ˆë‹¤.");
 	}
 
 	pd.elo = elo;
@@ -198,7 +198,7 @@ bool Handle_C_MatchmakeRequest(shared_ptr<PBSession> sessionRef, S2C_Protocol::C
 	pd.queuedTick = ::GetTickCount64();
 	it->second->Push(move(pd));
 #ifdef _DEBUG
-	cout << "ÀÓ½Ã ´ë±â¿­¿¡ ÁøÀÔ." << endl;
+	cout << "ì„ì‹œ ëŒ€ê¸°ì—´ì— ì§„ì…." << endl;
 #endif 
 	return Handle_C_MatchmakeRequestInternal(playerSessionRef, true, pkt.gameid(), "");
 }
@@ -218,13 +218,13 @@ bool Handle_C_MatchmakeCancel(shared_ptr<PBSession> sessionRef, S2C_Protocol::C_
 	GameType expected = IntToGameType(pkt.gameid());
 	GameType desired = GameType::None;
 	if (expected == GameType::Undefined) {
-		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), "À¯È¿ÇÑ gameId°¡ ¾Æ´Ô");
+		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), "ìœ íš¨í•œ gameIdê°€ ì•„ë‹˜");
 	}
 		
-	//ÇöÀç gameIdÀÇ ¸ÅÄªÀ» Ãë¼Ò ½Ãµµ.
+	//í˜„ì¬ gameIdì˜ ë§¤ì¹­ì„ ì·¨ì†Œ ì‹œë„.
 	if (!playerSessionRef->TryChangeMatchingState(expected, desired)) {
-		//¸ÅÄ¡ ¿Ï·á°¡ ¼±ÇàµÈ °æ¿ì¿Í µ¿±âÈ­ ¹®Á¦ÀÎ °æ¿ì·Î ÂÉ°³¾ß ÇÔ.
-		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), "¸ÅÄ¡ ¿Ï·áµÈ Å¥°¡ ÀÖ°Å³ª, µ¿±âÈ­ ¹®Á¦");
+		//ë§¤ì¹˜ ì™„ë£Œê°€ ì„ í–‰ëœ ê²½ìš°ì™€ ë™ê¸°í™” ë¬¸ì œì¸ ê²½ìš°ë¡œ ìª¼ê°œì•¼ í•¨.
+		return Handle_C_MatchmakeCancelInternal(playerSessionRef, false, pkt.gameid(), "ë§¤ì¹˜ ì™„ë£Œëœ íê°€ ìˆê±°ë‚˜, ë™ê¸°í™” ë¬¸ì œ");
 	}
 
 	return Handle_C_MatchmakeCancelInternal(playerSessionRef, true, pkt.gameid(), "");
@@ -236,8 +236,8 @@ bool Handle_C_MatchmakeKeepAlive(shared_ptr<PBSession> sessionRef, S2C_Protocol:
 		return false;
 
 	if (playerSessionRef->GetMatchingState() != IntToGameType(pkt.gameid())) {
-		//¸ğµç ´ë±â¿­¿¡¼­ ¹ş¾î³­ »óÈ²ÀÓÀ» Åëº¸ÇÏ°í, ´ë±â¿­ »óÅÂ¸¦ NoneÀ¸·Î ¹Ù²Ş.
-		//Å¬¶óÀÌ¾ğÆ®·Î ÇÏ¿©±İ Á¤»ó »óÅÂ·Î µ¹¾Æ°¥ ¼ö ÀÖµµ·Ï ³ë·Â
+		//ëª¨ë“  ëŒ€ê¸°ì—´ì—ì„œ ë²—ì–´ë‚œ ìƒí™©ì„ì„ í†µë³´í•˜ê³ , ëŒ€ê¸°ì—´ ìƒíƒœë¥¼ Noneìœ¼ë¡œ ë°”ê¿ˆ.
+		//í´ë¼ì´ì–¸íŠ¸ë¡œ í•˜ì—¬ê¸ˆ ì •ìƒ ìƒíƒœë¡œ ëŒì•„ê°ˆ ìˆ˜ ìˆë„ë¡ ë…¸ë ¥
 		S2C_Protocol::S_ExcludedFromMatch pkt = S2CPacketMaker::MakeSExcludedFromMatch(false);
 		shared_ptr<SendBuffer> sendBufferRef = S2CPacketHandler::MakeSendBufferRef(pkt);
 		playerSessionRef->Send(sendBufferRef);

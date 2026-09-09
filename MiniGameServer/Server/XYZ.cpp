@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "XYZ.h"
 
 void XYZ::SetPosition(float X, float Y, float Z) {
@@ -36,7 +36,7 @@ void XYZ::DeserializeFrom(const S2C_Protocol::XYZ& XYZ) {
 
 void XYZ::Normalize() {
     float mag = Magnitude();
-    if (mag > 0) { // 0À¸·Î ³ª´©´Â °ÍÀ» ¹æÁö
+    if (mag > 0) { // 0ìœ¼ë¡œ ë‚˜ëˆ„ëŠ” ê²ƒì„ ë°©ì§€
         x /= mag;
         y /= mag;
         z /= mag;

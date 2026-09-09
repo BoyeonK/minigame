@@ -1,4 +1,4 @@
-using Google.Protobuf.Protocol;
+ï»¿using Google.Protobuf.Protocol;
 using System;
 using UnityEngine;
 
@@ -210,7 +210,7 @@ public class RacePlayerController : GameObjectController {
     private void CalculateVelocityOnFixedUpdate() {
         if (_rigidBody == null) return;
 
-        //Å°º¸µå ¹«ºù (¼öÆò)
+        //í‚¤ë³´ë“œ ë¬´ë¹™ (ìˆ˜í‰)
         if (_accelerationDir.sqrMagnitude > 0.001f) {
             if (_state == State.Jumping)
                 _rigidBody.AddForce(_accelerationDir * _accelerationRate / 3, ForceMode.Acceleration);
@@ -218,7 +218,7 @@ public class RacePlayerController : GameObjectController {
                 _rigidBody.AddForce(_accelerationDir * _accelerationRate, ForceMode.Acceleration);
         }
 
-        //Áß·Â (¼öÁ÷)
+        //ì¤‘ë ¥ (ìˆ˜ì§)
         if (_state == State.Jumping) {
             _rigidBody.AddForce(Vector3.down * _gravityAccel, ForceMode.Acceleration);
         }
@@ -226,11 +226,11 @@ public class RacePlayerController : GameObjectController {
             _rigidBody.AddForce(Vector3.down * 4f, ForceMode.Acceleration);
         }
 
-        //Ãæµ¹¿¡ ÀÇÇÑ Èû
+        //ì¶©ëŒì— ì˜í•œ í˜
         _rigidBody.AddForce(GetCollisionVector(), ForceMode.Acceleration);
 
         /*
-        //¼öÆò¹æÇâ ÀúÇ×
+        //ìˆ˜í‰ë°©í–¥ ì €í•­
         Vector3 horizontalVelocity = new(_rigidBody.linearVelocity.x, 0f, _rigidBody.linearVelocity.z);
         if (horizontalVelocity.sqrMagnitude > 0.001f) {
             _rigidBody.AddForce(-horizontalVelocity * _horizonFrictionRatePerVelocity, ForceMode.Acceleration);
@@ -239,7 +239,7 @@ public class RacePlayerController : GameObjectController {
 
         Vector3 currentVelocity = _rigidBody.linearVelocity;
 
-        //Á¡ÇÁ ½Ãµ¿
+        //ì í”„ ì‹œë™
         if (_jump) {
             currentVelocity.y = _jumpSpeed;
             _jump = false;

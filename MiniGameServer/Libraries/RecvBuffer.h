@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class RecvBuffer {
 	enum { BUFFER_COUNT = 5 };
@@ -10,8 +10,8 @@ public:
 	bool OnRead(int32_t numOfBytes);
 	bool OnWrite(int32_t numOfBytes);
 
-	//»ç½Ç»ó _bufferÀÇ data¿µ¿ª¿¡ Æ÷ÀÎÅÍ¸¦ ¹İÈ¯ÇÏ°í ÀÖ±â ¶§¹®¿¡ 
-	//publicÀ¸·Î ¿­¾î³õÀº °Å³ª ´Ù¸§¾ø±â´Â ÇÏ´Ù.
+	//ì‚¬ì‹¤ìƒ _bufferì˜ dataì˜ì—­ì— í¬ì¸í„°ë¥¼ ë°˜í™˜í•˜ê³  ìˆê¸° ë•Œë¬¸ì— 
+	//publicìœ¼ë¡œ ì—´ì–´ë†“ì€ ê±°ë‚˜ ë‹¤ë¦„ì—†ê¸°ëŠ” í•˜ë‹¤.
 	unsigned char* WritePos() { return &_buffer[_writePos]; }
 	unsigned char* ReadPos() { return &_buffer[_readPos]; }
 	int32_t DataSize() { return _writePos - _readPos; }

@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CallData.h"
 #include "GlobalVariables.h"
 #include <openssl/rand.h>
@@ -18,27 +18,27 @@ void ReadyForCall(S2D_Protocol::S2D_Service::AsyncService* service, grpc::Server
 }
 
 void HelloCallData::Proceed() {
-    // Ã¹ ¹øÂ° ·¹½¼ : »ı¼ºÀÚ¿¡¼­ ½ÇÇàµÊ. CompletionQueue¿¡ CallData¸¦ µî·ÏÇÑ´Ù.
+    // ì²« ë²ˆì§¸ ë ˆìŠ¨ : ìƒì„±ìì—ì„œ ì‹¤í–‰ë¨. CompletionQueueì— CallDataë¥¼ ë“±ë¡í•œë‹¤.
     if (_status == CREATE) {
         _status = PROCESS;
         _service->RequestSayHello(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
     }
-    // µÎ ¹øÂ° ·¹½¼: RPC ¿äÃ»ÀÌ µµÂøÇÏ¿© Ã³¸® ½ÃÀÛ
+    // ë‘ ë²ˆì§¸ ë ˆìŠ¨: RPC ìš”ì²­ì´ ë„ì°©í•˜ì—¬ ì²˜ë¦¬ ì‹œì‘
     else if (_status == PROCESS) {
-        // »õ·Î¿î CallData¸¦ CompletionQueue¿¡ µî·Ï.
+        // ìƒˆë¡œìš´ CallDataë¥¼ CompletionQueueì— ë“±ë¡.
         HelloCallData* newCallData = objectPool<HelloCallData>::alloc(_service, _completionQueueRef);
 
-        // ºñÁî´Ï½º ·ÎÁ÷ ¼öÇà
+        // ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ ìˆ˜í–‰
         string name = _request.name();
         _reply.set_message("Hello, " + name + " from async server!");
 
         cout << "Server: Received request from '" << string(name.begin(), name.end()) << "'" << endl;
 
-        // ÀÀ´ä Àü¼ÛÀ» ºñµ¿±âÀûÀ¸·Î ½ÃÀÛ.
+        // ì‘ë‹µ ì „ì†¡ì„ ë¹„ë™ê¸°ì ìœ¼ë¡œ ì‹œì‘.
         _status = FINISH;
         _responder.Finish(_reply, grpc::Status::OK, this);
     }
-    // ¼¼¹øÂ° ·¹½¼: RPC°¡ ¿Ï·áµÊ CallData¸¦ Pool¿¡ ¹İÈ¯
+    // ì„¸ë²ˆì§¸ ë ˆìŠ¨: RPCê°€ ì™„ë£Œë¨ CallDataë¥¼ Poolì— ë°˜í™˜
     else {
         cout << "Server: Response sequence complete!" << endl;
         objectPool<HelloCallData>::dealloc(this);
@@ -62,7 +62,7 @@ void DLoginCallData::Proceed() {
             SQLHSTMT hStmt2 = nullptr;
             SQLHDBC hDbc = GDBManager->PopHDbc();
 
-            //½ºÄÚÇÁ¸¦ ¹ş¾î³¯¶§ ÀÚ¿øÀ» ÇØÁ¦ÇØ ÁÙ Ä£±¸µé
+            //ìŠ¤ì½”í”„ë¥¼ ë²—ì–´ë‚ ë•Œ ìì›ì„ í•´ì œí•´ ì¤„ ì¹œêµ¬ë“¤
             Cleaner hDbcCleaner([=]() { GDBManager->ReturnHDbc(hDbc); });
             Cleaner hStmtCleaner([=]() {
                 if (hStmt1 != nullptr)
@@ -75,14 +75,14 @@ void DLoginCallData::Proceed() {
             bool flag = false;
             bool flag2 = false;
 
-            //ÇØ´ç player_id·Î dbid Á¶È¸. ÇØ´ç player_id¸¦ °¡Áø columnÀÌ ¾øÀ»°æ¿ì, incorrect_id¸¦ Á÷·ÄÈ­.
+            //í•´ë‹¹ player_idë¡œ dbid ì¡°íšŒ. í•´ë‹¹ player_idë¥¼ ê°€ì§„ columnì´ ì—†ì„ê²½ìš°, incorrect_idë¥¼ ì§ë ¬í™”.
             ReadDbidFromPlayersTable(hDbc, hStmt1, flag, dbid, id);
 
-            //fSQL1ÀÇ °á°ú°¡ Á¸ÀçÇÒ °æ¿ì, ÇØ´ç dbid columnÀÇ Accounts TableÀ» Fetch.
+            //fSQL1ì˜ ê²°ê³¼ê°€ ì¡´ì¬í•  ê²½ìš°, í•´ë‹¹ dbid columnì˜ Accounts Tableì„ Fetch.
             if (flag == true) ReadHashAndSaltFromAccountsTable(hDbc, hStmt2, flag2, dbid);
 
-            //Account TableÀÌ Á¸ÀçÇÏ´Â °æ¿ì(Fetch ¼º°ø), TableÀÇ password_hash¿Í salt¸¦ °¡Á®¿È.
-            //ÀÔ·Â°ª password¿Í ÇØ½ÌÇÏ¿© ºñ±³ ¹× °á°ú¿¡ µû¶ó _reply¿¡ ¾Ë¸Â´Â dbid Á÷·ÄÈ­
+            //Account Tableì´ ì¡´ì¬í•˜ëŠ” ê²½ìš°(Fetch ì„±ê³µ), Tableì˜ password_hashì™€ saltë¥¼ ê°€ì ¸ì˜´.
+            //ì…ë ¥ê°’ passwordì™€ í•´ì‹±í•˜ì—¬ ë¹„êµ ë° ê²°ê³¼ì— ë”°ë¼ _replyì— ì•Œë§ëŠ” dbid ì§ë ¬í™”
             if (flag2 == true) Compare_PBKDF2(hDbc, hStmt2, dbid, password);
         }
         catch (runtime_error& e) {
@@ -92,7 +92,7 @@ void DLoginCallData::Proceed() {
         _status = FINISH;
         _responder.Finish(_reply, stat, this);
     }
-    // ¸¶Áö¸· ´Ü°è: RPC°¡ ¿Ï·áµÊ CallData¸¦ Pool¿¡ ¹İÈ¯
+    // ë§ˆì§€ë§‰ ë‹¨ê³„: RPCê°€ ì™„ë£Œë¨ CallDataë¥¼ Poolì— ë°˜í™˜
     else {
 #ifdef _DEBUG
         cout << "Server: Login Request sequence complete!" << endl;
@@ -127,23 +127,23 @@ void DLoginCallData::ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt1, b
     }
 
     ret = SQLFetch(hStmt1);
-    // SQL¹® ¼º°øÀº Çß´Ù (µ¥ÀÌÅÍ ¾øÀ½) or SQL¹® ¼º°øÇØ¼­ °á°ú¸¦ µé°í¿Ô´Ù
+    // SQLë¬¸ ì„±ê³µì€ í–ˆë‹¤ (ë°ì´í„° ì—†ìŒ) or SQLë¬¸ ì„±ê³µí•´ì„œ ê²°ê³¼ë¥¼ ë“¤ê³ ì™”ë‹¤
     if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
         ret = SQLGetData(hStmt1, 1, SQL_C_SLONG, &dbid, sizeof(dbid), NULL);
-        // Á¤»ó µ¿ÀÛ 1, °¡Á®¿À´Âµ¥ ¼º°ø
+        // ì •ìƒ ë™ì‘ 1, ê°€ì ¸ì˜¤ëŠ”ë° ì„±ê³µ
         if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
             flag = true;
         }
-        //? ÀÖ´Âµ¥ º¸¿©ÁÖ±ä ½ÈÀ½? ÀÌ°Ç ¹«½¼»óÈ²
+        //? ìˆëŠ”ë° ë³´ì—¬ì£¼ê¸´ ì‹«ìŒ? ì´ê±´ ë¬´ìŠ¨ìƒí™©
         else {
             throw runtime_error("S2D_Login : S1 GetData Failed");
         }
     }
-    // Á¤»ó µ¿ÀÛ 2, ÀÏÄ¡ÇÏ´Â µ¥ÀÌÅÍ°¡ ¾øÀ½. DBÀß¸øÀÌ ¾Æ´Ô. »ç¶÷ Àß¸ø.
+    // ì •ìƒ ë™ì‘ 2, ì¼ì¹˜í•˜ëŠ” ë°ì´í„°ê°€ ì—†ìŒ. DBì˜ëª»ì´ ì•„ë‹˜. ì‚¬ëŒ ì˜ëª».
     else if (ret == SQL_NO_DATA) {
         _reply.set_incorrect_id(true);
     }
-    // SQL¹® Fetch¿¡ ½ÇÆĞÇÔ.
+    // SQLë¬¸ Fetchì— ì‹¤íŒ¨í•¨.
     else {
         throw runtime_error("S2D_Login : S1 Fetch Failed");
     }
@@ -177,7 +177,7 @@ void DLoginCallData::ReadHashAndSaltFromAccountsTable(SQLHDBC& hDbc, SQLHSTMT& h
         flag2 = true;
     }
     else if (ret == SQL_NO_DATA) {
-        //¹æ±İ Á¶È¸ÇÑ db°¡.. ¾ø¾î?
+        //ë°©ê¸ˆ ì¡°íšŒí•œ dbê°€.. ì—†ì–´?
         throw runtime_error("S2D_Login : Table Disappeared. Maybe, by Other Thread.");
     }
     else {
@@ -192,7 +192,7 @@ void DLoginCallData::Compare_PBKDF2(SQLHDBC& hDbc, SQLHSTMT& hStmt2, SQLINTEGER&
     wstring salt(SALT_SIZE, L' ');
     SQLLEN hash_ind, salt_ind;
 
-    // password_hash¿Í salt µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+    // password_hashì™€ salt ë°ì´í„°ë¥¼ ê°€ì ¸ì˜´
     SQLRETURN ret = SQLGetData(hStmt2, 1, SQL_C_WCHAR, password_hash.data(), (HASH_SIZE + 1) * sizeof(wchar_t), &hash_ind);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
         throw runtime_error("Failed to get password_hash data.");
@@ -268,14 +268,14 @@ void DCreateAccountCallData::Proceed() {
 
             bool isSuccess = false;
             
-            //Æ®·£Àè¼Ç ¼³Á¤
+            //íŠ¸ëœì­ì…˜ ì„¤ì •
             SQLRETURN ret = SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, SQL_IS_UINTEGER);
             if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
                 throw runtime_error("Transaction Setting Failed");
             }
             attr = true;
 
-			//Áß¾Ó Å×ÀÌºíÀÎ Players row INSERT, ÀÌ°Ô ½ÇÆĞÇÏ¸é ¾ÆÀÌµğ Áßº¹ÀÌ¹Ç·Î ½ÇÆĞ ÀÀ´ä º¸³»Áà¾ßÁt
+			//ì¤‘ì•™ í…Œì´ë¸”ì¸ Players row INSERT, ì´ê²Œ ì‹¤íŒ¨í•˜ë©´ ì•„ì´ë”” ì¤‘ë³µì´ë¯€ë¡œ ì‹¤íŒ¨ ì‘ë‹µ ë³´ë‚´ì¤˜ì•¼í– 
             CreatePlayersTable(hDbc, hStmt2, id, isSuccess);
 
             if (isSuccess) {
@@ -300,7 +300,7 @@ void DCreateAccountCallData::Proceed() {
                 _reply.set_success(false);
             }
 
-			//Æ®·£Àè¼Ç Ä¿¹Ô. ½ÇÆĞ½Ã ·Ñ¹é.
+			//íŠ¸ëœì­ì…˜ ì»¤ë°‹. ì‹¤íŒ¨ì‹œ ë¡¤ë°±.
             SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_ON, SQL_IS_UINTEGER);
             if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
                 hDbc = nullptr;
@@ -325,7 +325,7 @@ void DCreateAccountCallData::Proceed() {
 void DCreateAccountCallData::CreatePlayersTable(SQLHDBC& hDbc, SQLHSTMT& hStmt2, const string& id, bool& flag) {
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
     if (!GDBManager->CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-        cout << "hStmt2 ÇÒ´ç ½ÇÆĞ;" << endl;
+        cout << "hStmt2 í• ë‹¹ ì‹¤íŒ¨;" << endl;
         throw runtime_error("D2S_CreateAccount : hStmt2 Alloc Failed");
     }
 
@@ -393,7 +393,7 @@ void DCreateAccountCallData::ReadDbidFromPlayersTable(SQLHDBC& hDbc, SQLHSTMT& h
     if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
         ret = SQLGetData(hStmt3, 1, SQL_C_SLONG, &dbid, sizeof(dbid), &dbid_ind);
         cout << dbid << endl;
-        // Á¤»ó µ¿ÀÛ
+        // ì •ìƒ ë™ì‘
     }
     else if (ret == SQL_NO_DATA) {
         throw runtime_error("D2S_CreateAccount : S3 Fetch No Data");
@@ -553,7 +553,7 @@ void DPlayerInfomationCallData::Proceed() {
         _status = FINISH;
         _responder.Finish(_reply, stat, this);
     }
-    // ¸¶Áö¸· ´Ü°è: RPC°¡ ¿Ï·áµÊ CallData¸¦ Pool¿¡ ¹İÈ¯
+    // ë§ˆì§€ë§‰ ë‹¨ê³„: RPCê°€ ì™„ë£Œë¨ CallDataë¥¼ Poolì— ë°˜í™˜
     else {
         objectPool<DPlayerInfomationCallData>::dealloc(this);
     }
@@ -584,8 +584,8 @@ void DPlayerInfomationCallData::ReadPlayerId(SQLHDBC& hDbc, SQLHSTMT& hStmt1, co
 
     ret = SQLFetch(hStmt1);
     if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
-        SQLWCHAR playerIdBuffer[101]; // ¿¹: ÃÖ´ë 100ÀÚ + NULL Á¾°á ¹®ÀÚ
-        SQLLEN indicator = 0; // ½ÇÁ¦ µ¥ÀÌÅÍ ±æÀÌ ¶Ç´Â NULL ¿©ºÎ¸¦ ¹ŞÀ» º¯¼ö
+        SQLWCHAR playerIdBuffer[101]; // ì˜ˆ: ìµœëŒ€ 100ì + NULL ì¢…ê²° ë¬¸ì
+        SQLLEN indicator = 0; // ì‹¤ì œ ë°ì´í„° ê¸¸ì´ ë˜ëŠ” NULL ì—¬ë¶€ë¥¼ ë°›ì„ ë³€ìˆ˜
         ret = SQLGetData(hStmt1, 1, SQL_C_WCHAR, playerIdBuffer, sizeof(playerIdBuffer), &indicator);
         if (SQL_SUCCEEDED(ret)) {
             if (indicator == SQL_NULL_DATA) {
@@ -725,12 +725,12 @@ void DUpdateEloCallData::Proceed() {
             cout << e.what() << endl;
         }
 
-        cout << dbid << "ÀÇ " << gameId << "¹ø °ÔÀÓ elo¸¦ " << elo << "·Î º¯°æ ¿äÃ»" << endl;
+        cout << dbid << "ì˜ " << gameId << "ë²ˆ ê²Œì„ eloë¥¼ " << elo << "ë¡œ ë³€ê²½ ìš”ì²­" << endl;
 
         _status = FINISH;
         _responder.Finish(_reply, stat, this);
     }
-    // ¸¶Áö¸· ´Ü°è: RPC°¡ ¿Ï·áµÊ CallData¸¦ Pool¿¡ ¹İÈ¯
+    // ë§ˆì§€ë§‰ ë‹¨ê³„: RPCê°€ ì™„ë£Œë¨ CallDataë¥¼ Poolì— ë°˜í™˜
     else {
         objectPool<DUpdateEloCallData>::dealloc(this);
     }
@@ -819,7 +819,7 @@ void DUpdatePersonalRecordCallData::Proceed() {
         _status = FINISH;
         _responder.Finish(_reply, stat, this);
     }
-    // ¸¶Áö¸· ´Ü°è: RPC°¡ ¿Ï·áµÊ CallData¸¦ Pool¿¡ ¹İÈ¯
+    // ë§ˆì§€ë§‰ ë‹¨ê³„: RPCê°€ ì™„ë£Œë¨ CallDataë¥¼ Poolì— ë°˜í™˜
     else {
         objectPool<DUpdatePersonalRecordCallData>::dealloc(this);
     }
@@ -871,8 +871,8 @@ void DUpdatePersonalRecordCallData::UpdatePersonalRecord(SQLHDBC& hDbc, SQLHSTMT
 }
 
 void DPublicRecordCallData::Proceed() {
-    //TODO : gameId¸¦ ¹ŞÀ½
-    //ÇØ´ç gameid¿¡ ÇØ´çÇÏ´Â °ÔÀÓÀÇ ÃÖ´ë ±â·ÏÀÚÀÎ À¯ÀúÀÇ ´Ğ³×ÀÓ°ú ½ºÄÚ¾î¸¦ reply·Î Àü¼Û
+    //TODO : gameIdë¥¼ ë°›ìŒ
+    //í•´ë‹¹ gameidì— í•´ë‹¹í•˜ëŠ” ê²Œì„ì˜ ìµœëŒ€ ê¸°ë¡ìì¸ ìœ ì €ì˜ ë‹‰ë„¤ì„ê³¼ ìŠ¤ì½”ì–´ë¥¼ replyë¡œ ì „ì†¡
     if (_status == CREATE) {
         _status = PROCESS;
         _service->RequestPublicRecord(&_ctx, &_request, &_responder, _completionQueueRef, _completionQueueRef, this);
@@ -917,7 +917,7 @@ void DPublicRecordCallData::Proceed() {
         _status = FINISH;
         _responder.Finish(_reply, stat, this);
     }
-    // ¸¶Áö¸· ´Ü°è: RPC°¡ ¿Ï·áµÊ CallData¸¦ Pool¿¡ ¹İÈ¯
+    // ë§ˆì§€ë§‰ ë‹¨ê³„: RPCê°€ ì™„ë£Œë¨ CallDataë¥¼ Poolì— ë°˜í™˜
     else {
         objectPool<DPublicRecordCallData>::dealloc(this);
     }
@@ -1053,7 +1053,7 @@ void DUpdatePublicRecordCallData::Proceed() {
             SQLINTEGER sScore = score;
             SQLINTEGER sDbid = dbid;
             SetScore(hDbc, hStmt2, gameId, sScore, sDbid);
-            cout << gameId << "¹ø °ÔÀÓ ±â·Ï " << score << "·Î °»½Å " << dbid << endl;
+            cout << gameId << "ë²ˆ ê²Œì„ ê¸°ë¡ " << score << "ë¡œ ê°±ì‹  " << dbid << endl;
             _reply.set_success(true);
         }
         catch (runtime_error& e) {
@@ -1063,7 +1063,7 @@ void DUpdatePublicRecordCallData::Proceed() {
         _status = FINISH;
         _responder.Finish(_reply, stat, this);
     }
-    // ¸¶Áö¸· ´Ü°è: RPC°¡ ¿Ï·áµÊ CallData¸¦ Pool¿¡ ¹İÈ¯
+    // ë§ˆì§€ë§‰ ë‹¨ê³„: RPCê°€ ì™„ë£Œë¨ CallDataë¥¼ Poolì— ë°˜í™˜
     else {
         objectPool<DUpdatePublicRecordCallData>::dealloc(this);
     }

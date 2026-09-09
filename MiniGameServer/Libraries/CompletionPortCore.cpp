@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CompletionPortCore.h"
 
 CPTask::CPTask(TaskType tasktype) : _TaskType(tasktype) {
@@ -50,7 +50,7 @@ bool CPCore::Dispatch(uint32_t timeoutMs) {
 		case WAIT_TIMEOUT:
 			return false;
 		default:
-			// TODO : ·Î±× Âï±â
+			// TODO : ë¡œê·¸ ì°ê¸°
 			shared_ptr<CPObject> cpObject = cpTask->_OwnerRef;
 			cpObject->Dispatch(cpTask, numOfBytes);
 			break;

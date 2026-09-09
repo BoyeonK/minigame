@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class OptionSelecterController : MonoBehaviour {
     private int _opt = 5;
@@ -52,13 +52,13 @@ public class OptionSelecterController : MonoBehaviour {
         }
     }
 
-    //OnEnable°ú Start´Â ºñ½ÁÇÏ¸é¼­µµ ´Ù¸£´Ù. ½ºÅ©¸³Æ®ÀÇ »ı¸íÁÖ±â¿Í Àç»ç¿ë¼º¿¡ ¿¬°üÀÌ ÀÖ´Ù.
+    //OnEnableê³¼ StartëŠ” ë¹„ìŠ·í•˜ë©´ì„œë„ ë‹¤ë¥´ë‹¤. ìŠ¤í¬ë¦½íŠ¸ì˜ ìƒëª…ì£¼ê¸°ì™€ ì¬ì‚¬ìš©ì„±ì— ì—°ê´€ì´ ìˆë‹¤.
     private void OnEnable() {
         _opt = 5;
         ChangeLookDir(); 
     }
 
-    //µ¿ÀÏÇÏ°Ô OnDisable°ú OnDestroyµµ ±×·¸´Ù.
+    //ë™ì¼í•˜ê²Œ OnDisableê³¼ OnDestroyë„ ê·¸ë ‡ë‹¤.
     private void OnDisable() {
         
     }
@@ -67,14 +67,14 @@ public class OptionSelecterController : MonoBehaviour {
         if (_mainCamera != null && _lookDirection != Vector3.zero) {
             Quaternion targetRotation = Quaternion.LookRotation(_lookDirection);
 
-            //Ä«¸Ş¶ó À§Ä¡ ÀÌµ¿
+            //ì¹´ë©”ë¼ ìœ„ì¹˜ ì´ë™
             _mainCamera.transform.position = Vector3.Lerp(
                 _mainCamera.transform.position,
                 _eyePosition,
                 Time.deltaTime * _positionSpeed
             );
 
-            //Ä«¸Ş¶ó°¡ ¹Ù¶óº¸´Â ¹æÇâ º¤ÅÍ È¸Àü
+            //ì¹´ë©”ë¼ê°€ ë°”ë¼ë³´ëŠ” ë°©í–¥ ë²¡í„° íšŒì „
             _mainCamera.transform.rotation = Quaternion.Slerp(
                 _mainCamera.transform.rotation,
                 targetRotation,

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 using namespace std;
 
@@ -27,8 +27,8 @@ public:
 		}
 	}
 
-	//aligned_mallocÀº 'µ¿ÀûÀ¸·Î' 16¹è¼ö·Î ¸ÂÃá´Ù.
-	//ÀÌÈÄ¿¡ ´Ù½Ã objectPoolÀ» ¼³°èÇÒ ÀÏÀÌ ÀÖ´Ù¸é, alignas Å°¿öµå¸¦ »ç¿ëÇÏ´Â ÂÊÀÌ ¹Ù¶÷Á÷ÇÔ. Áö±İÀº ±»ÀÌ µ¿ÀÛÇÏ´Â ÄÚµå¸¦ °Çµå¸®Áö ¸»ÀÚ.
+	//aligned_mallocì€ 'ë™ì ìœ¼ë¡œ' 16ë°°ìˆ˜ë¡œ ë§ì¶˜ë‹¤.
+	//ì´í›„ì— ë‹¤ì‹œ objectPoolì„ ì„¤ê³„í•  ì¼ì´ ìˆë‹¤ë©´, alignas í‚¤ì›Œë“œë¥¼ ì‚¬ìš©í•˜ëŠ” ìª½ì´ ë°”ëŒì§í•¨. ì§€ê¸ˆì€ êµ³ì´ ë™ì‘í•˜ëŠ” ì½”ë“œë¥¼ ê±´ë“œë¦¬ì§€ ë§ì.
 	PSLIST_ENTRY popEntry(uint32_t _typeSize) {
 		PSLIST_ENTRY pEntry = ::InterlockedPopEntrySList(&_header);
 		if (pEntry == nullptr)

@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include <functional>
 
 class ActorEvent {
 public:
 	ActorEvent(function<void()>&& callback) : _callback(move(callback)) {}
 
-	//±âÁ¸ ¹æ¹ıÀº &&¸¦ »ç¿ëÇÏ±ä ÇÑ´Ù¸¸, ³»ºÎ ±¸ÇöÀº ¿Ïº® Àü´ŞÀ» ÇÏÁö ¸øÇÔ. ¶÷´Ù Ä¸ÃÄ·Î ½Ï º¹»ç ÇÏ°í ÀÖ±â ¶§¹®.
+	//ê¸°ì¡´ ë°©ë²•ì€ &&ë¥¼ ì‚¬ìš©í•˜ê¸´ í•œë‹¤ë§Œ, ë‚´ë¶€ êµ¬í˜„ì€ ì™„ë²½ ì „ë‹¬ì„ í•˜ì§€ ëª»í•¨. ëŒë‹¤ ìº¡ì³ë¡œ ì‹¹ ë³µì‚¬ í•˜ê³  ìˆê¸° ë•Œë¬¸.
 	/*
 	template<typename T, typename Ret, typename... Args>
 	Job(weak_ptr<T> ownerWRef, Ret(T::* memFunc)(Args...), Args&&... args)  {
@@ -29,8 +29,8 @@ public:
 			};
 	}
 
-	//lambda capture¸¦ ÅëÇØ, shared_ptrÀ» º¹»çÇÑ °æ¿ì ¹®Á¦°¡ µÉ ¼ö ÀÖ´Ù. (µÇµµ·Ï weak_ptrÀ» ¾²·Á°í´Â ÇÏÁö¸¸)
-	//»ı¸í ÁÖ±â¸¦ º¸ÀåÇÏ±â À§ÇØ _callbackÀ» nullptr·Î ÃÊ±âÈ­.
+	//lambda captureë¥¼ í†µí•´, shared_ptrì„ ë³µì‚¬í•œ ê²½ìš° ë¬¸ì œê°€ ë  ìˆ˜ ìˆë‹¤. (ë˜ë„ë¡ weak_ptrì„ ì“°ë ¤ê³ ëŠ” í•˜ì§€ë§Œ)
+	//ìƒëª… ì£¼ê¸°ë¥¼ ë³´ì¥í•˜ê¸° ìœ„í•´ _callbackì„ nullptrë¡œ ì´ˆê¸°í™”.
 	void Execute() {
 		if (_callback) {
 			_callback();

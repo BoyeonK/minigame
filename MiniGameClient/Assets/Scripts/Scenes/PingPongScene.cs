@@ -1,4 +1,4 @@
-using Google.Protobuf.Protocol;
+ï»¿using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,23 +17,23 @@ public class PingPongScene : BaseScene {
     UI_PingPong_EndGame _uiEndGame;
 
     protected override void Init() {
-        //Base - EventSystemµî·Ï.
+        //Base - EventSystemë“±ë¡.
         base.Init();
 
-        //SceneManager¿¡ ºñ µ¿±âÀûÀ¸·Î ·ÎµùÇÏ´Âµ¥ »ç¿ëµÈ ÀÚ¿øµé ÃÊ±âÈ­
+        //SceneManagerì— ë¹„ ë™ê¸°ì ìœ¼ë¡œ ë¡œë”©í•˜ëŠ”ë° ì‚¬ìš©ëœ ìì›ë“¤ ì´ˆê¸°í™”
         SceneType = Scene.PingPong;
         Managers.Scene.ResetLoadSceneOp();
         
-        //MouseÀ§Ä¡¸¦ ÃßÀûÇØÁÙ RaycastPlaneÀ» ÂüÁ¶.
+        //Mouseìœ„ì¹˜ë¥¼ ì¶”ì í•´ì¤„ RaycastPlaneì„ ì°¸ì¡°.
         GameObject goRaycastPlane = GameObject.Find("RaycastPlane");
         if (goRaycastPlane != null) {
             _raycastPlane = goRaycastPlane.GetComponent<RaycastPlane>();
         }
         else {
-            Debug.LogError("RaycastPlaneÀÌ Scene¿¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("RaycastPlaneì´ Sceneì— ì—†ìŠµë‹ˆë‹¤.");
         }
 
-        //Àû Bar¸¦ ÂüÁ¶.
+        //ì  Barë¥¼ ì°¸ì¡°.
         GameObject goEastPlayerBar = GameObject.Find("EPlayerBar");
         GameObject goWestPlayerBar = GameObject.Find("WPlayerBar");
         if (goEastPlayerBar != null) {
@@ -48,7 +48,7 @@ public class PingPongScene : BaseScene {
         }
         _uiEndGame = Managers.UI.CacheSceneUI<UI_PingPong_EndGame>();
 
-        //CameraControllerÂüÁ¶
+        //CameraControllerì°¸ì¡°
         GameObject cam = GameObject.Find("TopViewCamera");
         if (cam != null) { 
             _pingPongCameraController = cam.GetComponent<PingPongCameraController>();
@@ -58,11 +58,11 @@ public class PingPongScene : BaseScene {
         Managers.Sound.GetOrAddAudioClip("gameEnd");
         Managers.Sound.Play("PingPongScene", Define.Sound.Bgm);
 
-        //¼­¹ö¿¡°Ô Scene¿¡ ·ÎµùÀÌ ¿Ï·áµÇ¾úÀ½À» ÅëÁö. GameÁ¤º¸¸¦ ¿äÃ»
+        //ì„œë²„ì—ê²Œ Sceneì— ë¡œë”©ì´ ì™„ë£Œë˜ì—ˆìŒì„ í†µì§€. Gameì •ë³´ë¥¼ ìš”ì²­
         Managers.Network.TryRequestGameState((int)GameType.PingPong);
     }
 
-    //ÇÃ·¹ÀÌ¾î°¡ ¾î´À ¹æÀ§ÀÇ ¼öÈ£ÀÚÀÎÁö Á¤º¸°¡ ¼­¹ö·ÎºÎÅÍ Àü´ŞµÇ¾úÀ» ¶§.
+    //í”Œë ˆì´ì–´ê°€ ì–´ëŠ ë°©ìœ„ì˜ ìˆ˜í˜¸ìì¸ì§€ ì •ë³´ê°€ ì„œë²„ë¡œë¶€í„° ì „ë‹¬ë˜ì—ˆì„ ë•Œ.
     public void SetId(int playerIdx) {
         _playerIdx = playerIdx;
 

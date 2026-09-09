@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "SendBuffer.h"
 
 void SendBufferChunk::Init() {
@@ -7,14 +7,14 @@ void SendBufferChunk::Init() {
 }
 
 shared_ptr<SendBuffer> SendBufferChunk::Open(uint32_t allocSize) {
-	//±¸Á¶ÀûÀ¸·Î SEND_BUFFER_CHUNKÅ©±âº¸´Ù Å« ¹ÙÀÌÆ®´Â sendÇÒ ¼ö ¾øÀ½
+	//êµ¬ì¡°ì ìœ¼ë¡œ SEND_BUFFER_CHUNKí¬ê¸°ë³´ë‹¤ í° ë°”ì´íŠ¸ëŠ” sendí•  ìˆ˜ ì—†ìŒ
 	ASSERT_CRASH(allocSize <= SEND_BUFFER_CHUNK_SIZE);
 
-	//¿­±â Àü¿¡ ÀÌ¹Ì ¿­·ÁÀÖ´Â°ÍÀº ¹«¾ğ°¡ Àß¸øµÇ¾ú´Ù.
-	//ÃÊ±âÈ­°¡ Àß¸ø‰ç°Å³ª, Close()°¡ µ¿ÀÛÇÏÁö ¾Ê¾Ò´Ù.
+	//ì—´ê¸° ì „ì— ì´ë¯¸ ì—´ë ¤ìˆëŠ”ê²ƒì€ ë¬´ì–¸ê°€ ì˜ëª»ë˜ì—ˆë‹¤.
+	//ì´ˆê¸°í™”ê°€ ì˜ëª»ë¬ê±°ë‚˜, Close()ê°€ ë™ì‘í•˜ì§€ ì•Šì•˜ë‹¤.
 	ASSERT_CRASH(_isOpen == false);
 
-	//Manager¿¡¼­ OpenÇÒ¶§ ÀÌ °æ¿ì¸¦ Ã¼Å©ÇØ ÁÖ¾úÀ¸³ª, È¤½Ã ¸ğ¸£´Ï ´õºíÃ¼Å©
+	//Managerì—ì„œ Opení• ë•Œ ì´ ê²½ìš°ë¥¼ ì²´í¬í•´ ì£¼ì—ˆìœ¼ë‚˜, í˜¹ì‹œ ëª¨ë¥´ë‹ˆ ë”ë¸”ì²´í¬
 	if (allocSize > FreeSize())
 		return nullptr;
 
@@ -44,7 +44,7 @@ void SendBuffer::Close(uint32_t writeSize) {
 }
 
 shared_ptr<SendBuffer> SendBufferManager::Open(uint32_t allocSize) {
-	//±¸Á¶ÀûÀ¸·Î SEND_BUFFER_CHUNKÅ©±âº¸´Ù Å« ¹ÙÀÌÆ®´Â sendÇÒ ¼ö ¾øÀ½
+	//êµ¬ì¡°ì ìœ¼ë¡œ SEND_BUFFER_CHUNKí¬ê¸°ë³´ë‹¤ í° ë°”ì´íŠ¸ëŠ” sendí•  ìˆ˜ ì—†ìŒ
 	ASSERT_CRASH(allocSize <= SEND_BUFFER_CHUNK_SIZE);
 
 	if (LSendBufferChunkRef == nullptr or LSendBufferChunkRef->FreeSize() < allocSize) {

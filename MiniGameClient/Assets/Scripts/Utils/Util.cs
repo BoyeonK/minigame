@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Util {
     public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component {
@@ -8,7 +8,7 @@ public class Util {
         return component;
     }
 
-    //ÀÓÀÇÀÇ GameObjectÅ¸ÀÔÀÎ °æ¿ì
+    //ì„ì˜ì˜ GameObjectíƒ€ì…ì¸ ê²½ìš°
     public static GameObject FindChild(GameObject go, string name = null, bool recursive = false) {
         Transform transform = FindChild<Transform>(go, name, recursive);
         if (transform == null)
@@ -17,7 +17,7 @@ public class Util {
         return transform.gameObject;
     }
 
-    //GameObject¸¦ ¹Ş¾Æ¼­ ÇÏÀ§ ÀÚ½Äµé Áß¿¡ <T> typeÀÎ °Íµé Áß ÀÌ¸§ÀÌ nameÀÎ Ä£±¸
+    //GameObjectë¥¼ ë°›ì•„ì„œ í•˜ìœ„ ìì‹ë“¤ ì¤‘ì— <T> typeì¸ ê²ƒë“¤ ì¤‘ ì´ë¦„ì´ nameì¸ ì¹œêµ¬
     public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object {
         if (go == null)
             return null;

@@ -1,4 +1,4 @@
-#include "pch.h"
+Ôªø#include "pch.h"
 #include "RaceRoom.h"
 #include "S2CPacketHandler.h"
 #include "S2CPacketMaker.h"
@@ -13,19 +13,19 @@ void RaceRoom::Init(vector<WatingPlayerData> pdv) {
 			ready = false;
 			break;
 		}
-		//∞¢ Sessionø° KeepAlive∆–≈∂¿ª BroadCast.
+		//Í∞Å SessionÏóê KeepAliveÌå®ÌÇ∑ÏùÑ BroadCast.
 		S2C_Protocol::S_MatchmakeKeepAlive pkt = S2CPacketMaker::MakeSMatchmakeKeepAlive(1);
 		shared_ptr<SendBuffer> sendBuffer = S2CPacketHandler::MakeSendBufferRef(pkt);
 		playerSessionRef->Send(sendBuffer);
 	}
 
 	if (ready) {
-		//1√  »ƒ, (Ping¿Ã 1√ ∞° ≥—¥¬∞Õ¿∫, ¿ÃªÛ«œ¥Ÿ.) ∏µÁ ∆–≈∂¿∏∑Œ∫Œ≈Õ ¿¿¥‰¿ª πﬁæ“¥Ÿ∏È Ω√¿€
+		//1Ï¥à ÌõÑ, (PingÏù¥ 1Ï¥àÍ∞Ä ÎÑòÎäîÍ≤ÉÏùÄ, Ïù¥ÏÉÅÌïòÎã§.) Î™®Îì† Ìå®ÌÇ∑ÏúºÎ°úÎ∂ÄÌÑ∞ ÏùëÎãµÏùÑ Î∞õÏïòÎã§Î©¥ ÏãúÏûë
 		PostEventAfter(1000, &RaceRoom::Init2, move(pdv));
 	}
 	else {
-		//¿Ø»ø«œ¡ˆ æ ¿∫ ººº«¿Ã ¿÷æ˙¿ª ∞ÊøÏ, ∏µŒ ¥Î±‚ø≠∑Œ µπ∑¡∫∏≥ø.
-		//¥Î±‚ø≠¿∫ ¡÷±‚¿˚¿∏∑Œ ¿Ø»ø«œ¡ˆ æ ¿∫ PlayerData∏¶ ∞≈∏£µµ∑œ º≥∞Ëµ«æÓ¿÷¿Ω.
+		//Ïú†Ìö®ÌïòÏßÄ ÏïäÏùÄ ÏÑ∏ÏÖòÏù¥ ÏûàÏóàÏùÑ Í≤ΩÏö∞, Î™®Îëê ÎåÄÍ∏∞Ïó¥Î°ú ÎèåÎ†§Î≥¥ÎÉÑ.
+		//ÎåÄÍ∏∞Ïó¥ÏùÄ Ï£ºÍ∏∞Ï†ÅÏúºÎ°ú Ïú†Ìö®ÌïòÏßÄ ÏïäÏùÄ PlayerDataÎ•º Í±∞Î•¥ÎèÑÎ°ù ÏÑ§Í≥ÑÎêòÏñ¥ÏûàÏùå.
 		GGameManagers[int(_ty)]->Push(move(pdv));
 		_state = GameState::EndGame;
 	}
@@ -187,8 +187,8 @@ void RaceRoom::HandleResponseMovementAndCollision(S2C_Protocol::C_R_ResponseMove
 	for (int i = 0; i < pkt.objectids_size(); i++)
 		collisionObjIds[i] = pkt.objectids().Get(i);
 
-	//FM¥Î∑Œ «œ∏È, position¿Ã ¡§¥Á«— øÚ¡˜¿”¿Œ¡ˆ ∫Ø¿ß √º≈© « ø‰«“µÌ.
-	/* æ∆∑°¿« ø‰º“∏¶ «ˆ¿Á¿« ø‰º“øÕ ∫Ò±≥«œø© ∫Œ¡§«‡¿ß¿Œ¡ˆ »Æ¿Œ
+	//FMÎåÄÎ°ú ÌïòÎ©¥, positionÏù¥ Ï†ïÎãπÌïú ÏõÄÏßÅÏûÑÏù∏ÏßÄ Î≥ÄÏúÑ Ï≤¥ÌÅ¨ ÌïÑÏöîÌï†ÎìØ.
+	/* ÏïÑÎûòÏùò ÏöîÏÜåÎ•º ÌòÑÏû¨Ïùò ÏöîÏÜåÏôÄ ÎπÑÍµêÌïòÏó¨ Î∂ÄÏ†ïÌñâÏúÑÏù∏ÏßÄ ÌôïÏù∏
 	pkt.movementinfo().position();
 	pkt.movementinfo().front();
 	pkt.movementinfo().velocity();

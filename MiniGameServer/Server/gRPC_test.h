@@ -1,14 +1,14 @@
-#pragma once
+ï»¿#pragma once
 
-#include <grpcpp/grpcpp.h>      // gRPC ¶óÀÌºê·¯¸®
-#include "S2D_Protocol.grpc.pb.h" // protoc ÄÄÆÄÀÏ·Î »ı¼ºµÈ Çì´õ ÆÄÀÏ
+#include <grpcpp/grpcpp.h>      // gRPC ë¼ì´ë¸ŒëŸ¬ë¦¬
+#include "S2D_Protocol.grpc.pb.h" // protoc ì»´íŒŒì¼ë¡œ ìƒì„±ëœ í—¤ë” íŒŒì¼
 
 class GreeterClient {
 private:
     unique_ptr<S2D_Protocol::S2D_Service::Stub> stub_;
     unique_ptr<grpc::CompletionQueue> cq_;
 
-    // AsyncClientCall: °¢ RPC È£ÃâÀÇ »óÅÂ¸¦ °ü¸®ÇÏ´Â °´Ã¼
+    // AsyncClientCall: ê° RPC í˜¸ì¶œì˜ ìƒíƒœë¥¼ ê´€ë¦¬í•˜ëŠ” ê°ì²´
     struct AsyncClientCall {
         S2D_Protocol::HelloReply reply;
         grpc::ClientContext context;
@@ -29,15 +29,15 @@ public:
     void SayHelloAsync(const string& user) {
         AsyncClientCall* call = new AsyncClientCall();
 
-        // 1. ¿äÃ» ¸Ş½ÃÁö °´Ã¼¸¦ ¸ÕÀú »ı¼ºÇÏ°í µ¥ÀÌÅÍ¸¦ ¼³Á¤
+        // 1. ìš”ì²­ ë©”ì‹œì§€ ê°ì²´ë¥¼ ë¨¼ì € ìƒì„±í•˜ê³  ë°ì´í„°ë¥¼ ì„¤ì •
         S2D_Protocol::HelloRequest request;
         request.set_name(user);
 
-        // 2. ÁØºñµÈ ¿äÃ» °´Ã¼¸¦ PrepareAsyncSayHello ÇÔ¼ö¿¡ Àü´Ş
+        // 2. ì¤€ë¹„ëœ ìš”ì²­ ê°ì²´ë¥¼ PrepareAsyncSayHello í•¨ìˆ˜ì— ì „ë‹¬
         call->response_reader = stub_->PrepareAsyncSayHello(&call->context, request, cq_.get());
         call->response_reader->StartCall();
 
-        // 3. ÀÀ´äÀ» ±â´Ù¸®¸ç CompletionQueue¿¡ ÅÂ±×¸¦ µî·Ï
+        // 3. ì‘ë‹µì„ ê¸°ë‹¤ë¦¬ë©° CompletionQueueì— íƒœê·¸ë¥¼ ë“±ë¡
         call->response_reader->Finish(&call->reply, &call->status, (void*)call);
     }
 
@@ -55,7 +55,7 @@ public:
                 cerr << "Client: RPC failed with code " << call->status.error_code() << " and message "
                     << string(call->status.error_message().begin(), call->status.error_message().end()) << endl;
             }
-            delete call; // RPC°¡ ¿Ï·áµÇ¸é °´Ã¼ ÇØÁ¦
+            delete call; // RPCê°€ ì™„ë£Œë˜ë©´ ê°ì²´ í•´ì œ
         }
     }
 };

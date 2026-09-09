@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "GlobalVariables.h"
 #include "DBServiceImpl.h"
 #include <grpcpp/grpcpp.h>
@@ -24,7 +24,7 @@ int main() {
     string server_cert = ReadFile("server.crt");
 
     if (server_key.empty() || server_cert.empty()) {
-        cerr << "ÀÎÁõ¼­ ÆÄÀÏ ¾øÀ½ Á¾·á ¤µ¤¡¤²" << endl;
+        cerr << "ì¸ì¦ì„œ íŒŒì¼ ì—†ìŒ ì¢…ë£Œ ã……ã„±ã…‚" << endl;
         return -1;
     }
 
@@ -37,7 +37,7 @@ int main() {
 
     grpc::ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::SslServerCredentials(ssl_opts));
-    builder.RegisterService(DBService.get()); // ºñµ¿±â ¼­ºñ½º µî·Ï
+    builder.RegisterService(DBService.get()); // ë¹„ë™ê¸° ì„œë¹„ìŠ¤ ë“±ë¡
 
     unique_ptr<grpc::ServerCompletionQueue> completionQueue(builder.AddCompletionQueue());
     DBService->setCompletionQueue(move(completionQueue));

@@ -1,4 +1,4 @@
-using Google.Protobuf.Protocol;
+ï»¿using Google.Protobuf.Protocol;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,8 +14,8 @@ public class UI_LoginPopup : UI_Popup {
         LoginButton
     }
 
-    //ÀÌ Ä£±¸µéÀº Æ÷ÀÎÅÍÀÌ´Ù. °¡Áö°í ÀÖ¾îµµ ¸Ş¸ğ¸®ÀûÀ¸·Î ¼ÕÇØ Á¶±İ º¸´Â Á¤µµ.
-    //C++Ã³·³ »ı°¢ÇØ¼­, ÇØ´ç °´Ã¼°¡ ÇÏ³ª ´õ ¸Ş¸ğ¸®¿¡ ·ÎµåµÇ´Â °³³äÀÌ ¾Æ´Ï´Ù.
+    //ì´ ì¹œêµ¬ë“¤ì€ í¬ì¸í„°ì´ë‹¤. ê°€ì§€ê³  ìˆì–´ë„ ë©”ëª¨ë¦¬ì ìœ¼ë¡œ ì†í•´ ì¡°ê¸ˆ ë³´ëŠ” ì •ë„.
+    //C++ì²˜ëŸ¼ ìƒê°í•´ì„œ, í•´ë‹¹ ê°ì²´ê°€ í•˜ë‚˜ ë” ë©”ëª¨ë¦¬ì— ë¡œë“œë˜ëŠ” ê°œë…ì´ ì•„ë‹ˆë‹¤.
     private Button _loginButton;
     private TMP_InputField _idField;
     private TMP_InputField _pwField;
@@ -65,7 +65,7 @@ public class UI_LoginPopup : UI_Popup {
         Managers.Network.Lobby.TryLogin(id, password);
     }
 
-    //Tab´­·¶À»¶§ ÆĞ½º¿öµå Ã¢À¸·Î Æ÷Ä¿½º ÀÌµ¿
+    //TabëˆŒë €ì„ë•Œ íŒ¨ìŠ¤ì›Œë“œ ì°½ìœ¼ë¡œ í¬ì»¤ìŠ¤ ì´ë™
     private void FocusToNxt() {
         GameObject current = EventSystem.current.currentSelectedGameObject;
         if (current == null) return;

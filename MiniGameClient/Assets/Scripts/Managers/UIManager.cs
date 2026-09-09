@@ -1,11 +1,11 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
 public class UIManager {
-    //´ëÀüÁ¦ : °°Àº ÀÌ¸§À» °¡Áö´Â UI´Â ¸¸µé¸é ¾È µÈ´Ù.
-           //: SceneUIÀÇ °³¼ö´Â ÇÕÇØµµ 10ÀÌ ³ÑÁö ¾ÊÀ¸¸ç, PopupUI´Â SceneUIº¸´Ù ¾Õ¿¡ Ãâ·ÂµÈ´Ù.
+    //ëŒ€ì „ì œ : ê°™ì€ ì´ë¦„ì„ ê°€ì§€ëŠ” UIëŠ” ë§Œë“¤ë©´ ì•ˆ ëœë‹¤.
+           //: SceneUIì˜ ê°œìˆ˜ëŠ” í•©í•´ë„ 10ì´ ë„˜ì§€ ì•Šìœ¼ë©°, PopupUIëŠ” SceneUIë³´ë‹¤ ì•ì— ì¶œë ¥ëœë‹¤.
     private Dictionary<string, GameObject> _uiCache = new Dictionary<string, GameObject>();
     private int _sceneOrder = 0;
     private int _popupOrder = 10;
@@ -21,8 +21,8 @@ public class UIManager {
         }
     }
 
-    //name -> prefabÀÇ ÀÌ¸§
-    //nameÀÌ¶ó´Â ÀÌ¸§À» °¡Áø UI_Popup¿¡ ÇØ´çÇÏ´Â GameObject¸¦ »ı¼ºÇÏ°í <T> ÄÄÆ÷³ÍÆ®¸¦ ºÎÂø.
+    //name -> prefabì˜ ì´ë¦„
+    //nameì´ë¼ëŠ” ì´ë¦„ì„ ê°€ì§„ UI_Popupì— í•´ë‹¹í•˜ëŠ” GameObjectë¥¼ ìƒì„±í•˜ê³  <T> ì»´í¬ë„ŒíŠ¸ë¥¼ ë¶€ì°©.
     public T ShowPopupUI<T>(string name = null) where T : UI_Popup {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
@@ -45,14 +45,14 @@ public class UIManager {
         int newOrder = Interlocked.Increment(ref _popupOrder);
         canvas.sortingOrder = newOrder;
 
-        //goÀÇ ÂüÁ¶°ªÀ»(Æ÷ÀÎÅÍ¶ó°í »ı°¢ÇÏ¸é ÆíÇÔ) µé°í ÀÖ±â ¶§¹®¿¡, 
-        //À§ÀÇ µñ¼Å³Ê¸® ÄÁÅ×ÀÌ³Ê¿¡¼­ ÇØ´ç object¸¦ ²¨³» ÄÁÆ®·Ñ ÇÒ ¼ö ÀÖ´Ù.
+        //goì˜ ì°¸ì¡°ê°’ì„(í¬ì¸í„°ë¼ê³  ìƒê°í•˜ë©´ í¸í•¨) ë“¤ê³  ìˆê¸° ë•Œë¬¸ì—, 
+        //ìœ„ì˜ ë”•ì…”ë„ˆë¦¬ ì»¨í…Œì´ë„ˆì—ì„œ í•´ë‹¹ objectë¥¼ êº¼ë‚´ ì»¨íŠ¸ë¡¤ í•  ìˆ˜ ìˆë‹¤.
         _uiCache.Add(name, go);
 
         return popup;
     }
 
-    //nameÀÌ¶ó´Â ÀÌ¸§À» °¡Áø UI_Scene¿¡ ÇØ´çÇÏ´Â GameObject¸¦ »ı¼ºÇÏ°í <T> ÄÄÆ÷³ÍÆ®¸¦ ºÎÂø.
+    //nameì´ë¼ëŠ” ì´ë¦„ì„ ê°€ì§„ UI_Sceneì— í•´ë‹¹í•˜ëŠ” GameObjectë¥¼ ìƒì„±í•˜ê³  <T> ì»´í¬ë„ŒíŠ¸ë¥¼ ë¶€ì°©.
     public T ShowSceneUI<T>(string name = null) where T : UI_Scene {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
@@ -79,10 +79,10 @@ public class UIManager {
         return sceneUI;
     }
 
-    //ÀÌ¹Ì Á¸ÀçÇÏ´Â UI¸¦ Àá½Ã SetActive(false)
+    //ì´ë¯¸ ì¡´ì¬í•˜ëŠ” UIë¥¼ ì ì‹œ SetActive(false)
     public void DisableUI(string uiName) {
-        //µñ¼Å³Ê¸® ÄÁÅ×ÀÌ³Ê¿¡¼­, uiName¿¡ ÇØ´çÇÏ´Â objectÀÇ Æ÷ÀÎÅÍ¸¦ ²¨³½´Ù.
-        //±×¸®°í Active°ªÀ» º¯°æ
+        //ë”•ì…”ë„ˆë¦¬ ì»¨í…Œì´ë„ˆì—ì„œ, uiNameì— í•´ë‹¹í•˜ëŠ” objectì˜ í¬ì¸í„°ë¥¼ êº¼ë‚¸ë‹¤.
+        //ê·¸ë¦¬ê³  Activeê°’ì„ ë³€ê²½
         if (_uiCache.TryGetValue(uiName, out GameObject uiObj)) {
             if (uiObj != null)
                 uiObj.SetActive(false);
@@ -91,7 +91,7 @@ public class UIManager {
         }
     }
 
-    //ÀÌ¹Ì Á¸ÀçÇÏ¸é¼­, SetActive(false)ÀÎ UI¸¦ enable
+    //ì´ë¯¸ ì¡´ì¬í•˜ë©´ì„œ, SetActive(false)ì¸ UIë¥¼ enable
     public void EnableUI(string uiName) {
         if (_uiCache.TryGetValue(uiName, out GameObject uiObj))
             uiObj.SetActive(true);
@@ -110,7 +110,7 @@ public class UIManager {
     }
 
     public void Clear() {
-        //Ä³½Ã¸¦ ºñ¿ì°í, sortOrder¸¦ Á¤»óÈ­.
+        //ìºì‹œë¥¼ ë¹„ìš°ê³ , sortOrderë¥¼ ì •ìƒí™”.
         foreach (var pair in _uiCache) {
             Managers.Resource.Destroy(pair.Value);
         }
@@ -120,8 +120,8 @@ public class UIManager {
     }
 
     public UI_ErrorOnlyConfirm ShowErrorUIOnlyConfirm(string errorDetail, Action confirmOnClickEvent = null) {
-        //¿¡·¯ ¹ß»ı UI´Â Ä³½ÌÇÏÁö ¾ÊÀ½.
-        //Á¤»óÀûÀÎ »óÈ²Àº ¾Æ´Ï±â ¶§¹®¿¡ º¸¼öÀûÀ¸·Î Á¢±ÙÇÑ´Ù.
+        //ì—ëŸ¬ ë°œìƒ UIëŠ” ìºì‹±í•˜ì§€ ì•ŠìŒ.
+        //ì •ìƒì ì¸ ìƒí™©ì€ ì•„ë‹ˆê¸° ë•Œë¬¸ì— ë³´ìˆ˜ì ìœ¼ë¡œ ì ‘ê·¼í•œë‹¤.
         GameObject go = Managers.Resource.Instantiate("UI/Popup/UI_ErrorOnlyConfirm");
         UI_ErrorOnlyConfirm uiError = Util.GetOrAddComponent<UI_ErrorOnlyConfirm>(go);
 
@@ -132,11 +132,11 @@ public class UIManager {
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
-        //ÃÖ»ó´Ü¿¡ À§Ä¡ÇÏµµ·Ï
+        //ìµœìƒë‹¨ì— ìœ„ì¹˜í•˜ë„ë¡
         int order = _popupOrder + 1000;
         canvas.sortingOrder = order;
 
-        //¿¡·¯ ³»¿ë + È®ÀÎ ¹öÆ° Å¬¸¯½Ã Ãß°¡ÀûÀ¸·Î ½ÇÇàÇÒ ÇÔ¼ö¸¦ ´ã¾Æ ÃÊ±âÈ­.
+        //ì—ëŸ¬ ë‚´ìš© + í™•ì¸ ë²„íŠ¼ í´ë¦­ì‹œ ì¶”ê°€ì ìœ¼ë¡œ ì‹¤í–‰í•  í•¨ìˆ˜ë¥¼ ë‹´ì•„ ì´ˆê¸°í™”.
         if (uiError != null) {
             uiError.Init(errorDetail, confirmOnClickEvent);
         }
@@ -155,11 +155,11 @@ public class UIManager {
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
-        //ÃÖ»ó´Ü¿¡ À§Ä¡ÇÏµµ·Ï
+        //ìµœìƒë‹¨ì— ìœ„ì¹˜í•˜ë„ë¡
         int order = _popupOrder + 1000;
         canvas.sortingOrder = order;
 
-        //¿¡·¯ ³»¿ë + °¢ ¹öÆ° Å¬¸¯½Ã ½ÇÇàÇÒ ÇÔ¼ö
+        //ì—ëŸ¬ ë‚´ìš© + ê° ë²„íŠ¼ í´ë¦­ì‹œ ì‹¤í–‰í•  í•¨ìˆ˜
         if (uiError != null) {
             uiError.Init(errorDetail, confirmOnClickEvent, cancelOnClickEvent);
         }

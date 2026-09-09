@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "GlobalVariables.h"
 #include <openssl/rand.h>
 
@@ -23,25 +23,25 @@ public:
 } GDBGlobal;
 
 DBManager::DBManager() : _hEnv(nullptr) {
-    //ODBC È¯°æ ¹× ¿¬°á ÃÊ±âÈ­
+    //ODBC í™˜ê²½ ë° ì—°ê²° ì´ˆê¸°í™”
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &_hEnv);
     if (!SQL_SUCCEEDED(ret)) {
-        cout << "È¯°æ ÇÚµé ÇÒ´ç ½ÇÆĞ." << endl;
+        cout << "í™˜ê²½ í•¸ë“¤ í• ë‹¹ ì‹¤íŒ¨." << endl;
         return;
     }
 
-    // ODBC ¹öÀü ¼³Á¤
+    // ODBC ë²„ì „ ì„¤ì •
     ret = SQLSetEnvAttr(_hEnv, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, SQL_IS_INTEGER);
 
-    //È¯°æº¯¼ö ¼³Á¤
+    //í™˜ê²½ë³€ìˆ˜ ì„¤ì •
     SetEnv();
 
-    //¿¬°á ÇÚµé Ç®¿¡, ¿¬°áµÈ »óÅÂÀÇ ÇÚµéÀ» 3°³ Ãß°¡.
+    //ì—°ê²° í•¸ë“¤ í’€ì—, ì—°ê²°ëœ ìƒíƒœì˜ í•¸ë“¤ì„ 3ê°œ ì¶”ê°€.
     for (int i = 0; i < 3; i++) {
         ReturnHDbc(ConnectNewHDbc());
     }
 
-    //CRUD Å×½ºÆ®
+    //CRUD í…ŒìŠ¤íŠ¸
 #ifdef _DEBUG
     try {
         InitialC();
@@ -64,13 +64,13 @@ DBManager::~DBManager() {
             SQLHDBC hDbc = _hDbcQ.front();
             SQLFreeHandle(SQL_HANDLE_DBC, &hDbc);
             _hDbcQ.pop();
-        }  // ¿¬°á ÇÚµé ÇØÁ¦
+        }  // ì—°ê²° í•¸ë“¤ í•´ì œ
     }
-    SQLFreeHandle(SQL_HANDLE_ENV, _hEnv);  // È¯°æ ÇÚµé ÇØÁ¦
+    SQLFreeHandle(SQL_HANDLE_ENV, _hEnv);  // í™˜ê²½ í•¸ë“¤ í•´ì œ
 }
 
 void DBManager::SetEnv() {
-    //DB¿¬°áÀ» À§ÇÑ Äõ¸® ÀÛ¼ºÀ» À§ÇØ¼­, ¼³Á¤À» È¯°æ º¯¼ö¿¡¼­ ÀĞ¾î³¿ (´Ù¸¥»ç¶÷ÀÌ º¸¸é °ï¶õ)
+    //DBì—°ê²°ì„ ìœ„í•œ ì¿¼ë¦¬ ì‘ì„±ì„ ìœ„í•´ì„œ, ì„¤ì •ì„ í™˜ê²½ ë³€ìˆ˜ì—ì„œ ì½ì–´ëƒ„ (ë‹¤ë¥¸ì‚¬ëŒì´ ë³´ë©´ ê³¤ë€)
     ifstream envFile(".env");
     if (envFile.is_open())
         cout << ".env Open Succeed!" << endl;
@@ -79,29 +79,29 @@ void DBManager::SetEnv() {
     string line;
 
     while (getline(envFile, line)) {
-        // °ø¹éÀÌ³ª ÁÖ¼®À» ¹«½ÃÇÏ°í, "=" ±âÁØÀ¸·Î KEY=VALUE ½ÖÀ» ÃßÃâ
+        // ê³µë°±ì´ë‚˜ ì£¼ì„ì„ ë¬´ì‹œí•˜ê³ , "=" ê¸°ì¤€ìœ¼ë¡œ KEY=VALUE ìŒì„ ì¶”ì¶œ
         if (line.empty() || line[0] == '#') continue;
 
-        // KEY=VALUE¿¡¼­ VALUE°¡ µû¿ÈÇ¥·Î °¨½ÎÁ® ÀÖ´Ù¸é ÀÌ¸¦ Á¦°Å
+        // KEY=VALUEì—ì„œ VALUEê°€ ë”°ì˜´í‘œë¡œ ê°ì‹¸ì ¸ ìˆë‹¤ë©´ ì´ë¥¼ ì œê±°
         size_t eqPos = line.find("=");
         if (eqPos != string::npos) {
             string key = line.substr(0, eqPos);
             string value = line.substr(eqPos + 1);
 
-            // VALUE°¡ µû¿ÈÇ¥·Î ¹­¿©ÀÖÀ» °æ¿ì, Á¦°Å
+            // VALUEê°€ ë”°ì˜´í‘œë¡œ ë¬¶ì—¬ìˆì„ ê²½ìš°, ì œê±°
             if (value.front() == '"' && value.back() == '"')
                 value = value.substr(1, value.length() - 2);
 
-            //Unicode·Î º¯È¯ (SetEnvironmentVariableW »ç¿ëÀ» À§ÇØ¼­)
-            //ÇÑ±ÛÀÌ Æ÷ÇÔµÇÁö ¾ÊÀ¸¸é¼­(ascii ÄÚµå ³»·Î ÀĞÈ÷´Â ¹®ÀÚµé), µ¿½Ã¿¡ WindowsÈ¯°æÀÌ¶ó¼­ Á¦´ë·Î µ¿ÀÛÇÑ´Ù.
+            //Unicodeë¡œ ë³€í™˜ (SetEnvironmentVariableW ì‚¬ìš©ì„ ìœ„í•´ì„œ)
+            //í•œê¸€ì´ í¬í•¨ë˜ì§€ ì•Šìœ¼ë©´ì„œ(ascii ì½”ë“œ ë‚´ë¡œ ì½íˆëŠ” ë¬¸ìë“¤), ë™ì‹œì— Windowsí™˜ê²½ì´ë¼ì„œ ì œëŒ€ë¡œ ë™ì‘í•œë‹¤.
             wstring wkey(key.begin(), key.end());
             wstring wvalue(value.begin(), value.end());
 
-            // È¯°æ º¯¼ö ¼³Á¤
+            // í™˜ê²½ ë³€ìˆ˜ ì„¤ì •
             if (SetEnvironmentVariableW(wkey.c_str(), wvalue.c_str()))
-                cout << "È¯°æ º¯¼ö : " << key << " ¼³Á¤ ¼º°ø." << std::endl;
+                cout << "í™˜ê²½ ë³€ìˆ˜ : " << key << " ì„¤ì • ì„±ê³µ." << std::endl;
             else
-                cout << "È¯°æ º¯¼ö ¼³Á¤ ½ÇÆĞ : " << key << " (¿¡·¯ ÄÚµå: " << GetLastError() << ")" << std::endl;
+                cout << "í™˜ê²½ ë³€ìˆ˜ ì„¤ì • ì‹¤íŒ¨ : " << key << " (ì—ëŸ¬ ì½”ë“œ: " << GetLastError() << ")" << std::endl;
         }
     }
     envFile.close();
@@ -115,7 +115,7 @@ bool DBManager::CheckReturn(SQLRETURN ret, SQLSMALLINT handleType, SQLHANDLE han
         SQLSMALLINT textLength;
         SQLSMALLINT recNumber = 1;
 
-        // ´õ ÀÌ»ó °¡Á®¿Ã µ¥ÀÌÅÍ°¡ ¾øÀ» ¶§(SQL_NO_DATA)±îÁö ¹İº¹
+        // ë” ì´ìƒ ê°€ì ¸ì˜¬ ë°ì´í„°ê°€ ì—†ì„ ë•Œ(SQL_NO_DATA)ê¹Œì§€ ë°˜ë³µ
         while (SQLGetDiagRecW(handleType, handle, recNumber, sqlState, &nativeError,
             messageText, sizeof(messageText) / sizeof(SQLWCHAR), &textLength) != SQL_NO_DATA)
         {
@@ -135,16 +135,16 @@ wstring DBManager::a2wsRef(const string& in_cp949) {
     if (in_cp949.empty())
         return L"";
 
-    // 1. ÇÊ¿äÇÑ wchar_t ¹öÆÛ Å©±â °è»ê (NULL Á¾·á ¹®ÀÚ Æ÷ÇÔ)
+    // 1. í•„ìš”í•œ wchar_t ë²„í¼ í¬ê¸° ê³„ì‚° (NULL ì¢…ë£Œ ë¬¸ì í¬í•¨)
     int w_len = MultiByteToWideChar(CP_ACP, 0, in_cp949.c_str(), -1, NULL, 0);
     if (w_len == 0)
         throw runtime_error("a2ws: Failed to get required length. LastError: " + to_string(GetLastError()));
 
-    // 2. ÇÒ´ç
+    // 2. í• ë‹¹
     wstring ws;
     ws.resize(w_len - 1);
 
-    //°ª Ã¤¿ì±â
+    //ê°’ ì±„ìš°ê¸°
     if (!MultiByteToWideChar(CP_ACP, 0, in_cp949.c_str(), -1, &ws[0], w_len))
         throw runtime_error("a2ws: Failed to convert string to wchar. LastError: " + std::to_string(GetLastError()));
 
@@ -155,16 +155,16 @@ wstring DBManager::s2wsRef(const string& in_u8s) {
     if (in_u8s.empty())
         return L"";
 
-    // 1. ÇÊ¿äÇÑ wchar_t ¹öÆÛ Å©±â °è»ê (NULL Á¾·á ¹®ÀÚ Æ÷ÇÔ)
+    // 1. í•„ìš”í•œ wchar_t ë²„í¼ í¬ê¸° ê³„ì‚° (NULL ì¢…ë£Œ ë¬¸ì í¬í•¨)
     int w_len = MultiByteToWideChar(CP_UTF8, 0, in_u8s.c_str(), -1, NULL, 0);
     if (w_len == 0)
         throw runtime_error("s2ws: Failed to get required length. LastError: " + to_string(GetLastError()));
 
-    // 2. ÇÒ´ç
+    // 2. í• ë‹¹
     wstring ws;
     ws.resize(w_len - 1);
 
-    //°ª Ã¤¿ì±â
+    //ê°’ ì±„ìš°ê¸°
     if (!MultiByteToWideChar(CP_UTF8, 0, in_u8s.c_str(), -1, &ws[0], w_len))
         throw runtime_error("s2ws: Failed to convert string to wchar. LastError: " + std::to_string(GetLastError()));
 
@@ -181,13 +181,13 @@ wstring DBManager::v2wsRef(const vector<unsigned char>& in_binary) {
 
 vector<unsigned char> DBManager::s2vRef(const string& hex_str) {
     vector<unsigned char> in_binary;
-    // ÀÔ·Â ¹®ÀÚ¿­ÀÇ ±æÀÌ°¡ È¦¼öÀÌ¸é º¯È¯ ºÒ°¡
+    // ì…ë ¥ ë¬¸ìì—´ì˜ ê¸¸ì´ê°€ í™€ìˆ˜ì´ë©´ ë³€í™˜ ë¶ˆê°€
     if (hex_str.length() % 2 != 0) {
-        throw invalid_argument("16Áø¼ö ¹®ÀÚ¿­ÀÇ ±æÀÌ°¡ È¦¼öÀÔ´Ï´Ù.");
+        throw invalid_argument("16ì§„ìˆ˜ ë¬¸ìì—´ì˜ ê¸¸ì´ê°€ í™€ìˆ˜ì…ë‹ˆë‹¤.");
     }
 
     for (size_t i = 0; i < hex_str.length(); i += 2) {
-        // 16Áø¼ö ¹®ÀÚ 2°³(¿¹: "ab")¸¦ unsigned int·Î º¯È¯
+        // 16ì§„ìˆ˜ ë¬¸ì 2ê°œ(ì˜ˆ: "ab")ë¥¼ unsigned intë¡œ ë³€í™˜
         string byte_string = hex_str.substr(i, 2);
         unsigned int byte_val = 0;
         stringstream ss;
@@ -204,17 +204,17 @@ string DBManager::ws2sRef(const wstring& in_u16ws) {
         return "";
     }
 
-    // 1. ÇÊ¿äÇÑ ¹öÆÛ Å©±â °è»ê
+    // 1. í•„ìš”í•œ ë²„í¼ í¬ê¸° ê³„ì‚°
     int s_len = WideCharToMultiByte(CP_UTF8, 0, in_u16ws.c_str(), -1, nullptr, 0, nullptr, nullptr);
     if (s_len == 0) {
         throw runtime_error("Failed to determine buffer size for string conversion.");
     }
 
-    // 2. ÇÒ´ç
+    // 2. í• ë‹¹
     string s;
-    s.resize(s_len - 1); // ³Î Á¾·á ¹®ÀÚ Á¦¿ÜÇÏ°í Å©±â ÇÒ´ç
+    s.resize(s_len - 1); // ë„ ì¢…ë£Œ ë¬¸ì ì œì™¸í•˜ê³  í¬ê¸° í• ë‹¹
 
-    // 3. °ª Ã¤¿ì±â
+    // 3. ê°’ ì±„ìš°ê¸°
     if (!WideCharToMultiByte(CP_UTF8, 0, in_u16ws.c_str(), -1, &s[0], s_len, nullptr, nullptr))
         throw runtime_error("ws2s: Failed to convert ws to string. LastError: " + to_string(GetLastError()));
     return s;
@@ -248,14 +248,14 @@ SQLHDBC DBManager::ConnectNewHDbc() {
             ret = SQLDriverConnectW(hDbc, NULL, connStr, wcslen(connStr), NULL, 0, NULL, SQL_DRIVER_COMPLETE);
             if (!SQL_SUCCEEDED(ret)) {
                 SQLFreeHandle(SQL_HANDLE_DBC, hDbc);
-                throw runtime_error("DB ¿¬°á ½ÇÆĞ");
+                throw runtime_error("DB ì—°ê²° ì‹¤íŒ¨");
             }
             else {
-                cout << "DB ¿¬°á ¼º°ø" << endl;
+                cout << "DB ì—°ê²° ì„±ê³µ" << endl;
             }
         }
         else
-            throw runtime_error("È¯°æ º¯¼ö¿¡ °ªÀÌ ¿Ã¹Ù¸£Áö ¾ÊÀ½");
+            throw runtime_error("í™˜ê²½ ë³€ìˆ˜ì— ê°’ì´ ì˜¬ë°”ë¥´ì§€ ì•ŠìŒ");
     }
     catch (runtime_error& e) {
         cout << e.what() << endl;
@@ -446,20 +446,20 @@ void DBManager::AkagiRedSunsNo2() {
     SQLHSTMT hStmt = nullptr;
     SQLHDBC hDbc = PopHDbc();
     if (hDbc == nullptr) {
-        cout << "ºÒ·® hDbc ÀÌ½´" << endl;
+        cout << "ë¶ˆëŸ‰ hDbc ì´ìŠˆ" << endl;
         return;
     }
     
-    //´çÀå ÀÌ ÇÔ¼ö ³»¿¡¼­´Â ±×·² ÀÏÀÌ ¾ø°ÚÁö¸¸,
-    //¸ÖÆ¼½º·¹µåÈ¯°æÀ» °í·ÁÇßÀ» ¶§, Cleaner´Â 1°³·Î ÅëÀÏÇÏ´Â °ÍÀÌ ÁÁ´Ù. (ÃÊ±âÈ­ ¼ø¼­ º¸Àå)
-    //·Ñ¹é µÇ±âÀü¿¡ hDbc ÇÚµéÀÌ ÃÊ±âÈ­ µÉ °¡´É¼ºÀÌ ÀÖ´Ù.
+    //ë‹¹ì¥ ì´ í•¨ìˆ˜ ë‚´ì—ì„œëŠ” ê·¸ëŸ´ ì¼ì´ ì—†ê² ì§€ë§Œ,
+    //ë©€í‹°ìŠ¤ë ˆë“œí™˜ê²½ì„ ê³ ë ¤í–ˆì„ ë•Œ, CleanerëŠ” 1ê°œë¡œ í†µì¼í•˜ëŠ” ê²ƒì´ ì¢‹ë‹¤. (ì´ˆê¸°í™” ìˆœì„œ ë³´ì¥)
+    //ë¡¤ë°± ë˜ê¸°ì „ì— hDbc í•¸ë“¤ì´ ì´ˆê¸°í™” ë  ê°€ëŠ¥ì„±ì´ ìˆë‹¤.
     Cleaner hDbcCleaner([=]() {
         ReturnHDbc(hDbc);
     });
 
     SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
     if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-        cout << "hStmt ÇÒ´ç ½ÇÆĞ;" << endl;
+        cout << "hStmt í• ë‹¹ ì‹¤íŒ¨;" << endl;
         return;
     }
 
@@ -487,7 +487,7 @@ void DBManager::AkagiRedSunsNo2() {
     ret = SQLFetch(hStmt);
     if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
         exists = true;
-        cout << "ÀÖ´Â ¾ÆÀÌµğ µ¥½º¿ì" << endl;
+        cout << "ìˆëŠ” ì•„ì´ë”” ë°ìŠ¤ìš°" << endl;
         return;
     }
     else if (ret == SQL_NO_DATA) {
@@ -499,7 +499,7 @@ void DBManager::AkagiRedSunsNo2() {
 
     ret = SQLSetConnectAttr(hDbc, SQL_ATTR_AUTOCOMMIT, (SQLPOINTER)SQL_AUTOCOMMIT_OFF, SQL_IS_UINTEGER);
     if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-        cout << "·¹µå ¸®ºÎÆ® ¸ÂÀ½." << endl;
+        cout << "ë ˆë“œ ë¦¬ë¶€íŠ¸ ë§ìŒ." << endl;
         return;
     }
     Cleaner Lovely_Labrynth_Of_The_Silver_Castle([=]() {
@@ -509,7 +509,7 @@ void DBManager::AkagiRedSunsNo2() {
     SQLHSTMT hStmt2 = nullptr;
     ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt2);
     if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-        cout << "hStmt2 ÇÒ´ç ½ÇÆĞ;" << endl;
+        cout << "hStmt2 í• ë‹¹ ì‹¤íŒ¨;" << endl;
         return;
     }
     Cleaner hStmt2Cleaner([=]() {
@@ -532,14 +532,14 @@ void DBManager::AkagiRedSunsNo2() {
         return;
     }
 
-    //Player Table SELECT ÀÛ¾÷
-    //¹æ±İ Ãß°¡ÇÑ °èÁ¤ÀÇ dbid¸¦ ¾ò¾î¿È.
+    //Player Table SELECT ì‘ì—…
+    //ë°©ê¸ˆ ì¶”ê°€í•œ ê³„ì •ì˜ dbidë¥¼ ì–»ì–´ì˜´.
     SQLINTEGER dbid = -1;
 
     SQLHSTMT hStmt3 = nullptr;
     ret = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt3);
     if (!CheckReturn(ret, SQL_HANDLE_DBC, hDbc)) {
-        cout << "hStmt3 ÇÒ´ç ½ÇÆĞ;" << endl;
+        cout << "hStmt3 í• ë‹¹ ì‹¤íŒ¨;" << endl;
         return;
     }
     Cleaner hStmt3Cleaner([=]() {
@@ -568,7 +568,7 @@ void DBManager::AkagiRedSunsNo2() {
     if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
         ret = SQLGetData(hStmt3, 1, SQL_C_SLONG, &dbid, sizeof(dbid), &dbid_ind);
         cout << dbid << endl;
-        // Á¤»ó µ¿ÀÛ
+        // ì •ìƒ ë™ì‘
     }
     else if (ret == SQL_NO_DATA) {
         return;
@@ -594,7 +594,7 @@ void DBManager::AkagiRedSunsNo2() {
     vector<unsigned char> salt(DBManager::salt_size);
     vector<unsigned char> hash(DBManager::hash_size);
     if (RAND_bytes(salt.data(), DBManager::salt_size) != 1) {
-        cout << "ÀÌ°Å½ÇÆĞ" << endl;
+        cout << "ì´ê±°ì‹¤íŒ¨" << endl;
         return;
     }
 
@@ -608,7 +608,7 @@ void DBManager::AkagiRedSunsNo2() {
         DBManager::hash_size,
         hash.data()
     ) != 1) {
-        cout << "±×°Å½ÇÆĞ" << endl;
+        cout << "ê·¸ê±°ì‹¤íŒ¨" << endl;
         return;
     }
 
@@ -679,7 +679,7 @@ void DBManager::ScandinavianFlick() {
     SQLHSTMT hStmt2 = nullptr;
     SQLHDBC hDbc = PopHDbc();
 
-    //½ºÄÚÇÁ¸¦ ¹ş¾î³¯¶§ ÀÚ¿øÀ» ÇØÁ¦ÇØ ÁÙ Ä£±¸µé
+    //ìŠ¤ì½”í”„ë¥¼ ë²—ì–´ë‚ ë•Œ ìì›ì„ í•´ì œí•´ ì¤„ ì¹œêµ¬ë“¤
     Cleaner hDbcCleaner([=]() { ReturnHDbc(hDbc); });
     Cleaner hStmtCleaner([=]() {
         if (hStmt1 != nullptr)
@@ -716,25 +716,25 @@ void DBManager::ScandinavianFlick() {
     bool flag = false;
 
     ret = SQLFetch(hStmt1);
-    // SQL¹® ¼º°øÀº Çß´Ù (µ¥ÀÌÅÍ ¾øÀ½) or SQL¹® ¼º°øÇØ¼­ °á°ú¸¦ µé°í¿Ô´Ù
+    // SQLë¬¸ ì„±ê³µì€ í–ˆë‹¤ (ë°ì´í„° ì—†ìŒ) or SQLë¬¸ ì„±ê³µí•´ì„œ ê²°ê³¼ë¥¼ ë“¤ê³ ì™”ë‹¤
     if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
         ret = SQLGetData(hStmt1, 1, SQL_C_SLONG, &dbid, sizeof(dbid), NULL);
-        // Á¤»ó µ¿ÀÛ 1, °¡Á®¿À´Âµ¥ ¼º°ø
+        // ì •ìƒ ë™ì‘ 1, ê°€ì ¸ì˜¤ëŠ”ë° ì„±ê³µ
         if (ret == SQL_SUCCESS || ret == SQL_SUCCESS_WITH_INFO) {
             flag = true;
         }
-        //? ÀÖ´Âµ¥ º¸¿©ÁÖ±ä ½ÈÀ½? ÀÌ°Ç ¹«½¼»óÈ²
+        //? ìˆëŠ”ë° ë³´ì—¬ì£¼ê¸´ ì‹«ìŒ? ì´ê±´ ë¬´ìŠ¨ìƒí™©
         else {
             cout << "Failed to get data" << endl;
             return;
         }
     }
-    // Á¤»ó µ¿ÀÛ 2, ÀÏÄ¡ÇÏ´Â µ¥ÀÌÅÍ°¡ ¾øÀ½. DBÀß¸øÀÌ ¾Æ´Ô. »ç¶÷ Àß¸ø.
+    // ì •ìƒ ë™ì‘ 2, ì¼ì¹˜í•˜ëŠ” ë°ì´í„°ê°€ ì—†ìŒ. DBì˜ëª»ì´ ì•„ë‹˜. ì‚¬ëŒ ì˜ëª».
     else if (ret == SQL_NO_DATA) {
         cout << "No Data" << endl;
         return;
     }
-    // SQL¹® Fetch¿¡ ½ÇÆĞÇÔ.
+    // SQLë¬¸ Fetchì— ì‹¤íŒ¨í•¨.
     else {
         return;
     }
@@ -768,21 +768,21 @@ void DBManager::ScandinavianFlick() {
         flag = true;
     }
     else if (ret == SQL_NO_DATA) {
-        cout << "ÀÏÄ¡ÇÏ´Â µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù." << endl;
+        cout << "ì¼ì¹˜í•˜ëŠ” ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤." << endl;
         return;
     }
     else {
         return;
     }
 
-    // °á°ú µ¥ÀÌÅÍ ¹öÆÛ ÁØºñ
+    // ê²°ê³¼ ë°ì´í„° ë²„í¼ ì¤€ë¹„
     const size_t HASH_SIZE = 64;
     const size_t SALT_SIZE = 32;
     wstring password_hash(HASH_SIZE, L' ');
     wstring salt(SALT_SIZE, L' ');
     SQLLEN hash_ind, salt_ind;
 
-    // password_hash¿Í salt µ¥ÀÌÅÍ¸¦ °¡Á®¿È
+    // password_hashì™€ salt ë°ì´í„°ë¥¼ ê°€ì ¸ì˜´
     ret = SQLGetData(hStmt2, 1, SQL_C_WCHAR, password_hash.data(), (HASH_SIZE + 1) * sizeof(wchar_t), &hash_ind);
     if (!CheckReturn(ret, SQL_HANDLE_STMT, hStmt2)) {
         return;
@@ -802,7 +802,7 @@ void DBManager::ScandinavianFlick() {
     vector<unsigned char> vSalt = ws2vRef(salt);
     
     if (vSalt.size() != DBManager::salt_size) {
-        cout << "ÀÌ°Ô ´Ù¸£¸é ¾È´ëÂ¡" << endl;
+        cout << "ì´ê²Œ ë‹¤ë¥´ë©´ ì•ˆëŒ€ì§•" << endl;
         return;
     }
 
@@ -816,13 +816,13 @@ void DBManager::ScandinavianFlick() {
         DBManager::hash_size,
         requestedVHash.data()
     ) != 1) {
-        cout << "±×°Å½ÇÆĞ" << endl;
+        cout << "ê·¸ê±°ì‹¤íŒ¨" << endl;
         return;
     }
 
     wstring requestedWHash = GDBManager->v2wsRef(requestedVHash);
     if (requestedWHash == password_hash) {
-        cout << "¼º°ø" << endl;
+        cout << "ì„±ê³µ" << endl;
     }
 }
 
@@ -835,9 +835,9 @@ ThreadManager::~ThreadManager() {
 }
 
 void ThreadManager::InitTLS() {
-    //NxtThreadID´Â ¿À·ÎÁö InitTLSÇÔ¼ö·Î¸¸ °ü¸®µÇ¾î¾ßÇÔ.
-    //µû¶ó¼­ staticÇÔ¼ö ½ºÄÚÇÁ ³»¿¡ staticº¯¼ö·Î ¼±¾ğ
-    //ÀÌ ÇÔ¼ö ½ºÄÚÇÁ¸¦ ¹ş¾î³ªµµ NxtThreadID º¯¼ö´Â »ì¾ÆÀÖ´Ù.
+    //NxtThreadIDëŠ” ì˜¤ë¡œì§€ InitTLSí•¨ìˆ˜ë¡œë§Œ ê´€ë¦¬ë˜ì–´ì•¼í•¨.
+    //ë”°ë¼ì„œ staticí•¨ìˆ˜ ìŠ¤ì½”í”„ ë‚´ì— staticë³€ìˆ˜ë¡œ ì„ ì–¸
+    //ì´ í•¨ìˆ˜ ìŠ¤ì½”í”„ë¥¼ ë²—ì–´ë‚˜ë„ NxtThreadID ë³€ìˆ˜ëŠ” ì‚´ì•„ìˆë‹¤.
     static atomic<uint32_t> NxtThreadID = 1;
     MyThreadID = NxtThreadID.fetch_add(1);
 }

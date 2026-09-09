@@ -1,14 +1,14 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "RWLock.h"
 #include "CoreGlobal.h"
 #include <thread>
 
-//#include <sysinfoapi.h> Windows¿¡ Á¾¼ÓÀû
+//#include <sysinfoapi.h> Windowsì— ì¢…ì†ì 
 #include <time.h>
 
 void RWLock::WriteLock() {
 
-	//µ¿ÀÏÇÑ Thread°¡ WriteLockGuard¸¦ ÀÌ¹Ì ¼ÒÀ¯ÇÏ°í ÀÖ´Â °æ¿ì
+	//ë™ì¼í•œ Threadê°€ WriteLockGuardë¥¼ ì´ë¯¸ ì†Œìœ í•˜ê³  ìˆëŠ” ê²½ìš°
 	const uint32_t TaskThreadId = (_lockFlag.load() & WRITE_THREAD_MASK) >> 16;
 	if (MyThreadID == TaskThreadId) {
 		_writeCount++;
@@ -17,7 +17,7 @@ void RWLock::WriteLock() {
 	clock_t S_tick = clock();
 	//uint64_t S_tick = GetTickCount64();
 
-	//ÀÌ¿ÜÀÇ °æ¿ì, _lockFlag°¡ 0x0000'0000ÀÏ ¶§ ±îÁö race conditionÀ¸·Î µé¾î°£´Ù.
+	//ì´ì™¸ì˜ ê²½ìš°, _lockFlagê°€ 0x0000'0000ì¼ ë•Œ ê¹Œì§€ race conditionìœ¼ë¡œ ë“¤ì–´ê°„ë‹¤.
 	const uint32_t desired = (MyThreadID << 16 & WRITE_THREAD_MASK);
 	while (true) {
 		for (uint32_t trial = 0; trial < MAX_SPIN_COUNT; trial++) {
@@ -29,19 +29,19 @@ void RWLock::WriteLock() {
 		}
 		//if (GetTickCount64() - S_tick > ACQUIRE_TIMEOUT_TICK) {
 		if (clock() - S_tick > ACQUIRE_TIMEOUT_TICK) {
-			CRASH("spinLock ½Ã°£ ÃÊ°ú");
-			//TODO :: ÃÖ´ë ¼Ò¿ä½Ã°£ ÃÊ°ú½Ã ¿¹¿ÜÃ³¸®
+			CRASH("spinLock ì‹œê°„ ì´ˆê³¼");
+			//TODO :: ìµœëŒ€ ì†Œìš”ì‹œê°„ ì´ˆê³¼ì‹œ ì˜ˆì™¸ì²˜ë¦¬
 		}
-		//ÁöÁ¤µÈ È½¼ö ÀÌ»óÀÇ spinÀÌÈÄ Àç½ºÄÉÁÙ¸µ ´ë»óÀ¸·Î ÆíÀÔ
+		//ì§€ì •ëœ íšŸìˆ˜ ì´ìƒì˜ spinì´í›„ ì¬ìŠ¤ì¼€ì¤„ë§ ëŒ€ìƒìœ¼ë¡œ í¸ì…
 		this_thread::yield();
 	}
 }
 
 void RWLock::WriteUnlock() {
 	if ((_lockFlag.load() & READ_COUNT_MASK) != 0) {
-		//Read ÀÛ¾÷ÀÌ ¿Ï·áµÇÁö ¾ÊÀº °æ¿ì¿¡ WriteLockÀÌ ÇØÁ¦µÇ´Â°ÍÀº ÀÚ¿¬½º·´Áö ¾Ê´Ù.
-		//WriteÀÛ¾÷ µµÁßÀÇ Read¿ì·Á°¡ ÀÖÀ¸¹Ç·Î Crash¸¦ ÀÏÀ¸Å²´Ù.
-		CRASH("WriteLock ÇØÁ¦ ¿À·ù. ReadLockÀÌ ¸ÕÀú ÇØÁ¦ µÇÁö ¾ÊÀ½.")
+		//Read ì‘ì—…ì´ ì™„ë£Œë˜ì§€ ì•Šì€ ê²½ìš°ì— WriteLockì´ í•´ì œë˜ëŠ”ê²ƒì€ ìì—°ìŠ¤ëŸ½ì§€ ì•Šë‹¤.
+		//Writeì‘ì—… ë„ì¤‘ì˜ Readìš°ë ¤ê°€ ìˆìœ¼ë¯€ë¡œ Crashë¥¼ ì¼ìœ¼í‚¨ë‹¤.
+		CRASH("WriteLock í•´ì œ ì˜¤ë¥˜. ReadLockì´ ë¨¼ì € í•´ì œ ë˜ì§€ ì•ŠìŒ.")
 	}
 
 	const int32_t lockCount = --_writeCount;
@@ -50,7 +50,7 @@ void RWLock::WriteUnlock() {
 }
 
 void RWLock::ReadLock() {
-	//µ¿ÀÏÇÑ Thread°¡ WriteLockGuard¸¦ ÀÌ¹Ì ¼ÒÀ¯ÇÏ°í ÀÖ´Â °æ¿ì
+	//ë™ì¼í•œ Threadê°€ WriteLockGuardë¥¼ ì´ë¯¸ ì†Œìœ í•˜ê³  ìˆëŠ” ê²½ìš°
 	const uint32_t TaskThreadId = (_lockFlag.load() & WRITE_THREAD_MASK) >> 16;
 	if (MyThreadID == TaskThreadId) {
 		_lockFlag.fetch_add(1);
@@ -60,9 +60,9 @@ void RWLock::ReadLock() {
 	clock_t S_tick = clock();
 	//uint64_t S_tick = GetTickCount64();
 
-	//ÀÌ¿ÜÀÇ °æ¿ì, _lockFlag°¡ 0x0000'XXXXÀÏ ¶§ ±îÁö
-	//race conditionÀ¸·Î µé¾î°£´Ù. Read³¢¸®´Â °æÇÕÇÏÁö ¾Ê´Â´Ù¸¸,
-	//CAS¿¬»ê½Ã ´Ù¸¥ Thread°¡ WriteLockÀ» È¹µæÇÑ °æ¿ì¸¦ Á¶½ÉÇÑ´Ù.
+	//ì´ì™¸ì˜ ê²½ìš°, _lockFlagê°€ 0x0000'XXXXì¼ ë•Œ ê¹Œì§€
+	//race conditionìœ¼ë¡œ ë“¤ì–´ê°„ë‹¤. Readë¼ë¦¬ëŠ” ê²½í•©í•˜ì§€ ì•ŠëŠ”ë‹¤ë§Œ,
+	//CASì—°ì‚°ì‹œ ë‹¤ë¥¸ Threadê°€ WriteLockì„ íšë“í•œ ê²½ìš°ë¥¼ ì¡°ì‹¬í•œë‹¤.
 	while (true) {
 		for (uint32_t trial = 0; trial < MAX_SPIN_COUNT; trial++) {
 			uint32_t expected = (_lockFlag.load() & READ_COUNT_MASK);
@@ -72,15 +72,15 @@ void RWLock::ReadLock() {
 		}
 		//if (GetTickCount64() - S_tick > ACQUIRE_TIMEOUT_TICK) {
 		if (clock() - S_tick > ACQUIRE_TIMEOUT_TICK) {
-			CRASH("spinLock ½Ã°£ ÃÊ°ú");
-			//TODO :: ÃÖ´ë ¼Ò¿ä½Ã°£ ÃÊ°ú½Ã ¿¹¿ÜÃ³¸®
+			CRASH("spinLock ì‹œê°„ ì´ˆê³¼");
+			//TODO :: ìµœëŒ€ ì†Œìš”ì‹œê°„ ì´ˆê³¼ì‹œ ì˜ˆì™¸ì²˜ë¦¬
 		}
-		//ÁöÁ¤µÈ È½¼ö ÀÌ»óÀÇ spinÀÌÈÄ Àç½ºÄÉÁÙ¸µ ´ë»óÀ¸·Î ÆíÀÔ
+		//ì§€ì •ëœ íšŸìˆ˜ ì´ìƒì˜ spinì´í›„ ì¬ìŠ¤ì¼€ì¤„ë§ ëŒ€ìƒìœ¼ë¡œ í¸ì…
 		this_thread::yield();
 	}
 }
 
 void RWLock::ReadUnlock() {
 	if ((_lockFlag.fetch_sub(1) & READ_COUNT_MASK) == 0)
-		CRASH("ReadCount°¡ ÀÌ¹Ì 0ÀÌ¾î¼­ ÇØÁ¦ÇÒ ¼ö ¾øÀ½");
+		CRASH("ReadCountê°€ ì´ë¯¸ 0ì´ì–´ì„œ í•´ì œí•  ìˆ˜ ì—†ìŒ");
 }

@@ -1,19 +1,19 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InputManager {
-    //Å°¸¦ ´©¸¥ ½ÃÁ¡¿¡ 1¹ø, Å°¸¦ ¶¾ ½ÃÁ¡¿¡ 1¹ø, ²Ú´©¸£±â °¡´É ¿©ºÎ¸¦ ±¸º°ÇÏ±â À§ÇÑ enum
-    // 1 = µş, 2 = ±ï, 3 = ²Ú
+    //í‚¤ë¥¼ ëˆ„ë¥¸ ì‹œì ì— 1ë²ˆ, í‚¤ë¥¼ ë—€ ì‹œì ì— 1ë²ˆ, ê¾¹ëˆ„ë¥´ê¸° ê°€ëŠ¥ ì—¬ë¶€ë¥¼ êµ¬ë³„í•˜ê¸° ìœ„í•œ enum
+    // 1 = ë”¸, 2 = ê¹, 3 = ê¾¹
     public enum KeyState {
         Down = 0,
         Up = 1,
         Press = 2,
     }
 
-    //¿¡·¯ ¹ß»ı½Ã, ½×ÀÏ ½ºÅÃ. 1ÀÌ¶óµµ ÀÖÀ¸¸é InputÀ» InvokeÇÏÁö¾Ê´Â´Ù.
+    //ì—ëŸ¬ ë°œìƒì‹œ, ìŒ“ì¼ ìŠ¤íƒ. 1ì´ë¼ë„ ìˆìœ¼ë©´ Inputì„ Invokeí•˜ì§€ì•ŠëŠ”ë‹¤.
     int errStack = 0;
     public void IncrementCounter() {
         Interlocked.Increment(ref errStack);
@@ -29,11 +29,11 @@ public class InputManager {
     }
 
     public Action<Define.MouseEvent> MouseAction = null;
-    //Æ¯Á¤ KeyÅ°(Key°¡ Å°ÀÓ ¤»¤»¤»¤»¤»¾ı¤»¤»¤»¤»)¿¡ ÇÒ´çµÈ ¿©·¯ µ¨¸®°ÔÀÌÅÍµéÀ» ´ãÀ» µñ¼Å³Ê¸®
+    //íŠ¹ì • Keyí‚¤(Keyê°€ í‚¤ì„ ã…‹ã…‹ã…‹ã…‹ã…‹ì—Œã…‹ã…‹ã…‹ã…‹)ì— í• ë‹¹ëœ ì—¬ëŸ¬ ë¸ë¦¬ê²Œì´í„°ë“¤ì„ ë‹´ì„ ë”•ì…”ë„ˆë¦¬
     private Dictionary<KeyCode, List<ActionState>> _keyActions = new Dictionary<KeyCode, List<ActionState>>();
     bool _mousePressed = false;
 
-    //±¸µ¶
+    //êµ¬ë…
     public void AddKeyListener(KeyCode key, Action action, KeyState state = KeyState.Down) {
         if (!_keyActions.ContainsKey(key))
             _keyActions.Add(key, new List<ActionState>());
@@ -41,11 +41,11 @@ public class InputManager {
         _keyActions[key].Add(new ActionState { Action = action, State = state });
     }
 
-    //±¸µ¶ Ãë¼Ò, ¾ÈÇÏ¸é ¸Ş¸ğ¸® ´©¼ö »ı±è. object°¡ ÆÄ±«µÇ¾úÀ» ¶§, ÇØ´ç object·Î ÇÏ¿©±İ ¹İµå½Ã ½ÇÇàÇÒ °Í.
+    //êµ¬ë… ì·¨ì†Œ, ì•ˆí•˜ë©´ ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ ìƒê¹€. objectê°€ íŒŒê´´ë˜ì—ˆì„ ë•Œ, í•´ë‹¹ objectë¡œ í•˜ì—¬ê¸ˆ ë°˜ë“œì‹œ ì‹¤í–‰í•  ê²ƒ.
     public void RemoveKeyListener(KeyCode key, Action action, KeyState state) {
         if (_keyActions.ContainsKey(key)) {
             var list = _keyActions[key];
-            // Àü´Ş¹ŞÀº action°ú state°¡ Á¤È®È÷ ÀÏÄ¡ÇÏ´Â Ç×¸ñÀ» Ã£¾Æ¼­ Á¦°Å
+            // ì „ë‹¬ë°›ì€ actionê³¼ stateê°€ ì •í™•íˆ ì¼ì¹˜í•˜ëŠ” í•­ëª©ì„ ì°¾ì•„ì„œ ì œê±°
             var itemToRemove = list.Find(x => x.Action == action && x.State == state);
             if (itemToRemove != null) {
                 list.Remove(itemToRemove);
@@ -54,16 +54,16 @@ public class InputManager {
     }
 
     public void OnUpdate() {
-        //Ã³¸®µÇÁö ¾ÊÀº ¿¡·¯ÆË¾÷ÀÌ Á¸ÀçÇÒ °æ¿ì InputÂ÷´Ü.
+        //ì²˜ë¦¬ë˜ì§€ ì•Šì€ ì—ëŸ¬íŒì—…ì´ ì¡´ì¬í•  ê²½ìš° Inputì°¨ë‹¨.
         if (errStack != 0)
             return;
 
-        // ÇØ´ç Å°¿¡ µî·ÏµÈ ¸ğµç ¾×¼ÇÀ» ¼øÈ¸
+        // í•´ë‹¹ í‚¤ì— ë“±ë¡ëœ ëª¨ë“  ì•¡ì…˜ì„ ìˆœíšŒ
         foreach (var pair in _keyActions) {
             KeyCode key = pair.Key;
             var actionList = pair.Value;
 
-            //ÇØ´ç KeyCode¿¡ µî·ÏµÈ ¸ğµç List¸¦ ¼øÈ¸, Â÷·Ê·Î µş±ï²Ú
+            //í•´ë‹¹ KeyCodeì— ë“±ë¡ëœ ëª¨ë“  Listë¥¼ ìˆœíšŒ, ì°¨ë¡€ë¡œ ë”¸ê¹ê¾¹
             if (Input.GetKeyDown(key)) {
                 foreach (var actionState in actionList) {
                     if (actionState.State == KeyState.Down)
@@ -84,18 +84,18 @@ public class InputManager {
             }
         }
 
-        //UI¿¡¼­ ÀÚÃ¼ÀûÀ¸·Î ¸¶¿ì½º ¾×¼ÇÀ» ´Ù·ê ¿¹Á¤ÀÌ±â ¶§¹®¿¡, ¸¶¿ì½º·Î UI¸¦ Á¶ÀÛÁßÀÎ °æ¿ì ¸¶¿ì½º ¾×¼Ç ºñÈ°¼ºÈ­.
+        //UIì—ì„œ ìì²´ì ìœ¼ë¡œ ë§ˆìš°ìŠ¤ ì•¡ì…˜ì„ ë‹¤ë£° ì˜ˆì •ì´ê¸° ë•Œë¬¸ì—, ë§ˆìš°ìŠ¤ë¡œ UIë¥¼ ì¡°ì‘ì¤‘ì¸ ê²½ìš° ë§ˆìš°ìŠ¤ ì•¡ì…˜ ë¹„í™œì„±í™”.
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
         if (MouseAction != null) {
-            //¿ŞÅ¬¸¯
+            //ì™¼í´ë¦­
             if (Input.GetMouseButton(0)) {
                 MouseAction.Invoke(Define.MouseEvent.Press);
                 _mousePressed = true;
             }
-            //¸¶¿ì½º°¡ Å¬¸¯ »óÅÂ°¡ ¾Æ´Ò¶§, ÀÌÀü »óÅÂ°¡ press¶ó¸é
-            //ÀÌ¶§ Å¬¸¯À¸·Î ÀÎÁ¤ (´©¸¦¶§°¡ ¾Æ´Ï¶ó ¶¿¶§)
+            //ë§ˆìš°ìŠ¤ê°€ í´ë¦­ ìƒíƒœê°€ ì•„ë‹ë•Œ, ì´ì „ ìƒíƒœê°€ pressë¼ë©´
+            //ì´ë•Œ í´ë¦­ìœ¼ë¡œ ì¸ì • (ëˆ„ë¥¼ë•Œê°€ ì•„ë‹ˆë¼ ë—„ë•Œ)
             else {
                 if (_mousePressed)
                     MouseAction.Invoke(Define.MouseEvent.Click);

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "ActorEvent.h"
 #include "MPSCQueue.h"
 #include "ActorEventScheduler.h"
@@ -15,7 +15,7 @@ public:
 		Push({ objectPool<ActorEvent>::alloc(std::move(callback)), objectPool<ActorEvent>::dealloc }, true);
 	}
 
-	//Ret´Â void·Î ÀÛ¼ºÇØµµ µÉ °Í °°´Ù.
+	//RetëŠ” voidë¡œ ì‘ì„±í•´ë„ ë  ê²ƒ ê°™ë‹¤.
 	template<typename T, typename Ret, typename... Args>
 	void DispatchEvent(Ret(T::*memFunc)(Args...), Args&&... args) {
 		weak_ptr<T> ownerWRef = static_pointer_cast<T>(shared_from_this());
@@ -28,7 +28,7 @@ public:
 		Push({ objectPool<ActorEvent>::alloc(ownerWRef, memFunc, forward<Args>(args)...), objectPool<ActorEvent>::dealloc }, true);
 	}
 
-	//³ª ÀÌ°Å ¿ØÁö JS¿¡¼­ ½áº»°Å°°¾Æ
+	//ë‚˜ ì´ê±° ì™ ì§€ JSì—ì„œ ì¨ë³¸ê±°ê°™ì•„
 	void PostEventAfter(uint64_t tickAfter, function<void()>&& callback) {
 		shared_ptr<ActorEvent> eventRef = { objectPool<ActorEvent>::alloc(std::move(callback)), objectPool<ActorEvent>::dealloc };
 		GActorEventScheduler->Reserve(tickAfter, shared_from_this(), eventRef);

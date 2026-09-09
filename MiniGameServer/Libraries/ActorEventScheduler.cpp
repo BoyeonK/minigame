@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "ActorEventScheduler.h"
 
 void ActorEventScheduler::Reserve(uint64_t tickAfter, weak_ptr<Actor> owner, shared_ptr<ActorEvent> event) {
@@ -10,11 +10,11 @@ void ActorEventScheduler::Reserve(uint64_t tickAfter, weak_ptr<Actor> owner, sha
 }
 
 void ActorEventScheduler::Distrubute(uint64_t now) {
-	//atomicº¯¼öÀÌ±â¶§¹®¿¡, exchange°¡ true·Î ¸®ÅÏµÇ¸é ´©±º°¡ ÀÌ¹Ì ÇÔ¼ö¸¦ ½ÇÇàÇÑ »óÈ²
+	//atomicë³€ìˆ˜ì´ê¸°ë•Œë¬¸ì—, exchangeê°€ trueë¡œ ë¦¬í„´ë˜ë©´ ëˆ„êµ°ê°€ ì´ë¯¸ í•¨ìˆ˜ë¥¼ ì‹¤í–‰í•œ ìƒí™©
 	if (_distributing.exchange(true) == true)
 		return;
 
-	//LockÀ» °Å´Â ½Ã°£À» ÃÖ¼Ò·Î ÇÏ±â À§ÇØ¼­
+	//Lockì„ ê±°ëŠ” ì‹œê°„ì„ ìµœì†Œë¡œ í•˜ê¸° ìœ„í•´ì„œ
 	vector<TimerItem> onTimeItems;
 	{
 		WRITE_RWLOCK;

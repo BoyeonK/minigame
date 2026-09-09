@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "MatchQueue.h"
 #include "UnityGameObject.h"
 
@@ -14,10 +14,10 @@ public:
 		_state = GameState::BeforeInit;
 	}
 
-	//BeforeInit : RoomÀÌ ÃÖÃÊ »ı¼ºµÈ °æ¿ì.
-	//BeforeStart : PlayerÀÇ ·Îµù ¹× KeepAlive¿©ºÎ ÀçÈ®ÀÎ
-	//OnGoing : °ÔÀÓÀÌ ÁøÇàÁßÀÎ °æ¿ì. (¿©±â¼­ ´õ ¼¼ºĞÈ­ µÉ ¼öµµ ÀÖÀ½)
-	//Counting : °ÔÀÓ Á¾·á. °á°ú¿¡ µû¸¥ º¯µ¿»çÇ×À» DB¿¡ ¹İ¿µÇÏ°í Room Á¾·á.
+	//BeforeInit : Roomì´ ìµœì´ˆ ìƒì„±ëœ ê²½ìš°.
+	//BeforeStart : Playerì˜ ë¡œë”© ë° KeepAliveì—¬ë¶€ ì¬í™•ì¸
+	//OnGoing : ê²Œì„ì´ ì§„í–‰ì¤‘ì¸ ê²½ìš°. (ì—¬ê¸°ì„œ ë” ì„¸ë¶„í™” ë  ìˆ˜ë„ ìˆìŒ)
+	//Counting : ê²Œì„ ì¢…ë£Œ. ê²°ê³¼ì— ë”°ë¥¸ ë³€ë™ì‚¬í•­ì„ DBì— ë°˜ì˜í•˜ê³  Room ì¢…ë£Œ.
 	enum class GameState {
 		BeforeInit,
 		BeforeStart,
@@ -54,9 +54,9 @@ protected:
 	int32_t _preparedPlayer = 0;
 	uint64_t _updateCount = 0;
 	
-	//Update¹®¿¡¼­ÀÇ ¼øÈ¸¿ë
+	//Updateë¬¸ì—ì„œì˜ ìˆœíšŒìš©
 	vector<shared_ptr<UnityGameObject>> _vecGameObjects;
-	//objectId¸¦ ÅëÇÑ Á¢±Ù¿ë
+	//objectIdë¥¼ í†µí•œ ì ‘ê·¼ìš©
 	unordered_map<int32_t, shared_ptr<UnityGameObject>> _hmGameObjects;
 };
 

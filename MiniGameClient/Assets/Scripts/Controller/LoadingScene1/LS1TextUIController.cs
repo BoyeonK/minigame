@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -26,16 +26,16 @@ public class LS1TextUIController : MonoBehaviour {
             string title = "";
             switch (gameId) {
                 case 1:
-                    title = "Å×½ºÆ®¿ë°ÔÀÓ";
+                    title = "í…ŒìŠ¤íŠ¸ìš©ê²Œì„";
                     break;
                 case 2:
-                    title = "ÇÎÆş";
+                    title = "í•‘í";
                     break;
                 case 3:
-                    title = "µÎ´õÁöÀâ±â";
+                    title = "ë‘ë”ì§€ì¡ê¸°";
                     break;
                 case 4:
-                    title = "Åº¸·ÇÇÇÏ±â";
+                    title = "íƒ„ë§‰í”¼í•˜ê¸°";
                     break;
                 default:
                     break;

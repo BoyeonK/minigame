@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CoreGlobal.h"
 #include "SocketUtils.h"
 #include "SendBuffer.h"
@@ -44,9 +44,9 @@ ThreadManager::~ThreadManager() {
 }
 
 void ThreadManager::InitTLS() {
-	//NxtThreadID´Â ¿À·ÎÁö InitTLSÇÔ¼ö·Î¸¸ °ü¸®µÇ¾î¾ßÇÔ.
-	//µû¶ó¼­ staticÇÔ¼ö ½ºÄÚÇÁ ³»¿¡ staticº¯¼ö·Î ¼±¾ğ
-	//ÀÌ ÇÔ¼ö ½ºÄÚÇÁ¸¦ ¹ş¾î³ªµµ NxtThreadID º¯¼ö´Â »ì¾ÆÀÖ´Ù.
+	//NxtThreadIDëŠ” ì˜¤ë¡œì§€ InitTLSí•¨ìˆ˜ë¡œë§Œ ê´€ë¦¬ë˜ì–´ì•¼í•¨.
+	//ë”°ë¼ì„œ staticí•¨ìˆ˜ ìŠ¤ì½”í”„ ë‚´ì— staticë³€ìˆ˜ë¡œ ì„ ì–¸
+	//ì´ í•¨ìˆ˜ ìŠ¤ì½”í”„ë¥¼ ë²—ì–´ë‚˜ë„ NxtThreadID ë³€ìˆ˜ëŠ” ì‚´ì•„ìˆë‹¤.
 	static atomic<uint32_t> NxtThreadID = 1;
 	MyThreadID = NxtThreadID.fetch_add(1);
 	random_device rd;

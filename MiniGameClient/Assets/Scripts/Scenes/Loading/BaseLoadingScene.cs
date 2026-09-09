@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class BaseLoadingScene : BaseScene {
     protected float _progressRate = 0f;
@@ -22,7 +22,7 @@ public class BaseLoadingScene : BaseScene {
     }
 
     protected void OnStart() {
-        Debug.Log("·Îµù¾À ½ºÅ¸Æ®");
+        Debug.Log("ë¡œë”©ì”¬ ìŠ¤íƒ€íŠ¸");
         Managers.Scene.LoadSceneAsync();
     }
 
@@ -30,7 +30,7 @@ public class BaseLoadingScene : BaseScene {
         if (!_isReady) {
             UpdateProgressRate();
             if (_hadProgress) {
-                Debug.Log($"ÁøÀüÀÌ ÀÖ¾ú´Ù. ÁøÇà·ü : {_progressRate}");
+                Debug.Log($"ì§„ì „ì´ ìˆì—ˆë‹¤. ì§„í–‰ë¥  : {_progressRate}");
                 Managers.Network.Loading.TrySendLoadingProgressRate(_progressRate);
                 _hadProgress = false;
             }

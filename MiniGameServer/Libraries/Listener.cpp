@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Listener.h"
 
 Listener::~Listener() {
@@ -8,35 +8,35 @@ Listener::~Listener() {
 }
 
 bool Listener::StartAccept() {
-	//¿¬µ¿µÈ Service°´Ã¼°¡ À¯È¿ÇÑÁö È®ÀÎ
+	//ì—°ë™ëœ Serviceê°ì²´ê°€ ìœ íš¨í•œì§€ í™•ì¸
 	shared_ptr<ServerService> service = _serverServiceWRef.lock();
 	if (service == nullptr)
 		return false;
 
-	//Listen ¼ÒÄÏ »ı¼º
+	//Listen ì†Œì¼“ ìƒì„±
 	_socketHandle = SocketUtils::CreateSocket();
 	if (_socketHandle == INVALID_SOCKET) return false;
 
-	//iocp ÇÚµéÀÌ À¯È¿ÇÑÁö °Ë»ç
+	//iocp í•¸ë“¤ì´ ìœ íš¨í•œì§€ ê²€ì‚¬
 	if (service->GetCPCoreRef()->GetHandle() == INVALID_HANDLE_VALUE) return false;
 
-	//iocp¿Í Listener Socket¿¬µ¿
+	//iocpì™€ Listener Socketì—°ë™
 	if (service->GetCPCoreRef()->Register(shared_from_this()) == false)
 		return false;
 
-	//¼ÒÄÏÀÇ TIME_WAIT»óÅÂÀÏ¶§, °°Àº Æ÷Æ®·Î ´Ù¸¥ ¼ÒÄÏÀÇ bind¿äÃ»À» Çã¿ë
+	//ì†Œì¼“ì˜ TIME_WAITìƒíƒœì¼ë•Œ, ê°™ì€ í¬íŠ¸ë¡œ ë‹¤ë¥¸ ì†Œì¼“ì˜ bindìš”ì²­ì„ í—ˆìš©
 	if (SocketUtils::SetReuseAddress(_socketHandle, true) == false)	return false;
 
-	//TCP ¿¬°áÀÌ ²÷±ä °æ¿ì, ³²Àº µ¥ÀÌÅÍ¸¦ º¸³»ÁÙ°ÍÀÎ°¡? (default º¸³½´Ù.)
+	//TCP ì—°ê²°ì´ ëŠê¸´ ê²½ìš°, ë‚¨ì€ ë°ì´í„°ë¥¼ ë³´ë‚´ì¤„ê²ƒì¸ê°€? (default ë³´ë‚¸ë‹¤.)
 	if (SocketUtils::SetLinger(_socketHandle, 0, 0) == false) return false;
 
-	//Bind½Ãµµ
+	//Bindì‹œë„
 	if (SocketUtils::Bind(_socketHandle, service->GetAddress()) == false) return false;
 
-	//shared_ptr ÇØÁ¦
+	//shared_ptr í•´ì œ
 	service = nullptr;
 
-	//Listen½Ãµµ
+	//Listenì‹œë„
 	if (SocketUtils::Listen(_socketHandle) == false) 
 		return false;
 
@@ -90,7 +90,7 @@ void Listener::Dispatch(CPTask* pCpTask, int32_t NumOfBytes) {
 		ProcessAccept(static_cast<AcceptTask*>(pCpTask));
 		break;
 	default:
-		CRASH("Listener¿¡ AcceptÀÌ¿ÜÀÇ Å¸ÀÔÀÇ DispatchÇàµ¿");
+		CRASH("Listenerì— Acceptì´ì™¸ì˜ íƒ€ì…ì˜ Dispatchí–‰ë™");
 		break;
 	}
 }
@@ -98,7 +98,7 @@ void Listener::Dispatch(CPTask* pCpTask, int32_t NumOfBytes) {
 void Listener::ProcessAccept(AcceptTask* pAcceptTask) {
 	shared_ptr<Session> sessionRef = move(pAcceptTask->_sessionRef);
 
-	//Listener Socket°ú µ¿ÀÏÇÑ ¿É¼ÇÀ» AcceptedSocket¿¡ Àü´Ş ½Ãµµ
+	//Listener Socketê³¼ ë™ì¼í•œ ì˜µì…˜ì„ AcceptedSocketì— ì „ë‹¬ ì‹œë„
 	if (false == SocketUtils::SetUpdateAcceptSocket(sessionRef->GetSocket(), _socketHandle)) {
 		sessionRef = nullptr;
 		RegisterAccept(pAcceptTask);

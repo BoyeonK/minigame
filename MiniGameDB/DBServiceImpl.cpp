@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "DBServiceImpl.h"
 
 void GreeterServiceImpl::setCompletionQueue(unique_ptr<grpc::ServerCompletionQueue> cqRef) {
@@ -20,15 +20,15 @@ void GreeterServiceImpl::HandleRpcs() {
         switch (status) {
         case (grpc::CompletionQueue::GOT_EVENT):
             if (ok)
-                // ¼º°ø ½Ã CallData °´Ã¼ÀÇ Proceed() È£Ãâ (´ÙÀ½ ´Ü°è·Î ÁøÇà)
+                // ì„±ê³µ ì‹œ CallData ê°ì²´ì˜ Proceed() í˜¸ì¶œ (ë‹¤ìŒ ë‹¨ê³„ë¡œ ì§„í–‰)
                 static_cast<CallData*>(tag)->Proceed();
             else
-                // ½ÇÆĞ ½Ã pool·Î ¹İÈ¯.
+                // ì‹¤íŒ¨ ì‹œ poolë¡œ ë°˜í™˜.
                 static_cast<CallData*>(tag)->ReturnToPool();
             break;
 
         case grpc::CompletionQueue::TIMEOUT:
-            // Å¸ÀÓ¾Æ¿ô ½Ã ´Ù¸¥ ÀÛ¾÷À» ¼öÇà (ÀÌÈÄ ·çÇÁÀÇ ´ÙÀ½ ¼ø¼­·Î °è¼Ó ÁøÇà)
+            // íƒ€ì„ì•„ì›ƒ ì‹œ ë‹¤ë¥¸ ì‘ì—…ì„ ìˆ˜í–‰ (ì´í›„ ë£¨í”„ì˜ ë‹¤ìŒ ìˆœì„œë¡œ ê³„ì† ì§„í–‰)
             break;
 
         case grpc::CompletionQueue::SHUTDOWN:

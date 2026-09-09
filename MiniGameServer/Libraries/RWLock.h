@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 #include "pch.h"
 #include <atomic>
 
-//std::shared_mutex¿Í »ç½Ç»ó µ¿ÀÏÇÑ ±â´ÉÀ» ÇÑ´Ù.
+//std::shared_mutexì™€ ì‚¬ì‹¤ìƒ ë™ì¼í•œ ê¸°ëŠ¥ì„ í•œë‹¤.
 class RWLock {
 	enum : uint32_t {
 		ACQUIRE_TIMEOUT_TICK = 10000,
