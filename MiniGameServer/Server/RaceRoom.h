@@ -3,8 +3,14 @@
 
 class RaceRoom : public GameRoom {
 public:
+	//Ids 0.._quota-1 are reserved for players: runner i IS player i.
+	//Every other game object must be numbered from QUOTA upwards.
+	static constexpr int32_t QUOTA = 2;
+
 	RaceRoom() {
 		_ty = GameType::Race;
+		//Runner ids are assigned by hand in Start(); the generator serves the rest.
+		_nxtObjectId = QUOTA;
 		_points = vector<int32_t>(_quota, 0);
 		_elos = vector<int32_t>(_quota, 0);
 		_dbids = vector<int32_t>(_quota, 0);
@@ -48,7 +54,7 @@ public:
 	S2C_Protocol::S_R_ResponseState MakeSRResponseState(int32_t playerIdx);
 
 private:
-	int32_t _quota = 2;
+	int32_t _quota = QUOTA;
 	bool _isUpdateCall = false;
 	vector<string> _playerIds;
 	vector<int32_t> _dbids;

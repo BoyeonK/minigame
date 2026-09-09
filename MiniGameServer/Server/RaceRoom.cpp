@@ -78,9 +78,11 @@ void RaceRoom::Start() {
 		return;
 	_state = GameState::OnGoing;
 
-	for (int i = 0; i < 4; i++) {
+	//Runner i is player i - the object id IS the player index, which is what
+	//the client compares S_R_ResponseState.playerid against.
+	for (int i = 0; i < _quota; i++) {
 		shared_ptr<RacePlayer> runnerRef = { objectPool<RacePlayer>::alloc(0, 0, -3 + 2 * i), objectPool<RacePlayer>::dealloc };
-		runnerRef->SetObjectId(GenerateUniqueGameObjectId());
+		runnerRef->SetObjectId(i);
 		RegisterGameObject(runnerRef);
 	}
 

@@ -20,8 +20,9 @@ public:
 	~poolHeader() {
 		PSLIST_ENTRY pSE;
 		while (pSE = ::InterlockedPopEntrySList(&_header)) {
-			_Ty* ptr = reinterpret_cast<_Ty*>(++pSE);
-			ptr->~_Ty();
+			//dealloc() already destroyed every pooled entry, so only the raw
+			//block is released here.
+			//pSE is the base address returned by _aligned_malloc - never offset it.
 			_aligned_free(pSE);
 		}
 	}
@@ -62,9 +63,12 @@ public:
 		_counter._uses.fetch_sub(1);
 		_counter._reserves.fetch_add(1);
 #endif
+		//Destroy first, then publish the block. pushEntry() makes this memory
+		//visible to every thread: another one can pop it and placement-new into
+		//it while this destructor is still running.
+		ptr->~_Ty();
 		PSLIST_ENTRY pSE = reinterpret_cast<PSLIST_ENTRY>(ptr) - 1;
 		_poolHeader.pushEntry(pSE);
-		ptr->~_Ty();
 	}
 
 public:
