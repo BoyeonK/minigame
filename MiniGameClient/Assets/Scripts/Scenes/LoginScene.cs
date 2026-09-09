@@ -67,7 +67,6 @@ public class LoginScene : BaseScene {
         Managers.Setting.ApplyPreviousSceneSetting();
         Managers.Sound.GetOrAddAudioClip("button");
         Managers.Sound.GetOrAddAudioClip("select");
-        Managers.Sound.GetOrAddAudioClip("swipe");
         Managers.Sound.Play("LobbyScene", Define.Sound.Bgm);
         
         GameObject screen = GameObject.Find("Screen");

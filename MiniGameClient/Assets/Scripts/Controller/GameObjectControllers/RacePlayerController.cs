@@ -23,9 +23,6 @@ public class RacePlayerController : GameObjectController {
     float xRotation = 0f;
     float yRotation = 0f;
 
-    float _stepTimer = 0f;
-    const float STEP_TIMER_INTERVAL = 0.25f;
-
     Vector3 _front = new(0f, 0f, 1f);
     Vector3 _right = new();
     Vector3 _viewFront = new(0f, 0f, 1f);
@@ -207,17 +204,6 @@ public class RacePlayerController : GameObjectController {
             _animator.SetBool("IsJumpingUp", true);
         }
 
-        if (_isGrounded && _state == State.Moving) {
-            _stepTimer -= Time.fixedDeltaTime;
-            if (_stepTimer <= 0f) {
-                PlayStepSFX();
-                _stepTimer = STEP_TIMER_INTERVAL;
-            }
-        }
-        else {
-            _stepTimer = 0f;
-        }
-
         _prestate = _state;
     }
 
@@ -331,14 +317,8 @@ public class RacePlayerController : GameObjectController {
         }
     }
 
-    private void PlayStepSFX() {
-        int rand = UnityEngine.Random.Range(0, 5);
-        Managers.Sound.Play($"footstep{rand}");
-    }
-
     private void PlayJumpSFX() {
-        int rand = UnityEngine.Random.Range(0, 2);
-        Managers.Sound.Play($"jump{rand}");
+        Managers.Sound.Play("jump");
     }
 
     private void WDown() {

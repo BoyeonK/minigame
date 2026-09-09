@@ -43,10 +43,9 @@ public class MoleScene : BaseScene {
         _uiPrintMessage = Managers.UI.CacheSceneUI<UI_PrintMessage>();
 
         Managers.Setting.ApplyPreviousSceneSetting();
-        Managers.Sound.GetOrAddAudioClip("MoleSetPoint0");
-        Managers.Sound.GetOrAddAudioClip("MoleSetPoint1");
-        Managers.Sound.GetOrAddAudioClip("MoleSetPoint2");
-        Managers.Sound.GetOrAddAudioClip("MoleSetPoint3");
+        Managers.Sound.GetOrAddAudioClip("MoleGetPoint0");
+        Managers.Sound.GetOrAddAudioClip("MoleGetPoint1");
+        Managers.Sound.GetOrAddAudioClip("MoleGetPoint2");
         Managers.Sound.GetOrAddAudioClip("MoleStunned");
         Managers.Sound.GetOrAddAudioClip("gameEnd");
         Managers.Sound.Play("MoleScene", Define.Sound.Bgm);

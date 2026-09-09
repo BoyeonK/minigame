@@ -55,10 +55,6 @@ public class PingPongScene : BaseScene {
         }
 
         Managers.Setting.ApplyPreviousSceneSetting();
-        Managers.Sound.GetOrAddAudioClip("PingPongImpact0");
-        Managers.Sound.GetOrAddAudioClip("PingPongImpact1");
-        Managers.Sound.GetOrAddAudioClip("PingPongImpact2");
-        Managers.Sound.GetOrAddAudioClip("PingPongImpact3");
         Managers.Sound.GetOrAddAudioClip("gameEnd");
         Managers.Sound.Play("PingPongScene", Define.Sound.Bgm);
 

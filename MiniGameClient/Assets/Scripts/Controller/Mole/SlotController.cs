@@ -78,7 +78,7 @@ public class SlotController : MonoBehaviour {
     }
 
     void PlaySFX() {
-        int randomIdx = UnityEngine.Random.Range(0, 4);
+        int randomIdx = UnityEngine.Random.Range(0, 3);
         Managers.Sound.Play($"MoleGetPoint{randomIdx}");
     }
 

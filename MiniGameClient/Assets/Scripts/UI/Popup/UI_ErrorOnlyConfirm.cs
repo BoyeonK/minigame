@@ -36,7 +36,7 @@ public class UI_ErrorOnlyConfirm : UI_Popup {
 
         _errorText.text = errorDetail;
         _confirmButton.onClick.RemoveAllListeners();
-        _confirmAct += PlaySwipeClip;
+        _confirmAct += PlaySelectClip;
         _confirmAct += confirmOnClickEvent;
         _confirmAct += DestroyThis;
         _confirmButton.onClick.AddListener(() => {
@@ -44,8 +44,8 @@ public class UI_ErrorOnlyConfirm : UI_Popup {
         });
     }
 
-    private void PlaySwipeClip() {
-        Managers.Sound.Play("swipe");
+    private void PlaySelectClip() {
+        Managers.Sound.Play("select");
     }
 
     private void Update() {
